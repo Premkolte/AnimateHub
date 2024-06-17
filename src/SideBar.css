@@ -1,0 +1,28 @@
+.sidebar{
+    background-color: pink;
+    width: 20vw;
+    height: 100vh;
+}
+
+.button{
+    width: 120px;
+    height: 40px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 4px;
+    outline: none;
+    border: none;
+    transition: all 0.3s ease;
+    position: relative;
+    border-radius: 10px;
+    background-color: #0c0c0c;
+    box-shadow: inset 2px 2px 2px 0px rgba(49, 49, 49, 0.5),
+      7px 7px 20px 0px rgba(20, 20, 20, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+}
+.button1:hover {
+    background-color: #2b2bff;
+    top: 2px;
+}

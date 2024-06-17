@@ -1,0 +1,10 @@
+.window{
+    display: flex;
+    /* flex-direction: row; */
+    background-color: rgb(255, 83, 83);
+    justify-items: center;
+    /* align-items: center;  */
+    width: 100vw;
+    height: 100vh;
+
+}
