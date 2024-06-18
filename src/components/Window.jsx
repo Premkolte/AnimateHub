@@ -1,8 +1,9 @@
 import React from "react";
+import ButtonSnippets from "./ButtonSnippets";
 
 function Window({ activeTab }) {
   const content = [
-    "ButtonSnippets",
+    <ButtonSnippets />,
     "Box-shadow Snippets Content",
     "Card Snippets Content",
     "Dropdown Snippets Content",
