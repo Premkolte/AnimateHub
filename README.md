@@ -1,4 +1,4 @@
 ANIMATE-HUB
 
 
-<img src="./Prototype.png" start="1000" />
+<img src="./Website-Image.png" start="1000" />
