@@ -2,7 +2,7 @@ import React from "react";
 
 function Window({ activeTab }) {
   const content = [
-    "Button Snippets Content",
+    "ButtonSnippets",
     "Box-shadow Snippets Content",
     "Card Snippets Content",
     "Dropdown Snippets Content",
@@ -12,11 +12,11 @@ function Window({ activeTab }) {
   ];
 
   return (
-    <div className="flex-1 p-8 bg-gray-100">
-      <h1 className="text-black text-xl mb-8">AnimateHub - A one place for all your Frontend CSS needs</h1>
-      <div>
-        {content[activeTab]}
-      </div>
+    <div className="flex-1 p-8 bg-gray-100 pt-20 md:pt-8">
+      <h1 className="text-black text-xl mb-8">
+        AnimateHub - A one place for all your Frontend CSS needs
+      </h1>
+      <div>{content[activeTab]}</div>
     </div>
   );
 }
