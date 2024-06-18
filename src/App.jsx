@@ -1,15 +1,12 @@
-
-import './App.css'
-
-import Window from './Window'
+import React from 'react';
+import Window from './components/Window';
 
 function App() {
-
   return (
-    <div className='screen'>
-      <Window/>
+    <div className='h-screen'>
+      <Window />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
