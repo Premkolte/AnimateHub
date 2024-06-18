@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function SideBar() {
-  const [activeTab, setActiveTab] = useState(0);
-
+function SideBar({ activeTab, setActiveTab }) {
   const Buttons = [
     "Button Snippets",
     "Box-shadow Snippets",
