@@ -11,6 +11,16 @@ function SideBar({ activeTab, setActiveTab }) {
     "Input-fields Snippets",
     "Radio Snippets",
     "Toggle Switches Snippets",
+    "Page-Loader Snippets",
+    "Text Snippets",
+    "Checkbox Snippets",
+    "Socials Snippets",
+    "Log-in Snippets",
+    "Form Snippets",
+    "(Demo) Snippets"
+
+
+
   ];
 
   const handleTabClick = (index) => {
