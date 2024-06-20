@@ -1,15 +1,19 @@
 import React from "react";
 import ButtonSnippets from "./ButtonSnippets";
+import CardSnippets from "./CardSnippets";
+import DropdownSnippetCard from "./DropdownSnippets";
+import InputFieldSnippets from "./Inputfield";
+
 
 function Window({ activeTab }) {
   const content = [
     <ButtonSnippets />,
     "Box-shadow Snippets Content",
-    "Card Snippets Content",
-    "Dropdown Snippets Content",
-    "Input-fields Snippets Content",
-    "Radio Snippets Content",
-    "Toggle Switches Snippets Content",
+    <CardSnippets/>,
+    <DropdownSnippetCard/>,
+    <InputFieldSnippets/>,
+    "Radio snippets Content",
+    "Toggle Switches Content",
   ];
 
   return (
