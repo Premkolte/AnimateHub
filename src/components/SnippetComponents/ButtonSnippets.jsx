@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
+import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
+import { buttonSnippets } from "./Snippets/Buttons";
 
 function ButtonSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -13,40 +14,9 @@ function ButtonSnippets() {
     setShowModal(true);
   };
 
-  const buttons = [
-    {
-      label: "Move Right",
-      cssCode:
-        '<button style="transform: translateX(5px); background-color: #271FE0; color: white; padding: 10px;">Move Right</button>',
-      jsxCode:
-        "<button className={`hover:translate-x-5 bg-[#271FE0] text-white py-2 px-4 rounded`}>Move Right</button>",
-    },
-    {
-      label: "Move Left",
-      cssCode:
-        '<button style="transform: translateX(-5px); background-color: #271FE0; color: white; padding: 10px;">Move Left</button>',
-      jsxCode:
-        "<button className={`hover:-translate-x-5 bg-[#271FE0] text-white py-2 px-4 rounded`}>Move Left</button>",
-    },
-    {
-      label: "Move Up",
-      cssCode:
-        '<button style="transform: translateY(-5px); background-color: #271FE0; color: white; padding: 10px;">Move Up</button>',
-      jsxCode:
-        "<button className={`hover:-translate-y-5 bg-[#271FE0] text-white py-2 px-4 rounded`}>Move Up</button>",
-    },
-    {
-      label: "Move Down",
-      cssCode:
-        '<button style="transform: translateY(5px); background-color: #271FE0; color: white; padding: 10px;">Move Down</button>',
-      jsxCode:
-        "<button className={`hover:translate-y-5 bg-[#271FE0] text-white py-2 px-4 rounded`}>Move Down</button>",
-    },
-  ];
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {buttons.map((buttonObject, index) => (
+      {buttonSnippets.map((buttonObject, index) => (
         <div
           key={index}
           className="p-8 pt-14 bg-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"

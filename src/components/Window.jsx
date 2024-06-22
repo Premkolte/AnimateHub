@@ -1,24 +1,23 @@
 import React from "react";
-import ButtonSnippets from "./ButtonSnippets";
-import CardSnippets from "./CardSnippets";
-import DropdownSnippetCard from "./DropdownSnippets";
-import InputFieldSnippets from "./Inputfield";
-import CheckboxSnippets from "./CheckboxSnippets";
-import RadioSnippets from "./RadioSnippets";
-
+import ButtonSnippets from "./SnippetComponents/ButtonSnippets";
+import CardSnippets from "./SnippetComponents/CardSnippets";
+import DropdownSnippetCard from "./SnippetComponents/DropdownSnippets";
+import InputFieldSnippets from "./SnippetComponents/InputfieldSnippets";
+import CheckboxSnippets from "./SnippetComponents/CheckboxSnippets";
+import RadioSnippets from "./SnippetComponents/RadioSnippets";
 
 function Window({ activeTab }) {
   const content = [
     <ButtonSnippets />,
     "Box-shadow Snippets Content",
-    <CardSnippets/>,
-    <DropdownSnippetCard/>,
-    <InputFieldSnippets/>,
-    <RadioSnippets/>,
+    <CardSnippets />,
+    <DropdownSnippetCard />,
+    <InputFieldSnippets />,
+    <RadioSnippets />,
     "Toggle Switches Content",
     "Page-Loader Content",
     "Text Snippets Content",
-    <CheckboxSnippets/>,
+    <CheckboxSnippets />,
   ];
 
   return (
