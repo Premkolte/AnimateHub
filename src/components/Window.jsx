@@ -4,6 +4,7 @@ import CardSnippets from "./CardSnippets";
 import DropdownSnippetCard from "./DropdownSnippets";
 import InputFieldSnippets from "./Inputfield";
 import CheckboxSnippets from "./CheckboxSnippets";
+import RadioSnippets from "./RadioSnippets";
 
 
 function Window({ activeTab }) {
@@ -13,7 +14,7 @@ function Window({ activeTab }) {
     <CardSnippets/>,
     <DropdownSnippetCard/>,
     <InputFieldSnippets/>,
-    "Radio snippets Content",
+    <RadioSnippets/>,
     "Toggle Switches Content",
     "Page-Loader Content",
     "Text Snippets Content",
