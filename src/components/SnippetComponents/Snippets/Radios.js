@@ -1,22 +1,7 @@
-import React, { useState } from "react";
-import Modal from "./Modal";
-import StringToReactComponent from "string-to-react-component";
-
-const RadioButtonSnippets = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [jsxCode, setJsxCode] = useState("");
-  const [cssCode, setCssCode] = useState("");
-
-  const handleShowModal = (jsx, css) => {
-    setJsxCode(jsx);
-    setCssCode(css);
-    setShowModal(true);
-  };
-
-  const snippets = [
-    {
-      title: "Simple Radio Button Snippet",
-      jsxCode: `(props) => (
+export const radioSnippets = [
+  {
+    title: "Simple Radio Button Snippet",
+    jsxCode: `(props) => (
         <div className="flex items-center space-x-4">
           <label className="flex items-center">
             <input
@@ -38,7 +23,7 @@ const RadioButtonSnippets = () => {
           </label>
         </div>
       )`,
-      cssCode: `<div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+    cssCode: `<div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
         <label style="display: flex; align-items: center; margin-right: 10px;">
           <input type="radio" name="option" style="margin-right: 10px;" />
           <span>Option 1</span>
@@ -47,11 +32,11 @@ const RadioButtonSnippets = () => {
           <input type="radio" name="option" style="margin-right: 10px;" />
           <span>Option 2</span>
         </label>
-      </div>`
-    },
-    {
-      title: "Grouped Radio Button Snippet",
-      jsxCode: `(props) => (
+      </div>`,
+  },
+  {
+    title: "Grouped Radio Button Snippet",
+    jsxCode: `(props) => (
         <div className="flex items-center space-x-4">
           <div>
             <label className="flex items-center">
@@ -95,7 +80,7 @@ const RadioButtonSnippets = () => {
           </div>
         </div>
       )`,
-      cssCode: `<div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+    cssCode: `<div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
         <div style="margin-right: 20px;">
           <label style="display: flex; align-items: center; margin-bottom: 10px;">
             <input type="radio" name="group" style="margin-right: 10px;" />
@@ -116,35 +101,6 @@ const RadioButtonSnippets = () => {
             <span>Group 2 - Option 2</span>
           </label>
         </div>
-      </div>`
-    }
-  ];
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {snippets.map((snippet, index) => (
-        <div key={index} className="p-8 bg-white rounded-lg shadow-lg">
-          <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
-          <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
-          <div className="mt-4 flex justify-end">
-            <button
-              className="text-black text-md py-2 px-4 rounded-lg shadow-md"
-              onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}
-            >
-              Show Code
-            </button>
-          </div>
-        </div>
-      ))}
-      <Modal
-        showModal={showModal}
-        onClose={() => setShowModal(false)}
-        jsxCode={jsxCode}
-        cssCode={cssCode}
-      />
-    </div>
-  );
-};
-
-export default RadioButtonSnippets;
-    
+      </div>`,
+  },
+];
