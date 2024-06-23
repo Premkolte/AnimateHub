@@ -10,11 +10,11 @@ function SideBar({ activeTab, setActiveTab }) {
     "Card Snippets",
     "Dropdown Snippets",
     "Input-fields Snippets",
+    "Toggle Switches Snippets",
     "Signup Snippets",
     "Login Snippets",
-    "Radio Snippets",
-    "Toggle Switches Snippets",
     "Page-Loader Snippets",
+    "Radio Snippets",
     "Text Snippets",
     "Checkbox Snippets",
     "Socials Snippets",
@@ -46,11 +46,11 @@ function SideBar({ activeTab, setActiveTab }) {
 
       {/* Sidebar */}
       <div
-        className={`lg:w-64 fixed inset-y-0 left-0 z-40 bg-white shadow-xl transform ${
+        className={`lg:w-64 lg:h-screen fixed inset-y-0 left-0 z-40 bg-white shadow-xl transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto`}
+        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
       >
-        <div className="p-4 h-full flex flex-col justify-between">
+        <div className="p-4">
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-center">AnimateHub</h1>
           </div>
