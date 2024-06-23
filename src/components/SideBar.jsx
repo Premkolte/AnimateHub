@@ -10,6 +10,7 @@ function SideBar({ activeTab, setActiveTab }) {
     "Card Snippets",
     "Dropdown Snippets",
     "Input-fields Snippets",
+    "Signup Snippets",
     "Login Snippets",
     "Radio Snippets",
     "Toggle Switches Snippets",
