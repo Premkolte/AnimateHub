@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import Modal from "../Modal";
-import StringToReactComponent from "string-to-react-component";
-import { dropDownSnippets } from "./Snippets/DropDowns";
+// LoginSnippets.js
 
-const DropdownSnippets = () => {
+import React, { useState } from 'react';
+import Modal from '../Modal';
+import StringToReactComponent from 'string-to-react-component';
+import { loginSnippets } from './Snippets/Login'; // Assuming you have login snippets defined
+
+const LoginSnippets = () => {
   const [showModal, setShowModal] = useState(false);
-  const [jsxCode, setJsxCode] = useState("");
-  const [cssCode, setCssCode] = useState("");
+  const [jsxCode, setJsxCode] = useState('');
+  const [cssCode, setCssCode] = useState('');
 
   const handleShowModal = (jsx, css) => {
     setJsxCode(jsx);
@@ -16,7 +18,7 @@ const DropdownSnippets = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {dropDownSnippets.map((snippet, index) => (
+      {loginSnippets.map((snippet, index) => (
         <div key={index} className="p-8 bg-white rounded-lg shadow-lg">
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
@@ -40,4 +42,4 @@ const DropdownSnippets = () => {
   );
 };
 
-export default DropdownSnippets;
+export default LoginSnippets;

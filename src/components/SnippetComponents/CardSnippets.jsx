@@ -26,8 +26,8 @@ function CardSnippets() {
           </StringToReactComponent>
           <div className="flex space-x-4">
             <button
-              className="text-black text-md py-2 px-4 rounded-lg shadow-md"
-              onClick={() =>
+            className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+            onClick={() =>
                 handleShowModal(cardObject.jsxCode, cardObject.cssCode)
               }
             >
