@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import { IoMdClose } from "react-icons/io";
-import StringToReactComponent from "string-to-react-component";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+// Modal.js (Updated for Login Snippets)
+
+import React, { useState } from 'react';
+import { IoMdClose } from 'react-icons/io';
+import StringToReactComponent from 'string-to-react-component';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 function Modal({ showModal, onClose, jsxCode, cssCode }) {
-  const [copyStatus, setCopyStatus] = useState("");
+  const [copyStatus, setCopyStatus] = useState('');
 
   if (!showModal) return null;
 
   const handleCopy = (text) => {
-    setCopyStatus("Copied!");
-    setTimeout(() => setCopyStatus(""), 2000); // Clear status after 2 seconds
+    setCopyStatus('Copied!');
+    setTimeout(() => setCopyStatus(''), 2000); // Clear status after 2 seconds
   };
 
   return (
@@ -62,4 +64,3 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
 }
 
 export default Modal;
-

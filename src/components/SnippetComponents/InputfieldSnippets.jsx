@@ -21,12 +21,12 @@ const InputFieldSnippets = () => {
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
           <div className="mt-4 flex justify-end">
-            <button
-              className="text-black text-md py-2 px-4 rounded-lg shadow-md"
-              onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}
-            >
-              Show Code
-            </button>
+          <button
+            className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+            onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}
+           >
+             Show Code
+         </button>
           </div>
         </div>
       ))}

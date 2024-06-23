@@ -1,5 +1,6 @@
 export const inputFieldSnippets = [
   {
+    
     title: "Basic Input Field",
     jsxCode: `(props) => (
         <input
