@@ -17,6 +17,11 @@
 
 $~$
 
+ **PROJECT NAME --- LIVE DEMO**          
+**visit URL for live demo :-** https://animate-hub.vercel.app/
+
+$-$
+
 ### 🖼️ Screenshot
 ![image](https://github.com/kom-senapati/AnimateHub/assets/92045934/bd377379-24ca-4ae4-b209-f59c994c3315)
 
