@@ -24,7 +24,7 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
 
         <div className="p-10 flex justify-center items-center">
           <StringToReactComponent>
-            {`(props) => (${jsxCode})`}
+            {`(props) => ${jsxCode}`}
           </StringToReactComponent>
         </div>
 
