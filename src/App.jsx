@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import SideBar from "./components/SideBar";
 import Window from "./components/Window";
 import AnimatedCursor from "react-animated-cursor";
+// index.js or App.js
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 import {
   KBarProvider,
   KBarPortal,
