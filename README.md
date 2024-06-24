@@ -17,10 +17,9 @@
 
 $~$
 
- **PROJECT NAME --- LIVE DEMO**          
-**visit URL for live demo :-** https://animate-hub.vercel.app/
+### 🚀 Live link - https://animate-hub.vercel.app/
 
-$-$
+$~$
 
 ### 🖼️ Screenshot
 ![image](https://github.com/kom-senapati/AnimateHub/assets/92045934/bd377379-24ca-4ae4-b209-f59c994c3315)
@@ -96,10 +95,19 @@ $~$
 │
 ├── src
 │   ├── components
-│   │   ├── ButtonSnippets.jsx
-│   │   ├── CardSnippets.jsx
-│   │   ├── DropdownSnippets.jsx
-│   │   ├── Inputfield.jsx
+│   |   ├── SnippetComponents
+│   |   |   ├── Snippets
+│   |   |   |   ├── Buttons.js
+│   |   |   |   ├── Cards.js
+│   |   |   |   ├── Checkboxes.js
+│   |   |   |   └── ... // other snippet objects
+|   |   |   |
+│   │   |   ├── ButtonSnippets.jsx
+│   │   |   ├── CardSnippets.jsx
+│   │   |   ├── CheckboxSnippets.jsx
+│   │   |   └── ... // other snippet components
+|   |   |
+│   │   ├── Card.jsx
 │   │   ├── Modal.jsx
 │   │   ├── SideBar.jsx
 │   │   └── Window.jsx
@@ -111,5 +119,7 @@ $~$
 ├── .gitignore
 ├── index.html
 ├── package.json
-└── README.md
+├── LICENSE
+├── README.md
+└── ... // other config files
 ```
