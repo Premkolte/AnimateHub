@@ -11,6 +11,7 @@ import ToggleSwitchSnippets from "./SnippetComponents/ToggleSwitchSnippets";
 import SlideshowSnippets from "./SnippetComponents/SlideShowSnippets";
 import BoxShadowSnippets from "./SnippetComponents/BoxShadowSnippets";
 import TextSnippets from "./SnippetComponents/TextSnippets";
+import SocialSnippets from "./SnippetComponents/SocialSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -24,9 +25,10 @@ function Window({ activeTab }) {
     <RadioSnippets />,
     <ToggleSwitchSnippets/> ,
     <SlideshowSnippets/>,
-    "Text Snippets Content",
+    "Page-Loader Content",
     <TextSnippets/>,
     <CheckboxSnippets />, 
+    <SocialSnippets/>,
   ];
 
   return (

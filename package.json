@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@babel/standalone": "^7.24.7",
+    "@fortawesome/fontawesome-free": "^6.5.2",
     "kbar": "^0.1.0-beta.45",
     "react": "^18.2.0",
     "react-animated-cursor": "^2.11.2",
