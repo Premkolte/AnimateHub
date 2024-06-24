@@ -45,6 +45,7 @@ _E.g_
 3. Install NPM packages
    ```sh
    npm install
+   npm install react-darkreader --legacy-peer-deps
    ```
 4. Run development server
    ```sh
