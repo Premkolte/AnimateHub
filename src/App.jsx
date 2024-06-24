@@ -31,7 +31,6 @@ function App() {
       },
     },
   ];
-  console.log(actions);
   function RenderResults() {
     const { results } = useMatches();
     return (
@@ -78,7 +77,7 @@ function App() {
         <Window activeTab={activeTab} />
       </div>
     </KBarProvider>
-  );
+)
 }
 
 export default App;

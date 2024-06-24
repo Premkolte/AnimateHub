@@ -1,13 +1,15 @@
+// Snippets/Logins.js
+
 export const loginSnippets = [
     {
       title: 'Simple Login Form',
-      jsxCode: `
+      jsxCode: `(props) => (
         <form className="flex flex-col space-y-4">
           <input type="text" placeholder="Username" className="border p-2 rounded-lg" />
           <input type="password" placeholder="Password" className="border p-2 rounded-lg" />
           <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg">Login</button>
         </form>
-      `,
+      )`,
       cssCode: `<form style="display: flex; flex-direction: column; gap: 1rem;">
         <input type="text" placeholder="Username" style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 5px;" />
         <input type="password" placeholder="Password" style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 5px;" />
@@ -16,7 +18,7 @@ export const loginSnippets = [
     },
     {
       title: 'Customized Login Form',
-      jsxCode: `
+      jsxCode: `(props) => (
         <form className="flex flex-col space-y-4">
           <input type="text" placeholder="Email" className="border p-2 rounded-lg" />
           <input type="password" placeholder="Password" className="border p-2 rounded-lg" />
@@ -26,7 +28,7 @@ export const loginSnippets = [
           </div>
           <button type="submit" className="bg-green-500 text-white p-2 rounded-lg">Sign In</button>
         </form>
-      `,
+      )`,
       cssCode: `<form style="display: flex; flex-direction: column; gap: 1rem;">
         <input type="text" placeholder="Email" style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 5px;" />
         <input type="password" placeholder="Password" style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 5px;" />
