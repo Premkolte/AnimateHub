@@ -1,7 +1,7 @@
 export const radioSnippets = [
   {
     title: "Simple Radio Button Snippet",
-    jsxCode: `(props) => (
+    jsxCode: `
         <div className="flex items-center space-x-4">
           <label className="flex items-center">
             <input
@@ -22,7 +22,7 @@ export const radioSnippets = [
             <span className="ml-2">Option 2</span>
           </label>
         </div>
-      )`,
+      `,
     cssCode: `<div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
         <label style="display: flex; align-items: center; margin-right: 10px;">
           <input type="radio" name="option" style="margin-right: 10px;" />
@@ -36,7 +36,7 @@ export const radioSnippets = [
   },
   {
     title: "Grouped Radio Button Snippet",
-    jsxCode: `(props) => (
+    jsxCode: `
         <div className="flex items-center space-x-4">
           <div>
             <label className="flex items-center">
@@ -79,7 +79,7 @@ export const radioSnippets = [
             </label>
           </div>
         </div>
-      )`,
+      `,
     cssCode: `<div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
         <div style="margin-right: 20px;">
           <label style="display: flex; align-items: center; margin-bottom: 10px;">

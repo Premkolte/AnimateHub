@@ -3,14 +3,14 @@
 export const signupSnippets = [
     {
       title: 'Simple Signup Form',
-      jsxCode: `(props) => (
+      jsxCode: `
         <form className="flex flex-col space-y-4">
           <input type="text" placeholder="Name" className="border p-2 rounded-lg" />
           <input type="email" placeholder="Email" className="border p-2 rounded-lg" />
           <input type="password" placeholder="Password" className="border p-2 rounded-lg" />
           <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg">Sign Up</button>
         </form>
-      )`,
+      `,
       cssCode: `<form style="display: flex; flex-direction: column; gap: 1rem;">
         <input type="text" placeholder="Name" style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 5px;" />
         <input type="email" placeholder="Email" style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 5px;" />
@@ -20,7 +20,7 @@ export const signupSnippets = [
     },
     {
       title: 'Customized Signup Form',
-      jsxCode: `(props) => (
+      jsxCode: `
         <form className="flex flex-col space-y-4">
           <input type="text" placeholder="Full Name" className="border p-2 rounded-lg" />
           <input type="email" placeholder="Email Address" className="border p-2 rounded-lg" />
@@ -31,7 +31,7 @@ export const signupSnippets = [
           </div>
           <button type="submit" className="bg-green-500 text-white p-2 rounded-lg">Join Now</button>
         </form>
-      )`,
+      `,
       cssCode: `<form style="display: flex; flex-direction: column; gap: 1rem;">
         <input type="text" placeholder="Full Name" style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 5px;" />
         <input type="email" placeholder="Email Address" style="border: 1px solid #ccc; padding: 0.5rem; border-radius: 5px;" />
