@@ -9,11 +9,13 @@ import LoginSnippets from "./SnippetComponents/LoginSnippets";
 import SignupSnippets from "./SnippetComponents/SignupSnippets";
 import ToggleSwitchSnippets from "./SnippetComponents/ToggleSwitchSnippets";
 import SlideshowSnippets from "./SnippetComponents/SlideShowSnippets";
+import BoxShadowSnippets from "./SnippetComponents/BoxShadowSnippets";
+import TextSnippets from "./SnippetComponents/TextSnippets";
 
 function Window({ activeTab }) {
   const content = [
     <ButtonSnippets />,
-    "Box-shadow Snippets Content",
+    <BoxShadowSnippets/>,
     <CardSnippets />,
     <DropdownSnippetCard />,
     <InputFieldSnippets />,
@@ -22,8 +24,8 @@ function Window({ activeTab }) {
     <RadioSnippets />,
     <ToggleSwitchSnippets/> ,
     <SlideshowSnippets/>,
-    "Page-Loader Content",
     "Text Snippets Content",
+    <TextSnippets/>,
     <CheckboxSnippets />, 
   ];
 
