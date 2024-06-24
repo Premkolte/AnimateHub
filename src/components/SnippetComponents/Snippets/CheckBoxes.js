@@ -1,7 +1,7 @@
 export const checkBoxSnippets = [
   {
     title: "Simple Checkbox Snippet",
-    jsxCode: `(props) => (
+    jsxCode: `
         <div className="flex items-center space-x-4">
           <label className="flex items-center">
             <input
@@ -12,7 +12,7 @@ export const checkBoxSnippets = [
             <span className="ml-2">Option 1</span>
           </label>
         </div>
-      )`,
+      `,
     cssCode: `<div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
         <label style="display: flex; align-items: center;">
           <input type="checkbox" style="margin-right: 10px;" />
@@ -22,7 +22,7 @@ export const checkBoxSnippets = [
   },
   {
     title: "Grouped Checkbox Snippet",
-    jsxCode: `(props) => (
+    jsxCode: `
         <div className="flex items-center space-x-4">
           <div>
             <label className="flex items-center">
@@ -43,7 +43,7 @@ export const checkBoxSnippets = [
             </label>
           </div>
         </div>
-      )`,
+      `,
     cssCode: `<div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
         <div>
           <label style="display: flex; align-items: center; margin-bottom: 10px;">
