@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Darkreader from "react-darkreader";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 function SideBar({ activeTab, setActiveTab }) {
@@ -51,8 +52,9 @@ function SideBar({ activeTab, setActiveTab }) {
         } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto`}
       >
         <div className="p-4 h-full flex flex-col justify-between">
-          <div className="mb-6">
+          <div className="flex flex-row items-center justify-center gap-2 mb-6">
             <h1 className="text-3xl font-bold text-center">AnimateHub</h1>
+            <Darkreader />
           </div>
           <div className="space-y-2">
             {Buttons.map((button, index) => (
