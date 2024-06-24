@@ -91,16 +91,21 @@ $~$
 ```
 .
 │
-├── public
-│   ├── favicon.ico
-│   └── logo.png
-│
 ├── src
 │   ├── components
-│   │   ├── ButtonSnippets.jsx
-│   │   ├── CardSnippets.jsx
-│   │   ├── DropdownSnippets.jsx
-│   │   ├── Inputfield.jsx
+│   |   ├── SnippetComponents
+│   |   |   ├── Snippets
+│   |   |   |   ├── Buttons.js
+│   |   |   |   ├── Cards.js
+│   |   |   |   ├── Checkboxes.js
+│   |   |   |   └── ... // other snippet objects
+|   |   |   |
+│   │   |   ├── ButtonSnippets.jsx
+│   │   |   ├── CardSnippets.jsx
+│   │   |   ├── CheckboxSnippets.jsx
+│   │   |   └── ... // other snippet components
+|   |   |
+│   │   ├── Card.jsx
 │   │   ├── Modal.jsx
 │   │   ├── SideBar.jsx
 │   │   └── Window.jsx
@@ -112,5 +117,6 @@ $~$
 ├── .gitignore
 ├── index.html
 ├── package.json
-└── README.md
-```
+├── LICENSE
+├── README.md
+└── ... // other config files
