@@ -17,7 +17,7 @@ function Window({ activeTab }) {
     <DropdownSnippetCard />,
     <InputFieldSnippets />,
     <SignupSnippets/>,
-    <LoginSnippets />,
+    <LoginSnippets />, // Ensure LoginSnippets component is correctly imported
     <RadioSnippets />,
     <ToggleSwitchSnippets/> ,
     "Page-Loader Content",
