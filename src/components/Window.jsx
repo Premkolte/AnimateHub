@@ -13,6 +13,7 @@ import BoxShadowSnippets from "./SnippetComponents/BoxShadowSnippets";
 import TextSnippets from "./SnippetComponents/TextSnippets";
 import SocialSnippets from "./SnippetComponents/SocialSnippets";
 import FormSnippets from "./SnippetComponents/FormSnippets";
+import ProgressBarSnippets from "./SnippetComponents/ProgressBarSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -31,6 +32,8 @@ function Window({ activeTab }) {
     <CheckboxSnippets />, 
     <SocialSnippets/>,
     <FormSnippets/>,
+    "demo",
+    <ProgressBarSnippets/>,
   ];
 
   return (

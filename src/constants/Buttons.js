@@ -15,4 +15,5 @@ export const Buttons = [
   "Socials Snippets",
   "Form Snippets",
   "(Demo) Snippets",
+  "ProgreesBar Snippets",
 ];
