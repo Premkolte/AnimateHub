@@ -1,27 +1,9 @@
 import React, { useState } from "react";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { Buttons } from "../constants/Buttons";
 
 function SideBar({ activeTab, setActiveTab }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const Buttons = [
-    "Button Snippets",
-    "Box-shadow Snippets",
-    "Card Snippets",
-    "Dropdown Snippets",
-    "Input-fields Snippets",
-    "Signup Snippets",
-    "Login Snippets",
-    "Radio Snippets",
-    "Toggle Switches Snippets",
-    "Page-Loader Snippets",
-    "Text Snippets",
-    "Checkbox Snippets",
-    "Socials Snippets",
-    // "Login Snippets", // Adjusted position for Login Snippets
-    "Form Snippets",
-    "(Demo) Snippets",
-  ];
 
   const handleTabClick = (index) => {
     setActiveTab(index);
@@ -54,7 +36,7 @@ function SideBar({ activeTab, setActiveTab }) {
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-center">AnimateHub</h1>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 mb-4">
             {Buttons.map((button, index) => (
               <button
                 key={index}
@@ -68,6 +50,17 @@ function SideBar({ activeTab, setActiveTab }) {
                 {button}
               </button>
             ))}
+          </div>
+          <div>
+            Type{" "}
+            <kbd className="px-2 py-1.5 text-sm  text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
+              cmd
+            </kbd>
+            +
+            <kbd className="px-2 py-1.5 text-sm  text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
+              K
+            </kbd>{" "}
+            for command pallete
           </div>
         </div>
       </div>
