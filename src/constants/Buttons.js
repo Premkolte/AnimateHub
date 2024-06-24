@@ -8,6 +8,7 @@ export const Buttons = [
   "Login Snippets",
   "Radio Snippets",
   "Toggle Switches Snippets",
+  "SlideShow Snippets",
   "Page-Loader Snippets",
   "Text Snippets",
   "Checkbox Snippets",

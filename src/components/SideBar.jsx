@@ -31,7 +31,8 @@ function SideBar({ activeTab, setActiveTab }) {
       <div
         className={`lg:w-64 fixed inset-y-0 left-0 z-40 bg-white shadow-xl transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto`}
+        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
+        style={{ maxHeight: "100vh" }} // Limit sidebar height to viewport height
       >
         <div className="p-4 h-full flex flex-col justify-between">
           <div className="flex flex-row items-center justify-center gap-2 mb-6">
@@ -55,14 +56,14 @@ function SideBar({ activeTab, setActiveTab }) {
           </div>
           <div>
             Type{" "}
-            <kbd className="px-2 py-1.5 text-sm  text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
+            <kbd className="px-2 py-1.5 text-sm text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
               cmd
             </kbd>
             +
-            <kbd className="px-2 py-1.5 text-sm  text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
+            <kbd className="px-2 py-1.5 text-sm text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
               K
             </kbd>{" "}
-            for command pallete
+            for command palette
           </div>
         </div>
       </div>

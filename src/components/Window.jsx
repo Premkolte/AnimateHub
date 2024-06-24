@@ -8,6 +8,7 @@ import RadioSnippets from "./SnippetComponents/RadioSnippets";
 import LoginSnippets from "./SnippetComponents/LoginSnippets";
 import SignupSnippets from "./SnippetComponents/SignupSnippets";
 import ToggleSwitchSnippets from "./SnippetComponents/ToggleSwitchSnippets";
+import SlideshowSnippets from "./SnippetComponents/SlideShowSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -20,6 +21,7 @@ function Window({ activeTab }) {
     <LoginSnippets />, // Ensure LoginSnippets component is correctly imported
     <RadioSnippets />,
     <ToggleSwitchSnippets/> ,
+    <SlideshowSnippets/>,
     "Page-Loader Content",
     "Text Snippets Content",
     <CheckboxSnippets />, 
