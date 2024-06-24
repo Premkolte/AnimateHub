@@ -16,27 +16,24 @@ function ProgressBarSnippets() {
     setShowModal(true);
   };
 
-  const runProgress = () => {
+  const runProgress = (index) => {
     // Clear any existing interval
     clearInterval(intervalRef.current);
 
-    let currentBarIndex = 0;
+    let currentProgress = 0;
     const interval = setInterval(() => {
       // Update progress for current bar
+      currentProgress += 1;
       setProgressBars(prevProgressBars => {
         const updatedProgressBars = [...prevProgressBars];
-        updatedProgressBars[currentBarIndex] += 1;
+        updatedProgressBars[index] = currentProgress;
         return updatedProgressBars;
       });
 
       // Check if current bar is complete
-      if (progressBars[currentBarIndex] >= 100) {
-        currentBarIndex += 1; // Move to next bar
-        // Reset after the last bar
-        if (currentBarIndex >= progressBarSnippets.length) {
-          clearInterval(intervalRef.current);
-          intervalRef.current = null;
-        }
+      if (currentProgress >= 100) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     }, 20); // Adjust interval duration (ms) for smoother animation
 
@@ -61,8 +58,16 @@ function ProgressBarSnippets() {
           </StringToReactComponent>
           <div className="relative w-full h-5 bg-gray-300 rounded-lg overflow-hidden">
             <div
-              className="absolute top-0 left-0 bg-green-500 h-full"
-              style={{ width: `${progressBars[index]}%` }}
+              className="absolute top-0 left-0 h-full"
+              style={{
+                width: `${progressBars[index]}%`,
+                backgroundColor:
+                  index === 0
+                    ? '#6b7280' // Default Progress Bar color
+                    : index === 1
+                    ? '#3b82f6' // Custom Progress Bar (Blue) color
+                    : '#10b981', // Progress Bar with Animation color
+              }}
             ></div>
           </div>
           <div className="flex space-x-4">
@@ -82,16 +87,16 @@ function ProgressBarSnippets() {
             >
               React Snippet
             </button>
+            <button
+              className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-blue-500 hover:bg-blue-600 focus:outline-none"
+              onClick={() => runProgress(index)}
+            >
+              Run
+            </button>
           </div>
         </div>
       ))}
       <div className="col-span-3 flex justify-center space-x-4">
-        <button
-          className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-blue-500 hover:bg-blue-600 focus:outline-none"
-          onClick={runProgress}
-        >
-          Run
-        </button>
         <button
           className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-gray-500 hover:bg-gray-600 focus:outline-none"
           onClick={resetProgress}
