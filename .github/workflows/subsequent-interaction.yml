@@ -48,7 +48,7 @@ jobs:
         if: env.first == 'false'
         run: |
           if [ "${{ github.event_name }}" == "issues" ]; then
-            gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" -f body='💡 Hi @${{ github.actor }}! Thanks for your continued contributions! We appreciate your efforts and suggestions. Keep up the great work! 🚀'
+            gh api repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments -f body='💡 Hi @${{ github.actor }}! Thanks for your continued contributions! We appreciate your efforts and suggestions. Keep up the great work! 🚀'
           elif [ "${{ github.event_name }}" == "pull_request_target" ]; then
-            gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" -f body='✨ Hi @${{ github.actor }}! Thanks for submitting another pull request. Your continuous improvements are highly valued. Keep contributing! 🙌'
+            gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments -f body='✨ Hi @${{ github.actor }}! Thanks for submitting another pull request. Your continuous improvements are highly valued. Keep contributing! 🙌'
           fi
