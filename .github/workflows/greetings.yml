@@ -1,0 +1,79 @@
+name: Greeting
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if first interaction
+        id: check
+        run: |
+          issues=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                    -H "Accept: application/vnd.github.v3+json" \
+                    "https://api.github.com/repos/${{ github.repository }}/issues?state=all&creator=${{ github.actor }}" \
+                    | jq length)
+          prs=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                    -H "Accept: application/vnd.github.v3+json" \
+                    "https://api.github.com/repos/${{ github.repository }}/pulls?state=all&creator=${{ github.actor }}" \
+                    | jq length)
+          echo "total_interactions=$((issues + prs))" >> $GITHUB_ENV
+
+      - name: Set first interaction variable
+        id: first_check
+        run: |
+          if [ "${{ env.total_interactions }}" -eq 1 ]; then
+            echo "first=true" >> $GITHUB_ENV
+          else
+            echo "first=false" >> $GITHUB_ENV
+          fi
+
+      - name: Debug - Log Environment Variables
+        run: |
+          echo "Total Interactions: ${{ env.total_interactions }}"
+          echo "First Interaction: ${{ env.first }}"
+
+      - name: Greet on first interaction - Issue
+        if: env.first == 'true' && github.event_name == 'issues'
+        run: |
+          echo "This is the first interaction on issue! Greeting the user..."
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" \
+            -d '{"body": "🎉 Hi @${{ github.actor }}! Welcome to our repository. Thanks for your first issue. We appreciate your efforts! 🚀"}'
+
+      - name: Greet on first interaction - Pull Request
+        if: env.first == 'true' && github.event_name == 'pull_request_target'
+        run: |
+          echo "This is the first interaction on pull request! Greeting the user..."
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
+            -d '{"body": "🎉 Hi @${{ github.actor }}! Welcome to our repository. Thanks for your first pull request. Your contributions are highly valued! 🙌"}'
+
+      - name: Greet on subsequent interaction - Issue
+        if: env.first == 'false' && github.event_name == 'issues'
+        run: |
+          echo "This is a subsequent interaction on issue. Greeting the user..."
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" \
+            -d '{"body": "💡 Hi @${{ github.actor }}! Thanks for your continued contributions! We appreciate your efforts and suggestions. Keep up the great work! 🚀"}'
+
+      - name: Greet on subsequent interaction - Pull Request
+        if: env.first == 'false' && github.event_name == 'pull_request_target'
+        run: |
+          echo "This is a subsequent interaction on pull request. Greeting the user..."
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
+            -d '{"body": "✨ Hi @${{ github.actor }}! Thanks for submitting another pull request. Your continuous improvements are highly valued. Keep contributing! 🙌"}'
