@@ -11,30 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          echo "deb [arch=amd64] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list
+          sudo apt update
+          sudo apt install gh -y
+
       - name: Check if first interaction
         id: check
         run: |
           issues=$(gh api -X GET "repos/${{ github.repository }}/issues?state=all&creator=${{ github.actor }}" | jq length)
           prs=$(gh api -X GET "repos/${{ github.repository }}/pulls?state=all&creator=${{ github.actor }}" | jq length)
-          if [ $((issues + prs)) -gt 1 ]; then
-            echo "::set-output name=first::false"
-          else
-            echo "::set-output name=first::true"
-          fi
+          echo "first=$((issues + prs == 1))" >> $GITHUB_ENV
 
       - name: Greet subsequent interaction
-        if: steps.check.outputs.first == 'false'
+        if: env.first == 'false'
         run: |
           if [ "${{ github.event_name }}" == "issues" ]; then
             gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" -f body='💡 Hi @${{ github.actor }}! Thanks for your continued contributions! We appreciate your efforts and suggestions. Keep up the great work! 🚀'
           elif [ "${{ github.event_name }}" == "pull_request_target" ]; then
             gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" -f body='✨ Hi @${{ github.actor }}! Thanks for submitting another pull request. Your continuous improvements are highly valued. Keep contributing! 🙌'
           fi
-
-      - name: Install GitHub CLI
-        if: steps.check.outputs.first == 'false'
-        run: |
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-          echo "deb [arch=amd64] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list
-          sudo apt update
-          sudo apt install gh -y
