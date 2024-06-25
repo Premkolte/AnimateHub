@@ -120,3 +120,5 @@ $~$
 ├── LICENSE
 ├── README.md
 └── ... // other config files
+```
+## Contributors
