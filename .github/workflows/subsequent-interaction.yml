@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GH_TOKEN: ${{ secrets.GH_PAT }}
+      GH_TOKEN: ${{ github.GH_PAT }}
 
     steps:
       - name: Install GitHub CLI
