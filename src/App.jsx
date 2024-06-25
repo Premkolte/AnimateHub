@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import SideBar from "./components/SideBar";
-import Window from "./components/Window";
-import AnimatedCursor from "react-animated-cursor";
-// index.js or App.js
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Home/Navbar';
+import SideBar from './components/SideBar';
+import Window from './components/Window';
+import HomePage from './components/Home/HomePage';
+import AnimatedCursor from 'react-animated-cursor';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
 import {
   KBarProvider,
   KBarPortal,
@@ -13,40 +14,41 @@ import {
   KBarSearch,
   useMatches,
   KBarResults,
-} from "kbar";
-import { Buttons } from "./constants/Buttons";
+} from 'kbar';
+import { Buttons } from './constants/Buttons';
 
 function App() {
-  const [activeTab, setActiveTab] = useState(0); // Initialize activeTab state
+  const [activeTab, setActiveTab] = useState(0);
 
   const actions = [
     ...Buttons.map((button, index) => ({
-      id: button.toLowerCase().replace(" ", "-"),
+      id: button.toLowerCase().replace(' ', '-'),
       name: button,
       perform: () => setActiveTab(index),
     })),
     {
-      id: "github",
-      keywords: ["repositary", "source code"],
-      name: "Github",
+      id: 'github',
+      keywords: ['repositary', 'source code'],
+      name: 'Github',
       perform: () => {
-        window.location.href = "https://github.com/Premkolte/AnimateHub";
+        window.location.href = 'https://github.com/Premkolte/AnimateHub';
       },
     },
   ];
+
   function RenderResults() {
     const { results } = useMatches();
     return (
       <KBarResults
         items={results}
         onRender={({ item, active }) =>
-          typeof item === "string" ? (
+          typeof item === 'string' ? (
             <div>{item}</div>
           ) : (
             <div
               className="text-lg p-4 rounded-lg"
               style={{
-                background: active ? "#eee" : "transparent",
+                background: active ? '#eee' : 'transparent',
               }}
             >
               {item.name}
@@ -67,20 +69,35 @@ function App() {
           </KBarAnimator>
         </KBarPositioner>
       </KBarPortal>
-      <div className="flex">
-        <AnimatedCursor
-          innerSize={12}
-          outerSize={25}
-          outerAlpha={0.4}
-          innerScale={1}
-          outerScale={2}
-          color="194, 198, 204"
-        />
-        <SideBar activeTab={activeTab} setActiveTab={setActiveTab} />
-        <Window activeTab={activeTab} />
-      </div>
+      <Router>
+        <div>
+          <Navbar />
+          <div className="flex">
+            <AnimatedCursor
+              innerSize={12}
+              outerSize={25}
+              outerAlpha={0.4}
+              innerScale={1}
+              outerScale={2}
+              color="194, 198, 204"
+            />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/explore"
+                element={
+                  <>
+                    <SideBar activeTab={activeTab} setActiveTab={setActiveTab} />
+                    <Window activeTab={activeTab} />
+                  </>
+                }
+              />
+            </Routes>
+          </div>
+        </div>
+      </Router>
     </KBarProvider>
-)
+  );
 }
 
 export default App;
