@@ -12,7 +12,7 @@
 </p> -->     
 ### :star2: About
 **Animate Hub** is your go-to resource for all things animation in web development. Discover a wide range of code snippets for animations, hovers, and effects, designed to streamline your workflow. Just copy, paste, and watch your projects come to life!
-
+ 
 $~$
 
  **PROJECT NAME --- LIVE DEMO**          
