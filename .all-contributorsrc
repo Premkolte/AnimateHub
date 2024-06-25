@@ -1,0 +1,81 @@
+{
+  "projectName": "AnimateHub",
+  "projectOwner": "Premkolte",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 90,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Premkolte",
+      "name": "Prem Kolte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100456448?v=4",
+      "profile": "https://github.com/Premkolte",
+      "contributions": [
+        "code",
+        "projectManagement"
+      ]
+    },
+    {
+      "login": "deepesh611",
+      "name": "Deepesh Patil",
+      "avatar_url": "https://avatars.githubusercontent.com/u/123585104?v=4",
+      "profile": "https://github.com/deepesh611",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "Krishna100604",
+      "name": "Prajapati Shrikrushna R.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/110299021?v=4",
+      "profile": "https://github.com/Krishna100604",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kom-senapati",
+      "name": "K Om Senapati ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/92045934?v=4",
+      "profile": "https://github.com/kom-senapati",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Kaustav2410",
+      "name": "Kaustav2410",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94297897?v=4",
+      "profile": "https://github.com/Kaustav2410",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "pandey22",
+      "name": "Kshitij Pandey",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35039432?v=4",
+      "profile": "https://github.com/pandey22",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Sudhanva21",
+      "name": "Sudhanva21",
+      "avatar_url": "https://avatars.githubusercontent.com/u/123559895?v=4",
+      "profile": "https://github.com/Sudhanva21",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": false
+}

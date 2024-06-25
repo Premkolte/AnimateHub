@@ -1,0 +1,45 @@
+name: Add Contributor
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  add-contributor:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false # We disable persisting the token to use it with another tool later
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install all-contributors-cli
+        run: npm install --global all-contributors-cli
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add Contributor
+        run: npx all-contributors-cli add ${{ github.event.pull_request.user.login }} code
+
+      - name: Generate README
+        run: npx all-contributors-cli generate
+
+      - name: Commit changes
+        run: |
+          git add README.md .all-contributorsrc
+          git commit -m "docs: add ${{ github.event.pull_request.user.login }} as a contributor"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
