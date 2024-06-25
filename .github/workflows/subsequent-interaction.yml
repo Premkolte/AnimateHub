@@ -1,0 +1,37 @@
+name: Subsequent Interaction
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gnupg software-properties-common curl
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt-get update
+          sudo apt-get install -y gh
+
+      - name: Check if first interaction
+        id: check
+        run: |
+          issues=$(gh api -X GET "repos/${{ github.repository }}/issues?state=all&creator=${{ github.actor }}" | jq length)
+          prs=$(gh api -X GET "repos/${{ github.repository }}/pulls?state=all&creator=${{ github.actor }}" | jq length)
+          echo "first=$((issues + prs == 1))" >> $GITHUB_ENV
+
+      - name: Greet subsequent interaction
+        if: env.first == 'false'
+        run: |
+          if [ "${{ github.event_name }}" == "issues" ]; then
+            gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" -f body='💡 Hi @${{ github.actor }}! Thanks for your continued contributions! We appreciate your efforts and suggestions. Keep up the great work! 🚀'
+          elif [ "${{ github.event_name }}" == "pull_request_target" ]; then
+            gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" -f body='✨ Hi @${{ github.actor }}! Thanks for submitting another pull request. Your continuous improvements are highly valued. Keep contributing! 🙌'
+          fi
