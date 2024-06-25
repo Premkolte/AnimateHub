@@ -21,11 +21,20 @@ jobs:
           else
             echo "::set-output name=first::true"
           fi
-      - name: Subsequent interaction message
+
+      - name: Greet subsequent interaction
         if: steps.check.outputs.first == 'false'
         run: |
-          if [ ${{ github.event_name }} == 'issues' ]; then
+          if [ "${{ github.event_name }}" == "issues" ]; then
             gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" -f body='💡 Hi @${{ github.actor }}! Thanks for your continued contributions! We appreciate your efforts and suggestions. Keep up the great work! 🚀'
-          elif [ ${{ github.event_name }} == 'pull_request_target' ]; then
+          elif [ "${{ github.event_name }}" == "pull_request_target" ]; then
             gh api -X POST "repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" -f body='✨ Hi @${{ github.actor }}! Thanks for submitting another pull request. Your continuous improvements are highly valued. Keep contributing! 🙌'
           fi
+
+      - name: Install GitHub CLI
+        if: steps.check.outputs.first == 'false'
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          echo "deb [arch=amd64] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list
+          sudo apt update
+          sudo apt install gh -y
