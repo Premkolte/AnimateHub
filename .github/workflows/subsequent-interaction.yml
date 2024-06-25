@@ -25,7 +25,16 @@ jobs:
         run: |
           issues=$(gh api -X GET "repos/${{ github.repository }}/issues?state=all&creator=${{ github.actor }}" | jq length)
           prs=$(gh api -X GET "repos/${{ github.repository }}/pulls?state=all&creator=${{ github.actor }}" | jq length)
-          echo "first=$((issues + prs == 1))" >> $GITHUB_ENV
+          echo "total_interactions=$((issues + prs))" >> $GITHUB_ENV
+
+      - name: Set first interaction variable
+        id: first_check
+        run: echo "first=$((${{ steps.check.outputs.total_interactions }} == 1))" >> $GITHUB_ENV
+
+      - name: Debug - Log Environment Variables
+        run: |
+          echo "Total Interactions: ${{ env.total_interactions }}"
+          echo "First Interaction: ${{ env.first }}"
 
       - name: Greet subsequent interaction
         if: env.first == 'false'
