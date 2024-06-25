@@ -10,7 +10,6 @@
   <img src="https://img.shields.io/badge/npm-v.0.21.0-red"  />
   <img src="https://img.shields.io/badge/LICENSE-MIT-green"  />
 </p> -->     
-   
 ### :star2: About
 **Animate Hub** is your go-to resource for all things animation in web development. Discover a wide range of code snippets for animations, hovers, and effects, designed to streamline your workflow. Just copy, paste, and watch your projects come to life!
 
