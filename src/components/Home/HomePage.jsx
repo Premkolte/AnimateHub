@@ -1,5 +1,3 @@
-// src/components/HomePage.jsx
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -18,6 +16,7 @@ const HomePage = () => {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
+        style={{ fontWeight: 600, fontSize: '7rem' }} // Adjusted font weight and size
       >
         Welcome to AnimateHub
       </motion.h1>
