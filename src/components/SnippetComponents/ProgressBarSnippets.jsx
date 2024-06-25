@@ -72,7 +72,7 @@ function ProgressBarSnippets() {
           </div>
           <div className="flex space-x-4">
             <button
-              className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
               onClick={() =>
                 handleShowModal(progressObject.jsxCode, progressObject.cssCode)
               }
@@ -80,7 +80,7 @@ function ProgressBarSnippets() {
               Show CSS
             </button>
             <button
-              className="text-black text-md py-2 px-4 rounded-lg shadow-md"
+              className="text-black text-md py-1 px-6 rounded-lg shadow-md"
               onClick={() =>
                 handleShowModal(progressObject.jsxCode, progressObject.cssCode)
               }
@@ -88,7 +88,7 @@ function ProgressBarSnippets() {
               React Snippet
             </button>
             <button
-              className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-blue-500 hover:bg-blue-600 focus:outline-none"
+              className="text-white text-md py-3 px-4 rounded-lg shadow-md bg-blue-500 hover:bg-blue-600 focus:outline-none"
               onClick={() => runProgress(index)}
             >
               Run
