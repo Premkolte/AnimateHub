@@ -1,4 +1,4 @@
-name: Greeting
+name: Common Greeting
 
 on:
   issues:
@@ -11,19 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gnupg software-properties-common curl
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-          sudo apt-get update
-          sudo apt-get install -y gh
-
       - name: Greet on new issue or pull request
         run: |
           if [ "${{ github.event_name }}" == "issues" ]; then
-            gh api repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments -f body='💡 Hi @${{ github.actor }}! Thanks for opening this issue. We appreciate your efforts and suggestions. Keep up the great work! 🚀'
+            curl -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments" \
+              -d '{"body": "💡 Hi @${{ github.actor }}! Thanks for opening this issue. We appreciate your efforts and suggestions. Keep up the great work! 🚀"}'
           elif [ "${{ github.event_name }}" == "pull_request_target" ]; then
-            gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments -f body='✨ Hi @${{ github.actor }}! Thanks for opening this pull request. Your contributions are highly valued. Keep up the good work! 🙌'
+            curl -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments" \
+              -d '{"body": "✨ Hi @${{ github.actor }}! Thanks for opening this pull request. Your contributions are highly valued. Keep up the good work! 🙌"}'
           fi
