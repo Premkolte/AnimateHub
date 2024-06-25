@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Home/Navbar';
 import SideBar from './components/SideBar';
-import Window from './components/Window';
+import Window from "./components/Window";
 import HomePage from './components/Home/HomePage';
+import AboutUs from './components/About/AboutUs';
+import ContactUs from './components/Contact/ContactUs';
 import AnimatedCursor from 'react-animated-cursor';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import {
@@ -83,15 +85,9 @@ function App() {
             />
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route
-                path="/explore"
-                element={
-                  <>
-                    <SideBar activeTab={activeTab} setActiveTab={setActiveTab} />
-                    <Window activeTab={activeTab} />
-                  </>
-                }
-              />
+              <Route path="/explore" element={<><SideBar activeTab={activeTab} setActiveTab={setActiveTab} /><Window activeTab={activeTab} /></>} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs/>} />
             </Routes>
           </div>
         </div>
