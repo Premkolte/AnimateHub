@@ -14,14 +14,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center">
           <motion.div
-            className="text-2xl font-bold" // Increased font weight to bold
+            className="text-lg md:text-xl lg:text-2xl font-bold" // Responsive font size
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             AnimateHub
           </motion.div>
-          <div className="flex space-x-6 items-center"> {/* Added items-center for vertical alignment */}
+          <div className="flex space-x-4 md:space-x-6 items-center"> {/* Added items-center for vertical alignment */}
             <motion.div
               className="hover:text-gray-300"
               whileHover={{ scale: 1.1 }}
