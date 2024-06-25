@@ -29,7 +29,12 @@ jobs:
 
       - name: Set first interaction variable
         id: first_check
-        run: echo "first=$((${{ steps.check.outputs.total_interactions }} == 1))" >> $GITHUB_ENV
+        run: |
+          if [ "${{ env.total_interactions }}" -eq 1 ]; then
+            echo "first=true" >> $GITHUB_ENV
+          else
+            echo "first=false" >> $GITHUB_ENV
+          fi
 
       - name: Debug - Log Environment Variables
         run: |
