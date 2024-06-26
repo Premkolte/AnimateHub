@@ -1,172 +1,125 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCogs, faLightbulb, faRocket } from '@fortawesome/free-solid-svg-icons';
-
-const testimonials = [
-  {
-    quote: "AnimateHub has transformed the way I create animations. The components are so easy to use and customize!",
-    name: "Jane Doe",
-    role: "Front-end Developer"
-  },
-  {
-    quote: "The best resource for animated UI components. Highly recommended for any web developer!",
-    name: "John Smith",
-    role: "UI/UX Designer"
-  },
-  {
-    quote: "I love the creative designs and high performance of the animations. AnimateHub is a game-changer!",
-    name: "Sarah Johnson",
-    role: "Software Engineer"
-  }
-];
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaReact, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
+import { LuLayoutTemplate } from "react-icons/lu";
+import { BiLogoTailwindCss } from "react-icons/bi";
+import Navbar from "../Navbar"
 
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const handleExploreClick = () => {
-    navigate('/explore');
-  };
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-r from-blue-400 to-purple-500 text-white px-4 mt-20">
-      {/* Hero Section */}
-      <motion.div
-        className="text-center mb-20"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        style={{ marginTop: '72px' }} 
-      >
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-7 pt-5">
-          Welcome to AnimateHub
-        </h2>
-        <p className="text-base md:text-lg lg:text-xl mb-8 max-w-screen-lg mx-auto">
-          Explore various animated components and more! AnimateHub is an open-source project where you can find and contribute to a collection of animated UI components built with React and other modern web technologies.
-        </p>
-        <motion.button
-          className="text-white text-sm md:text-md lg:text-lg py-2 px-8 rounded-full shadow-md bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-300"
-          onClick={handleExploreClick}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+    <>
+      <Navbar />
+      <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6 space-y-16 pt-60">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl"
         >
-          Explore
-        </motion.button>
-      </motion.div>
-
-      {/* Features Section */}
-      <section className="w-full py-20 bg-gray-100 text-gray-800">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h3 className="text-2xl md:text-4xl font-bold mb-12">Features</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center">
-              <FontAwesomeIcon icon={faCogs} size="3x" className="mb-4 text-blue-500" />
-              <h4 className="text-xl font-bold mb-2">Easy Integration</h4>
-              <p>Integrate animated components effortlessly into your projects.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FontAwesomeIcon icon={faLightbulb} size="3x" className="mb-4 text-yellow-500" />
-              <h4 className="text-xl font-bold mb-2">Creative Designs</h4>
-              <p>Discover unique and innovative designs to enhance user experience.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FontAwesomeIcon icon={faRocket} size="3x" className="mb-4 text-red-500" />
-              <h4 className="text-xl font-bold mb-2">High Performance</h4>
-              <p>Enjoy high-performance animations that run smoothly on any device.</p>
-            </div>
+          <div className="bg-black text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
+            100% OPEN-SOURCE
           </div>
-        </div>
-      </section>
+          <p className="text-4xl md:text-6xl mb-6">
+            Animation UI Library <br /> for Developers
+          </p>
+          <p className="text-md mb-10">
+            Open-sourced components made with
+            <br />
+            <span className="font-bold">HTML + CSS</span> &{" "}
+            <span className="font-bold">React + Tailwind</span>.
+          </p>
 
-      {/* Testimonials Section */}
-      <section className="w-full py-20 bg-white text-gray-800">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h3 className="text-2xl md:text-4xl font-bold mb-12">What Our Users Say</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-lg">
-                <p className="text-lg italic mb-4">"{testimonial.quote}"</p>
-                <p className="font-bold">{testimonial.name}</p>
-                <p className="text-sm text-gray-600">{testimonial.role}</p>
+          <div className="flex space-x-6 justify-center">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+              onClick={() => {
+                navigate("/explore");
+              }}
+            >
+              Browse Components
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              className="border border-white text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+              onClick={() => {
+                window.location.href = "https://github.com/Premkolte/AnimateHub";
+              }}
+            >
+              Get Started
+            </motion.button>
+          </div>
+        </motion.div>
+
+        <div className="flex space-x-6 mt-12">
+          <FaHtml5 className="h-12 w-12" />
+          <FaCss3Alt className="h-12 w-12" />
+          <FaReact className="h-12 w-12" />
+          <BiLogoTailwindCss className="h-12 w-12" />
+        </div>
+
+        <div className="text-center space-y-4 py-16">
+          <h1 className="text-4xl">Pricing</h1>
+          <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
+            <div>
+              <h2 className="font-extrabold text-3xl text-center mb-2">
+                Starter
+              </h2>
+              <p className="opacity-60 text-center">
+                For the individual and small teams
+              </p>
+              <div className="flex flex-col items-center my-8">
+                <p className="font-extrabold text-4xl">$0</p>
+                <p className="text-sm opacity-60">per month</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Latest Updates/Blog Section */}
-      <section className="w-full py-20 bg-gray-100 text-gray-800">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h3 className="text-2xl md:text-4xl font-bold mb-12">Latest Updates</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-xl font-bold mb-2">New Animation Components Released</h4>
-              <p className="text-gray-600">Check out our latest additions to the library.</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-xl font-bold mb-2">Tutorial: Creating Custom Animations</h4>
-              <p className="text-gray-600">Learn how to create your own custom animations.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h4 className="text-xl font-bold mb-2">Community Spotlight: User Projects</h4>
-              <p className="text-gray-600">Discover amazing projects created by our community.</p>
+            <div className="flex flex-col gap-1">
+              <p>
+                ✔️<b>Access to all components</b>
+              </p>
+              <p>
+                ✔️<b>Access to codebase</b>
+              </p>
+              <div className="flex justify-center mt-8 ">
+                <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
+                  Get Started
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Why AnimateHub Section */}
-      <section className="w-full py-20 bg-white text-gray-800">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h3 className="text-2xl md:text-4xl font-bold mb-12">Why AnimateHub</h3>
-          <p className="text-lg md:text-xl max-w-screen-lg mx-auto mb-8">
-            AnimateHub is designed to make web development easier and more fun. Our components are not only easy to use but also highly customizable to fit any project. Join our community and start creating stunning animations today!
-          </p>
-        </div>
-      </section>
-
-      {/* Get Started Section */}
-      <section className="w-full py-20 bg-gray-100 text-gray-800">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h3 className="text-2xl md:text-4xl font-bold mb-12">Get Started</h3>
-          <p className="text-lg md:text-xl max-w-screen-lg mx-auto mb-8">
-            Ready to start creating amazing animations? Head over to our documentation and explore the vast library of components we offer. Whether you're a beginner or an expert, AnimateHub has something for you.
-          </p>
-          <motion.button
-            className="text-white text-sm md:text-md lg:text-lg py-2 px-8 rounded-full shadow-md bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-300"
-            onClick={handleExploreClick}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+        <div className="text-center mt-12">
+          <h2 className="text-4xl font-extrabold mb-4">
+            Want to contribute or have some suggestions?
+          </h2>
+          <p className="text-2xl">Come to our GitHub and raise an issue!</p>
+          <a
+            href="https://github.com/Premkolte/AnimateHub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex gap-2 bg-black text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
           >
-            Explore Components
-          </motion.button>
+            <FaGithub size={30} />Visit GitHub
+          </a>
         </div>
-      </section>
 
-      {/* Contact Section */}
-      <section className="w-full py-20 bg-gradient-to-r from-blue-400 to-purple-500 text-white">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <h3 className="text-2xl md:text-4xl font-bold mb-12">Contact Us</h3>
-          <p className="text-lg md:text-xl max-w-screen-lg mx-auto mb-8">
-            Got any questions, suggestions, or feedback? We'd love to hear from you!
-          </p>
-          <motion.button
-            className="text-white text-sm md:text-md lg:text-lg py-2 px-8 rounded-full shadow-md bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-300"
-            onClick={() => navigate('/contact')}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            Contact Us
-          </motion.button>
+        <div className="w-full flex flex-col items-center border-y-2 border-white py-14">
+          <LuLayoutTemplate size={100} />
+          <h2 className="text-4xl font-extrabold mb-4">
+            Looking for Templates Instead?
+          </h2>
+          <p className="text-2xl">Coming Soon!</p>
         </div>
-      </section>
 
-      {/* Footer Section */}
-      <footer className="w-full py-8 bg-gray-800 text-white text-center">
-        <p>&copy; 2024 AnimateHub. All rights reserved.</p>
-      </footer>
-    </div>
+        <footer className="bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 p-5 w-full text-left mt-16">
+          <p className="text-lg">&copy; 2024 Animate Hub. All rights reserved.</p>
+        </footer>
+      </div>
+    </>
   );
 };
 

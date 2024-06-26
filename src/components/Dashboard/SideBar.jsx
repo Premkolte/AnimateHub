@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
-import { Buttons } from '../constants/Buttons';
+import { Buttons } from './Buttons';
+import { useNavigate } from 'react-router-dom';
 
 function SideBar({ activeTab, setActiveTab }) {
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleTabClick = (index) => {
@@ -31,8 +33,9 @@ function SideBar({ activeTab, setActiveTab }) {
         className={`lg:w-64 fixed inset-y-0 left-0 z-40 bg-white shadow-xl transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
-        style={{ maxHeight: '100vh', paddingTop: '4rem' }} // Adjusted padding top
+        style={{ maxHeight: '100vh', paddingTop: '2rem' }} // Adjusted padding top
       >
+        <h1 className="text-3xl font-bold text-center" onClick={() => navigate('/')}>AnimateHub</h1>
         <div className="p-4 h-full flex flex-col justify-between">
           <div className="space-y-2 mb-4 pb-4">
             {Buttons.map((button, index) => (
