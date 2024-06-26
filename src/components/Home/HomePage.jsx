@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { FaReact, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
 import { LuLayoutTemplate } from "react-icons/lu";
 import { BiLogoTailwindCss } from "react-icons/bi";
-import Navbar from "../Navbar";
 import { BsPeople } from "react-icons/bs";
 
 const HomePage = () => {
@@ -12,7 +11,6 @@ const HomePage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6 space-y-16 pt-24">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
