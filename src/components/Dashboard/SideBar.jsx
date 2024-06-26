@@ -15,15 +15,15 @@ function SideBar({ activeTab, setActiveTab }) {
   return (
     <>
       {/* Menu Icon for Mobile Devices */}
-      <div className="lg:hidden fixed top-4 left-4 z-50">
+      <div className="lg:hidden fixed top-4 right-4 z-50">
         <button
-          className="flex items-center justify-center rounded-md p-2 bg-gray-200 hover:bg-gray-300 focus:outline-none"
+          className="flex items-center justify-center rounded-md p-2 bg-gray-200 hover:bg-gray-300 focus:outline-none mt-12 md:mt-0"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           {isSidebarOpen ? (
-            <IoMdClose size={30} className="text-gray-700" />
+            <IoMdClose size={24} className="text-gray-700" />
           ) : (
-            <IoMdMenu size={30} className="text-gray-700" />
+            <IoMdMenu size={24} className="text-gray-700" />
           )}
         </button>
       </div>
