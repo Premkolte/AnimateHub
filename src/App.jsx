@@ -6,6 +6,7 @@ import ContactUs from "./components/Contact/ContactUs";
 import AnimatedCursor from "react-animated-cursor";
 import Dashboard from "./components/Dashboard/Dashboard";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Contributors from "./components/Contributors/Contributors";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/explore" element={<Dashboard />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/contributors" element={<Contributors />} />
         </Routes>
       </div>
     </Router>
