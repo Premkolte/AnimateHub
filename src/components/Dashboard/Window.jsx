@@ -19,23 +19,23 @@ import NavbarIconSnippets from "../SnippetComponents/NavbarIconSnippets";
 function Window({ activeTab }) {
   const content = [
     <ButtonSnippets />,
-    <BoxShadowSnippets/>,
+    <BoxShadowSnippets />,
     <CardSnippets />,
     <DropdownSnippetCard />,
     <InputFieldSnippets />,
-    <SignupSnippets/>,
-    <LoginSnippets />, // Ensure LoginSnippets component is correctly imported
+    <SignupSnippets />,
+    <LoginSnippets />,
     <RadioSnippets />,
-    <ToggleSwitchSnippets/> ,
-    <SlideshowSnippets/>,
+    <ToggleSwitchSnippets />,
+    <SlideshowSnippets />,
     "Page-Loader Content",
-    <TextSnippets/>,
-    <CheckboxSnippets />, 
-    <SocialSnippets/>,
-    <FormSnippets/>,
+    <TextSnippets />,
+    <CheckboxSnippets />,
+    <SocialSnippets />,
+    <FormSnippets />,
     "demo",
-    <ProgressBarSnippets/>,
-    <NavbarIconSnippets/>,
+    <ProgressBarSnippets />,
+    <NavbarIconSnippets />,
   ];
 
   return (

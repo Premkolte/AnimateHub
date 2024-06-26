@@ -20,7 +20,7 @@ const Contributors = () => {
           const sortedContributors = data.sort(
             (a, b) => b.contributions - a.contributions
           );
-          localStorage.setItem("contributors", sortedContributors);
+          localStorage.setItem("contributors", JSON.stringify(sortedContributors));
           setContributors(sortedContributors);
         }
       } catch (error) {
@@ -69,6 +69,16 @@ const Contributors = () => {
                 <p className="text-gray-100">
                   {contributor.contributions} contributions
                 </p>
+                <motion.a
+                  href={contributor.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <FaGithub size={20} />
+                  Visit Profile
+                </motion.a>
               </div>
             </motion.div>
           ))}
@@ -90,6 +100,16 @@ const Contributors = () => {
               <p className="text-gray-100">
                 {contributor.contributions} contributions
               </p>
+              <motion.a
+                href={contributor.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
+                whileHover={{ scale: 1.1 }}
+              >
+                <FaGithub size={20} />
+                Visit Profile
+              </motion.a>
             </div>
           ))}
         </div>

@@ -5,7 +5,7 @@ import { FaReact, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
 import { LuLayoutTemplate } from "react-icons/lu";
 import { BiLogoTailwindCss } from "react-icons/bi";
 import { BsPeople } from "react-icons/bs";
-import { GiTechnoHeart } from "react-icons/gi"; // Add this import
+import { GiTechnoHeart } from "react-icons/gi";
 import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 
@@ -168,9 +168,9 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Other Sections */}
-        <div className="text-center space-y-4 py-16">
-          <h1 className="text-4xl">Features</h1>
+        {/* Updated Features Section */}
+        <div className="text-center space-y-8 py-16">
+          <h1 className="text-4xl font-extrabold">Features</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
             <motion.div
               className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
@@ -199,9 +199,10 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="text-center space-y-4 py-16">
-          <h1 className="text-4xl">Testimonials</h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        {/* Updated Testimonials Section */}
+        <div className="text-center space-y-8 py-16 bg-gray-900 bg-opacity-50 rounded-lg  ml-4 w-260">
+          <h1 className="text-4xl font-extrabold">Testimonials</h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 p-5">
             <motion.div
               className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
               whileHover={{ scale: 1.05 }}
@@ -235,7 +236,6 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Contact and Contribution Section */}
         <div className="text-center mt-12">
           <h2 className="text-4xl font-extrabold mb-4">
             Want to contribute or have some suggestions?
@@ -262,7 +262,6 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Templates Section */}
         <div className="w-full flex flex-col items-center border-y-2 border-white py-14">
           <LuLayoutTemplate size={100} />
           <h2 className="text-4xl font-extrabold mb-4">
@@ -271,7 +270,6 @@ const HomePage = () => {
           <p className="text-2xl">Coming Soon!</p>
         </div>
 
-        {/* Footer Section */}
         <footer className="bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 p-5 w-full text-left mt-16">
           <p className="text-lg">
             &copy; 2024 Animate Hub. All rights reserved.

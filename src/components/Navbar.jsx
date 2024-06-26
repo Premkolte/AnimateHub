@@ -19,14 +19,14 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ scale: 1.1, rotate: 6 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1, rotate: 7}}
+            whileTap={{ scale: 1.6 }}
           >
             <Link to="/" className="flex items-center space-x-2">
               <motion.span
                 initial={{ scale: 2}}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                animate={{ scale: 1.2 }}
+                transition={{ duration: 0.2, delay: 0.3 }}
               >
                 🌀
               </motion.span>

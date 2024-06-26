@@ -23,7 +23,7 @@ function Dashboard() {
     })),
     {
       id: "github",
-      keywords: ["repositary", "source code"],
+      keywords: ["repository", "source code"],
       name: "Github",
       perform: () => {
         window.location.href = "https://github.com/Premkolte/AnimateHub";
@@ -53,6 +53,7 @@ function Dashboard() {
       />
     );
   }
+
   return (
     <KBarProvider actions={actions}>
       <KBarPortal>
@@ -70,4 +71,5 @@ function Dashboard() {
     </KBarProvider>
   );
 }
+
 export default Dashboard;
