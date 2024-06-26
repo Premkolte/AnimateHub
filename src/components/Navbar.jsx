@@ -13,17 +13,29 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center">
+          {/* Logo Animation */}
           <motion.div
-            className="text-lg md:text-xl lg:text-2xl font-bold" // Responsive font size
+            className="text-lg md:text-xl lg:text-2xl font-bold tracking-wider"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ scale: 1.1, rotate: 6 }}
+            whileTap={{ scale: 0.9 }}
           >
-            AnimateHub
+            <Link to="/" className="flex items-center space-x-2">
+              <motion.span
+                initial={{ scale: 2}}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                🌀
+              </motion.span>
+              <span>AnimateHub</span>
+            </Link>
           </motion.div>
+
+          {/* Navigation Links */}
           <div className="flex space-x-4 md:space-x-6 items-center">
-            {" "}
-            {/* Added items-center for vertical alignment */}
             <motion.div
               className="hover:text-gray-300"
               whileHover={{ scale: 1.1 }}

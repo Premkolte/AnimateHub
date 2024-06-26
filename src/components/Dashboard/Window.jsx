@@ -14,6 +14,7 @@ import TextSnippets from "../SnippetComponents/TextSnippets";
 import SocialSnippets from "../SnippetComponents/SocialSnippets";
 import FormSnippets from "../SnippetComponents/FormSnippets";
 import ProgressBarSnippets from "../SnippetComponents/ProgressBarSnippets";
+import NavbarIconSnippets from "../SnippetComponents/NabarIconSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -34,6 +35,7 @@ function Window({ activeTab }) {
     <FormSnippets/>,
     "demo",
     <ProgressBarSnippets/>,
+    <NavbarIconSnippets/>,
   ];
 
   return (
