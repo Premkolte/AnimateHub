@@ -7,6 +7,7 @@ import AnimatedCursor from "react-animated-cursor";
 import Dashboard from "./components/Dashboard/Dashboard";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Contributors from "./components/Contributors/Contributors";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           outerScale={2}
           color="194, 198, 204"
         />
+        <Navbar/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<Dashboard />} />

@@ -2,12 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import Navbar from "../Navbar";
 
 const About = () => {
   return (
     <>
-    <Navbar/>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
