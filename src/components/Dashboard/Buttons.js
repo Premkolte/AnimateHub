@@ -16,5 +16,4 @@ export const Buttons = [
   "Form Snippets",
   "(Demo) Snippets",
   "ProgreesBar Snippets",
-  "Navbar-Icons",
 ];
