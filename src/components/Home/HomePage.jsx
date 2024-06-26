@@ -1,10 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaReact, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
 import { LuLayoutTemplate } from "react-icons/lu";
 import { BiLogoTailwindCss } from "react-icons/bi";
-import Navbar from "../Navbar"
+import Navbar from "../Navbar";
+import { BsPeople } from "react-icons/bs";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -46,7 +47,8 @@ const HomePage = () => {
               whileHover={{ scale: 1.1 }}
               className="border border-white text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
               onClick={() => {
-                window.location.href = "https://github.com/Premkolte/AnimateHub";
+                window.location.href =
+                  "https://github.com/Premkolte/AnimateHub";
               }}
             >
               Get Started
@@ -97,14 +99,25 @@ const HomePage = () => {
             Want to contribute or have some suggestions?
           </h2>
           <p className="text-2xl">Come to our GitHub and raise an issue!</p>
-          <a
-            href="https://github.com/Premkolte/AnimateHub"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex gap-2 bg-black text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
-          >
-            <FaGithub size={30} />Visit GitHub
-          </a>
+          <div className="mt-8 flex justify-center items-center gap-4">
+            <motion.a
+              href="https://github.com/Premkolte/AnimateHub"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
+              whileHover={{ scale: 1.05 }}
+            >
+              <FaGithub size={30} />
+              Visit GitHub
+            </motion.a>
+            <Link
+              to="/contributors"
+              className="inline-flex items-center gap-2 bg-indigo-500 text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
+            >
+              <BsPeople size={30}/>
+              View Contributors
+            </Link>
+          </div>
         </div>
 
         <div className="w-full flex flex-col items-center border-y-2 border-white py-14">
@@ -116,7 +129,9 @@ const HomePage = () => {
         </div>
 
         <footer className="bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 p-5 w-full text-left mt-16">
-          <p className="text-lg">&copy; 2024 Animate Hub. All rights reserved.</p>
+          <p className="text-lg">
+            &copy; 2024 Animate Hub. All rights reserved.
+          </p>
         </footer>
       </div>
     </>
