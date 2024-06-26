@@ -1,41 +1,125 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaReact, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
+import { LuLayoutTemplate } from "react-icons/lu";
+import { BiLogoTailwindCss } from "react-icons/bi";
+import Navbar from "../Navbar"
 
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const handleExploreClick = () => {
-    navigate('/explore');
-  };
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-r from-blue-400 to-purple-500 text-white px-4">
-      <motion.h2
-        className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-center"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Welcome to AnimateHub
-      </motion.h2>
-      <motion.p
-        className="text-base md:text-lg lg:text-xl mb-8 max-w-screen-lg text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        Explore various animated components and more! AnimateHub is an open-source project where you can find and contribute to a collection of animated UI components built with React and other modern web technologies.
-      </motion.p>
-      <motion.button
-        className="text-white text-sm md:text-md lg:text-lg py-2 px-8 rounded-full shadow-md bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 focus:outline-none transform hover:scale-110 transition-transform duration-300"
-        onClick={handleExploreClick}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        Explore
-      </motion.button>
-    </div>
+    <>
+      <Navbar />
+      <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6 space-y-16 pt-60">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl"
+        >
+          <div className="bg-black text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
+            100% OPEN-SOURCE
+          </div>
+          <p className="text-4xl md:text-6xl mb-6">
+            Animation UI Library <br /> for Developers
+          </p>
+          <p className="text-md mb-10">
+            Open-sourced components made with
+            <br />
+            <span className="font-bold">HTML + CSS</span> &{" "}
+            <span className="font-bold">React + Tailwind</span>.
+          </p>
+
+          <div className="flex space-x-6 justify-center">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+              onClick={() => {
+                navigate("/explore");
+              }}
+            >
+              Browse Components
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              className="border border-white text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+              onClick={() => {
+                window.location.href = "https://github.com/Premkolte/AnimateHub";
+              }}
+            >
+              Get Started
+            </motion.button>
+          </div>
+        </motion.div>
+
+        <div className="flex space-x-6 mt-12">
+          <FaHtml5 className="h-12 w-12" />
+          <FaCss3Alt className="h-12 w-12" />
+          <FaReact className="h-12 w-12" />
+          <BiLogoTailwindCss className="h-12 w-12" />
+        </div>
+
+        <div className="text-center space-y-4 py-16">
+          <h1 className="text-4xl">Pricing</h1>
+          <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
+            <div>
+              <h2 className="font-extrabold text-3xl text-center mb-2">
+                Starter
+              </h2>
+              <p className="opacity-60 text-center">
+                For the individual and small teams
+              </p>
+              <div className="flex flex-col items-center my-8">
+                <p className="font-extrabold text-4xl">$0</p>
+                <p className="text-sm opacity-60">per month</p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <p>
+                ✔️<b>Access to all components</b>
+              </p>
+              <p>
+                ✔️<b>Access to codebase</b>
+              </p>
+              <div className="flex justify-center mt-8 ">
+                <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
+                  Get Started
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-12">
+          <h2 className="text-4xl font-extrabold mb-4">
+            Want to contribute or have some suggestions?
+          </h2>
+          <p className="text-2xl">Come to our GitHub and raise an issue!</p>
+          <a
+            href="https://github.com/Premkolte/AnimateHub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex gap-2 bg-black text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
+          >
+            <FaGithub size={30} />Visit GitHub
+          </a>
+        </div>
+
+        <div className="w-full flex flex-col items-center border-y-2 border-white py-14">
+          <LuLayoutTemplate size={100} />
+          <h2 className="text-4xl font-extrabold mb-4">
+            Looking for Templates Instead?
+          </h2>
+          <p className="text-2xl">Coming Soon!</p>
+        </div>
+
+        <footer className="bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 p-5 w-full text-left mt-16">
+          <p className="text-lg">&copy; 2024 Animate Hub. All rights reserved.</p>
+        </footer>
+      </div>
+    </>
   );
 };
 

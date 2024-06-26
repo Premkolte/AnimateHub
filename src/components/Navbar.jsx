@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import DarkModeToggle from './DarkModeToggle'; // Adjust the import path as per your file structure
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import DarkModeToggle from "./DarkModeToggle"; // Adjust the import path as per your file structure
 
 const Navbar = () => {
   return (
@@ -21,7 +21,9 @@ const Navbar = () => {
           >
             AnimateHub
           </motion.div>
-          <div className="flex space-x-4 md:space-x-6 items-center"> {/* Added items-center for vertical alignment */}
+          <div className="flex space-x-4 md:space-x-6 items-center">
+            {" "}
+            {/* Added items-center for vertical alignment */}
             <motion.div
               className="hover:text-gray-300"
               whileHover={{ scale: 1.1 }}
