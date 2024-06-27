@@ -1,9 +1,7 @@
 <p align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-    <!--     You can add your logo here -->
-    <img src="https://www.amug.com/wp-content/uploads/2016/09/you-logo-here-300x106.png" />
+    
+<!--     You can add your logo here   -->
+<img src="https://www.amug.com/wp-content/uploads/2016/09/you-logo-here-300x106.png" />
 </p>
 <!-- <p align="center"> -->
   <!-- You can add your badges here -->
@@ -67,7 +65,7 @@ $~$
 1. `Fork` our repository to your GitHub account. 
 2. `Clone` your fork to your local machine. 
     Use the command `git clone <your-fork-url>`.
-3. Create a new branch for your work. 
+3. Create a new branch for your work . 
     
 **Commit Your Changes**
 
