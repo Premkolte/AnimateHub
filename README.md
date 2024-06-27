@@ -65,7 +65,7 @@ $~$
 1. `Fork` our repository to your GitHub account. 
 2. `Clone` your fork to your local machine. 
     Use the command `git clone <your-fork-url>`.
-3. Create a new branch for your work. 
+3. Create a new branch for your work . 
     
 **Commit Your Changes**
 
