@@ -281,13 +281,59 @@ const HomePage = () => {
           </div>
         </motion.div>
 
+        {/* Updated Template Section */}
         <div className="w-full flex flex-col items-center border-y-2 border-white py-14">
-          <LuLayoutTemplate size={100} />
-          <h2 className="text-4xl font-extrabold mb-4">
-            Looking for Templates Instead?
-          </h2>
-          <p className="text-2xl">Coming Soon!</p>
+        <LuLayoutTemplate size={100} />
+        <h2 className="text-4xl font-extrabold mb-4">
+          Looking for Templates Instead?
+        </h2>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-12 mt-8">
+          {/* Portfolio Template */}
+          <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
+            <div>
+              <h2 className="font-extrabold text-3xl text-center mb-2">Portfolio</h2>
+              <p className="opacity-60 text-center">
+                Showcase your projects and skills with a professional portfolio template.
+              </p>
+              <div className="flex justify-center mt-8">
+                <Link to="/portfolio" className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
+                  View Template
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Product Template */}
+          <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
+            <div>
+              <h2 className="font-extrabold text-3xl text-center mb-2">Product</h2>
+              <p className="opacity-60 text-center">
+                Promote your product with a clean and effective product template.
+              </p>
+              <div className="flex justify-center mt-8">
+                <Link to="/product" className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
+                  View Template
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Blog Template */}
+          <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
+            <div>
+              <h2 className="font-extrabold text-3xl text-center mb-2">Blog</h2>
+              <p className="opacity-60 text-center">
+                Share your thoughts and insights with a customizable blog template.
+              </p>
+              <div className="flex justify-center mt-8">
+                <Link to="/blog" className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
+                  View Template
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
         <footer className="bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 p-5 w-full text-left mt-16">
           <p className="text-lg">
