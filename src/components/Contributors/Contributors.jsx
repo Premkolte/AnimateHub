@@ -6,29 +6,35 @@ import { FaGithub } from "react-icons/fa";
 const Contributors = () => {
   const [contributors, setContributors] = useState([]);
 
-  useEffect(() => {
-    const fetchContributors = async () => {
-      try {
-        const response = await fetch(
-          "https://api.github.com/repos/Premkolte/AnimateHub/contributors"
+  const fetchContributors = async () => {
+    try {
+      const response = await fetch(
+        "https://api.github.com/repos/Premkolte/AnimateHub/contributors"
+      );
+      if (!response.ok) {
+        const storedData = JSON.parse(localStorage.getItem("contributors"));
+        setContributors(storedData);
+      } else {
+        const data = await response.json();
+        const sortedContributors = data.sort(
+          (a, b) => b.contributions - a.contributions
         );
-        if (!response.ok) {
-          const storedData = JSON.parse(localStorage.getItem("contributors"));
-          setContributors(storedData);
-        } else {
-          const data = await response.json();
-          const sortedContributors = data.sort(
-            (a, b) => b.contributions - a.contributions
-          );
-          localStorage.setItem("contributors", JSON.stringify(sortedContributors));
-          setContributors(sortedContributors);
-        }
-      } catch (error) {
-        console.error("Error fetching contributors:", error);
+        localStorage.setItem("contributors", JSON.stringify(sortedContributors));
+        setContributors(sortedContributors);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching contributors:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchContributors();
+
+    const interval = setInterval(() => {
+      fetchContributors();
+    }, 60000); // Fetch contributors every 60 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
 
   return (

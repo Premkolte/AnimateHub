@@ -8,6 +8,7 @@ import { BsPeople } from "react-icons/bs";
 import { GiTechnoHeart } from "react-icons/gi";
 import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
+import Chatbot from "./Chatbot";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -275,6 +276,9 @@ const HomePage = () => {
             &copy; 2024 Animate Hub. All rights reserved.
           </p>
         </footer>
+
+        {/* Include the Chatbot Component */}
+        <Chatbot />
       </div>
     </>
   );
