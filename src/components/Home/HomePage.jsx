@@ -25,9 +25,12 @@ const HomePage = () => {
           <div className="bg-black text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
             100% OPEN-SOURCE
           </div>
-          <p className="text-4xl md:text-6xl mb-6">
+          <motion.p
+            className="text-4xl md:text-6xl mb-6"
+            whileHover={{ scale: 1.05 }}
+          >
             Animation UI Library <br /> for Developers
-          </p>
+          </motion.p>
           <p className="text-md mb-10">
             Open-sourced components made with
             <br />
@@ -170,7 +173,12 @@ const HomePage = () => {
         </div>
 
         {/* Updated Features Section */}
-        <div className="text-center space-y-8 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center space-y-8 py-16"
+        >
           <h1 className="text-4xl font-extrabold">Features</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
             <motion.div
@@ -198,10 +206,15 @@ const HomePage = () => {
               <p>Extensive documentation and examples to help developers get started quickly.</p>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Updated Testimonials Section */}
-        <div className="text-center space-y-8 py-16 bg-gray-900 bg-opacity-50 rounded-lg  ml-4 w-260">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center space-y-8 py-16 bg-gray-900 bg-opacity-50 rounded-lg  ml-4 w-260"
+        >
           <h1 className="text-4xl font-extrabold">Testimonials</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 p-5">
             <motion.div
@@ -235,9 +248,14 @@ const HomePage = () => {
               <p className="text-gray-400">Freelance Developer</p>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="text-center mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mt-12"
+        >
           <h2 className="text-4xl font-extrabold mb-4">
             Want to contribute or have some suggestions?
           </h2>
@@ -261,7 +279,7 @@ const HomePage = () => {
               View Contributors
             </Link>
           </div>
-        </div>
+        </motion.div>
 
         <div className="w-full flex flex-col items-center border-y-2 border-white py-14">
           <LuLayoutTemplate size={100} />

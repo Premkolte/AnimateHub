@@ -17,4 +17,8 @@ export const Buttons = [
   "(Demo) Snippets",
   "ProgreesBar Snippets",
   "Navbar-Icons",
+  "DarkMode",
+  "Animation",
+  "Tables",
+  "Responsiveness",
 ];

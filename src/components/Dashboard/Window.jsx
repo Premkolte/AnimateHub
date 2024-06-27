@@ -15,6 +15,11 @@ import SocialSnippets from "../SnippetComponents/SocialSnippets";
 import FormSnippets from "../SnippetComponents/FormSnippets";
 import ProgressBarSnippets from "../SnippetComponents/ProgressBarSnippets";
 import NavbarIconSnippets from "../SnippetComponents/NavbarIconSnippets";
+import DarkModeSnippets from "../SnippetComponents/DarkModeSnippets";
+import AnimationSnippets from "../SnippetComponents/AnimationSnippets";
+import TableSnippets from "../SnippetComponents/TableSnippets";
+import ResponsivenessSnippets from "../SnippetComponents/ResponsivenessSnippets";
+
 
 function Window({ activeTab }) {
   const content = [
@@ -36,6 +41,10 @@ function Window({ activeTab }) {
     "demo",
     <ProgressBarSnippets />,
     <NavbarIconSnippets />,
+    <DarkModeSnippets/>,
+    <AnimationSnippets/>,
+    <TableSnippets/>,
+    <ResponsivenessSnippets/>
   ];
 
   return (
