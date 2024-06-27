@@ -17,6 +17,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@google/generative-ai": "^0.14.0",
     "framer-motion": "^11.2.12",
     "kbar": "^0.1.0-beta.45",
     "react": "^18.2.0",
