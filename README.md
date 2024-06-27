@@ -1,6 +1,6 @@
 <p align="center">
     
-<!--     You can add your logo here -->
+<!--     You can add your logo here   -->
 <img src="https://www.amug.com/wp-content/uploads/2016/09/you-logo-here-300x106.png" />
 </p>
 <!-- <p align="center"> -->
