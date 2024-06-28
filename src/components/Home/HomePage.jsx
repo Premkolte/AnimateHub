@@ -224,49 +224,6 @@ const HomePage = () => {
         {/* Updated Testimonials Section */}
 
         <TestimonialSection />
-        {/* <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center space-y-8 py-16 bg-gray-900 bg-opacity-50 rounded-lg  ml-4 w-260"
-        >
-          <h1 className="text-4xl font-extrabold">Testimonials</h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 p-5">
-            <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <p className="mb-4">
-                "The components are well-designed and easy to customize. Great
-                job!"
-              </p>
-              <h3 className="font-bold">Jane Smith</h3>
-              <p className="text-gray-400">Lead Developer, Sample Co.</p>
-            </motion.div>
-            <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <p className="mb-4">
-                "We've seen significant improvement in user engagement after
-                implementing AnimateHub."
-              </p>
-              <h3 className="font-bold">David Brown</h3>
-              <p className="text-gray-400">CTO, Test Solutions</p>
-            </motion.div>
-            <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <p className="mb-4">
-                "A fantastic resource for developers. The open-source aspect is
-                a huge plus!"
-              </p>
-              <h3 className="font-bold">Alex Johnson</h3>
-              <p className="text-gray-400">Freelance Developer</p>
-            </motion.div>
-          </div>
-        </motion.div> */}
 
         <motion.div
           initial={{ opacity: 0, y: 50 }}
