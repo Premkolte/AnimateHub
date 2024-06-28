@@ -9,6 +9,7 @@ import { GiTechnoHeart } from "react-icons/gi";
 import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import Chatbot from "./Chatbot";
+import TestimonialSection from "./Testimonial";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -173,6 +174,7 @@ const HomePage = () => {
         </div>
 
         {/* Updated Features Section */}
+
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -182,73 +184,46 @@ const HomePage = () => {
           <h1 className="text-4xl font-extrabold">Features</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
             <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
+              className="bg-slate-900 p-6 rounded-lg shadow-lg min-h-[250px]"
               whileHover={{ scale: 1.05 }}
             >
               <GiTechnoHeart className="text-4xl mb-4 mx-auto text-purple-500" />
               <h2 className="font-extrabold text-2xl mb-2">Easy Integration</h2>
-              <p>Seamlessly integrate with any project using HTML, CSS, React, and Tailwind.</p>
+              <p>
+                Seamlessly integrate with any project using HTML, CSS, React,
+                and Tailwind.
+              </p>
             </motion.div>
             <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
+              className="bg-slate-900 p-6 rounded-lg shadow-lg min-h-[250px]"
               whileHover={{ scale: 1.05 }}
             >
               <IoMdRocket className="text-4xl mb-4 mx-auto text-purple-500" />
               <h2 className="font-extrabold text-2xl mb-2">High Performance</h2>
-              <p>Optimized for speed and efficiency, ensuring smooth animations and interactions.</p>
+              <p>
+                Optimized for speed and efficiency, ensuring smooth animations
+                and interactions.
+              </p>
             </motion.div>
             <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
+              className="bg-slate-900 p-6 rounded-lg shadow-lg min-h-[250px]"
               whileHover={{ scale: 1.05 }}
             >
               <MdLibraryBooks className="text-4xl mb-4 mx-auto text-purple-500" />
-              <h2 className="font-extrabold text-2xl mb-2">Comprehensive Documentation</h2>
-              <p>Extensive documentation and examples to help developers get started quickly.</p>
+              <h2 className="font-extrabold text-2xl mb-2">
+                Comprehensive Documentation
+              </h2>
+              <p>
+                Extensive documentation and examples to help developers get
+                started quickly.
+              </p>
             </motion.div>
           </div>
         </motion.div>
 
         {/* Updated Testimonials Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center space-y-8 py-16 bg-gray-900 bg-opacity-50 rounded-lg  ml-4 w-260"
-        >
-          <h1 className="text-4xl font-extrabold">Testimonials</h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 p-5">
-            <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <p className="mb-4">
-                "The components are well-designed and easy to customize. Great job!"
-              </p>
-              <h3 className="font-bold">Jane Smith</h3>
-              <p className="text-gray-400">Lead Developer, Sample Co.</p>
-            </motion.div>
-            <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <p className="mb-4">
-                "We've seen significant improvement in user engagement after implementing AnimateHub."
-              </p>
-              <h3 className="font-bold">David Brown</h3>
-              <p className="text-gray-400">CTO, Test Solutions</p>
-            </motion.div>
-            <motion.div
-              className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <p className="mb-4">
-                "A fantastic resource for developers. The open-source aspect is a huge plus!"
-              </p>
-              <h3 className="font-bold">Alex Johnson</h3>
-              <p className="text-gray-400">Freelance Developer</p>
-            </motion.div>
-          </div>
-        </motion.div>
+
+        <TestimonialSection />
 
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -275,7 +250,7 @@ const HomePage = () => {
               to="/contributors"
               className="inline-flex items-center gap-2 bg-indigo-500 text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
             >
-              <BsPeople size={30}/>
+              <BsPeople size={30} />
               View Contributors
             </Link>
           </div>
@@ -283,57 +258,75 @@ const HomePage = () => {
 
         {/* Updated Template Section */}
         <div className="w-full flex flex-col items-center border-y-2 border-white py-14">
-        <LuLayoutTemplate size={100} />
-        <h2 className="text-4xl font-extrabold mb-4">
-          Looking for Templates Instead?
-        </h2>
-        <div className="flex flex-col md:flex-row justify-center items-center gap-12 mt-8">
-          {/* Portfolio Template */}
-          <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
-            <div>
-              <h2 className="font-extrabold text-3xl text-center mb-2">Portfolio</h2>
-              <p className="opacity-60 text-center">
-                Showcase your projects and skills with a professional portfolio template.
-              </p>
-              <div className="flex justify-center mt-8">
-                <Link to="/portfolio" className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
-                  View Template
-                </Link>
+          <LuLayoutTemplate size={100} />
+          <h2 className="text-4xl font-extrabold mb-4">
+            Looking for Templates Instead?
+          </h2>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-12 mt-8">
+            {/* Portfolio Template */}
+            <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
+              <div>
+                <h2 className="font-extrabold text-3xl text-center mb-2">
+                  Portfolio
+                </h2>
+                <p className="opacity-60 text-center">
+                  Showcase your projects and skills with a professional
+                  portfolio template.
+                </p>
+                <div className="flex justify-center mt-8">
+                  <Link
+                    to="/portfolio"
+                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
+                  >
+                    View Template
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Product Template */}
-          <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
-            <div>
-              <h2 className="font-extrabold text-3xl text-center mb-2">Product</h2>
-              <p className="opacity-60 text-center">
-                Promote your product with a clean and effective product template.
-              </p>
-              <div className="flex justify-center mt-8">
-                <Link to="/product" className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
-                  View Template
-                </Link>
+            {/* Product Template */}
+            <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
+              <div>
+                <h2 className="font-extrabold text-3xl text-center mb-2">
+                  Product
+                </h2>
+                <p className="opacity-60 text-center">
+                  Promote your product with a clean and effective product
+                  template.
+                </p>
+                <div className="flex justify-center mt-8">
+                  <Link
+                    to="/product"
+                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
+                  >
+                    View Template
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Blog Template */}
-          <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
-            <div>
-              <h2 className="font-extrabold text-3xl text-center mb-2">Blog</h2>
-              <p className="opacity-60 text-center">
-                Share your thoughts and insights with a customizable blog template.
-              </p>
-              <div className="flex justify-center mt-8">
-                <Link to="/blog" className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
-                  View Template
-                </Link>
+            {/* Blog Template */}
+            <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
+              <div>
+                <h2 className="font-extrabold text-3xl text-center mb-2">
+                  Blog
+                </h2>
+                <p className="opacity-60 text-center">
+                  Share your thoughts and insights with a customizable blog
+                  template.
+                </p>
+                <div className="flex justify-center mt-8">
+                  <Link
+                    to="/blog"
+                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
+                  >
+                    View Template
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
         <footer className="bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 p-5 w-full text-left mt-16">
           <p className="text-lg">
