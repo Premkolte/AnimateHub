@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar";
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Contributors = () => {
   const [contributors, setContributors] = useState([]);
@@ -19,7 +19,10 @@ const Contributors = () => {
         const sortedContributors = data.sort(
           (a, b) => b.contributions - a.contributions
         );
-        localStorage.setItem("contributors", JSON.stringify(sortedContributors));
+        localStorage.setItem(
+          "contributors",
+          JSON.stringify(sortedContributors)
+        );
         setContributors(sortedContributors);
       }
     } catch (error) {
@@ -37,12 +40,36 @@ const Contributors = () => {
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <>
-      <Navbar />
+      <div className="p-4 min-h-screen h-full text-white bg-gradient-to-r from-blue-500 to-purple-400 flex flex-col items-center">
+        <button
+          className="bg-violet-200 text-center w-48 rounded-2xl h-14 relative font-sans text-black text-xl font-semibold group"
+          onClick={() => navigate("/")}
+        >
+          <div className="bg-violet-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500">
+            <svg
+              width="25px"
+              height="25px"
+              viewBox="0 0 1024 1024"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill="#000000"
+                d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
+              ></path>
+              <path
+                fill="#000000"
+                d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
+              ></path>
+            </svg>
+          </div>
+          <p className="translate-x-2">Home</p>
+        </button>
 
-      <div className="pt-20 p-4 min-h-screen h-full text-white bg-gradient-to-r from-blue-500 to-purple-400">
-        <h2 className="text-4xl font-extrabold text-center mb-8">
+        <h2 className="text-4xl font-extrabold text-center mb-8 mt-10">
           Contributors
         </h2>
 
@@ -91,7 +118,7 @@ const Contributors = () => {
         </div>
 
         {/* Other Contributors Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        <div className="w-full md:w-[80%] grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
           {contributors.slice(3).map((contributor) => (
             <div
               key={contributor.id}

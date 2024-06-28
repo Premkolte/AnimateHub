@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import DarkModeToggle from "./DarkModeToggle"; // Adjust the import path as per your file structure
+import DarkModeToggle from "../DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const Navbar = () => {

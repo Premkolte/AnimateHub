@@ -1,8 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faUser } from '@fortawesome/free-regular-svg-icons';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
   const Blobs = () => (
@@ -63,13 +64,39 @@ const Contact = () => {
       </svg>
     </>
   );
+  
+  const navigate = useNavigate();
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="relative flex items-center justify-center w-screen h-screen overflow-hidden bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500 via-violet-500 to-fuchsia-500"
+      className="relative flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500 via-violet-500 to-fuchsia-500"
     >
+      <button
+        className="bg-violet-200 text-center w-48 rounded-2xl h-14 relative font-sans text-black text-xl font-semibold group"
+        onClick={() => navigate("/")}
+      >
+        <div className="bg-violet-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500">
+          <svg
+            width="25px"
+            height="25px"
+            viewBox="0 0 1024 1024"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="#000000"
+              d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
+            ></path>
+            <path
+              fill="#000000"
+              d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
+            ></path>
+          </svg>
+        </div>
+        <p className="translate-x-2">Home</p>
+      </button>
+
       <Blobs />
 
       {/* Content */}
@@ -77,16 +104,19 @@ const Contact = () => {
         <div className="bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg mb-4">
-            Got any questions, suggestions, or feedback? We'd love to hear from you!
+            Got any questions, suggestions, or feedback? We'd love to hear from
+            you!
           </p>
           <p className="text-lg mb-4">
-            Reach out to us via email at <strong>contact@animatehub.com</strong> or fill out the form
-            below:
+            Reach out to us via email at <strong>contact@animatehub.com</strong>{" "}
+            or fill out the form below:
           </p>
           <form className="flex flex-col space-y-4">
             <div className="flex space-x-4">
               <div className="flex-1">
-                <label className="sr-only" htmlFor="name">Your Name</label>
+                <label className="sr-only" htmlFor="name">
+                  Your Name
+                </label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <FontAwesomeIcon icon={faUser} className="text-gray-500" />
@@ -100,10 +130,15 @@ const Contact = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <label className="sr-only" htmlFor="email">Your Email</label>
+                <label className="sr-only" htmlFor="email">
+                  Your Email
+                </label>
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FontAwesomeIcon icon={faEnvelope} className="text-gray-500" />
+                    <FontAwesomeIcon
+                      icon={faEnvelope}
+                      className="text-gray-500"
+                    />
                   </span>
                   <input
                     type="email"
@@ -115,7 +150,9 @@ const Contact = () => {
               </div>
             </div>
             <div className="flex-1">
-              <label className="sr-only" htmlFor="message">Your Message</label>
+              <label className="sr-only" htmlFor="message">
+                Your Message
+              </label>
               <textarea
                 id="message"
                 placeholder="Your Message"
@@ -127,7 +164,8 @@ const Contact = () => {
               type="submit"
               className="btn btn-primary py-2 px-4 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
             >
-              <FontAwesomeIcon icon={faPaperPlane} className="me-2" /> Send Message
+              <FontAwesomeIcon icon={faPaperPlane} className="me-2" /> Send
+              Message
             </button>
           </form>
         </div>

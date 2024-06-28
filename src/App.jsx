@@ -6,7 +6,6 @@ import ContactUs from "./components/Contact/ContactUs";
 import AnimatedCursor from "react-animated-cursor";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Contributors from "./components/Contributors/Contributors";
-import Navbar from "./components/Navbar";
 import PortfolioPage from "./components/TemplatesFiles/Portfoilo";
 import ProductPage from "./components/TemplatesFiles/Product";
 import BlogPage from "./components/TemplatesFiles/Blog";
@@ -24,7 +23,6 @@ function App() {
           outerScale={2}
           color="194, 198, 204"
         />
-        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<Dashboard />} />

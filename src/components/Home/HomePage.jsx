@@ -10,12 +10,14 @@ import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import Chatbot from "./Chatbot";
 import TestimonialSection from "./Testimonial";
+import Navbar from "./Navbar";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
   return (
     <>
+      <Navbar />
       <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6 space-y-16 pt-24">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
