@@ -6,15 +6,12 @@ import ContactUs from "./components/Contact/ContactUs";
 import AnimatedCursor from "react-animated-cursor";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Contributors from "./components/Contributors/Contributors";
-import PortfolioPage from "./components/TemplatesFiles/Portfoilo";
-import ProductPage from "./components/TemplatesFiles/Product";
-import BlogPage from "./components/TemplatesFiles/Blog";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import TemplatesRoutes from "./components/Templates/TemplatesRoutes";
 
 function App() {
   return (
     <Router>
-      <div>
         <AnimatedCursor
           innerSize={12}
           outerSize={25}
@@ -29,11 +26,8 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/contributors" element={<Contributors />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/product" element={<ProductPage />} />
-          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/templates/*" element={<TemplatesRoutes />} />
         </Routes>
-      </div>
     </Router>
   );
 }
