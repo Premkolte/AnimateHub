@@ -11,6 +11,7 @@ import { MdLibraryBooks } from "react-icons/md";
 import Chatbot from "./Chatbot";
 import TestimonialSection from "./Testimonial";
 import Navbar from "./Navbar";
+import Footer from "../Footer";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -258,83 +259,26 @@ const HomePage = () => {
           </div>
         </motion.div>
 
-        {/* Updated Template Section */}
-        <div className="w-full flex flex-col items-center border-y-2 border-white py-14">
-          <LuLayoutTemplate size={100} />
-          <h2 className="text-4xl font-extrabold mb-4">
-            Looking for Templates Instead?
+        {/* Templates */}
+        <div className="w-full flex flex-col items-center border-y-2 border-white py-16">
+          <LuLayoutTemplate size={100} className="text-white-500" />
+          <h2 className="text-4xl font-extrabold mb-3 text-center">
+            Introducing Templates
           </h2>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-12 mt-8">
-            {/* Portfolio Template */}
-            <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
-              <div>
-                <h2 className="font-extrabold text-3xl text-center mb-2">
-                  Portfolio
-                </h2>
-                <p className="opacity-60 text-center">
-                  Showcase your projects and skills with a professional
-                  portfolio template.
-                </p>
-                <div className="flex justify-center mt-8">
-                  <Link
-                    to="/portfolio"
-                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
-                  >
-                    View Template
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Product Template */}
-            <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
-              <div>
-                <h2 className="font-extrabold text-3xl text-center mb-2">
-                  Product
-                </h2>
-                <p className="opacity-60 text-center">
-                  Promote your product with a clean and effective product
-                  template.
-                </p>
-                <div className="flex justify-center mt-8">
-                  <Link
-                    to="/product"
-                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
-                  >
-                    View Template
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Blog Template */}
-            <div className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg min-w-sm">
-              <div>
-                <h2 className="font-extrabold text-3xl text-center mb-2">
-                  Blog
-                </h2>
-                <p className="opacity-60 text-center">
-                  Share your thoughts and insights with a customizable blog
-                  template.
-                </p>
-                <div className="flex justify-center mt-8">
-                  <Link
-                    to="/blog"
-                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
-                  >
-                    View Template
-                  </Link>
-                </div>
-              </div>
-            </div>
+          <p className="text-lg md:text-xl text-center">
+            Check them out here! Handcrafted for your needs.
+          </p>
+          <div className="flex justify-center mt-8">
+            <Link
+              to="/templates"
+              className="px-6 py-3 border-violet-400 border-4 hover:bg-violet-700 rounded-full text-lg font-semibold"
+            >
+              View Templates
+            </Link>
           </div>
         </div>
 
-        <footer className="bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 p-5 w-full text-left mt-16">
-          <p className="text-lg">
-            &copy; 2024 Animate Hub. All rights reserved.
-          </p>
-        </footer>
+        <Footer />
 
         {/* Include the Chatbot Component */}
         <Chatbot />
