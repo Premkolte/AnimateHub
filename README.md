@@ -73,7 +73,7 @@ $~$
 
 **Submit a Pull Request**
 
-- Push your branch and changes to your fork on GitHub.
+- Push your branch and changes to your fork on GitHub .
 - Create a pull request, compare branches and submit.
 - Provide a detailed description and screenshots of what changes you've made and why. 
   Link the pull request to the issue it resolves. 🔗
