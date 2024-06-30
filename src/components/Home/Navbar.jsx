@@ -45,7 +45,10 @@ const Navbar = () => {
               >
                 🌀
               </motion.span>
-              <span>AnimateHub</span> <span className="md:hidden"><DarkModeToggle /></span>
+              <span>AnimateHub</span>
+              <span className="md:hidden">
+                <DarkModeToggle />
+              </span>
             </Link>
           </motion.div>
 
@@ -85,6 +88,15 @@ const Navbar = () => {
             >
               <Link to="/contact" onClick={closeMenu}>
                 Contact
+              </Link>
+            </motion.div>
+            <motion.div
+              className="hover:text-gray-300"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Link to="/login" onClick={closeMenu}>
+                Login
               </Link>
             </motion.div>
             <DarkModeToggle />
@@ -143,6 +155,15 @@ const Navbar = () => {
             >
               <Link to="/contact" onClick={closeMenu}>
                 Contact
+              </Link>
+            </motion.div>
+            <motion.div
+              className="hover:text-gray-300"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Link to="/login" onClick={closeMenu}>
+                Login
               </Link>
             </motion.div>
           </motion.div>
