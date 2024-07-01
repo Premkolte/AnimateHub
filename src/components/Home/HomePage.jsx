@@ -100,7 +100,11 @@ const HomePage = () => {
                   ✔️<b>Access to codebase</b>
                 </p>
                 <div className="flex justify-center mt-8">
-                  <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
+                  <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
+                  onClick={() => {
+                   navigate("/payment");
+              }}
+                  >
                     Get Started
                   </button>
                 </div>
@@ -135,7 +139,9 @@ const HomePage = () => {
                   ✔️<b>Custom solutions</b>
                 </p>
                 <div className="flex justify-center mt-8">
-                  <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
+                  <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl" onClick={() => {
+                   navigate("/payment");
+                   }}>
                     Get Started
                   </button>
                 </div>
