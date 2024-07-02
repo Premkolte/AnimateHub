@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import BackButton from "../BackButton";
 
-const About = () => {
+const About = () =>  {
   const Blobs = () => (
     <>
       <svg
