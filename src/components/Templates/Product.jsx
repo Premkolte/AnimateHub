@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { BsFillPersonFill } from "react-icons/bs";
+import TemplateNavBar from "./TemplateNavBar";
 
 const ProductPage = () => {
   const products = [
@@ -37,42 +37,46 @@ const ProductPage = () => {
   ];
 
   return (
-    <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6 space-y-16 pt-24">
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center max-w-3xl"
-      >
-        <motion.p
-          className="text-4xl md:text-6xl mb-6"
-          whileHover={{ scale: 1.05 }}
+    <>
+      <TemplateNavBar templateName="Product" />
+      
+      <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6 space-y-16 pt-24">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl"
         >
-          Software Engineering Products
-        </motion.p>
-        <p className="text-md mb-10">
-          Explore our curated selection of software engineering tools and products.
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-7xl mx-auto">
-        {products.map((product, index) => (
-          <motion.div
-            key={index}
-            className="bg-slate-900 p-6 rounded-lg shadow-lg"
+          <motion.p
+            className="text-4xl md:text-6xl mb-6"
             whileHover={{ scale: 1.05 }}
           >
-            <img
-              src={product.imageUrl}
-              alt={product.title}
-              className="w-full h-48 object-cover mb-4"
-            />
-            <h2 className="font-extrabold text-2xl mb-2">{product.title}</h2>
-            <p className="opacity-80 mb-4">{product.description}</p>
-          </motion.div>
-        ))}
+            Software Engineering Products
+          </motion.p>
+          <p className="text-md mb-10">
+            Explore our curated selection of software engineering tools and products.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-7xl mx-auto">
+          {products.map((product, index) => (
+            <motion.div
+              key={index}
+              className="bg-slate-900 p-6 rounded-lg shadow-lg"
+              whileHover={{ scale: 1.05 }}
+            >
+              <img
+                src={product.imageUrl}
+                alt={product.title}
+                className="w-full h-48 object-cover mb-4"
+              />
+              <h2 className="font-extrabold text-2xl mb-2">{product.title}</h2>
+              <p className="opacity-80 mb-4">{product.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
