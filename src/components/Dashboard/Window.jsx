@@ -19,7 +19,10 @@ import DarkModeSnippets from "../SnippetComponents/DarkModeSnippets";
 import AnimationSnippets from "../SnippetComponents/AnimationSnippets";
 import TableSnippets from "../SnippetComponents/TableSnippets";
 import ResponsivenessSnippets from "../SnippetComponents/ResponsivenessSnippets";
-
+import FooterSnippets from "../SnippetComponents/FooterSnippets";
+import BadgeSnippets from "../SnippetComponents/BadgeSnippets";
+import AvatarImageSnippets from "../SnippetComponents/AvatarImageSnippets";
+import ColorPickerSnippets from "../SnippetComponents/ColorPickerSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -41,18 +44,22 @@ function Window({ activeTab }) {
     "demo",
     <ProgressBarSnippets />,
     <NavbarIconSnippets />,
-    <DarkModeSnippets/>,
-    <AnimationSnippets/>,
-    <TableSnippets/>,
-    <ResponsivenessSnippets/>
+    <DarkModeSnippets />,
+    <AnimationSnippets />,
+    <TableSnippets />,
+    <ResponsivenessSnippets />,
+    <FooterSnippets />,
+    <BadgeSnippets />,
+    <AvatarImageSnippets />,
+    <ColorPickerSnippets />,
   ];
 
   return (
-    <div className="flex-1 p-8 bg-gray-100 pt-20 md:pt-8 overflow-y-auto">
-      <h1 className="text-black text-xl mb-8">
-        AnimateHub - A one place for all your Frontend CSS needs
-      </h1>
-      <div>{content[activeTab]}</div>
+    <div className="flex-1 p-8 bg-gradient-to-r from-violet-500 via-white-500 to-blue-500 text-white pt-20 md:pt-8 overflow-y-auto min-h-screen pt-4">
+      <h1 className="text-3xl font-extrabold mb-6 text-center">AnimateHub - A one place for all your Frontend CSS needs</h1>
+      <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+        {content[activeTab]}
+      </div>
     </div>
   );
 }
