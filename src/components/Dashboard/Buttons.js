@@ -21,4 +21,8 @@ export const Buttons = [
   "Animation",
   "Tables",
   "Responsiveness",
+  "FooterSnippets",
+  "BadgeSnippets",
+  "AvatarImage",
+  "ColorPicker",
 ];

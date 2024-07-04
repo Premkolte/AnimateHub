@@ -35,7 +35,7 @@ function SideBar({ activeTab, setActiveTab }) {
         } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
         style={{ maxHeight: '100vh', paddingTop: '2rem' }}
       >
-        <h1 className="text-3xl font-bold text-center cursor-pointer" onClick={() => navigate('/')}>
+        <h1 className="text-4xl font-bold text-center cursor-pointer mb-7 " onClick={() => navigate('/')}>
           AnimateHub
         </h1>
         <div className="p-4 h-full flex flex-col justify-between">

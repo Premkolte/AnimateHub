@@ -1,14 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { FcGoogle } from "react-icons/fc";
 import BackButton from "../BackButton";
 
 const LoginPage = () => {
   const navigate = useNavigate();
 
+  const handleGoogleSignIn = () => {
+    // Add the logic for Google sign-in here
+    console.log("Sign in with Google");
+  };
+
   return (
     <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6">
-     <BackButton/>
+      <BackButton />
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -46,6 +52,18 @@ const LoginPage = () => {
             Login
           </button>
         </form>
+        <div className="mt-4 flex flex-col items-center">
+          <p className="mb-2">Or</p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleGoogleSignIn}
+            className="w-full bg-white text-black flex items-center justify-center p-3 rounded-lg shadow-md hover:bg-gray-100"
+          >
+            <FcGoogle className="mr-2" />
+            Sign in with Google
+          </motion.button>
+        </div>
         <div className="mt-4 text-center">
           <p>
             Don't have an account?{" "}
