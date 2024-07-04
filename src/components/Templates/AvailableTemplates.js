@@ -5,7 +5,7 @@ export const templates = [
     description:
       "Showcase your projects and skills with a professional portfolio template.",
     codeLink:
-      "https://github.com/Premkolte/AnimateHub/tree/main/src/components/Templates/Portfolio",
+      "https://github.com/Premkolte/AnimateHub/tree/main/src/components/Templates/Portfolio.jsx",
   },
   {
     name: "Product",
@@ -13,7 +13,7 @@ export const templates = [
     description:
       "Promote your product with a clean and effective product template.",
     codeLink:
-      "https://github.com/Premkolte/AnimateHub/tree/main/src/components/Templates/Product",
+      "https://github.com/Premkolte/AnimateHub/tree/main/src/components/Templates/Product.jsx",
   },
   {
     name: "Blog",
@@ -21,6 +21,6 @@ export const templates = [
     description:
       "Share your thoughts and insights with a customizable blog template.",
     codeLink:
-      "https://github.com/Premkolte/AnimateHub/tree/main/src/components/Templates/Blog",
+      "https://github.com/Premkolte/AnimateHub/tree/main/src/components/Templates/Blog.jsx",
   },
 ];
