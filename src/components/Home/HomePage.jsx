@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FaReact, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
 import { LuLayoutTemplate } from "react-icons/lu";
 import { BiLogoTailwindCss } from "react-icons/bi";
-import { BsPeople } from "react-icons/bs";
+import { BsGithub, BsPeople, BsStarFill } from "react-icons/bs";
 import { GiTechnoHeart } from "react-icons/gi";
 import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
@@ -72,6 +72,16 @@ const HomePage = () => {
           <BiLogoTailwindCss className="h-12 w-12" />
         </div>
 
+        <motion.a href="https://github.com/Premkolte/AnimateHub"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex items-center justify-center gap-4 whitespace-nowrap rounded-md text-sm font-medium h-12 px-6 py-3 group bg-gray-900 hover:bg-gray-950 transition-all duration-200 ease-in-out"
+        >
+          <BsGithub size={25} />
+          <span className="text-white text-xl">Star on Github</span>
+          <BsStarFill size={25} className="text-yellow-500" />
+        </motion.a>
+
         <div className="text-center space-y-4 py-16">
           <h1 className="text-4xl">Pricing</h1>
           <div className="flex flex-col md:flex-row justify-center items-center gap-12 mt-8">
@@ -100,10 +110,11 @@ const HomePage = () => {
                   ✔️<b>Access to codebase</b>
                 </p>
                 <div className="flex justify-center mt-8">
-                  <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
-                  onClick={() => {
-                   navigate("/payment");
-              }}
+                  <button
+                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
+                    onClick={() => {
+                      navigate("/payment");
+                    }}
                   >
                     Get Started
                   </button>
@@ -139,9 +150,12 @@ const HomePage = () => {
                   ✔️<b>Custom solutions</b>
                 </p>
                 <div className="flex justify-center mt-8">
-                  <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl" onClick={() => {
-                   navigate("/payment");
-                   }}>
+                  <button
+                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
+                    onClick={() => {
+                      navigate("/payment");
+                    }}
+                  >
                     Get Started
                   </button>
                 </div>
