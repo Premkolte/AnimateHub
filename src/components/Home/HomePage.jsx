@@ -286,74 +286,60 @@ const HomePage = () => {
           <TestimonialSection />
         </div>
 
-        <section className="flex flex-col items-center bg-slate-900 p-8 rounded-lg shadow-lg text-white contribute-section">
-          <h2 className="text-4xl font-extrabold text-center mb-6">
-            Contribute to Our Project
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mt-12"
+        >
+          <h2 className="text-4xl font-extrabold mb-4">
+            Want to contribute or have some suggestions?
           </h2>
-          <p className="text-center text-md mb-10 max-w-4xl">
-            Animation UI Library is open-source and we welcome contributions
-            from the community. Whether it's reporting bugs, suggesting new
-            features, or contributing code, your help is appreciated.
-          </p>
-          <motion.a
-            href="https://github.com/Premkolte/AnimateHub"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center justify-center gap-4 whitespace-nowrap rounded-md text-sm font-medium h-12 px-6 py-3 group bg-gray-900 hover:bg-gray-950 transition-all duration-200 ease-in-out"
-          >
-            <BsPeople size={25} />
-            <span className="text-white text-xl">Contribute on Github</span>
-          </motion.a>
-        </section>
-
-        <section className="bg-slate-900 p-8 rounded-lg shadow-lg text-white templates-section">
-          <div className="flex flex-col justify-center items-center">
-            <h2 className="text-4xl font-extrabold text-center mb-6">
-              Templates
-            </h2>
-            <p className="text-center text-md mb-10 max-w-4xl">
-              Explore our collection of professionally designed templates to
-              kickstart your project. Each template is fully customizable and
-              easy to integrate.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <motion.div
-                className="bg-black p-6 rounded-lg shadow-lg flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <LuLayoutTemplate size={40} className="mb-4 text-green-400" />
-                <h3 className="font-bold text-lg mb-2">Landing Page</h3>
-                <p className="text-center text-sm opacity-60">
-                  A modern landing page template to showcase your product.
-                </p>
-              </motion.div>
-              <motion.div
-                className="bg-black p-6 rounded-lg shadow-lg flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <LuLayoutTemplate size={40} className="mb-4 text-blue-400" />
-                <h3 className="font-bold text-lg mb-2">Portfolio</h3>
-                <p className="text-center text-sm opacity-60">
-                  A clean and minimal portfolio template to display your work.
-                </p>
-              </motion.div>
-              <motion.div
-                className="bg-black p-6 rounded-lg shadow-lg flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <LuLayoutTemplate size={40} className="mb-4 text-pink-400" />
-                <h3 className="font-bold text-lg mb-2">E-commerce</h3>
-                <p className="text-center text-sm opacity-60">
-                  An elegant e-commerce template to sell your products online.
-                </p>
-              </motion.div>
-            </div>
+          <p className="text-2xl">Come to our GitHub and raise an issue!</p>
+          <div className="mt-8 flex justify-center items-center gap-4">
+            <motion.a
+              href="https://github.com/Premkolte/AnimateHub"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
+              whileHover={{ scale: 1.05 }}
+            >
+              <FaGithub size={30} />
+              Visit GitHub
+            </motion.a>
+            <Link
+              to="/contributors"
+              className="inline-flex items-center gap-2 bg-indigo-500 text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
+            >
+              <BsPeople size={30} />
+              View Contributors
+            </Link>
           </div>
-        </section>
+        </motion.div>
+
+
+ {/* Templates */}
+ <div className="w-full flex flex-col items-center border-y-2 border-white py-16">
+          <LuLayoutTemplate size={100} className="text-white-500" />
+          <h2 className="text-4xl font-extrabold mb-3 text-center">
+            Introducing Templates
+          </h2>
+          <p className="text-lg md:text-xl text-center">
+            Check them out here! Handcrafted for your needs.
+          </p>
+          <div className="flex justify-center mt-8">
+            <Link
+              to="/templates"
+              className="px-6 py-3 border-violet-400 border-4 hover:bg-violet-700 rounded-full text-lg font-semibold"
+            >
+              View Templates
+            </Link>
+          </div>
+        </div>
+      <Footer />
 
         <Chatbot />
       </div>
-      <Footer />
     </>
   );
 };
