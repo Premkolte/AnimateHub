@@ -43,8 +43,8 @@ const HomePage = () => {
       content: 'Read testimonials from our satisfied users.',
     },
     {
-      target: '.contribute-section',
-      content: 'Contribute to our project or suggest improvements.',
+      target: '.contributors-section',
+      content: 'Meet our talented contributors who have made this amazing website.',
     },
     {
       target: '.templates-section',
@@ -221,11 +221,19 @@ const HomePage = () => {
                   ✔️<b>Customizable plans</b>
                 </p>
                 <p>
-                  ✔️<b>Dedicated support</b>
+                  ✔️<b>Dedicated support team</b>
+                </p>
+                <p>
+                  ✔️<b>Advanced analytics</b>
                 </p>
                 <div className="flex justify-center mt-8">
-                  <button className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl">
-                    Contact Sales
+                  <button
+                    className="px-4 py-2 border-violet-400 border-4 hover:bg-violet-700 rounded-xl"
+                    onClick={() => {
+                      navigate("/contact");
+                    }}
+                  >
+                    Contact Us
                   </button>
                 </div>
               </div>
@@ -233,113 +241,100 @@ const HomePage = () => {
           </div>
         </div>
 
-        <section className="bg-slate-900 p-8 rounded-lg shadow-lg text-white features-section">
-          <div className="flex flex-col justify-center items-center">
-            <h2 className="text-4xl font-extrabold text-center mb-6">
-              Features
-            </h2>
-            <p className="text-center text-md mb-10 max-w-4xl">
-              Animation UI Library offers a variety of features to make your
-              development process seamless and efficient. Our components are
-              designed with the latest technologies and best practices to ensure
-              high performance and compatibility.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <motion.div
-                className="bg-black p-6 rounded-lg shadow-lg flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <IoMdRocket size={40} className="mb-4 text-indigo-400" />
-                <h3 className="font-bold text-lg mb-2">Fast Performance</h3>
-                <p className="text-center text-sm opacity-60">
-                  Our components are optimized for fast load times and smooth
-                  performance.
-                </p>
-              </motion.div>
-              <motion.div
-                className="bg-black p-6 rounded-lg shadow-lg flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <GiTechnoHeart size={40} className="mb-4 text-red-400" />
-                <h3 className="font-bold text-lg mb-2">Modern Design</h3>
-                <p className="text-center text-sm opacity-60">
-                  We use the latest design trends to provide a modern and
-                  attractive UI.
-                </p>
-              </motion.div>
-              <motion.div
-                className="bg-black p-6 rounded-lg shadow-lg flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <MdLibraryBooks size={40} className="mb-4 text-yellow-400" />
-                <h3 className="font-bold text-lg mb-2">Comprehensive Docs</h3>
-                <p className="text-center text-sm opacity-60">
-                  Our documentation covers everything you need to know to get
-                  started.
-                </p>
-              </motion.div>
-            </div>
+        <div className="features-section">
+          <h2 className="text-4xl mb-8 text-center">Features</h2>
+          <div className="flex flex-wrap justify-center gap-12">
+            <motion.div
+              className="bg-white text-black p-8 rounded-lg shadow-lg max-w-xs  bg-green-200"
+              whileHover={{ scale: 1.05 }}
+            >
+              <IoMdRocket size={50} className="mb-4 text-indigo-500" />
+              <h3 className="text-xl font-semibold mb-2">Easy to Use</h3>
+              <p>
+                Simple and intuitive components that make development a breeze.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="bg-white text-black p-8 rounded-lg shadow-lg max-w-xs  bg-green-200"
+              whileHover={{ scale: 1.05 }}
+            >
+              <MdLibraryBooks size={50} className="mb-4 text-indigo-500" />
+              <h3 className="text-xl font-semibold mb-2">Comprehensive Docs</h3>
+              <p>
+                Detailed documentation to help you get started quickly and easily.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="bg-white text-black p-8 rounded-lg shadow-lg max-w-xs bg-green-200"
+              whileHover={{ scale: 1.05 }}
+            >
+              <GiTechnoHeart size={50} className="mb-4 text-indigo-500 " />
+              <h3 className="text-xl font-semibold mb-2 ">Modern Design</h3>
+              <p>
+                Beautifully designed components that enhance your project's UI.
+              </p>
+            </motion.div>
           </div>
-        </section>
+        </div>
 
         <div className="testimonial-section">
+          <h2 className="text-4xl mb-8 text-center"></h2>
           <TestimonialSection />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mt-12"
-        >
-          <h2 className="text-4xl font-extrabold mb-4">
-            Want to contribute or have some suggestions?
-          </h2>
-          <p className="text-2xl">Come to our GitHub and raise an issue!</p>
-          <div className="mt-8 flex justify-center items-center gap-4">
-            <motion.a
-              href="https://github.com/Premkolte/AnimateHub"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
-              whileHover={{ scale: 1.05 }}
-            >
-              <FaGithub size={30} />
-              Visit GitHub
-            </motion.a>
-            <Link
-              to="/contributors"
-              className="inline-flex items-center gap-2 bg-indigo-500 text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg transition-transform transform hover:scale-105"
-            >
-              <BsPeople size={30} />
-              View Contributors
-            </Link>
-          </div>
-        </motion.div>
-
-
- {/* Templates */}
- <div className="w-full flex flex-col items-center border-y-2 border-white py-16">
-          <LuLayoutTemplate size={100} className="text-white-500" />
-          <h2 className="text-4xl font-extrabold mb-3 text-center">
-            Introducing Templates
-          </h2>
-          <p className="text-lg md:text-xl text-center">
-            Check them out here! Handcrafted for your needs.
+        <div className="contributors-section mt-12 w-full flex flex-col items-center text-white">
+          <h2 className="text-4xl mb-8">Contributors</h2>
+          <p className="max-w-xl text-center mb-8">
+            Meet the talented people who have contributed to making this amazing website possible.
           </p>
-          <div className="flex justify-center mt-8">
-            <Link
-              to="/templates"
-              className="px-6 py-3 border-violet-400 border-4 hover:bg-violet-700 rounded-full text-lg font-semibold"
-            >
-              View Templates
+          <div className="flex space-x-6">
+            <Link to="/contributors">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+              >
+                View Contributors
+              </motion.button>
             </Link>
+            <a
+              href="https://github.com/your-repo"
+              className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+            >
+              <BsPeople className="inline-block mr-2" />
+              Become a Contributor
+            </a>
           </div>
         </div>
-      <Footer />
 
+        <div className="templates-section mt-12 w-full flex flex-col items-center text-white">
+          <h2 className="text-4xl mb-8">Templates</h2>
+          <p className="max-w-xl text-center mb-8">
+            Explore our library of handcrafted templates designed to kickstart your projects.
+          </p>
+          <div className="flex space-x-6">
+            <Link to="/templates">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+              >
+                View Templates
+              </motion.button>
+            </Link>
+            <a
+              href="https://github.com/your-repo"
+              className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+            >
+              <LuLayoutTemplate className="inline-block mr-2" />
+              Submit a Template
+            </a>
+          </div>
+        </div>
+        <Footer />
         <Chatbot />
       </div>
+    
     </>
   );
 };
