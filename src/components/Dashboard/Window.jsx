@@ -23,6 +23,7 @@ import FooterSnippets from "../SnippetComponents/FooterSnippets";
 import BadgeSnippets from "../SnippetComponents/BadgeSnippets";
 import AvatarImageSnippets from "../SnippetComponents/AvatarImageSnippets";
 import ColorPickerSnippets from "../SnippetComponents/ColorPickerSnippets";
+import PageLoaderSnippets from "../SnippetComponents/PageLoaderSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -36,7 +37,7 @@ function Window({ activeTab }) {
     <RadioSnippets />,
     <ToggleSwitchSnippets />,
     <SlideshowSnippets />,
-    "Page-Loader Content",
+    <PageLoaderSnippets/>,
     <TextSnippets />,
     <CheckboxSnippets />,
     <SocialSnippets />,
