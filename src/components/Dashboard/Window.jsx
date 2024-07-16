@@ -24,6 +24,8 @@ import BadgeSnippets from "../SnippetComponents/BadgeSnippets";
 import AvatarImageSnippets from "../SnippetComponents/AvatarImageSnippets";
 import ColorPickerSnippets from "../SnippetComponents/ColorPickerSnippets";
 import PageLoaderSnippets from "../SnippetComponents/PageLoaderSnippets";
+import PaginationSnippets from "../SnippetComponents/PaginationSnippets";
+import PillNavigationSnippets from "../SnippetComponents/PillNavigationSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -53,6 +55,8 @@ function Window({ activeTab }) {
     <BadgeSnippets />,
     <AvatarImageSnippets />,
     <ColorPickerSnippets />,
+    <PaginationSnippets/>,
+    <PillNavigationSnippets/>
   ];
 
   return (
