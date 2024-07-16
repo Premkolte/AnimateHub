@@ -122,8 +122,24 @@ $~$
 ```
 ## Contributors
 
-<div>
-<a href="https://github.com/Premkolte/AnimateHub/graphs/contributors">
-  <img width="90%" src="https://contrib.rocks/image?repo=Premkolte/AnimateHub" />
-</a>
-</div>
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Premkolte"><img src="https://avatars.githubusercontent.com/u/100456448?v=4?s=90" width="90px;" alt="Prem Kolte"/><br /><sub><b>Prem Kolte</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=Premkolte" title="Code">💻</a> <a href="#projectManagement-Premkolte" title="Project Management">📆</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/deepesh611"><img src="https://avatars.githubusercontent.com/u/123585104?v=4?s=90" width="90px;" alt="Deepesh Patil"/><br /><sub><b>Deepesh Patil</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=deepesh611" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Krishna100604"><img src="https://avatars.githubusercontent.com/u/110299021?v=4?s=90" width="90px;" alt="Prajapati Shrikrushna R."/><br /><sub><b>Prajapati Shrikrushna R.</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=Krishna100604" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kom-senapati"><img src="https://avatars.githubusercontent.com/u/92045934?v=4?s=90" width="90px;" alt="K Om Senapati "/><br /><sub><b>K Om Senapati </b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=kom-senapati" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Kaustav2410"><img src="https://avatars.githubusercontent.com/u/94297897?v=4?s=90" width="90px;" alt="Kaustav2410"/><br /><sub><b>Kaustav2410</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=Kaustav2410" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/pandey22"><img src="https://avatars.githubusercontent.com/u/35039432?v=4?s=90" width="90px;" alt="Kshitij Pandey"/><br /><sub><b>Kshitij Pandey</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=pandey22" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Sudhanva21"><img src="https://avatars.githubusercontent.com/u/123559895?v=4?s=90" width="90px;" alt="Sudhanva21"/><br /><sub><b>Sudhanva21</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=Sudhanva21" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
