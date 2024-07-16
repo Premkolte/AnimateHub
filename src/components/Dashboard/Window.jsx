@@ -26,6 +26,7 @@ import ColorPickerSnippets from "../SnippetComponents/ColorPickerSnippets";
 import PageLoaderSnippets from "../SnippetComponents/PageLoaderSnippets";
 import PaginationSnippets from "../SnippetComponents/PaginationSnippets";
 import PillNavigationSnippets from "../SnippetComponents/PillNavigationSnippets";
+import PaymentFormSnippets from "../SnippetComponents/PaymentFormSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -56,7 +57,8 @@ function Window({ activeTab }) {
     <AvatarImageSnippets />,
     <ColorPickerSnippets />,
     <PaginationSnippets/>,
-    <PillNavigationSnippets/>
+    <PillNavigationSnippets/>,
+    <PaymentFormSnippets/>,
   ];
 
   return (
