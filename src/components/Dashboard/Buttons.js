@@ -25,4 +25,6 @@ export const Buttons = [
   "BadgeSnippets",
   "AvatarImage",
   "ColorPicker",
+  "Pagination",
+  "PillNavigation",
 ];
