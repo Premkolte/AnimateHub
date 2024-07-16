@@ -27,5 +27,7 @@ export const Buttons = [
   "ColorPicker",
   "Pagination",
   "PillNavigation",
-  "PaymentForm"
+  "PaymentForm",
+  "NewsLetter",
+  // "Sort"
 ];
