@@ -6,7 +6,7 @@ on:
 
 jobs:
   add-contributor:
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
 
     steps:
@@ -29,15 +29,15 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Add Contributor
-        run: npx all-contributors-cli add ${{ github.event.pull_request.user.login }} code
+        run: npx all-contributors add ${{ github.event.pull_request.user.login }} code
 
       - name: Generate README
-        run: npx all-contributors-cli generate
+        run: npx all-contributors generate
 
       - name: Commit changes
         run: |
           git add README.md .all-contributorsrc
-          git commit -m "docs: add ${{ github.event.pull_request.user.login }} as a contributor"
+          git commit -m "docs: add ${{ github.event.pull_request.user.login }} as a contributor" || echo "No changes to commit"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
