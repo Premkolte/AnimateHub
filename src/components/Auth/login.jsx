@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import the eye icons
 import BackButton from "../BackButton";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [passwordVisible, setPasswordVisible] = useState(false); // State to toggle password visibility
 
   const handleGoogleSignIn = () => {
     // Add the logic for Google sign-in here
     console.log("Sign in with Google");
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
@@ -38,12 +44,21 @@ const LoginPage = () => {
             <label htmlFor="password" className="block text-sm font-medium">
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              className="mt-1 w-full p-2 bg-gray-800 text-white rounded"
-              required
-            />
+            <div className="relative">
+              <input
+                type={passwordVisible ? "text" : "password"}
+                id="password"
+                className="mt-1 w-full p-2 bg-gray-800 text-white rounded"
+                required
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400"
+              >
+                {passwordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+              </button>
+            </div>
           </div>
           <button
             type="submit"
