@@ -1,15 +1,15 @@
 <p align="center">
     
 <!--     You can add your logo here   -->
-<img src="https://www.amug.com/wp-content/uploads/2016/09/you-logo-here-300x106.png" />
+<img src="https://www.amug.com/wp-content/uploads/2016/09/you-logo-here-300x106.png"  />
 </p>
-<!-- <p align="center"> -->
+<!-- <p align="center"> --> 
   <!-- You can add your badges here -->
   <!-- If you have never added badges, head over to https://img.shields.io/badges/static-badge, follow the instructions and generate URL links to add below -->
 <!--   <img src="https://img.shields.io/badge/STARS-20K-green"  />
   <img src="https://img.shields.io/badge/FORKS-15K-blue"  />
   <img src="https://img.shields.io/badge/npm-v.0.21.0-red"  />
-  <img src="https://img.shields.io/badge/LICENSE-MIT-green"  />
+  <img src="https://img.shields.io/badge/LICENSE-MIT-green "  />
 </p> -->     
 ### :star2: About
 **Animate Hub** is your go-to resource for all things animation in web development. Discover a wide range of code snippets for animations, hovers, and effects, designed to streamline your workflow. Just copy, paste, and watch your projects come to life!
@@ -128,8 +128,8 @@ $~$
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Premkolte"><img src="https://avatars.githubusercontent.com/u/100456448?v=4?s=90" width="90px;" alt="Prem Kolte"/><br /><sub><b>Prem Kolte</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=Premkolte" title="Code">💻</a> <a href="#projectManagement-Premkolte" title="Project Management">📆</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/deepesh611"><img src="https://avatars.githubusercontent.com/u/123585104?v=4?s=90" width="90px;" alt="Deepesh Patil"/><br /><sub><b>Deepesh Patil</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=deepesh611" title="Code">💻</a> <a href="https://github.com/Premkolte/AnimateHub/commits?author=deepesh611" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Premkolte"><img src="https://avatars.githubusercontent.com/u/100456448?v=4?s=90" width="90px;" alt="Prem Kolte"/><br /><sub><b>Prem Kolte</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=Premkolte" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/deepesh611"><img src="https://avatars.githubusercontent.com/u/123585104?v=4?s=90" width="90px;" alt="Deepesh Patil"/><br /><sub><b>Deepesh Patil</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=deepesh611" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Krishna100604"><img src="https://avatars.githubusercontent.com/u/110299021?v=4?s=90" width="90px;" alt="Prajapati Shrikrushna R."/><br /><sub><b>Prajapati Shrikrushna R.</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=Krishna100604" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/kom-senapati"><img src="https://avatars.githubusercontent.com/u/92045934?v=4?s=90" width="90px;" alt="K Om Senapati "/><br /><sub><b>K Om Senapati </b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=kom-senapati" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Kaustav2410"><img src="https://avatars.githubusercontent.com/u/94297897?v=4?s=90" width="90px;" alt="Kaustav2410"/><br /><sub><b>Kaustav2410</b></sub></a><br /><a href="https://github.com/Premkolte/AnimateHub/commits?author=Kaustav2410" title="Code">💻</a></td>
