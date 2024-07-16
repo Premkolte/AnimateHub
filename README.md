@@ -21,7 +21,7 @@
 ###  :outbox_tray: How to Set up Project locally : 
 
 1. Clone the repo
-   ```sh
+   ```sh 
    git clone https://github.com/Premkolte/AnimateHub.git
    ```
 2. Go to the project folder
