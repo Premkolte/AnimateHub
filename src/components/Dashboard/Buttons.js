@@ -29,5 +29,5 @@ export const Buttons = [
   "PillNavigation",
   "PaymentForm",
   "NewsLetter",
-  // "Sort"
+  "Sort"
 ];

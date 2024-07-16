@@ -28,7 +28,7 @@ import PaginationSnippets from "../SnippetComponents/PaginationSnippets";
 import PillNavigationSnippets from "../SnippetComponents/PillNavigationSnippets";
 import PaymentFormSnippets from "../SnippetComponents/PaymentFormSnippets";
 import NewsletterSnippets from "../SnippetComponents/NewsLetterSnippets";
-// import SortSnippets from "../SnippetComponents/SortSnippets";
+import SortSnippets from "../SnippetComponents/SortSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -62,7 +62,7 @@ function Window({ activeTab }) {
     <PillNavigationSnippets/>,
     <PaymentFormSnippets/>,
     <NewsletterSnippets/>,
-    // <SortSnippets/>,
+    <SortSnippets/>,
   ];
 
   return (
