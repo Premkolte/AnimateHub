@@ -25,4 +25,10 @@ export const Buttons = [
   "BadgeSnippets",
   "AvatarImage",
   "ColorPicker",
+  "Pagination",
+  "PillNavigation",
+  "PaymentForm",
+  "NewsLetter",
+  "Sort",
+  "Coupon",
 ];
