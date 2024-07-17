@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 shadow-lg fixed top-0 left-0 z-50"
+      className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 pt-1 shadow-lg fixed top-0 left-0 z-50"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -42,7 +42,7 @@ const Navbar = () => {
               >
                 <img className="w-16 h-16 pt-2 pl-4" src={Logo} alt="AnimateHub Logo" />
               </motion.div>
-              <span className="font-gagalin bg-clip-text text-transparent bg-gradient-to-r from-orange-800 to-pink-900 font-bold text-3xl">
+              <span className="font-gagalin bg-clip-text text-transparent bg-gradient-to-r from-white to-white font-bold text-3xl">
                 AnimateHub
               </span>
               <span className="md:hidden">
