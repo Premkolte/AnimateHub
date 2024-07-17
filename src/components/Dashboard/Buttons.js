@@ -1,7 +1,16 @@
 export const Buttons = [
+  "AvatarImage",
+  "Animation",
+  "AnimationIcon",
+  "BadgeSnippets",
   "Button Snippets",
   "Box-shadow Snippets",
   "Card Snippets",
+  "Checkbox Snippets",
+  "ColorPicker",
+  "Coupon",
+  "CountDown",
+  "DarkMode",
   "Dropdown Snippets",
   "Input-fields Snippets",
   "Signup Snippets",
@@ -14,7 +23,6 @@ export const Buttons = [
   "Checkbox Snippets",
   "Socials Snippets",
   "Form Snippets",
-  "(Demo) Snippets",
   "ProgreesBar Snippets",
   "Navbar-Icons",
   "DarkMode",
@@ -38,5 +46,4 @@ export const Buttons = [
   "TextArea",
   "Pricing",
   "ProfileCard"
-  
 ];
