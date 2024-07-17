@@ -37,5 +37,6 @@ export const Buttons = [
   "CountDown",
   "TextArea",
   "Pricing",
+  "ProfileCard"
   
 ];
