@@ -76,8 +76,10 @@ const Contact = () => {
 
       <Blobs />
 
+      
+
       {/* Content */}
-      <div className="relative z-10 container mx-auto mt-20 px-19 md:px-10 text-white mb-19 pt-7 w-150">
+      <div className="relative z-10 mx-auto mt-20 px-8 md:px-20 text-white mb-16 pt-7">
         <div className="bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg mb-4">
@@ -133,16 +135,16 @@ const Contact = () => {
               <textarea
                 id="message"
                 placeholder="Your Message"
-                rows="4"
-                className="form-control border border-gray-300 rounded-md py-2 px-4 bg-gray-100 text-gray-800"
+                rows="8"
+                className="form-control border border-gray-300 rounded-md py-2 px-10 bg-gray-100 text-gray-800"
               ></textarea>
             </div>
             <button
               type="submit"
               className="btn btn-primary py-2 px-4 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
             >
-              <FontAwesomeIcon icon={faPaperPlane} className="me-2" /> Send
-              Message
+              <FontAwesomeIcon icon={faPaperPlane} className="me-2" /> 
+              Send Message
             </button>
           </form>
         </div>
@@ -152,3 +154,6 @@ const Contact = () => {
 };
 
 export default Contact;
+
+
+
