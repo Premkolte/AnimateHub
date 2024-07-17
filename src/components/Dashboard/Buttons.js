@@ -36,5 +36,5 @@ export const Buttons = [
   "AnimationIcon",
   "CountDown",
   "TextArea",
-  // "Pricing",
+  "Pricing",
 ];
