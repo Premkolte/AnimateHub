@@ -36,12 +36,12 @@ function SideBar({ activeTab, setActiveTab }) {
         } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
         style={{ maxHeight: "100vh", paddingTop: "2rem" }}
       >
-        <div className=" flex items-center justify-center hover:bg-purple-300 m-2 py-1 px-2 rounded-md">
+        <div className=" flex items-center justify-between hover:bg-purple-300 m-2 py-1 px-2 rounded-md">
           <Link to="/">
             <BiChevronLeft size={28} className="hover:text-white" />
           </Link>
           <h1
-            className="text-3xl ml-3 font-bold text-center cursor-pointer "
+            className="text-3xl font-bold text-center cursor-pointer "
             onClick={() => navigate("/")}
           >
             AnimateHub
