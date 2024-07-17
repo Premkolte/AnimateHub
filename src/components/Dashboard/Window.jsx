@@ -30,7 +30,6 @@ import PaymentFormSnippets from "../SnippetComponents/PaymentFormSnippets";
 import NewsletterSnippets from "../SnippetComponents/NewsLetterSnippets";
 import SortSnippets from "../SnippetComponents/SortSnippets";
 import CouponSnippets from "../SnippetComponents/CouponSnippets";
-// import TabGroup from "../SnippetComponents/TabGroup";
 import ShapedSnippets from "../SnippetComponents/ShadeSnippets";
 import QuoteSlideshowSnippets from "../SnippetComponents/QuoteSlideSnippets";
 import AnimatedIconSnippets from "../SnippetComponents/AnimationIcon";
@@ -47,53 +46,45 @@ function Window({ activeTab }) {
   const content = [
     // Please add your components alphabetically in both button and this file and in same palce for perfect rendering
 
-    <AvatarImageSnippets />,
-    <AnimationSnippets />,
     <AnimatedIconSnippets />,
+    <AnimationSnippets />,
+    <AvatarImageSnippets />,
     <BadgeSnippets />,
-    <ButtonSnippets />,
     <BoxShadowSnippets />,
+    <ButtonSnippets />,
     <CardSnippets />,
     <CheckboxSnippets />,
     <ColorPickerSnippets />,
-    <CouponSnippets />,
     <CountdownTimeSnippets />,
+    <CouponSnippets />,
     <DarkModeSnippets />,
     <DropdownSnippetCard />,
-    <FormSnippets />,
     <FooterSnippets />,
+    <FormSnippets />,
     <InputFieldSnippets />,
     <LoginSnippets />,
     <NavbarIconSnippets />,
     <NewsletterSnippets />,
-    <QuoteSlideshowSnippets />,
-    <ShapedSnippets />,
-    <SignupSnippets />,
+    <PageLoaderSnippets />,
     <PaginationSnippets />,
     <PaymentFormSnippets />,
-    <PageLoaderSnippets />,
     <PillNavigationSnippets />,
     <PricingSnippets />,
+    <ProfileCardSnippets/>,
     <ProgressBarSnippets />,
-    <ResponsivenessSnippets />,
+    <QuoteSlideshowSnippets />,
     <RadioSnippets />,
+    <ResponsivenessSnippets />,
+    <ShapedSnippets />,
+    <SignupSnippets />,
     <SlideshowSnippets />,
-    <SortSnippets />,
     <SocialSnippets />,
+    <SortSnippets />,
     <TabGroup />,
     <TableSnippets />,
     <TextAreaSnippets />,
     <TextSnippets />,
     <ToggleSwitchSnippets />,
-    <CouponSnippets />,
-    <TabGroup />,
-    <ShapedSnippets/>,
-    <QuoteSlideshowSnippets/>,
-    <AnimatedIconSnippets/>,
-    <CountdownTimeSnippets/>,
-    <TextAreaSnippets/>,
-    <PricingSnippets/>,
-    <ProfileCardSnippets/>,
   ];
 
   return (
