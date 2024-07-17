@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* tailwind.css or index.css */
+@import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
+
+/* Custom utilities if needed */
+@layer utilities {
+  .font-gagalin {
+    font-family: 'Gagalin', sans-serif;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px; /* Width of the scrollbar */
 }

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import DarkModeToggle from "../DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
+import Logo from "./images/Animate_logo.png";
+// import './Navbar.css'; // Assuming you have a CSS file for additional styling
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,27 +28,24 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo Animation */}
           <motion.div
-            className="text-lg md:text-xl lg:text-2xl font-bold tracking-wider"
+            className="text-lg md:text-xl lg:text-2xl font-bold tracking-wider flex items-center space-x-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             whileHover={{ scale: 1.1, rotate: 7 }}
             whileTap={{ scale: 1.6 }}
           >
-            <Link
-              to="/"
-              className="flex items-center space-x-2"
-              onClick={closeMenu}
-            >
-              <motion.span
+            <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
+              <motion.div
                 initial={{ scale: 2 }}
                 animate={{ scale: 1.2 }}
                 transition={{ duration: 0.2, delay: 0.3 }}
               >
-                🌀
-              </motion.span>
-              <span>AnimateHub</span>
-              <span className="md:hidden">
+                <img className="size-12 pt-2 pl-4" src={Logo} alt="animateHub"/>
+              </motion.div>
+              <span className="font-gagalin bg-clip-text text-transparent bg-text-gradient font-bold text-3xl">
+                AnimateHub
+              </span>              <span className="md:hidden">
                 <DarkModeToggle />
               </span>
             </Link>
@@ -54,60 +53,24 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="hidden md:flex space-x-4 md:space-x-6 items-center">
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/" onClick={closeMenu}>
-                Home
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/explore" onClick={closeMenu}>
-                Explore
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/about" onClick={closeMenu}>
-                About
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/contact" onClick={closeMenu}>
-                Contact
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/login" onClick={closeMenu}>
-                Login
-              </Link>
-            </motion.div>
+            {["Home", "Explore", "About", "Contact", "Login"].map((item) => (
+              <motion.div
+                key={item}
+                className="hover:text-gray-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Link to={`/${item.toLowerCase()}`} onClick={closeMenu}>
+                  {item}
+                </Link>
+              </motion.div>
+            ))}
             <DarkModeToggle />
           </div>
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center">
-            <button
-              onClick={toggleMenu}
-              className="text-2xl focus:outline-none"
-            >
+            <button onClick={toggleMenu} className="text-2xl focus:outline-none">
               {isOpen ? <FiX /> : <FiMenu />}
             </button>
           </div>
@@ -121,51 +84,18 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             transition={{ duration: 0.5 }}
           >
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/" onClick={closeMenu}>
-                Home
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/explore" onClick={closeMenu}>
-                Explore
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/about" onClick={closeMenu}>
-                About
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/contact" onClick={closeMenu}>
-                Contact
-              </Link>
-            </motion.div>
-            <motion.div
-              className="hover:text-gray-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Link to="/login" onClick={closeMenu}>
-                Login
-              </Link>
-            </motion.div>
+            {["Home", "Explore", "About", "Contact", "Login"].map((item) => (
+              <motion.div
+                key={item}
+                className="hover:text-gray-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Link to={`/${item.toLowerCase()}`} onClick={closeMenu}>
+                  {item}
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         )}
       </div>
