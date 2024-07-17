@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import DarkModeToggle from "../DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
 import Logo from "./images/Animate_logo.png";
-// import './Navbar.css'; // Assuming you have a CSS file for additional styling
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,11 +40,12 @@ const Navbar = () => {
                 animate={{ scale: 1.2 }}
                 transition={{ duration: 0.2, delay: 0.3 }}
               >
-                <img className="size-12 pt-2 pl-4" src={Logo} alt="animateHub"/>
+                <img className="w-16 h-16 pt-2 pl-4" src={Logo} alt="AnimateHub Logo" />
               </motion.div>
-              <span className="font-gagalin bg-clip-text text-transparent bg-text-gradient font-bold text-3xl">
+              <span className="font-gagalin bg-clip-text text-transparent bg-gradient-to-r from-orange-800 to-pink-900 font-bold text-3xl">
                 AnimateHub
-              </span>              <span className="md:hidden">
+              </span>
+              <span className="md:hidden">
                 <DarkModeToggle />
               </span>
             </Link>
