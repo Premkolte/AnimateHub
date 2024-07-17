@@ -32,6 +32,7 @@ import SortSnippets from "../SnippetComponents/SortSnippets";
 import CouponSnippets from "../SnippetComponents/CouponSnippets";
 // import TabGroup from "../SnippetComponents/TabGroup";
 import ShapedSnippets from "../SnippetComponents/ShadeSnippets";
+import QuoteSlideshowSnippets from "../SnippetComponents/QuoteSlideSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -69,6 +70,7 @@ function Window({ activeTab }) {
     <CouponSnippets />,
     // <TabGroup />,
     <ShapedSnippets/>,
+    <QuoteSlideshowSnippets/>
   ];
 
   return (

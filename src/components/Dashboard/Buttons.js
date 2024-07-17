@@ -32,4 +32,5 @@ export const Buttons = [
   "Text Snippets",
   "Tables",
   "Shade",
+  "QuoteSnippets",
 ];
