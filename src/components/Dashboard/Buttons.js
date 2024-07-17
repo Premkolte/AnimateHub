@@ -31,4 +31,5 @@ export const Buttons = [
   "Toggle Switches Snippets",
   "Text Snippets",
   "Tables",
+  "Shade",
 ];
