@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { Buttons } from "./Buttons";
 import { useNavigate, Link } from "react-router-dom";
+import { BiChevronLeft } from "react-icons/bi";
 
 function SideBar({ activeTab, setActiveTab }) {
   const navigate = useNavigate();
@@ -35,13 +36,18 @@ function SideBar({ activeTab, setActiveTab }) {
         } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
         style={{ maxHeight: "100vh", paddingTop: "2rem" }}
       >
-        <h1
-          className="text-4xl font-bold text-center cursor-pointer mb-7 "
-          onClick={() => navigate("/")}
-        >
-          AnimateHub
-        </h1>
-        <Link to="/"> Home</Link>
+        <div className=" flex items-center justify-center hover:bg-purple-300 m-2 py-1 px-2 rounded-md">
+          <Link to="/">
+            <BiChevronLeft size={28} className="hover:text-white" />
+          </Link>
+          <h1
+            className="text-3xl ml-3 font-bold text-center cursor-pointer "
+            onClick={() => navigate("/")}
+          >
+            AnimateHub
+          </h1>
+        </div>
+
         <div className="p-4 h-full flex flex-col justify-between">
           <div className="space-y-2 mb-4 pb-4">
             {Buttons.map((button, index) => (
