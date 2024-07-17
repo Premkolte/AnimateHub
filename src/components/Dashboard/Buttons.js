@@ -31,4 +31,5 @@ export const Buttons = [
   "NewsLetter",
   "Sort",
   "Coupon",
+  "Tab",
 ];

@@ -30,6 +30,7 @@ import PaymentFormSnippets from "../SnippetComponents/PaymentFormSnippets";
 import NewsletterSnippets from "../SnippetComponents/NewsLetterSnippets";
 import SortSnippets from "../SnippetComponents/SortSnippets";
 import CouponSnippets from "../SnippetComponents/CouponSnippets";
+import TabGroup from "../SnippetComponents/TabGroup";
 
 function Window({ activeTab }) {
   const content = [
@@ -43,7 +44,7 @@ function Window({ activeTab }) {
     <RadioSnippets />,
     <ToggleSwitchSnippets />,
     <SlideshowSnippets />,
-    <PageLoaderSnippets/>,
+    <PageLoaderSnippets />,
     <TextSnippets />,
     <CheckboxSnippets />,
     <SocialSnippets />,
@@ -59,17 +60,20 @@ function Window({ activeTab }) {
     <BadgeSnippets />,
     <AvatarImageSnippets />,
     <ColorPickerSnippets />,
-    <PaginationSnippets/>,
-    <PillNavigationSnippets/>,
-    <PaymentFormSnippets/>,
-    <NewsletterSnippets/>,
-    <SortSnippets/>,
-    <CouponSnippets/>,
+    <PaginationSnippets />,
+    <PillNavigationSnippets />,
+    <PaymentFormSnippets />,
+    <NewsletterSnippets />,
+    <SortSnippets />,
+    <CouponSnippets />,
+    <TabGroup />,
   ];
 
   return (
     <div className="flex-1 p-8 bg-gradient-to-r from-violet-500 via-white-500 to-blue-500 text-white pt-20 md:pt-8 overflow-y-auto min-h-screen pt-4">
-      <h1 className="text-3xl font-extrabold mb-6 text-center">AnimateHub - A one place for all your Frontend CSS needs</h1>
+      <h1 className="text-3xl font-extrabold mb-6 text-center">
+        AnimateHub - A one place for all your Frontend CSS needs
+      </h1>
       <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
         {content[activeTab]}
       </div>
