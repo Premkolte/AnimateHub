@@ -34,6 +34,7 @@ import CouponSnippets from "../SnippetComponents/CouponSnippets";
 import ShapedSnippets from "../SnippetComponents/ShadeSnippets";
 import QuoteSlideshowSnippets from "../SnippetComponents/QuoteSlideSnippets";
 import AnimatedIconSnippets from "../SnippetComponents/AnimationIcon";
+import CountdownTimeSnippets from "../SnippetComponents/CountDownSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -73,6 +74,8 @@ function Window({ activeTab }) {
     <ShapedSnippets/>,
     <QuoteSlideshowSnippets/>,
     <AnimatedIconSnippets/>,
+    <CountdownTimeSnippets/>,
+    
   ];
 
   return (
