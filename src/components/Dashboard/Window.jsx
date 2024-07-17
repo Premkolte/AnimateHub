@@ -37,6 +37,7 @@ import AnimatedIconSnippets from "../SnippetComponents/AnimationIcon";
 import CountdownTimeSnippets from "../SnippetComponents/CountDownSnippets";
 import TextAreaSnippets from "../SnippetComponents/TextAreaSnippets";
 import PricingSnippets from "../SnippetComponents/PricingSnippets";
+import ProfileCardSnippets from "../SnippetComponents/ProfileCardSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -79,6 +80,7 @@ function Window({ activeTab }) {
     <CountdownTimeSnippets/>,
     <TextAreaSnippets/>,
     <PricingSnippets/>,
+    <ProfileCardSnippets/>,
     
   ];
 
