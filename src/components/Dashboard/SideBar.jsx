@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { IoMdMenu, IoMdClose } from 'react-icons/io';
-import { Buttons } from './Buttons';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { Buttons } from "./Buttons";
+import { useNavigate } from "react-router-dom";
 
 function SideBar({ activeTab, setActiveTab }) {
   const navigate = useNavigate();
@@ -30,12 +30,14 @@ function SideBar({ activeTab, setActiveTab }) {
 
       {/* Sidebar */}
       <div
-        className={`lg:w-64 fixed inset-y-0 left-0 z-40 bg-white shadow-xl transform ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
-        style={{ maxHeight: '100vh', paddingTop: '2rem' }}
+        className={`h-screen no-scrollbar lg:w-64 fixed inset-y-0 left-0 z-40 bg-white shadow-xl transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto pt-8`}
       >
-        <h1 className="text-4xl font-bold text-center cursor-pointer mb-7 " onClick={() => navigate('/')}>
+        <h1
+          className="text-4xl font-bold text-center cursor-pointer mb-7 "
+          onClick={() => navigate("/")}
+        >
           AnimateHub
         </h1>
         <div className="p-4 h-full flex flex-col justify-between">
@@ -45,8 +47,8 @@ function SideBar({ activeTab, setActiveTab }) {
                 key={index}
                 className={`${
                   activeTab === index
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white'
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white"
                 } py-2 px-4 rounded-md w-full text-lg text-left focus:outline-none transition-colors duration-300`}
                 onClick={() => handleTabClick(index)}
               >
@@ -54,15 +56,16 @@ function SideBar({ activeTab, setActiveTab }) {
               </button>
             ))}
           </div>
-          <div className="text-center text-sm text-gray-700">
-            Type{' '}
+          <div className="text-center text-sm text-gray-700 pb-8">
+            Type{" "}
             <kbd className="px-2 py-1.5 text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
               cmd
             </kbd>
             +
             <kbd className="px-2 py-1.5 text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
               K
-            </kbd>{' '}
+            </kbd>{" "}
+            <br />
             for command palette
           </div>
         </div>
