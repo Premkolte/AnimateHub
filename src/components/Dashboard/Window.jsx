@@ -35,6 +35,8 @@ import ShapedSnippets from "../SnippetComponents/ShadeSnippets";
 import QuoteSlideshowSnippets from "../SnippetComponents/QuoteSlideSnippets";
 import AnimatedIconSnippets from "../SnippetComponents/AnimationIcon";
 import CountdownTimeSnippets from "../SnippetComponents/CountDownSnippets";
+import TextAreaSnippets from "../SnippetComponents/TextAreaSnippets";
+// import PricingSnippets from "../SnippetComponents/PricingSnippets";
 
 function Window({ activeTab }) {
   const content = [
@@ -75,6 +77,8 @@ function Window({ activeTab }) {
     <QuoteSlideshowSnippets/>,
     <AnimatedIconSnippets/>,
     <CountdownTimeSnippets/>,
+    <TextAreaSnippets/>,
+    // <PricingSnippets/>,
     
   ];
 
