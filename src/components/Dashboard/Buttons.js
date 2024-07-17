@@ -35,4 +35,6 @@ export const Buttons = [
   "QuoteSnippets",
   "AnimationIcon",
   "CountDown",
+  "TextArea",
+  // "Pricing",
 ];
