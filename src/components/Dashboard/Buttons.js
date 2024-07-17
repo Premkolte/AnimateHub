@@ -33,5 +33,6 @@ export const Buttons = [
   "Tables",
   "Shade",
   "QuoteSnippets",
-  "AnimationIcon"
+  "AnimationIcon",
+  "CountDown",
 ];
