@@ -46,8 +46,7 @@ function SideBar({ activeTab, setActiveTab }) {
           >
             AnimateHub
           </h1>
-        </div>
-
+      </div>
         <div className="p-4 h-full flex flex-col justify-between">
           <div className="space-y-2 mb-4 pb-4">
             {Buttons.map((button, index) => (
@@ -64,6 +63,7 @@ function SideBar({ activeTab, setActiveTab }) {
               </button>
             ))}
           </div>
+
           <div className="text-center text-sm text-gray-700">
             Type{" "}
             <kbd className="px-2 py-1.5 text-gray-900 bg-gray-100 border border-gray-300 rounded-lg">
