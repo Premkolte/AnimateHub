@@ -68,7 +68,7 @@ function Window({ activeTab }) {
   ];
 
   return (
-    <div className="flex-1 p-8 bg-gradient-to-r from-violet-500 via-white-500 to-blue-500 text-white pt-20 md:pt-8 overflow-y-auto min-h-screen pt-4">
+    <div className="flex-1 bg-gradient-to-r from-violet-500 via-white-500 to-blue-500 text-white overflow-y-auto min-h-screen p-8 pt-4 md:pt-8">
       <h1 className="text-3xl font-extrabold mb-6 text-center">AnimateHub - A one place for all your Frontend CSS needs</h1>
       <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
         {content[activeTab]}
