@@ -30,7 +30,7 @@ import PaymentFormSnippets from "../SnippetComponents/PaymentFormSnippets";
 import NewsletterSnippets from "../SnippetComponents/NewsLetterSnippets";
 import SortSnippets from "../SnippetComponents/SortSnippets";
 import CouponSnippets from "../SnippetComponents/CouponSnippets";
-import TabGroup from "../SnippetComponents/TabGroup";
+// import TabGroup from "../SnippetComponents/TabGroup";
 
 function Window({ activeTab }) {
   const content = [
@@ -66,7 +66,7 @@ function Window({ activeTab }) {
     <NewsletterSnippets />,
     <SortSnippets />,
     <CouponSnippets />,
-    <TabGroup />,
+    // <TabGroup />,
   ];
 
   return (
