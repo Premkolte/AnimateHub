@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import BackButton from "../BackButton";
+import FAQ from "../../assets/FAQ";
+
 
 const Contact = () => {
   const Blobs = () => (
@@ -67,19 +69,20 @@ const Contact = () => {
   
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="relative flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500 via-violet-500 to-fuchsia-500"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className="relative flex flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500 via-violet-500 to-fuchsia-500"
     >
-      <BackButton />
+     <div className="my-20">
+    <FAQ />
+    </div> 
 
+      <BackButton />
       <Blobs />
 
-      
-
       {/* Content */}
-      <div className="relative z-10 mx-auto mt-20 px-8 md:px-20 text-white mb-16 pt-7">
+      <div className="relative z-10 mx-auto px-8 md:px-20 text-white mb-16">
         <div className="bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg mb-4">
@@ -151,9 +154,6 @@ const Contact = () => {
       </div>
     </motion.div>
   );
-};
+};  
 
 export default Contact;
-
-
-
