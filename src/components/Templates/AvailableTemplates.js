@@ -8,7 +8,7 @@ export const templates = [
       "https://github.com/Premkolte/AnimateHub/tree/main/src/components/Templates/Portfolio.jsx",
   },
   {
-    name: "Product",
+    name: "Product",   
     link: "/templates/product",
     description:
       "Promote your product with a clean and effective product template.",
