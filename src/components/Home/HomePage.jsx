@@ -298,13 +298,16 @@ const HomePage = () => {
                 View Contributors
               </motion.button>
             </Link>
-            <a
-              href="https://github.com/Premkolte/AnimateHub"
-              className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
-            >
-              <BsPeople className="inline-block mr-2" />
-              Become a Contributor
-            </a>
+            <motion.button whileHover={{ scale: 1.1 }}
+              className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg">
+              <a
+                href="https://github.com/Premkolte/AnimateHub"
+                className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+              >
+                <BsPeople className="inline-block mr-2" />
+                Become a Contributor
+              </a>
+            </motion.button>
           </div>
         </div>
 
@@ -334,7 +337,7 @@ const HomePage = () => {
         <Footer />
         <Chatbot />
       </div>
-    
+
     </>
   );
 };
