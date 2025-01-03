@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaCommentDots } from 'react-icons/fa';
 
@@ -40,11 +40,11 @@ const Chatbot = () => {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-2 right-2 z-50">
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="bg-blue-500 text-white p-4 rounded-full shadow-lg"
+          className="bg-blue-800 text-white p-4 rounded-full shadow-lg"
           onClick={toggleChatbot}
         >
           <FaCommentDots size={24} />
@@ -69,7 +69,7 @@ const Chatbot = () => {
               <div
                 key={index}
                 className={`mb-2 p-2 rounded-lg max-w-xs ${
-                  message.sender === 'user' ? 'bg-blue-500 self-end text-white' : 'bg-gray-300 self-start text-black'
+                  message.sender === 'user' ? 'bg-blue-800 self-end text-white' : 'bg-gray-300 self-start text-black'
                 }`}
               >
                 <p className="text-base leading-relaxed">
@@ -83,13 +83,13 @@ const Chatbot = () => {
             <input
               type="text"
               placeholder="Type a message..."
-              className="w-full p-2 rounded-md border-2 border-gray-300 focus:outline-none focus:border-blue-500 text-gray-800"
+              className="w-full p-2 rounded-md border-2 border-gray-300 focus:outline-none focus:border-blue-800 text-gray-800"
               value={userMessage}
               onChange={(e) => setUserMessage(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
             />
             <button
-              className="mt-2 w-full bg-blue-500 text-white py-2 rounded-md"
+              className="mt-2 w-full bg-blue-800 text-white py-2 rounded-md"
               onClick={handleSendMessage}
             >
               Send
