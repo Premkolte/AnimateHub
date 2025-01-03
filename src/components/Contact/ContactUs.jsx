@@ -6,7 +6,6 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import BackButton from "../BackButton";
 import FAQ from "../../assets/FAQ";
 
-
 const Contact = () => {
   const Blobs = () => (
     <>
@@ -66,94 +65,97 @@ const Contact = () => {
       </svg>
     </>
   );
-  
+
   return (
     <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
-    className="relative flex flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500 via-violet-500 to-fuchsia-500"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative flex flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500 via-violet-500 to-fuchsia-500"
     >
-     <div className="my-20">
-    <FAQ />
-    </div> 
+      <div className="my-20">
+        <FAQ />
+      </div>
 
       <BackButton />
       <Blobs />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto px-8 md:px-20 text-white mb-16">
+      <div className="relative z-10 mx-auto px-4 sm:px-8 md:px-20 text-white mb-16 max-w-4xl">
         <div className="bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg mb-4">
             Got any questions, suggestions, or feedback? We'd love to hear from
             you!
           </p>
-          <p className="text-lg mb-4">
+          <p className="text-lg mb-6">
             Reach out to us via email at <strong>contact@animatehub.com</strong>{" "}
             or fill out the form below:
           </p>
-          <form className="flex flex-col space-y-4">
-            <div className="flex space-x-4">
-              <div className="flex-1">
-                <label className="sr-only" htmlFor="name">
-                  Your Name
-                </label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FontAwesomeIcon icon={faUser} className="text-gray-500" />
-                  </span>
-                  <input
-                    type="text"
-                    id="name"
-                    placeholder="Your Name"
-                    className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800"
-                  />
-                </div>
-              </div>
-              <div className="flex-1">
-                <label className="sr-only" htmlFor="email">
-                  Your Email
-                </label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FontAwesomeIcon
-                      icon={faEnvelope}
-                      className="text-gray-500"
-                    />
-                  </span>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="Your Email"
-                    className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800"
-                  />
-                </div>
+          <form className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+            <div className="col-span-1">
+              <label htmlFor="name" className="sr-only">
+                Your Name
+              </label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FontAwesomeIcon icon={faUser} className="text-gray-500" />
+                </span>
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  placeholder="Your Name"
+                  className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800 w-full"
+                />
               </div>
             </div>
-            <div className="flex-1">
-              <label className="sr-only" htmlFor="message">
+            <div className="col-span-1">
+              <label htmlFor="email" className="sr-only">
+                Your Email
+              </label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="text-gray-500"
+                  />
+                </span>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Your Email"
+                  required
+                  className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800 w-full"
+                />
+              </div>
+            </div>
+            <div className="col-span-2">
+              <label htmlFor="message" className="sr-only">
                 Your Message
               </label>
               <textarea
+                required
                 id="message"
                 placeholder="Your Message"
-                rows="8"
-                className="form-control border border-gray-300 rounded-md py-2 px-10 bg-gray-100 text-gray-800"
+                rows="6"
+                className="form-control border border-gray-300 rounded-md py-2 px-4 bg-gray-100 text-gray-800 w-full"
               ></textarea>
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary py-2 px-4 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faPaperPlane} className="me-2" /> 
-              Send Message
-            </button>
+            <div className="col-span-2">
+              <button
+                type="submit"
+                className="btn btn-primary py-2 px-4 w-full sm:w-auto rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
+              >
+                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Send
+                Message
+              </button>
+            </div>
           </form>
         </div>
       </div>
     </motion.div>
   );
-};  
+};
 
 export default Contact;
