@@ -1,5 +1,3 @@
-// Modal.js (Updated for Login Snippets)
-
 import React, { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import StringToReactComponent from 'string-to-react-component';
@@ -11,7 +9,7 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
   if (!showModal) return null;
 
   const handleCopy = (text) => {
-    setCopyStatus('Copied!');
+    setCopyStatus(text);
     setTimeout(() => setCopyStatus(''), 2000); // Clear status after 2 seconds
   };
 
@@ -34,7 +32,7 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
               <div className="bg-green-500 p-2">JSX</div>
               <CopyToClipboard text={jsxCode} onCopy={() => handleCopy(jsxCode)}>
                 <button className="bg-white text-black p-2 px-4 rounded-lg">
-                  Copy to clipboard
+                  {copyStatus === jsxCode ? 'Copied!' : 'Copy to clipboard'}
                 </button>
               </CopyToClipboard>
             </div>
@@ -45,19 +43,13 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
               <div className="bg-green-500 p-2">CSS</div>
               <CopyToClipboard text={cssCode} onCopy={() => handleCopy(cssCode)}>
                 <button className="bg-white text-black p-2 px-4 rounded-lg">
-                  Copy to clipboard
+                  {copyStatus === cssCode ? 'Copied!' : 'Copy to clipboard'}
                 </button>
               </CopyToClipboard>
             </div>
             <pre className="overflow-x-auto p-4">{cssCode}</pre>
           </div>
         </div>
-
-        {copyStatus && (
-          <p className="text-green-500 text-sm mt-2 text-center">
-            {copyStatus}
-          </p>
-        )}
       </div>
     </div>
   );
