@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          persist-credentials: false # We disable persisting the token to use it with another tool later
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -32,7 +32,7 @@ jobs:
           git config --global user.email "premkolte26@gmail.com"
 
       - name: Add Contributor
-        run: npx all-contributors add ${{ github.event.pull_request.user.login }} code
+        run: npx all-contributors add "${{ github.event.pull_request.user.login }}" code
 
       - name: Generate README
         run: npx all-contributors generate
@@ -43,6 +43,7 @@ jobs:
           git commit -m "docs: add ${{ github.event.pull_request.user.login }} as a contributor" || echo "No changes to commit"
 
       - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin HEAD
