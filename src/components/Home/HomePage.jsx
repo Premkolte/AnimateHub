@@ -325,6 +325,10 @@ const HomePage = () => {
                 View Templates
               </motion.button>
             </Link>
+            <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+              >
             <a
               href="https://github.com/Premkolte/AnimateHub/issues/new/choose"
               className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
@@ -332,6 +336,7 @@ const HomePage = () => {
               <LuLayoutTemplate className="inline-block mr-2" />
               Submit a Template
             </a>
+            </motion.button>
           </div>
         </div>
         <Footer />
