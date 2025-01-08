@@ -103,10 +103,10 @@ const HomePage = () => {
         </motion.div>
 
         <div className="flex space-x-6 mt-12">
-          <FaHtml5 className="h-12 w-12" />
-          <FaCss3Alt className="h-12 w-12" />
-          <FaReact className="h-12 w-12" />
-          <BiLogoTailwindCss className="h-12 w-12" />
+          <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML"><FaHtml5 className="h-12 w-12" /></a>
+          <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS"><FaCss3Alt className="h-12 w-12" /></a>
+          <a target="_blank" href="https://react.dev/learn"><FaReact className="h-12 w-12" /></a>
+          <a target="_blank" href="https://tailwindcss.com/"><BiLogoTailwindCss className="h-12 w-12" /></a>
         </div>
 
         <motion.a href="https://github.com/Premkolte/AnimateHub"
