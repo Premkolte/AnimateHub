@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          persist-credentials: false
+          persist-credentials: false  # Disable default credentials
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -42,8 +42,9 @@ jobs:
           git add README.md .all-contributorsrc
           git commit -m "docs: add ${{ github.event.pull_request.user.login }} as a contributor" || echo "No changes to commit"
 
-      - name: Push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up authentication for pushing changes
         run: |
-          git push origin HEAD
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
+      - name: Push changes
+        run: git push origin HEAD
