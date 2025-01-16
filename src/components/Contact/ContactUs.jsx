@@ -106,6 +106,8 @@ const Contact = () => {
                   id="name"
                   required
                   placeholder="Your Name"
+                  pattern="[a-zA-Z\s]+"
+                  title="Name must only contain letters."
                   className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800 w-full"
                 />
               </div>
