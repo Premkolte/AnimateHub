@@ -34,15 +34,26 @@ const Navbar = () => {
             whileHover={{ scale: 1.1, rotate: 7 }}
             whileTap={{ scale: 1.6 }}
           >
-            <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
+            <Link
+              to="/"
+              className="flex items-center space-x-2"
+              onClick={closeMenu}
+            >
               <motion.div
                 initial={{ scale: 2 }}
                 animate={{ scale: 1.2 }}
                 transition={{ duration: 0.2, delay: 0.3 }}
               >
-                <img className="w-16 h-16 pt-2 pl-4" src={Logo} alt="AnimateHub Logo" />
+                <img
+                  className="w-16 h-16 pt-2 pl-4"
+                  src={Logo}
+                  alt="AnimateHub Logo"
+                />
               </motion.div>
-              <span className="font-gagalin bg-clip-text text-transparent bg-gradient-to-r from-white to-white font-bold text-3xl">
+              <span
+                className="font-gagalin bg-clip-text text-3xl font-bold 
+      text-white dark:text-gray-100"
+              >
                 AnimateHub
               </span>
               <span className="md:hidden">
@@ -70,7 +81,10 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center">
-            <button onClick={toggleMenu} className="text-2xl focus:outline-none">
+            <button
+              onClick={toggleMenu}
+              className="text-2xl focus:outline-none"
+            >
               {isOpen ? <FiX /> : <FiMenu />}
             </button>
           </div>
