@@ -14,12 +14,40 @@ const RippleEffectButton = () => {
     setShowModal(true);
   };
 
+  const createRipple = (event) => {
+    const button = event.currentTarget;
+
+    // Create a span for the ripple effect
+    const circle = document.createElement("span");
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+    circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+    circle.classList.add("ripple");
+
+    // Remove existing ripples before adding a new one
+    const existingRipple = button.getElementsByClassName("ripple")[0];
+    if (existingRipple) {
+      existingRipple.remove();
+    }
+
+    button.appendChild(circle);
+
+    setTimeout(() => {
+      circle.remove();
+    }, 600);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {rippleEffectButtonSnippet.map((snippet, index) => (
         <div key={index} className="p-8 bg-white rounded-lg shadow-lg">
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
-          <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
+          <button className="ripple-button" onClick={createRipple}>
+            Click Me
+          </button>
           <style>{snippet.cssCode}</style>
           <div className="mt-4 flex justify-end">
             <button

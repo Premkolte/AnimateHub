@@ -1,41 +1,35 @@
-export const rippleEffectButtonSnippet = [
+export const RippleEffectButtonSnippets = [
   {
     title: "Ripple Effect Button",
-    jsxCode: `(props) => (
-      <button className="ripple-button" onClick={props.onClick}>Click Me</button>
-    )`,
-    cssCode: `<style>
+    jsxCode: `<button className="ripple-button">Click Me</button>`,
+    cssCode: `
       .ripple-button {
         position: relative;
         overflow: hidden;
-        padding: 12px 24px;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        background-color: #007bff;
+        background: #3498db;
         color: white;
-        font-size: 16px;
-        border-radius: 6px;
-        display: inline-block;
+        padding: 12px 24px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        outline: none;
       }
 
-      .ripple-button::after {
-        content: "";
+      .ripple {
         position: absolute;
-        width: 100px;
-        height: 100px;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
         transform: scale(0);
-        animation: ripple 0.6s linear;
+        border-radius: 50%;
+        animation: ripple-animation 0.6s linear;
       }
 
-      @keyframes ripple {
+      @keyframes ripple-animation {
         to {
           transform: scale(4);
           opacity: 0;
         }
       }
-    </style>`,
+    `,
   },
 ];
