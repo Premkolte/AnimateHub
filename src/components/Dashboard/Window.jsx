@@ -36,11 +36,11 @@ import AnimatedIconSnippets from "../SnippetComponents/AnimationIcon";
 import CountdownTimeSnippets from "../SnippetComponents/CountDownSnippets";
 import TextAreaSnippets from "../SnippetComponents/TextAreaSnippets";
 import PricingSnippets from "../SnippetComponents/PricingSnippets";
-import ExpandingSearchBarSnippets from "../SnippetComponents/ExpandingSearchBar";
-import GlassmorphismCardSnippets from "../SnippetComponents/GlassmorphismCard";
-import GlowingBorderInputSnippets from "../SnippetComponents/GlowingBorderInput";
-import NeonButtonSnippet from "../SnippetComponents/NeonButton";
-import RippleEffectButtonSnippets from "../SnippetComponents/RippleEffectButton";
+import ExpandingSearchBarSnippets from "../SnippetComponents/ExpandingSearchBarSnippets";
+import GlassmorphismCardSnippets from "../SnippetComponents/GlassmorphismCardSnippets";
+import GlowingBorderInputSnippets from "../SnippetComponents/GlowingBorderInputSnippets";
+import NeonButtonSnippet from "../SnippetComponents/NeonButtonSnippets";
+import RippleEffectButtonSnippets from "../SnippetComponents/RippleEffectButtonSnipeets";
 
 
 import TabGroup from "../SnippetComponents/TabGroup";
@@ -72,7 +72,7 @@ function Window({ activeTab }) {
       <InputFieldSnippets />,
       <LoginSnippets />,
       <NavbarIconSnippets />,
-      <NeonButtonSnippet />,
+      <NeonButtonSnippets />,
       <NewsletterSnippets />,
       <PageLoaderSnippets />,
       <PaginationSnippets />,
