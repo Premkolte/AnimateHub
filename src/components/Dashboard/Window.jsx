@@ -36,6 +36,12 @@ import AnimatedIconSnippets from "../SnippetComponents/AnimationIcon";
 import CountdownTimeSnippets from "../SnippetComponents/CountDownSnippets";
 import TextAreaSnippets from "../SnippetComponents/TextAreaSnippets";
 import PricingSnippets from "../SnippetComponents/PricingSnippets";
+import ExpandingSearchBarSnippets from "../SnippetComponents/ExpandingSearchBar";
+import GlassmorphismCardSnippets from "../SnippetComponents/GlassmorphismCard";
+import GlowingBorderInputSnippets from "../SnippetComponents/GlowingBorderInput";
+import NeonButtonSnippet from "../SnippetComponents/NeonButton";
+import RippleEffectButtonSnippets from "../SnippetComponents/RippleEffectButton";
+
 
 import TabGroup from "../SnippetComponents/TabGroup";
 
@@ -45,48 +51,52 @@ import ProfileCardSnippets from "../SnippetComponents/ProfileCardSnippets";
 function Window({ activeTab }) {
   const content = [
     // Please add your components alphabetically in both button and this file and in same palce for perfect rendering
-
-    <AnimatedIconSnippets />,
-    <AnimationSnippets />,
-    <AvatarImageSnippets />,
-    <BadgeSnippets />,
-    <BoxShadowSnippets />,
-    <ButtonSnippets />,
-    <CardSnippets />,
-    <CheckboxSnippets />,
-    <ColorPickerSnippets />,
-    <CountdownTimeSnippets />,
-    <CouponSnippets />,
-    <DarkModeSnippets />,
-    <DropdownSnippetCard />,
-    <FooterSnippets />,
-    <FormSnippets />,
-    <InputFieldSnippets />,
-    <LoginSnippets />,
-    <NavbarIconSnippets />,
-    <NewsletterSnippets />,
-    <PageLoaderSnippets />,
-    <PaginationSnippets />,
-    <PaymentFormSnippets />,
-    <PillNavigationSnippets />,
-    <PricingSnippets />,
-    <ProfileCardSnippets/>,
-    <ProgressBarSnippets />,
-    <QuoteSlideshowSnippets />,
-    <RadioSnippets />,
-    <ResponsivenessSnippets />,
-    <ShapedSnippets />,
-    <SignupSnippets />,
-    <SlideshowSnippets />,
-    <SocialSnippets />,
-    <SortSnippets />,
-    <TabGroup />,
-    <TableSnippets />,
-    <TextAreaSnippets />,
-    <TextSnippets />,
-    <ToggleSwitchSnippets />,
-  ];
-
+      <AnimatedIconSnippets />,
+      <AnimationSnippets />,
+      <AvatarImageSnippets />,
+      <BadgeSnippets />,
+      <BoxShadowSnippets />,
+      <ButtonSnippets />,
+      <CardSnippets />,
+      <CheckboxSnippets />,
+      <ColorPickerSnippets />,
+      <CountdownTimeSnippets />,
+      <CouponSnippets />,
+      <DarkModeSnippets />,
+      <DropdownSnippetCard />,
+      <ExpandingSearchBarSnippets />,
+      <FooterSnippets />,
+      <FormSnippets />,
+      <GlassmorphismCardSnippets />,
+      <GlowingBorderInputSnippets />,
+      <InputFieldSnippets />,
+      <LoginSnippets />,
+      <NavbarIconSnippets />,
+      <NeonButtonSnippet />,
+      <NewsletterSnippets />,
+      <PageLoaderSnippets />,
+      <PaginationSnippets />,
+      <PaymentFormSnippets />,
+      <PillNavigationSnippets />,
+      <PricingSnippets />,
+      <ProfileCardSnippets />,
+      <ProgressBarSnippets />,
+      <QuoteSlideshowSnippets />,
+      <RadioSnippets />,
+      <ResponsivenessSnippets />,
+      <RippleEffectButtonSnippets />,
+      <ShapedSnippets />,
+      <SignupSnippets />,
+      <SlideshowSnippets />,
+      <SocialSnippets />,
+      <SortSnippets />,
+      <TabGroup />,
+      <TableSnippets />,
+      <TextAreaSnippets />,
+      <TextSnippets />,
+      <ToggleSwitchSnippets />,
+    ];
+    
   return (
     <div className="flex-1 p-8 bg-gradient-to-r from-violet-500 via-white-500 to-blue-500 text-white pt-20 md:pt-8 overflow-y-auto min-h-screen pt-4">
       <h1 className="text-3xl font-extrabold mb-6 text-center">
