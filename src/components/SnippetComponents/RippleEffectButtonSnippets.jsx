@@ -1,40 +1,44 @@
 import React, { useState } from "react";
-import "./RippleEffect.css"; // Import the CSS file
+import Modal from "../Modal";
+import StringToReactComponent from "string-to-react-component";
+import { rippleEffectButtonSnippet } from "./Snippets/RippleEffectButtonSnippets.js";
 
-const RippleEffect = ({ children, className, ...props }) => {
-  const [ripples, setRipples] = useState([]);
+const RippleEffectButton = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [jsxCode, setJsxCode] = useState("");
+  const [cssCode, setCssCode] = useState("");
 
-  const handleClick = (event) => {
-    const button = event.currentTarget;
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
-
-    const newRipple = {
-      id: Date.now(),
-      size,
-      x,
-      y,
-    };
-
-    setRipples((prevRipples) => [...prevRipples, newRipple]);
-
-    setTimeout(() => {
-      setRipples((prevRipples) => prevRipples.filter((r) => r.id !== newRipple.id));
-    }, 600); // Remove ripple after animation
+  const handleShowModal = (jsx, css) => {
+    setJsxCode(jsx);
+    setCssCode(css);
+    setShowModal(true);
   };
 
   return (
-    <button className={`ripple-btn ${className}`} onClick={handleClick} {...props}>
-      {children}
-      <div className="ripple-container">
-        {ripples.map(({ id, x, y, size }) => (
-          <span key={id} className="ripple" style={{ left: x, top: y, width: size, height: size }} />
-        ))}
-      </div>
-    </button>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {rippleEffectButtonSnippet.map((snippet, index) => (
+        <div key={index} className="p-8 bg-white rounded-lg shadow-lg">
+          <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
+          <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
+          <style>{snippet.cssCode}</style>
+          <div className="mt-4 flex justify-end">
+            <button
+              className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+              onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}
+            >
+              Show Code
+            </button>
+          </div>
+        </div>
+      ))}
+      <Modal
+        showModal={showModal}
+        onClose={() => setShowModal(false)}
+        jsxCode={jsxCode}
+        cssCode={cssCode}
+      />
+    </div>
   );
 };
 
-export default RippleEffect;
+export default RippleEffectButton;
