@@ -39,8 +39,8 @@ import PricingSnippets from "../SnippetComponents/PricingSnippets";
 import ExpandingSearchBarSnippets from "../SnippetComponents/ExpandingSearchBarSnippets";
 import GlassmorphismCardSnippets from "../SnippetComponents/GlassmorphismCardSnippets";
 import GlowingBorderInputSnippets from "../SnippetComponents/GlowingBorderInputSnippets";
-import NeonButtonSnippet from "../SnippetComponents/NeonButtonSnippets";
-import RippleEffectButtonSnippets from "../SnippetComponents/RippleEffectButtonSnipeets";
+import NeonButtonSnippets from "../SnippetComponents/NeonButtonSnippets";
+import RippleEffectButtonSnippets from "../SnippetComponents/RippleEffectButtonSnippets";
 
 
 import TabGroup from "../SnippetComponents/TabGroup";
@@ -72,7 +72,7 @@ function Window({ activeTab }) {
       <InputFieldSnippets />,
       <LoginSnippets />,
       <NavbarIconSnippets />,
-      <NeonButtonSnippets />,
+      <NeonButtonSnippets/>,
       <NewsletterSnippets />,
       <PageLoaderSnippets />,
       <PaginationSnippets />,

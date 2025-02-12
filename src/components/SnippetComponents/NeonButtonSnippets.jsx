@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
-import { neonButtonSnippet } from "./Snippets/NeonButton";
+import { neonButtonSnippet } from "./Snippets/NeonButtonSnippets.js";
 
 const NeonButton = () => {
   const [showModal, setShowModal] = useState(false);
