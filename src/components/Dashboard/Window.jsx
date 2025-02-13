@@ -36,7 +36,6 @@ import AnimatedIconSnippets from "../SnippetComponents/AnimationIcon";
 import CountdownTimeSnippets from "../SnippetComponents/CountDownSnippets";
 import TextAreaSnippets from "../SnippetComponents/TextAreaSnippets";
 import PricingSnippets from "../SnippetComponents/PricingSnippets";
-import ExpandingSearchBarSnippets from "../SnippetComponents/ExpandingSearchBarSnippets";
 import GlassmorphismCardSnippets from "../SnippetComponents/GlassmorphismCardSnippets";
 import GlowingBorderInputSnippets from "../SnippetComponents/GlowingBorderInputSnippets";
 import NeonButtonSnippets from "../SnippetComponents/NeonButtonSnippets";
@@ -64,7 +63,6 @@ function Window({ activeTab }) {
       <CouponSnippets />,
       <DarkModeSnippets />,
       <DropdownSnippetCard />,
-      <ExpandingSearchBarSnippets />,
       <FooterSnippets />,
       <FormSnippets />,
       <GlassmorphismCardSnippets />,

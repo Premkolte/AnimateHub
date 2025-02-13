@@ -12,7 +12,6 @@ export const Buttons = [
     "CouponSnippets",
     "DarkModeSnippets",
     "DropdownSnippetCard",
-    "ExpandingSearchBarSnippets",
     "FooterSnippets",
     "FormSnippets",
     "GlassmorphismCardSnippets",
