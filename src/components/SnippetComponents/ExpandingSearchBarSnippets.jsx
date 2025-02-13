@@ -1,6 +1,6 @@
-// Snippets/ExpandingSearchBarSnippet.js
+// Snippets/ExpandingSearchBarSnippets.js
 
-export const expandingSearchBarSnippet = [
+export const expandingSearchBarSnippets = [
   {
     title: "Expanding Search Bar",
     jsxCode: `(props) => {
