@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
-import { expandingSearchBarSnippet } from "./Snippets/ExpandingSearchBarSnippets";
+import { ExpandingSearchBarSnippets} from "./Snippets/ExpandingSearchBarSnippets";
 
 const ExpandingSearchBar = () => {
   const [showModal, setShowModal] = useState(false);

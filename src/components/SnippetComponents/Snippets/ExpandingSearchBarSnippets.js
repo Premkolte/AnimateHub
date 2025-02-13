@@ -1,6 +1,6 @@
 export const ExpandingSearchBarSnippets = [
   {
-    title: "Expanding Search Bar",
+    title: "ExpandingSearchBarSnippets",
     jsxCode: `(props) => {
       const [isExpanded, setIsExpanded] = React.useState(false);
 
