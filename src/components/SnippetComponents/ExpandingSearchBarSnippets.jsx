@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
-import { ExpandingSearchBarSnippets} from "./Snippets/ExpandingSearchBarSnippets";
+import { ExpandingSearchBarSnippets } from "./Snippets/ExpandingSearchBarSnippets";
 
 const ExpandingSearchBar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +17,7 @@ const ExpandingSearchBar = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {expandingSearchBarSnippet.map((snippet, index) => (
+      {ExpandingSearchBarSnippet.map((snippet, index) => (
         <div key={index} className="p-8 bg-white rounded-lg shadow-lg">
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
@@ -42,4 +42,4 @@ const ExpandingSearchBar = () => {
   );
 };
 
-export default ExpandingSearchBar;
+export default ExpandingSearchBarSnippets;
