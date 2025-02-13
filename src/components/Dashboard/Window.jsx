@@ -41,6 +41,9 @@ import TabGroup from "../SnippetComponents/TabGroup";
 
 import ProfileCardSnippets from "../SnippetComponents/ProfileCardSnippets";
 
+import NeonButton from "../SnippetComponents/NeonButton";
+import ExpandingSearchBar from "../SnippetComponents/ExpandingSearchBar";
+
 
 function Window({ activeTab }) {
   const content = [
@@ -59,11 +62,13 @@ function Window({ activeTab }) {
     <CouponSnippets />,
     <DarkModeSnippets />,
     <DropdownSnippetCard />,
+    < ExpandingSearchBar/>,
     <FooterSnippets />,
     <FormSnippets />,
     <InputFieldSnippets />,
     <LoginSnippets />,
     <NavbarIconSnippets />,
+    <NeonButton/>,
     <NewsletterSnippets />,
     <PageLoaderSnippets />,
     <PaginationSnippets />,
