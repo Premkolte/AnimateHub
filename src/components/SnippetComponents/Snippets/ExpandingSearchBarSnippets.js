@@ -1,7 +1,7 @@
 export const ExpandingSearchBarSnippets = [
   {
-    title: "ExpandingSearchBarSnippets",
-    jsxCode: `(props) => {
+    title: "Expanding Search Bar",
+    jsxCode: `() => {
       const [isExpanded, setIsExpanded] = React.useState(false);
 
       return (
@@ -17,7 +17,7 @@ export const ExpandingSearchBarSnippets = [
         </div>
       );
     }`,
-    cssCode: `<style>
+    cssCode: `
       .expanding-input {
         transition: width 0.3s ease-in-out;
         padding: 10px;
@@ -26,6 +26,6 @@ export const ExpandingSearchBarSnippets = [
         outline: none;
         font-size: 16px;
       }
-    </style>`,
+    `,
   },
 ];

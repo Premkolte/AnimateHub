@@ -1,10 +1,9 @@
-
 import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { ExpandingSearchBarSnippets } from "./Snippets/ExpandingSearchBarSnippets";
 
-const ExpandingSearchBarSnippets = () => {
+const ExpandingSearchBarComponent = () => {
   const [showModal, setShowModal] = useState(false);
   const [jsxCode, setJsxCode] = useState("");
   const [cssCode, setCssCode] = useState("");
@@ -42,4 +41,4 @@ const ExpandingSearchBarSnippets = () => {
   );
 };
 
-export default ExpandingSearchBarSnippets;
+export default ExpandingSearchBarComponent;
