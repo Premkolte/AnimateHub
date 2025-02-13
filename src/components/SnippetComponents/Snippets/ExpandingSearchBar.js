@@ -1,21 +1,31 @@
-// Snippets/ExpandingSearchBar.js
+export const ExpandingSearchBarSnippets = [
+  {
+    title: "Expanding Search Bar",
+    jsxCode: `(props) => {
+      const [isExpanded, setIsExpanded] = React.useState(false);
 
-export const expandingSearchBarSnippet = [
-    {
-      title: "Expanding Search Bar",
-      jsxCode: `(props) => (
-        <input type="text" className="expanding-search" placeholder="Search..." />
-      )`,
-      cssCode: `<style>
-        .expanding-search {
-          width: 50px;
-          padding: 10px;
-          transition: width 0.3s ease-in-out;
-        }
-        .expanding-search:focus {
-          width: 200px;
-        }
-      </style>`,
-    },
-  ];
-  
+      return (
+        <div className="relative flex items-center">
+          <input
+            type="text"
+            className="expanding-input"
+            placeholder="Search..."
+            onFocus={() => setIsExpanded(true)}
+            onBlur={() => setIsExpanded(false)}
+            style={{ width: isExpanded ? "200px" : "100px" }}
+          />
+        </div>
+      );
+    }`,
+    cssCode: `<style>
+      .expanding-input {
+        transition: width 0.3s ease-in-out;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        font-size: 16px;
+      }
+    </style>`,
+  },
+];

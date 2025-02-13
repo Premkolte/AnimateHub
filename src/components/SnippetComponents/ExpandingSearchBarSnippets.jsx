@@ -1,28 +1,45 @@
-// Snippets/ExpandingSearchBarSnippets.js
 
-export const ExpandingSearchBarSnippets = [
-  {
-    title: "ExpandingSearchBarSnippets",
-    jsxCode: `(props) => {
-      const [isExpanded, setIsExpanded] = useState(false);
-      
-      return (
-        <div className="relative flex items-center">
-          <input
-            type="text"
-            className={\`transition-all duration-300 border border-gray-300 rounded-md p-2 \${isExpanded ? "w-64" : "w-32"}\`}
-            placeholder="Search..."
-            onFocus={() => setIsExpanded(true)}
-            onBlur={() => setIsExpanded(false)}
-          />
+import React, { useState } from "react";
+import Modal from "../Modal";
+import StringToReactComponent from "string-to-react-component";
+import { expandingSearchBarSnippet } from "./Snippets/ExpandingSearchBarSnippets";
+
+const ExpandingSearchBar = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [jsxCode, setJsxCode] = useState("");
+  const [cssCode, setCssCode] = useState("");
+
+  const handleShowModal = (jsx, css) => {
+    setJsxCode(jsx);
+    setCssCode(css);
+    setShowModal(true);
+  };
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {expandingSearchBarSnippet.map((snippet, index) => (
+        <div key={index} className="p-8 bg-white rounded-lg shadow-lg">
+          <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
+          <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
+          <style>{snippet.cssCode}</style>
+          <div className="mt-4 flex justify-end">
+            <button
+              className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+              onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}
+            >
+              Show Code
+            </button>
+          </div>
         </div>
-      );
-    }`,
-    cssCode: `<style>
-      input {
-        outline: none;
-        transition: width 0.3s ease-in-out;
-      }
-    </style>`,
-  },
-];
+      ))}
+      <Modal
+        showModal={showModal}
+        onClose={() => setShowModal(false)}
+        jsxCode={jsxCode}
+        cssCode={cssCode}
+      />
+    </div>
+  );
+};
+
+export default ExpandingSearchBar;
