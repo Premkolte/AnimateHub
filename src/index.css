@@ -1,9 +1,11 @@
+/* tailwind.css or index.css */
+@import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* tailwind.css or index.css */
-@import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
+
 
 /* Custom utilities if needed */
 @layer utilities {
