@@ -26,7 +26,7 @@ Follow these steps to run the project locally:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/AnimateHub.git
+git clone https://github.com/premkolte/AnimateHub.git
 cd AnimateHub
 ```
 
