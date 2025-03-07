@@ -1,9 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* tailwind.css or index.css */
-@import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
 
 /* Custom utilities if needed */
 @layer utilities {
@@ -27,9 +25,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(
-    22,
-    153,
-    146
-  ); /* Color when hovering over the scrollbar thumb */
+  background: rgb(22, 153, 146); /* Color when hovering over the scrollbar thumb */
 }
