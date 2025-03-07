@@ -20,23 +20,27 @@
 
 ###  :outbox_tray: How to Set up Project locally : 
 
-1. Clone the repo
-   ```sh 
-   git clone https://github.com/Premkolte/AnimateHub.git
-   ```
-2. Go to the project folder
-   ```sh
-   cd AnimateHub
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   npm install react-darkreader --legacy-peer-deps
-   ```
-4. Run development server
-   ```sh
-   npm run dev
-   ```
+## Installation
+
+Follow these steps to run the project locally:
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/AnimateHub.git
+cd AnimateHub
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+The application should now be running at http://localhost:5173 (or another port if 5173 is in use)
 ### Alternatively contribute using GitHub Desktop
 
 1. **Open GitHub Desktop:**
