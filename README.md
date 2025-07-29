@@ -14,24 +14,79 @@
 
 <img width="900" alt="AnimateHub Banner" src="https://github.com/user-attachments/assets/591d8b41-bd68-40d1-b62b-90781b71bf2b">
 
+</div>
+
+---
+
 ## 🌟 About AnimateHub
+
+<div align="left">
 
 **AnimateHub** is your ultimate destination for creating stunning web animations with ease. Whether you're a beginner learning web development or an experienced developer looking to add flair to your projects, AnimateHub provides:
 
-- 🎯 **Ready-to-use code snippets** for animations, transitions, and effects
-- 🎨 **Interactive component library** with live previews
-- 📱 **Responsive design patterns** that work across all devices
-- ⚡ **Performance-optimized** animations for smooth user experiences
-- 🎭 **Copy-paste simplicity** - just grab the code and go!
+</div>
+
+<table align="center">
+<tr>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Desktop%20Computer.png" width="60" height="60"/>
+<br>
+<b>Ready-to-use Components</b>
+<br>
+<small>Copy-paste code snippets for animations, transitions, and effects</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Artist%20Palette.png" width="60" height="60"/>
+<br>
+<b>Interactive Library</b>
+<br>
+<small>Live previews and interactive component showcase</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Mobile%20Phone.png" width="60" height="60"/>
+<br>
+<b>Responsive Design</b>
+<br>
+<small>Works perfectly across all devices and screen sizes</small>
+</td>
+</tr>
+<tr>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/High%20Voltage.png" width="60" height="60"/>
+<br>
+<b>Performance Optimized</b>
+<br>
+<small>Smooth animations with excellent performance</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Scissors.png" width="60" height="60"/>
+<br>
+<b>Copy-Paste Simple</b>
+<br>
+<small>Just grab the code and integrate instantly</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Gear.png" width="60" height="60"/>
+<br>
+<b>Modern Tech Stack</b>
+<br>
+<small>Built with latest React, Vite, and Tailwind CSS</small>
+</td>
+</tr>
+</table>
 
 ### ✨ Key Features
 
+<div align="left">
+
 - **50+ Animation Components**: Buttons, cards, loaders, hover effects, and more
-- **Multiple Categories**: Organized by type for easy navigation
+- **Multiple Categories**: Organized by type for easy navigation  
 - **Live Preview**: See animations in action before copying
 - **Dark/Light Mode**: Comfortable viewing in any environment
 - **Mobile Responsive**: Perfect experience on all devices
 - **Modern Tech Stack**: Built with React, Vite, and Tailwind CSS
+
+</div>
 
 ---
 
@@ -50,14 +105,43 @@
 
 ## 🚀 Quick Start Guide
 
+<div align="left">
+
 ### Prerequisites
 
 Before you begin, ensure you have the following installed:
-- **Node.js** (v16.0 or higher) - [Download here](https://nodejs.org/)
-- **npm** or **yarn** package manager
-- **Git** - [Download here](https://git-scm.com/)
+
+</div>
+
+<table align="center" width="100%">
+<tr>
+<td align="center" width="33%">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Desktop%20Computer.png" width="50" height="50"/>
+<br>
+<b>Node.js (v16.0+)</b>
+<br>
+<a href="https://nodejs.org/">Download here</a>
+</td>
+<td align="center" width="33%">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Package.png" width="50" height="50"/>
+<br>
+<b>Package Manager</b>
+<br>
+npm or yarn
+</td>
+<td align="center" width="33%">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Git.png" width="50" height="50"/>
+<br>
+<b>Git</b>
+<br>
+<a href="https://git-scm.com/">Download here</a>
+</td>
+</tr>
+</table>
 
 ### ⚡ Local Development Setup
+
+<div align="left">
 
 Follow these steps to get AnimateHub running on your local machine:
 
@@ -80,7 +164,11 @@ npm run dev
 #### 4. 🌐 Open in Browser
 The application will be available at: **http://localhost:5173**
 
+</div>
+
 ### 🔧 Available Scripts
+
+<div align="left">
 
 | Command | Description |
 |---------|-------------|
@@ -89,22 +177,58 @@ The application will be available at: **http://localhost:5173**
 | `npm run preview` | Preview production build locally |
 | `npm run lint` | Run ESLint for code quality checks |
 
+</div>
+
 ## 🤝 Contributing to AnimateHub
+
+<div align="left">
 
 We love your input! AnimateHub thrives on community contributions. Whether you're fixing bugs, adding new animation components, improving documentation, or suggesting new features, your contributions are welcome!
 
+</div>
+
 ### 🎯 Ways to Contribute
+
+<div align="center">
 
 <table>
 <tr>
-<td align="center">🐛<br><b>Bug Reports</b><br>Found a bug? Report it!</td>
-<td align="center">✨<br><b>New Features</b><br>Suggest new animations</td>
-<td align="center">📚<br><b>Documentation</b><br>Improve our docs</td>
-<td align="center">🎨<br><b>UI/UX</b><br>Enhance user experience</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Bug.png" width="60" height="60"/>
+<br>
+<b>Bug Reports</b>
+<br>
+<small>Found a bug? Report it!</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Sparkles.png" width="60" height="60"/>
+<br>
+<b>New Features</b>
+<br>
+<small>Suggest new animations</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Books.png" width="60" height="60"/>
+<br>
+<b>Documentation</b>
+<br>
+<small>Improve our docs</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Artist%20Palette.png" width="60" height="60"/>
+<br>
+<b>UI/UX</b>
+<br>
+<small>Enhance user experience</small>
+</td>
 </tr>
 </table>
 
+</div>
+
 ### 🚀 Getting Started with Contributions
+
+<div align="left">
 
 #### 1. 🍴 Fork & Clone
 ```bash
@@ -152,7 +276,11 @@ git push origin feature/your-feature-name
 ```
 Then create a Pull Request on GitHub with a clear description of your changes.
 
+</div>
+
 ### 📋 Contribution Guidelines
+
+<div align="left">
 
 #### For New Animation Components:
 1. **Create the component** in `src/components/SnippetComponents/`
@@ -169,7 +297,11 @@ Then create a Pull Request on GitHub with a clear description of your changes.
 - Keep components **modular and reusable**
 - Add **PropTypes** for type checking
 
+</div>
+
 ### 🏷️ Good First Issues
+
+<div align="left">
 
 New to open source? Look for issues labeled:
 - `good first issue` - Perfect for beginners
@@ -177,7 +309,11 @@ New to open source? Look for issues labeled:
 - `documentation` - Improve our docs
 - `bug` - Fix existing issues
 
+</div>
+
 ### 🔍 Pull Request Process
+
+<div align="left">
 
 1. **Check existing PRs** to avoid duplicates
 2. **Link related issues** in your PR description
@@ -186,7 +322,11 @@ New to open source? Look for issues labeled:
 5. **Ensure all tests pass**
 6. **Request review** from maintainers
 
+</div>
+
 ### 💡 Development Tips
+
+<div align="left">
 
 #### Adding New Animation Categories:
 1. Create component in `SnippetComponents/`
@@ -201,6 +341,8 @@ npm run build        # Build for production
 npm run lint         # Check code quality
 npm run lint:fix     # Auto-fix linting issues
 ```
+
+</div>
 
 ---
 
@@ -286,7 +428,11 @@ AnimateHub/
 
 ## 📋 Code of Conduct
 
+<div align="left">
+
 We are committed to fostering a welcoming and inclusive community. Please read our [Code of Conduct](CODE_OF_CONDUCT.md) to understand the standards of behavior we expect from all contributors.
+
+</div>
 
 ---
 
@@ -298,28 +444,29 @@ We are committed to fostering a welcoming and inclusive community. Please read o
 
 </div>
 
-<table>
+<table align="center">
 <tr>
-<td align="center">
-<img src="https://gssoc.girlscript.tech/images/favicon/android-chrome-512x512.png" alt="GSSoC'25 Logo" width="100" height="100">
+<td align="center" width="200">
+<img src="https://gssoc.girlscript.tech/images/favicon/android-chrome-512x512.png" alt="GSSoC'25 Logo" width="120" height="120">
 <br>
 <strong>GirlScript Summer of Code 2025</strong>
 <br>
 <em>3-month long Open Source Program</em>
 <br>
-<a href="https://gssoc.girlscript.tech/">Official Website</a>
+<a href="https://gssoc.girlscript.tech/">🌐 Official Website</a>
 </td>
-<td>
-<h3>🎓 What is GSSoC'25?</h3>
-<p>GirlScript Summer of Code is a <strong>3-month long Open Source Program</strong> conducted by GirlScript Foundation. It aims to help beginners get started with Open Source Development while encouraging diversity in the tech community.</p>
+<td align="left" width="400">
 
-<h3>🏆 Program Highlights:</h3>
-<ul>
-<li>🎯 <strong>Beginner-friendly</strong> environment for newcomers</li>
-<li>👥 <strong>Mentorship</strong> from experienced developers</li>
-<li>🏅 <strong>Certificates & Goodies</strong> for contributors</li>
-<li>🌈 <strong>Promoting diversity</strong> in tech</li>
-</ul>
+### 🎓 What is GSSoC'25?
+
+GirlScript Summer of Code is a **3-month long Open Source Program** conducted by GirlScript Foundation. It aims to help beginners get started with Open Source Development while encouraging diversity in the tech community.
+
+### 🏆 Program Highlights:
+- 🎯 **Beginner-friendly** environment for newcomers
+- 👥 **Mentorship** from experienced developers  
+- 🏅 **Certificates & Goodies** for contributors
+- 🌈 **Promoting diversity** in tech
+
 </td>
 </tr>
 </table>
@@ -328,13 +475,44 @@ We are committed to fostering a welcoming and inclusive community. Please read o
 
 <div align="center">
 
-| 🌟 Learning | 🛠️ Skills | 🤝 Community | 🏆 Recognition |
-|-------------|-----------|--------------|----------------|
-| Hands-on experience with React, Tailwind CSS, and modern web animations | Improve coding skills through real-world project contributions | Join a supportive community of developers and mentors | Earn GSSoC'25 certificates, badges, and potential swag |
+<table>
+<tr>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Books.png" width="60" height="60"/>
+<br>
+<b>Learning</b>
+<br>
+<small>Hands-on experience with React, Tailwind CSS, and modern web animations</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Hammer%20and%20Wrench.png" width="60" height="60"/>
+<br>
+<b>Skills</b>
+<br>
+<small>Improve coding skills through real-world project contributions</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png" width="60" height="60"/>
+<br>
+<b>Community</b>
+<br>
+<small>Join a supportive community of developers and mentors</small>
+</td>
+<td align="center" width="200">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Trophy.png" width="60" height="60"/>
+<br>
+<b>Recognition</b>
+<br>
+<small>Earn GSSoC'25 certificates, badges, and potential swag</small>
+</td>
+</tr>
+</table>
 
 </div>
 
 ### 📚 Resources for GSSoC'25 Participants
+
+<div align="left">
 
 - 📖 **[Contribution Guidelines](CONTRIBUTING.md)** - Detailed guide for contributors
 - 🎯 **[Good First Issues](https://github.com/Premkolte/AnimateHub/labels/good%20first%20issue)** - Perfect starting points
@@ -342,11 +520,17 @@ We are committed to fostering a welcoming and inclusive community. Please read o
 - 🐛 **[Report Issues](https://github.com/Premkolte/AnimateHub/issues/new)** - Help us improve
 - 📱 **[Join our Community](https://discord.gg/animatehub)** - Connect with other contributors
 
+</div>
+
 ---
 
 ## 📄 License
 
+<div align="left">
+
 This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE) file for details.
+
+</div>
 
 ---
 
@@ -356,9 +540,31 @@ This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE
 
 **If you found AnimateHub helpful, please consider:**
 
-[![Star this repo](https://img.shields.io/badge/⭐_Star_this_repo-black?style=for-the-badge)](https://github.com/Premkolte/AnimateHub/stargazers)
-[![Fork this repo](https://img.shields.io/badge/🍴_Fork_this_repo-blue?style=for-the-badge)](https://github.com/Premkolte/AnimateHub/fork)
-[![Share on Twitter](https://img.shields.io/badge/🐦_Share_on_Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/intent/tweet?text=Check%20out%20AnimateHub%20-%20A%20comprehensive%20animation%20library%20for%20modern%20web%20development!&url=https://github.com/Premkolte/AnimateHub)
+<table>
+<tr>
+<td align="center" width="250">
+<a href="https://github.com/Premkolte/AnimateHub/stargazers">
+<img src="https://img.shields.io/badge/⭐_Star_this_repo-black?style=for-the-badge" alt="Star this repo"/>
+</a>
+<br>
+<small>Give us a star on GitHub</small>
+</td>
+<td align="center" width="250">
+<a href="https://github.com/Premkolte/AnimateHub/fork">
+<img src="https://img.shields.io/badge/🍴_Fork_this_repo-blue?style=for-the-badge" alt="Fork this repo"/>
+</a>
+<br>
+<small>Fork and contribute</small>
+</td>
+<td align="center" width="250">
+<a href="https://twitter.com/intent/tweet?text=Check%20out%20AnimateHub%20-%20A%20comprehensive%20animation%20library%20for%20modern%20web%20development!&url=https://github.com/Premkolte/AnimateHub">
+<img src="https://img.shields.io/badge/🐦_Share_on_Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Share on Twitter"/>
+</a>
+<br>
+<small>Share with friends</small>
+</td>
+</tr>
+</table>
 
 **Your support helps us reach more developers and keep improving!** 🚀
 
@@ -386,18 +592,56 @@ This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE
 
 **Join AnimateHub today and be part of GSSoC'25!**
 
-[![Join GSSoC'25](https://img.shields.io/badge/Join_GSSoC'25-FF6B6B?style=for-the-badge&logo=github&logoColor=white)](https://gssoc.girlscript.tech/)
-[![Start Contributing](https://img.shields.io/badge/Start_Contributing-4ECDC4?style=for-the-badge&logo=git&logoColor=white)](https://github.com/Premkolte/AnimateHub/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+<table>
+<tr>
+<td align="center" width="300">
+<a href="https://gssoc.girlscript.tech/">
+<img src="https://img.shields.io/badge/Join_GSSoC'25-FF6B6B?style=for-the-badge&logo=github&logoColor=white" alt="Join GSSoC'25"/>
+</a>
+<br>
+<small>Register for GSSoC'25</small>
+</td>
+<td align="center" width="300">
+<a href="https://github.com/Premkolte/AnimateHub/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">
+<img src="https://img.shields.io/badge/Start_Contributing-4ECDC4?style=for-the-badge&logo=git&logoColor=white" alt="Start Contributing"/>
+</a>
+<br>
+<small>Find good first issues</small>
+</td>
+</tr>
+</table>
 
 ---
 
-<p><strong>Made with ❤️ by the AnimateHub Community</strong></p>
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Red%20heart.png" width="25" height="25"/> **Made with ❤️ by the AnimateHub Community** <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Red%20heart.png" width="25" height="25"/>
 
-<p>
-  <a href="https://animatehub.vercel.app">🌐 Website</a> •
-  <a href="https://github.com/Premkolte/AnimateHub/issues">🐛 Report Bug</a> •
-  <a href="https://github.com/Premkolte/AnimateHub/issues">✨ Request Feature</a> •
-  <a href="https://github.com/Premkolte/AnimateHub/discussions">💬 Discussions</a>
-</p>
+<table align="center">
+<tr>
+<td align="center">
+<a href="https://animatehub.vercel.app">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Globe%20with%20Meridians.png" width="20" height="20"/>
+Website
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/Premkolte/AnimateHub/issues">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Bug.png" width="20" height="20"/>
+Report Bug
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/Premkolte/AnimateHub/issues">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Sparkles.png" width="20" height="20"/>
+Request Feature
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/Premkolte/AnimateHub/discussions">
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Speech%20Balloon.png" width="20" height="20"/>
+Discussions
+</a>
+</td>
+</tr>
+</table>
 
 </div>
