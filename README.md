@@ -14,16 +14,6 @@
 
 <img width="900" alt="AnimateHub Banner" src="https://github.com/user-attachments/assets/591d8b41-bd68-40d1-b62b-90781b71bf2b">
 
-</div>ign="center">
-  <h1> AnimateHub </h1>
-</div>
-
-**Visit URL for live demo :-** https://animate-hub.vercel.app/
-
-<img width="1440" alt="Screenshot 2024-07-17 at 1 16 02 AM" src="https://github.com/user-attachments/assets/591d8b41-bd68-40d1-b62b-90781b71bf2b">
-
----
-
 ## 🌟 About AnimateHub
 
 **AnimateHub** is your ultimate destination for creating stunning web animations with ease. Whether you're a beginner learning web development or an experienced developer looking to add flair to your projects, AnimateHub provides:
