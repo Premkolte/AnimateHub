@@ -1,4 +1,20 @@
 <div align="center">
+  
+# 🎨 AnimateHub
+
+**A comprehensive animation library for modern web development**
+
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-blue?style=for-the-badge)](https://animate-ogb2hnu3i-premkoltes-projects.vercel.app)
+[![License](https://img.shields.io/github/license/Premkolte/AnimateHub?style=for-the-badge&color=green)](./LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/Premkolte/AnimateHub?style=for-the-badge&color=yellow)](https://github.com/Premkolte/AnimateHub/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/Premkolte/AnimateHub?style=for-the-badge&color=orange)](https://github.com/Premkolte/AnimateHub/network/members)
+[![Contributors](https://img.shields.io/github/contributors/Premkolte/AnimateHub?style=for-the-badge&color=purple)](https://github.com/Premkolte/AnimateHub/graphs/contributors)
+[![Issues](https://img.shields.io/github/issues/Premkolte/AnimateHub?style=for-the-badge&color=red)](https://github.com/Premkolte/AnimateHub/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](https://github.com/Premkolte/AnimateHub/pulls)
+
+<img width="900" alt="AnimateHub Banner" src="https://github.com/user-attachments/assets/591d8b41-bd68-40d1-b62b-90781b71bf2b">
+
+</div>ign="center">
   <h1> AnimateHub </h1>
 </div>
 
@@ -6,207 +22,392 @@
 
 <img width="1440" alt="Screenshot 2024-07-17 at 1 16 02 AM" src="https://github.com/user-attachments/assets/591d8b41-bd68-40d1-b62b-90781b71bf2b">
 
+---
 
-<!-- <p align="center"> --> 
-  <!-- You can add your badges here -->
-  <!-- If you have never added badges, head over to https://img.shields.io/badges/static-badge, follow the instructions and generate URL links to add below -->
-<!--   <img src="https://img.shields.io/badge/STARS-20K-green"  />
-  <img src="https://img.shields.io/badge/FORKS-15K-blue"  />
-  <img src="https://img.shields.io/badge/npm-v.0.21.0-red"  />
-  <img src="https://img.shields.io/badge/LICENSE-MIT-green "  />
-</p> -->     
-### :star2: About
-**Animate Hub** is your go-to resource for all things animation in web development. Discover a wide range of code snippets for animations, hovers, and effects, designed to streamline your workflow. Just copy, paste, and watch your projects come to life!
+## 🌟 About AnimateHub
 
-###  :outbox_tray: How to Set up Project locally : 
+**AnimateHub** is your ultimate destination for creating stunning web animations with ease. Whether you're a beginner learning web development or an experienced developer looking to add flair to your projects, AnimateHub provides:
 
-## Installation
+- 🎯 **Ready-to-use code snippets** for animations, transitions, and effects
+- 🎨 **Interactive component library** with live previews
+- 📱 **Responsive design patterns** that work across all devices
+- ⚡ **Performance-optimized** animations for smooth user experiences
+- 🎭 **Copy-paste simplicity** - just grab the code and go!
 
-Follow these steps to run the project locally:
+### ✨ Key Features
 
-1. Clone the repository:
+- **50+ Animation Components**: Buttons, cards, loaders, hover effects, and more
+- **Multiple Categories**: Organized by type for easy navigation
+- **Live Preview**: See animations in action before copying
+- **Dark/Light Mode**: Comfortable viewing in any environment
+- **Mobile Responsive**: Perfect experience on all devices
+- **Modern Tech Stack**: Built with React, Vite, and Tailwind CSS
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+| Frontend | Styling | Build Tools | Analytics |
+|----------|---------|-------------|-----------|
+| ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | ![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E) | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) |
+| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) | ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) | ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) | ![Vercel Analytics](https://img.shields.io/badge/Analytics-000000?style=for-the-badge&logo=vercel&logoColor=white) |
+
+</div>
+
+---
+
+## 🚀 Quick Start Guide
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+- **Node.js** (v16.0 or higher) - [Download here](https://nodejs.org/)
+- **npm** or **yarn** package manager
+- **Git** - [Download here](https://git-scm.com/)
+
+### ⚡ Local Development Setup
+
+Follow these steps to get AnimateHub running on your local machine:
+
+#### 1. 📥 Clone the Repository
 ```bash
-git clone https://github.com/premkolte/AnimateHub.git
+git clone https://github.com/Premkolte/AnimateHub.git
 cd AnimateHub
 ```
 
-2. Install dependencies:
+#### 2. 📦 Install Dependencies
 ```bash
-npm install --legacy-peer-deps
+npm install
 ```
 
-3. Start the development server:
+#### 3. 🏃‍♂️ Start Development Server
 ```bash
 npm run dev
 ```
 
-The application should now be running at http://localhost:5173 (or another port if 5173 is in use)
-### Alternatively contribute using GitHub Desktop
+#### 4. 🌐 Open in Browser
+The application will be available at: **http://localhost:5173**
 
-1. **Open GitHub Desktop:**
-   Launch GitHub Desktop and log in to your GitHub account if you haven't already.
+### 🔧 Available Scripts
 
-2. **Clone the Repository:**
-   - If you haven't cloned the repository yet, you can do so by clicking on the "File" menu and selecting "Clone Repository."
-   - Choose the repository from the list of repositories on GitHub and clone it to your local machine.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with hot reload |
+| `npm run build` | Build production-ready application |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint for code quality checks |
 
-3. **Switch to the Correct Branch:**
-   - Ensure you are on the branch that you want to submit a pull request for.
-   - If you need to switch branches, you can do so by clicking on the "Current Branch" dropdown menu and selecting the desired branch.
+## 🤝 Contributing to AnimateHub
 
-4. **Make Changes:**
-   Make your changes to the code or files in the repository using your preferred code editor.
+We love your input! AnimateHub thrives on community contributions. Whether you're fixing bugs, adding new animation components, improving documentation, or suggesting new features, your contributions are welcome!
 
-5. **Commit Changes:**
-   - In GitHub Desktop, you'll see a list of the files you've changed. Check the box next to each file you want to include in the commit.
-   - Enter a summary and description for your changes in the "Summary" and "Description" fields, respectively. Click the "Commit to <branch-name>" button to commit your changes to the local branch.
+### 🎯 Ways to Contribute
 
-6. **Push Changes to GitHub:**
-   After committing your changes, click the "Push origin" button in the top right corner of GitHub Desktop to push your changes to your forked repository on GitHub.
+<table>
+<tr>
+<td align="center">🐛<br><b>Bug Reports</b><br>Found a bug? Report it!</td>
+<td align="center">✨<br><b>New Features</b><br>Suggest new animations</td>
+<td align="center">📚<br><b>Documentation</b><br>Improve our docs</td>
+<td align="center">🎨<br><b>UI/UX</b><br>Enhance user experience</td>
+</tr>
+</table>
 
-7. **Create a Pull Request:**
-  - Go to the GitHub website and navigate to your fork of the repository.
-  - You should see a button to "Compare & pull request" between your fork and the original repository. Click on it.
+### 🚀 Getting Started with Contributions
 
-8. **Review and Submit:**
-   - On the pull request page, review your changes and add any additional information, such as a title and description, that you want to include with your pull request.
-   - Once you're satisfied, click the "Create pull request" button to submit your pull request.
+#### 1. 🍴 Fork & Clone
+```bash
+# Fork the repository on GitHub, then clone your fork
+git clone https://github.com/your-username/AnimateHub.git
+cd AnimateHub
+```
 
-9. **Wait for Review:**
-    Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the repository.
+#### 2. 🔄 Set Up Upstream
+```bash
+git remote add upstream https://github.com/Premkolte/AnimateHub.git
+git fetch upstream
+```
 
-###  :building_construction: How to Contribute ?
+#### 3. 🌿 Create a Feature Branch
+```bash
+git checkout -b feature/your-feature-name
+# or
+git checkout -b fix/your-bug-fix
+```
 
-**Choose an Issue**
+#### 4. 💻 Make Your Changes
+- Write clean, readable code
+- Follow our coding conventions
+- Add comments where necessary
+- Test your changes thoroughly
 
-1. Pick an issue that interests you.
-2. Comment on the Issue, and explain why you want to work on it.
-    
-**Set Up Your Environment**
+#### 5. ✅ Commit Your Changes
+```bash
+git add .
+git commit -m "feat: add awesome new animation component"
+```
 
-1. `Fork` our repository to your GitHub account. 
-2. `Clone` your fork to your local machine. 
-    Use the command `git clone <your-fork-url>`.
-3. Create a new branch for your work . 
-    
-**Commit Your Changes**
+**Commit Message Convention:**
+- `feat:` for new features
+- `fix:` for bug fixes
+- `docs:` for documentation changes
+- `style:` for code style changes
+- `refactor:` for code refactoring
+- `test:` for adding tests
 
-- Commit your changes with a _clear commit message_. 
+#### 6. 📤 Push & Create PR
+```bash
+git push origin feature/your-feature-name
+```
+Then create a Pull Request on GitHub with a clear description of your changes.
 
-**Submit a Pull Request**
+### 📋 Contribution Guidelines
 
-- Push your branch and changes to your fork on GitHub .
-- Create a pull request, compare branches and submit.
-- Provide a detailed description and screenshots of what changes you've made and why. 
-  Link the pull request to the issue it resolves. 🔗
-    
-**Review and Merge**
+#### For New Animation Components:
+1. **Create the component** in `src/components/SnippetComponents/`
+2. **Add snippet data** in `src/components/SnippetComponents/Snippets/`
+3. **Include live preview** functionality
+4. **Add proper documentation** and comments
+5. **Ensure responsiveness** across all devices
+6. **Test performance** for smooth animations
 
-- Our team will review your pull request and provide feedback or request changes if necessary. 
-- Once your pull request is approved, we will merge it into the main codebase 🥳
+#### Code Style:
+- Use **ES6+** features
+- Follow **React best practices**
+- Use **Tailwind CSS** for styling
+- Keep components **modular and reusable**
+- Add **PropTypes** for type checking
 
-<div>
-  <h2><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f31f/512.webp" width="35" height="35"> Ready to Contribute?</h2>
-</div>
+### 🏷️ Good First Issues
 
-Kindly go through [CONTRIBUTING.md](CONTRIBUITING.md) to understand everything from setup to contributing guidelines.
+New to open source? Look for issues labeled:
+- `good first issue` - Perfect for beginners
+- `help wanted` - We need community help
+- `documentation` - Improve our docs
+- `bug` - Fix existing issues
 
-If you would like to contribute to the project, please follow our contribution guidelines.
+### 🔍 Pull Request Process
 
-###  :file_folder: File Structure
+1. **Check existing PRs** to avoid duplicates
+2. **Link related issues** in your PR description
+3. **Add screenshots/GIFs** for UI changes
+4. **Write descriptive commit messages**
+5. **Ensure all tests pass**
+6. **Request review** from maintainers
+
+### 💡 Development Tips
+
+#### Adding New Animation Categories:
+1. Create component in `SnippetComponents/`
+2. Add to navigation in `Dashboard/Buttons.js`
+3. Include in `Dashboard/Window.jsx`
+4. Test across different screen sizes
+
+#### Useful Commands:
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run lint         # Check code quality
+npm run lint:fix     # Auto-fix linting issues
+```
+
+---
+
+## 📁 Project Structure
+
+<details>
+<summary>🔍 <b>Click to expand project structure</b></summary>
 
 ```
-.
-│
-├── src
-│   ├── components
-│   |   ├── SnippetComponents
-│   |   |   ├── Snippets
-│   |   |   |   ├── Buttons.js
-│   |   |   |   ├── Cards.js
-│   |   |   |   ├── Checkboxes.js
-│   |   |   |   └── ... // other snippet objects
-|   |   |   |
-│   │   |   ├── ButtonSnippets.jsx
-│   │   |   ├── CardSnippets.jsx
-│   │   |   ├── CheckboxSnippets.jsx
-│   │   |   └── ... // other snippet components
-|   |   |
-│   │   ├── Card.jsx
-│   │   ├── Modal.jsx
-│   │   ├── SideBar.jsx
-│   │   └── Window.jsx
-│   │
+AnimateHub/
+├── 📁 public/
+│   └── vite.svg
+├── 📁 src/
+│   ├── 📁 components/
+│   │   ├── 📁 About/
+│   │   │   └── AboutUs.jsx
+│   │   ├── 📁 Auth/
+│   │   │   ├── login.jsx
+│   │   │   └── SignUp.jsx
+│   │   ├── 📁 Contact/
+│   │   │   └── ContactUs.jsx
+│   │   ├── 📁 Contributors/
+│   │   │   └── Contributors.jsx
+│   │   ├── 📁 Dashboard/
+│   │   │   ├── Buttons.js
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── SideBar.jsx
+│   │   │   └── Window.jsx
+│   │   ├── 📁 Home/
+│   │   │   ├── Chatbot.jsx
+│   │   │   ├── HomePage.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Testimonial.jsx
+│   │   │   └── 📁 images/
+│   │   ├── 📁 Payment/
+│   │   │   └── Payment.jsx
+│   │   ├── 📁 SnippetComponents/
+│   │   │   ├── 📁 Snippets/
+│   │   │   │   ├── Animation.js
+│   │   │   │   ├── Buttons.js
+│   │   │   │   ├── Cards.js
+│   │   │   │   ├── Checkboxes.js
+│   │   │   │   └── ... (40+ more animation snippets)
+│   │   │   ├── AnimationSnippets.jsx
+│   │   │   ├── ButtonSnippets.jsx
+│   │   │   ├── CardSnippets.jsx
+│   │   │   ├── CheckboxSnippets.jsx
+│   │   │   └── ... (matching components)
+│   │   └── 📁 Templates/
+│   │       ├── Blog.jsx
+│   │       ├── Portfolio.jsx
+│   │       ├── Product.jsx
+│   │       └── ...
+│   ├── 📁 assets/
+│   │   └── FAQ.jsx
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css
-│
-├── .gitignore
-├── index.html
-├── package.json
-├── LICENSE
-├── README.md
-└── ... // other config files
+├── 📄 Configuration Files
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── tailwind.config.js
+│   ├── vercel.json
+│   └── vite.config.js
+├── 📄 Documentation
+│   ├── CODE_OF_CONDUCT.md
+│   ├── CONTRIBUTING.md
+│   ├── LICENSE
+│   └── README.md
+└── 📄 Assets
+    ├── Favicon.png
+    ├── Logo.png
+    ├── Prototype.png
+    └── Website-Image.png
 ```
 
-<!-- Code of conduct -->
-<div>
-<h2><img src = "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Handshake.png" width="35" height="35"> Code of Conduct</h2>
+</details>
+
+---
+
+## 📋 Code of Conduct
+
+We are committed to fostering a welcoming and inclusive community. Please read our [Code of Conduct](CODE_OF_CONDUCT.md) to understand the standards of behavior we expect from all contributors.
+
+---
+
+## 🎯 Open Source Programs
+
+<div align="center">
+
+### 🌟 **Proudly participating in GirlScript Summer of Code 2025!** 🌟
+
 </div>
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+<table>
+<tr>
+<td align="center">
+<img src="https://gssoc.girlscript.tech/images/favicon/android-chrome-512x512.png" alt="GSSoC'25 Logo" width="100" height="100">
+<br>
+<strong>GirlScript Summer of Code 2025</strong>
+<br>
+<em>3-month long Open Source Program</em>
+<br>
+<a href="https://gssoc.girlscript.tech/">Official Website</a>
+</td>
+<td>
+<h3>🎓 What is GSSoC'25?</h3>
+<p>GirlScript Summer of Code is a <strong>3-month long Open Source Program</strong> conducted by GirlScript Foundation. It aims to help beginners get started with Open Source Development while encouraging diversity in the tech community.</p>
 
-<hr>
-
-<!-- Open Source Programs -->
-<div>
-   <h2><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4aa/512.webp" width="35" height="35" >Open Source Programs</h2>
-</div>
-<table border="1" cellpadding="10">
-    <tr>
-        <td rowspan="2">
-            <img src="https://vinyasa-summer-of-code-vsoc.devfolio.co/_next/image?url=https%3A%2F%2Fassets.devfolio.co%2Fhackathons%2F39347ec8c7be4f5ba28169197ce5dbfc%2Fassets%2Fcover%2F19.png&w=1440&q=100" alt="VSOC Logo" width="400" height="85">
-        </td>
-        <td>
-            <strong>VSOC 2024</strong>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            This project is part of Vinyasa Summer of Code. We welcome contributions from the community.
-        </td>
-    </tr>
+<h3>🏆 Program Highlights:</h3>
+<ul>
+<li>🎯 <strong>Beginner-friendly</strong> environment for newcomers</li>
+<li>👥 <strong>Mentorship</strong> from experienced developers</li>
+<li>🏅 <strong>Certificates & Goodies</strong> for contributors</li>
+<li>🌈 <strong>Promoting diversity</strong> in tech</li>
+</ul>
+</td>
+</tr>
 </table>
 
-<!-- License -->
-<div>
-<h2><img src = "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Page%20with%20Curl.png" width="35" height="35"> License</h2>
+### 🚀 Why Contribute to AnimateHub in GSSoC'25?
+
+<div align="center">
+
+| 🌟 Learning | 🛠️ Skills | 🤝 Community | 🏆 Recognition |
+|-------------|-----------|--------------|----------------|
+| Hands-on experience with React, Tailwind CSS, and modern web animations | Improve coding skills through real-world project contributions | Join a supportive community of developers and mentors | Earn GSSoC'25 certificates, badges, and potential swag |
+
 </div>
 
-This project is licensed under the [MIT License](./LICENSE).
+### 📚 Resources for GSSoC'25 Participants
 
-<div>
-  <h2><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2764_fe0f/512.webp" width="35" height="35"> Show Your Support</h2>
+- 📖 **[Contribution Guidelines](CONTRIBUTING.md)** - Detailed guide for contributors
+- 🎯 **[Good First Issues](https://github.com/Premkolte/AnimateHub/labels/good%20first%20issue)** - Perfect starting points
+- 💬 **[Discussions](https://github.com/Premkolte/AnimateHub/discussions)** - Ask questions and get help
+- 🐛 **[Report Issues](https://github.com/Premkolte/AnimateHub/issues/new)** - Help us improve
+- 📱 **[Join our Community](https://discord.gg/animatehub)** - Connect with other contributors
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE) file for details.
+
+---
+
+## ⭐ Show Your Support
+
+<div align="center">
+
+**If you found AnimateHub helpful, please consider:**
+
+[![Star this repo](https://img.shields.io/badge/⭐_Star_this_repo-black?style=for-the-badge)](https://github.com/Premkolte/AnimateHub/stargazers)
+[![Fork this repo](https://img.shields.io/badge/🍴_Fork_this_repo-blue?style=for-the-badge)](https://github.com/Premkolte/AnimateHub/fork)
+[![Share on Twitter](https://img.shields.io/badge/🐦_Share_on_Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/intent/tweet?text=Check%20out%20AnimateHub%20-%20A%20comprehensive%20animation%20library%20for%20modern%20web%20development!&url=https://github.com/Premkolte/AnimateHub)
+
+**Your support helps us reach more developers and keep improving!** 🚀
+
 </div>
 
-If you find this project interesting and inspiring, please consider showing your support by starring it on GitHub! Your star goes a long way in helping us to reach more developers and encourages to keep enhancing the project.
+---
 
-<div>
-  <h2><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f496/512.webp" width="40" height="40"> Contributors</h2>
-</div>
+## 👥 Our Amazing Contributors
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<div>
+<div align="center">
+
+**AnimateHub exists thanks to all the people who contribute! 🎉**
+
 <a href="https://github.com/Premkolte/AnimateHub/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Premkolte/AnimateHub" />
+  <img src="https://contrib.rocks/image?repo=Premkolte/AnimateHub" alt="Contributors"/>
 </a>
+
 </div>
 
-Thank you for contributing to our project! Your help is greatly appreciated in making AnimateHub even better. 😊
+---
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
+<div align="center">
 
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+### 🌟 **Ready to make your mark in open source?**
+
+**Join AnimateHub today and be part of GSSoC'25!**
+
+[![Join GSSoC'25](https://img.shields.io/badge/Join_GSSoC'25-FF6B6B?style=for-the-badge&logo=github&logoColor=white)](https://gssoc.girlscript.tech/)
+[![Start Contributing](https://img.shields.io/badge/Start_Contributing-4ECDC4?style=for-the-badge&logo=git&logoColor=white)](https://github.com/Premkolte/AnimateHub/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+
+---
+
+<p><strong>Made with ❤️ by the AnimateHub Community</strong></p>
+
+<p>
+  <a href="https://animatehub.vercel.app">🌐 Website</a> •
+  <a href="https://github.com/Premkolte/AnimateHub/issues">🐛 Report Bug</a> •
+  <a href="https://github.com/Premkolte/AnimateHub/issues">✨ Request Feature</a> •
+  <a href="https://github.com/Premkolte/AnimateHub/discussions">💬 Discussions</a>
+</p>
+
+</div>
