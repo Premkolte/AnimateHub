@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
+import { Analytics } from '@vercel/analytics/react';
 import HomePage from "./components/Home/HomePage";
 import AboutUs from "./components/About/AboutUs";
 import ContactUs from "./components/Contact/ContactUs";
@@ -36,6 +37,7 @@ function App() {
           <Route path="/login" element={<LoginPage/>} />
           <Route path="/SignUp" element={<SignupPage/>} />
         </Routes>
+        <Analytics />
       </Router>
     </ThemeProvider>
   );
