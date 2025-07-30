@@ -173,7 +173,8 @@ The application will be available at: **http://localhost:5173**
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build production-ready application |
+| `
+npm run build` | Build production-ready application |
 | `npm run preview` | Preview production build locally |
 | `npm run lint` | Run ESLint for code quality checks |
 
@@ -613,31 +614,39 @@ This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE
 
 ---
 
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Red%20heart.png" width="25" height="25"/> **Made with ❤️ by the AnimateHub Community** <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Red%20heart.png" width="25" height="25"/>
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Red%20Heart.png" width="25" height="25"/> **Made with ❤️ by the AnimateHub Community** <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Red%20Heart.png" width="25" height="25"/>
+
+</div>
 
 <table align="center">
 <tr>
 <td align="center">
-<a href="https://animatehub.vercel.app">
+<a href="https://animate-ogb2hnu3i-premkoltes-projects.vercel.app">
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Globe%20with%20Meridians.png" width="20" height="20"/>
+<br>
 Website
 </a>
 </td>
 <td align="center">
 <a href="https://github.com/Premkolte/AnimateHub/issues">
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Bug.png" width="20" height="20"/>
+<br>
 Report Bug
 </a>
 </td>
 <td align="center">
 <a href="https://github.com/Premkolte/AnimateHub/issues">
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Sparkles.png" width="20" height="20"/>
+<br>
 Request Feature
 </a>
 </td>
 <td align="center">
 <a href="https://github.com/Premkolte/AnimateHub/discussions">
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Speech%20Balloon.png" width="20" height="20"/>
+<br>
 Discussions
 </a>
 </td>
