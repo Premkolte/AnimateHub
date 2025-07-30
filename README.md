@@ -335,6 +335,17 @@ New to open source? Look for issues labeled:
 3. Include in `Dashboard/Window.jsx`
 4. Test across different screen sizes
 
+#### GitHub API Setup (Important for Contributors Page):
+The contributors page uses GitHub API which has rate limits:
+- **Without authentication**: 60 requests/hour (may fail on production)
+- **With authentication**: 5000 requests/hour (recommended)
+
+**Quick Setup:**
+1. Create [GitHub Personal Access Token](https://github.com/settings/tokens) with `public_repo` scope
+2. Add to `.env` file: `VITE_GITHUB_TOKEN=your_token_here`
+3. For Vercel: Add as environment variable in project settings
+4. See `GITHUB_API_SETUP.md` for detailed instructions
+
 #### Useful Commands:
 ```bash
 npm run dev          # Start development server
