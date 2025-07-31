@@ -239,36 +239,36 @@ const HomePage = () => {
         </section>
 
         {/* Pricing */}
-        <section className="text-center space-y-4 py-16 pricing-section">
-          <h1 className="text-4xl font-bold">Pricing</h1>
+        <section className="text-center space-y-4 py-8 sm:py-16 pricing-section px-4 sm:px-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Pricing</h1>
 
-          <div className="flex flex-col md:flex-row justify-center items-center gap-12 mt-8">
+          <div className="flex flex-col lg:flex-row justify-center items-stretch gap-6 sm:gap-8 lg:gap-12 mt-8 max-w-7xl mx-auto">
             {plans.map((plan, idx) => (
               <motion.div
                 key={idx}
-                className="flex flex-col items-center bg-white dark:bg-secondary-800 border border-secondary-200 dark:border-secondary-700 p-8 rounded-lg shadow-lg min-w-sm max-w-sm w-full"
+                className="flex flex-col items-center bg-white dark:bg-secondary-800 border border-secondary-200 dark:border-secondary-700 p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-sm"
                 whileHover={{ scale: 1.05 }}
               >
-                <div>
-                  <h2 className="font-extrabold text-3xl text-center mb-2">
+                <div className="w-full">
+                  <h2 className="font-extrabold text-2xl sm:text-3xl text-center mb-2">
                     {plan.planName}
                   </h2>
-                  <p className="opacity-60 text-center">{plan.planSubText}</p>
-                  <div className="flex flex-col items-center my-8">
-                    <p className="font-extrabold text-4xl">{plan.price}</p>
-                    <p className="text-sm opacity-60">{plan.priceSubText}</p>
+                  <p className="opacity-60 text-center text-sm sm:text-base">{plan.planSubText}</p>
+                  <div className="flex flex-col items-center my-6 sm:my-8">
+                    <p className="font-extrabold text-3xl sm:text-4xl">{plan.price}</p>
+                    <p className="text-xs sm:text-sm opacity-60">{plan.priceSubText}</p>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-2 w-full">
                   {plan.features.map((feature, index) => (
-                    <p key={index}>✔️<b>{feature}</b></p>
+                    <p key={index} className="text-sm sm:text-base">✔️<b>{feature}</b></p>
                   ))}
 
-                  <div className="flex justify-center mt-8">
+                  <div className="flex justify-center mt-6 sm:mt-8">
                     <Link
                       to={plan.redirectTo}
-                      className="px-4 py-2 border-primary-500 dark:border-accent-500 border-2 text-primary-600 dark:text-accent-600 hover:bg-primary-500 hover:text-white dark:hover:bg-accent-500 dark:hover:text-white rounded-xl transition-all duration-200"
+                      className="px-4 py-2 border-primary-500 dark:border-accent-500 border-2 text-primary-600 dark:text-accent-600 hover:bg-primary-500 hover:text-white dark:hover:bg-accent-500 dark:hover:text-white rounded-xl transition-all duration-200 text-sm sm:text-base"
                     >
                       {plan.btnText}
                     </Link>
