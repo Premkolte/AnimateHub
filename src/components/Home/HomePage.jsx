@@ -239,36 +239,38 @@ const HomePage = () => {
         </section>
 
         {/* Pricing */}
-        <section className="text-center space-y-4 py-8 sm:py-16 pricing-section px-4 sm:px-6">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Pricing</h1>
+        <section className="text-center space-y-4 py-6 sm:py-8 md:py-16 pricing-section px-3 sm:px-4 md:px-6">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">Pricing</h1>
 
-          <div className="flex flex-col lg:flex-row justify-center items-stretch gap-6 sm:gap-8 lg:gap-12 mt-8 max-w-7xl mx-auto">
+          <div className="flex flex-col xl:flex-row justify-center items-stretch gap-4 sm:gap-6 md:gap-8 xl:gap-12 mt-6 sm:mt-8 max-w-7xl mx-auto">
             {plans.map((plan, idx) => (
               <motion.div
                 key={idx}
-                className="flex flex-col items-center bg-white dark:bg-secondary-800 border border-secondary-200 dark:border-secondary-700 p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-sm"
+                className="flex flex-col items-center bg-white dark:bg-secondary-800 border border-secondary-200 dark:border-secondary-700 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg w-full max-w-sm min-h-[400px] sm:min-h-[450px]"
                 whileHover={{ scale: 1.05 }}
               >
-                <div className="w-full">
-                  <h2 className="font-extrabold text-2xl sm:text-3xl text-center mb-2">
+                <div className="w-full flex-1">
+                  <h2 className="font-extrabold text-xl sm:text-2xl md:text-3xl text-center mb-2">
                     {plan.planName}
                   </h2>
-                  <p className="opacity-60 text-center text-sm sm:text-base">{plan.planSubText}</p>
-                  <div className="flex flex-col items-center my-6 sm:my-8">
-                    <p className="font-extrabold text-3xl sm:text-4xl">{plan.price}</p>
+                  <p className="opacity-60 text-center text-xs sm:text-sm md:text-base mb-4">{plan.planSubText}</p>
+                  <div className="flex flex-col items-center my-4 sm:my-6 md:my-8">
+                    <p className="font-extrabold text-2xl sm:text-3xl md:text-4xl">{plan.price}</p>
                     <p className="text-xs sm:text-sm opacity-60">{plan.priceSubText}</p>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 w-full">
-                  {plan.features.map((feature, index) => (
-                    <p key={index} className="text-sm sm:text-base">✔️<b>{feature}</b></p>
-                  ))}
+                <div className="flex flex-col gap-1 sm:gap-2 w-full flex-1 justify-between">
+                  <div>
+                    {plan.features.map((feature, index) => (
+                      <p key={index} className="text-xs sm:text-sm md:text-base mb-1 sm:mb-2">✔️<b>{feature}</b></p>
+                    ))}
+                  </div>
 
-                  <div className="flex justify-center mt-6 sm:mt-8">
+                  <div className="flex justify-center mt-4 sm:mt-6 md:mt-8">
                     <Link
                       to={plan.redirectTo}
-                      className="px-4 py-2 border-primary-500 dark:border-accent-500 border-2 text-primary-600 dark:text-accent-600 hover:bg-primary-500 hover:text-white dark:hover:bg-accent-500 dark:hover:text-white rounded-xl transition-all duration-200 text-sm sm:text-base"
+                      className="px-3 sm:px-4 py-2 border-primary-500 dark:border-accent-500 border-2 text-primary-600 dark:text-accent-600 hover:bg-primary-500 hover:text-white dark:hover:bg-accent-500 dark:hover:text-white rounded-xl transition-all duration-200 text-xs sm:text-sm md:text-base whitespace-nowrap"
                     >
                       {plan.btnText}
                     </Link>
