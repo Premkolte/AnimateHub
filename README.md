@@ -22,7 +22,7 @@
 
 <div align="left">
 
-**AnimateHub** is your ultimate destination for creating stunning web animations with ease. Whether you're a beginner learning web development or an experienced developer looking to add flair to your projects, AnimateHub provides a comprehensive collection of ready-to-use animation components.
+**AnimateHub** is a powerful open-source animation UI library designed to simplify the integration of sleek, reusable animations into modern web applications. Tailored for both beginners and experienced developers, it offers a rich collection of customizable, production-ready components. AnimateHub accelerates frontend development by reducing complexity, enhancing user experience, and promoting clean, maintainable code. It’s your go-to toolkit for crafting visually engaging interfaces with minimal effort.
 
 **🎯 Our Mission**: To democratize web animations by providing high-quality, performant, and accessible animation components that anyone can use, learn from, and contribute to.
 
