@@ -62,20 +62,20 @@ function Window({ activeTab }) {
     <CouponSnippets />,
     <DarkModeSnippets />,
     <DropdownSnippetCard />,
-    < ExpandingSearchBar/>,
+    < ExpandingSearchBar />,
     <FooterSnippets />,
     <FormSnippets />,
     <InputFieldSnippets />,
     <LoginSnippets />,
     <NavbarIconSnippets />,
-    <NeonButton/>,
+    <NeonButton />,
     <NewsletterSnippets />,
     <PageLoaderSnippets />,
     <PaginationSnippets />,
     <PaymentFormSnippets />,
     <PillNavigationSnippets />,
     <PricingSnippets />,
-    <ProfileCardSnippets/>,
+    <ProfileCardSnippets />,
     <ProgressBarSnippets />,
     <QuoteSlideshowSnippets />,
     <RadioSnippets />,
@@ -93,11 +93,12 @@ function Window({ activeTab }) {
   ];
 
   return (
-    <div className="flex-1 p-8 bg-gradient-to-r from-violet-500 via-white-500 to-blue-500 text-white pt-20 md:pt-8 overflow-y-auto min-h-screen pt-4">
-      <h1 className="text-3xl font-extrabold mb-6 text-center">
-        AnimateHub - A one place for all your Frontend CSS needs
+    <div className="flex-1 p-6 md:p-8 bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white overflow-y-auto min-h-screen pt-20 md:pt-16">
+      <h1 className="text-3xl md:text-4xl font-extrabold mb-8 text-center leading-tight">
+        AnimateHub — A one place for all your Frontend CSS needs
       </h1>
-      <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+
+      <div className="bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
         {content[activeTab]}
       </div>
     </div>

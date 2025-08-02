@@ -21,20 +21,25 @@ function PaginationSnippets() {
     setActivePages(newActivePages);
   };
 
-  const renderPagination = (jsxCode, snippetIndex) => {
-    const buttonElements = [];
-    for (let i = 1; i <= 3; i++) {
-      buttonElements.push(
-        <button
-          key={i}
-          className={`page-link py-2 px-4 m-1 border border-gray-300 ${activePages[snippetIndex] === i ? 'bg-blue-500 text-white' : ''}`}
-          onClick={() => handlePageClick(snippetIndex, i)}
-        >
-          {i}
-        </button>
-      );
-    }
-    return <div className="flex list-none p-0">{buttonElements}</div>;
+  const renderPagination = (snippetIndex) => {
+    return (
+      <div className="flex space-x-2 mt-4">
+        {[1, 2, 3].map((i) => (
+          <button
+            key={i}
+            className={`py-2 px-4 border rounded-md transition-all duration-300
+              ${
+                activePages[snippetIndex] === i
+                  ? "bg-primary-600 text-white border-primary-600 dark:bg-accent-600 dark:border-accent-600"
+                  : "bg-white text-secondary-900 border-secondary-300 dark:bg-secondary-700 dark:text-white dark:border-secondary-600 hover:bg-secondary-100 dark:hover:bg-secondary-600"
+              }`}
+            onClick={() => handlePageClick(snippetIndex, i)}
+          >
+            {i}
+          </button>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -42,15 +47,15 @@ function PaginationSnippets() {
       {paginationSnippets.map((paginationObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
+          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
         >
           <StringToReactComponent>
             {`(props) => (${paginationObject.jsxCode})`}
           </StringToReactComponent>
-          <div>{renderPagination(paginationObject.jsxCode, index)}</div>
+          {renderPagination(index)}
           <div className="flex space-x-4">
             <button
-              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+              className="text-white text-md py-3 px-4 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 transition-all duration-200"
               onClick={() =>
                 handleShowModal(paginationObject.jsxCode, paginationObject.cssCode)
               }
@@ -58,7 +63,7 @@ function PaginationSnippets() {
               Show CSS
             </button>
             <button
-              className="text-black text-md py-2 px-4 rounded-lg shadow-md"
+              className="text-primary-600 dark:text-accent-500 border border-primary-600 dark:border-accent-500 text-md py-2 px-4 rounded-lg shadow-md hover:bg-primary-600 hover:text-white dark:hover:bg-accent-600 dark:hover:text-white transition-all duration-200"
               onClick={() =>
                 handleShowModal(paginationObject.jsxCode, paginationObject.cssCode)
               }

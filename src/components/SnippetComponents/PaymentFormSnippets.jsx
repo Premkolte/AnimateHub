@@ -1,5 +1,3 @@
-// PaymentFormSnippets.js
-
 import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
@@ -21,14 +19,14 @@ function PaymentFormSnippets() {
       {paymentFormSnippets.map((paymentObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
+          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
         >
           <StringToReactComponent>
             {`(props) => (${paymentObject.jsxCode})`}
           </StringToReactComponent>
           <div className="flex flex-col space-y-4">
             <button
-              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 transition-all duration-200"
               onClick={() =>
                 handleShowModal(paymentObject.jsxCode, paymentObject.cssCode)
               }
@@ -36,7 +34,7 @@ function PaymentFormSnippets() {
               Show CSS
             </button>
             <button
-              className="text-black text-md py-2 px-4 rounded-lg shadow-md"
+              className="text-primary-600 dark:text-accent-500 border border-primary-600 dark:border-accent-500 text-md py-2 px-4 rounded-lg shadow-md hover:bg-primary-600 hover:text-white dark:hover:bg-accent-600 dark:hover:text-white transition-all duration-200"
               onClick={() =>
                 handleShowModal(paymentObject.jsxCode, paymentObject.cssCode)
               }

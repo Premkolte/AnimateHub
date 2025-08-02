@@ -17,27 +17,23 @@ function ProgressBarSnippets() {
   };
 
   const runProgress = (index) => {
-    // Clear any existing interval
     clearInterval(intervalRef.current);
 
     let currentProgress = 0;
     const interval = setInterval(() => {
-      // Update progress for current bar
       currentProgress += 1;
-      setProgressBars(prevProgressBars => {
-        const updatedProgressBars = [...prevProgressBars];
-        updatedProgressBars[index] = currentProgress;
-        return updatedProgressBars;
+      setProgressBars(prev => {
+        const updated = [...prev];
+        updated[index] = currentProgress;
+        return updated;
       });
 
-      // Check if current bar is complete
       if (currentProgress >= 100) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
-    }, 20); // Adjust interval duration (ms) for smoother animation
+    }, 20);
 
-    // Store interval reference for clearing later
     intervalRef.current = interval;
   };
 
@@ -51,28 +47,28 @@ function ProgressBarSnippets() {
       {progressBarSnippets.map((progressObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10 relative"
+          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10 relative"
         >
           <StringToReactComponent>
             {`(props) => (${progressObject.jsxCode})`}
           </StringToReactComponent>
-          <div className="relative w-full h-5 bg-gray-300 rounded-lg overflow-hidden">
+          <div className="relative w-full h-5 bg-secondary-200 dark:bg-secondary-700 rounded-lg overflow-hidden">
             <div
-              className="absolute top-0 left-0 h-full"
+              className="absolute top-0 left-0 h-full transition-all duration-200"
               style={{
                 width: `${progressBars[index]}%`,
                 backgroundColor:
                   index === 0
-                    ? '#6b7280' // Default Progress Bar color
+                    ? '#94a3b8' // slate-400
                     : index === 1
-                    ? '#3b82f6' // Custom Progress Bar (Blue) color
-                    : '#10b981', // Progress Bar with Animation color
+                    ? '#3b82f6' // blue-500
+                    : '#10b981', // emerald-500
               }}
             ></div>
           </div>
-          <div className="flex space-x-4">
+          <div className="flex flex-wrap gap-2 justify-center">
             <button
-              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+              className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 transition-all"
               onClick={() =>
                 handleShowModal(progressObject.jsxCode, progressObject.cssCode)
               }
@@ -80,7 +76,7 @@ function ProgressBarSnippets() {
               Show CSS
             </button>
             <button
-              className="text-black text-md py-1 px-6 rounded-lg shadow-md"
+              className="text-primary-600 dark:text-accent-500 border border-primary-600 dark:border-accent-500 text-md py-2 px-4 rounded-lg shadow-md transition-all hover:bg-primary-600 hover:text-white dark:hover:bg-accent-600 dark:hover:text-white"
               onClick={() =>
                 handleShowModal(progressObject.jsxCode, progressObject.cssCode)
               }
@@ -88,7 +84,7 @@ function ProgressBarSnippets() {
               React Snippet
             </button>
             <button
-              className="text-white text-md py-3 px-4 rounded-lg shadow-md bg-blue-500 hover:bg-blue-600 focus:outline-none"
+              className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-secondary-700 hover:bg-secondary-800 dark:bg-secondary-600 dark:hover:bg-secondary-700 transition-all"
               onClick={() => runProgress(index)}
             >
               Run
@@ -98,7 +94,7 @@ function ProgressBarSnippets() {
       ))}
       <div className="col-span-3 flex justify-center space-x-4">
         <button
-          className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-gray-500 hover:bg-gray-600 focus:outline-none"
+          className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-gray-600 hover:bg-gray-700 transition-all"
           onClick={resetProgress}
         >
           Reset

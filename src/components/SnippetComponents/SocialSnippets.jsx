@@ -19,14 +19,14 @@ function SocialMediaSnippets() {
       {socialMediaSnippets.map((socialObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
+          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
         >
           <StringToReactComponent>
             {`(props) => (${socialObject.jsxCode})`}
           </StringToReactComponent>
           <div className="flex space-x-4">
             <button
-              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
               onClick={() =>
                 handleShowModal(socialObject.jsxCode, socialObject.cssCode)
               }
@@ -34,7 +34,7 @@ function SocialMediaSnippets() {
               Show CSS
             </button>
             <button
-              className="text-black text-md py-2 px-4 rounded-lg shadow-md"
+              className="text-secondary-900 dark:text-white text-md py-2 px-4 rounded-lg shadow-md border dark:border-white"
               onClick={() =>
                 handleShowModal(socialObject.jsxCode, socialObject.cssCode)
               }

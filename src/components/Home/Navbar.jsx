@@ -45,7 +45,7 @@ const Navbar = () => {
             {["Home", "Explore", "About", "Contact", "Login"].map((item) => (
               <Link
                 key={item}
-                to={`/${item.toLowerCase()}`}
+                to={`/${item === "Home" ? '' : item.toLowerCase()}`}
                 onClick={closeMenu}
                 className="hover:text-gray-300 dark:hover:text-white"
               >
@@ -72,7 +72,7 @@ const Navbar = () => {
             {["Home", "Explore", "About", "Contact", "Login"].map((item) => (
               <Link
                 key={item}
-                to={`/${item.toLowerCase()}`}
+                to={`/${item === "Home" ? '' : item.toLowerCase()}`}
                 onClick={closeMenu}
                 className="hover:text-gray-300 dark:hover:text-white"
               >
