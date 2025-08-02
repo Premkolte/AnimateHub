@@ -1,13 +1,11 @@
-// DarkModeSnippets.js
-
 import React, { useState } from 'react';
 import Modal from '../Modal';
 import StringToReactComponent from 'string-to-react-component';
-import { darkModeSnippets } from './Snippets/DarkMode'; // Assuming you have dark mode snippets defined
+import { darkModeSnippets } from './Snippets/DarkMode';
 
 const DarkModeSnippets = () => {
   const [showModal, setShowModal] = useState(false);
-  const [isDarkModeOn, setIsDarkModeOn] = useState(false); // State to track dark mode
+  const [isDarkModeOn, setIsDarkModeOn] = useState(false);
 
   const handleShowModal = (jsx, css) => {
     setShowModal(true);
@@ -19,8 +17,9 @@ const DarkModeSnippets = () => {
 
   return (
     <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${isDarkModeOn ? 'dark' : ''}`}>
-      <div className={`p-8 bg-white rounded-lg shadow-lg ${isDarkModeOn ? 'dark:bg-gray-800' : ''}`}>
+      <div className="p-8 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg">
         <h2 className="text-xl font-bold mb-4">Dark Mode Toggle</h2>
+
         <div className="flex items-center mb-4">
           <input
             type="checkbox"
@@ -31,28 +30,47 @@ const DarkModeSnippets = () => {
           />
           <label
             htmlFor="dark-mode-toggle"
-            className={`cursor-pointer relative w-12 h-6 bg-gray-400 rounded-full shadow-inner ${isDarkModeOn ? 'bg-gray-900' : 'bg-gray-400'}`}
+            className={`cursor-pointer relative w-12 h-6 rounded-full transition-colors duration-300 ${
+              isDarkModeOn ? 'bg-gray-700' : 'bg-gray-300'
+            }`}
           >
             <div
-              className={`dot absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition ${isDarkModeOn ? 'transform translate-x-full' : ''}`}
+              className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ${
+                isDarkModeOn ? 'transform translate-x-full' : ''
+              }`}
             ></div>
           </label>
         </div>
-        <StringToReactComponent>{isDarkModeOn ? darkModeSnippets[0].jsxCode : darkModeSnippets[1].jsxCode}</StringToReactComponent>
+
+        <StringToReactComponent>
+          {isDarkModeOn
+            ? darkModeSnippets[0].jsxCode
+            : darkModeSnippets[1].jsxCode}
+        </StringToReactComponent>
+
         <div className="mt-4 flex justify-end">
           <button
-            className={`text-white text-md py-3 px-2 rounded-lg shadow-md bg-gradient-to-r ${isDarkModeOn ? 'from-gray-700 to-gray-900 hover:from-gray-800 hover:to-gray-1000' : 'from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700'} hover:shadow-xl focus:outline-none`}
+            className="bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 text-white text-md py-2 px-4 rounded-lg shadow focus:outline-none transition-all duration-200"
             onClick={() => handleShowModal()}
           >
             Show Code
           </button>
         </div>
       </div>
+
       <Modal
         showModal={showModal}
         onClose={() => setShowModal(false)}
-        jsxCode={isDarkModeOn ? darkModeSnippets[0].jsxCode : darkModeSnippets[1].jsxCode} // Adjust to show current mode
-        cssCode={isDarkModeOn ? darkModeSnippets[0].cssCode : darkModeSnippets[1].cssCode} // Adjust to show current mode
+        jsxCode={
+          isDarkModeOn
+            ? darkModeSnippets[0].jsxCode
+            : darkModeSnippets[1].jsxCode
+        }
+        cssCode={
+          isDarkModeOn
+            ? darkModeSnippets[0].cssCode
+            : darkModeSnippets[1].cssCode
+        }
       />
     </div>
   );

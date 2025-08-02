@@ -1,9 +1,7 @@
-// LoginSnippets.js
-
 import React, { useState } from 'react';
 import Modal from '../Modal';
 import StringToReactComponent from 'string-to-react-component';
-import { loginSnippets } from './Snippets/Login'; // Assuming you have login snippets defined
+import { loginSnippets } from './Snippets/Login';
 
 const LoginSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -19,12 +17,15 @@ const LoginSnippets = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {loginSnippets.map((snippet, index) => (
-        <div key={index} className="p-8 bg-white rounded-lg shadow-lg">
+        <div
+          key={index}
+          className="p-8 bg-white dark:bg-secondary-800 text-black dark:text-white rounded-lg shadow-lg"
+        >
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
           <div className="mt-4 flex justify-end">
             <button
-              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
+              className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 focus:outline-none"
               onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}
             >
               Show Code

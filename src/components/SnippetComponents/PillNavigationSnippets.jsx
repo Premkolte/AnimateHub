@@ -17,7 +17,7 @@ function PillNavigationSnippets() {
 
   const handlePillClick = (snippetIndex) => {
     const newActivePills = [...activePills];
-    newActivePills[snippetIndex] = (newActivePills[snippetIndex] + 1) % 3; // Toggle between 0, 1, 2
+    newActivePills[snippetIndex] = (newActivePills[snippetIndex] + 1) % 3;
     setActivePills(newActivePills);
   };
 
@@ -27,7 +27,11 @@ function PillNavigationSnippets() {
       pillElements.push(
         <button
           key={i}
-          className={`pill-link py-2 px-4 m-1 rounded-full ${activePills[snippetIndex] === i - 1 ? 'bg-blue-500 text-white' : 'border border-blue-500 text-blue-500'}`}
+          className={`pill-link py-2 px-4 m-1 rounded-full transition-colors duration-200 ${
+            activePills[snippetIndex] === i - 1
+              ? "bg-primary-600 text-white dark:bg-accent-600"
+              : "border border-primary-600 text-primary-600 dark:border-accent-500 dark:text-accent-500 hover:bg-primary-100 dark:hover:bg-secondary-700"
+          }`}
           onClick={() => handlePillClick(snippetIndex)}
         >
           Item {i}
@@ -42,7 +46,7 @@ function PillNavigationSnippets() {
       {pillNavigationSnippets.map((pillObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
+          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
         >
           <StringToReactComponent>
             {`(props) => (${pillObject.jsxCode})`}
@@ -50,18 +54,14 @@ function PillNavigationSnippets() {
           {renderPills(pillObject.jsxCode, pillObject.cssCode, index)}
           <div className="flex space-x-4">
             <button
-              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:shadow-xl focus:outline-none"
-              onClick={() =>
-                handleShowModal(pillObject.jsxCode, pillObject.cssCode)
-              }
+              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 transition-all duration-200"
+              onClick={() => handleShowModal(pillObject.jsxCode, pillObject.cssCode)}
             >
               Show CSS
             </button>
             <button
-              className="text-black text-md py-2 px-4 rounded-lg shadow-md"
-              onClick={() =>
-                handleShowModal(pillObject.jsxCode, pillObject.cssCode)
-              }
+              className="text-primary-600 dark:text-accent-500 border border-primary-600 dark:border-accent-500 text-md py-2 px-4 rounded-lg shadow-md hover:bg-primary-600 hover:text-white dark:hover:bg-accent-600 dark:hover:text-white transition-all duration-200"
+              onClick={() => handleShowModal(pillObject.jsxCode, pillObject.cssCode)}
             >
               React Snippet
             </button>
