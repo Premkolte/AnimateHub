@@ -46,6 +46,7 @@ function App() {
           {/* Wrap all primary pages with Layout and use Outlet inside */}
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
