@@ -19,10 +19,10 @@ const Contributors = () => {
     },
     {
       id: 2,
-      login: "contributor2",
-      avatar_url: "https://github.com/github.png",
-      html_url: "https://github.com/github",
-      contributions: 25
+      login: "ShauraaSharma",
+      avatar_url: "https://github.com/ShauraaSharma.png",
+      html_url: "https://github.com/ShauraaSharma",
+      contributions: 1
     },
     {
       id: 3,
