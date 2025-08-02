@@ -4,107 +4,56 @@ on:
   pull_request:
     types: [closed]
 
-# Set comprehensive permissions for the workflow to push changes
-# Note: For protected branches, ensure "Allow force pushes > Everyone" 
-# or add the github-actions[bot] as an exception in branch protection rules
 permissions:
   contents: write
-  pull-requests: read
-  actions: read
 
 jobs:
   add-contributor:
-    # Only run when PR is merged and not triggered by bot to prevent recursion
-    if: ${{ github.event.pull_request.merged == true && github.actor != 'github-actions[bot]' }}
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.user.login != 'Copilot' && github.event.pull_request.user.login != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository with full history for contributor management
+      # Checkout the repo
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           persist-credentials: false  # Disable default credentials for security
-          fetch-depth: 0  # Fetch full history for proper git operations
 
-      # Setup Node.js environment for all-contributors-cli
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'npm'  # Cache npm dependencies for faster builds
 
-      # Install the all-contributors CLI tool globally
+      # Install all-contributors-cli
       - name: Install all-contributors-cli
-        run: |
-          echo "Installing all-contributors-cli..."
-          npm install --global all-contributors-cli
-          echo "Installation completed successfully"
+        run: npm install --global all-contributors-cli
 
-      # Configure Git with repository owner credentials for commits
-      # Note: Consider using a dedicated bot account for production usage
+      # Configure Git
       - name: Configure Git
         run: |
-          echo "Configuring Git user..."
           git config --global user.name "Premkolte"
           git config --global user.email "premkolte26@gmail.com"
-          echo "Git configuration completed"
 
-      # Add the PR author as a contributor with 'code' contribution type
+      # Add Contributor (only if username is valid and not a known bot)
       - name: Add Contributor
-        run: |
-          echo "Adding contributor: ${{ github.event.pull_request.user.login }}"
-          npx all-contributors add "${{ github.event.pull_request.user.login }}" code
-          if [ $? -eq 0 ]; then
-            echo "Contributor added successfully"
-          else
-            echo "Error: Failed to add contributor" >&2
-            exit 1
-          fi
+        run: npx all-contributors add "${{ github.event.pull_request.user.login }}" code
 
-      # Generate updated README with new contributor information
+      # Generate README
       - name: Generate README
-        run: |
-          echo "Generating updated README..."
-          npx all-contributors generate
-          if [ $? -eq 0 ]; then
-            echo "README generated successfully"
-          else
-            echo "Error: Failed to generate README" >&2
-            exit 1
-          fi
+        run: npx all-contributors generate
 
-      # Commit changes to repository (only if there are changes)
+      # Commit changes
       - name: Commit changes
         run: |
-          echo "Checking for changes to commit..."
           git add README.md .all-contributorsrc
-          
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            echo "Committing changes..."
-            git commit -m "docs: add ${{ github.event.pull_request.user.login }} as a contributor"
-            echo "Changes committed successfully"
-          fi
+          git commit -m "docs: add ${{ github.event.pull_request.user.login }} as a contributor" || echo "No changes to commit"
 
-      # Setup authentication for pushing changes back to repository
+      # Set up authentication for pushing changes
       - name: Set up authentication for pushing changes
         run: |
-          echo "Setting up authentication..."
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          echo "Authentication configured"
 
-      # Push changes back to the repository
-      # Note: This may fail on protected branches without proper configuration
+      # Push changes
       - name: Push changes
-        run: |
-          echo "Pushing changes to repository..."
-          if git push origin HEAD; then
-            echo "Changes pushed successfully"
-          else
-            echo "Error: Failed to push changes. This may be due to branch protection rules." >&2
-            echo "For protected branches, ensure the github-actions[bot] has push permissions" >&2
-            echo "or temporarily disable branch protection for automated commits." >&2
-            exit 1
-          fi
+        run: git push origin HEAD
