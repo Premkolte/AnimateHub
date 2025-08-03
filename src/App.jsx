@@ -16,6 +16,7 @@ import SignupPage from "./components/Auth/SignUp";
 import Navbar from "./components/Home/Navbar";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Home/Chatbot";
+import BackToTop from "./components/BackToTop";
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -25,6 +26,7 @@ function Layout() {
       <Outlet />
       <Chatbot />
       <Footer />
+      <BackToTop />
     </>
   );
 }
