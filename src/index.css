@@ -11,12 +11,12 @@
 }
 
 :root {
-  --scrollbar-thumb: #1b67e2; /* Tailwind green-500 */
+  --scrollbar-thumb: #1b67e2; /* for light mode */
 }
 
 .dark {
   background-color: #0f1629;
-  --scrollbar-thumb: #7429c6; /* Example: secondary-900, update to your actual color if different */
+  --scrollbar-thumb: #7429c6; /* for dark mode */
 }
 
 ::-webkit-scrollbar {
