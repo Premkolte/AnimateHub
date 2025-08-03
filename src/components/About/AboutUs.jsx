@@ -71,18 +71,18 @@ const About = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="relative flex flex-col items-center justify-center w-screen h-screen overflow-hidden 
-        bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 text-gray-900 
-        dark:bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] 
-        dark:from-indigo-500 dark:via-violet-500 dark:to-fuchsia-500 dark:text-white"
-    >
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+  className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden
+    bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 text-gray-900 
+    dark:bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] 
+    dark:from-indigo-500 dark:via-violet-500 dark:to-fuchsia-500 dark:text-white"
+>
       <BackButton />
       <Blobs />
 
-      <div className="relative z-10 container mx-auto px-4 md:px-8">
+      <div className="relative z-10 container mx-auto px-4 md:px-8 ">
         <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-8 md:p-12 lg:w-2/3 xl:w-1/2 mx-auto mt-7 dark:bg-white dark:bg-opacity-20 dark:border-none">
           <h1 className="text-3xl font-bold mb-3">About Us</h1>
           <p className="text-lg mb-4">

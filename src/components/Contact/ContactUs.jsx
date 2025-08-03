@@ -72,7 +72,7 @@ const Contact = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="relative flex flex-col items-center justify-center overflow-hidden w-screen min-h-screen 
+      className="relative flex flex-col items-center justify-center overflow-hidden w-full min-h-screen 
         bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 text-gray-900 
         dark:bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] 
         dark:from-indigo-500 dark:via-violet-500 dark:to-fuchsia-500 dark:text-white"
