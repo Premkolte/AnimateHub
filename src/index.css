@@ -10,20 +10,29 @@
   }
 }
 
+:root {
+  --scrollbar-thumb: #1b67e2; /* Tailwind green-500 */
+}
+
+.dark {
+  background-color: #0f1629;
+  --scrollbar-thumb: #7429c6; /* Example: secondary-900, update to your actual color if different */
+}
+
 ::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: whitesmoke; /* Background of the scrollbar track */
-  border-radius: 10px; /* Rounded corners */
+  background: inherit;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: lightseagreen; /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners */
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(22, 153, 146); /* Color when hovering over the scrollbar thumb */
+  background: var(--scrollbar-thumb);
 }
