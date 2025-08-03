@@ -19,29 +19,36 @@ function SideBar({ activeTab, setActiveTab }) {
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           {isSidebarOpen ? (
-            <IoMdClose size={24} className="text-secondary-900 dark:text-white" />
+            <IoMdClose
+              size={24}
+              className="text-secondary-900 dark:text-white"
+            />
           ) : (
-            <IoMdMenu size={24} className="text-secondary-900 dark:text-white" />
+            <IoMdMenu
+              size={24}
+              className="text-secondary-900 dark:text-white"
+            />
           )}
         </button>
       </div>
 
       {/* Sidebar */}
       <div
-        className={`lg:w-64 fixed inset-y-0 left-0 z-40 bg-white dark:bg-secondary-900 shadow-xl transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
-        style={{ maxHeight: "100vh", paddingTop: "2rem" }}
+        className={`fixed inset-y-0 left-0 z-40 bg-white dark:bg-secondary-900 shadow-xl transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
+        style={{ maxHeight: "100vh" }}
       >
-
         <div className="p-4 h-full flex flex-col justify-between">
-          <div className="space-y-2 mb-4 pb-4">
+          <div className="space-y-2 mb-4 pb-4 inline-flex flex-col w-auto min-w-full">
             {Buttons.map((button, index) => (
               <button
                 key={index}
-                className={`${activeTab === index
-                    ? "bg-primary-600 text-white"
+                className={`${
+                  activeTab === index
+                    ? "bg-primary-600 text-white dark:bg-purple-700"
                     : "bg-primary-100 dark:bg-secondary-800 text-secondary-900 dark:text-white hover:bg-primary-600 hover:text-white"
-                  } py-2 px-4 rounded-md w-full text-lg text-left focus:outline-none transition-colors duration-300`}
+                } py-2 px-4 rounded-md text-lg text-left focus:outline-none transition-colors duration-300 w-full`}
                 onClick={() => handleTabClick(index)}
               >
                 {button}
