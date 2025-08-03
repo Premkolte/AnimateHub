@@ -6,6 +6,7 @@ const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [userMessage, setUserMessage] = useState('');
+  const [hasScrolled, setHasScrolled] = useState(false);
   const messagesEndRef = useRef(null);
 
   const toggleChatbot = () => {
@@ -18,7 +19,7 @@ const Chatbot = () => {
     const newMessages = [...messages, { sender: 'user', text: userMessage }];
     setMessages(newMessages);
     setUserMessage('');
-    
+
     // Simulate a bot response
     setTimeout(() => {
       const botResponse = getBotResponse(userMessage);
@@ -27,7 +28,6 @@ const Chatbot = () => {
   };
 
   const getBotResponse = (message) => {
-    // Simple rule-based response
     if (message.toLowerCase().includes('hello')) {
       return 'Hi there! How can I help you today?';
     }
@@ -38,9 +38,28 @@ const Chatbot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200 && !hasScrolled) {
+        setHasScrolled(true);
+      } else if (window.scrollY <= 200 && hasScrolled) {
+        setHasScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasScrolled]);
+
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50">
+      {/* Floating Button with scroll-aware position */}
+      <motion.div
+        className="fixed right-6 z-50"
+        initial={{ bottom: 24 }}
+        animate={{ bottom: hasScrolled ? 96 : 24 }} // 96px = bottom-24, 24px = bottom-6
+        transition={{ type: 'spring', stiffness: 300 }}
+      >
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -49,8 +68,9 @@ const Chatbot = () => {
         >
           <FaCommentDots size={24} />
         </motion.button>
-      </div>
+      </motion.div>
 
+      {/* Chatbot Window */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: 100 }}
@@ -64,21 +84,23 @@ const Chatbot = () => {
               ✕
             </button>
           </div>
+
           <div className="h-64 bg-white bg-opacity-60 p-2 rounded-lg overflow-y-auto flex flex-col">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={`mb-2 p-2 rounded-lg max-w-xs ${
-                  message.sender === 'user' ? 'bg-blue-500 self-end text-white' : 'bg-gray-300 self-start text-black'
+                  message.sender === 'user'
+                    ? 'bg-blue-500 self-end text-white'
+                    : 'bg-gray-300 self-start text-black'
                 }`}
               >
-                <p className="text-base leading-relaxed">
-                  {message.text}
-                </p>
+                <p className="text-base leading-relaxed">{message.text}</p>
               </div>
             ))}
             <div ref={messagesEndRef} />
           </div>
+
           <div className="mt-4">
             <input
               type="text"
