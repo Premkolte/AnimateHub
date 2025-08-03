@@ -8,11 +8,11 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import BackButton from "../BackButton";
 
-const About = () =>  {
+const About = () => {
   const Blobs = () => (
     <>
       <svg
-        className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 opacity-50"
+        className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 opacity-30 dark:opacity-50"
         width="600"
         height="600"
         viewBox="0 0 600 600"
@@ -20,8 +20,8 @@ const About = () =>  {
       >
         <g transform="translate(300,300)">
           <motion.path
-            d="M120.5,-132.3C156.6,-109.2,176.1,-54.6,169.7,-4.9C163.2,44.9,130.8,89.7,94.7,124.5C58.6,159.3,18.8,184.1,-34.6,192.9C-88,201.6,-154,194.3,-176.4,155.4C-198.9,116.5,-177.8,46,-157.3,-18.1C-136.8,-82.2,-116.8,-139.9,-78.4,-162.7C-40.1,-185.4,16.6,-173.2,63.2,-153.8C109.8,-134.4,144.4,-108.9,120.5,-132.3Z"
-            fill="#fff"
+            fill="#e5e7eb"
+            className="dark:fill-white"
             animate={{
               d: [
                 "M120.5,-132.3C156.6,-109.2,176.1,-54.6,169.7,-4.9C163.2,44.9,130.8,89.7,94.7,124.5C58.6,159.3,18.8,184.1,-34.6,192.9C-88,201.6,-154,194.3,-176.4,155.4C-198.9,116.5,-177.8,46,-157.3,-18.1C-136.8,-82.2,-116.8,-139.9,-78.4,-162.7C-40.1,-185.4,16.6,-173.2,63.2,-153.8C109.8,-134.4,144.4,-108.9,120.5,-132.3Z",
@@ -38,8 +38,9 @@ const About = () =>  {
           />
         </g>
       </svg>
+
       <svg
-        className="absolute bottom-0 right-0 transform translate-x-1/2 translate-y-1/2 opacity-50"
+        className="absolute bottom-0 right-0 transform translate-x-1/2 translate-y-1/2 opacity-30 dark:opacity-50"
         width="600"
         height="600"
         viewBox="0 0 600 600"
@@ -47,8 +48,8 @@ const About = () =>  {
       >
         <g transform="translate(300,300)">
           <motion.path
-            d="M120.5,-132.3C156.6,-109.2,176.1,-54.6,169.7,-4.9C163.2,44.9,130.8,89.7,94.7,124.5C58.6,159.3,18.8,184.1,-34.6,192.9C-88,201.6,-154,194.3,-176.4,155.4C-198.9,116.5,-177.8,46,-157.3,-18.1C-136.8,-82.2,-116.8,-139.9,-78.4,-162.7C-40.1,-185.4,16.6,-173.2,63.2,-153.8C109.8,-134.4,144.4,-108.9,120.5,-132.3Z"
-            fill="#fff"
+            fill="#e5e7eb"
+            className="dark:fill-white"
             animate={{
               d: [
                 "M120.5,-132.3C156.6,-109.2,176.1,-54.6,169.7,-4.9C163.2,44.9,130.8,89.7,94.7,124.5C58.6,159.3,18.8,184.1,-34.6,192.9C-88,201.6,-154,194.3,-176.4,155.4C-198.9,116.5,-177.8,46,-157.3,-18.1C-136.8,-82.2,-116.8,-139.9,-78.4,-162.7C-40.1,-185.4,16.6,-173.2,63.2,-153.8C109.8,-134.4,144.4,-108.9,120.5,-132.3Z",
@@ -70,18 +71,19 @@ const About = () =>  {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="relative flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500 via-violet-500 to-fuchsia-500"
-    >
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+  className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden
+    bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 text-gray-900 
+    dark:bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] 
+    dark:from-indigo-500 dark:via-violet-500 dark:to-fuchsia-500 dark:text-white"
+>
       <BackButton />
-
       <Blobs />
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 md:px-8 text-white">
-        <div className="bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded-lg shadow-lg p-8 md:p-12 lg:w-2/3 xl:w-1/2 mx-auto mt-7">
+      <div className="relative z-10 container mx-auto px-4 md:px-8 ">
+        <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-8 md:p-12 lg:w-2/3 xl:w-1/2 mx-auto mt-7 dark:bg-white dark:bg-opacity-20 dark:border-none">
           <h1 className="text-3xl font-bold mb-3">About Us</h1>
           <p className="text-lg mb-4">
             AnimateHub is your ultimate resource for learning and exploring
@@ -99,7 +101,7 @@ const About = () =>  {
             <li>
               <a
                 href="https://twitter.com/animatehub"
-                className="text-indigo-250 hover:underline"
+                className="text-blue-500 hover:underline"
               >
                 <FontAwesomeIcon icon={faTwitter} size="2x" />
               </a>
@@ -107,7 +109,7 @@ const About = () =>  {
             <li>
               <a
                 href="https://facebook.com/animatehub"
-                className="text-indigo-250 hover:underline"
+                className="text-blue-600 hover:underline"
               >
                 <FontAwesomeIcon icon={faFacebook} size="2x" />
               </a>
@@ -115,7 +117,7 @@ const About = () =>  {
             <li>
               <a
                 href="https://linkedin.com/company/animatehub"
-                className="text-indigo-250 hover:underline"
+                className="text-blue-700 hover:underline"
               >
                 <FontAwesomeIcon icon={faLinkedin} size="2x" />
               </a>

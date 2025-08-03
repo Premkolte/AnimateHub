@@ -2,12 +2,13 @@ import { useNavigate } from "react-router-dom";
 
 const BackButton = () => {
   const navigate = useNavigate();
+
   return (
     <button
-      className="bg-violet-200 text-center w-48 rounded-2xl h-14 font-sans text-black text-xl font-semibold group absolute top-5 left-5 z-20"
+      className="bg-blue-200 text-center w-48 rounded-2xl h-14 font-sans text-black text-xl font-semibold group absolute top-5 left-5 z-20 dark:bg-violet-200"
       onClick={() => navigate("/")}
     >
-      <div className="bg-violet-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500">
+      <div className="bg-blue-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500 dark:bg-violet-400">
         <svg
           width="25px"
           height="25px"
@@ -28,4 +29,5 @@ const BackButton = () => {
     </button>
   );
 };
+
 export default BackButton;

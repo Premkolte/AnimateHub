@@ -10,7 +10,7 @@ const Contact = () => {
   const Blobs = () => (
     <>
       <svg
-        className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 opacity-50"
+        className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 opacity-30 dark:opacity-50"
         width="600"
         height="600"
         viewBox="0 0 600 600"
@@ -18,8 +18,8 @@ const Contact = () => {
       >
         <g transform="translate(300,300)">
           <motion.path
-            d="M120.5,-132.3C156.6,-109.2,176.1,-54.6,169.7,-4.9C163.2,44.9,130.8,89.7,94.7,124.5C58.6,159.3,18.8,184.1,-34.6,192.9C-88,201.6,-154,194.3,-176.4,155.4C-198.9,116.5,-177.8,46,-157.3,-18.1C-136.8,-82.2,-116.8,-139.9,-78.4,-162.7C-40.1,-185.4,16.6,-173.2,63.2,-153.8C109.8,-134.4,144.4,-108.9,120.5,-132.3Z"
-            fill="#fff"
+            fill="#e5e7eb"
+            className="dark:fill-white"
             animate={{
               d: [
                 "M120.5,-132.3C156.6,-109.2,176.1,-54.6,169.7,-4.9C163.2,44.9,130.8,89.7,94.7,124.5C58.6,159.3,18.8,184.1,-34.6,192.9C-88,201.6,-154,194.3,-176.4,155.4C-198.9,116.5,-177.8,46,-157.3,-18.1C-136.8,-82.2,-116.8,-139.9,-78.4,-162.7C-40.1,-185.4,16.6,-173.2,63.2,-153.8C109.8,-134.4,144.4,-108.9,120.5,-132.3Z",
@@ -36,8 +36,9 @@ const Contact = () => {
           />
         </g>
       </svg>
+
       <svg
-        className="absolute bottom-0 right-0 transform translate-x-1/2 translate-y-1/2 opacity-50"
+        className="absolute bottom-0 right-0 transform translate-x-1/2 translate-y-1/2 opacity-30 dark:opacity-50"
         width="600"
         height="600"
         viewBox="0 0 600 600"
@@ -45,8 +46,8 @@ const Contact = () => {
       >
         <g transform="translate(300,300)">
           <motion.path
-            d="M120.5,-132.3C156.6,-109.2,176.1,-54.6,169.7,-4.9C163.2,44.9,130.8,89.7,94.7,124.5C58.6,159.3,18.8,184.1,-34.6,192.9C-88,201.6,-154,194.3,-176.4,155.4C-198.9,116.5,-177.8,46,-157.3,-18.1C-136.8,-82.2,-116.8,-139.9,-78.4,-162.7C-40.1,-185.4,16.6,-173.2,63.2,-153.8C109.8,-134.4,144.4,-108.9,120.5,-132.3Z"
-            fill="#fff"
+            fill="#e5e7eb"
+            className="dark:fill-white"
             animate={{
               d: [
                 "M120.5,-132.3C156.6,-109.2,176.1,-54.6,169.7,-4.9C163.2,44.9,130.8,89.7,94.7,124.5C58.6,159.3,18.8,184.1,-34.6,192.9C-88,201.6,-154,194.3,-176.4,155.4C-198.9,116.5,-177.8,46,-157.3,-18.1C-136.8,-82.2,-116.8,-139.9,-78.4,-162.7C-40.1,-185.4,16.6,-173.2,63.2,-153.8C109.8,-134.4,144.4,-108.9,120.5,-132.3Z",
@@ -71,34 +72,31 @@ const Contact = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="relative flex flex-col items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-indigo-500 via-violet-500 to-fuchsia-500"
+      className="relative flex flex-col items-center justify-center overflow-hidden w-full min-h-screen 
+        bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 text-gray-900 
+        dark:bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] 
+        dark:from-indigo-500 dark:via-violet-500 dark:to-fuchsia-500 dark:text-white"
     >
-      <div className="my-20">
+      <div className="my-16">
         <FAQ />
       </div>
 
       <BackButton />
       <Blobs />
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto px-4 sm:px-8 md:px-20 text-white mb-16 max-w-4xl">
-        <div className="bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 rounded-lg shadow-lg p-8">
+      <div className="relative z-10 mx-auto px-4 sm:px-8 md:px-20 text-black dark:text-white mb-16 max-w-4xl">
+        <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-8 md:p-12 dark:bg-white dark:bg-opacity-20 dark:border-none">
           <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg mb-4">
-            Got any questions, suggestions, or feedback? We'd love to hear from
-            you!
+            Got any questions, suggestions, or feedback? We'd love to hear from you!
           </p>
           <p className="text-lg mb-10">
-            Reach out to us via email at <strong>contact@animatehub.com</strong>{" "}
-            or fill out the form below:
+            Reach out to us via email at <strong>contact@animatehub.com</strong> or fill out the form below:
           </p>
-         
-          <form >
-       
-          <div className=" p-10 p-md-4 pt-2 pt-md-1 pb-10 pb-md-2 px-4 sm:px-8 md:px-20">
-              <label htmlFor="name" className="sr-only">
-                Your Name
-              </label>
+
+          <form>
+            <div className="p-10 pt-2 pb-10 px-4 sm:px-8 md:px-20">
+              <label htmlFor="name" className="sr-only">Your Name</label>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FontAwesomeIcon icon={faUser} className="text-gray-500" />
@@ -110,20 +108,16 @@ const Contact = () => {
                   placeholder="Your Name"
                   pattern="[a-zA-Z\s]+"
                   title="Name must only contain letters."
-                  className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800 w-full w-md-500px"
+                  className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800 w-full"
                 />
               </div>
             </div>
-            <div className="p-10 p-md-4 pt-2 pt-md-1 pb-10 pb-md-2 pr-md-0 px-4 sm:px-8 md:px-20">
-              <label htmlFor="email" className="sr-only">
-                Your Email
-              </label>
+
+            <div className="p-10 pt-2 pb-10 px-4 sm:px-8 md:px-20">
+              <label htmlFor="email" className="sr-only">Your Email</label>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FontAwesomeIcon
-                    icon={faEnvelope}
-                    className="text-gray-500"
-                  />
+                  <FontAwesomeIcon icon={faEnvelope} className="text-gray-500" />
                 </span>
                 <input
                   type="email"
@@ -134,33 +128,29 @@ const Contact = () => {
                 />
               </div>
             </div>
-            <div className="p-10 p-md-4 pt-2 pt-md-1 px-4 sm:px-20 md:px-20">
-              <label htmlFor="message" className="sr-only">
-                Your Message
-              </label>
+
+            <div className="p-10 pt-2 px-4 sm:px-20 md:px-20">
+              <label htmlFor="message" className="sr-only">Your Message</label>
               <textarea
                 required
                 id="message"
                 placeholder="Your Message"
                 rows="6"
-                className="form-control border border-gray-300 rounded-md py-2 px-4 bg-gray-100 text-gray-800 w-full "
+                className="form-control border border-gray-300 rounded-md py-2 px-4 bg-gray-100 text-gray-800 w-full"
               ></textarea>
             </div>
-            <div className="p-10 p-md-4 pt-4 pt-md-2 text-center" >
-              <button 
+
+            <div className="p-10 pt-4 text-center">
+              <button
                 type="submit"
-                className="btn btn-primary py-2 px-4 w-full sm:w-auto   rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
+                className="btn btn-primary py-2 px-4 w-full sm:w-auto rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
               >
-                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Send
-                Message
+                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Send Message
               </button>
-          
             </div>
           </form>
         </div>
       </div>
-      
-     
     </motion.div>
   );
 };
