@@ -88,12 +88,14 @@ const Contact = () => {
             Got any questions, suggestions, or feedback? We'd love to hear from
             you!
           </p>
-          <p className="text-lg mb-6">
+          <p className="text-lg mb-10">
             Reach out to us via email at <strong>contact@animatehub.com</strong>{" "}
             or fill out the form below:
           </p>
-          <form className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
-            <div className="col-span-1">
+         
+          <form >
+       
+          <div className=" p-10 p-md-4 pt-2 pt-md-1 pb-10 pb-md-2 px-4 sm:px-8 md:px-20">
               <label htmlFor="name" className="sr-only">
                 Your Name
               </label>
@@ -108,11 +110,11 @@ const Contact = () => {
                   placeholder="Your Name"
                   pattern="[a-zA-Z\s]+"
                   title="Name must only contain letters."
-                  className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800 w-full"
+                  className="form-control border border-gray-300 rounded-md py-2 pl-10 pr-4 bg-gray-100 text-gray-800 w-full w-md-500px"
                 />
               </div>
             </div>
-            <div className="col-span-1">
+            <div className="p-10 p-md-4 pt-2 pt-md-1 pb-10 pb-md-2 pr-md-0 px-4 sm:px-8 md:px-20">
               <label htmlFor="email" className="sr-only">
                 Your Email
               </label>
@@ -132,7 +134,7 @@ const Contact = () => {
                 />
               </div>
             </div>
-            <div className="col-span-2">
+            <div className="p-10 p-md-4 pt-2 pt-md-1 px-4 sm:px-20 md:px-20">
               <label htmlFor="message" className="sr-only">
                 Your Message
               </label>
@@ -141,21 +143,24 @@ const Contact = () => {
                 id="message"
                 placeholder="Your Message"
                 rows="6"
-                className="form-control border border-gray-300 rounded-md py-2 px-4 bg-gray-100 text-gray-800 w-full"
+                className="form-control border border-gray-300 rounded-md py-2 px-4 bg-gray-100 text-gray-800 w-full "
               ></textarea>
             </div>
-            <div className="col-span-2">
-              <button
+            <div className="p-10 p-md-4 pt-4 pt-md-2 text-center" >
+              <button 
                 type="submit"
-                className="btn btn-primary py-2 px-4 w-full sm:w-auto rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
+                className="btn btn-primary py-2 px-4 w-full sm:w-auto   rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
               >
                 <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Send
                 Message
               </button>
+          
             </div>
           </form>
         </div>
       </div>
+      
+     
     </motion.div>
   );
 };
