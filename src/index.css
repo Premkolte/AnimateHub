@@ -36,3 +36,41 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-thumb);
 }
+.back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding-top: 8px;
+  background-color: #3B82F6;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  transition: scale 0.3s ease-in-out;
+  transform: scale(1.1);
+}
+
+.back-to-top svg {
+  width: 44px;
+  height: 44px;
+  fill: white;
+}
