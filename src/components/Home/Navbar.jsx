@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import DarkModeToggle from "../DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
 import Logo from "./images/Animate_logo.png";
+import { SignedIn, SignedOut, UserButton, useClerk } from "@clerk/clerk-react"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const { signOut } = useClerk();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,6 +17,8 @@ const Navbar = () => {
   const closeMenu = () => {
     setIsOpen(false);
   };
+
+const navLinks = ["Home", "Explore", "About", "Contact"];
 
   return (
     <nav className="w-full bg-blue-600 dark:bg-purple-700 text-white dark:text-gray-200 py-2 pt-1 shadow-lg sticky top-0 left-0 z-50">
@@ -42,17 +47,34 @@ const Navbar = () => {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex space-x-4 md:space-x-6 items-center">
-            {["Home", "Explore", "About", "Contact", "Login"].map((item) => (
+            {navLinks.map((item) => (
               <Link
                 key={item}
                 to={`/${item === "Home" ? '' : item.toLowerCase()}`}
                 onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white"
+                className="hover:text-gray-300 dark:hover:text-white" 
               >
                 {item}
               </Link>
             ))}
+            <SignedOut>
+              <Link to="/sign-in" onClick={closeMenu} className="hover:text-gray-300 dark:hover:text-white">
+                Login
+              </Link>
+            </SignedOut>
+ <SignedIn>
+    <button
+      onClick={() => {
+       signOut({ redirectUrl: "/sign-in" });
+        closeMenu();
+      }}
+      className="hover:text-gray-300 dark:hover:text-white"
+    >
+      Sign Out
+    </button>
+  </SignedIn>
             <DarkModeToggle />
+            <UserButton/>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -69,7 +91,7 @@ const Navbar = () => {
         {/* Mobile Navigation Links */}
         {isOpen && (
           <div className="flex flex-col mt-4 space-y-4 md:hidden">
-            {["Home", "Explore", "About", "Contact", "Login"].map((item) => (
+            {navLinks.map((item) => (
               <Link
                 key={item}
                 to={`/${item === "Home" ? '' : item.toLowerCase()}`}
@@ -79,6 +101,22 @@ const Navbar = () => {
                 {item}
               </Link>
             ))}
+            <SignedOut>
+              <Link to="/sign-in" onClick={closeMenu} className="hover:text-gray-300 dark:hover:text-white">
+                Login
+              </Link>
+            </SignedOut>
+ <SignedIn>
+    <button
+      onClick={() => {
+       signOut({ redirectUrl: "/sign-in" });
+        closeMenu();
+      }}
+      className="hover:text-gray-300 dark:hover:text-white"
+    >
+      Sign Out
+    </button>
+  </SignedIn>
           </div>
         )}
       </div>

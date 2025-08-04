@@ -17,6 +17,7 @@ import Navbar from "./components/Home/Navbar";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Home/Chatbot";
 import BackToTop from "./components/BackToTop";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -47,18 +48,18 @@ function App() {
         <Routes>
           {/* Wrap all primary pages with Layout and use Outlet inside */}
           <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/explore" element={<Dashboard />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/contributors" element={<Contributors />} />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/templates/*" element={<TemplatesRoutes />} />
+            <Route path="/" element={<><ProtectedRoute><HomePage /></ProtectedRoute></>} />
+            <Route path="/home" element={<><ProtectedRoute><HomePage /></ProtectedRoute></>} />
+            <Route path="/explore" element={<><ProtectedRoute><Dashboard /></ProtectedRoute></>} />
+            <Route path="/about" element={<><ProtectedRoute><AboutUs /></ProtectedRoute></>} />
+            <Route path="/contact" element={<><ProtectedRoute><ContactUs /></ProtectedRoute></>} />
+            <Route path="/contributors" element={<><ProtectedRoute><Contributors /></ProtectedRoute></>} />
+            <Route path="/payment" element={<><ProtectedRoute><PaymentPage /></ProtectedRoute></>} />
+            <Route path="/templates/*" element={<><ProtectedRoute><TemplatesRoutes /></ProtectedRoute></>} />
           </Route>
 
           {/* Auth pages don't use layout (optional) */}
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-in" element={<LoginPage />} />
           <Route path="/SignUp" element={<SignupPage />} />
         </Routes>
 
