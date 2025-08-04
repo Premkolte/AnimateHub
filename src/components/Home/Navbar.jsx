@@ -59,20 +59,20 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
             ))}
             <SignedOut>
               <Link to="/sign-in" onClick={closeMenu} className="hover:text-gray-300 dark:hover:text-white">
-                Login
+                Sign In
               </Link>
             </SignedOut>
- <SignedIn>
-    <button
-      onClick={() => {
-       signOut({ redirectUrl: "/sign-in" });
-        closeMenu();
-      }}
-      className="hover:text-gray-300 dark:hover:text-white"
-    >
-      Sign Out
-    </button>
-  </SignedIn>
+            <SignedIn>
+              <button
+                onClick={() => {
+                 signOut({ redirectUrl: "/" });
+                  closeMenu();
+                }}
+                className="hover:text-gray-300 dark:hover:text-white"
+              >
+                Sign Out
+              </button>
+            </SignedIn>
             <DarkModeToggle />
             <UserButton/>
           </div>
@@ -103,20 +103,20 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
             ))}
             <SignedOut>
               <Link to="/sign-in" onClick={closeMenu} className="hover:text-gray-300 dark:hover:text-white">
-                Login
+                Sign In
               </Link>
             </SignedOut>
- <SignedIn>
-    <button
-      onClick={() => {
-       signOut({ redirectUrl: "/sign-in" });
-        closeMenu();
-      }}
-      className="hover:text-gray-300 dark:hover:text-white"
-    >
-      Sign Out
-    </button>
-  </SignedIn>
+            <SignedIn>
+              <button
+                onClick={() => {
+                 signOut({ redirectUrl: "/" });
+                  closeMenu();
+                }}
+                className="hover:text-gray-300 dark:hover:text-white"
+              >
+                Sign Out
+              </button>
+            </SignedIn>
           </div>
         )}
       </div>

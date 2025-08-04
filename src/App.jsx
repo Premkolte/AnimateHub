@@ -48,18 +48,19 @@ function App() {
         <Routes>
           {/* Wrap all primary pages with Layout and use Outlet inside */}
           <Route element={<Layout />}>
-            <Route path="/" element={<><ProtectedRoute><HomePage /></ProtectedRoute></>} />
-            <Route path="/home" element={<><ProtectedRoute><HomePage /></ProtectedRoute></>} />
-            <Route path="/explore" element={<><ProtectedRoute><Dashboard /></ProtectedRoute></>} />
-            <Route path="/about" element={<><ProtectedRoute><AboutUs /></ProtectedRoute></>} />
-            <Route path="/contact" element={<><ProtectedRoute><ContactUs /></ProtectedRoute></>} />
-            <Route path="/contributors" element={<><ProtectedRoute><Contributors /></ProtectedRoute></>} />
-            <Route path="/payment" element={<><ProtectedRoute><PaymentPage /></ProtectedRoute></>} />
-            <Route path="/templates/*" element={<><ProtectedRoute><TemplatesRoutes /></ProtectedRoute></>} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/explore" element={<Dashboard />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/contributors" element={<Contributors />} />
+            <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+            <Route path="/templates/*" element={<TemplatesRoutes />} />
           </Route>
 
           {/* Auth pages don't use layout (optional) */}
           <Route path="/sign-in" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route path="/SignUp" element={<SignupPage />} />
         </Routes>
 
