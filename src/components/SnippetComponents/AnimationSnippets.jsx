@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from '../Modal';
 import StringToReactComponent from 'string-to-react-component';
 import { animationSnippets } from './Snippets/Animation';
+import FavoriteButton from '../Favorites/FavoriteButton';
 
 const AnimationSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,9 +18,23 @@ const AnimationSnippets = () => {
       {animationSnippets.map((snippet, index) => (
         <div
           key={index}
-          className="p-6 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-xl shadow transition-all duration-200"
+          className="p-6 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-xl shadow transition-all duration-200 relative"
         >
-          <h2 className="text-xl font-semibold mb-4">{snippet.title}</h2>
+          {/* Favorite Button */}
+          <div className="absolute top-4 right-4">
+            <FavoriteButton
+              snippet={{
+                type: 'animation',
+                index: index,
+                title: snippet.title,
+                jsxCode: snippet.jsxCode,
+                cssCode: snippet.cssCode,
+              }}
+              size="md"
+            />
+          </div>
+
+          <h2 className="text-xl font-semibold mb-4 pr-8">{snippet.title}</h2>
 
           <div className="mb-4">
             <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>

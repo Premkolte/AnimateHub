@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import DarkModeToggle from "../DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa";
 import Logo from "./images/Animate_logo.png";
-import { SignedIn, SignedOut, UserButton, useClerk } from "@clerk/clerk-react"
+import { SignedIn, SignedOut, UserButton, useClerk } from "@clerk/clerk-react";
+import { useFavorites } from "../../contexts/FavoritesContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { signOut } = useClerk();
+  const { favorites } = useFavorites();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -57,6 +60,24 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
                 {item}
               </Link>
             ))}
+            
+            {/* Favorites Link - Only for signed in users */}
+            <SignedIn>
+              <Link
+                to="/favorites"
+                onClick={closeMenu}
+                className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
+              >
+                <FaHeart className="text-red-400" />
+                <span>Favorites</span>
+                {favorites.length > 0 && (
+                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                    {favorites.length}
+                  </span>
+                )}
+              </Link>
+            </SignedIn>
+
             <SignedOut>
               <Link to="/sign-in" onClick={closeMenu} className="hover:text-gray-300 dark:hover:text-white">
                 Sign In
@@ -101,6 +122,24 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
                 {item}
               </Link>
             ))}
+            
+            {/* Mobile Favorites Link */}
+            <SignedIn>
+              <Link
+                to="/favorites"
+                onClick={closeMenu}
+                className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
+              >
+                <FaHeart className="text-red-400" />
+                <span>Favorites</span>
+                {favorites.length > 0 && (
+                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                    {favorites.length}
+                  </span>
+                )}
+              </Link>
+            </SignedIn>
+
             <SignedOut>
               <Link to="/sign-in" onClick={closeMenu} className="hover:text-gray-300 dark:hover:text-white">
                 Sign In

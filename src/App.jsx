@@ -18,6 +18,8 @@ import Footer from "./components/Footer";
 import Chatbot from "./components/Home/Chatbot";
 import BackToTop from "./components/BackToTop";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import { FavoritesProvider } from "./contexts/FavoritesContext";
+import FavoritesPage from "./components/Favorites/FavoritesPage";
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -35,37 +37,40 @@ function Layout() {
 function App() {
   return (
     <ThemeProvider attribute="class">
-      <Router>
-        <AnimatedCursor
-          innerSize={12}
-          outerSize={25}
-          outerAlpha={0.4}
-          innerScale={1}
-          outerScale={2}
-          color="194, 198, 204"
-        />
+      <FavoritesProvider>
+        <Router>
+          <AnimatedCursor
+            innerSize={12}
+            outerSize={25}
+            outerAlpha={0.4}
+            innerScale={1}
+            outerScale={2}
+            color="194, 198, 204"
+          />
 
-        <Routes>
-          {/* Wrap all primary pages with Layout and use Outlet inside */}
-          <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/explore" element={<Dashboard />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/contributors" element={<Contributors />} />
-            <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
-            <Route path="/templates/*" element={<TemplatesRoutes />} />
-          </Route>
+          <Routes>
+            {/* Wrap all primary pages with Layout and use Outlet inside */}
+            <Route element={<Layout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/explore" element={<Dashboard />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/contributors" element={<Contributors />} />
+              <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
+              <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+              <Route path="/templates/*" element={<TemplatesRoutes />} />
+            </Route>
 
-          {/* Auth pages don't use layout (optional) */}
-          <Route path="/sign-in" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/SignUp" element={<SignupPage />} />
-        </Routes>
+            {/* Auth pages don't use layout (optional) */}
+            <Route path="/sign-in" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/SignUp" element={<SignupPage />} />
+          </Routes>
 
-        <Analytics />
-      </Router>
+          <Analytics />
+        </Router>
+      </FavoritesProvider>
     </ThemeProvider>
   );
 }

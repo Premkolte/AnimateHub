@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaReact, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
+import { FaReact, FaHtml5, FaCss3Alt, FaGithub, FaHeart } from "react-icons/fa";
 import { LuLayoutTemplate } from "react-icons/lu";
 import { BiLogoTailwindCss } from "react-icons/bi";
 import { BsGithub, BsPeople, BsStarFill } from "react-icons/bs";
@@ -10,9 +10,12 @@ import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
 import ReactJoyride from 'react-joyride';
+import { SignedIn, SignedOut } from '@clerk/clerk-react';
+import { useFavorites } from '../../contexts/FavoritesContext';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { favorites } = useFavorites();
 
   const steps = [
     {
@@ -135,7 +138,7 @@ const HomePage = () => {
             <span className="font-bold">React + Tailwind</span>.
           </p>
 
-          <div className="flex space-x-6 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center">
             <motion.button
               whileHover={{ scale: 1.1 }}
               className="bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg browse-components-button transition-colors duration-200"
@@ -155,6 +158,39 @@ const HomePage = () => {
             >
               Get Started
             </motion.button>
+            
+            {/* Favorites Button - Only show for signed in users */}
+            <SignedIn>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200 flex items-center gap-2"
+                onClick={() => {
+                  navigate("/favorites");
+                }}
+              >
+                <FaHeart />
+                My Favorites
+                {favorites.length > 0 && (
+                  <span className="bg-white text-red-500 text-sm px-2 py-1 rounded-full font-bold">
+                    {favorites.length}
+                  </span>
+                )}
+              </motion.button>
+            </SignedIn>
+
+            {/* Sign In prompt for favorites */}
+            <SignedOut>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
+                onClick={() => {
+                  navigate("/sign-in");
+                }}
+              >
+                <FaHeart />
+                Sign In for Favorites
+              </motion.button>
+            </SignedOut>
           </div>
         </motion.div>
 

@@ -3,8 +3,11 @@ import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaCode, FaHeart, FaDownload, FaUsers } from "react-icons/fa";
+import { useFavorites } from "../contexts/FavoritesContext";
 
 const WelcomeMessage = () => {
+  const { favorites } = useFavorites();
+
   return (
     <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-200 dark:border-indigo-700 rounded-lg p-6 mb-8">
       <SignedOut>
@@ -78,11 +81,16 @@ const WelcomeMessage = () => {
               </h3>
               <p className="text-green-700 dark:text-green-300 text-sm mb-4">
                 You're all set! Enjoy premium features like saving favorites, creating collections, and more.
+                {favorites.length > 0 && (
+                  <span className="font-medium"> You have {favorites.length} favorite{favorites.length !== 1 ? 's' : ''}.</span>
+                )}
               </p>
               <div className="grid grid-cols-3 gap-3">
                 <div className="flex items-center space-x-2">
                   <FaHeart className="text-green-500 text-sm" />
-                  <span className="text-xs text-green-700 dark:text-green-300">Save favorites</span>
+                  <span className="text-xs text-green-700 dark:text-green-300">
+                    {favorites.length} saved favorite{favorites.length !== 1 ? 's' : ''}
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <FaUsers className="text-green-500 text-sm" />
@@ -93,6 +101,16 @@ const WelcomeMessage = () => {
                   <span className="text-xs text-green-700 dark:text-green-300">Premium templates</span>
                 </div>
               </div>
+              {favorites.length > 0 && (
+                <div className="mt-3">
+                  <Link
+                    to="/favorites"
+                    className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 text-sm font-medium hover:underline"
+                  >
+                    View your favorites →
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>

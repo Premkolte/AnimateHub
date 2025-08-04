@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { cardSnippets } from "./Snippets/Cards";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 function CardSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -19,8 +20,22 @@ function CardSnippets() {
       {cardSnippets.map((cardObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
+          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10 relative"
         >
+          {/* Favorite Button */}
+          <div className="absolute top-4 right-4">
+            <FavoriteButton
+              snippet={{
+                type: 'card',
+                index: index,
+                title: cardObject.title || `Card ${index + 1}`,
+                jsxCode: cardObject.jsxCode,
+                cssCode: cardObject.cssCode,
+              }}
+              size="md"
+            />
+          </div>
+
           <StringToReactComponent>
             {`(props) => (${cardObject.jsxCode})`}
           </StringToReactComponent>
