@@ -89,12 +89,7 @@ const footerLinks = [
         icon: Compass,
         color: "text-blue-400",
       },
-      {
-        name: "About",
-        href: "/about",
-        icon: Info,
-        color: "text-yellow-400",
-      },
+      
       {
         name: "Contact Us",
         href: "/contact",
