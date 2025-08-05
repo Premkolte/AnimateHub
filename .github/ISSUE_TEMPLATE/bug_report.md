@@ -22,14 +22,5 @@ If applicable, add screenshots to help explain your problem.
 - [ ] Version [e.g. 22]
 
 
-Please mention these details about yourself here.
-1) Contributor Name
-2) Contributor Email ID
-3) Contributor Github Link
-
-regards,
-Prem Kolte.
-
-
 **Additional context 💬**
 Add any other context about the problem here.
