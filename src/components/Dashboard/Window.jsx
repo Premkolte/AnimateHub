@@ -36,6 +36,7 @@ import AnimatedIconSnippets from "../SnippetComponents/AnimationIcon";
 import CountdownTimeSnippets from "../SnippetComponents/CountDownSnippets";
 import TextAreaSnippets from "../SnippetComponents/TextAreaSnippets";
 import PricingSnippets from "../SnippetComponents/PricingSnippets";
+import LoginPageSnippets from "../SnippetComponents/LoginPageSnippets";
 
 import TabGroup from "../SnippetComponents/TabGroup";
 
@@ -43,7 +44,6 @@ import ProfileCardSnippets from "../SnippetComponents/ProfileCardSnippets";
 
 import NeonButton from "../SnippetComponents/NeonButton";
 import ExpandingSearchBar from "../SnippetComponents/ExpandingSearchBar";
-
 
 function Window({ activeTab }) {
   const content = [
@@ -62,7 +62,7 @@ function Window({ activeTab }) {
     <CouponSnippets />,
     <DarkModeSnippets />,
     <DropdownSnippetCard />,
-    < ExpandingSearchBar />,
+    <ExpandingSearchBar />,
     <FooterSnippets />,
     <FormSnippets />,
     <InputFieldSnippets />,
@@ -90,6 +90,7 @@ function Window({ activeTab }) {
     <TextAreaSnippets />,
     <TextSnippets />,
     <ToggleSwitchSnippets />,
+    <LoginPageSnippets />,
   ];
 
   return (
