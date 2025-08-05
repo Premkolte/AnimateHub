@@ -10,38 +10,38 @@ import { Link } from "react-router-dom";
 
 const TemplatesPage = () => {
   return (
-    <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6 space-y-16 pt-24">
+    <div className="flex flex-col items-center justify-center w-full min-h-screen p-6 pt-24 space-y-16 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <BackButton />
 
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-center max-w-3xl"
+        className="max-w-3xl text-center"
       >
-        <div className="bg-green-600 text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
+        <div className="inline-block px-4 py-1 mb-6 text-sm text-white bg-green-600 rounded-full">
           100% OPEN-SOURCE
         </div>
         <motion.p
-          className="text-4xl md:text-6xl mb-6 font-extrabold"
+          className="mb-6 text-4xl font-extrabold md:text-6xl"
           whileHover={{ scale: 1.05 }}
         >
           Introducing Templates
           <br /> Handcrafted pages for your needs
         </motion.p>
-        <p className="text-md md:text-lg mb-4">
+        <p className="mb-4 text-md md:text-lg">
           Created by our components
           <br />
           <span className="font-bold">by Animate Hub</span>
         </p>
-        <div className="bg-yellow-500 text-black px-4 py-1 rounded-full inline-block text-md font-semibold">
+        <div className="inline-block px-4 py-1 font-semibold text-black bg-yellow-500 rounded-full text-md">
           All the templates are open source
         </div>
 
-        <div className="flex space-x-6 justify-center mt-8">
+        <div className="flex justify-center mt-8 space-x-6">
           <motion.button
             whileHover={{ scale: 1.1 }}
-            className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+            className="px-6 py-3 text-lg font-semibold text-white bg-black rounded-full shadow-lg"
             onClick={() => {
               window.location.href = "https://github.com/Premkolte/AnimateHub";
             }}
@@ -50,7 +50,7 @@ const TemplatesPage = () => {
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.1 }}
-            className="border border-white text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
+            className="px-6 py-3 text-lg font-semibold text-white border border-white rounded-full shadow-lg"
             onClick={() => {
               window.location.href = "https://github.com/Premkolte/AnimateHub";
             }}
@@ -60,24 +60,24 @@ const TemplatesPage = () => {
         </div>
       </motion.div>
 
-      <div className="flex space-x-6 mt-12">
-        <FaHtml5 className="h-12 w-12" />
-        <FaCss3Alt className="h-12 w-12" />
-        <FaReact className="h-12 w-12" />
-        <BiLogoTailwindCss className="h-12 w-12" />
+      <div className="flex mt-12 space-x-6">
+        <FaHtml5 className="w-12 h-12" />
+        <FaCss3Alt className="w-12 h-12" />
+        <FaReact className="w-12 h-12" />
+        <BiLogoTailwindCss className="w-12 h-12" />
       </div>
 
       <div className="text-center space-y-8 py-10 md:w-[800px]">
-        <h1 className="text-4xl md:text-5xl font-extrabold">
+        <h1 className="text-4xl font-extrabold md:text-5xl">
           Create and Share Your Templates
         </h1>
-        <p className="text-lg md:text-xl mb-6">
+        <p className="mb-6 text-lg md:text-xl">
           You can also create your templates and share them with others. Join
           our community and contribute to the growing library of amazing
           templates!
         </p>
         <Link
-          className="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-purple-700 to-pink-500 leading-pro text-lg ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-110 hover:rotate-2 hover:bg-pink-700 hover:text-pink-200 hover:shadow-lg active:opacity-85"
+          className="inline-block px-6 py-3 mr-3 text-lg font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-purple-700 to-pink-500 leading-pro ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-110 hover:rotate-2 hover:bg-pink-700 hover:text-pink-200 hover:shadow-lg active:opacity-85"
           to="https://github.com/Premkolte/AnimateHub"
           target="_blank"
         >
@@ -85,18 +85,16 @@ const TemplatesPage = () => {
         </Link>
       </div>
 
-      <div className="text-center space-y-8 py-16">
-        <h1 className="text-4xl md:text-5xl font-extrabold">
+      <div className="py-16 space-y-8 text-center">
+        <h1 className="text-4xl font-extrabold md:text-5xl">
           Available Templates
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-3">
           {templates.map((template, index) => (
             <TemplateCard key={index} template={template} />
           ))}
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };
