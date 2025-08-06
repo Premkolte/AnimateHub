@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Outlet } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/react';
+import { HelmetProvider } from 'react-helmet-async';
 import HomePage from "./components/Home/HomePage";
 import AboutUs from "./components/About/AboutUs";
 import ContactUs from "./components/Contact/ContactUs";
@@ -36,42 +37,44 @@ function Layout() {
 
 function App() {
   return (
-    <ThemeProvider attribute="class">
-      <FavoritesProvider>
-        <Router>
-          <AnimatedCursor
-            innerSize={12}
-            outerSize={25}
-            outerAlpha={0.4}
-            innerScale={1}
-            outerScale={2}
-            color="194, 198, 204"
-          />
+    <HelmetProvider>
+      <ThemeProvider attribute="class">
+        <FavoritesProvider>
+          <Router>
+            <AnimatedCursor
+              innerSize={12}
+              outerSize={25}
+              outerAlpha={0.4}
+              innerScale={1}
+              outerScale={2}
+              color="194, 198, 204"
+            />
 
-          <Routes>
-            {/* Wrap all primary pages with Layout and use Outlet inside */}
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/home" element={<HomePage />} />
-              <Route path="/explore" element={<Dashboard />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route path="/contributors" element={<Contributors />} />
-              <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
-              <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
-              <Route path="/templates/*" element={<TemplatesRoutes />} />
-            </Route>
+            <Routes>
+              {/* Wrap all primary pages with Layout and use Outlet inside */}
+              <Route element={<Layout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/explore" element={<Dashboard />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/contributors" element={<Contributors />} />
+                <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
+                <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+                <Route path="/templates/*" element={<TemplatesRoutes />} />
+              </Route>
 
-            {/* Auth pages don't use layout (optional) */}
-            <Route path="/sign-in" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/SignUp" element={<SignupPage />} />
-          </Routes>
+              {/* Auth pages don't use layout (optional) */}
+              <Route path="/sign-in" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/SignUp" element={<SignupPage />} />
+            </Routes>
 
-          <Analytics />
-        </Router>
-      </FavoritesProvider>
-    </ThemeProvider>
+            <Analytics />
+          </Router>
+        </FavoritesProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
