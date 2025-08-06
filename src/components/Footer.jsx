@@ -9,6 +9,11 @@ import {
   Zap,
   Code,
   Heart,
+  Home,
+  Compass,
+  Info,
+  Phone,
+  BookOpen,
 } from "lucide-react";
 
 const currentYear = new Date().getFullYear();
@@ -69,6 +74,31 @@ const footerLinks = [
       },
     ],
   },
+  {
+    title: "Quick Links",
+    links: [
+      {
+        name: "Home",
+        href: "/",
+        icon: Home,
+        color: "text-pink-400",
+      },
+      {
+        name: "Explore",
+        href: "/explore",
+        icon: Compass,
+        color: "text-blue-400",
+      },
+      
+      {
+        name: "Contact Us",
+        href: "/contact",
+        icon: Phone,
+        color: "text-red-400",
+      },
+      
+    ],
+  },
 ];
 
 const Footer = () => {
@@ -76,7 +106,7 @@ const Footer = () => {
     <footer className="bg-primary-50 dark:bg-secondary-900 text-secondary-800 dark:text-white pt-16 pb-8 border-t border-gray-200 dark:border-secondary-700">
       <div className="max-w-6xl mx-auto px-4">
         {/* Top Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent">
@@ -140,6 +170,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+};  
 
 export default Footer;
