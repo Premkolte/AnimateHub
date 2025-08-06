@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
 import { ExpandingSearchBarSnippets } from "./Snippets/ExpandingSearchBarSnippets";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const ExpandingSearchBar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +32,15 @@ const ExpandingSearchBar = () => {
               Show Code
             </button>
           </div>
+          <FavoriteButton
+                      snippet={{
+                        type: 'expandingSearchBar',
+                        index: index,
+                        title: snippet.title,
+                        jsxCode: snippet.jsxCode,
+                        cssCode: snippet.cssCode,
+                      }}
+                    />
         </div>
       ))}
       <Modal

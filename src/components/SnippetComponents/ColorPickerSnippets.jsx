@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { colorPickerSnippets } from "./Snippets/ColorPicker";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const ColorPickerSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +32,16 @@ const ColorPickerSnippets = () => {
               Show Code
             </button>
           </div>
+          <FavoriteButton
+                snippet={{
+                  type: 'colorpicker',
+                  index: index,
+                  title: snippet.title,
+                  jsxCode: snippet.jsxCode,
+                  cssCode: snippet.cssCode,
+                }}
+                size="md"
+              />
         </div>
       ))}
       <Modal

@@ -28,7 +28,7 @@ function CardSnippets() {
               snippet={{
                 type: 'card',
                 index: index,
-                title: cardObject.title || `Card ${index + 1}`,
+                title: cardObject.title ,
                 jsxCode: cardObject.jsxCode,
                 cssCode: cardObject.cssCode,
               }}

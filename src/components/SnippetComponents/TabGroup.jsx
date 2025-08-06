@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { tabGroupSnippets } from "./Snippets/Tab";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const TabGroup = () => {
   const [showModal, setShowModal] = useState(false);
@@ -32,6 +33,16 @@ const TabGroup = () => {
               Show Code
             </button>
           </div>
+           <FavoriteButton
+                    snippet={{
+                      index: index,
+                      type: 'Tabgroup', 
+                      title: snippet.title,
+                      jsxCode: snippet.jsxCode,
+                      cssCode: snippet.cssCode,
+                    }}
+                    size="md"
+                  />
         </div>
       ))}
       <Modal

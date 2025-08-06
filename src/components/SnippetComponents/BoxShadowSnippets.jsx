@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { boxShadowSnippets } from "./Snippets/BoxShadow";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 function BoxShadowSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -33,6 +34,7 @@ function BoxShadowSnippets() {
             >
               Show CSS
             </button>
+            
             <button
               className="text-secondary-900 dark:text-white border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-700 text-md py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
               onClick={() =>
@@ -42,7 +44,19 @@ function BoxShadowSnippets() {
               React Snippet
             </button>
           </div>
+          {/* Favorite Button - move it here */}
+    <FavoriteButton
+      snippet={{
+        type: 'boxShadow',
+        index: index,
+        title: shadowObject.title,
+        jsxCode: shadowObject.jsxCode,
+        cssCode: shadowObject.cssCode,
+      }}
+      size="md"
+    />
         </div>
+        
       ))}
       <Modal
         showModal={showModal}

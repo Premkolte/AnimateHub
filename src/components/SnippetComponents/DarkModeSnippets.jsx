@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from '../Modal';
 import StringToReactComponent from 'string-to-react-component';
 import { darkModeSnippets } from './Snippets/DarkMode';
+import FavoriteButton from '../Favorites/FavoriteButton';
 
 const DarkModeSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -56,6 +57,16 @@ const DarkModeSnippets = () => {
             Show Code
           </button>
         </div>
+        <FavoriteButton
+  snippet={{
+    type: 'darkmode',
+    index: isDarkModeOn ? 0 : 1,
+    title: isDarkModeOn ? darkModeSnippets[0].title : darkModeSnippets[1].title,
+    jsxCode: isDarkModeOn ? darkModeSnippets[0].jsxCode : darkModeSnippets[1].jsxCode,
+    cssCode: isDarkModeOn ? darkModeSnippets[0].cssCode : darkModeSnippets[1].cssCode,
+  }}
+  size="md"
+/>
       </div>
 
       <Modal

@@ -1,8 +1,24 @@
 import { useRef } from "react";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 export default function LoginPageSnippets() {
   const formRef = useRef(null);
   const loginRef = useRef(null);
+
+  const formSnippets = [
+    {
+      label: 'Login Form 1',
+      jsxCode: '<div>...</div>',
+      cssCode: 'div { ... }',
+      index: 1,
+    },
+    {
+      label: 'Login Form 2',
+      jsxCode: '<form>...</form>',
+      cssCode: 'form { ... }',
+      index: 2,
+    }
+  ];
 
   return (
     <div
@@ -12,6 +28,28 @@ export default function LoginPageSnippets() {
       {/* Login Panel */}
       <div ref={loginRef} className="p-8">
         <h1 className="text-xl font-bold text-blue-500 mb-6">Account Login</h1>
+        
+        {/* Always render FavoriteButton in the snippet list */}
+        {formSnippets.map((snippet, index) => (
+  <div
+    key={index}
+    className="mb-4 flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200"
+    style={{ minHeight: 48 }}
+  >
+    <span className="font-medium">{snippet.label}</span>
+    <FavoriteButton
+      snippet={{
+        type: 'loginpage',
+        index: index,
+        title: snippet.label,
+        jsxCode: snippet.jsxCode,
+        cssCode: snippet.cssCode,
+      }}
+      size="md"
+    />
+  </div>
+))}
+
         <form>
           <div className="mb-4">
             <label

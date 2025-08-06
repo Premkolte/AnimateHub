@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { footerSnippets } from "./Snippets/Footer";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const FooterSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -32,6 +33,15 @@ const FooterSnippets = () => {
               Show Code
             </button>
           </div>
+          <FavoriteButton
+                      snippet={{
+                        type: 'footer',
+                        index: index,
+                        title: snippet.title,
+                        jsxCode: snippet.jsxCode,
+                        cssCode: snippet.cssCode,
+                      }}
+                    />
         </div>
       ))}
       <Modal

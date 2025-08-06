@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { checkBoxSnippets } from "./Snippets/CheckBoxes";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const CheckboxSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +32,17 @@ const CheckboxSnippets = () => {
               Show Code
             </button>
           </div>
+    <FavoriteButton
+      snippet={{
+        type: 'checkbox',
+        index: index,
+        title: snippet.title,
+        jsxCode: snippet.jsxCode,
+        cssCode: snippet.cssCode,
+      }}
+      size="md"
+    />
+          
         </div>
       ))}
       <Modal

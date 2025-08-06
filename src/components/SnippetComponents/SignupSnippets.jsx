@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from '../Modal';
 import StringToReactComponent from 'string-to-react-component';
 import { signupSnippets } from './Snippets/SignUp';
+import FavoriteButton from '../Favorites/FavoriteButton';
 
 const SignupSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +32,16 @@ const SignupSnippets = () => {
               Show Code
             </button>
           </div>
+           <FavoriteButton
+                              snippet={{
+                                type: 'signup', 
+                                index: index,
+                                title: snippet.title,
+                                jsxCode: snippet.jsxCode,
+                                cssCode: snippet.cssCode,
+                              }}
+                              size="md"
+                            />
         </div>
       ))}
       <Modal

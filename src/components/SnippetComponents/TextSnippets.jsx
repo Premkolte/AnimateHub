@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { textSnippets } from "./Snippets/Text";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 function TextSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -42,6 +43,16 @@ function TextSnippets() {
               React Snippet
             </button>
           </div>
+           <FavoriteButton
+                    snippet={{
+                      type: 'text', 
+                      index: index,
+                      title: textObject.title,
+                      jsxCode: textObject.jsxCode,
+                      cssCode: textObject.cssCode,
+                    }}
+                    size="md"
+                  />
         </div>
       ))}
       <Modal

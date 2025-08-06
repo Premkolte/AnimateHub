@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { paginationSnippets } from "./Snippets/Pagination";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 function PaginationSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -71,6 +72,16 @@ function PaginationSnippets() {
               React Snippet
             </button>
           </div>
+          <FavoriteButton
+  snippet={{
+    type: 'pagination', 
+    index: index,
+    title: paginationObject.title,
+    jsxCode: paginationObject.jsxCode,
+    cssCode: paginationObject.cssCode,
+  }}
+  size="md"
+/>
         </div>
       ))}
       <Modal

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { pillNavigationSnippets } from "./Snippets/PillNavigation";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 function PillNavigationSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -66,6 +67,16 @@ function PillNavigationSnippets() {
               React Snippet
             </button>
           </div>
+          <FavoriteButton
+  snippet={{
+    type: 'pillNavigation', 
+    index: index,
+    title: pillObject.title,
+    jsxCode: pillObject.jsxCode,
+    cssCode: pillObject.cssCode,
+  }}
+  size="md"
+/>
         </div>
       ))}
       <Modal

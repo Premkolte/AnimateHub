@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from '../Modal';
 import StringToReactComponent from 'string-to-react-component';
 import { loginSnippets } from './Snippets/Login';
+import FavoriteButton from '../Favorites/FavoriteButton';
 
 const LoginSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +22,16 @@ const LoginSnippets = () => {
           key={index}
           className="p-8 bg-white dark:bg-secondary-800 text-black dark:text-white rounded-lg shadow-lg"
         >
+           <FavoriteButton
+        snippet={{
+          type: 'login',
+          index: index,
+          title: snippet.title,
+          jsxCode: snippet.jsxCode,
+          cssCode: snippet.cssCode,
+        }}
+        size="md"
+      />
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
           <div className="mt-4 flex justify-end">
