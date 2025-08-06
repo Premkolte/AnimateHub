@@ -74,7 +74,7 @@ const About = () => {
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
   transition={{ duration: 0.5 }}
-  className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden
+  className="relative flex flex-col items-center justify-center w-full min-h-screen overflow-y-auto py-8 overflow-x-hidden
     bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 text-gray-900 
     dark:bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] 
     dark:from-indigo-500 dark:via-violet-500 dark:to-fuchsia-500 dark:text-white"
@@ -82,48 +82,180 @@ const About = () => {
       <BackButton />
       <Blobs />
 
-      <div className="relative z-10 container mx-auto px-4 md:px-8 ">
-        <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-8 md:p-12 lg:w-2/3 xl:w-1/2 mx-auto mt-7 dark:bg-white dark:bg-opacity-20 dark:border-none">
-          <h1 className="text-3xl font-bold mb-3">About Us</h1>
-          <p className="text-lg mb-4">
-            AnimateHub is your ultimate resource for learning and exploring
-            animation techniques in web development. Whether you're a beginner
-            or an expert, our curated collection of snippets and tutorials will
-            help you bring your web projects to life.
+      <div className="relative z-10 mx-auto px-4 sm:px-8 md:px-20 text-black dark:text-white mb-16 max-w-4xl space-y-8">
+        
+        {/* Hero Section */}
+        <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-8 md:p-12 dark:bg-white dark:bg-opacity-20 dark:border-none">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            About AnimateHub
+          </h1>
+          <div className="inline-block px-4 py-2 mb-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
+            100% OPEN-SOURCE
+          </div>
+          <p className="text-lg mb-4 leading-relaxed">
+            A powerful open-source animation UI library that simplifies creating beautiful, reusable animations for modern web applications.
           </p>
-          <p className="text-lg mb-4">
-            Our mission is to inspire creativity and innovation through
-            animation. Join our community and start creating stunning animations
-            today!
-          </p>
-          <p className="text-lg mb-4">Connect with us on social media:</p>
-          <ul className="list-none flex space-x-6">
-            <li>
-              <a
-                href="https://twitter.com/animatehub"
-                className="text-blue-500 hover:underline"
-              >
-                <FontAwesomeIcon icon={faTwitter} size="2x" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://facebook.com/animatehub"
-                className="text-blue-600 hover:underline"
-              >
-                <FontAwesomeIcon icon={faFacebook} size="2x" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://linkedin.com/company/animatehub"
-                className="text-blue-700 hover:underline"
-              >
-                <FontAwesomeIcon icon={faLinkedin} size="2x" />
-              </a>
-            </li>
-          </ul>
         </div>
+
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-6 dark:bg-white dark:bg-opacity-20 dark:border-none">
+            <h2 className="text-2xl font-bold mb-4 flex items-center">
+              <span className="text-2xl mr-3">✨</span>
+              Why Choose Us?
+            </h2>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <span className="text-green-500 text-lg">✂️</span>
+                <div>
+                  <h3 className="font-semibold">Copy-Paste Simple</h3>
+                  <p className="text-lg opacity-90">Instant integration, no complex setup</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-blue-500 text-lg">⚡</span>
+                <div>
+                  <h3 className="font-semibold">Performance Optimized</h3>
+                  <p className="text-lg opacity-90">Smooth 60fps animations</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-6 dark:bg-white dark:bg-opacity-20 dark:border-none">
+            <h2 className="text-2xl font-bold mb-4 flex items-center">
+              <span className="text-2xl mr-3">🚀</span>
+              What We Offer
+            </h2>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <span className="w-3 h-3 bg-blue-500 rounded-full flex-shrink-0"></span>
+                <span className="text-lg">50+ Animation Components</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="w-3 h-3 bg-green-500 rounded-full flex-shrink-0"></span>
+                <span className="text-lg">Live Preview & Code Copy</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="w-3 h-3 bg-purple-500 rounded-full flex-shrink-0"></span>
+                <span className="text-lg">Ready-to-use Templates</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <span className="w-3 h-3 bg-orange-500 rounded-full flex-shrink-0"></span>
+                <span className="text-lg">Dark/Light Mode Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tech Stack */}
+        <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-6 md:p-8 dark:bg-white dark:bg-opacity-20 dark:border-none">
+          <h2 className="text-2xl font-bold mb-6 flex items-center">
+            <span className="text-2xl mr-3">🛠️</span>
+            Built With Modern Technology
+          </h2>
+          <div className="flex flex-wrap justify-center gap-8 p-4 bg-gray-50/50 dark:bg-gray-800/30 rounded-lg">
+            <div className="flex items-center space-x-2">
+              <span className="text-blue-500 text-2xl">⚛️</span>
+              <span className="font-semibold">React 18</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-purple-500 text-2xl">⚡</span>
+              <span className="font-semibold">Vite 5</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-cyan-500 text-2xl">🎨</span>
+              <span className="font-semibold">Tailwind CSS 3</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-green-500 text-2xl">🎭</span>
+              <span className="font-semibold">Framer Motion</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Community & CTA */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-6 dark:bg-white dark:bg-opacity-20 dark:border-none">
+            <h2 className="text-2xl font-bold mb-4 flex items-center">
+              <span className="text-2xl mr-3">👥</span>
+              Join Community
+            </h2>
+            <p className="text-lg mb-4">
+              Collaborate with developers worldwide and contribute to making web animations accessible to everyone.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
+                🔧 Contribute
+              </span>
+              <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
+                💡 Suggest
+              </span>
+              <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
+                📚 Document
+              </span>
+            </div>
+          </div>
+
+          <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-6 dark:bg-white dark:bg-opacity-20 dark:border-none">
+            <h2 className="text-2xl font-bold mb-4">
+              Ready to Start?
+            </h2>
+            <p className="text-lg mb-4">
+              Explore our collection and start creating beautiful animations today!
+            </p>
+            <div className="space-y-3">
+              <a
+                href="/explore"
+                className="block w-full text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
+              >
+                🚀 Explore Components
+              </a>
+              <a
+                href="https://github.com/Premkolte/AnimateHub"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center bg-gray-800 hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-lg hover:shadow-xl"
+              >
+                ⭐ Star on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Social Media */}
+        <div className="bg-white/40 bg-opacity-80 backdrop-filter backdrop-blur-md border border-gray-200 rounded-lg shadow-lg p-6 md:p-8 dark:bg-white dark:bg-opacity-20 dark:border-none text-center">
+          <h2 className="text-2xl font-bold mb-4">
+            Connect With Us
+          </h2>
+          <p className="text-lg mb-6">
+            Follow us for updates, tips, and community highlights.
+          </p>
+          <div className="flex justify-center space-x-8">
+            <a
+              href="https://twitter.com/animatehub"
+              className="text-blue-500 hover:text-blue-600 transition-colors duration-200 hover:scale-110 transform"
+              aria-label="Follow us on Twitter"
+            >
+              <FontAwesomeIcon icon={faTwitter} size="2x" />
+            </a>
+            <a
+              href="https://facebook.com/animatehub"
+              className="text-blue-600 hover:text-blue-700 transition-colors duration-200 hover:scale-110 transform"
+              aria-label="Follow us on Facebook"
+            >
+              <FontAwesomeIcon icon={faFacebook} size="2x" />
+            </a>
+            <a
+              href="https://linkedin.com/company/animatehub"
+              className="text-blue-700 hover:text-blue-800 transition-colors duration-200 hover:scale-110 transform"
+              aria-label="Follow us on LinkedIn"
+            >
+              <FontAwesomeIcon icon={faLinkedin} size="2x" />
+            </a>
+          </div>
+        </div>
+
       </div>
     </motion.div>
   );
