@@ -1,13 +1,14 @@
-import React from "react";
-import StringToReactComponent from "string-to-react-component";
-import Modal from "../Modal";
-import { formSnippets } from "./Snippets/Form";
+import React from 'react';
+import StringToReactComponent from 'string-to-react-component';
+import Modal from '../Modal';  // Ensure this is correctly imported
+import { formSnippets } from './Snippets/Form';
+import FavoriteButton from '../Favorites/FavoriteButton';
 
 function FormSnippets() {
   const [showModal, setShowModal] = React.useState(false);
-  const [jsxCode, setJsxCode] = React.useState("");
-  const [cssCode, setCssCode] = React.useState("");
-  const [heading, setHeading] = React.useState("");
+  const [jsxCode, setJsxCode] = React.useState('');
+  const [cssCode, setCssCode] = React.useState('');
+  const [heading, setHeading] = React.useState('');
 
   const handleShowModal = (jsx, css, heading) => {
     setJsxCode(jsx);
@@ -45,6 +46,15 @@ function FormSnippets() {
               React Snippet
             </button>
           </div>
+          <FavoriteButton
+            snippet={{
+              type: 'formsnippet',
+              index: index,
+              title: formObject.label,
+              jsxCode: formObject.jsxCode,
+              cssCode: formObject.cssCode,
+            }}
+          />
         </div>
       ))}
       <Modal

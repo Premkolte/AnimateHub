@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { newsletterSnippets } from "./Snippets/NewsLetter";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const NewsletterSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -21,7 +22,7 @@ const NewsletterSnippets = () => {
         >
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
-          <div className="mt-4 flex justify-end">
+          <div className="mt-4 flex justify-between">
             <button
               className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
               onClick={() => handleShowModal(snippet.jsxCode)}
@@ -29,6 +30,17 @@ const NewsletterSnippets = () => {
               Show Code
             </button>
           </div>
+          <FavoriteButton
+       snippet={{
+         type: 'newsletter',
+         index: index,
+         title: snippet.title,
+         jsxCode: snippet.jsxCode,
+         cssCode: snippet.cssCode,
+       }}
+       size="md"
+       style={{ marginTop: '10px'}}
+     />
         </div>
       ))}
       <Modal

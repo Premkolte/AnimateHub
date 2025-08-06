@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { pageLoaderSnippets } from './Snippets/Page-load';
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 function PageLoaderSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -57,6 +58,16 @@ function PageLoaderSnippets() {
               React Snippet
             </button>
           </div>
+           <FavoriteButton
+        snippet={{
+          type: 'pageloader',
+         index: index,
+          title: loaderObject.title,
+          jsxCode: loaderObject.jsxCode,
+          cssCode: loaderObject.cssCode,
+        }}
+        size="md"
+      />
         </div>
       ))}
       <Modal

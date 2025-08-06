@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { animatedIconSnippets } from "./Snippets/AnimationIcon";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const AnimatedIconSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -28,7 +29,23 @@ const AnimatedIconSnippets = () => {
             <style>{snippet.cssCode}</style>
           </div>
 
-          <div className="flex justify-end">
+
+
+
+          <div className="flex justify-between">
+            {/* Favorite Button */}
+          
+            <FavoriteButton
+              snippet={{
+                type: 'animationicon',
+                index: index,
+                title: snippet.title,
+                jsxCode: snippet.jsxCode,
+                cssCode: snippet.cssCode,
+              }}
+              size="md"
+            />
+            
             <button
               onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}
               className="px-4 py-2 text-sm font-medium rounded-lg text-white bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 transition-colors"

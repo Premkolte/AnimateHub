@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
 import { NeonButtonSnippets } from "./Snippets/NeonButtonSnippets";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const NeonButton = () => {
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +24,7 @@ const NeonButton = () => {
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <div dangerouslySetInnerHTML={{ __html: snippet.jsxCode }} />
           <style>{snippet.cssCode}</style>
-          <div className="mt-4 flex justify-end">
+          <div className="mt-4 flex justify-between">
             <button
               className="text-white text-md py-2 px-4 rounded-lg shadow-md bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
               onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}
@@ -31,6 +32,16 @@ const NeonButton = () => {
               Show Code
             </button>
           </div>
+           <FavoriteButton
+        snippet={{
+          type: 'neonbutton',
+          index: index,
+          title: snippet.title,
+          jsxCode: snippet.jsxCode,
+          cssCode: snippet.cssCode,
+        }}
+        size="md"
+      />
         </div>
       ))}
       <Modal

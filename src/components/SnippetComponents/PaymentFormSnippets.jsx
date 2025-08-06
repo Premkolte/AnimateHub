@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { paymentFormSnippets } from "./Snippets/PaymentForm";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 function PaymentFormSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -42,6 +43,16 @@ function PaymentFormSnippets() {
               React Snippet
             </button>
           </div>
+          <FavoriteButton
+  snippet={{
+    type: 'payment', 
+    index: index,
+    title: paymentObject.title,
+    jsxCode: paymentObject.jsxCode,
+    cssCode: paymentObject.cssCode,
+  }}
+  size="md"
+/>
         </div>
       ))}
       <Modal

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from '../Modal';
 import StringToReactComponent from 'string-to-react-component';
 import { responsivenessSnippets } from './Snippets/Responsiveness';
+import FavoriteButton from '../Favorites/FavoriteButton';
 
 const ResponsivenessSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +32,16 @@ const ResponsivenessSnippets = () => {
               Show Code
             </button>
           </div>
+          <FavoriteButton
+                    snippet={{
+                      type: 'responsive', 
+                      title: snippet.title,
+                      jsxCode: snippet.jsxCode,
+                      cssCode: snippet.cssCode,
+                      index: index,
+                    }}
+                    size="md"
+                  />
         </div>
       ))}
       <Modal

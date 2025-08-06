@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { dropDownSnippets } from "./Snippets/DropDowns";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const DropdownSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +32,15 @@ const DropdownSnippets = () => {
               Show Code
             </button>
           </div>
+          <FavoriteButton
+            snippet={{
+              type: 'dropdown',
+              index: index,
+              title: snippet.title,
+              jsxCode: snippet.jsxCode,
+              cssCode: snippet.cssCode,
+            }}
+          />
         </div>
       ))}
       <Modal

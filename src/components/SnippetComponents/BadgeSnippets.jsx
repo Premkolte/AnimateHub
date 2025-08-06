@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { badgeSnippets } from "./Snippets/Badge";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const BadgeSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +24,19 @@ const BadgeSnippets = () => {
         >
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
-          <div className="mt-4 flex justify-end">
+          <div className="mt-4 flex justify-between">
+            {/* Favorite Button */}
+          
+            <FavoriteButton
+              snippet={{
+                type: 'BadgeSnippet',
+                index: index,
+                title: snippet.title,
+                jsxCode: snippet.jsxCode,
+                cssCode: snippet.cssCode,
+              }}
+              size="md"
+            />
             <button
               className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
               onClick={() => handleShowModal(snippet.jsxCode, snippet.cssCode)}

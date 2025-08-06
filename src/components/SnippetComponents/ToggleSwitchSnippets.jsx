@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { toggleSwitchSnippets } from "./Snippets/ToggleSwitch";
+import FavoriteButton from '../Favorites/FavoriteButton';
 
 function ToggleSwitchSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -30,6 +31,16 @@ function ToggleSwitchSnippets() {
               React Snippet
             </button>
           </div>
+           <FavoriteButton
+                              snippet={{
+                                index: index,
+                                type: 'Pricing', 
+                                title: switchObject.title,
+                                jsxCode: switchObject.jsxCode,
+                                cssCode: switchObject.cssCode,
+                              }}
+                              size="md"
+                            />
         </div>
       ))}
       <Modal

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { sortSnippets } from "./Snippets/Sort";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const SortSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -29,6 +30,16 @@ const SortSnippets = () => {
               Show Code
             </button>
           </div>
+           <FavoriteButton
+                    snippet={{
+                      type: 'Sort', 
+                      index: index,
+                      title: snippet.title,
+                      jsxCode: snippet.jsxCode,
+                      cssCode: snippet.cssCode,
+                    }}
+                    size="md"
+                  />
         </div>
       ))}
       <Modal

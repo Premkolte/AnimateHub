@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { socialMediaSnippets } from "./Snippets/Social";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 function SocialMediaSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -42,6 +43,16 @@ function SocialMediaSnippets() {
               React Snippet
             </button>
           </div>
+           <FavoriteButton
+                              snippet={{
+                                type: 'social', 
+                                index: index,
+                                title: socialObject.title,
+                                jsxCode: socialObject.jsxCode,
+                                cssCode: socialObject.cssCode,
+                              }}
+                              size="md"
+                            />
         </div>
       ))}
       <Modal

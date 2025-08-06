@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../Modal";
 import StringToReactComponent from "string-to-react-component";
 import { inputFieldSnippets } from "./Snippets/InputFields";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const InputFieldSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +32,16 @@ const InputFieldSnippets = () => {
               Show Code
             </button>
           </div>
+          <FavoriteButton
+            snippet={{
+              type: 'inputfield',
+              index: index,
+              title: snippet.label,
+              jsxCode: snippet.jsxCode,
+              cssCode: snippet.cssCode,
+            }}
+          
+          />
         </div>
       ))}
       <Modal

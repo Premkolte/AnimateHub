@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import Modal from '../Modal';
 import StringToReactComponent from 'string-to-react-component';
 import { progressBarSnippets } from './Snippets/Progress';
+import FavoriteButton from '../Favorites/FavoriteButton';
 
 function ProgressBarSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -90,6 +91,16 @@ function ProgressBarSnippets() {
               Run
             </button>
           </div>
+          <FavoriteButton
+          snippet={{
+            type: 'Progress',
+            index: index, 
+            title: progressObject.title,
+            jsxCode: progressObject.jsxCode,
+            cssCode: progressObject.cssCode,
+          }}
+          size="md"
+        />
         </div>
       ))}
       <div className="col-span-3 flex justify-center space-x-4">
@@ -99,6 +110,7 @@ function ProgressBarSnippets() {
         >
           Reset
         </button>
+        
       </div>
       <Modal
         showModal={showModal}

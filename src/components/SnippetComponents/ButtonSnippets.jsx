@@ -28,7 +28,7 @@ function ButtonSnippets() {
               snippet={{
                 type: 'button',
                 index: index,
-                title: `Button ${index + 1}`,
+                title: buttonObject.title,
                 jsxCode: buttonObject.jsxCode,
                 cssCode: buttonObject.cssCode,
               }}
