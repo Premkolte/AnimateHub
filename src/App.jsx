@@ -21,7 +21,7 @@ import BackToTop from "./components/BackToTop";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
 import FavoritesPage from "./components/Favorites/FavoritesPage";
-
+import ForgotPasswordPage from "./components/Auth/ForgotPasswordPage";
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
   return (
@@ -62,6 +62,7 @@ function App() {
                 <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
                 <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
                 <Route path="/templates/*" element={<TemplatesRoutes />} />
+                <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
               </Route>
 
               {/* Auth pages don't use layout (optional) */}
