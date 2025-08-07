@@ -221,22 +221,22 @@ const HomePage = () => {
 
         {/* Features */}
         <section className="features-section py-16 text-center">
-          <h2 className="text-4xl font-bold mb-12">Features</h2>
+            <h2 className="text-4xl font-bold mb-12">Features</h2>
 
-          <div className="flex flex-wrap justify-center gap-12">
-            {features.map((feature, index) => (
+            <div className="flex flex-wrap justify-center gap-12">
+              {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-lg max-w-xs w-full"
-                whileHover={{ scale: 1.05 }}
-              >
+                className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-2 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform hover:scale-105 duration-300 ease-in-out max-w-xs w-full">
+                
                 {feature.icon}
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p>{feature.description}</p>
+                 <p>{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </section>
+
 
         {/* Templates */}
         <section className="templates-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white px-4">
@@ -282,7 +282,7 @@ const HomePage = () => {
             {plans.map((plan, idx) => (
               <motion.div
                 key={idx}
-                className="flex flex-col items-center bg-white dark:bg-secondary-800 border border-secondary-200 dark:border-secondary-700 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg w-full max-w-sm min-h-[400px] sm:min-h-[450px]"
+                className="flex flex-col items-center bg-white dark:bg-secondary-800 border border-secondary-200 dark:border-secondary-700 p-4 sm:p-6 md:p-8 rounded-lg w-full max-w-sm min-h-[400px] sm:min-h-[450px] transform transition-transform duration-300 ease-in-out hover:scale-105 hover:ring-2 hover:ring-primary-400 dark:hover:ring-accent-500"
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="w-full flex-1">
