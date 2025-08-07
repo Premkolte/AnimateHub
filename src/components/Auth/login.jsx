@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSignIn } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -89,6 +89,15 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <p className="text-sm text-right mt-1">
+              <span
+                className="text-indigo-400 cursor-pointer"
+                onClick={() => navigate("/forgotpassword")}
+                >
+                Forgot Password?
+              </span>
+              </p>
+
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
