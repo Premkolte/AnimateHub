@@ -20,7 +20,7 @@ const testimonials = [
   },
   {
     id: 3,
-    text: "The UI components are sleek and easy to tweak. Perfect for our startup’s needs.",
+    text: "The UI components are sleek and easy to tweak. Perfect for our startup's needs.",
     name: "Vikranth Jonna",
     image: img2
   },
@@ -32,7 +32,7 @@ const testimonials = [
   },
   {
     id: 5,
-    text: "By far the smoothest animation library I’ve tried. The documentation is crystal clear.",
+    text: "By far the smoothest animation library I've tried. The documentation is crystal clear.",
     name: "Vikram Iyer",
     image: img3
   },
@@ -59,9 +59,9 @@ const TestimonialCard = ({ text, name, image }) => {
 
 const TestimonialSection = () => {
   const [isPaused, setIsPaused] = useState(false);
-
-  // Duplicate testimonials for seamless loop
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  
+  // Triple duplicate testimonials for seamless continuous loop
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   return (
     <>
@@ -73,25 +73,23 @@ const TestimonialSection = () => {
               transform: translateX(0);
             }
             100% {
-              transform: translateX(-50%);
+              transform: translateX(calc(-100% / 3));
             }
           }
         `
       }} />
-
       <div className="w-full max-w-7xl mx-auto py-6 sm:py-8 md:py-16 px-3 sm:px-4 md:px-6">
         <h2 className="text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 sm:mb-8 md:mb-12">
           Testimonials
         </h2>
-
         {/* Continuous scrolling container */}
         <div className="overflow-hidden">
           <div
             className="flex"
             style={{
-              width: `${duplicatedTestimonials.length * 900}px`,
-              animation: `scrollLeft 60s linear infinite`,
-              animationPlayState: isPaused ? 'paused' : 'running'
+              animation: `scrollLeft 20s linear infinite`,
+              animationPlayState: isPaused ? 'paused' : 'running',
+              width: 'max-content'
             }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
