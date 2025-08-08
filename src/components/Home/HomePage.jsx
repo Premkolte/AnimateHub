@@ -158,7 +158,7 @@ const HomePage = () => {
             >
               Get Started
             </motion.button>
-            
+
             {/* Favorites Button - Only show for signed in users */}
             <SignedIn>
               <motion.button
@@ -221,17 +221,17 @@ const HomePage = () => {
 
         {/* Features */}
         <section className="features-section py-16 text-center">
-            <h2 className="text-4xl font-bold mb-12">Features</h2>
+          <h2 className="text-4xl font-bold mb-12">Features</h2>
 
-            <div className="flex flex-wrap justify-center gap-12">
-              {features.map((feature, index) => (
+          <div className="flex flex-wrap justify-center gap-12">
+            {features.map((feature, index) => (
               <motion.div
                 key={index}
                 className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-2 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform hover:scale-105 duration-300 ease-in-out max-w-xs w-full">
-                
+
                 {feature.icon}
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                 <p>{feature.description}</p>
+                <p>{feature.description}</p>
               </motion.div>
             ))}
           </div>
