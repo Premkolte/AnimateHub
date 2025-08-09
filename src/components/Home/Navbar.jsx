@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import DarkModeToggle from "../DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -12,16 +12,66 @@ const Navbar = () => {
   const location = useLocation();
   const { signOut } = useClerk();
   const { favorites } = useFavorites();
+  const [language, setLanguage] = useState("en");
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
+  const navLinks = ["Home", "Explore", "About", "Contact"];
+
+  useEffect(() => {
+    // Hide Google Translate UI
+    const style = document.createElement("style");
+    style.innerHTML = `
+      .goog-te-banner-frame.skiptranslate { display: none !important; }
+      body { top: 0px !important; position: static !important;  }
+      .goog-te-gadget { display: none !important; }
+      .goog-logo-link { display: none !important; }
+    `;
+    document.head.appendChild(style);
+
+    // Init Google Translate
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          includedLanguages: "en,hi,es",
+          autoDisplay: false,
+        },
+        "google_translate_element"
+      );
+    };
+
+    // Load Google Translate script only once
+    if (!document.getElementById("google-translate-script")) {
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.src =
+        "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  // Safe language change
+  const changeLanguage = (lang) => {
+    let attempts = 0;
+    const interval = setInterval(() => {
+      const selectEl = document.querySelector(".goog-te-combo");
+      if (selectEl) {
+        selectEl.value = lang;
+        selectEl.dispatchEvent(new Event("change"));
+        clearInterval(interval);
+      }
+      attempts++;
+      if (attempts > 10) clearInterval(interval);
+    }, 200);
   };
 
-  const closeMenu = () => {
-    setIsOpen(false);
+  const toggleLanguage = () => {
+    const newLang = language === "en" ? "hi" : "en";
+    setLanguage(newLang);
+    changeLanguage(newLang);
   };
-
-const navLinks = ["Home", "Explore", "About", "Contact"];
 
   return (
     <nav className="w-full bg-blue-600 dark:bg-purple-700 text-white dark:text-gray-200 py-2 pt-1 shadow-lg sticky top-0 left-0 z-50">
@@ -48,20 +98,19 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
             </Link>
           </div>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex space-x-4 md:space-x-6 items-center">
             {navLinks.map((item) => (
               <Link
                 key={item}
-                to={`/${item === "Home" ? '' : item.toLowerCase()}`}
+                to={`/${item === "Home" ? "" : item.toLowerCase()}`}
                 onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white" 
+                className="hover:text-gray-300 dark:hover:text-white"
               >
                 {item}
               </Link>
             ))}
-            
-            {/* Favorites Link - Only for signed in users */}
+
             <SignedIn>
               <Link
                 to="/favorites"
@@ -79,14 +128,19 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
             </SignedIn>
 
             <SignedOut>
-              <Link to="/sign-in" onClick={closeMenu} className="hover:text-gray-300 dark:hover:text-white">
+              <Link
+                to="/sign-in"
+                onClick={closeMenu}
+                className="hover:text-gray-300 dark:hover:text-white"
+              >
                 Sign In
               </Link>
             </SignedOut>
+
             <SignedIn>
               <button
                 onClick={() => {
-                 signOut({ redirectUrl: "/" });
+                  signOut({ redirectUrl: "/" });
                   closeMenu();
                 }}
                 className="hover:text-gray-300 dark:hover:text-white"
@@ -94,11 +148,22 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
                 Sign Out
               </button>
             </SignedIn>
+
             <DarkModeToggle />
-            <UserButton/>
+
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="ml-4 px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
+            >
+              {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
+            </button>
+            <div id="google_translate_element" style={{ display: "none" }}></div>
+
+            <UserButton />
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMenu}
@@ -109,21 +174,20 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
           </div>
         </div>
 
-        {/* Mobile Navigation Links */}
+        {/* Mobile Menu */}
         {isOpen && (
           <div className="flex flex-col mt-4 space-y-4 md:hidden">
             {navLinks.map((item) => (
               <Link
                 key={item}
-                to={`/${item === "Home" ? '' : item.toLowerCase()}`}
+                to={`/${item === "Home" ? "" : item.toLowerCase()}`}
                 onClick={closeMenu}
                 className="hover:text-gray-300 dark:hover:text-white"
               >
                 {item}
               </Link>
             ))}
-            
-            {/* Mobile Favorites Link */}
+
             <SignedIn>
               <Link
                 to="/favorites"
@@ -141,14 +205,19 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
             </SignedIn>
 
             <SignedOut>
-              <Link to="/sign-in" onClick={closeMenu} className="hover:text-gray-300 dark:hover:text-white">
+              <Link
+                to="/sign-in"
+                onClick={closeMenu}
+                className="hover:text-gray-300 dark:hover:text-white"
+              >
                 Sign In
               </Link>
             </SignedOut>
+
             <SignedIn>
               <button
                 onClick={() => {
-                 signOut({ redirectUrl: "/" });
+                  signOut({ redirectUrl: "/" });
                   closeMenu();
                 }}
                 className="hover:text-gray-300 dark:hover:text-white"
@@ -156,6 +225,14 @@ const navLinks = ["Home", "Explore", "About", "Contact"];
                 Sign Out
               </button>
             </SignedIn>
+
+            {/* Mobile Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
+            >
+              {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
+            </button>
           </div>
         )}
       </div>

@@ -12,6 +12,21 @@
     <meta name="author" content="AnimateHub" />
     <meta name="robots" content="index, follow" />
     
+    <!-- REMOVE this line to allow translation -->
+    <!-- <meta name="google" content="notranslate" /> -->
+
+    <!-- Google Translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'hi,en',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <!-- Open Graph Meta Tags for Social Sharing -->
     <meta property="og:title" content="AnimateHub - Open Source Animation UI Library" />
     <meta property="og:description" content="100+ open-source animation components for React & CSS. Zero setup required, production-ready animations." />
@@ -55,8 +70,12 @@
       "softwareVersion": "1.0.0"
     }
     </script>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element" style="position:fixed;top:10px;right:10px;z-index:9999;"></div>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body> 
