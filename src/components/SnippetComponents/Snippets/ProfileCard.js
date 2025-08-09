@@ -30,7 +30,7 @@ export const profileCardSnippets = [
           <div className="p-4">
             <h3 className="text-xl font-bold">Jane Smith</h3>
             <p className="text-gray-600 mb-2">Backend Developer</p>
-            <p className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, elit at lacinia ultricies, risus mi sollicitudin magna.</p> <p className="text-gray-700 text-sm mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, elit at lacinia ultricies, risus mi sollicitudin magna.</p>
+            <p className="text-gray-700 text-sm mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, elit at lacinia ultricies, risus mi sollicitudin magna.</p>
             <a href="javascript:void(0)" className="text-blue-500 hover:underline">View Profile</a>
           </div>
         </div>
