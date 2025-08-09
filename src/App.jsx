@@ -63,12 +63,11 @@ function App() {
                 <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
                 <Route path="/templates/*" element={<TemplatesRoutes />} />
                 <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+
+                <Route path="/sign-in" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
               </Route>
 
-              {/* Auth pages don't use layout (optional) */}
-              <Route path="/sign-in" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/SignUp" element={<SignupPage />} />
             </Routes>
 
             <Analytics />
