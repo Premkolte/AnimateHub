@@ -8,7 +8,7 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-secondary-900">
+    <div className="min-h-screen bg-white dark:bg-secondary-900 p-2">
       <div className="container mx-auto px-4 pt-8">
         <WelcomeMessage />
       </div>

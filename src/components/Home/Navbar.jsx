@@ -92,10 +92,10 @@ const Navbar = () => {
               <span className="font-gagalin text-3xl font-bold text-white dark:text-gray-100">
                 AnimateHub
               </span>
+            </Link>
               <span className="md:hidden">
                 <DarkModeToggle />
               </span>
-            </Link>
           </div>
 
           {/* Desktop Nav */}

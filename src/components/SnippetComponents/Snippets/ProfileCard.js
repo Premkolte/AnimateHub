@@ -9,7 +9,7 @@ export const profileCardSnippets = [
           <div className="p-4">
             <h3 className="text-lg font-bold">John Doe</h3>
             <p className="text-gray-600">Frontend Developer</p>
-            <a href="#" className="text-blue-500 hover:underline">View Profile</a>
+            <a href="javascript:void(0)" className="text-blue-500 hover:underline">View Profile</a>
           </div>
         </div>
       )`,
@@ -30,18 +30,18 @@ export const profileCardSnippets = [
           <div className="p-4">
             <h3 className="text-xl font-bold">Jane Smith</h3>
             <p className="text-gray-600 mb-2">Backend Developer</p>
-            <p className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, elit at lacinia ultricies, risus mi sollicitudin magna.</p>
-            <a href="#" className="text-blue-500 hover:underline">View Profile</a>
+            <p className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, elit at lacinia ultricies, risus mi sollicitudin magna.</p> <p className="text-gray-700 text-sm mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, elit at lacinia ultricies, risus mi sollicitudin magna.</p>
+            <a href="javascript:void(0)" className="text-blue-500 hover:underline">View Profile</a>
           </div>
         </div>
       )`,
-      cssCode: `<div style="background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <img src="profile.jpg" alt="Profile" style="width: 100%; height: 250px; object-fit: cover;" />
+     cssCode: `<div style="background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <img src="profile.jpg" alt="Profile" style="width: 100%; height: 160px; object-fit: cover;" />
         <div style="padding: 1rem;">
-          <h3 style="font-size: 1.25rem; font-weight: bold;">Jane Smith</h3>
+          <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">Jane Smith</h3>
           <p style="color: #666; margin-bottom: 0.5rem;">Backend Developer</p>
-          <p style="margin-bottom: 0.5rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, elit at lacinia ultricies, risus mi sollicitudin magna.</p>
-          <a href="#" style="color: #007bff; text-decoration: none;">View Profile</a>
+          <p style="color: #555; font-size: 0.875rem; margin-bottom: 0.75rem; line-height: 1.4;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, elit at lacinia ultricies, risus mi sollicitudin magna.</p>
+          <a href="javascript:void(0)" style="color: #007bff; text-decoration: none;">View Profile</a>
         </div>
       </div>`
     },
