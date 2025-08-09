@@ -68,13 +68,13 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6">
+    <div className="w-full flex flex-col items-center min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 ">
       <BackButton />
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="bg-slate-900 p-8 rounded-lg shadow-lg max-w-sm w-full"
+        className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm max-w-sm w-full"
       >
         <h1 className="text-3xl font-extrabold mb-6 text-center">Sign Up</h1>
 
@@ -87,7 +87,7 @@ const SignupPage = () => {
               <input
                 type="text"
                 id="name"
-                className="mt-1 w-full p-2 bg-gray-800 text-white rounded"
+                className="mt-1 w-full p-2 border border-primary-100 dark:border-accent-600 dark:bg-secondary-700 text-secondary-900 dark:text-white rounded"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -100,7 +100,7 @@ const SignupPage = () => {
               <input
                 type="email"
                 id="email"
-                className="mt-1 w-full p-2 bg-gray-800 text-white rounded"
+                className="mt-1 w-full p-2 border border-primary-100 dark:border-accent-600 dark:bg-secondary-700 text-secondary-900 dark:text-white rounded"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -113,8 +113,8 @@ const SignupPage = () => {
               <div className="relative">
                 <input
                   type={passwordVisible ? "text" : "password"}
-                  id="password"
-                  className="mt-1 w-full p-2 bg-gray-800 text-white rounded"
+                  id="password-input"
+                  className="mt-1 w-full p-2 border border-primary-100 dark:border-accent-600 dark:bg-secondary-700 text-secondary-900 dark:text-white rounded"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -122,7 +122,7 @@ const SignupPage = () => {
                 <button
                   type="button"
                   onClick={togglePasswordVisibility}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-primary-600 dark:hover:text-accent-500 transition-colors duration-200"
                 >
                   {passwordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                 </button>
@@ -130,7 +130,7 @@ const SignupPage = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 p-3 rounded-lg font-semibold"
+              className="w-full bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200"
             >
               Sign Up
             </button>
@@ -143,7 +143,7 @@ const SignupPage = () => {
             <input
               type="text"
               placeholder="Enter verification code"
-              className="w-full p-2 bg-gray-800 text-white rounded"
+              className="mt-1 w-full p-2 border border-primary-100 dark:border-accent-600 dark:bg-secondary-700 text-secondary-900 dark:text-white rounded"
               value={code}
               onChange={(e) => setCode(e.target.value)}
               required
@@ -175,7 +175,7 @@ const SignupPage = () => {
             Already have an account?{" "}
             <span
               onClick={() => navigate("/sign-in")}
-              className="text-indigo-400 cursor-pointer"
+              className="text-primary-600 dark:text-accent-500 cursor-pointer"
             >
               Login
             </span>

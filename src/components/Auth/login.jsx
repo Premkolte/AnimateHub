@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import BackButton from "../BackButton";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -53,63 +52,59 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white p-6">
-      <BackButton />
+    <div className="w-full flex flex-col items-center justify-center min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 py-24">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="bg-slate-900 p-8 rounded-lg shadow-lg max-w-sm w-full"
+        className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm max-w-sm w-full"
       >
         <h1 className="text-3xl font-extrabold mb-6 text-center">Login</h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium">
+            <label htmlFor="email" className="block text-sm font-medium mb-1">
               Email
             </label>
             <input
-              type="email"
+              type="text"
               id="email"
-              className="mt-1 w-full p-2 bg-gray-800 text-white rounded"
+              className="mt-1 w-full p-2 border border-primary-100 dark:border-accent-600 dark:bg-gray-800 rounded"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium">
+            <label htmlFor="password" className="block text-sm font-medium mb-1">
               Password
             </label>
             <div className="relative">
               <input
                 type={passwordVisible ? "text" : "password"}
-                id="password"
-                className="mt-1 w-full p-2 bg-gray-800 text-white rounded"
+                id="password-input"
+                className="mt-1 w-full p-2 border border-primary-100 dark:border-accent-600 dark:bg-gray-800 rounded"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <p className="text-sm text-right mt-1">
-              <span
-                className="text-indigo-400 cursor-pointer"
-                onClick={() => navigate("/forgotpassword")}
-                >
-                Forgot Password?
-              </span>
-              </p>
-
+              
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400"
-              >
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-primary-600 dark:hover:text-accent-500 transition-colors duration-200"
+              > 
                 {passwordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </button>
             </div>
+            <p className="text-sm text-right mt-2">
+              <span className="text-primary-600 dark:text-accent-500 cursor-pointer hover:underline" onClick={() => navigate("/forgotpassword")}>
+                Forgot Password?
+              </span>
+            </p>
           </div>
           <button
-            type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 p-3 rounded-lg font-semibold"
+            type="submit" 
+            className="w-full bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200"
           >
             Login
           </button>
@@ -118,9 +113,8 @@ const LoginPage = () => {
         <div className="mt-4 flex flex-col items-center">
           <p className="mb-2">Or</p>
           <motion.button
-            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignIn} 
             className="w-full bg-white text-black flex items-center justify-center p-3 rounded-lg shadow-md hover:bg-gray-100"
           >
             <FcGoogle className="mr-2" />
@@ -133,7 +127,7 @@ const LoginPage = () => {
             Don't have an account?{" "}
             <span
               onClick={() => navigate("/signup")}
-              className="text-indigo-400 cursor-pointer"
+              className="text-primary-600 dark:text-accent-500 cursor-pointer"
             >
               Sign Up
             </span>
