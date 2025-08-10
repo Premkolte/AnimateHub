@@ -10,7 +10,6 @@ import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
 import ReactJoyride from 'react-joyride';
-import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { useFavorites } from '../../contexts/FavoritesContext';
 
 const HomePage = () => {
@@ -95,17 +94,17 @@ const HomePage = () => {
 
   const features = [
     {
-      icon: <IoMdRocket size={50} className="mb-4 text-primary-600 dark:text-accent-500" />,
+      icon: <IoMdRocket size={50} className="text-center w-full mb-4 text-primary-600 dark:text-accent-500" />,
       title: "Easy to Use",
       description: "Simple and intuitive components that make development a breeze."
     },
     {
-      icon: <MdLibraryBooks size={50} className="mb-4 text-primary-600 dark:text-accent-500" />,
+      icon: <MdLibraryBooks size={50} className="text-center w-full mb-4 text-primary-600 dark:text-accent-500" />,
       title: "Comprehensive Docs",
       description: "Detailed documentation to help you get started quickly and easily."
     },
     {
-      icon: <GiTechnoHeart size={50} className="mb-4 text-primary-600 dark:text-accent-500" />,
+      icon: <GiTechnoHeart size={50} className="text-center w-full mb-4 text-primary-600 dark:text-accent-500" />,
       title: "Modern Design",
       description: "Beautifully designed components that enhance your project's UI."
     }
@@ -159,8 +158,9 @@ const HomePage = () => {
               Get Started
             </motion.button>
 
+            {/* ---------------------- THIS FUNCTIONALITY WILL BE ADDED IN FUTURE WITH CUSTOM BACKEND --------------------------- */}
             {/* Favorites Button - Only show for signed in users */}
-            <SignedIn>
+            {/* <SignedIn>
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200 flex items-center gap-2"
@@ -176,10 +176,10 @@ const HomePage = () => {
                   </span>
                 )}
               </motion.button>
-            </SignedIn>
+            </SignedIn> */}
 
             {/* Sign In prompt for favorites */}
-            <SignedOut>
+            {/* <SignedOut>
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
@@ -190,7 +190,19 @@ const HomePage = () => {
                 <FaHeart />
                 Sign In for Favorites
               </motion.button>
-            </SignedOut>
+            </SignedOut> */}
+            {/* ---------------------- THIS FUNCTIONALITY WILL BE ADDED IN FUTURE WITH CUSTOM BACKEND --------------------------- */}
+
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
+              onClick={() => {
+                navigate("/sign-in");
+              }}
+            >
+              <FaHeart />
+              Sign In for Favorites
+            </motion.button>
           </div>
         </motion.div>
 
@@ -228,7 +240,6 @@ const HomePage = () => {
               <motion.div
                 key={index}
                 className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-2 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform hover:scale-105 duration-300 ease-in-out max-w-xs w-full">
-
                 {feature.icon}
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p>{feature.description}</p>
