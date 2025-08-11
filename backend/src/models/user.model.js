@@ -75,7 +75,7 @@ userSchema.methods.generateAccessToken = function () {
         role: this.role,
         isVerified: this.isVerified
     }, process.env.JWT_SECRET, {
-        expiresIn: "1w"
+        expiresIn: "1h"
     })
 }
 

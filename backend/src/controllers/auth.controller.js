@@ -31,7 +31,7 @@ export const registerController = asyncHandler(async (req, res) => {
     let user = await newUser.save();
     const accessToken = user.generateAccessToken();
 
-    // remove unnecessary` details
+    // remove unnecessary details
     user = user.toObject();
     user.password = undefined;
     user.bio = undefined
@@ -45,7 +45,7 @@ export const registerController = asyncHandler(async (req, res) => {
 
 
     return res
-        .cookie("accessToken", accessToken)
+        .cookie(accessToken)
         .status(201)
         .json(new ApiResponse(201, "User created successfully, please verify your email via link", { user, accessToken }))
 })
@@ -84,7 +84,7 @@ export const loginController = asyncHandler(async (req, res) => {
 
 
     return res
-        .cookie("accessToken", accessToken)
+        .cookie(accessToken)
         .status(200)
         .json(new ApiResponse(200, "User logged in successfully", { user, accessToken }))
 })

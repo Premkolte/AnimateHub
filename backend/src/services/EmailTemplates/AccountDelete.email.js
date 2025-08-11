@@ -1,4 +1,4 @@
- export const AccountDeletedEmail = () => ({
+export const AccountDeletedEmail = () => ({
     subject: "Your AnimateHub Account Has Been Deleted",
     html: `
     <div style="width: 100%; background-color: #f5f5f5; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">

@@ -1,10 +1,10 @@
 import nodemailer from 'nodemailer';
 
 
-// Verify environment variables
-console.log('Environment variables:', {
-    EMAIL_USER: process.env.EMAIL_USER,
-    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD ? 'Password is set' : 'Password is not set',
+// Log environment variable status for debugging
+console.log('Environment variables for email transporter:', {
+    EMAIL_USER_SET: !!process.env.EMAIL_USER,
+    EMAIL_PASSWORD_SET: !!process.env.EMAIL_PASSWORD,
 });
 
 // Create a transporter object using SMTP transport
