@@ -23,7 +23,7 @@ const corsOptions = {
     credentials: true // if you're using cookies or sessions
 };
 app.use(cors(corsOptions));
-
+ 
 
 
 // ~--------------------- LIMIT JSON | ENABLING COOKIES

@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 
 const userSchema = new Schema({
     username: {
@@ -15,7 +16,7 @@ const userSchema = new Schema({
         type: String, required: true
     },
     isVerified: {
-        type: Boolean, deafult: false
+        type: Boolean, default: false,
     },
 
     // For UI library role
@@ -27,14 +28,17 @@ const userSchema = new Schema({
 
     // Profile customization
     avatarUrl: {
-        type: String
+        type: String,
+        default: "https://i.pinimg.com/736x/14/43/55/144355d7b36c5f646435423798281ce9.jpg"
     },
     bio: {
         type: String,
-        maxlength: 250
+        maxlength: 250,
+        default: ""
     },
     website: {
-        type: String
+        type: String,
+        default: ""
     },
 
 
@@ -61,6 +65,20 @@ userSchema.methods.verifyPassword = async function (candidatePassword) {
         throw error
     }
 }
+
+// Method to generate access token with validity of 1 week
+userSchema.methods.generateAccessToken = function () {
+    return jwt.sign({
+        id: this._id,
+        username: this.username,
+        email: this.email,
+        role: this.role,
+        isVerified: this.isVerified
+    }, process.env.JWT_SECRET, {
+        expiresIn: "1w"
+    })
+}
+
 
 const User = model("User", userSchema)
 export default User
