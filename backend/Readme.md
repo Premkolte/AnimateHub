@@ -1,15 +1,18 @@
 # AnimateHub Backend
 
-Backend service for AnimateHub, handling authentication, data management, and other core functionalities.
+Backend service for AnimateHub, a platform for discovering and sharing UI animations. Built with Node.js, Express, and MongoDB, it provides a robust API for user authentication, animation management, and community features.
 
 ## 🚀 Features
 
 - **RESTful API** built with Express.js
-- **MongoDB** database integration with Mongoose
+- **JWT Authentication** with secure cookie storage
+- **Email Verification** for new user accounts
+- **Password Reset** functionality
+- **MongoDB** database with Mongoose ODM
 - **CORS** enabled with configurable allowed origins
-- **Cookie-based** authentication
 - **Environment-based** configuration
 - **Development** mode with hot-reload support
+- **Rate limiting** and security best practices
 
 ## 📦 Prerequisites
 
@@ -50,31 +53,54 @@ Backend service for AnimateHub, handling authentication, data management, and ot
 ```
 backend/
 ├── src/
-│   ├── controllers/    # Route controllers
-│   ├── models/         # Database models
+│   ├── controllers/    # Route controllers (auth, user, animations)
+│   ├── models/         # Database models (User, Animation, etc.)
 │   ├── routes/         # Route definitions
-│   ├── middlewares/    # Custom middleware
-│   ├── utils/          # Utility functions
+│   ├── middlewares/    # Custom middleware (auth, error handling)
+│   ├── services/       # Business logic and external services
+│   │   └── email/      # Email templates and sending logic
+│   ├── utils/          # Utility functions and helpers
 │   ├── app.js          # Express application setup
 │   └── index.js        # Server entry point
-├── .env                # Environment variables (create this file)
+├── .env                # Environment variables
+├── .gitignore          # Git ignore file
 ├── package.json        # Project dependencies and scripts
 └── README.md           # This file
 ```
 
 ## 🚦 Environment Variables
 
-| Variable              | Description                                   | Default Value           |
-|-----------------------|-----------------------------------------------|-------------------------|
-| `PORT`               | Port to run the server on                     | `3000`                  |
-| `MONGODB_URI`        | MongoDB connection string                     | - (required)            |
-| `ALLOWED_CORS_ORIGINS`| Comma-separated list of allowed CORS origins  | `http://localhost:3000` |
+Create a `.env` file in the root directory with the following variables:
+
+| Variable                | Description                                      | Required | Default                     |
+|-------------------------|--------------------------------------------------|----------|-----------------------------|
+| `PORT`                 | Port to run the server on                        | No       | `5000`                      |
+| `MONGODB_URI`          | MongoDB connection string                        | Yes      | -                           |
+| `JWT_SECRET`           | Secret key for JWT token signing                | Yes      | -                           |
+| `EMAIL_USER`           | Email address for sending notifications         | Yes      | -                           |
+| `EMAIL_PASSWORD`       | App password for the email service              | Yes      | -                           |
+| `BCRYPT_SALT_ROUNDS`   | Number of salt rounds for password hashing      | No       | `10`                        |
 
 ## 🚀 Available Scripts
 
-- `npm run dev` - Start the development server with hot-reload
+- `npm run dev` - Start the development server with hot-reload using nodemon
 - `npm start` - Start the production server
 - `npm test` - Run tests (if configured)
+
+## 🔐 Authentication
+
+The API uses JWT (JSON Web Tokens) for authentication. Include the token in the `Authorization` header as `Bearer <token>` for protected routes.
+
+## 📧 Email System
+
+The backend includes a built-in email system for:
+- Account verification
+- Password reset
+- Account notifications
+
+## 🌐 API Documentation
+
+For detailed API documentation, please refer to the [API Documentation](https://github.com/Premkolte/AnimateHub/tree/main/backend/docs/API.md) (coming soon).
 
 ## 🤝 Contributing
 
