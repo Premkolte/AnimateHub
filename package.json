@@ -16,6 +16,7 @@
   "dependencies": {
     "@babel/standalone": "^7.26.10",
     "@clerk/clerk-react": "^5.38.1",
+    "@clerk/nextjs": "^6.30.0",
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
@@ -26,7 +27,7 @@
     "@popperjs/core": "^2.11.8",
     "@vercel/analytics": "^1.5.0",
     "framer-motion": "^11.11.11",
-    "i18next": "^25.3.2",
+    "i18next": "^25.3.4",
     "i18next-browser-languagedetector": "^8.2.0",
     "lucide-react": "^0.534.0",
     "next-themes": "^0.4.4",

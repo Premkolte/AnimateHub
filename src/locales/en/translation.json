@@ -1,0 +1,16 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact",
+    "explore": "Explore",
+    "contributors": "Contributors",
+    "favorites": "Favorites",
+    "payment": "Payment",
+    "sign_in": "Sign In",
+    "signup": "Sign Up"
+  },
+  "footer": {
+    "copyright": "© 2025 My Website"
+  }
+}

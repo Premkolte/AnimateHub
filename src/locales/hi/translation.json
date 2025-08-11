@@ -1,0 +1,16 @@
+{
+  "navbar": {
+    "home": "होम",
+    "about": "हमारे बारे में",
+    "contact": "संपर्क करें",
+    "explore": "एक्सप्लोर",
+    "contributors": "योगदानकर्ता",
+    "favorites": "पसंदीदा",
+    "payment": "भुगतान",
+    "sign_in": "साइन इन",
+    "signup": "साइन अप"
+  },
+  "footer": {
+    "copyright": "© 2025 मेरी वेबसाइट"
+  }
+}
