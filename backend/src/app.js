@@ -38,10 +38,21 @@ app.use(cookieParser())
 
 // *--------------------- ROUTES IMPORT
 // all routes are meant to be imported here
+import authRoute from "./routes/auth.route.js"
+
+
+
+
+
+
+
+
 
 
 // *--------------------- ROUTES DECLARATION
 // all routes will be declared here
+app.use("/api/auth", authRoute)
+
 
 
 
