@@ -18,7 +18,7 @@ export const Buttons = [
     "FormSnippets",
     "InputFieldSnippets",
     "LoginSnippets",
-    'ModelSnippets',
+    'ModalSnippets',
     "NavbarIconSnippets",
     "NeonButton",
     "NewsletterSnippets",
