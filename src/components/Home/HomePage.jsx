@@ -280,9 +280,11 @@ const HomePage = () => {
         </section>
 
         {/* Testimonials */}
-        <section className="testimonial-section">
+        <section className="testimonial-section max-w-full">
           <h2 className="text-4xl mb-8 text-center"></h2>
-          <TestimonialSection />
+          <div className="overflow-x-hidden">
+            <TestimonialSection />
+          </div>
         </section>
 
         {/* Pricing */}
