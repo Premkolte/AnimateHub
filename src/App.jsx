@@ -6,7 +6,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import HomePage from "./components/Home/HomePage";
 import AboutUs from "./components/About/AboutUs";
 import ContactUs from "./components/Contact/ContactUs";
-import AnimatedCursor from "react-animated-cursor";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Contributors from "./components/Contributors/Contributors";
 import PaymentPage from "./components/Payment/Payment";
@@ -42,7 +41,7 @@ function App() {
     <HelmetProvider>
       <ThemeProvider attribute="class">
         <FavoritesProvider>
-          <Router>
+          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <SplashCursor />
 
             <Routes>

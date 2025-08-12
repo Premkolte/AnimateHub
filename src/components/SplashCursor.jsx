@@ -18,6 +18,7 @@ function SplashCursor({
   TRANSPARENT = true
 }) {
   const canvasRef = useRef(null);
+  const animationFrameRef = useRef();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -759,7 +760,7 @@ function SplashCursor({
       applyInputs();
       step(dt);
       render(null);
-      requestAnimationFrame(updateFrame);
+      animationFrameRef.current = requestAnimationFrame(updateFrame);
     }
 
     function calcDeltaTime() {
@@ -1161,7 +1162,15 @@ function SplashCursor({
       }
     });
 
-    updateFrame();
+  // Start animation only once
+  animationFrameRef.current = requestAnimationFrame(updateFrame);
+    return () => {
+      // Cancel animation frame on unmount
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      // Optionally, remove event listeners here if needed
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     SIM_RESOLUTION,

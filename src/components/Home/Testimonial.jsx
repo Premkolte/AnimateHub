@@ -62,9 +62,6 @@ const TestimonialCard = ({ text, name, image }) => {
         />
         <div className="text-center sm:text-left">
           <h5 className="font-bold text-sm sm:text-base md:text-lg text-gray-800 dark:text-white">{name}</h5>
-          {verified && (
-            <p className="text-xs sm:text-sm text-blue-600 dark:text-accent-400 font-medium">Verified User</p>
-          )}
         </div>
       </div>
     </div>
