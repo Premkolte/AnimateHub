@@ -22,6 +22,8 @@ import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
 import FavoritesPage from "./components/Favorites/FavoritesPage";
 import ForgotPasswordPage from "./components/Auth/ForgotPasswordPage";
+import SplashCursor from "./components/SplashCursor";
+
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
   return (
@@ -41,14 +43,7 @@ function App() {
       <ThemeProvider attribute="class">
         <FavoritesProvider>
           <Router>
-            <AnimatedCursor
-              innerSize={12}
-              outerSize={25}
-              outerAlpha={0.4}
-              innerScale={1}
-              outerScale={2}
-              color="194, 198, 204"
-            />
+            <SplashCursor />
 
             <Routes>
               {/* Wrap all primary pages with Layout and use Outlet inside */}
