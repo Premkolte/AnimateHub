@@ -60,7 +60,7 @@ const TestimonialCard = ({ text, name, image }) => {
           alt={name}
           className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full border-4 border-white dark:border-gray-600 flex-shrink-0 shadow-md object-cover"
         />
-        <div className="text-center xs:text-left">
+        <div className="text-center sm:text-left">
           <h5 className="font-bold text-sm sm:text-base md:text-lg text-gray-800 dark:text-white">{name}</h5>
           <p className="text-xs sm:text-sm text-blue-600 dark:text-accent-400 font-medium">Verified User</p>
         </div>
