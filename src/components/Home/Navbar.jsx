@@ -89,7 +89,7 @@ const Navbar = () => {
                 src={Logo}
                 alt="AnimateHub Logo"
               />
-              <span className="font-gagalin text-3xl font-bold text-white dark:text-gray-100">
+              <span className="font-heading text-3xl font-bold text-white dark:text-gray-100">
                 AnimateHub
               </span>
             </Link>
