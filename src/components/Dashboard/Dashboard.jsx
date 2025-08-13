@@ -16,7 +16,6 @@ function Dashboard() {
     }, 200);
 
     return () => clearTimeout(timer);
-  }, [searchQuery]);
 // Custom hook for debouncing a value
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
