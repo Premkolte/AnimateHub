@@ -63,7 +63,6 @@ function Dashboard() {
 
   const clearSearch = useCallback(() => {
     setSearchQuery("");
-    setDebouncedSearchQuery("");
     setActiveTab(0);
   }, []);
 
