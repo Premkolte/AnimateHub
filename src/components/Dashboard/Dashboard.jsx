@@ -83,7 +83,6 @@ function Dashboard() {
         clearSearch();
       }
     };
-
     document.addEventListener('keydown', handleKeyDown);
   const handleKeyDown = useCallback((e) => {
     if (!debouncedSearchQuery.trim() || filteredButtons.length === 0) return;
