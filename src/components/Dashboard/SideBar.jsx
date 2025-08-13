@@ -2,12 +2,30 @@ import React, { useState } from "react";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { Buttons } from "./Buttons";
 
-function SideBar({ activeTab, setActiveTab }) {
+function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleTabClick = (index) => {
-    setActiveTab(index);
+  const handleTabClick = (originalIndex) => {
+    setActiveTab(originalIndex);
     setIsSidebarOpen(false);
+  };
+
+  const buttonsToShow = searchQuery ? filteredButtons : Buttons.map((button, index) => ({ button, originalIndex: index }));
+
+  const highlightMatch = (text, query) => {
+    if (!query) return text;
+    const regex = new RegExp(`(${query})`, 'gi');
+    const parts = text.split(regex);
+    return parts.map((part, index) => {
+      if (part.toLowerCase() === query.toLowerCase()) {
+        return (
+          <span key={index} className="bg-yellow-200 dark:bg-yellow-600 text-secondary-900 dark:text-white">
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
   };
 
   return (
@@ -29,22 +47,27 @@ function SideBar({ activeTab, setActiveTab }) {
         } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
         style={{ maxHeight: "100vh", width: "260px" }}
       >
-        <div className="flex flex-col h-full">
-          {/* Buttons List */}
-          <div className="flex-1 px-4 py-6 space-y-1">
-            {Buttons.map((button, index) => (
-              <button
-                key={index}
-                className={`w-full text-left px-4 py-2 rounded-md transition-colors duration-200 font-medium ${
-                  activeTab === index
-                    ? "bg-secondary-800 text-white"
-                    : "hover:bg-secondary-800 hover:text-white text-gray-400"
-                }`}
-                onClick={() => handleTabClick(index)}
-              >
-                {button}
-              </button>
-            ))}
+        <div className="p-4 h-full flex flex-col justify-between">
+          <div className="space-y-2 mb-4 pb-4 inline-flex flex-col w-auto min-w-full">
+            {buttonsToShow.length > 0 ? (
+              buttonsToShow.map(({ button, originalIndex }, displayIndex) => (
+                <button
+                  key={originalIndex}
+                  className={`${activeTab === originalIndex
+                      ? "bg-primary-600 text-white dark:bg-purple-700"
+                      : "bg-primary-100 dark:bg-secondary-800 text-secondary-900 dark:text-white hover:bg-primary-600 hover:text-white"
+                    } py-2 px-4 rounded-md text-lg text-left focus:outline-none transition-colors duration-300 w-full`}
+                  onClick={() => handleTabClick(originalIndex)}
+                >
+                  {searchQuery ? highlightMatch(button, searchQuery) : button}
+                </button>
+              ))
+            ) : (
+              <div className="text-center text-gray-500 dark:text-gray-400 py-4">
+                <p className="mb-2">No components found</p>
+                <p className="text-sm">Try a different search term</p>
+              </div>
+            )}
           </div>
 
           {/* Footer Shortcut Info */}
