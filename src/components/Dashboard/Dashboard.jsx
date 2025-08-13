@@ -5,30 +5,17 @@ import Window from "./Window";
 import WelcomeMessage from "../WelcomeMessage";
 import { FaSearch } from "react-icons/fa";
 
-function Dashboard() {
-  const [activeTab, setActiveTab] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearchQuery(searchQuery);
-    }, 200);
-
 // Custom hook for debouncing a value
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
-
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
-
     return () => {
       clearTimeout(handler);
     };
   }, [value, delay]);
-
   return debouncedValue;
 }
 
@@ -36,11 +23,11 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearchQuery = useDebounce(searchQuery, 200);
+
   const filteredButtons = useMemo(() => {
     if (!debouncedSearchQuery.trim()) {
       return Buttons.map((button, index) => ({ button, originalIndex: index }));
     }
-    
     return Buttons.map((button, index) => ({ button, originalIndex: index }))
       .filter(({ button }) =>
         button.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
@@ -48,47 +35,17 @@ function Dashboard() {
   }, [debouncedSearchQuery]);
 
   const handleSearchChange = useCallback((e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
+    setSearchQuery(e.target.value);
   }, []);
-
-  useEffect(() => {
-    if (debouncedSearchQuery.trim() && filteredButtons.length > 0) {
-      setActiveTab(filteredButtons[0].originalIndex);
-    } else if (!debouncedSearchQuery.trim()) {
-      setActiveTab(0);
-    }
-  }, [filteredButtons, debouncedSearchQuery]);
 
   const clearSearch = useCallback(() => {
     setSearchQuery("");
     setActiveTab(0);
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (!debouncedSearchQuery.trim() || filteredButtons.length === 0) return;
-
-      const currentIndex = filteredButtons.findIndex(({ originalIndex }) => originalIndex === activeTab);
-      
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        const nextIndex = currentIndex < filteredButtons.length - 1 ? currentIndex + 1 : 0;
-        setActiveTab(filteredButtons[nextIndex].originalIndex);
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        const prevIndex = currentIndex > 0 ? currentIndex - 1 : filteredButtons.length - 1;
-        setActiveTab(filteredButtons[prevIndex].originalIndex);
-      } else if (e.key === 'Escape') {
-        clearSearch();
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
   const handleKeyDown = useCallback((e) => {
     if (!debouncedSearchQuery.trim() || filteredButtons.length === 0) return;
-
     const currentIndex = filteredButtons.findIndex(({ originalIndex }) => originalIndex === activeTab);
-    
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       const nextIndex = currentIndex < filteredButtons.length - 1 ? currentIndex + 1 : 0;
@@ -104,14 +61,23 @@ function Dashboard() {
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, [handleKeyDown]);
+
+  useEffect(() => {
+    if (debouncedSearchQuery.trim() && filteredButtons.length > 0) {
+      setActiveTab(filteredButtons[0].originalIndex);
+    } else if (!debouncedSearchQuery.trim()) {
+      setActiveTab(0);
+    }
+  }, [filteredButtons, debouncedSearchQuery]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-secondary-900 p-2">
       <div className="container mx-auto px-4 pt-8">
         <WelcomeMessage />
-        
         {/* Search Bar */}
         <div className="max-w-md mx-auto mb-6">
           <div className="relative">
