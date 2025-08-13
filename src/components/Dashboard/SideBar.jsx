@@ -17,7 +17,7 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
     const regex = new RegExp(`(${query})`, 'gi');
     const parts = text.split(regex);
     return parts.map((part, index) => {
-      if (regex.test(part)) {
+      if (part.toLowerCase() === query.toLowerCase()) {
         return (
           <span key={index} className="bg-yellow-200 dark:bg-yellow-600 text-secondary-900 dark:text-white">
             {part}
