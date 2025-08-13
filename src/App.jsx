@@ -6,7 +6,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import HomePage from "./components/Home/HomePage";
 import AboutUs from "./components/About/AboutUs";
 import ContactUs from "./components/Contact/ContactUs";
-import AnimatedCursor from "react-animated-cursor";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Contributors from "./components/Contributors/Contributors";
 import PaymentPage from "./components/Payment/Payment";
@@ -22,6 +21,8 @@ import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
 import FavoritesPage from "./components/Favorites/FavoritesPage";
 import ForgotPasswordPage from "./components/Auth/ForgotPasswordPage";
+import SplashCursor from "./components/SplashCursor";
+
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
   return (
@@ -40,15 +41,8 @@ function App() {
     <HelmetProvider>
       <ThemeProvider attribute="class">
         <FavoritesProvider>
-          <Router>
-            <AnimatedCursor
-              innerSize={12}
-              outerSize={25}
-              outerAlpha={0.4}
-              innerScale={1}
-              outerScale={2}
-              color="194, 198, 204"
-            />
+          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <SplashCursor />
 
             <Routes>
               {/* Wrap all primary pages with Layout and use Outlet inside */}
@@ -63,12 +57,11 @@ function App() {
                 <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
                 <Route path="/templates/*" element={<TemplatesRoutes />} />
                 <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+
+                <Route path="/sign-in" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
               </Route>
 
-              {/* Auth pages don't use layout (optional) */}
-              <Route path="/sign-in" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/SignUp" element={<SignupPage />} />
             </Routes>
 
             <Analytics />
