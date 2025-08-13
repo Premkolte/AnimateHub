@@ -89,7 +89,6 @@ const TestimonialCard = ({ text, name, image }) => {
         <div className="text-center sm:text-left">
           <h5 className="font-bold text-sm sm:text-base md:text-lg text-gray-800 dark:text-white">{name}</h5>
         </div>
- main
       </div>
     </div>
   </div>
