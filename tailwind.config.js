@@ -5,7 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        gagalin: ['Gagalin', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif'], // body text font
+        heading: ['Sora', 'sans-serif'], // headings font
       },
       colors: {
         // Light theme colors (blue/white)
