@@ -17,7 +17,27 @@ function Dashboard() {
 
     return () => clearTimeout(timer);
   }, [searchQuery]);
+// Custom hook for debouncing a value
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+function Dashboard() {
+  const [activeTab, setActiveTab] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 200);
   const filteredButtons = useMemo(() => {
     if (!debouncedSearchQuery.trim()) {
       return Buttons.map((button, index) => ({ button, originalIndex: index }));
