@@ -1,8 +1,9 @@
-export const ForgotPasswordEmail = (resetLink) => ({
+export const ForgotPasswordEmail = (fullName, resetLink) => ({
     subject: "Reset Your Password - AnimateHub",
     html: `
     <div style="width: 100%; background-color: #f5f5f5; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         <h1 style="text-align: center; color: #333; font-size: 24px; margin-bottom: 20px;">Reset Your Password</h1>
+        <p style="color: #666; font-size: 16px; line-height: 24px; margin-bottom: 20px;">Hi ${fullName},</p>
         <p style="color: #666; font-size: 16px; line-height: 24px; margin-bottom: 20px;">We received a request to reset your AnimateHub account password.</p>
         <p style="color: #666; font-size: 16px; line-height: 24px; margin-bottom: 20px;">
             Click the button below to create a new password:
