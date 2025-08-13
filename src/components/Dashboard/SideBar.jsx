@@ -2,12 +2,32 @@ import React, { useState } from "react";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { Buttons } from "./Buttons";
 
-function SideBar({ activeTab, setActiveTab }) {
+function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleTabClick = (index) => {
-    setActiveTab(index);
+  const handleTabClick = (originalIndex) => {
+    setActiveTab(originalIndex);
     setIsSidebarOpen(false);
+  };
+
+  const buttonsToShow = searchQuery ? filteredButtons : Buttons.map((button, index) => ({ button, originalIndex: index }));
+
+  const highlightMatch = (text, query) => {
+    if (!query) return text;
+    
+    const regex = new RegExp(`(${query})`, 'gi');
+    const parts = text.split(regex);
+    
+    return parts.map((part, index) => {
+      if (regex.test(part)) {
+        return (
+          <span key={index} className="bg-yellow-200 dark:bg-yellow-600 text-secondary-900 dark:text-white">
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
   };
 
   return (
@@ -40,18 +60,25 @@ function SideBar({ activeTab, setActiveTab }) {
       >
         <div className="p-4 h-full flex flex-col justify-between">
           <div className="space-y-2 mb-4 pb-4 inline-flex flex-col w-auto min-w-full">
-            {Buttons.map((button, index) => (
-              <button
-                key={index}
-                className={`${activeTab === index
-                    ? "bg-primary-600 text-white dark:bg-purple-700"
-                    : "bg-primary-100 dark:bg-secondary-800 text-secondary-900 dark:text-white hover:bg-primary-600 hover:text-white"
-                  } py-2 px-4 rounded-md text-lg text-left focus:outline-none transition-colors duration-300 w-full`}
-                onClick={() => handleTabClick(index)}
-              >
-                {button}
-              </button>
-            ))}
+            {buttonsToShow.length > 0 ? (
+              buttonsToShow.map(({ button, originalIndex }, displayIndex) => (
+                <button
+                  key={originalIndex}
+                  className={`${activeTab === originalIndex
+                      ? "bg-primary-600 text-white dark:bg-purple-700"
+                      : "bg-primary-100 dark:bg-secondary-800 text-secondary-900 dark:text-white hover:bg-primary-600 hover:text-white"
+                    } py-2 px-4 rounded-md text-lg text-left focus:outline-none transition-colors duration-300 w-full`}
+                  onClick={() => handleTabClick(originalIndex)}
+                >
+                  {searchQuery ? highlightMatch(button, searchQuery) : button}
+                </button>
+              ))
+            ) : (
+              <div className="text-center text-gray-500 dark:text-gray-400 py-4">
+                <p className="mb-2">No components found</p>
+                <p className="text-sm">Try a different search term</p>
+              </div>
+            )}
           </div>
 
           <div className="text-center text-sm text-secondary-700 dark:text-secondary-300">
