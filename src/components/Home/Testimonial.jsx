@@ -64,7 +64,6 @@ const TestimonialCard = ({ text, name, image, noMargin = false, style }) => (
       <div className="text-center sm:text-left">
         <h5 className="font-bold text-xs sm:text-sm md:text-base pt-4">
           {name}
-        </h5>
 
 const TestimonialCard = ({ text, name, image }) => {
   return (
