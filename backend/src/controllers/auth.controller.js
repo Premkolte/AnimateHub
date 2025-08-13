@@ -141,3 +141,36 @@ export const getCurrentUserController = asyncHandler(async (req, res) => {
 
     return res.status(200).json(new ApiResponse(200, "User fetched successfully", { user: userObj }));
 })
+
+export const updatePasswordController = asyncHandler(async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+        throw new ApiError(400, "Both fields are required");
+    }
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+
+    const isPasswordValid = await user.verifyPassword(currentPassword);
+    if (!isPasswordValid) {
+        throw new ApiError(401, "Invalid current password");
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    const accessToken = user.generateAccessToken();
+
+    return res
+        .cookie("accessToken", accessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+        })
+        .status(200)
+        .json(new ApiResponse(200, "Password updated successfully", { accessToken }));
+})

@@ -4,6 +4,7 @@ import {
     loginController,
     logoutController,
     registerController,
+    updatePasswordController
 } from "../controllers/auth.controller.js";
 
 import { verifyUserMailController, resendVerificationEmail } from "../controllers/user.controller.js";
@@ -21,5 +22,6 @@ router.get("/check", authMiddleware, getCurrentUserController)
 // Email verification routes
 router.get("/verify-email/:token", verifyUserMailController)
 router.post("/resend-verification", authMiddleware, resendVerificationEmail)
+router.post("/update-password", authMiddleware, updatePasswordController)
 
 export default router
