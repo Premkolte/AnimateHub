@@ -1,11 +1,13 @@
 import { Router } from "express";
 import {
+    getCurrentUserController,
     loginController,
     logoutController,
     registerController,
-    verifyUserMailController,
-    resendVerificationEmail
 } from "../controllers/auth.controller.js";
+
+import { verifyUserMailController, resendVerificationEmail } from "../controllers/user.controller.js";
+
 import authMiddleware from "../middlewares/auth.middleware.js";
 
 const router = Router()
@@ -14,6 +16,7 @@ const router = Router()
 router.post("/register", registerController)
 router.post("/login", loginController)
 router.post("/logout", logoutController)
+router.get("/check", authMiddleware, getCurrentUserController)
 
 // Email verification routes
 router.get("/verify-email/:token", verifyUserMailController)
