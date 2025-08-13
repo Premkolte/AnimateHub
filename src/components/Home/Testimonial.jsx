@@ -62,7 +62,6 @@ const TestimonialCard = ({ text, name, image, noMargin = false, style }) => (
         className="h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16 rounded-full sm:mr-4 border-4 border-white flex-shrink-0"
       />
       <div className="text-center sm:text-left">
-        <h5 className="font-bold text-xs sm:text-sm md:text-base pt-4">
 // Removed duplicate and incomplete TestimonialCard definition (lines 43–66)
 const TestimonialCard = ({ text, name, image }) => {
   return (
