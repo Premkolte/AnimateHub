@@ -23,7 +23,7 @@ const corsOptions = {
     credentials: true // if you're using cookies or sessions
 };
 app.use(cors(corsOptions));
-
+ 
 
 
 // ~--------------------- LIMIT JSON | ENABLING COOKIES
@@ -38,10 +38,21 @@ app.use(cookieParser())
 
 // *--------------------- ROUTES IMPORT
 // all routes are meant to be imported here
+import authRoute from "./routes/auth.route.js"
+
+
+
+
+
+
+
+
 
 
 // *--------------------- ROUTES DECLARATION
 // all routes will be declared here
+app.use("/api/auth", authRoute)
+
 
 
 

@@ -44,11 +44,13 @@ import ProfileCardSnippets from "../SnippetComponents/ProfileCardSnippets";
 
 import NeonButton from "../SnippetComponents/NeonButton";
 import ExpandingSearchBar from "../SnippetComponents/ExpandingSearchBar";
-
+import AccordianSnippets from "../SnippetComponents/AccordianSnippets";
+import ModalSnippets from "../SnippetComponents/ModalSnippets";
+import TooltipSnippets from "../SnippetComponents/TooltipSnippets";
 function Window({ activeTab }) {
   const content = [
     // Please add your components alphabetically in both button and this file and in same palce for perfect rendering
-
+    <AccordianSnippets />,
     <AnimatedIconSnippets />,
     <AnimationSnippets />,
     <AvatarImageSnippets />,
@@ -67,6 +69,7 @@ function Window({ activeTab }) {
     <FormSnippets />,
     <InputFieldSnippets />,
     <LoginSnippets />,
+    <ModalSnippets />,
     <NavbarIconSnippets />,
     <NeonButton />,
     <NewsletterSnippets />,
@@ -90,6 +93,7 @@ function Window({ activeTab }) {
     <TextAreaSnippets />,
     <TextSnippets />,
     <ToggleSwitchSnippets />,
+    <TooltipSnippets/>,
     <LoginPageSnippets />,
   ];
 

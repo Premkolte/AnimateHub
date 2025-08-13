@@ -1,4 +1,5 @@
 export const Buttons = [
+    "AccordionSnippets",
     "AnimatedIconSnippets",
     "AnimationSnippets",
     "AvatarImageSnippets",
@@ -17,8 +18,9 @@ export const Buttons = [
     "FormSnippets",
     "InputFieldSnippets",
     "LoginSnippets",
+    'ModalSnippets',
     "NavbarIconSnippets",
-    " NeonButton",
+    "NeonButton",
     "NewsletterSnippets",
     "PageLoaderSnippets",
     "PaginationSnippets",
@@ -40,4 +42,5 @@ export const Buttons = [
     "TextAreaSnippets",
     "TextSnippets",
     "ToggleSwitchSnippets",
+    "TooltipSnippets"
 ];
