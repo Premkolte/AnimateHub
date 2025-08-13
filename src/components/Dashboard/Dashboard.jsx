@@ -89,7 +89,28 @@ function Dashboard() {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
+  const handleKeyDown = useCallback((e) => {
+    if (!debouncedSearchQuery.trim() || filteredButtons.length === 0) return;
+
+    const currentIndex = filteredButtons.findIndex(({ originalIndex }) => originalIndex === activeTab);
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = currentIndex < filteredButtons.length - 1 ? currentIndex + 1 : 0;
+      setActiveTab(filteredButtons[nextIndex].originalIndex);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : filteredButtons.length - 1;
+      setActiveTab(filteredButtons[prevIndex].originalIndex);
+    } else if (e.key === 'Escape') {
+      clearSearch();
+    }
   }, [debouncedSearchQuery, filteredButtons, activeTab, clearSearch]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-secondary-900 p-2">
