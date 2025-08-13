@@ -1,47 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import img1 from "./images/main.jpg";
 import img2 from "./images/img2.jpeg";
 import img3 from "./images/img.jpeg";
 import img4 from "./images/img3.jpeg";
 import img5 from "./images/img4.jpeg";
 
-
 const testimonials = [
   {
     id: 1,
     text: "An amazing tool for developers in India. The open-source nature makes it even more valuable!",
     name: "Varnikumar Patel",
-    image: img1
+    image: img1,
   },
   {
     id: 2,
     text: "After integrating AnimateHub, our website engagement in India went through the roof!",
     name: "Priya Nair",
-    image: img4
+    image: img4,
   },
   {
     id: 3,
     text: "The UI components are sleek and easy to tweak. Perfect for our startup's needs.",
     name: "Vikranth Jonna",
-    image: img2
+    image: img2,
   },
   {
     id: 4,
     text: "AnimateHub has streamlined our workflow completely. A must-have for Indian tech teams!",
     name: "Ananya Singh",
-    image: img5
+    image: img5,
   },
   {
     id: 5,
     text: "By far the smoothest animation library I've tried. The documentation is crystal clear.",
     name: "Vikram Iyer",
-    image: img3
+    image: img3,
   },
 ];
 
 const TestimonialCard = ({ text, name, image }) => {
   return (
     <div className="flex-none w-72 sm:w-80 sm:w-84 md:w-96 p-4 sm:p-6 md:p-8 h-auto min-h-[220px] sm:min-h-[240px] md:min-h-[260px] rounded-xl shadow-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 text-gray-900 dark:text-white flex flex-col justify-between relative transition-all duration-300 transform hover:scale-105 hover:shadow-xl mx-2 sm:mx-3 border border-blue-100 dark:border-gray-700">
+      
       {/* Top accent bar */}
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-2 w-12 bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-blue-400 dark:to-indigo-400 rounded-t-lg shadow-sm" />
       
@@ -52,7 +52,9 @@ const TestimonialCard = ({ text, name, image }) => {
         </svg>
       </div>
 
-      <p className="mb-4 sm:mb-6 text-sm sm:text-base md:text-lg flex-grow leading-relaxed break-words text-gray-700 dark:text-gray-300 font-medium pr-8">{text}</p>
+      <p className="mb-4 sm:mb-6 text-sm sm:text-base md:text-lg flex-grow leading-relaxed break-words text-gray-700 dark:text-gray-300 font-medium pr-8">
+        {text}
+      </p>
       
       <div className="flex flex-col xs:flex-row items-center xs:items-center gap-3 xs:gap-4 mt-auto pt-4 border-t border-blue-100 dark:border-gray-700">
         <img
@@ -70,82 +72,98 @@ const TestimonialCard = ({ text, name, image }) => {
 
 const TestimonialSection = () => {
   const [isPaused, setIsPaused] = useState(false);
-  
-  // Triple duplicate testimonials for seamless continuous loop
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const maxIndex = testimonials.length - 1;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
   const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   return (
     <>
-      {/* CSS Animation Keyframes with responsive speed */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
           @keyframes scrollLeft {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(calc(-100% / 3));
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-100% / 3)); }
           }
-          
-          @media (max-width: 640px) {
-            .scroll-container {
-              animation-duration: 25s !important;
-            }
-          }
-          
-          @media (min-width: 641px) and (max-width: 1024px) {
-            .scroll-container {
-              animation-duration: 22s !important;
-            }
-          }
-          
-          @media (min-width: 1025px) {
-            .scroll-container {
-              animation-duration: 20s !important;
-            }
-          }
-        `
-      }} />
-      
-      <div className="w-full max-w-full mx-auto py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 bg-gradient-to-b bg-white dark:bg-gray-900">
-        {/* Header Section */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
-            What Our Users Say
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Trusted by developers and teams across India
-          </p>
-        </div>
+        `,
+        }}
+      />
 
-        {/* Testimonials Container */}
-        <div className="relative">
-          {/* Gradient overlays for fade effect */}
-          <div className="absolute -left-1 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
-          <div className="absolute -right-1 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
-          
-          {/* Scrolling container */}
+      <div className="w-full max-w-5xl mx-auto py-8 px-4">
+        <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold mb-8">
+          Testimonials
+        </h2>
+
+        {isMobile ? (
+          <div className="relative flex items-center justify-center max-w-md mx-auto">
+            <button
+              onClick={prevSlide}
+              className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full shadow-md mr-3"
+            >
+              &#8592;
+            </button>
+
+            <div className="overflow-hidden rounded-lg shadow-lg" style={{ width: "280px" }}>
+              <div
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{
+                  width: `${testimonials.length * 280}px`,
+                  transform: `translateX(-${currentIndex * 280}px)`,
+                }}
+              >
+                {testimonials.map((t) => (
+                  <div key={t.id} style={{ width: "280px" }}>
+                    <TestimonialCard {...t} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={nextSlide}
+              className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full shadow-md ml-3"
+            >
+              &#8594;
+            </button>
+          </div>
+        ) : (
           <div className="overflow-hidden">
             <div
-              className="flex scroll-container"
+              className="flex"
               style={{
                 animation: `scrollLeft 20s linear infinite`,
-                animationPlayState: isPaused ? 'paused' : 'running',
-                width: 'max-content'
+                animationPlayState: isPaused ? "paused" : "running",
+                width: "max-content",
               }}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
-              {duplicatedTestimonials.map((testimonial, index) => (
-                <TestimonialCard
-                  key={`${testimonial.id}-${index}`}
-                  {...testimonial}
-                />
+              {duplicatedTestimonials.map((t, i) => (
+                <TestimonialCard key={`${t.id}-${i}`} {...t} />
               ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );
