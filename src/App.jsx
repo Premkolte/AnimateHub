@@ -8,6 +8,7 @@ import Chatbot from "./components/layout/Chatbot";
 import Footer from "./components/layout/Footer";
 import SplashCursor from "./components/SplashCursor";
 import BackToTop from "./components/UI/BackToTop";
+import { Toaster } from "react-hot-toast";
 
 
 // Middleware -------------------------------
@@ -38,6 +39,7 @@ function Layout() {
       <Chatbot />
       <Footer />
       <BackToTop />
+      <Toaster />
     </>
   );
 }

@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { User, Lock } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const LoginPage = () => {
 
   const handleGoogleSignIn = () => {
     // Google sign-in can be implemented later if needed
-    alert("Google sign-in is currently not available");
+    toast.error("Google sign-in is currently not available");
   };
 
   useEffect(() => {
@@ -232,7 +233,7 @@ const LoginPage = () => {
                 boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
               }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => alert("Google signup is currently not available")}
+              onClick={() => toast.error("Google signup is currently not available")}
               className="w-full bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 font-semibold"
             >
               <FcGoogle className="mr-3 text-xl" />
