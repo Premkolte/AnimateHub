@@ -16,15 +16,21 @@ function ButtonSnippets() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-secondary-900 rounded-lg ">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#eff6ff] dark:bg-secondary-900 rounded-lg ">
       {buttonSnippets.map((buttonObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white dark:bg-secondary-700 
+          className="
+  p-8 pt-14 
+  bg-[#dbeafe]
+ dark:bg-secondary-700 
   text-secondary-900 dark:text-white 
   rounded-lg 
-  border border-gray-200 dark:border-[#a855f7]
-  shadow-lg dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)]  flex flex-col items-center justify-evenly gap-10 relative"
+border border-blue-300 dark:border-[#a855f7]
+  shadow-lg shadow-[0_4px_20px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] 
+  flex flex-col items-center justify-evenly gap-10 relative 
+  text-sm
+"
         >
           {/* Favorite Button */}
           <div className="absolute top-4 right-4">
@@ -45,12 +51,24 @@ function ButtonSnippets() {
           </StringToReactComponent>
           <div className="flex flex-col gap-4 w-full">
             <button
-              className="w-full text-white text-md py-3 px-6 rounded-full shadow-md bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
-              onClick={() =>
+              className="
+  p-8 pt-14 
+  bg-[#dbeafe]
+ dark:bg-secondary-700 
+  text-secondary-900 dark:text-white 
+  rounded-lg 
+border border-blue-300 dark:border-[#a855f7]
+  shadow-lg shadow-[0_4px_20px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] 
+  flex flex-col items-center justify-evenly gap-10 relative 
+  text-sm
+"
+            >
+              {" "}
+              onClick=
+              {() =>
                 handleShowModal(buttonObject.jsxCode, buttonObject.cssCode)
               }
-            >
-              Show CSS
+               Show CSS
             </button>
             <button
               className="w-full text-secondary-900 dark:text-white border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-700 text-md py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-200"

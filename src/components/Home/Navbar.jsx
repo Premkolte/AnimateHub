@@ -75,7 +75,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full bg-blue-600 dark:bg-purple-700 text-white dark:text-gray-200 py-2 pt-1 shadow-lg sticky top-0 left-0 z-50">
+    <nav className="w-full backdrop-blur-md bg-white/30 dark:bg-purple-900/30 text-gray-800 dark:text-gray-200 
+py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -100,15 +101,24 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex space-x-4 md:space-x-6 items-center">
+          <div className="hidden md:flex space-x-6 items-center">
             {navLinks.map((item) => (
               <Link
                 key={item}
                 to={`/${item === "Home" ? "" : item.toLowerCase()}`}
                 onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white"
+                className={`relative px-2 py-1 transition-all duration-300 
+                  hover:text-blue-500 hover:font-bold dark:hover:text-purple-300 
+                  ${location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`
+                    ? "text-blue-500 dark:text-purple-300 font-bold"
+                    : "font-normal"
+                  }
+                  group
+                `}
               >
                 {item}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 dark:bg-purple-300 
+                  transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
 
@@ -152,99 +162,114 @@ const Navbar = () => {
               <Link
                 to="/sign-in"
                 onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white"
+                className="px-4 py-1.5 rounded-lg bg-blue-500 hover:bg-blue-600 dark:bg-purple-600 
+                  dark:hover:bg-purple-700 text-white transition-all duration-300 shadow-lg 
+                  hover:shadow-blue-500/25 dark:hover:shadow-purple-500/25"
               >
                 Sign In
               </Link>
             )}
 
-            <DarkModeToggle />
+            <div className="p-1.5 rounded-lg backdrop-blur-sm bg-white/10 dark:bg-purple-800/40">
+              <DarkModeToggle />
+            </div>
 
-            {/* Language Toggle */}
+            {/* Language Toggle with enhanced styling */}
             <button
               onClick={toggleLanguage}
-              className="ml-4 px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
+              className="px-4 py-1.5 rounded-lg backdrop-blur-sm bg-white/20 hover:bg-white/30 
+                dark:bg-purple-800/40 dark:hover:bg-purple-700/50 transition-all duration-300 
+                font-medium shadow-sm"
             >
               {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
             </button>
             <div id="google_translate_element" style={{ display: "none" }}></div>
-          </div>
+          </div >
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
+          < div className="md:hidden flex items-center" >
             <button
               onClick={toggleMenu}
               className="text-2xl focus:outline-none"
             >
               {isOpen ? <FiX /> : <FiMenu />}
             </button>
-          </div>
-        </div>
+          </div >
+        </div >
 
         {/* Mobile Menu */}
-        {isOpen && (
-          <div className="flex flex-col mt-4 space-y-4 md:hidden">
-            {navLinks.map((item) => (
-              <Link
-                key={item}
-                to={`/${item === "Home" ? "" : item.toLowerCase()}`}
-                onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white"
-              >
-                {item}
-              </Link>
-            ))}
+        {
+          isOpen && (
+            <div className="flex flex-col mt-4 space-y-4 md:hidden">
+              {navLinks.map((item) => (
+                <Link
+                  key={item}
+                  to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                  onClick={closeMenu}
+                  className={`transition-all duration-300
+                  hover:text-gray-300 hover:font-bold dark:hover:text-white
+                  ${location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`
+                      ? "font-bold text-blue-500 dark:text-purple-300"
+                      : "font-normal"
+                    }
+                `}
+                >
+                  {item}
+                </Link>
+              ))}
 
-            <SignedIn>
-              <Link
-                to="/favorites"
-                onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
-              >
-                <FaHeart className="text-red-400" />
-                <span>Favorites</span>
-                {favorites.length > 0 && (
-                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                    {favorites.length}
-                  </span>
-                )}
-              </Link>
-            </SignedIn>
+              <SignedIn>
+                <Link
+                  to="/favorites"
+                  onClick={closeMenu}
+                  className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
+                >
+                  <FaHeart className="text-red-400" />
+                  <span>Favorites</span>
+                  {favorites.length > 0 && (
+                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                      {favorites.length}
+                    </span>
+                  )}
+                </Link>
+              </SignedIn>
 
-            <SignedOut>
-              <Link
-                to="/sign-in"
-                onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white"
-              >
-                Sign In
-              </Link>
-            </SignedOut>
+              <SignedOut>
+                <Link
+                  to="/sign-in"
+                  onClick={closeMenu}
+                  className="hover:text-gray-300 dark:hover:text-white"
+                >
+                  Sign In
+                </Link>
+              </SignedOut>
 
-            <SignedIn>
+              <SignedIn>
+                <button
+                  onClick={() => {
+                    signOut({ redirectUrl: "/" });
+                    closeMenu();
+                  }}
+                  className="hover:text-gray-300 dark:hover:text-white"
+                >
+                  Sign Out
+                </button>
+              </SignedIn>
+
+              {/* Mobile Language Toggle */}
               <button
-                onClick={() => {
-                  signOut({ redirectUrl: "/" });
-                  closeMenu();
-                }}
-                className="hover:text-gray-300 dark:hover:text-white"
+                onClick={toggleLanguage}
+                className="px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
               >
-                Sign Out
+                {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
               </button>
-            </SignedIn>
-
-            {/* Mobile Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className="px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
-            >
-              {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
-            </button>
-          </div>
-        )}
-      </div>
-    </nav>
+            </div>
+          )
+        }
+      </div >
+    </nav >
   );
 };
 
 export default Navbar;
+

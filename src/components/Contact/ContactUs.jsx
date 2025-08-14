@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { User, Mail, Send, MessageCircle, Clock, Shield, Users } from 'lucide-react';
 import FAQ from '../../assets/FAQ';
+import { motion } from 'framer-motion';
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -21,14 +23,14 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     setSubmitStatus('success');
     setIsSubmitting(false);
     setFormData({ name: '', email: '', message: '' });
-    
+
     setTimeout(() => setSubmitStatus(null), 5000);
   };
 
@@ -41,7 +43,7 @@ const Contact = () => {
             <MessageCircle className="w-6 h-6 text-blue-600" />
             <span className="text-gray-700 dark:text-gray-300 font-medium">Let's Connect</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
             Get In Touch
           </h1>
@@ -59,7 +61,7 @@ const Contact = () => {
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">24h</h3>
             <p className="text-gray-600 dark:text-gray-300">Response Time</p>
           </div>
-          
+
           <div className="text-center p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
             <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Users className="w-8 h-8 text-white" />
@@ -67,7 +69,7 @@ const Contact = () => {
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">500+</h3>
             <p className="text-gray-600 dark:text-gray-300">Happy Clients</p>
           </div>
-          
+
           <div className="text-center p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
             <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Shield className="w-8 h-8 text-white" />
@@ -174,16 +176,20 @@ const Contact = () => {
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      Sending...
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                      </svg>
+                      <span>Sending...</span>
                     </>
                   ) : (
                     <>
-                      <Send className="w-5 h-5" />
-                      Send Message
+                      <Send className="h-5 w-5" />
+                      <span>Send Message</span>
                     </>
                   )}
                 </button>
+
               </div>
             </div>
           </div>

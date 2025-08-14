@@ -37,6 +37,13 @@ const socialLinks = [
     icon: Twitter,
     color: "hover:text-blue-500",
   },
+  {
+    name: "GitHub",
+    href: "https://github.com/Premkolte/AnimateHub",
+    icon: Github,
+    color: "hover:text-blue-500",
+  }
+
 ];
 
 const footerLinks = [
@@ -103,7 +110,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-50 dark:bg-secondary-900 text-secondary-800 dark:text-white pt-16 pb-8 border-t border-gray-200 dark:border-secondary-700">
+    <footer className="bg-primary-50 dark:bg-secondary-900 text-secondary-800 dark:text-white pt-16 pb-8 border-t border-gray-200 dark:border-t-[2px] dark:border-secondary-500">
       <div className="max-w-6xl mx-auto px-4">
         {/* Top Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">

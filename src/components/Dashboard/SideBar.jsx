@@ -42,13 +42,15 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 bg-secondary-900 text-gray-300 shadow-xl transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
-        style={{ maxHeight: "100vh", width: "260px" }}
-      >
-        <div className="p-4 h-full flex flex-col justify-between">
-          <div className="space-y-2 mb-4 pb-4 inline-flex flex-col w-auto min-w-full">
+  className={`fixed inset-y-0 left-0 z-40 bg-white dark:bg-secondary-900 border border-blue-300 dark:border-[#a855f7]
+    text-gray-300 shadow-xl rounded-xl transform ${
+      isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+    } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
+  style={{ maxHeight: "calc(100vh - 35px)", width: "260px", bottom: "35px" }}
+>
+
+        <div className="p-4 h-full flex flex-col justify-between bg-white dark:bg-secondary-900">
+          <div className="space-y-2 mb-4 pb-4 inline-flex flex-col w-auto min-w-full bg-white dark:bg-secondary-900">
             {buttonsToShow.length > 0 ? (
               buttonsToShow.map(({ button, originalIndex }, displayIndex) => (
                 <button
