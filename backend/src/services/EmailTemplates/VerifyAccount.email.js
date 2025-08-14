@@ -1,9 +1,9 @@
-export const VerifyAccountEmail = (verificationLink) => ({
+export const VerifyAccountEmail = (fullName, verificationLink) => ({
     subject: "Verify Your Email - Welcome to AnimateHub",
     html: `
     <div style="width: 100%; background-color: #f5f5f5; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         <h1 style="text-align: center; color: #333; font-size: 24px; margin-bottom: 20px;">Verify Your Email</h1>
-        <p style="color: #666; font-size: 16px; line-height: 24px; margin-bottom: 20px;">Welcome to AnimateHub!</p>
+        <p style="color: #666; font-size: 16px; line-height: 24px; margin-bottom: 20px;">Hi ${fullName}, Welcome to AnimateHub!</p>
         <p style="color: #666; font-size: 16px; line-height: 24px; margin-bottom: 20px;">
             Please verify your email by clicking the link below:
         </p>

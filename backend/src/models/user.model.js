@@ -16,7 +16,25 @@ const userSchema = new Schema({
         type: String, required: true
     },
     isVerified: {
-        type: Boolean, default: false,
+        type: Boolean,
+        default: false,
+    },
+    emailVerificationToken: {
+        type: String,
+        default: null
+    },
+    emailVerificationExpires: {
+        type: Date,
+        default: null
+    },
+    
+    resetPasswordToken: {
+        type: String,
+        default: null
+    },
+    resetPasswordExpires: {
+        type: Date,
+        default: null
     },
 
     // For UI library role
@@ -75,7 +93,7 @@ userSchema.methods.generateAccessToken = function () {
         role: this.role,
         isVerified: this.isVerified
     }, process.env.JWT_SECRET, {
-        expiresIn: "1h"
+        expiresIn: "7d"
     })
 }
 
