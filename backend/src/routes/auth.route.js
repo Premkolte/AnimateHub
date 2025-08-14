@@ -7,7 +7,12 @@ import {
     updatePasswordController
 } from "../controllers/auth.controller.js";
 
-import { verifyUserMailController, resendVerificationEmail } from "../controllers/user.controller.js";
+import { 
+    verifyUserMailController, 
+    resendVerificationEmail,
+    forgotPassword,
+    resetPassword 
+} from "../controllers/user.controller.js";
 
 import authMiddleware from "../middlewares/auth.middleware.js";
 
@@ -18,10 +23,16 @@ router.post("/register", registerController)
 router.post("/login", loginController)
 router.post("/logout", logoutController)
 router.get("/check", authMiddleware, getCurrentUserController)
+router.post("/update-password", authMiddleware, updatePasswordController)
+
 
 // Email verification routes
 router.get("/verify-email/:token", verifyUserMailController)
 router.post("/resend-verification", authMiddleware, resendVerificationEmail)
-router.post("/update-password", authMiddleware, updatePasswordController)
+
+// Password reset routes
+router.post("/forgot-password", forgotPassword)
+router.post("/reset-password/:token", resetPassword)
+
 
 export default router

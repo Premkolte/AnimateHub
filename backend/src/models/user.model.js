@@ -27,6 +27,15 @@ const userSchema = new Schema({
         type: Date,
         default: null
     },
+    
+    resetPasswordToken: {
+        type: String,
+        default: null
+    },
+    resetPasswordExpires: {
+        type: Date,
+        default: null
+    },
 
     // For UI library role
     role: {

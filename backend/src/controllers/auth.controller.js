@@ -58,6 +58,8 @@ export const registerController = asyncHandler(async (req, res) => {
     user.emailVerificationExpires = undefined;
     user.createdAt = undefined;
     user.updatedAt = undefined;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
 
     return res
         .cookie("accessToken", accessToken, {
@@ -100,6 +102,8 @@ export const loginController = asyncHandler(async (req, res) => {
     userObj.emailVerificationExpires = undefined;
     userObj.createdAt = undefined;
     userObj.updatedAt = undefined;
+    userObj.resetPasswordToken = undefined;
+    userObj.resetPasswordExpires = undefined;
 
     let message = "User logged in successfully";
     if (!user.isVerified) {
@@ -122,7 +126,7 @@ export const logoutController = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, "User logged out successfully"))
 })
 
-export const getCurrentUserController = asyncHandler(async (req, res) => {
+export const getCurrentUserController = asyncHandler(async (req, res) => {  
     const user = await User.findById(req.user.id);
 
     if (!user) {
@@ -138,6 +142,8 @@ export const getCurrentUserController = asyncHandler(async (req, res) => {
     userObj.emailVerificationExpires = undefined;
     userObj.createdAt = undefined;
     userObj.updatedAt = undefined;
+    userObj.resetPasswordToken = undefined;
+    userObj.resetPasswordExpires = undefined;
 
     return res.status(200).json(new ApiResponse(200, "User fetched successfully", { user: userObj }));
 })

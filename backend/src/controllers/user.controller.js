@@ -3,7 +3,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import crypto from "crypto";
 import User from "../models/user.model.js";
-import { sendVerificationEmail } from "../services/emailService.js";
+import { sendVerificationEmail, sendPasswordResetEmail } from "../services/emailService.js";
 
 
 export const verifyUserMailController = asyncHandler(async (req, res) => {
@@ -81,3 +81,68 @@ export const resendVerificationEmail = asyncHandler(async (req, res) => {
         new ApiResponse(200, "Verification email resent successfully. Please check your email.")
     );
 })
+
+// Forgot password - Generate and send reset token
+export const forgotPassword = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        throw new ApiError(400, "Email is required");
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        throw new ApiError(404, `No user found with the following email: ${email}`);
+    }
+
+    // Generate reset token (valid for 1 hour)
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpiry = Date.now() + 3600000; // 1 hour from now
+
+    // Save token and expiry to user
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = resetTokenExpiry;
+    await user.save();
+
+    // Send password reset email
+    await sendPasswordResetEmail(user.email, resetToken, user.fullName);
+
+    return res.status(200).json(
+        new ApiResponse(200, "Password reset link sent to your email. It will expire in 1 hour.")
+    );
+});
+
+// Reset password with token
+export const resetPassword = asyncHandler(async (req, res) => {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    if (!token) {
+        throw new ApiError(400, "Reset token is required");
+    }
+
+    if (!newPassword || newPassword.length < 8) {
+        throw new ApiError(400, "Password must be at least 8 characters long");
+    }
+
+    // Find user with valid reset token
+    const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+        throw new ApiError(400, "Invalid or expired reset token");
+    }
+
+    // Update password and clear reset token
+    user.password = newPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    return res.status(200).json(
+        new ApiResponse(200, "Password reset successful. You can now log in with your new password.")
+    );
+});
