@@ -1,17 +1,30 @@
 import { useEffect, useState } from "react";
-import { useSignIn } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Mail, Lock } from "lucide-react";
+import { User, Lock } from "lucide-react";
+import { useAuthStore } from "../../store/authStore";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { signIn, setActive, isLoaded } = useSignIn();
+  const { handleLogin, isAuthLoading, authError, currentUser } = useAuthStore();
+
+  const [loginData, setLoginData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const onChangeHandler = (e) => {
+    setLoginData({
+      ...loginData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+
+
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -19,42 +32,23 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isLoaded) return;
+    handleLogin(loginData);
 
-    try {
-      const result = await signIn.create({
-        identifier: email,
-        password: password,
-      });
-
-      if (result.status === "complete") {
-        await setActive({ session: result.createdSessionId });
-        navigate("/"); // redirect to home page after login
-      } else {
-        console.log("Additional steps required:", result);
-      }
-    } catch (err) {
-      console.error("Login failed:", err);
-      alert(err.errors?.[0]?.message || "Login failed");
-    }
   };
 
-  const handleGoogleSignIn = async () => {
-    if (!isLoaded) return;
-
-    try {
-      await signIn.authenticateWithRedirect({
-        strategy: "oauth_google",
-        redirectUrl: window.location.origin + "/", //  redirects back to your home
-      });
-    } catch (err) {
-      console.error("Google sign-in error:", err);
-    }
+  const handleGoogleSignIn = () => {
+    // Google sign-in can be implemented later if needed
+    alert("Google sign-in is currently not available");
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (currentUser) navigate("/");
+    console.log(currentUser)
+  }, [currentUser])
 
 
   return (
@@ -124,18 +118,19 @@ const LoginPage = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <label htmlFor="email" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
-                Email Address
+              <label htmlFor="username" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
+                Username
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
                 <input
                   type="text"
-                  id="email"
+                  id="username"
+                  name="username"
                   className="w-full pl-12 pr-4 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
+                  value={loginData.username}
+                  onChange={onChangeHandler}
+                  placeholder="Enter your username"
                   required
                 />
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
@@ -154,10 +149,11 @@ const LoginPage = () => {
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
                 <input
                   type={passwordVisible ? "text" : "password"}
-                  id="password-input"
+                  id="password"
+                  name="password"
                   className="w-full pl-12 pr-12 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={loginData.password}
+                  onChange={onChangeHandler}
                   placeholder="Enter your password"
                   required
                 />
@@ -173,9 +169,9 @@ const LoginPage = () => {
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
               </div>
               <div className="mt-3 text-right">
-                <motion.span 
+                <motion.span
                   whileHover={{ scale: 1.05 }}
-                  className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200" 
+                  className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200"
                   onClick={() => navigate("/forgotpassword")}
                 >
                   Forgot Password?
@@ -187,23 +183,36 @@ const LoginPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.02,
                 boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
               }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 dark:from-accent-600 dark:to-accent-700 dark:hover:from-accent-700 dark:hover:to-accent-800 text-white px-6 py-4 rounded-xl text-lg font-bold shadow-lg shadow-primary-500/25 dark:shadow-accent-500/25 transition-all duration-300 relative overflow-hidden"
+              disabled={isAuthLoading}
+              className={`w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 dark:from-accent-600 dark:to-accent-700 dark:hover:from-accent-700 dark:hover:to-accent-800 text-white px-6 py-4 rounded-xl text-lg font-bold shadow-lg shadow-primary-500/25 dark:shadow-accent-500/25 transition-all duration-300 relative overflow-hidden ${isAuthLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
-              <span className="relative z-10">Sign In</span>
+              <span className="relative z-10">
+                {isAuthLoading ? 'Signing in...' : 'Sign In'}
+              </span>
               <div className="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             </motion.button>
+
+            {authError && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-red-500 text-sm text-center p-3 bg-red-50 dark:bg-red-900/20 rounded-lg"
+              >
+                {authError}
+              </motion.div>
+            )}
           </form>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
             className="mt-8"
           >
             <div className="relative flex items-center justify-center mb-6">
@@ -217,25 +226,25 @@ const LoginPage = () => {
             <motion.button
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              whileHover={{ 
+              transition={{ duration: 0.5, delay: 1.0 }}
+              whileHover={{
                 scale: 1.02,
                 boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
               }}
               whileTap={{ scale: 0.98 }}
-              onClick={handleGoogleSignIn}
+              onClick={() => alert("Google signup is currently not available")}
               className="w-full bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 font-semibold"
             >
               <FcGoogle className="mr-3 text-xl" />
-              Continue with Google
+              Continue with Google (Coming Soon)
             </motion.button>
           </motion.div>
 
           <motion.div
+            className="mt-8 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.0 }}
-            className="mt-8 text-center"
           >
             <p className="text-secondary-600 dark:text-secondary-400">
               Don't have an account?{" "}
