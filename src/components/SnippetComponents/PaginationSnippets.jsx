@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import StringToReactComponent from "string-to-react-component";
 import { paginationSnippets } from "./Snippets/Pagination";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 function PaginationSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -31,10 +31,9 @@ function PaginationSnippets() {
           <button
             key={i}
             className={`py-2 px-4 border rounded-md transition-all duration-300
-              ${
-                activePages[snippetIndex] === i
-                  ? "bg-primary-600 text-white border-primary-600 dark:bg-accent-600 dark:border-accent-600"
-                  : "bg-white text-secondary-900 border-secondary-300 dark:bg-secondary-700 dark:text-white dark:border-secondary-600 hover:bg-secondary-100 dark:hover:bg-secondary-600"
+              ${activePages[snippetIndex] === i
+                ? "bg-primary-600 text-white border-primary-600 dark:bg-accent-600 dark:border-accent-600"
+                : "bg-white text-secondary-900 border-secondary-300 dark:bg-secondary-700 dark:text-white dark:border-secondary-600 hover:bg-secondary-100 dark:hover:bg-secondary-600"
               }`}
             onClick={() => handlePageClick(snippetIndex, i)}
           >

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import StringToReactComponent from "string-to-react-component";
 import { darkModeSnippets } from "./Snippets/DarkMode";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 const DarkModeSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,9 +18,8 @@ const DarkModeSnippets = () => {
 
   return (
     <div
-      className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${
-        isDarkModeOn ? "dark" : ""
-      }`}
+      className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${isDarkModeOn ? "dark" : ""
+        }`}
     >
       <div
         className="
@@ -47,14 +46,12 @@ border border-blue-300 dark:border-[#a855f7]
           />
           <label
             htmlFor="dark-mode-toggle"
-            className={`cursor-pointer relative w-12 h-6 rounded-full transition-colors duration-300 ${
-              isDarkModeOn ? "bg-gray-700" : "bg-gray-300"
-            }`}
+            className={`cursor-pointer relative w-12 h-6 rounded-full transition-colors duration-300 ${isDarkModeOn ? "bg-gray-700" : "bg-gray-300"
+              }`}
           >
             <div
-              className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ${
-                isDarkModeOn ? "transform translate-x-full" : ""
-              }`}
+              className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ${isDarkModeOn ? "transform translate-x-full" : ""
+                }`}
             ></div>
           </label>
         </div>

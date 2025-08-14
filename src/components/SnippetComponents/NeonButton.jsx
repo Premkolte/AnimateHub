@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import { NeonButtonSnippets } from "./Snippets/NeonButtonSnippets";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 const NeonButton = () => {
   const [showModal, setShowModal] = useState(false);

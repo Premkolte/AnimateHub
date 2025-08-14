@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import { modalSnippets } from "./Snippets/Modal";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 // Functional Modal Components
 const BasicModal = () => {

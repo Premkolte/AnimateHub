@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import StringToReactComponent from "string-to-react-component";
 import { pageLoaderSnippets } from "./Snippets/Page-load";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 function PageLoaderSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +18,7 @@ function PageLoaderSnippets() {
 
   const runLoader = (index) => {
     clearInterval(intervalRef.current);
-    const interval = setInterval(() => {}, 10);
+    const interval = setInterval(() => { }, 10);
     intervalRef.current = interval;
   };
 

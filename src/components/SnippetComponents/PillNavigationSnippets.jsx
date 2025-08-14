@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import StringToReactComponent from "string-to-react-component";
 import { pillNavigationSnippets } from "./Snippets/PillNavigation";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 function PillNavigationSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -30,11 +30,10 @@ function PillNavigationSnippets() {
       pillElements.push(
         <button
           key={i}
-          className={`pill-link py-2 px-4 m-1 rounded-full transition-colors duration-200 ${
-            activePills[snippetIndex] === i - 1
-              ? "bg-primary-600 text-white dark:bg-accent-600"
-              : "border border-primary-600 text-primary-600 dark:border-accent-500 dark:text-accent-500 hover:bg-primary-100 dark:hover:bg-secondary-700"
-          }`}
+          className={`pill-link py-2 px-4 m-1 rounded-full transition-colors duration-200 ${activePills[snippetIndex] === i - 1
+            ? "bg-primary-600 text-white dark:bg-accent-600"
+            : "border border-primary-600 text-primary-600 dark:border-accent-500 dark:text-accent-500 hover:bg-primary-100 dark:hover:bg-secondary-700"
+            }`}
           onClick={() => handlePillClick(snippetIndex)}
         >
           Item {i}

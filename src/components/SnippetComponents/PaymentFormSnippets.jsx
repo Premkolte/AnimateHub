@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import StringToReactComponent from "string-to-react-component";
 import { paymentFormSnippets } from "./Snippets/PaymentForm";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 function PaymentFormSnippets() {
   const [showModal, setShowModal] = useState(false);

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import StringToReactComponent from "string-to-react-component";
 import { progressBarSnippets } from "./Snippets/Progress";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 function ProgressBarSnippets() {
   const [showModal, setShowModal] = useState(false);
@@ -74,8 +74,8 @@ border border-blue-300 dark:border-[#a855f7]
                   index === 0
                     ? "#94a3b8" // slate-400
                     : index === 1
-                    ? "#3b82f6" // blue-500
-                    : "#10b981", // emerald-500
+                      ? "#3b82f6" // blue-500
+                      : "#10b981", // emerald-500
               }}
             ></div>
           </div>

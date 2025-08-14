@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { User, Mail, Send, MessageCircle, Clock, Shield, Users } from 'lucide-react';
-import FAQ from '../../assets/FAQ';
+import FAQ from './FAQ';
 import { motion } from 'framer-motion';
 
 

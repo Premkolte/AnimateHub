@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import { ExpandingSearchBarSnippets } from "./Snippets/ExpandingSearchBarSnippets";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 const ExpandingSearchBar = () => {
   const [showModal, setShowModal] = useState(false);

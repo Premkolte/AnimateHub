@@ -1,9 +1,9 @@
 // components/FooterSnippets.js
 import React, { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import StringToReactComponent from "string-to-react-component";
 import { footerSnippets } from "./Snippets/Footer";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 const FooterSnippets = () => {
   const [showModal, setShowModal] = useState(false);

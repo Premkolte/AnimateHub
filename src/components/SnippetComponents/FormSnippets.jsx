@@ -1,8 +1,8 @@
 import React from "react";
 import StringToReactComponent from "string-to-react-component";
-import Modal from "../Modal"; // Ensure this is correctly imported
+import Modal from "../UI/Modal"; // Ensure this is correctly imported
 import { formSnippets } from "./Snippets/Form";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 function FormSnippets() {
   const [showModal, setShowModal] = React.useState(false);

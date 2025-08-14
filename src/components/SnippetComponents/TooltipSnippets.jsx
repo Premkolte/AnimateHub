@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import { tooltipSnippets } from "./Snippets/Tooltip";
-import FavoriteButton from "../Favorites/FavoriteButton";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
+
 
 // Functional Tooltip Components
 const HoverTooltip = () => {
@@ -16,11 +17,10 @@ const HoverTooltip = () => {
           <button
             key={pos}
             onClick={() => setPosition(pos)}
-            className={`px-3 py-1 rounded text-sm ${
-              position === pos
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
+            className={`px-3 py-1 rounded text-sm ${position === pos
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
           >
             {pos}
           </button>
@@ -33,27 +33,25 @@ const HoverTooltip = () => {
             Hover me
           </button>
           <div
-            className={`absolute z-10 px-3 py-2 text-sm text-white bg-gray-900 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap ${
-              position === "top"
-                ? "-top-10 left-1/2 transform -translate-x-1/2 -translate-y-1"
-                : position === "bottom"
+            className={`absolute z-10 px-3 py-2 text-sm text-white bg-gray-900 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap ${position === "top"
+              ? "-top-10 left-1/2 transform -translate-x-1/2 -translate-y-1"
+              : position === "bottom"
                 ? "-bottom-10 left-1/2 transform -translate-x-1/2 translate-y-1"
                 : position === "left"
-                ? "top-1/2 -left-3 transform -translate-x-full -translate-y-1/2"
-                : "top-1/2 -right-3 transform translate-x-full -translate-y-1/2"
-            }`}
+                  ? "top-1/2 -left-3 transform -translate-x-full -translate-y-1/2"
+                  : "top-1/2 -right-3 transform translate-x-full -translate-y-1/2"
+              }`}
           >
             This is a tooltip!
             <div
-              className={`absolute w-2 h-2 bg-gray-900 transform rotate-45 ${
-                position === "top"
-                  ? "top-full left-1/2 -translate-x-1/2 -translate-y-1/2"
-                  : position === "bottom"
+              className={`absolute w-2 h-2 bg-gray-900 transform rotate-45 ${position === "top"
+                ? "top-full left-1/2 -translate-x-1/2 -translate-y-1/2"
+                : position === "bottom"
                   ? "bottom-full left-1/2 -translate-x-1/2 translate-y-1/2"
                   : position === "left"
-                  ? "left-full top-1/2 -translate-x-1/2 -translate-y-1/2"
-                  : "right-full top-1/2 translate-x-1/2 -translate-y-1/2"
-              }`}
+                    ? "left-full top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    : "right-full top-1/2 translate-x-1/2 -translate-y-1/2"
+                }`}
             ></div>
           </div>
         </div>
@@ -94,21 +92,19 @@ const ClickTooltip = () => {
       <div className="flex space-x-2 mb-4">
         <button
           onClick={() => setPosition("top")}
-          className={`px-3 py-1 rounded text-sm ${
-            position === "top"
-              ? "bg-purple-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
+          className={`px-3 py-1 rounded text-sm ${position === "top"
+            ? "bg-purple-600 text-white"
+            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
         >
           Top
         </button>
         <button
           onClick={() => setPosition("bottom")}
-          className={`px-3 py-1 rounded text-sm ${
-            position === "bottom"
-              ? "bg-purple-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
+          className={`px-3 py-1 rounded text-sm ${position === "bottom"
+            ? "bg-purple-600 text-white"
+            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
         >
           Bottom
         </button>
@@ -125,11 +121,10 @@ const ClickTooltip = () => {
 
           {isOpen && (
             <div
-              className={`absolute z-20 bg-gray-700 text-white p-4 rounded-lg shadow-xl min-w-[200px] transform transition-all duration-200 ${
-                position === "top"
-                  ? "-top-3 left-1/2 -translate-x-1/2 -translate-y-full"
-                  : "-bottom-3 left-1/2 -translate-x-1/2 translate-y-full"
-              }`}
+              className={`absolute z-20 bg-gray-700 text-white p-4 rounded-lg shadow-xl min-w-[200px] transform transition-all duration-200 ${position === "top"
+                ? "-top-3 left-1/2 -translate-x-1/2 -translate-y-full"
+                : "-bottom-3 left-1/2 -translate-x-1/2 translate-y-full"
+                }`}
             >
               <button
                 onClick={closeTooltip}
@@ -145,11 +140,10 @@ const ClickTooltip = () => {
                 </p>
               </div>
               <div
-                className={`absolute w-3 h-3 bg-gray-700 transform rotate-45 ${
-                  position === "top"
-                    ? "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2"
-                    : "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                }`}
+                className={`absolute w-3 h-3 bg-gray-700 transform rotate-45 ${position === "top"
+                  ? "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2"
+                  : "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  }`}
               ></div>
             </div>
           )}

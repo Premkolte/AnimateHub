@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import DarkModeToggle from "../DarkModeToggle";
+import DarkModeToggle from "../UI/DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-import Logo from "./images/Animate_logo.png";
+import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
 

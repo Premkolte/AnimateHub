@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaHeart, FaCode, FaTrash, FaEye } from 'react-icons/fa';
 import { useFavorites } from '../../contexts/FavoritesContext';
-import Modal from '../Modal';
+import Modal from '../../components/UI/Modal';
 import StringToReactComponent from 'string-to-react-component';
 import { Link } from 'react-router-dom';
 
@@ -21,8 +21,8 @@ const FavoritesPage = () => {
     removeFromFavorites(snippetId);
   };
 
-  const filteredFavorites = filter === 'all' 
-    ? favorites 
+  const filteredFavorites = filter === 'all'
+    ? favorites
     : favorites.filter(fav => fav.type === filter);
 
   const uniqueTypes = [...new Set(favorites.map(fav => fav.type))];
@@ -85,11 +85,10 @@ const FavoritesPage = () => {
             <div className="flex flex-wrap gap-2 mb-6">
               <button
                 onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  filter === 'all'
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'all'
                     ? 'bg-primary-600 dark:bg-accent-600 text-white'
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
+                  }`}
               >
                 All ({favorites.length})
               </button>
@@ -97,11 +96,10 @@ const FavoritesPage = () => {
                 <button
                   key={type}
                   onClick={() => setFilter(type)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${
-                    filter === type
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${filter === type
                       ? 'bg-primary-600 dark:bg-accent-600 text-white'
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                  }`}
+                    }`}
                 >
                   {type} ({favorites.filter(fav => fav.type === type).length})
                 </button>

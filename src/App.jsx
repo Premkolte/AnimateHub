@@ -1,28 +1,33 @@
-import React from "react";
 import { HashRouter as Router, Route, Routes, Outlet } from "react-router-dom";
-import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/react';
-import { HelmetProvider } from 'react-helmet-async';
-import HomePage from "./components/Home/HomePage";
-import AboutUs from "./components/About/AboutUs";
-import ContactUs from "./components/Contact/ContactUs";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Contributors from "./components/Contributors/Contributors";
-import PaymentPage from "./components/Payment/Payment";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import TemplatesRoutes from "./components/Templates/TemplatesRoutes";
-import LoginPage from "./components/Auth/login";
-import SignupPage from "./components/Auth/SignUp";
-import Navbar from "./components/Home/Navbar";
-import Footer from "./components/Footer";
-import Chatbot from "./components/Home/Chatbot";
-import BackToTop from "./components/BackToTop";
-import ProtectedRoute from "./components/Auth/ProtectedRoute";
-import { FavoritesProvider } from "./contexts/FavoritesContext";
-import FavoritesPage from "./components/Favorites/FavoritesPage";
-import ForgotPasswordPage from "./components/Auth/ForgotPasswordPage";
+
+// Import Layout --------------------------
+import Navbar from "./components/layout/Navbar";
+import Chatbot from "./components/layout/Chatbot";
+import Footer from "./components/layout/Footer";
 import SplashCursor from "./components/SplashCursor";
-import AuthProvider from "./providers/AuthProvider";
+import BackToTop from "./components/UI/BackToTop";
+
+
+// Middleware -------------------------------
+import ProtectedRoute from "./Pages/Auth/ProtectedRoute";
+import AppProvider from "./providers/AppProvider";
+
+
+
+// Import pages ---------------------------
+import HomePage from "./Pages/Home/HomePage";
+import AboutUs from "./Pages/About/AboutUs";
+import ContactUs from "./Pages/Contact/ContactUs";
+import Dashboard from "./Pages/Dashboard/Dashboard"
+import Contributors from "./Pages/Contributors/Contributors";
+import PaymentPage from "./Pages/Payment/Payment";
+import TemplatesRoutes from "./components/Templates/TemplatesRoutes";
+import LoginPage from "./Pages/Auth/LoginPage";
+import SignupPage from "./Pages/Auth/SignUpPage";
+import FavoritesPage from "./Pages/Favorites/FavoritesPage";
+import ForgotPasswordPage from "./Pages/Auth/ForgotPasswordPage";
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -39,41 +44,35 @@ function Layout() {
 
 function App() {
   return (
-    <HelmetProvider>
-      <ThemeProvider attribute="class">
-        <FavoritesProvider>
-          <AuthProvider>
+    <AppProvider>
 
-            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-              <SplashCursor />
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <SplashCursor />
 
-              <Routes>
-                {/* Wrap all primary pages with Layout and use Outlet inside */}
-                <Route element={<Layout />}>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/home" element={<HomePage />} />
-                  <Route path="/explore" element={<Dashboard />} />
-                  <Route path="/about" element={<AboutUs />} />
-                  <Route path="/contact" element={<ContactUs />} />
-                  <Route path="/contributors" element={<Contributors />} />
-                  <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
-                  <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
-                  <Route path="/templates/*" element={<TemplatesRoutes />} />
-                  <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+        <Routes>
+          {/* Wrap all primary pages with Layout and use Outlet inside */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/explore" element={<Dashboard />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/contributors" element={<Contributors />} />
+            <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
+            <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+            <Route path="/templates/*" element={<TemplatesRoutes />} />
+            <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
 
-                  <Route path="/sign-in" element={<LoginPage />} />
-                  <Route path="/signup" element={<SignupPage />} />
-                </Route>
+            <Route path="/sign-in" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+          </Route>
 
-              </Routes>
+        </Routes>
 
-              <Analytics />
-            </Router>
+        <Analytics />
+      </Router>
+    </AppProvider>
 
-          </AuthProvider>
-        </FavoritesProvider>
-      </ThemeProvider>
-    </HelmetProvider>
   );
 }
 

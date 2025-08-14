@@ -10,14 +10,12 @@ import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
 import ReactJoyride from 'react-joyride';
-import { useFavorites } from '../../contexts/FavoritesContext';
-import Particles from '../Particles';
+import Particles from "../../components/Particles";
 
-import { useAuthStore } from '../../store/authStore';
+import { useAuthStore } from "../../store/authStore"
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { favorites } = useFavorites();
   const { currentUser } = useAuthStore();
 
   const steps = [
@@ -117,9 +115,9 @@ const HomePage = () => {
 
   return (
     <>
-     <ReactJoyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
+      <ReactJoyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
       <div className="w-full flex flex-col items-center justify-center min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 py-24">
-  <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
           <Particles
             particleColors={['#ffffff', '#ffffff']}
             particleCount={300}
@@ -187,11 +185,6 @@ const HomePage = () => {
                 >
                   <FaHeart />
                   My Favorites
-                  {favorites.length > 0 && (
-                    <span className="bg-white text-red-500 text-sm px-2 py-1 rounded-full font-bold">
-                      {favorites.length}
-                    </span>
-                  )}
                 </motion.button>
               ) : (
                 <motion.button
