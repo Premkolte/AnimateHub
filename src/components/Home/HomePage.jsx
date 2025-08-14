@@ -114,31 +114,20 @@ const HomePage = () => {
 
   return (
     <>
-      <ReactJoyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
+     <ReactJoyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
       <div className="w-full flex flex-col items-center justify-center min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 py-24">
-        <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-
-          <Particles
-
-            particleColors={['#ffffff', '#ffffff']}
-
-            particleCount={200}
-
-            particleSpread={10}
-
-            speed={0.1}
-
-            particleBaseSize={100}
-
-            moveParticlesOnHover={true}
-
-            alphaParticles={false}
-
-            disableRotation={false}
-
-          />
-
-        </div>
+        <div className="absolute top-0 left-0 w-full h-full z-0">
+    <Particles
+      particleColors={['#ffffff', '#ffffff']}
+      particleCount={200}
+      particleSpread={10}
+      speed={0.1}
+      particleBaseSize={100}
+      moveParticlesOnHover={true}
+      alphaParticles={false}
+      disableRotation={false}
+    />
+  </div>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
