@@ -104,7 +104,7 @@ function Window({ activeTab }) {
 </h1>
 
 <div
-  className="bg-[#eff6ff] dark:bg-secondary-800 text-secondary-900 dark:text-white p-6 rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.2)] max-w-4xl mx-auto"
+  className="bg-[#eff6ff] dark:bg-secondary-800 text-secondary-900 dark:text-white p-6 rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.2)] max-w-4xl mx-auto "
 >
         {content[activeTab]}
       </div>
