@@ -16,17 +16,21 @@ function ButtonSnippets() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-secondary-900 rounded-lg ">
       {buttonSnippets.map((buttonObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10 relative"
+          className="p-8 pt-14 bg-white dark:bg-secondary-700 
+  text-secondary-900 dark:text-white 
+  rounded-lg 
+  border border-gray-200 dark:border-[#a855f7]
+  shadow-lg dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)]  flex flex-col items-center justify-evenly gap-10 relative"
         >
           {/* Favorite Button */}
           <div className="absolute top-4 right-4">
             <FavoriteButton
               snippet={{
-                type: 'button',
+                type: "button",
                 index: index,
                 title: buttonObject.title,
                 jsxCode: buttonObject.jsxCode,
@@ -39,9 +43,9 @@ function ButtonSnippets() {
           <StringToReactComponent>
             {`(props) => (${buttonObject.jsxCode})`}
           </StringToReactComponent>
-          <div className="flex space-x-4">
+          <div className="flex flex-col gap-4 w-full">
             <button
-              className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
+              className="w-full text-white text-md py-3 px-6 rounded-full shadow-md bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
               onClick={() =>
                 handleShowModal(buttonObject.jsxCode, buttonObject.cssCode)
               }
@@ -49,7 +53,7 @@ function ButtonSnippets() {
               Show CSS
             </button>
             <button
-              className="text-secondary-900 dark:text-white border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-700 text-md py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+              className="w-full text-secondary-900 dark:text-white border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-700 text-md py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-200"
               onClick={() =>
                 handleShowModal(buttonObject.jsxCode, buttonObject.cssCode)
               }

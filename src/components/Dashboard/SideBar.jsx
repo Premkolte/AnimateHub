@@ -56,7 +56,7 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
                   className={`${activeTab === originalIndex
                       ? "bg-primary-600 text-white dark:bg-purple-700"
                       : "bg-primary-100 dark:bg-secondary-800 text-secondary-900 dark:text-white hover:bg-primary-600 hover:text-white"
-                    } py-2 px-4 rounded-md text-lg text-left focus:outline-none transition-colors duration-300 w-full`}
+                    } py-2 px-4 rounded-md text-sm text-left focus:outline-none transition-colors duration-300 w-full`}
                   onClick={() => handleTabClick(originalIndex)}
                 >
                   {searchQuery ? highlightMatch(button, searchQuery) : button}

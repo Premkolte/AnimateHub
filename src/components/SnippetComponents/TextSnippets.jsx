@@ -16,16 +16,20 @@ function TextSnippets() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-secondary-900 rounded-lg ">
       {textSnippets.map((textObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white dark:bg-secondary-800 rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10 text-secondary-900 dark:text-white"
+          className="p-8 pt-14 bg-white bg-white dark:bg-secondary-700 
+  text-secondary-900 dark:text-white 
+  rounded-lg 
+  border border-gray-200 dark:border-[#a855f7]
+  shadow-lg dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)]  flex flex-col items-center justify-evenly gap-10 text-secondary-900 dark:text-white"
         >
           <StringToReactComponent>
             {`(props) => (${textObject.jsxCode})`}
           </StringToReactComponent>
-          <div className="flex space-x-4">
+          <div className="flex flex-col gap-4 w-full">
             <button
               className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
               onClick={() =>
@@ -43,16 +47,16 @@ function TextSnippets() {
               React Snippet
             </button>
           </div>
-           <FavoriteButton
-                    snippet={{
-                      type: 'text', 
-                      index: index,
-                      title: textObject.title,
-                      jsxCode: textObject.jsxCode,
-                      cssCode: textObject.cssCode,
-                    }}
-                    size="md"
-                  />
+          <FavoriteButton
+            snippet={{
+              type: "text",
+              index: index,
+              title: textObject.title,
+              jsxCode: textObject.jsxCode,
+              cssCode: textObject.cssCode,
+            }}
+            size="md"
+          />
         </div>
       ))}
       <Modal
