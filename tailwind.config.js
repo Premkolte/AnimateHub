@@ -49,6 +49,13 @@ export default {
           900: '#581c87',
         },
       },
+      backdropBlur: {
+        xs: '2px',
+      },
+      backgroundColor: {
+        'nav-light': 'rgba(255, 255, 255, 0.3)',
+        'nav-dark': 'rgba(88, 28, 135, 0.3)',
+      },
     },
   },
   plugins: [],
