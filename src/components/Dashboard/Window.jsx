@@ -100,10 +100,12 @@ function Window({ activeTab }) {
   return (
     <div className="flex-1 p-6 md:p-8 bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white overflow-y-auto min-h-screen pt-20 md:pt-16">
       <h1 className="text-3xl md:text-4xl font-extrabold mb-8 text-center leading-tight text-secondary-900 dark:text-white">
-  <span className="dark:text-[#c084fc]">AnimateHub</span> — A one place for all your Frontend CSS needs
+  <span className="text-[#2563eb] dark:text-[#c084fc]">AnimateHub</span> — A one place for all your Frontend CSS needs
 </h1>
 
-      <div className="bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+<div
+  className="bg-[#eff6ff] dark:bg-secondary-800 text-secondary-900 dark:text-white p-6 rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.2)] max-w-4xl mx-auto"
+>
         {content[activeTab]}
       </div>
     </div>
