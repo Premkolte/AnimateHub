@@ -74,10 +74,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full backdrop-blur-md bg-white/30 dark:bg-purple-900/30 text-gray-800 dark:text-gray-200 
+    <nav className=" w-full backdrop-blur-md bg-white/30 dark:bg-purple-900/30 text-gray-800 dark:text-gray-200 
 py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]">
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="flex justify-between items-center">
+      <div className="w-full px-4">
+        <div className="w-full flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <Link
@@ -90,17 +90,17 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 src={Logo}
                 alt="AnimateHub Logo"
               />
-              <span className="font-heading text-3xl font-bold text-white dark:text-gray-100">
+              <span className="font-heading text-2xl md:text-3xl font-bold text-white dark:text-gray-100">
                 AnimateHub
               </span>
             </Link>
-              <span className="md:hidden">
+              <span className="lg:hidden">
                 <DarkModeToggle />
               </span>
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex space-x-6 items-center">
+          <div className="hidden lg:flex space-x-4 items-center">
             {navLinks.map((item) => (
               <Link
                 key={item}
@@ -172,7 +172,7 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={toggleMenu}
               className="text-2xl focus:outline-none"
@@ -184,7 +184,7 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="flex flex-col mt-4 space-y-4 md:hidden">
+          <div className="block lg:hidden flex flex-col mt-4 space-y-4">
             {navLinks.map((item) => (
               <Link
                 key={item}
