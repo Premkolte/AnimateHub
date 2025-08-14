@@ -1,5 +1,6 @@
 import { create } from "zustand"
 import { axiosInstance } from "../utils/axiosInstance.js";
+import toast from "react-hot-toast";
 
 export const useAuthStore = create((set, get) => ({
     isAuthLoading: true,
@@ -27,6 +28,7 @@ export const useAuthStore = create((set, get) => ({
             const response = apiResponse.data;
             if (response.success) {
                 set({ currentUser: response.data });
+                toast.success("Please check your inbox to verify your account.")
             } else {
                 set({ authError: response.message });
             }
@@ -93,8 +95,10 @@ export const useAuthStore = create((set, get) => ({
         try {
             await axiosInstance.post('/auth/logout');
             set({ currentUser: null });
+            toast.success("User logged out successfully");
         } catch (error) {
             set({ authError: error.response.data.message });
+            toast.error("Failed to logout user!")
         } finally {
             set({ isAuthLoading: false })
         }
@@ -131,6 +135,7 @@ export const useAuthStore = create((set, get) => ({
             const response = apiResponse.data;
             if (response.success) {
                 set({ currentUser: response.data });
+                toast.success(response.message)
             } else {
                 set({ authError: response.message });
             }
@@ -154,6 +159,7 @@ export const useAuthStore = create((set, get) => ({
             const response = apiResponse.data;
             if (response.success) {
                 set({ currentUser: response.data });
+                toast.success(response.message)
             } else {
                 set({ authError: response.message });
             }
@@ -177,6 +183,7 @@ export const useAuthStore = create((set, get) => ({
             const response = apiResponse.data;
             if (response.success) {
                 set({ currentUser: response.data });
+                toast.success(response.message)
             } else {
                 set({ authError: response.message });
             }
@@ -200,6 +207,7 @@ export const useAuthStore = create((set, get) => ({
             const response = apiResponse.data;
             if (response.success) {
                 set({ currentUser: response.data });
+                toast.success(response.message)
             } else {
                 set({ authError: response.message });
             }
