@@ -4,14 +4,15 @@ import DarkModeToggle from "../DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import Logo from "./images/Animate_logo.png";
-import { SignedIn, SignedOut, UserButton, useClerk } from "@clerk/clerk-react";
 import { useFavorites } from "../../contexts/FavoritesContext";
+import { useAuthStore } from "../../store/authStore";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { signOut } = useClerk();
   const { favorites } = useFavorites();
+  const { currentUser, logout } = useAuthStore();
   const [language, setLanguage] = useState("en");
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -93,9 +94,9 @@ const Navbar = () => {
                 AnimateHub
               </span>
             </Link>
-              <span className="md:hidden">
-                <DarkModeToggle />
-              </span>
+            <span className="md:hidden">
+              <DarkModeToggle />
+            </span>
           </div>
 
           {/* Desktop Nav */}
@@ -111,23 +112,43 @@ const Navbar = () => {
               </Link>
             ))}
 
-            <SignedIn>
-              <Link
-                to="/favorites"
-                onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
-              >
-                <FaHeart className="text-red-400" />
-                <span>Favorites</span>
-                {favorites.length > 0 && (
-                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                    {favorites.length}
-                  </span>
-                )}
-              </Link>
-            </SignedIn>
+            {currentUser ? (
+              <>
+                <Link
+                  to="/favorites"
+                  onClick={closeMenu}
+                  className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
+                >
+                  <FaHeart className="text-red-400" />
+                  <span>Favorites</span>
+                  {favorites.length > 0 && (
+                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                      {favorites.length}
+                    </span>
+                  )}
+                </Link>
 
-            <SignedOut>
+                <button
+                  onClick={() => {
+                    logout();
+                    closeMenu();
+                    navigate("/");
+                  }}
+                  className="hover:text-gray-300 dark:hover:text-white"
+                >
+                  Sign Out
+                </button>
+
+                {/* User avatar or initial */}
+                <Link
+                  to="/profile"
+                  className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center"
+                  title={currentUser.username || 'Profile'}
+                >
+                  {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}
+                </Link>
+              </>
+            ) : (
               <Link
                 to="/sign-in"
                 onClick={closeMenu}
@@ -135,19 +156,7 @@ const Navbar = () => {
               >
                 Sign In
               </Link>
-            </SignedOut>
-
-            <SignedIn>
-              <button
-                onClick={() => {
-                  signOut({ redirectUrl: "/" });
-                  closeMenu();
-                }}
-                className="hover:text-gray-300 dark:hover:text-white"
-              >
-                Sign Out
-              </button>
-            </SignedIn>
+            )}
 
             <DarkModeToggle />
 
@@ -159,8 +168,6 @@ const Navbar = () => {
               {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
             </button>
             <div id="google_translate_element" style={{ display: "none" }}></div>
-
-            <UserButton />
           </div>
 
           {/* Mobile Menu Button */}
