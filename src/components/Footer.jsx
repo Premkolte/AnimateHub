@@ -37,6 +37,13 @@ const socialLinks = [
     icon: Twitter,
     color: "hover:text-blue-500",
   },
+  {
+    name: "GitHub",
+    href: "https://github.com/Premkolte/AnimateHub",
+    icon: Github,
+    color: "hover:text-blue-500",
+  }
+
 ];
 
 const footerLinks = [
