@@ -13,9 +13,12 @@ import ReactJoyride from 'react-joyride';
 import { useFavorites } from '../../contexts/FavoritesContext';
 import Particles from '../Particles';
 
+import { useAuthStore } from '../../store/authStore';
+
 const HomePage = () => {
   const navigate = useNavigate();
   const { favorites } = useFavorites();
+  const { currentUser } = useAuthStore();
 
   const steps = [
     {
@@ -171,51 +174,39 @@ const HomePage = () => {
               Get Started
             </motion.button>
 
-            {/* ---------------------- THIS FUNCTIONALITY WILL BE ADDED IN FUTURE WITH CUSTOM BACKEND --------------------------- */}
+
             {/* Favorites Button - Only show for signed in users */}
-            {/* <SignedIn>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200 flex items-center gap-2"
-                onClick={() => {
-                  navigate("/favorites");
-                }}
-              >
-                <FaHeart />
-                My Favorites
-                {favorites.length > 0 && (
-                  <span className="bg-white text-red-500 text-sm px-2 py-1 rounded-full font-bold">
-                    {favorites.length}
-                  </span>
-                )}
-              </motion.button>
-            </SignedIn> */}
+            {
+              currentUser ? (
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200 flex items-center gap-2"
+                  onClick={() => {
+                    navigate("/favorites");
+                  }}
+                >
+                  <FaHeart />
+                  My Favorites
+                  {favorites.length > 0 && (
+                    <span className="bg-white text-red-500 text-sm px-2 py-1 rounded-full font-bold">
+                      {favorites.length}
+                    </span>
+                  )}
+                </motion.button>
+              ) : (
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
+                  onClick={() => {
+                    navigate("/sign-in");
+                  }}
+                >
+                  <FaHeart />
+                  Sign In for Favorites
+                </motion.button>
+              )
+            }
 
-            {/* Sign In prompt for favorites */}
-            {/* <SignedOut>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
-                onClick={() => {
-                  navigate("/sign-in");
-                }}
-              >
-                <FaHeart />
-                Sign In for Favorites
-              </motion.button>
-            </SignedOut> */}
-            {/* ---------------------- THIS FUNCTIONALITY WILL BE ADDED IN FUTURE WITH CUSTOM BACKEND --------------------------- */}
-
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
-              onClick={() => {
-                navigate("/sign-in");
-              }}
-            >
-              <FaHeart />
-              Sign In for Favorites
-            </motion.button>
           </div>
         </motion.div>
 

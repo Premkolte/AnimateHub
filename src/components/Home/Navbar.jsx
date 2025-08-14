@@ -4,14 +4,15 @@ import DarkModeToggle from "../DarkModeToggle";
 import { FiMenu, FiX } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import Logo from "./images/Animate_logo.png";
-import { SignedIn, SignedOut, UserButton, useClerk } from "@clerk/clerk-react";
 import { useFavorites } from "../../contexts/FavoritesContext";
+import { useAuthStore } from "../../store/authStore";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { signOut } = useClerk();
   const { favorites } = useFavorites();
+  const { currentUser, logout } = useAuthStore();
   const [language, setLanguage] = useState("en");
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -94,9 +95,9 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 AnimateHub
               </span>
             </Link>
-              <span className="md:hidden">
-                <DarkModeToggle />
-              </span>
+            <span className="md:hidden">
+              <DarkModeToggle />
+            </span>
           </div>
 
           {/* Desktop Nav */}
@@ -108,10 +109,9 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 onClick={closeMenu}
                 className={`relative px-2 py-1 transition-all duration-300 
                   hover:text-blue-500 hover:font-bold dark:hover:text-purple-300 
-                  ${
-                    location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}` 
-                      ? "text-blue-500 dark:text-purple-300 font-bold" 
-                      : "font-normal"
+                  ${location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`
+                    ? "text-blue-500 dark:text-purple-300 font-bold"
+                    : "font-normal"
                   }
                   group
                 `}
@@ -122,26 +122,43 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
               </Link>
             ))}
 
-            <SignedIn>
-              <Link
-                to="/favorites"
-                onClick={closeMenu}
-                className="relative px-3 py-1.5 rounded-lg backdrop-blur-sm bg-white/10 hover:bg-white/20 
-                  dark:bg-purple-800/40 dark:hover:bg-purple-700/50 transition-all duration-300 
-                  flex items-center space-x-2 shadow-sm"
-              >
-                <FaHeart className="text-red-400" />
-                <span>Favorites</span>
-                {favorites.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 
-                    py-1 rounded-full animate-pulse">
-                    {favorites.length}
-                  </span>
-                )}
-              </Link>
-            </SignedIn>
+            {currentUser ? (
+              <>
+                <Link
+                  to="/favorites"
+                  onClick={closeMenu}
+                  className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
+                >
+                  <FaHeart className="text-red-400" />
+                  <span>Favorites</span>
+                  {favorites.length > 0 && (
+                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                      {favorites.length}
+                    </span>
+                  )}
+                </Link>
 
-            <SignedOut>
+                <button
+                  onClick={() => {
+                    logout();
+                    closeMenu();
+                    navigate("/");
+                  }}
+                  className="hover:text-gray-300 dark:hover:text-white"
+                >
+                  Sign Out
+                </button>
+
+                {/* User avatar or initial */}
+                <Link
+                  to="/profile"
+                  className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center"
+                  title={currentUser.username || 'Profile'}
+                >
+                  {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}
+                </Link>
+              </>
+            ) : (
               <Link
                 to="/sign-in"
                 onClick={closeMenu}
@@ -151,7 +168,11 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
               >
                 Sign In
               </Link>
-            </SignedOut>
+            )}
+
+            <div className="p-1.5 rounded-lg backdrop-blur-sm bg-white/10 dark:bg-purple-800/40">
+              <DarkModeToggle />
+            </div>
 
             {/* Language Toggle with enhanced styling */}
             <button
@@ -162,96 +183,91 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
             >
               {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
             </button>
-
-            {/* Dark Mode Toggle wrapper */}
-            <div className="p-1.5 rounded-lg backdrop-blur-sm bg-white/10 dark:bg-purple-800/40">
-              <DarkModeToggle />
-            </div>
-
-            <UserButton />
-          </div>
+            <div id="google_translate_element" style={{ display: "none" }}></div>
+          </div >
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
+          < div className="md:hidden flex items-center" >
             <button
               onClick={toggleMenu}
               className="text-2xl focus:outline-none"
             >
               {isOpen ? <FiX /> : <FiMenu />}
             </button>
-          </div>
-        </div>
+          </div >
+        </div >
 
         {/* Mobile Menu */}
-        {isOpen && (
-          <div className="flex flex-col mt-4 space-y-4 md:hidden">
-            {navLinks.map((item) => (
-              <Link
-                key={item}
-                to={`/${item === "Home" ? "" : item.toLowerCase()}`}
-                onClick={closeMenu}
-                className={`transition-all duration-300
+        {
+          isOpen && (
+            <div className="flex flex-col mt-4 space-y-4 md:hidden">
+              {navLinks.map((item) => (
+                <Link
+                  key={item}
+                  to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                  onClick={closeMenu}
+                  className={`transition-all duration-300
                   hover:text-gray-300 hover:font-bold dark:hover:text-white
-                  ${
-                    location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`
+                  ${location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`
                       ? "font-bold text-blue-500 dark:text-purple-300"
                       : "font-normal"
-                  }
+                    }
                 `}
-              >
-                {item}
-              </Link>
-            ))}
+                >
+                  {item}
+                </Link>
+              ))}
 
-            <SignedIn>
-              <Link
-                to="/favorites"
-                onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
-              >
-                <FaHeart className="text-red-400" />
-                <span>Favorites</span>
-                {favorites.length > 0 && (
-                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                    {favorites.length}
-                  </span>
-                )}
-              </Link>
-            </SignedIn>
+              <SignedIn>
+                <Link
+                  to="/favorites"
+                  onClick={closeMenu}
+                  className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
+                >
+                  <FaHeart className="text-red-400" />
+                  <span>Favorites</span>
+                  {favorites.length > 0 && (
+                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                      {favorites.length}
+                    </span>
+                  )}
+                </Link>
+              </SignedIn>
 
-            <SignedOut>
-              <Link
-                to="/sign-in"
-                onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white"
-              >
-                Sign In
-              </Link>
-            </SignedOut>
+              <SignedOut>
+                <Link
+                  to="/sign-in"
+                  onClick={closeMenu}
+                  className="hover:text-gray-300 dark:hover:text-white"
+                >
+                  Sign In
+                </Link>
+              </SignedOut>
 
-            <SignedIn>
+              <SignedIn>
+                <button
+                  onClick={() => {
+                    signOut({ redirectUrl: "/" });
+                    closeMenu();
+                  }}
+                  className="hover:text-gray-300 dark:hover:text-white"
+                >
+                  Sign Out
+                </button>
+              </SignedIn>
+
+              {/* Mobile Language Toggle */}
               <button
-                onClick={() => {
-                  signOut({ redirectUrl: "/" });
-                  closeMenu();
-                }}
-                className="hover:text-gray-300 dark:hover:text-white"
+                onClick={toggleLanguage}
+                className="px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
               >
-                Sign Out
+                {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
               </button>
-            </SignedIn>
-
-            {/* Mobile Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className="px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
-            >
-              {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
-            </button>
-          </div>
-        )}
-      </div>
-    </nav>
+            </div>
+          )
+        }
+      </div >
+    </nav >
   );
 };
 

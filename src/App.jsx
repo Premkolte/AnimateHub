@@ -22,6 +22,7 @@ import { FavoritesProvider } from "./contexts/FavoritesContext";
 import FavoritesPage from "./components/Favorites/FavoritesPage";
 import ForgotPasswordPage from "./components/Auth/ForgotPasswordPage";
 import SplashCursor from "./components/SplashCursor";
+import AuthProvider from "./providers/AuthProvider";
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -41,31 +42,35 @@ function App() {
     <HelmetProvider>
       <ThemeProvider attribute="class">
         <FavoritesProvider>
-          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            <SplashCursor />
+          <AuthProvider>
 
-            <Routes>
-              {/* Wrap all primary pages with Layout and use Outlet inside */}
-              <Route element={<Layout />}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/explore" element={<Dashboard />} />
-                <Route path="/about" element={<AboutUs />} />
-                <Route path="/contact" element={<ContactUs />} />
-                <Route path="/contributors" element={<Contributors />} />
-                <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
-                <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
-                <Route path="/templates/*" element={<TemplatesRoutes />} />
-                <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+              <SplashCursor />
 
-                <Route path="/sign-in" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupPage />} />
-              </Route>
+              <Routes>
+                {/* Wrap all primary pages with Layout and use Outlet inside */}
+                <Route element={<Layout />}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/home" element={<HomePage />} />
+                  <Route path="/explore" element={<Dashboard />} />
+                  <Route path="/about" element={<AboutUs />} />
+                  <Route path="/contact" element={<ContactUs />} />
+                  <Route path="/contributors" element={<Contributors />} />
+                  <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
+                  <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+                  <Route path="/templates/*" element={<TemplatesRoutes />} />
+                  <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
 
-            </Routes>
+                  <Route path="/sign-in" element={<LoginPage />} />
+                  <Route path="/signup" element={<SignupPage />} />
+                </Route>
 
-            <Analytics />
-          </Router>
+              </Routes>
+
+              <Analytics />
+            </Router>
+
+          </AuthProvider>
         </FavoritesProvider>
       </ThemeProvider>
     </HelmetProvider>
