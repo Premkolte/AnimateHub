@@ -15,11 +15,15 @@ const ExpandingSearchBar = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-secondary-900 rounded-lg ">
       {ExpandingSearchBarSnippets.map((snippet, index) => (
         <div
           key={index}
-          className="p-8 bg-white dark:bg-secondary-800 rounded-lg shadow-lg text-black dark:text-white"
+          className="p-8 bg-white bg-white dark:bg-secondary-700 
+  text-secondary-900 dark:text-white 
+  rounded-lg 
+  border border-gray-200 dark:border-[#a855f7]
+  shadow-lg dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)]  text-black dark:text-white"
         >
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <div dangerouslySetInnerHTML={{ __html: snippet.jsxCode }} />
@@ -33,14 +37,14 @@ const ExpandingSearchBar = () => {
             </button>
           </div>
           <FavoriteButton
-                      snippet={{
-                        type: 'expandingSearchBar',
-                        index: index,
-                        title: snippet.title,
-                        jsxCode: snippet.jsxCode,
-                        cssCode: snippet.cssCode,
-                      }}
-                    />
+            snippet={{
+              type: "expandingSearchBar",
+              index: index,
+              title: snippet.title,
+              jsxCode: snippet.jsxCode,
+              cssCode: snippet.cssCode,
+            }}
+          />
         </div>
       ))}
       <Modal

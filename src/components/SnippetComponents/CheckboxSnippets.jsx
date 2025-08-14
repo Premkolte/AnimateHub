@@ -16,11 +16,15 @@ const CheckboxSnippets = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-secondary-900 rounded-lg ">
       {checkBoxSnippets.map((snippet, index) => (
         <div
           key={index}
-          className="p-8 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg"
+          className="p-8 bg-white dark:bg-secondary-700 
+  text-secondary-900 dark:text-white 
+  rounded-lg 
+  border border-gray-200 dark:border-[#a855f7]
+  shadow-lg dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] "
         >
           <h2 className="text-xl font-bold mb-4">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
@@ -32,17 +36,16 @@ const CheckboxSnippets = () => {
               Show Code
             </button>
           </div>
-    <FavoriteButton
-      snippet={{
-        type: 'checkbox',
-        index: index,
-        title: snippet.title,
-        jsxCode: snippet.jsxCode,
-        cssCode: snippet.cssCode,
-      }}
-      size="md"
-    />
-          
+          <FavoriteButton
+            snippet={{
+              type: "checkbox",
+              index: index,
+              title: snippet.title,
+              jsxCode: snippet.jsxCode,
+              cssCode: snippet.cssCode,
+            }}
+            size="md"
+          />
         </div>
       ))}
       <Modal

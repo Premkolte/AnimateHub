@@ -8,7 +8,9 @@ function PillNavigationSnippets() {
   const [showModal, setShowModal] = useState(false);
   const [jsxCode, setJsxCode] = useState("");
   const [cssCode, setCssCode] = useState("");
-  const [activePills, setActivePills] = useState(pillNavigationSnippets.map(() => 0));
+  const [activePills, setActivePills] = useState(
+    pillNavigationSnippets.map(() => 0)
+  );
 
   const handleShowModal = (jsx, css) => {
     setJsxCode(jsx);
@@ -43,40 +45,48 @@ function PillNavigationSnippets() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-secondary-900 rounded-lg ">
       {pillNavigationSnippets.map((pillObject, index) => (
         <div
           key={index}
-          className="p-8 pt-14 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg flex flex-col items-center justify-evenly gap-10"
+          className="p-8 pt-14 bg-white dark:bg-secondary-700 
+  text-secondary-900 dark:text-white 
+  rounded-lg 
+  border border-gray-200 dark:border-[#a855f7]
+  shadow-lg dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)]  flex flex-col items-center justify-evenly gap-10"
         >
           <StringToReactComponent>
             {`(props) => (${pillObject.jsxCode})`}
           </StringToReactComponent>
           {renderPills(pillObject.jsxCode, pillObject.cssCode, index)}
-          <div className="flex space-x-4">
+          <div className="flex flex-col gap-4 w-full">
             <button
               className="text-white text-md py-3 px-2 rounded-lg shadow-md bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 transition-all duration-200"
-              onClick={() => handleShowModal(pillObject.jsxCode, pillObject.cssCode)}
+              onClick={() =>
+                handleShowModal(pillObject.jsxCode, pillObject.cssCode)
+              }
             >
               Show CSS
             </button>
             <button
               className="text-primary-600 dark:text-accent-500 border border-primary-600 dark:border-accent-500 text-md py-2 px-4 rounded-lg shadow-md hover:bg-primary-600 hover:text-white dark:hover:bg-accent-600 dark:hover:text-white transition-all duration-200"
-              onClick={() => handleShowModal(pillObject.jsxCode, pillObject.cssCode)}
+              onClick={() =>
+                handleShowModal(pillObject.jsxCode, pillObject.cssCode)
+              }
             >
               React Snippet
             </button>
           </div>
           <FavoriteButton
-  snippet={{
-    type: 'pillNavigation', 
-    index: index,
-    title: pillObject.title,
-    jsxCode: pillObject.jsxCode,
-    cssCode: pillObject.cssCode,
-  }}
-  size="md"
-/>
+            snippet={{
+              type: "pillNavigation",
+              index: index,
+              title: pillObject.title,
+              jsxCode: pillObject.jsxCode,
+              cssCode: pillObject.cssCode,
+            }}
+            size="md"
+          />
         </div>
       ))}
       <Modal

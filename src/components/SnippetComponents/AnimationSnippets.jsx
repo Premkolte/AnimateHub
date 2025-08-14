@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Modal from '../Modal';
-import StringToReactComponent from 'string-to-react-component';
-import { animationSnippets } from './Snippets/Animation';
-import FavoriteButton from '../Favorites/FavoriteButton';
+import React, { useState } from "react";
+import Modal from "../Modal";
+import StringToReactComponent from "string-to-react-component";
+import { animationSnippets } from "./Snippets/Animation";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const AnimationSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -14,17 +14,18 @@ const AnimationSnippets = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white dark:bg-secondary-900 rounded-lg">
       {animationSnippets.map((snippet, index) => (
         <div
           key={index}
-          className="p-6 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-xl shadow transition-all duration-200 relative"
+          className="p-6 bg-white bg-white dark:bg-secondary-700  text-secondary-900 border border-gray-200 dark:border-[#a855f7]
+  shadow-lg dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] dark:text-white rounded-xl shadow transition-all duration-200 relative"
         >
           {/* Favorite Button */}
           <div className="absolute top-4 right-4">
             <FavoriteButton
               snippet={{
-                type: 'animation',
+                type: "animation",
                 index: index,
                 title: snippet.title,
                 jsxCode: snippet.jsxCode,

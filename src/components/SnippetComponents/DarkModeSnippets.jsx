@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Modal from '../Modal';
-import StringToReactComponent from 'string-to-react-component';
-import { darkModeSnippets } from './Snippets/DarkMode';
-import FavoriteButton from '../Favorites/FavoriteButton';
+import React, { useState } from "react";
+import Modal from "../Modal";
+import StringToReactComponent from "string-to-react-component";
+import { darkModeSnippets } from "./Snippets/DarkMode";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 const DarkModeSnippets = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,8 +17,18 @@ const DarkModeSnippets = () => {
   };
 
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${isDarkModeOn ? 'dark' : ''}`}>
-      <div className="p-8 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white rounded-lg shadow-lg">
+    <div
+      className={`grid grid-cols-1 md:grid-cols-3 gap-6 ${
+        isDarkModeOn ? "dark" : ""
+      }`}
+    >
+      <div
+        className="p-8 bg-white dark:bg-secondary-700 
+  text-secondary-900 dark:text-white 
+  rounded-lg 
+  border border-gray-200 dark:border-[#a855f7]
+  shadow-lg dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] "
+      >
         <h2 className="text-xl font-bold mb-4">Dark Mode Toggle</h2>
 
         <div className="flex items-center mb-4">
@@ -32,12 +42,12 @@ const DarkModeSnippets = () => {
           <label
             htmlFor="dark-mode-toggle"
             className={`cursor-pointer relative w-12 h-6 rounded-full transition-colors duration-300 ${
-              isDarkModeOn ? 'bg-gray-700' : 'bg-gray-300'
+              isDarkModeOn ? "bg-gray-700" : "bg-gray-300"
             }`}
           >
             <div
               className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 ${
-                isDarkModeOn ? 'transform translate-x-full' : ''
+                isDarkModeOn ? "transform translate-x-full" : ""
               }`}
             ></div>
           </label>
@@ -58,15 +68,21 @@ const DarkModeSnippets = () => {
           </button>
         </div>
         <FavoriteButton
-  snippet={{
-    type: 'darkmode',
-    index: isDarkModeOn ? 0 : 1,
-    title: isDarkModeOn ? darkModeSnippets[0].title : darkModeSnippets[1].title,
-    jsxCode: isDarkModeOn ? darkModeSnippets[0].jsxCode : darkModeSnippets[1].jsxCode,
-    cssCode: isDarkModeOn ? darkModeSnippets[0].cssCode : darkModeSnippets[1].cssCode,
-  }}
-  size="md"
-/>
+          snippet={{
+            type: "darkmode",
+            index: isDarkModeOn ? 0 : 1,
+            title: isDarkModeOn
+              ? darkModeSnippets[0].title
+              : darkModeSnippets[1].title,
+            jsxCode: isDarkModeOn
+              ? darkModeSnippets[0].jsxCode
+              : darkModeSnippets[1].jsxCode,
+            cssCode: isDarkModeOn
+              ? darkModeSnippets[0].cssCode
+              : darkModeSnippets[1].cssCode,
+          }}
+          size="md"
+        />
       </div>
 
       <Modal
