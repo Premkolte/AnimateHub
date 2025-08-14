@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { Buttons } from "./Buttons";
 import SideBar from "./SideBar";
 import Window from "./Window";
-import WelcomeMessage from "../WelcomeMessage";
+import WelcomeMessage from "../../components/layout/WelcomeMessage";
 import { FaSearch } from "react-icons/fa";
 
 // Custom hook for debouncing a value

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import img1 from "./images/main.jpg";
-import img2 from "./images/img2.jpeg";
-import img3 from "./images/img.jpeg";
-import img4 from "./images/img3.jpeg";
-import img5 from "./images/img4.jpeg";
+import img1 from "/assets/testimonials/img5.jpg";
+import img2 from "/assets/testimonials/img2.jpeg";
+import img3 from "/assets/testimonials/img.jpeg";
+import img4 from "/assets/testimonials/img3.jpeg";
+import img5 from "/assets/testimonials/img4.jpeg";
 
 const testimonials = [
   {

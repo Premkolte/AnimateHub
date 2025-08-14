@@ -3,7 +3,7 @@ import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaCode, FaHeart, FaDownload, FaUsers } from "react-icons/fa";
-import { useFavorites } from "../contexts/FavoritesContext";
+import { useFavorites } from "../../contexts/FavoritesContext";
 
 const WelcomeMessage = () => {
   const { favorites } = useFavorites();
