@@ -68,7 +68,7 @@ border border-blue-300 dark:border-[#a855f7]
               {() =>
                 handleShowModal(buttonObject.jsxCode, buttonObject.cssCode)
               }
-              > Show CSS
+               Show CSS
             </button>
             <button
               className="w-full text-secondary-900 dark:text-white border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-700 text-md py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-200"
