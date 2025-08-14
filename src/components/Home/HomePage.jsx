@@ -11,6 +11,7 @@ import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
 import ReactJoyride from 'react-joyride';
 import { useFavorites } from '../../contexts/FavoritesContext';
+import Particles from '../Particles';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -115,6 +116,29 @@ const HomePage = () => {
     <>
       <ReactJoyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
       <div className="w-full flex flex-col items-center justify-center min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 py-24">
+        <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+
+          <Particles
+
+            particleColors={['#ffffff', '#ffffff']}
+
+            particleCount={200}
+
+            particleSpread={10}
+
+            speed={0.1}
+
+            particleBaseSize={100}
+
+            moveParticlesOnHover={true}
+
+            alphaParticles={false}
+
+            disableRotation={false}
+
+          />
+
+        </div>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
