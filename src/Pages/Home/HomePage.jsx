@@ -20,36 +20,37 @@ const HomePage = () => {
 
   const steps = [
     {
-      target: '.browse-components-button',
-      content: 'Click here to browse our components.',
+      target: ".browse-components-button",
+      content: "Click here to browse our components.",
     },
     {
-      target: '.get-started-button',
-      content: 'Click here to get started with our GitHub repository.',
+      target: ".get-started-button",
+      content: "Click here to get started with our GitHub repository.",
     },
     {
-      target: '.star-github-button',
-      content: 'Show your support by starring our GitHub repository.',
+      target: ".star-github-button",
+      content: "Show your support by starring our GitHub repository.",
     },
     {
-      target: '.pricing-section',
-      content: 'Check out our pricing plans here.',
+      target: ".pricing-section",
+      content: "Check out our pricing plans here.",
     },
     {
-      target: '.features-section',
-      content: 'Discover the amazing features we offer.',
+      target: ".features-section",
+      content: "Discover the amazing features we offer.",
     },
     {
-      target: '.testimonial-section',
-      content: 'Read testimonials from our satisfied users.',
+      target: ".testimonial-section",
+      content: "Read testimonials from our satisfied users.",
     },
     {
-      target: '.contributors-section',
-      content: 'Meet our talented contributors who have made this amazing website.',
+      target: ".contributors-section",
+      content:
+        "Meet our talented contributors who have made this amazing website.",
     },
     {
-      target: '.templates-section',
-      content: 'Explore our handcrafted templates.',
+      target: ".templates-section",
+      content: "Explore our handcrafted templates.",
     },
   ];
 
@@ -59,12 +60,9 @@ const HomePage = () => {
       planSubText: "For the individual and small teams",
       price: "$0",
       priceSubText: "per month",
-      features: [
-        "Access to all components",
-        "Access to codebase"
-      ],
+      features: ["Access to all components", "Access to codebase"],
       btnText: "Get Started",
-      redirectTo: "/payment"
+      redirectTo: "/payment",
     },
     {
       planName: "Pro",
@@ -74,10 +72,10 @@ const HomePage = () => {
       features: [
         "Priority support",
         "Access to exclusive components",
-        "Custom solutions"
+        "Custom solutions",
       ],
       btnText: "Get Started",
-      redirectTo: "/payment"
+      redirectTo: "/payment",
     },
     {
       planName: "Enterprise",
@@ -87,39 +85,61 @@ const HomePage = () => {
       features: [
         "Customizable plans",
         "Dedicated support team",
-        "Advanced analytics"
+        "Advanced analytics",
       ],
       btnText: "Contact Us",
-      redirectTo: "/contact"
-    }
+      redirectTo: "/contact",
+    },
   ];
 
   const features = [
     {
-      icon: <IoMdRocket size={50} className="text-center w-full mb-4 text-primary-600 dark:text-accent-500" />,
+      icon: (
+        <IoMdRocket
+          size={50}
+          className="text-center w-full mb-4 text-primary-600 dark:text-accent-500"
+        />
+      ),
       title: "Easy to Use",
-      description: "Simple and intuitive components that make development a breeze."
+      description:
+        "Simple and intuitive components that make development a breeze.",
     },
     {
-      icon: <MdLibraryBooks size={50} className="text-center w-full mb-4 text-primary-600 dark:text-accent-500" />,
+      icon: (
+        <MdLibraryBooks
+          size={50}
+          className="text-center w-full mb-4 text-primary-600 dark:text-accent-500"
+        />
+      ),
       title: "Comprehensive Docs",
-      description: "Detailed documentation to help you get started quickly and easily."
+      description:
+        "Detailed documentation to help you get started quickly and easily.",
     },
     {
-      icon: <GiTechnoHeart size={50} className="text-center w-full mb-4 text-primary-600 dark:text-accent-500" />,
+      icon: (
+        <GiTechnoHeart
+          size={50}
+          className="text-center w-full mb-4 text-primary-600 dark:text-accent-500"
+        />
+      ),
       title: "Modern Design",
-      description: "Beautifully designed components that enhance your project's UI."
-    }
+      description:
+        "Beautifully designed components that enhance your project's UI.",
+    },
   ];
-
 
   return (
     <>
-      <ReactJoyride steps={steps} continuous={true} showProgress={true} showSkipButton={true} />
-      <div className="w-full flex flex-col items-center justify-center min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 py-24">
+      <ReactJoyride
+        steps={steps}
+        continuous={true}
+        showProgress={true}
+        showSkipButton={true}
+      />
+      <div className="w-full flex flex-col items-center justify-center min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 py-24 ">
         <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
           <Particles
-            particleColors={['#ffffff', '#ffffff']}
+            particleColors={["#ffffff", "#ffffff"]}
             particleCount={300}
             particleSpread={10}
             speed={0.1}
@@ -130,10 +150,11 @@ const HomePage = () => {
           />
         </div>
         <motion.div
+        className="text-center max-w-3xl relative -top-20" 
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl"
+          
         >
           <div className="bg-primary-600 dark:bg-accent-600 text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
             100% OPEN-SOURCE
@@ -172,46 +193,62 @@ const HomePage = () => {
               Get Started
             </motion.button>
 
-
             {/* Favorites Button - Only show for signed in users */}
-            {
-              currentUser ? (
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200 flex items-center gap-2"
-                  onClick={() => {
-                    navigate("/favorites");
-                  }}
-                >
-                  <FaHeart />
-                  My Favorites
-                </motion.button>
-              ) : (
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
-                  onClick={() => {
-                    navigate("/sign-in");
-                  }}
-                >
-                  <FaHeart />
-                  Sign In for Favorites
-                </motion.button>
-              )
-            }
-
+            {currentUser ? (
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200 flex items-center gap-2"
+                onClick={() => {
+                  navigate("/favorites");
+                }}
+              >
+                <FaHeart />
+                My Favorites
+                {favorites.length > 0 && (
+                  <span className="bg-white text-red-500 text-sm px-2 py-1 rounded-full font-bold">
+                    {favorites.length}
+                  </span>
+                )}
+              </motion.button>
+            ) : (
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
+                onClick={() => {
+                  navigate("/sign-in");
+                }}
+              >
+                <FaHeart />
+                Sign In for Favorites
+              </motion.button>
+            )}
           </div>
         </motion.div>
 
-        <section className="flex flex-col space-y-6 mt-12">
+        <section className="flex flex-col space-y-6 mt-12 relative -top-16">
           <div className="flex space-x-6">
-            <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML"><FaHtml5 className="h-12 w-12" /></a>
-            <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS"><FaCss3Alt className="h-12 w-12" /></a>
-            <a target="_blank" href="https://react.dev/learn"><FaReact className="h-12 w-12" /></a>
-            <a target="_blank" href="https://tailwindcss.com/"><BiLogoTailwindCss className="h-12 w-12" /></a>
+            <a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML"
+            >
+              <FaHtml5 className="h-12 w-12" />
+            </a>
+            <a
+              target="_blank"
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+            >
+              <FaCss3Alt className="h-12 w-12" />
+            </a>
+            <a target="_blank" href="https://react.dev/learn">
+              <FaReact className="h-12 w-12" />
+            </a>
+            <a target="_blank" href="https://tailwindcss.com/">
+              <BiLogoTailwindCss className="h-12 w-12" />
+            </a>
           </div>
 
-          <motion.a href="https://github.com/Premkolte/AnimateHub"
+          <motion.a
+            href="https://github.com/Premkolte/AnimateHub"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center justify-center gap-4 whitespace-nowrap rounded-md text-sm font-medium h-12 px-6 py-3 group bg-secondary-700 dark:bg-secondary-800 hover:bg-secondary-800 dark:hover:bg-secondary-600 transition-all duration-200 ease-in-out star-github-button"
@@ -220,37 +257,42 @@ const HomePage = () => {
             <span className="text-white text-xl">Star on Github</span>
             <BsStarFill size={25} className="text-yellow-500" />
           </motion.a>
-
         </section>
-
-
-
-
-
 
         {/* Features */}
-        <section className="features-section py-16 text-center">
-          <h2 className="text-4xl font-bold mb-12">Features</h2>
+        <section
+          className="features-section w-full bg-[#dbeafe]
+ dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900
+ rounded-3xl py-16 text-center"
+        >
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-bold mb-12 text-primary-700 dark:text-white">
+              Features
+            </h2>
 
-          <div className="flex flex-wrap justify-center gap-12">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-2 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform hover:scale-105 duration-300 ease-in-out max-w-xs w-full">
-                {feature.icon}
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p>{feature.description}</p>
-              </motion.div>
-            ))}
+            <div className="flex flex-wrap justify-center gap-12">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-2 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform hover:scale-105 duration-300 ease-in-out max-w-xs w-full"
+                >
+                  {feature.icon}
+                  <h3 className="text-xl font-semibold mb-2">
+                    {feature.title}
+                  </h3>
+                  <p>{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
-
 
         {/* Templates */}
         <section className="templates-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white px-4">
           <h2 className="text-4xl font-bold mb-4 text-center">Templates</h2>
           <p className="max-w-2xl text-center mb-8 text-lg opacity-80">
-            Explore our library of handcrafted templates designed to kickstart your projects.
+            Explore our library of handcrafted templates designed to kickstart
+            your projects.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -277,7 +319,11 @@ const HomePage = () => {
         </section>
 
         {/* Testimonials */}
-        <section className="testimonial-section max-w-full">
+        <section
+          className="testimonial-section w-full bg-[#dbeafe]
+ dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900
+ rounded-3xl"
+        >
           <h2 className="text-4xl mb-8 text-center"></h2>
           <div className="overflow-x-hidden">
             <TestimonialSection />
@@ -286,7 +332,9 @@ const HomePage = () => {
 
         {/* Pricing */}
         <section className="text-center space-y-4 py-6 sm:py-8 md:py-16 pricing-section px-3 sm:px-4 md:px-6">
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">Pricing</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
+            Pricing
+          </h1>
 
           <div className="flex flex-col xl:flex-row justify-center items-stretch gap-4 sm:gap-6 md:gap-8 xl:gap-12 mt-6 sm:mt-8 max-w-7xl mx-auto">
             {plans.map((plan, idx) => (
@@ -299,17 +347,28 @@ const HomePage = () => {
                   <h2 className="font-extrabold text-xl sm:text-2xl md:text-3xl text-center mb-2">
                     {plan.planName}
                   </h2>
-                  <p className="opacity-60 text-center text-xs sm:text-sm md:text-base mb-4">{plan.planSubText}</p>
+                  <p className="opacity-60 text-center text-xs sm:text-sm md:text-base mb-4">
+                    {plan.planSubText}
+                  </p>
                   <div className="flex flex-col items-center my-4 sm:my-6 md:my-8">
-                    <p className="font-extrabold text-2xl sm:text-3xl md:text-4xl">{plan.price}</p>
-                    <p className="text-xs sm:text-sm opacity-60">{plan.priceSubText}</p>
+                    <p className="font-extrabold text-2xl sm:text-3xl md:text-4xl">
+                      {plan.price}
+                    </p>
+                    <p className="text-xs sm:text-sm opacity-60">
+                      {plan.priceSubText}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-1 sm:gap-2 w-full flex-1 justify-between">
                   <div>
                     {plan.features.map((feature, index) => (
-                      <p key={index} className="text-xs sm:text-sm md:text-base mb-1 sm:mb-2">✔️<b>{feature}</b></p>
+                      <p
+                        key={index}
+                        className="text-xs sm:text-sm md:text-base mb-1 sm:mb-2"
+                      >
+                        ✔️<b>{feature}</b>
+                      </p>
                     ))}
                   </div>
 
@@ -328,11 +387,17 @@ const HomePage = () => {
         </section>
 
         {/* Contributors */}
-        <section className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white px-4">
+        <section
+  className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white 
+  bg-[#dbeafe] dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900
+  rounded-3xl px-4 py-8"
+>
+
           <h2 className="text-4xl font-bold mb-4 text-center">Contributors</h2>
           <p className="max-w-2xl text-center mb-6 text-lg opacity-80">
-            Meet the talented developers, designers, and open-source contributors
-            who made this platform possible. Join the crew and shape the future!
+            Meet the talented developers, designers, and open-source
+            contributors who made this platform possible. Join the crew and
+            shape the future!
           </p>
 
           <div className="flex flex-wrap justify-center gap-6">
@@ -357,8 +422,6 @@ const HomePage = () => {
             </motion.a>
           </div>
         </section>
-
-
 
         {/* <div className="templates-section mt-12 w-full flex flex-col items-center text-white">
           <h2 className="text-4xl mb-8">Templates</h2>
@@ -389,7 +452,6 @@ const HomePage = () => {
           </div>
         </div> */}
       </div>
-
     </>
   );
 };
