@@ -10,6 +10,11 @@
   }
 }
 
+@layer base {
+  html, body {
+    @apply overscroll-none; /* disables rubber-band bounce */
+  }
+}
 :root {
   --scrollbar-thumb: #1b67e2; /* for light mode */
 }
