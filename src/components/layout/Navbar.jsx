@@ -6,7 +6,14 @@ import { FaHeart } from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
-
+import {
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+  useClerk,
+} from "@clerk/clerk-react";
+import "../layout/Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,8 +82,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" w-full backdrop-blur-md bg-white/30 dark:bg-purple-900/30 text-gray-800 dark:text-gray-200 
-py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]">
+    <nav
+      className=" w-full backdrop-blur-md bg-white/30 dark:bg-purple-900/30 text-gray-800 dark:text-gray-200 
+py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
+    >
       <div className="w-full px-4">
         <div className="w-full flex justify-between items-center">
           {/* Logo */}
@@ -91,13 +100,13 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 src={Logo}
                 alt="AnimateHub Logo"
               />
-              <span className="font-heading text-2xl md:text-3xl font-bold text-blue-800 dark:text-white-100">
+              <span className="font-heading text-2xl md:text-3xl font-bold text-blue-800 dark:text-gray-100">
                 AnimateHub
               </span>
             </Link>
-              <span className="lg:hidden">
-                <DarkModeToggle />
-              </span>
+            <span className="lg:hidden">
+              <DarkModeToggle />
+            </span>
           </div>
 
           {/* Desktop Nav */}
@@ -109,16 +118,20 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 onClick={closeMenu}
                 className={`relative px-2 py-1 transition-all duration-300 
                   hover:text-blue-500 hover:font-bold dark:hover:text-purple-300 
-                  ${location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`
-                    ? "text-blue-500 dark:text-purple-300 font-bold"
-                    : "font-normal"
+                  ${
+                    location.pathname ===
+                    `/${item === "Home" ? "" : item.toLowerCase()}`
+                      ? "text-blue-500 dark:text-purple-300 font-bold"
+                      : "font-normal"
                   }
                   group
                 `}
               >
                 {item}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 dark:bg-purple-300 
-                  transition-all duration-300 group-hover:w-full" />
+                <span
+                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 dark:bg-purple-300 
+                  transition-all duration-300 group-hover:w-full"
+                />
               </Link>
             ))}
 
@@ -153,9 +166,11 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 <Link
                   to="/profile"
                   className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center"
-                  title={currentUser.username || 'Profile'}
+                  title={currentUser.username || "Profile"}
                 >
-                  {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}
+                  {currentUser.username
+                    ? currentUser.username.charAt(0).toUpperCase()
+                    : "U"}
                 </Link>
               </>
             ) : (
@@ -183,93 +198,105 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
             >
               {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
             </button>
-            <div id="google_translate_element" style={{ display: "none" }}></div>
-          </div >
+            <div
+              id="google_translate_element"
+              style={{ display: "none" }}
+            ></div>
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center">
-
             <button
               onClick={toggleMenu}
               className="text-2xl focus:outline-none"
             >
               {isOpen ? <FiX /> : <FiMenu />}
             </button>
-          </div >
-        </div >
+          </div>
+        </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="block lg:hidden flex flex-col mt-4 space-y-4">
-            {navLinks.map((item) => (
-              <Link
-                key={item}
-                to={`/${item === "Home" ? "" : item.toLowerCase()}`}
-                onClick={closeMenu}
-                className={`transition-all duration-300
-                  hover:text-gray-300 hover:font-bold dark:hover:text-white
-                  ${location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`
-                      ? "font-bold text-blue-500 dark:text-purple-300"
-                      : "font-normal"
-                    }
-                `}
+          <div className="fixed top-0 right-0 h-screen w-[80%] bg-[#f8f6ff] dark:bg-[#261946] shadow-lg z-50 transform translate-x-0 transition-transform duration-300 ease-in-out block lg:hidden flex flex-col p-4 space-y-4 gap-[3vh]">
+            {/* Close button at top-right */}
+            <button onClick={closeMenu} className="self-end text-2xl mb-4">
+              <FiX />
+            </button>
+
+            {navLinks.map((item) => {
+              const isActive =
+                location.pathname ===
+                `/${item === "Home" ? "" : item.toLowerCase()}`;
+
+              return (
+                <Link
+                  key={item}
+                  to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                  onClick={closeMenu}
+                  className={`transition-all duration-300 text-xl
+        hover:text-gray-300 hover:font-bold dark:hover:text-white hover-underline-animation
+        ${
+          isActive
+            ? "font-bold text-blue-500 dark:text-purple-300 active-underline"
+            : "font-normal"
+        }
+      `}
                 >
                   {item}
                 </Link>
-              ))}
+              );
+            })}
 
-              <SignedIn>
-                <Link
-                  to="/favorites"
-                  onClick={closeMenu}
-                  className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
-                >
-                  <FaHeart className="text-red-400" />
-                  <span>Favorites</span>
-                  {favorites.length > 0 && (
-                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                      {favorites.length}
-                    </span>
-                  )}
-                </Link>
-              </SignedIn>
-
-              <SignedOut>
-                <Link
-                  to="/sign-in"
-                  onClick={closeMenu}
-                  className="hover:text-gray-300 dark:hover:text-white"
-                >
-                  Sign In
-                </Link>
-              </SignedOut>
-
-              <SignedIn>
-                <button
-                  onClick={() => {
-                    signOut({ redirectUrl: "/" });
-                    closeMenu();
-                  }}
-                  className="hover:text-gray-300 dark:hover:text-white"
-                >
-                  Sign Out
-                </button>
-              </SignedIn>
-
-              {/* Mobile Language Toggle */}
-              <button
-                onClick={toggleLanguage}
-                className="px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
+            <SignedIn>
+              <Link
+                to="/favorites"
+                onClick={closeMenu}
+                className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
               >
-                {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
+                <FaHeart className="text-red-400" />
+                <span>Favorites</span>
+                {favorites.length > 0 && (
+                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                    {favorites.length}
+                  </span>
+                )}
+              </Link>
+            </SignedIn>
+
+            <SignedOut>
+              <Link
+                to="/sign-in"
+                onClick={closeMenu}
+                className="hover:text-gray-300 dark:hover:text-white text-xl"
+              >
+                Sign In
+              </Link>
+            </SignedOut>
+
+            <SignedIn>
+              <button
+                onClick={() => {
+                  signOut({ redirectUrl: "/" });
+                  closeMenu();
+                }}
+                className="hover:text-gray-300 dark:hover:text-white"
+              >
+                Sign Out
               </button>
-            </div>
-          )
-        }
-      </div >
-    </nav >
+            </SignedIn>
+
+            {/* Mobile Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
+            >
+              {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
+            </button>
+          </div>
+        )}
+      </div>
+    </nav>
   );
 };
 
 export default Navbar;
-
