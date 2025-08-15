@@ -40,7 +40,7 @@ const testimonials = [
 
 const TestimonialCard = ({ text, name, image }) => {
   return (
-    <div className="flex-none w-72 sm:w-80 sm:w-84 md:w-96 p-4 sm:p-6 md:p-8 h-auto min-h-[220px] sm:min-h-[240px] md:min-h-[260px] rounded-xl shadow-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 text-gray-900 dark:text-white flex flex-col justify-between relative transition-all duration-300 transform hover:scale-105 hover:shadow-xl mx-2 sm:mx-3 border border-blue-100 dark:border-gray-700">
+    <div className="flex-none w-72 sm:w-80 sm:w-84 md:w-96 p-4 sm:p-6 md:p-8 h-auto min-h-[220px] sm:min-h-[240px] md:min-h-[260px] rounded-xl shadow-lg bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 text-gray-900 dark:text-white flex flex-col justify-between relative transition-all duration-300 transform hover:scale-105 hover:shadow-xl mx-2 sm:mx-3 border border-blue-100 dark:border-gray-700">
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-2 w-12 bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-blue-400 dark:to-indigo-400 rounded-t-lg shadow-sm" />
       <div className="absolute top-3 right-3 text-blue-200 dark:text-gray-600">
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -85,7 +85,7 @@ const TestimonialSection = () => {
           }
         `
       }} />
-      <div className="w-full max-w-full mx-auto py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 bg-gradient-to-bw-full bg-[#dbeafe] dark:bg-secondary-900 border-b border-blue-300 dark:border-b-secondary-900
+      <div className="w-full max-w-full mx-auto py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 bg-gradient-to-bw-full bg-[#dbeafe] dark:bg-secondary-800 border-b border-blue-300 dark:border-b-accent-700
 rounded-3xl">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
@@ -98,9 +98,9 @@ rounded-3xl">
         <div className="relative">
 
           {/* for left side shadow */}
-          <div className="absolute -left-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
+          <div className="absolute -left-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-r from-white dark:from-gray-900 to-black z-10 pointer-events-none" />
           {/* for right side shadow */}
-          <div className="absolute -right-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
+          <div className="absolute -right-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-l from-white dark:from-gray-900 to-black z-10 pointer-events-none" />
           <div className="overflow-hidden">
             <div
               className="flex scroll-container"

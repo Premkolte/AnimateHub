@@ -262,11 +262,12 @@ const HomePage = () => {
         {/* Features */}
         <section
           className="features-section w-full bg-[#dbeafe]
- dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900
+ dark:bg-secondary-800 border border-blue-300 dark:border-accent-700
  rounded-3xl py-16 text-center"
         >
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12 text-primary-700 dark:text-white">
+<h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
+
               Features
             </h2>
 
@@ -321,7 +322,7 @@ const HomePage = () => {
         {/* Testimonials */}
         <section
           className="testimonial-section w-full bg-[#dbeafe]
- dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900
+ dark:bg-secondary-800 border border-blue-300 dark:border-accent-700
  rounded-3xl"
         >
           <h2 className="text-4xl mb-8 text-center"></h2>
@@ -389,7 +390,7 @@ const HomePage = () => {
         {/* Contributors */}
         <section
   className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white 
-  bg-[#dbeafe] dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900
+  bg-[#dbeafe] dark:bg-secondary-800 border border-blue-300 dark:border-accent-700
   rounded-3xl px-4 py-8"
 >
 
