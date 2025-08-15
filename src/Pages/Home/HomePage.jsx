@@ -150,11 +150,11 @@ const HomePage = () => {
           />
         </div>
         <motion.div
-        className="text-center max-w-3xl relative -top-20" 
+          className="text-center max-w-3xl relative -top-20"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          
+
         >
           <div className="bg-primary-600 dark:bg-accent-600 text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
             100% OPEN-SOURCE
@@ -204,11 +204,13 @@ const HomePage = () => {
               >
                 <FaHeart />
                 My Favorites
-                {favorites.length > 0 && (
+                {/* -------------- will be implemented later */}
+                {/* {favorites.length > 0 && (
                   <span className="bg-white text-red-500 text-sm px-2 py-1 rounded-full font-bold">
                     {favorites.length}
                   </span>
-                )}
+                )} */}
+                {/* -------------- will be implemented later */}
               </motion.button>
             ) : (
               <motion.button
@@ -388,10 +390,10 @@ const HomePage = () => {
 
         {/* Contributors */}
         <section
-  className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white 
+          className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white 
   bg-[#dbeafe] dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900
   rounded-3xl px-4 py-8"
->
+        >
 
           <h2 className="text-4xl font-bold mb-4 text-center">Contributors</h2>
           <p className="max-w-2xl text-center mb-6 text-lg opacity-80">
