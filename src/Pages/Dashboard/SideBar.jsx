@@ -1,25 +1,32 @@
 import React, { useState } from "react";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { Buttons } from "./Buttons";
+import { useNavigate } from "react-router-dom"; // ✅ import
 
 function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate(); // ✅ define navigate here
 
   const handleTabClick = (originalIndex) => {
     setActiveTab(originalIndex);
     setIsSidebarOpen(false);
   };
 
-  const buttonsToShow = searchQuery ? filteredButtons : Buttons.map((button, index) => ({ button, originalIndex: index }));
+  const buttonsToShow = searchQuery
+    ? filteredButtons
+    : Buttons.map((button, index) => ({ button, originalIndex: index }));
 
   const highlightMatch = (text, query) => {
     if (!query) return text;
-    const regex = new RegExp(`(${query})`, 'gi');
+    const regex = new RegExp(`(${query})`, "gi");
     const parts = text.split(regex);
     return parts.map((part, index) => {
       if (part.toLowerCase() === query.toLowerCase()) {
         return (
-          <span key={index} className="bg-yellow-200 dark:bg-yellow-600 text-secondary-900 dark:text-white">
+          <span
+            key={index}
+            className="bg-yellow-200 dark:bg-yellow-600 text-secondary-900 dark:text-white"
+          >
             {part}
           </span>
         );
@@ -42,26 +49,34 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
 
       {/* Sidebar */}
       <div
-  className={`fixed inset-y-0 left-0 z-40 bg-white dark:bg-secondary-900 border border-blue-300 dark:border-[#a855f7]
+        className={`fixed inset-y-0 left-0 z-40 bg-white dark:bg-secondary-900 border border-blue-300 dark:border-[#a855f7]
     text-gray-300 shadow-xl rounded-xl transform ${
       isSidebarOpen ? "translate-x-0" : "-translate-x-full"
     } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto`}
-  style={{ maxHeight: "calc(100vh - 35px)", width: "260px", bottom: "35px" }}
->
-
+        style={{ maxHeight: "calc(100vh - 35px)", width: "260px", bottom: "35px" }}
+      >
         <div className="p-4 h-full flex flex-col justify-between bg-white dark:bg-secondary-900">
           <div className="space-y-2 mb-4 pb-4 inline-flex flex-col w-auto min-w-full bg-white dark:bg-secondary-900">
+            <button
+              className="bg-blue-600 text-white py-2 px-4 rounded-md text-sm text-left hover:bg-blue-700 transition-colors duration-300 w-full"
+              onClick={() => navigate("/my-snippets")} // ✅ fixed navigation
+            >
+              ✍️ My Snippets
+            </button>
             {buttonsToShow.length > 0 ? (
               buttonsToShow.map(({ button, originalIndex }, displayIndex) => (
                 <button
                   key={originalIndex}
-                  className={`${activeTab === originalIndex
+                  className={`${
+                    activeTab === originalIndex
                       ? "bg-primary-600 text-white dark:bg-purple-700"
                       : "bg-primary-100 dark:bg-secondary-800 text-secondary-900 dark:text-white hover:bg-primary-600 hover:text-white"
-                    } py-2 px-4 rounded-md text-sm text-left focus:outline-none transition-colors duration-300 w-full`}
+                  } py-2 px-4 rounded-md text-sm text-left focus:outline-none transition-colors duration-300 w-full`}
                   onClick={() => handleTabClick(originalIndex)}
                 >
-                  {searchQuery ? highlightMatch(button, searchQuery) : button}
+                  {searchQuery
+                    ? highlightMatch(button, searchQuery)
+                    : button}
                 </button>
               ))
             ) : (
