@@ -91,7 +91,7 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 src={Logo}
                 alt="AnimateHub Logo"
               />
-              <span className="font-heading text-2xl md:text-3xl font-bold text-white dark:text-gray-100">
+              <span className="font-heading text-2xl md:text-3xl font-bold text-blue-800 dark:text-white-100">
                 AnimateHub
               </span>
             </Link>
