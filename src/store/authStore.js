@@ -7,6 +7,7 @@ export const useAuthStore = create((set, get) => ({
     authError: null,
     currentUser: null,
     initialFetch: false,
+    successfullyResetPassword: null,
 
     setIsAuthLoading: (isLoading) => set({ isAuthLoading: isLoading }),
     setError: (error) => set({ authError: error }),
@@ -27,7 +28,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/register', userData);
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
                 toast.success("Please check your inbox to verify your account.")
             } else {
                 set({ authError: response.message });
@@ -51,7 +52,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/login', userData);
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
             } else {
                 set({ authError: response.message });
             }
@@ -65,21 +66,20 @@ export const useAuthStore = create((set, get) => ({
     /**
      * Fetch the current user
      */
-    fetchCurrentUser: async () => {
+    fetchCurrentUser: async (silent = true) => {
         set({ isAuthLoading: true });
         try {
-            console.log("I run")
-
             const apiResponse = await axiosInstance.get('/auth/check');
             console.log(apiResponse)
             const response = apiResponse.data;
             if (response.success) {
                 set({ currentUser: response.data });
+                set({ authError: null })
             } else {
-                set({ authError: response.message });
+                if (!silent) toast.error(response.message)
             }
         } catch (error) {
-            set({ authError: error.response.data.message });
+            if (!silent) toast.error(error.response.data.message)
         } finally {
             set({ isAuthLoading: false })
             set({ initialFetch: true })
@@ -114,7 +114,8 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.get(`/auth/verify-email/${token}`);
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
+                set({ authError: null })
             } else {
                 set({ authError: response.message });
             }
@@ -134,13 +135,14 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/resend-verification');
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ authError: null })
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
             }
         } catch (error) {
             set({ authError: error.response.data.message });
+            toast.error(error.response.data.message)
         } finally {
             set({ isAuthLoading: false })
         }
@@ -158,7 +160,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/update-password', { currentPassword, newPassword });
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
@@ -182,7 +184,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/forgot-password', { email });
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ authError: null })
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
@@ -206,13 +208,15 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post(`/auth/reset-password/${token}`, { newPassword });
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ authError: null })
+                set({ successfullyResetPassword: true })
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
             }
         } catch (error) {
             set({ authError: error.response.data.message });
+            set({ successfullyResetPassword: false })
         } finally {
             set({ isAuthLoading: false })
         }

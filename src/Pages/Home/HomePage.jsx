@@ -155,17 +155,17 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-        <div className="flex flex-col items-center bg-white dark:bg-[#0f172a]">
-          <div className="mt-6 mb-10 p-[1px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500">
-            <div className="bg-white dark:bg-gray-900 rounded-full px-6 py-4">
-              <DynamicGreeting />
+          <div className="flex flex-col items-center bg-white dark:bg-[#0f172a]">
+            <div className="mt-6 mb-10 p-[1px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500">
+              <div className="bg-white dark:bg-gray-900 rounded-full px-6 py-4">
+                <DynamicGreeting />
+              </div>
             </div>
           </div>
-        </div>
 
 
 
-           
+
           <div className="bg-primary-600 dark:bg-accent-600 text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
             100% OPEN-SOURCE
           </div>
@@ -214,11 +214,13 @@ const HomePage = () => {
               >
                 <FaHeart />
                 My Favorites
-                {favorites.length > 0 && (
+                {/* -------------- will be implemented later */}
+                {/* {favorites.length > 0 && (
                   <span className="bg-white text-red-500 text-sm px-2 py-1 rounded-full font-bold">
                     {favorites.length}
                   </span>
-                )}
+                )} */}
+                {/* -------------- will be implemented later */}
               </motion.button>
             ) : (
               <motion.button
@@ -398,9 +400,7 @@ const HomePage = () => {
 
         {/* Contributors */}
         <section
-          className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white 
-  bg-[#dbeafe] dark:bg-secondary-800 border border-blue-300 dark:border-accent-700
-  rounded-3xl px-4 py-8"
+          className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white bg-[#dbeafe] dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900 rounded-3xl px-4 py-8"
         >
           <h2 className="text-4xl font-bold mb-4 text-center">Contributors</h2>
           <p className="max-w-2xl text-center mb-6 text-lg opacity-80">
