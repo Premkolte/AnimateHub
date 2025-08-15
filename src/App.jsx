@@ -21,6 +21,8 @@ import AppProvider from "./providers/AppProvider";
 import HomePage from "./Pages/Home/HomePage";
 import AboutUs from "./Pages/About/AboutUs";
 import ContactUs from "./Pages/Contact/ContactUs";
+import Leaderboard from "./Pages/Leaderboard/LeaderBoard";
+
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import Contributors from "./Pages/Contributors/Contributors";
 import PaymentPage from "./Pages/Payment/Payment";
@@ -31,6 +33,7 @@ import FavoritesPage from "./Pages/Favorites/FavoritesPage";
 import ForgotPasswordPage from "./Pages/Auth/ForgotPasswordPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
+import MySnippet from './Pages/Dashboard/MySnippet';
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -60,19 +63,21 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/contributors" element={<Contributors />} />
             <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
             <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
             <Route path="/templates/*" element={<TemplatesRoutes />} />
-            <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
-
+            <Route path="/my-snippets" element={<MySnippet />} />
 
             {/* Auth Routes */}
             <Route path="/sign-in" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
             <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+            <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+
 
 
           </Route>
