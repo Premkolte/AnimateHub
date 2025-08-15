@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../../components/UI/BackButton";
+import toast from "react-hot-toast";
 
 const PaymentPage = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const PaymentPage = () => {
 
   const handlePayment = (e) => {
     e.preventDefault();
-    alert("Payment processed successfully!");
+    toast.success("Payment processed successfully!");
     navigate("/");
   };
 

@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { User, Mail, Lock } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
+import toast from "react-hot-toast";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -280,7 +281,7 @@ const SignupPage = () => {
                     boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
                   }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => alert("Google signup is currently not available")}
+                  onClick={() => toast.error("Google signup is currently not available")}
                   className="w-full bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 font-semibold"
                 >
                   <FcGoogle className="mr-3 text-xl" />
