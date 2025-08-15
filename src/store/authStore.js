@@ -27,7 +27,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/register', userData);
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
                 toast.success("Please check your inbox to verify your account.")
             } else {
                 set({ authError: response.message });
@@ -51,7 +51,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/login', userData);
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
             } else {
                 set({ authError: response.message });
             }
@@ -114,7 +114,8 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.get(`/auth/verify-email/${token}`);
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
+                set({ authError: null })
             } else {
                 set({ authError: response.message });
             }
