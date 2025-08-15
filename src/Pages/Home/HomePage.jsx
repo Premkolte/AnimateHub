@@ -155,13 +155,13 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-<div className="flex flex-col items-center bg-white dark:bg-[#0f172a]">
-  <div className="mt-6 mb-20 p-[1px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500">
-    <div className="bg-white dark:bg-gray-900 rounded-full px-6 py-4">
-      <DynamicGreeting />
-    </div>
-  </div>
-</div>
+        <div className="flex flex-col items-center bg-white dark:bg-[#0f172a]">
+          <div className="mt-6 mb-10 p-[1px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500">
+            <div className="bg-white dark:bg-gray-900 rounded-full px-6 py-4">
+              <DynamicGreeting />
+            </div>
+          </div>
+        </div>
 
 
 
