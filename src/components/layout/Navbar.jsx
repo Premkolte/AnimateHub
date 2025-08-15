@@ -25,7 +25,7 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  const navLinks = ["Home", "Explore", "About", "Contact"];
+  const navLinks = ["Home", "Explore", "About", "LeaderBoard","Contact"];
 
   useEffect(() => {
     // Hide Google Translate UI

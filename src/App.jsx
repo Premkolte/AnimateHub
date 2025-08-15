@@ -21,6 +21,8 @@ import AppProvider from "./providers/AppProvider";
 import HomePage from "./Pages/Home/HomePage";
 import AboutUs from "./Pages/About/AboutUs";
 import ContactUs from "./Pages/Contact/ContactUs";
+import Leaderboard from "./Pages/Leaderboard/LeaderBoard";
+
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import Contributors from "./Pages/Contributors/Contributors";
 import PaymentPage from "./Pages/Payment/Payment";
@@ -58,6 +60,7 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/contributors" element={<Contributors />} />
             <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
