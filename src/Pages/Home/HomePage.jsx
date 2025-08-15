@@ -9,10 +9,10 @@ import { GiTechnoHeart } from "react-icons/gi";
 import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
-import ReactJoyride from 'react-joyride';
+import ReactJoyride from "react-joyride";
 import Particles from "../../components/Particles";
-
-import { useAuthStore } from "../../store/authStore"
+import DynamicGreeting from "./DynamicGreeting";
+import { useAuthStore } from "../../store/authStore";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -150,12 +150,22 @@ const HomePage = () => {
           />
         </div>
         <motion.div
-        className="text-center max-w-3xl relative -top-20" 
+          className="text-center max-w-3xl relative -top-20"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          
         >
+<div className="flex flex-col items-center bg-white dark:bg-[#0f172a]">
+  <div className="mt-6 mb-20 p-[1px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500">
+    <div className="bg-white dark:bg-gray-900 rounded-full px-6 py-4">
+      <DynamicGreeting />
+    </div>
+  </div>
+</div>
+
+
+
+           
           <div className="bg-primary-600 dark:bg-accent-600 text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
             100% OPEN-SOURCE
           </div>
@@ -266,8 +276,7 @@ const HomePage = () => {
  rounded-3xl py-16 text-center"
         >
           <div className="max-w-7xl mx-auto">
-<h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
-
+            <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
               Features
             </h2>
 
@@ -389,11 +398,10 @@ const HomePage = () => {
 
         {/* Contributors */}
         <section
-  className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white 
+          className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white 
   bg-[#dbeafe] dark:bg-secondary-800 border border-blue-300 dark:border-accent-700
   rounded-3xl px-4 py-8"
->
-
+        >
           <h2 className="text-4xl font-bold mb-4 text-center">Contributors</h2>
           <p className="max-w-2xl text-center mb-6 text-lg opacity-80">
             Meet the talented developers, designers, and open-source
