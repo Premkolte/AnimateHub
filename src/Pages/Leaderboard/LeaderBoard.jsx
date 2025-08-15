@@ -77,7 +77,7 @@ export default function LeaderBoard() {
   if (loading)
     return (
       <div className="flex flex-col justify-center items-center mt-10">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-500 border-b-4 border-gray-200"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-gray-200"></div>
         <span className="mt-4 text-xl font-medium">Loading leaderboard...</span>
       </div>
     );
