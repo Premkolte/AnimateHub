@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { User, Lock } from "lucide-react";
+import { User, Lock, Mail } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 import toast from "react-hot-toast";
 
@@ -13,6 +13,8 @@ const LoginPage = () => {
   const { handleLogin, isAuthLoading, authError, currentUser, forgotPassword } = useAuthStore();
 
   const [isForgotPasswordActive, setIsForgotPasswordActive] = useState(false)
+  const [email, setEmail] = useState("")
+
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -37,7 +39,7 @@ const LoginPage = () => {
 
     // if forgot password is active, send reset password email otherwise login
     if (isForgotPasswordActive) {
-      forgotPassword(loginData.username);
+      forgotPassword(email);
     } else {
       handleLogin(loginData);
     }
@@ -116,89 +118,118 @@ const LoginPage = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mb-8"
           >
-            <h2 className="text-2xl font-bold text-center mb-2">Sign In</h2>
+            <h2 className="text-2xl font-bold text-center mb-2">{isForgotPasswordActive ? "Forgot Password" : "Sign In"}</h2>
             <div className="w-12 h-1 bg-gradient-to-r from-primary-500 to-primary-700 dark:from-accent-500 dark:to-accent-700 mx-auto rounded-full"></div>
           </motion.div>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <label htmlFor="username" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
-                Username
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  className="w-full pl-12 pr-4 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
-                  value={loginData.username}
-                  onChange={onChangeHandler}
-                  placeholder="Enter your username"
-                  required
-                />
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
-              </div>
-              {isForgotPasswordActive && (
-                <div className="mt-3 text-right">
-                  <motion.span
-                    whileHover={{ scale: 1.05 }}
-                    className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200"
-                    onClick={() => setIsForgotPasswordActive(false)}
-                  >
-                    ⟵ Back to Login
-                  </motion.span>
-                </div>
-              )}
-            </motion.div>
+            {isForgotPasswordActive ?
 
-            {!isForgotPasswordActive && (
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <label htmlFor="password" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
-                  Password
+                <label htmlFor="email" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
+                  Email Address
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
                   <input
-                    type={passwordVisible ? "text" : "password"}
-                    id="password"
-                    name="password"
-                    className="w-full pl-12 pr-12 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
-                    value={loginData.password}
-                    onChange={onChangeHandler}
-                    placeholder="Enter your password"
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="w-full pl-12 pr-4 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
                     required
                   />
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-secondary-400 hover:text-primary-600 dark:hover:text-accent-500 transition-colors duration-200 p-1"
-                  >
-                    {passwordVisible ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
-                  </motion.button>
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
                 </div>
-                <div className="mt-3 text-right">
-                  <motion.span
-                    whileHover={{ scale: 1.05 }}
-                    className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200"
-                    onClick={() => setIsForgotPasswordActive(true)}
-                  >
-                    Forgot Password?
-                  </motion.span>
-                </div>
+                {isForgotPasswordActive && (
+                  <div className="mt-3 text-right">
+                    <motion.span
+                      whileHover={{ scale: 1.05 }}
+                      className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200"
+                      onClick={() => setIsForgotPasswordActive(false)}
+                    >
+                      ⟵ Back to Login
+                    </motion.span>
+                  </div>
+                )}
               </motion.div>
-            )}
+
+              : (
+                <>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  >
+                    <label htmlFor="username" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
+                      Username
+                    </label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        className="w-full pl-12 pr-4 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
+                        value={loginData.username}
+                        onChange={onChangeHandler}
+                        placeholder="Enter your username"
+                        required
+                      />
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
+                    </div>
+                  </motion.div>
+
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                  >
+                    <label htmlFor="password" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
+                      Password
+                    </label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
+                      <input
+                        type={passwordVisible ? "text" : "password"}
+                        id="password"
+                        name="password"
+                        className="w-full pl-12 pr-12 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
+                        value={loginData.password}
+                        onChange={onChangeHandler}
+                        placeholder="Enter your password"
+                        required
+                      />
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        type="button"
+                        onClick={togglePasswordVisibility}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-secondary-400 hover:text-primary-600 dark:hover:text-accent-500 transition-colors duration-200 p-1"
+                      >
+                        {passwordVisible ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+                      </motion.button>
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
+                    </div>
+                    <div className="mt-3 text-right">
+                      <motion.span
+                        whileHover={{ scale: 1.05 }}
+                        className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200"
+                        onClick={() => setIsForgotPasswordActive(true)}
+                      >
+                        Forgot Password?
+                      </motion.span>
+                    </div>
+                  </motion.div>
+                </>
+              )}
 
             <motion.button
               initial={{ opacity: 0, y: 20 }}
