@@ -135,13 +135,14 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/resend-verification');
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ authError: null })
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
             }
         } catch (error) {
             set({ authError: error.response.data.message });
+            toast.error(error.response.data.message)
         } finally {
             set({ isAuthLoading: false })
         }
@@ -159,7 +160,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/update-password', { currentPassword, newPassword });
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
@@ -183,7 +184,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post('/auth/forgot-password', { email });
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ authError: null })
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
@@ -207,7 +208,7 @@ export const useAuthStore = create((set, get) => ({
             const apiResponse = await axiosInstance.post(`/auth/reset-password/${token}`, { newPassword });
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ authError: null })
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
