@@ -17,9 +17,12 @@ export default function ProjectStats() {
   useEffect(() => {
     async function fetchGitHubStats() {
       try {
-        const repoRes = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}`);
+        const token = import.meta.env.VITE_GITHUB_TOKEN;
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+        const repoRes = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}`, { headers });
         const repoData = await repoRes.json();
-        const contributorsRes = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contributors?per_page=1&anon=true`);
+        const contributorsRes = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contributors?per_page=1&anon=true`, { headers });
         const contributorsCount = contributorsRes.headers.get("Link")?.match(/&page=(\d+)>; rel="last"/)?.[1] || 0;
 
         setStats({
