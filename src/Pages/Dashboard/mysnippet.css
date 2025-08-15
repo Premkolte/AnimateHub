@@ -1,0 +1,145 @@
+/* Theme Variables */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1e293b;
+  --card-bg: #f8fafc;
+  --card-border: #e2e8f0;
+  --highlight: #4f46e5;
+  --highlight-hover: #4338ca;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+}
+
+html.dark {
+  --bg-color: #0f172a;
+  --text-color: #f1f5f9;
+  --card-bg: #1e293b;
+  --card-border: #334155;
+  --highlight: #6366f1;
+  --highlight-hover: #4f46e5;
+  --input-bg: #0f172a;
+  --input-border: #475569;
+}
+
+/* Page Container */
+.mysnippet-container {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mysnippet-container h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Form */
+.snippet-form {
+  width: 100%;
+  max-width: 900px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.snippet-form input,
+.snippet-form textarea,
+.snippet-form select {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.snippet-form input:focus,
+.snippet-form textarea:focus,
+.snippet-form select:focus {
+  border-color: var(--highlight);
+}
+
+/* Add Button */
+.add-btn {
+  background-color: var(--highlight);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-btn:hover {
+  background-color: var(--highlight-hover);
+}
+
+/* Snippet List */
+.snippet-list {
+  width: 100%;
+  max-width: 900px;
+}
+
+.snippet-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.snippet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.snippet-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.snippet-actions button {
+  margin-left: 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.copy-btn {
+  color: var(--highlight);
+}
+
+.delete-btn {
+  color: crimson;
+}
+
+.snippet-description {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: 0.8rem;
+}
+
+/* No snippets message */
+.no-snippets {
+  text-align: center;
+  opacity: 0.7;
+}
