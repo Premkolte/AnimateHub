@@ -7,6 +7,7 @@ export const useAuthStore = create((set, get) => ({
     authError: null,
     currentUser: null,
     initialFetch: false,
+    successfullyResetPassword: null,
 
     setIsAuthLoading: (isLoading) => set({ isAuthLoading: isLoading }),
     setError: (error) => set({ authError: error }),
@@ -65,21 +66,20 @@ export const useAuthStore = create((set, get) => ({
     /**
      * Fetch the current user
      */
-    fetchCurrentUser: async () => {
+    fetchCurrentUser: async (silent = true) => {
         set({ isAuthLoading: true });
         try {
-            console.log("I run")
-
             const apiResponse = await axiosInstance.get('/auth/check');
             console.log(apiResponse)
             const response = apiResponse.data;
             if (response.success) {
                 set({ currentUser: response.data });
+                set({ authError: null })
             } else {
-                set({ authError: response.message });
+                if (!silent) toast.error(response.message)
             }
         } catch (error) {
-            set({ authError: error.response.data.message });
+            if (!silent) toast.error(error.response.data.message)
         } finally {
             set({ isAuthLoading: false })
             set({ initialFetch: true })
@@ -209,12 +209,14 @@ export const useAuthStore = create((set, get) => ({
             const response = apiResponse.data;
             if (response.success) {
                 set({ authError: null })
+                set({ successfullyResetPassword: true })
                 toast.success(response.message)
             } else {
                 set({ authError: response.message });
             }
         } catch (error) {
             set({ authError: error.response.data.message });
+            set({ successfullyResetPassword: false })
         } finally {
             set({ isAuthLoading: false })
         }
