@@ -126,7 +126,7 @@ export const logoutController = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, "User logged out successfully"))
 })
 
-export const getCurrentUserController = asyncHandler(async (req, res) => {  
+export const getCurrentUserController = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user.id);
 
     if (!user) {
@@ -170,6 +170,18 @@ export const updatePasswordController = asyncHandler(async (req, res) => {
 
     const accessToken = user.generateAccessToken();
 
+    // Remove sensitive data before sending response
+    const userObj = user.toObject();
+    userObj.password = undefined;
+    userObj.__v = undefined;
+    userObj._id = undefined;
+    userObj.emailVerificationToken = undefined;
+    userObj.emailVerificationExpires = undefined;
+    userObj.createdAt = undefined;
+    userObj.updatedAt = undefined;
+    userObj.resetPasswordToken = undefined;
+    userObj.resetPasswordExpires = undefined;
+
     return res
         .cookie("accessToken", accessToken, {
             httpOnly: true,
@@ -178,5 +190,5 @@ export const updatePasswordController = asyncHandler(async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         })
         .status(200)
-        .json(new ApiResponse(200, "Password updated successfully", { accessToken }));
+        .json(new ApiResponse(200, "Password updated successfully", { user: userObj, accessToken }));
 })

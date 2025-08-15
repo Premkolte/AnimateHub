@@ -33,6 +33,18 @@ export const verifyUserMailController = asyncHandler(async (req, res) => {
     // Generate a new access token and set it as cookie
     const accessToken = user.generateAccessToken();
 
+    // Remove sensitive data before sending response
+    const userObj = user.toObject();
+    userObj.password = undefined;
+    userObj.__v = undefined;
+    userObj._id = undefined;
+    userObj.emailVerificationToken = undefined;
+    userObj.emailVerificationExpires = undefined;
+    userObj.createdAt = undefined;
+    userObj.updatedAt = undefined;
+    userObj.resetPasswordToken = undefined;
+    userObj.resetPasswordExpires = undefined;
+
     return res
         .status(200)
         .cookie("accessToken", accessToken, {
@@ -42,7 +54,7 @@ export const verifyUserMailController = asyncHandler(async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         })
         .json(
-            new ApiResponse(200, "Email verified successfully. You can now log in.", { accessToken })
+            new ApiResponse(200, "Email verified successfully. You can now log in.", { user: userObj, accessToken })
         );
 })
 
