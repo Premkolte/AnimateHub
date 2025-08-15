@@ -98,9 +98,9 @@ rounded-3xl">
         <div className="relative">
 
           {/* for left side shadow */}
-          <div className="absolute -left-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-r from-white dark:from-gray-900 to-black z-10 pointer-events-none" />
+          <div className="absolute -left-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
           {/* for right side shadow */}
-          <div className="absolute -right-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-l from-white dark:from-gray-900 to-black z-10 pointer-events-none" />
+          <div className="absolute -right-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
           <div className="overflow-hidden">
             <div
               className="flex scroll-container"

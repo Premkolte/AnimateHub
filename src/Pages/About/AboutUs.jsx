@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import GitHubStats from "./GitHubStats";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTwitter,
@@ -8,35 +9,28 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const About = () => {
-
   const techUsed = [
     {
       icon: "⚛️",
       name: "React 18",
-      desc: "Reusable UI & hooks"
+      desc: "Reusable UI & hooks",
     },
     {
       icon: "⚡",
       name: "Vite 5",
-      desc: "Blazing fast dev server"
+      desc: "Blazing fast dev server",
     },
     {
       icon: "🎨",
       name: "Tailwind CSS 3",
-      desc: "Utility-first styling"
+      desc: "Utility-first styling",
     },
     {
       icon: "🎭",
       name: "Framer Motion",
-      desc: "Declarative animations"
-    }
-  ]
-
-
-
-
-
-
+      desc: "Declarative animations",
+    },
+  ];
 
   return (
     <motion.div
@@ -46,14 +40,12 @@ const About = () => {
       className="min-h-screen w-full py-16 px-4 bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white"
     >
       <div className="max-w-6xl mx-auto space-y-16">
-
         {/* Hero */}
         <section className="text-center space-y-6">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            About AnimateHub
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold">About AnimateHub</h1>
           <p className="text-lg max-w-3xl mx-auto opacity-80">
-            A powerful open-source animation UI library that simplifies creating beautiful, reusable animations for modern web applications.
+            A powerful open-source animation UI library that simplifies creating
+            beautiful, reusable animations for modern web applications.
           </p>
           <div className="inline-block px-4 py-1 text-sm rounded-full bg-primary-600 text-white dark:bg-accent-600">
             100% OPEN-SOURCE
@@ -71,7 +63,9 @@ const About = () => {
                 <span className="text-xl">✂️</span>
                 <div>
                   <h3 className="font-semibold">Copy-Paste Simple</h3>
-                  <p className="opacity-80">Instant integration, no complex setup</p>
+                  <p className="opacity-80">
+                    Instant integration, no complex setup
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -96,7 +90,9 @@ const About = () => {
                 { label: "Dark/Light Mode Support", color: "bg-orange-500" },
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-3">
-                  <span className={`w-3 h-3 rounded-full ${item.color} flex-shrink-0`}></span>
+                  <span
+                    className={`w-3 h-3 rounded-full ${item.color} flex-shrink-0`}
+                  ></span>
                   <span className="text-lg">{item.label}</span>
                 </li>
               ))}
@@ -111,21 +107,20 @@ const About = () => {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-
             {techUsed.map((tech) => (
-              <div key={tech.name} className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full text-center">
+              <div
+                key={tech.name}
+                className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full text-center"
+              >
                 <span className="text-4xl">{tech.icon}</span>
                 <h3 className="mt-3 text-lg font-semibold text-blue-600 dark:text-blue-400">
                   {tech.name}
                 </h3>
-                <p className="text-sm opacity-80 mt-1">
-                  {tech.desc}
-                </p>
+                <p className="text-sm opacity-80 mt-1">{tech.desc}</p>
               </div>
             ))}
           </div>
         </section>
-
 
         {/* Community & CTA */}
         <section className="grid md:grid-cols-2 gap-8">
@@ -134,7 +129,8 @@ const About = () => {
               👥 Join Community
             </h2>
             <p className="mb-4 opacity-80">
-              Collaborate with developers worldwide and contribute to making web animations accessible to everyone.
+              Collaborate with developers worldwide and contribute to making web
+              animations accessible to everyone.
             </p>
             <div className="flex flex-wrap gap-2">
               {["🔧 Contribute", "💡 Suggest", "📚 Document"].map((item, i) => (
@@ -171,7 +167,73 @@ const About = () => {
             </div>
           </div>
         </section>
+        {/* {Github Info section} */}
+        {/* <section className="stats-section py-12 bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full">
+          <div className="stats-container max-w-6xl mx-auto px-4 text-center">
+            <h3 className="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-8">
+              Project Stats
+            </h3>
+            <div className="badges-grid grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-4 justify-center items-center">
+              {/* License */}
+              {/* <img
+                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
+                src="https://img.shields.io/badge/License-MIT-blue.svg"
+                alt="License"
+              /> */}
 
+              {/* Stars */}
+              {/* <img
+                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
+                src="https://img.shields.io/github/stars/Premkolte/AnimateHub?style=social"
+                alt="GitHub stars"
+              /> */}
+
+              {/* Forks */}
+              {/* <img
+                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
+                src="https://img.shields.io/github/forks/Premkolte/AnimateHub?style=social"
+                alt="GitHub forks"
+              /> */}
+
+              {/* Issues */}
+              {/* <img
+                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
+                src="https://img.shields.io/github/issues/Premkolte/AnimateHub"
+                alt="GitHub issues"
+              /> */}
+
+              {/* Contributors */}
+
+              {/* <img
+                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
+                src="https://img.shields.io/github/contributors/Premkolte/AnimateHub?color=green"
+                alt="Contributors"
+              /> */}
+
+              {/* Last Commit */}
+              {/* <img
+                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
+                src="https://img.shields.io/github/last-commit/Premkolte/AnimateHub?color=blue"
+                alt="Last commit"
+              /> */}
+
+              {/* Repo Size */}
+              {/* <img
+                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
+                src="https://img.shields.io/github/repo-size/Premkolte/AnimateHub?color=orange"
+                alt="Repository size"
+              /> */}
+
+              {/* Open PRs */}
+              {/* <img
+                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
+                src="https://img.shields.io/badge/Open%20PRs-0-red"
+                alt="Open pull requests"
+              />
+            </div> */}
+          {/* </div>
+        </section> */}
+        <GitHubStats></GitHubStats>
         {/* Social Media */}
         <section className="text-center bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full">
           <h2 className="text-2xl font-semibold mb-2">Connect With Us</h2>
@@ -202,7 +264,6 @@ const About = () => {
             </a>
           </div>
         </section>
-
       </div>
     </motion.div>
   );
