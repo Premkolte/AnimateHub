@@ -10,8 +10,9 @@ import toast from "react-hot-toast";
 const LoginPage = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const { handleLogin, isAuthLoading, authError, currentUser } = useAuthStore();
+  const { handleLogin, isAuthLoading, authError, currentUser, forgotPassword } = useAuthStore();
 
+  const [isForgotPasswordActive, setIsForgotPasswordActive] = useState(false)
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -33,7 +34,13 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin(loginData);
+
+    // if forgot password is active, send reset password email otherwise login
+    if (isForgotPasswordActive) {
+      forgotPassword(loginData.username);
+    } else {
+      handleLogin(loginData);
+    }
 
   };
 
@@ -136,49 +143,62 @@ const LoginPage = () => {
                 />
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
               </div>
+              {isForgotPasswordActive && (
+                <div className="mt-3 text-right">
+                  <motion.span
+                    whileHover={{ scale: 1.05 }}
+                    className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200"
+                    onClick={() => setIsForgotPasswordActive(false)}
+                  >
+                    ⟵ Back to Login
+                  </motion.span>
+                </div>
+              )}
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <label htmlFor="password" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
-                Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  className="w-full pl-12 pr-12 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
-                  value={loginData.password}
-                  onChange={onChangeHandler}
-                  placeholder="Enter your password"
-                  required
-                />
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-secondary-400 hover:text-primary-600 dark:hover:text-accent-500 transition-colors duration-200 p-1"
-                >
-                  {passwordVisible ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
-                </motion.button>
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
-              </div>
-              <div className="mt-3 text-right">
-                <motion.span
-                  whileHover={{ scale: 1.05 }}
-                  className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200"
-                  onClick={() => navigate("/forgotpassword")}
-                >
-                  Forgot Password?
-                </motion.span>
-              </div>
-            </motion.div>
+            {!isForgotPasswordActive && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                <label htmlFor="password" className="block text-sm font-semibold mb-2 text-secondary-700 dark:text-secondary-300">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-400 dark:text-secondary-500 w-5 h-5" />
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    className="w-full pl-12 pr-12 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
+                    value={loginData.password}
+                    onChange={onChangeHandler}
+                    placeholder="Enter your password"
+                    required
+                  />
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-secondary-400 hover:text-primary-600 dark:hover:text-accent-500 transition-colors duration-200 p-1"
+                  >
+                    {passwordVisible ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+                  </motion.button>
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
+                </div>
+                <div className="mt-3 text-right">
+                  <motion.span
+                    whileHover={{ scale: 1.05 }}
+                    className="text-sm text-primary-600 dark:text-accent-500 cursor-pointer hover:underline font-medium transition-all duration-200"
+                    onClick={() => setIsForgotPasswordActive(true)}
+                  >
+                    Forgot Password?
+                  </motion.span>
+                </div>
+              </motion.div>
+            )}
 
             <motion.button
               initial={{ opacity: 0, y: 20 }}
@@ -194,8 +214,11 @@ const LoginPage = () => {
               className={`w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 dark:from-accent-600 dark:to-accent-700 dark:hover:from-accent-700 dark:hover:to-accent-800 text-white px-6 py-4 rounded-xl text-lg font-bold shadow-lg shadow-primary-500/25 dark:shadow-accent-500/25 transition-all duration-300 relative overflow-hidden ${isAuthLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
               <span className="relative z-10">
-                {isAuthLoading ? 'Signing in...' : 'Sign In'}
+                {isAuthLoading
+                  ? (isForgotPasswordActive ? 'Sending reset link...' : 'Signing in...')
+                  : (isForgotPasswordActive ? 'Reset Password' : 'Sign In')}
               </span>
+
               <div className="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             </motion.button>
 
@@ -210,36 +233,38 @@ const LoginPage = () => {
             )}
           </form>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
-            className="mt-8"
-          >
-            <div className="relative flex items-center justify-center mb-6">
-              <div className="border-t border-secondary-200 dark:border-secondary-700 flex-1"></div>
-              <span className="bg-white dark:bg-secondary-800 px-4 text-sm text-secondary-500 dark:text-secondary-400 font-medium whitespace-nowrap">
-                or continue with
-              </span>
-              <div className="border-t border-secondary-200 dark:border-secondary-700 flex-1"></div>
-            </div>
-
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.0 }}
-              whileHover={{
-                scale: 1.02,
-                boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
-              }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => toast.error("Google signup is currently not available")}
-              className="w-full bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 font-semibold"
+          {!isForgotPasswordActive && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+              className="mt-8"
             >
-              <FcGoogle className="mr-3 text-xl" />
-              Continue with Google (Coming Soon)
-            </motion.button>
-          </motion.div>
+              <div className="relative flex items-center justify-center mb-6">
+                <div className="border-t border-secondary-200 dark:border-secondary-700 flex-1"></div>
+                <span className="bg-white dark:bg-secondary-800 px-4 text-sm text-secondary-500 dark:text-secondary-400 font-medium whitespace-nowrap">
+                  or continue with
+                </span>
+                <div className="border-t border-secondary-200 dark:border-secondary-700 flex-1"></div>
+              </div>
+
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.0 }}
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+                }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => toast.error("Google signup is currently not available")}
+                className="w-full bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 font-semibold"
+              >
+                <FcGoogle className="mr-3 text-xl" />
+                Continue with Google (Coming Soon)
+              </motion.button>
+            </motion.div>
+          )}
 
           <motion.div
             className="mt-8 text-center"
