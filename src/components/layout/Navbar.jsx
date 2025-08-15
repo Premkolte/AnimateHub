@@ -82,10 +82,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className=" w-full backdrop-blur-md bg-white/30 dark:bg-purple-900/30 text-gray-800 dark:text-gray-200 
-py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
-    >
+<nav
+  className="w-full backdrop-blur-md 
+             bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-900 dark:to-purple-900
+             text-gray-800 dark:text-gray-200
+             py-2 pt-1 sticky top-0 left-0 z-50
+             border-b border-white/20
+             shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
+>
+
       <div className="w-full px-4">
         <div className="w-full flex justify-between items-center">
           {/* Logo */}
@@ -100,7 +105,7 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 src={Logo}
                 alt="AnimateHub Logo"
               />
-              <span className="font-heading text-2xl md:text-3xl font-bold text-blue-800 dark:text-gray-100">
+              <span className="font-heading text-2xl md:text-3xl font-bold text-white dark:text-gray-100">
                 AnimateHub
               </span>
             </Link>
@@ -117,11 +122,11 @@ py-2 pt-1  sticky top-0 left-0 z-50 border-b border-white/20 shadow-[0px_3px_20p
                 to={`/${item === "Home" ? "" : item.toLowerCase()}`}
                 onClick={closeMenu}
                 className={`relative px-2 py-1 transition-all duration-300 
-                  hover:text-blue-500 hover:font-bold dark:hover:text-purple-300 
+                  hover:text-blue-700 hover:font-bold dark:hover:text-purple-300 
                   ${
                     location.pathname ===
                     `/${item === "Home" ? "" : item.toLowerCase()}`
-                      ? "text-blue-500 dark:text-purple-300 font-bold"
+                      ? "text-white dark:text-purple-300 font-bold"
                       : "font-normal"
                   }
                   group
