@@ -82,7 +82,7 @@ export default function LeaderBoard() {
       </div>
     );
 
-  if (contributors.length === 0)
+  if (contributors.length === 0) 
     return (
       <p className="text-center mt-10 text-gray-500">
         No contributors found with PRs labeled <strong>GSSoC'25</strong>.
