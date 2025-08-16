@@ -4,7 +4,7 @@ import CountUp from "react-countup";
 const GITHUB_USER = "Premkolte";
 const GITHUB_REPO = "AnimateHub";
 
-export default function ProjectStats() {
+export default function GitHubStats() {
   const [stats, setStats] = useState({
     stars: 0,
     forks: 0,
@@ -51,7 +51,7 @@ export default function ProjectStats() {
   ];
 
   return (
-    <section className="py-12 rounded-xl bg-gradient-to-br from-blue-300 to-white dark:from-secondary-800 dark:to-gray-800 text-gray-900 dark:text-white">
+    <section className="py-12 rounded-xl bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h3 className="text-3xl sm:text-4xl font-extrabold mb-10">
           Project Stats
@@ -59,28 +59,20 @@ export default function ProjectStats() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {statCards.map(({ label, value, icon, link }) => (
             <a
-  key={label}
-  href={link}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="
-    group
-    bg-white dark:bg-secondary-700 
-    p-6 rounded-2xl shadow hover:shadow-xl 
-    transform hover:-translate-y-1 transition-all duration-300 
-    hover:bg-gradient-to-br hover:from-[#93c5fd] hover:to-[#3b82f6] /* light blue gradient */
-    dark:hover:from-purple-400 dark:hover:to-indigo-500 
-    flex flex-col items-center justify-center
-  "
->
-  <div className="text-3xl mb-2">{icon}</div>
-  <div className="text-2xl font-bold">
-    {typeof value === "number" ? <CountUp end={value} duration={1.5} /> : value}
-  </div>
-  <div className="text-gray-500 dark:text-gray-300 mt-1 group-hover:text-white">
-    {label}
-  </div>
-</a>
+              key={label}
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-primary-50 dark:bg-secondary-800  p-6 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none  transform hover:-translate-y-1 transition-all duration-300  hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 flex flex-col items-center justify-center text-secondary-900 dark:text-white"
+            >
+              <div className="text-3xl mb-2">{icon}</div>
+              <div className="text-2xl font-bold">
+                {typeof value === "number" ? <CountUp end={value} duration={1.5} /> : value}
+              </div>
+              <div className="text-gray-600 dark:text-gray-300 mt-1 group-hover:text-primary-700 dark:group-hover:text-accent-400 transition-colors">
+                {label}
+              </div>
+            </a>
 
           ))}
         </div>

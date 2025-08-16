@@ -167,73 +167,12 @@ const About = () => {
             </div>
           </div>
         </section>
+        
+        
         {/* {Github Info section} */}
-        {/* <section className="stats-section py-12 bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full">
-          <div className="stats-container max-w-6xl mx-auto px-4 text-center">
-            <h3 className="text-3xl sm:text-4xl font-bold text-black dark:text-white mb-8">
-              Project Stats
-            </h3>
-            <div className="badges-grid grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-4 justify-center items-center">
-              {/* License */}
-              {/* <img
-                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
-                src="https://img.shields.io/badge/License-MIT-blue.svg"
-                alt="License"
-              /> */}
+        <GitHubStats />
 
-              {/* Stars */}
-              {/* <img
-                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
-                src="https://img.shields.io/github/stars/Premkolte/AnimateHub?style=social"
-                alt="GitHub stars"
-              /> */}
 
-              {/* Forks */}
-              {/* <img
-                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
-                src="https://img.shields.io/github/forks/Premkolte/AnimateHub?style=social"
-                alt="GitHub forks"
-              /> */}
-
-              {/* Issues */}
-              {/* <img
-                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
-                src="https://img.shields.io/github/issues/Premkolte/AnimateHub"
-                alt="GitHub issues"
-              /> */}
-
-              {/* Contributors */}
-
-              {/* <img
-                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
-                src="https://img.shields.io/github/contributors/Premkolte/AnimateHub?color=green"
-                alt="Contributors"
-              /> */}
-
-              {/* Last Commit */}
-              {/* <img
-                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
-                src="https://img.shields.io/github/last-commit/Premkolte/AnimateHub?color=blue"
-                alt="Last commit"
-              /> */}
-
-              {/* Repo Size */}
-              {/* <img
-                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
-                src="https://img.shields.io/github/repo-size/Premkolte/AnimateHub?color=orange"
-                alt="Repository size"
-              /> */}
-
-              {/* Open PRs */}
-              {/* <img
-                className="mx-auto h-10 w-22 transition-transform transform hover:scale-110 hover:shadow-lg rounded-lg"
-                src="https://img.shields.io/badge/Open%20PRs-0-red"
-                alt="Open pull requests"
-              />
-            </div> */}
-          {/* </div>
-        </section> */}
-        <GitHubStats></GitHubStats>
         {/* Social Media */}
         <section className="text-center bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full">
           <h2 className="text-2xl font-semibold mb-2">Connect With Us</h2>
