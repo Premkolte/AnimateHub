@@ -76,14 +76,14 @@ const BasicModal = () => {
     <div>
       <button 
         onClick={openModal}
-        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors motion-reduce:transition-none"
       >
         Open Modal
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 transform animate-scaleIn">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn motion-reduce:animate-none">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 transform animate-scaleIn motion-reduce:animate-none motion-reduce:transform-none">
             <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900">Modal Title</h3>
               <button 
@@ -117,7 +117,7 @@ const BasicModal = () => {
       )}
     </div>
   );
-};`
+};`,
   },
   {
     title: "Large Modal",
@@ -196,19 +196,19 @@ const LargeModal = () => {
     <div>
       <button 
         onClick={openModal}
-        className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold"
+        className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors motion-reduce:transition-none font-semibold"
       >
         Open Large Modal
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 animate-fadeIn">
-          <div className="bg-white rounded-xl p-8 max-w-4xl w-full mx-4 transform animate-slideDown shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 animate-fadeIn motion-reduce:animate-none">
+          <div className="bg-white rounded-xl p-8 max-w-4xl w-full mx-4 transform animate-slideDown shadow-2xl max-h-[90vh] overflow-y-auto motion-reduce:animate-none motion-reduce:transform-none">
             <div className="flex justify-between items-center mb-6 pb-5 border-b-2 border-gray-100">
               <h3 className="text-3xl font-bold text-gray-900">Large Modal Dialog</h3>
               <button 
                 onClick={closeModal}
-                className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg p-2 transition-all text-3xl leading-none"
+                className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg p-2 transition-all motion-reduce:transition-none text-3xl leading-none"
               >
                 ×
               </button>
@@ -249,7 +249,7 @@ const LargeModal = () => {
       )}
     </div>
   );
-};`
+};`,
   },
   {
     title: "Alert Modal",
@@ -367,27 +367,27 @@ const AlertModal = () => {
       <div className="flex space-x-3">
         <button 
           onClick={() => openModal('warning')}
-          className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors"
+          className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors motion-reduce:transition-none"
         >
           Warning Alert
         </button>
         <button 
           onClick={() => openModal('error')}
-          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+          className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors motion-reduce:transition-none"
         >
           Error Alert
         </button>
         <button 
           onClick={() => openModal('success')}
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors motion-reduce:transition-none"
         >
           Success Alert
         </button>
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn">
-          <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 text-center transform animate-bounceIn shadow-xl">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn motion-reduce:animate-none">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 text-center transform animate-bounceIn shadow-xl motion-reduce:animate-none motion-reduce:transform-none">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center text-3xl">
               {config.icon}
             </div>
@@ -404,7 +404,7 @@ const AlertModal = () => {
               </button>
               <button 
                 onClick={closeModal}
-                className={\`flex-1 px-4 py-2 text-white rounded-lg font-medium transition-colors \${config.confirmClass}\`}
+                className={\`flex-1 px-4 py-2 text-white rounded-lg font-medium transition-colors motion-reduce:transition-none \${config.confirmClass}\`}
               >
                 {config.confirmText}
               </button>
@@ -414,6 +414,6 @@ const AlertModal = () => {
       )}
     </div>
   );
-};`
-  }
+};`,
+  },
 ];
