@@ -86,9 +86,14 @@ export default function LeaderBoard() {
 
   if (loading)
     return (
-      <div className="flex flex-col justify-center items-center mt-10">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-gray-200"></div>
-        <span className="mt-4 text-xl font-medium">Loading leaderboard...</span>
+      <div className="absolute inset-0 top-[64px] flex flex-col justify-center items-center bg-white dark:bg-gray-950 z-40">
+        <div
+          className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4"
+          style={{ borderColor: "#581C87", borderTopColor: "#581C87", borderBottomColor: "#581C87" }}
+        ></div>
+        <span className="mt-4 text-xl font-medium text-gray-900 dark:text-gray-100">
+          Loading leaderboard...
+        </span>
       </div>
     );
 
