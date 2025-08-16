@@ -272,11 +272,7 @@ const HomePage = () => {
         </section>
 
         {/* Features */}
-        <section
-          className="features-section w-full bg-[#dbeafe]
- dark:bg-secondary-800 border border-blue-300 dark:border-accent-700
- rounded-3xl py-16 text-center"
-        >
+        <section className="features-section w-full py-16 text-center">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
               Features
@@ -332,9 +328,7 @@ const HomePage = () => {
 
         {/* Testimonials */}
         <section
-          className="testimonial-section w-full bg-[#dbeafe]
- dark:bg-secondary-800 border border-blue-300 dark:border-accent-700
- rounded-3xl"
+          className="testimonial-section w-full"
         >
           <h2 className="text-4xl mb-8 text-center"></h2>
           <div className="overflow-x-hidden">
@@ -399,9 +393,7 @@ const HomePage = () => {
         </section>
 
         {/* Contributors */}
-        <section
-          className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white bg-[#dbeafe] dark:bg-secondary-900 border border-blue-300 dark:border-secondary-900 rounded-3xl px-4 py-8"
-        >
+        <section className="contributors-section mt-20 w-full flex flex-col items-center text-secondary-900 dark:text-white px-4 py-8">
           <h2 className="text-4xl font-bold mb-4 text-center">Contributors</h2>
           <p className="max-w-2xl text-center mb-6 text-lg opacity-80">
             Meet the talented developers, designers, and open-source
@@ -431,35 +423,6 @@ const HomePage = () => {
             </motion.a>
           </div>
         </section>
-
-        {/* <div className="templates-section mt-12 w-full flex flex-col items-center text-white">
-          <h2 className="text-4xl mb-8">Templates</h2>
-          <p className="max-w-xl text-center mb-8">
-            Explore our library of handcrafted templates designed to kickstart your projects.
-          </p>
-          <div className="flex space-x-6">
-            <Link to="/templates">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
-              >
-                View Templates
-              </motion.button>
-            </Link>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
-            >
-              <a
-                href="https://github.com/Premkolte/AnimateHub/issues/new/choose"
-                className="bg-black text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg"
-              >
-                <LuLayoutTemplate className="inline-block mr-2" />
-                Submit a Template
-              </a>
-            </motion.button>
-          </div>
-        </div> */}
       </div>
     </>
   );
