@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Outlet } from "react-router-dom";
 import { Analytics } from '@vercel/analytics/react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 // Import Layout --------------------------
 import Navbar from "./components/layout/Navbar";
@@ -87,6 +88,7 @@ function App() {
 
         <Analytics />
       </Router>
+      <SpeedInsights />
     </AppProvider>
 
   );
