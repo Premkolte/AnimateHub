@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import confetti from "canvas-confetti";
 
 const GITHUB_REPO = "Premkolte/AnimateHub";
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "";
@@ -12,6 +13,15 @@ const POINTS = {
 export default function LeaderBoard() {
   const [contributors, setContributors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const handleHover = (rank) => {
+    if (rank <= 3) {
+      confetti({
+        particleCount: 40,
+        spread: 50,
+        origin: { y: 0.7 },
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchContributorsWithPoints = async () => {
@@ -82,7 +92,7 @@ export default function LeaderBoard() {
       </div>
     );
 
-  if (contributors.length === 0) 
+  if (contributors.length === 0)
     return (
       <p className="text-center mt-10 text-gray-500">
         No contributors found with PRs labeled <strong>GSSoC'25</strong>.
@@ -91,23 +101,30 @@ export default function LeaderBoard() {
 
   return (
     <div className="max-w-5xl mx-auto mt-10 p-4">
-     <div className="flex justify-center">
-  <h2 className="text-4xl font-bold mt-4 mb-16 bg-gradient-to-r from-pink-500 to-blue-800 bg-clip-text text-transparent border-2 border-gray-300 rounded-full px-6 py-2">
-     AnimateHub GSSoC'25 Leaderboard
-  </h2>
-</div>
-
+      <div className="flex justify-center">
+        <h2 className="text-4xl font-bold mt-4 mb-16 bg-gradient-to-r from-pink-500 to-blue-800 bg-clip-text text-transparent border-2 border-gray-300 rounded-full px-6 py-2">
+          AnimateHub GSSoC'25 Leaderboard
+        </h2>
+      </div>
 
       <div className="space-y-4">
         {contributors.map((contributor, index) => (
           <div
             key={contributor.username}
+            onMouseEnter={() => handleHover(index + 1)}
             className="flex items-center justify-between p-4 rounded-lg shadow-md bg-white dark:bg-gray-800 hover:shadow-lg transform hover:scale-[1.02] transition duration-300"
           >
             <div className="flex items-center gap-4">
               <span className="text-lg font-semibold w-8 text-center">
-                {index + 1 <= 3 ? "🏆" : index + 1}
+                {index === 0
+                  ? "🥇"
+                  : index === 1
+                  ? "🥈"
+                  : index === 2
+                  ? "🥉"
+                  : index + 1}
               </span>
+
               <img
                 src={contributor.avatar}
                 alt={contributor.username}
@@ -122,18 +139,17 @@ export default function LeaderBoard() {
                 {contributor.username}
               </a>
             </div>
-           <div className="text-right">
-  <span className="inline-flex items-center gap-2 bg-gray-100 dark:bg-purple-900/30 px-3 py-1 rounded-full text-sm font-semibold">
-    <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-      📌 {contributor.prs} PR
-    </span>
-    <span className="text-gray-500">|</span>
-    <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
-      ⭐ {contributor.points} pts
-    </span>
-  </span>
-</div>
-
+            <div className="text-right">
+              <span className="inline-flex items-center gap-2 bg-gray-100 dark:bg-purple-900/30 px-3 py-1 rounded-full text-sm font-semibold">
+                <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+                  📌 {contributor.prs} PR
+                </span>
+                <span className="text-gray-500">|</span>
+                <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
+                  ⭐ {contributor.points} pts
+                </span>
+              </span>
+            </div>
           </div>
         ))}
       </div>
