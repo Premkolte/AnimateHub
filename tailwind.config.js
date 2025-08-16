@@ -9,7 +9,6 @@ export default {
         heading: ['Sora', 'sans-serif'], // headings
       },
       colors: {
-        // Light theme colors (blue/white)
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
@@ -22,7 +21,6 @@ export default {
           800: '#1e40af',
           900: '#1e3a8a',
         },
-        // Dark theme colors (purple/gray)
         secondary: {
           50: '#f8fafc',
           100: '#f1f5f9',
@@ -57,7 +55,16 @@ export default {
         'nav-light': 'rgba(255, 255, 255, 0.3)',
         'nav-dark': 'rgba(88, 28, 135, 0.3)',
       },
+      keyframes: {
+        gradient: {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+        },
+      },
+      animation: {
+        gradient: 'gradient 3s ease infinite',
+      },
     },
   },
   plugins: [],
-};
+}
