@@ -25,22 +25,24 @@ function PillNavigationSnippets() {
   };
 
   const renderPills = (jsxCode, cssCode, snippetIndex) => {
-    const pillElements = [];
-    for (let i = 1; i <= 3; i++) {
-      pillElements.push(
-        <button
-          key={i}
-          className={`pill-link py-2 px-4 m-1 rounded-full transition-colors duration-200 ${activePills[snippetIndex] === i - 1
-            ? "bg-primary-600 text-white dark:bg-accent-600"
-            : "border border-primary-600 text-primary-600 dark:border-accent-500 dark:text-accent-500 hover:bg-primary-100 dark:hover:bg-secondary-700"
+    const pills = ['Item 1', 'Item 2', 'Item 3'];
+    return (
+      <div className="flex list-none p-0">
+        {pills.map((pill, i) => (
+          <button
+            key={i}
+            className={`pill-link py-2 px-4 m-1 rounded-full transition-colors duration-200 ${
+              activePills[snippetIndex] === i
+                ? "bg-primary-600 text-white dark:bg-accent-600"
+                : "border border-primary-600 text-primary-600 dark:border-accent-500 dark:text-accent-500 hover:bg-primary-100 dark:hover:bg-secondary-700"
             }`}
-          onClick={() => handlePillClick(snippetIndex)}
-        >
-          Item {i}
-        </button>
-      );
-    }
-    return <div className="flex list-none p-0">{pillElements}</div>;
+            onClick={() => handlePillClick(snippetIndex)}
+          >
+            {pill}
+          </button>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -60,9 +62,25 @@ border border-blue-300 dark:border-[#a855f7]
   text-sm
 "
         >
-          <StringToReactComponent>
-            {`(props) => (${pillObject.jsxCode})`}
-          </StringToReactComponent>
+          <div className="flex items-center justify-center">
+            {['Tab 1', 'Tab 2', 'Tab 3'].map((tab, index) => (
+              <button
+                key={index}
+                className={`py-2 px-4 mx-1 rounded-full transition-colors duration-200 ${
+                  activePills[snippetIndex] === index
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-700"
+                }`}
+                onClick={() => {
+                  const newActivePills = [...activePills];
+                  newActivePills[snippetIndex] = index;
+                  setActivePills(newActivePills);
+                }}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
           {renderPills(pillObject.jsxCode, pillObject.cssCode, index)}
           <div className="flex flex-col gap-4 w-full">
             <button

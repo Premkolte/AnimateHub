@@ -329,7 +329,7 @@ const Contributors = () => {
             </div>
             <div className="mx-auto flex flex-wrap justify-center items-center mb-8 gap-5 w-full ">
               {contributors.slice(0, 3).map((contributor, index) => (
-                <TopContributorsCard contributor={contributor} index={index} />
+                <TopContributorsCard key={contributor.id || index} contributor={contributor} index={index} />
               ))}
             </div>
 
@@ -341,8 +341,8 @@ const Contributors = () => {
               <p className="bg-primary-500 dark:bg-accent-500 w-32 h-1 rounded-full" />
             </div>
             <div className="w-full grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-              {contributors.slice(3).map((contributor) => (
-                <ContributorCard contributor={contributor} />
+              {contributors.slice(3).map((contributor, index) => (
+                <ContributorCard key={contributor.id || `contributor-${index + 3}`} contributor={contributor} />
               ))}
             </div>
           </>
