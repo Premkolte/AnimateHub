@@ -44,7 +44,7 @@ const TestimonialCard = ({ text, name, image }) => {
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-2 w-12 bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-blue-400 dark:to-indigo-400 rounded-t-lg shadow-sm" />
       <div className="absolute top-3 right-3 text-blue-200 dark:text-gray-600">
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
         </svg>
       </div>
       <p className="mb-4 sm:mb-6 text-sm sm:text-base md:text-lg flex-grow leading-relaxed break-words text-gray-700 dark:text-gray-300 font-medium pr-8">{text}</p>
@@ -85,8 +85,7 @@ const TestimonialSection = () => {
           }
         `
       }} />
-      <div className="w-full max-w-full mx-auto py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 bg-gradient-to-bw-full bg-[#dbeafe] dark:bg-secondary-800 border-b border-blue-300 dark:border-b-accent-700
-rounded-3xl">
+      <div className="w-full max-w-full mx-auto py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
             What Our Users Say

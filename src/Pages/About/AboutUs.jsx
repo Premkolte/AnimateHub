@@ -214,9 +214,11 @@ const [code, setCode] = useState(
             </div>
           </motion.div>
         </section>
-
-        {/* GitHub Stats */}
+        
+        
+        {/* {Github Info section} */}
         <GitHubStats />
+
 
         {/* Social Media */}
         <section className="text-center p-8 rounded-3xl bg-gradient-to-tr from-purple-200 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-purple-500 dark:border-secondary-700">

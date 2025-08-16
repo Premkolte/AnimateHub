@@ -9,7 +9,7 @@ import Footer from "./components/layout/Footer";
 import SplashCursor from "./components/SplashCursor";
 import BackToTop from "./components/UI/BackToTop";
 import { Toaster } from "react-hot-toast";
-
+import ScrollToTop from "./components/ScrollToTop";
 
 // Middleware -------------------------------
 import ProtectedRoute from "./Pages/Auth/ProtectedRoute";
@@ -55,6 +55,7 @@ function App() {
 
       <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <SplashCursor />
+        <ScrollToTop />
 
         <Routes>
           {/* Wrap all primary pages with Layout and use Outlet inside */}
