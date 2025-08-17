@@ -26,17 +26,10 @@ function CustomDropdown({ sortBy, setSortBy }) {
                    whitespace-nowrap"
       >
 
-
-
-
-
         {/* Selected option (always stays in one line) */}
         <span className="flex items-center gap-2 whitespace-nowrap">
           {options.find((o) => o.value === sortBy)?.label}
 </span>
-
-
-
 
 
 {/* Dropdown arrow with rotation animation */}
