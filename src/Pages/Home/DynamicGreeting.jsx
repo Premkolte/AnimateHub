@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function DynamicGreeting() {
-  const storedName = localStorage.getItem("userName");
-const [userName, setUserName] = useState(storedName || "");
+  const [userName, setUserName] = useState("");
   const [tempName, setTempName] = useState("");
   const [greeting, setGreeting] = useState("");
 
@@ -24,50 +23,61 @@ const [userName, setUserName] = useState(storedName || "");
     return () => clearInterval(interval);
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!tempName.trim()) return;
-    localStorage.setItem("userName", tempName.trim());
-    setUserName(tempName.trim());
-    setTempName("");
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && tempName.trim()) {
+      setUserName(tempName.trim());
+      setTempName("");
+    }
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center px-4">
       {greeting && (
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold inline-flex items-center gap-2">
-          {/* Gradient greeting */}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 animate-gradient-x">
-            {greeting},
-          </span>
-          {userName && userName !== "Guest" ? (
-            <span className="text-purple-600 font-semibold">{userName}</span>
+        <div className="text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 animate-gradient-x">
+              {greeting},
+            </span>
+          </h1>
+          
+          {userName ? (
+            <div className="space-y-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-purple-600 dark:text-purple-400">
+                {userName}!
+              </h2>
+              <button
+                onClick={() => {setUserName(""); setTempName("");}}
+                className="text-sm text-gray-500 hover:text-purple-500 dark:text-gray-400 dark:hover:text-purple-400 underline transition-colors"
+              >
+                Change name
+              </button>
+            </div>
           ) : (
-            <form onSubmit={handleSubmit} className="inline">
-              <input
-  type="text"
-  placeholder="Your name"
-  value={tempName}
-  onChange={(e) => setTempName(e.target.value)}
-  className="
-    px-2 py-1
-    rounded-sm
-    border-none
-    bg-white dark:bg-[#0f172a]
-    text-gray-800 dark:text-gray-100
-    placeholder-gray-400 dark:placeholder-gray-500
-    focus:outline-none
-    text-base
-    transition-all duration-300
-  "
-
-  autoFocus
-/>
-
-            </form>
+            <input
+              type="text"
+              placeholder="What's your name?"
+              value={tempName}
+              onChange={(e) => setTempName(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="
+                px-4 py-2
+                text-center
+                text-lg sm:text-xl
+                rounded-lg
+                border border-gray-300 dark:border-gray-600
+                bg-white dark:bg-[#0f172a]
+                text-gray-800 dark:text-gray-100
+                placeholder-gray-500 dark:placeholder-gray-400
+                focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 dark:focus:ring-purple-800
+                transition-all duration-300
+                max-w-xs w-full
+              "
+              autoFocus
+            />
           )}
-        </h1>
+        </div>
       )}
+      
       <style>{`
         @keyframes gradient-x {
           0% {background-position: 0% 50%;}
