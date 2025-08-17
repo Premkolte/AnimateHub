@@ -17,6 +17,7 @@ import "../layout/Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { favorites } = useFavorites();
   const { currentUser, logout } = useAuthStore();
@@ -25,7 +26,27 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  const navLinks = ["Home", "Explore", "About","AnimationPlayground", "LeaderBoard", "Contact"];
+  const navLinks = ["Home", "Explore", "About", "AnimationPlayground", "LeaderBoard", "Contact"];
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.menu-button')) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
   useEffect(() => {
     // Hide Google Translate UI
@@ -82,73 +103,276 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className="w-full backdrop-blur-md 
-             bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-900 dark:to-purple-900
-             text-gray-800 dark:text-gray-200
-             py-2 pt-1 sticky top-0 left-0 z-50
-             border-b border-white/20
-             shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
-    >
-      <div className="w-full px-4">
-        <div className="w-full flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Link
-              to="/"
-              className="flex items-center space-x-2"
-              onClick={closeMenu}
+    <>
+      <nav
+        className={`
+          w-full backdrop-blur-md transition-all duration-500 ease-out
+          ${scrolled 
+            ? 'bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200' 
+            : 'bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200'
+          }
+          py-3 sticky top-0 left-0 z-50
+          ${scrolled ? 'shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]' : 'shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]'}
+        `}
+      >
+        <div className="w-full px-4 lg:px-8">
+          <div className="w-full flex justify-between items-center">
+            {/* Logo Section */}
+            <div className="flex items-center space-x-3 group">
+              <Link
+                to="/"
+                className="flex items-center space-x-3 transform transition-transform duration-300 hover:scale-105"
+                onClick={closeMenu}
+              >
+                <div className="relative">
+                  <img
+                    className="w-12 h-12 lg:w-16 lg:h-16 transition-transform duration-300 group-hover:rotate-12"
+                    src={Logo}
+                    alt="AnimateHub Logo"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 rounded-full blur-lg group-hover:opacity-30 transition-opacity duration-300"></div>
+                </div>
+                <span className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${
+                  scrolled 
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' 
+                    : 'bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent'
+                }`}>
+                  AnimateHub
+                </span>
+              </Link>
+              <div className="xl:hidden">
+                <DarkModeToggle />
+              </div>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden xl:flex items-center space-x-1 xl:space-x-2">
+              {navLinks.map((item, index) => {
+                const isActive = location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`;
+                return (
+                  <Link
+                    key={item}
+                    to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                    onClick={closeMenu}
+                    className={`
+                      relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
+                      font-medium text-sm xl:text-base
+                      ${scrolled 
+                        ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300' 
+                        : 'hover:bg-white/20 dark:hover:bg-purple-800/30 text-white/90 dark:text-gray-200'
+                      }
+                      hover:shadow-lg hover:shadow-white/10
+                      transform hover:scale-105 hover:-translate-y-0.5
+                      ${isActive 
+                        ? scrolled
+                          ? 'text-blue-600 dark:text-purple-400 bg-blue-50 dark:bg-purple-900/40 shadow-lg'
+                          : 'text-white dark:text-purple-200 bg-white/10 dark:bg-purple-700/40 shadow-lg'
+                        : ''
+                      }
+                      group overflow-hidden
+                    `}
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <span className="relative z-10">{item}</span>
+                    <div className={`
+                      absolute bottom-0 left-0 h-0.5 bg-gradient-to-r transition-all duration-300
+                      ${scrolled 
+                        ? 'from-blue-500 to-purple-500' 
+                        : 'from-white to-blue-200 dark:from-purple-300 dark:to-pink-300'
+                      }
+                      ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}
+                    `} />
+                    {/* Animated background on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Desktop Actions */}
+            <div className="hidden xl:flex items-center space-x-3 xl:space-x-4">
+              {currentUser ? (
+                <>
+                  {/* Favorites Link */}
+                  <Link
+                    to="/favorites"
+                    onClick={closeMenu}
+                    className="relative group flex items-center space-x-2 px-3 py-2 rounded-lg
+                      bg-white/10 dark:bg-purple-800/30 hover:bg-white/20 dark:hover:bg-purple-700/40
+                      transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  >
+                    <FaHeart className="text-red-400 transition-transform duration-300 group-hover:scale-110" />
+                    <span className="text-sm font-medium">Favorites</span>
+                    {favorites.length > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full
+                        animate-pulse shadow-lg transform scale-110">
+                        {favorites.length}
+                      </span>
+                    )}
+                  </Link>
+
+                  {/* Sign Out Button */}
+                  <button
+                    onClick={() => {
+                      logout();
+                      closeMenu();
+                      navigate("/");
+                    }}
+                    className="px-4 py-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300
+                      transition-all duration-300 hover:scale-105 font-medium text-sm"
+                  >
+                    Sign Out
+                  </button>
+
+                  {/* User Profile */}
+                  <Link
+                    to="/profile"
+                    className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 
+                      text-white flex items-center justify-center font-bold text-sm
+                      hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 
+                      hover:scale-110 transform ring-2 ring-white/20"
+                    title={currentUser.username || "Profile"}
+                  >
+                    {currentUser.username
+                      ? currentUser.username.charAt(0).toUpperCase()
+                      : "U"}
+                  </Link>
+                </>
+              ) : (
+                <Link
+                  to="/sign-in"
+                  onClick={closeMenu}
+                  className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 
+                    dark:from-purple-600 dark:to-purple-700 text-white font-medium
+                    transition-all duration-300 hover:scale-105 hover:shadow-xl 
+                    hover:shadow-blue-500/25 dark:hover:shadow-purple-500/25
+                    transform hover:-translate-y-0.5"
+                >
+                  Sign In
+                </Link>
+              )}
+
+              {/* Dark Mode Toggle */}
+              <div className="p-2 rounded-lg backdrop-blur-sm bg-white/10 dark:bg-purple-800/40
+                hover:bg-white/20 dark:hover:bg-purple-700/50 transition-all duration-300">
+                <DarkModeToggle />
+              </div>
+
+              {/* Language Toggle */}
+              <button
+                onClick={toggleLanguage}
+                className="px-4 py-2 rounded-lg backdrop-blur-sm bg-white/20 hover:bg-white/30 
+                  dark:bg-purple-800/40 dark:hover:bg-purple-700/50 transition-all duration-300 
+                  font-medium shadow-sm hover:scale-105 hover:shadow-lg text-sm"
+              >
+                {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+              <button
+              onClick={toggleMenu}
+              className={`xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${
+                scrolled 
+                  ? 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700' 
+                  : 'bg-white/10 hover:bg-white/20'
+              }`}
             >
-              <img
-                className="w-16 h-16 pt-2 pl-4"
-                src={Logo}
-                alt="AnimateHub Logo"
-              />
-              <span className="font-heading text-2xl md:text-3xl font-bold text-white dark:text-gray-100">
-                AnimateHub
-              </span>
-            </Link>
-            <span className="lg:hidden">
-              <DarkModeToggle />
+              <div className="relative w-6 h-6">
+                <span className={`
+                  absolute top-1.5 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
+                  ${scrolled ? 'bg-gray-700 dark:bg-gray-300' : 'bg-white'}
+                  ${isOpen ? 'rotate-45 translate-y-2' : ''}
+                `} />
+                <span className={`
+                  absolute top-3 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
+                  ${scrolled ? 'bg-gray-700 dark:bg-gray-300' : 'bg-white'}
+                  ${isOpen ? 'opacity-0' : ''}
+                `} />
+                <span className={`
+                  absolute top-4.5 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
+                  ${scrolled ? 'bg-gray-700 dark:bg-gray-300' : 'bg-white'}
+                  ${isOpen ? '-rotate-45 -translate-y-2' : ''}
+                `} />
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div id="google_translate_element" style={{ display: "none" }}></div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`
+        fixed inset-0 bg-black/50 backdrop-blur-sm z-40 xl:hidden transition-opacity duration-300
+        ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+      `} />
+
+      {/* Mobile Menu */}
+      <div className={`
+        fixed top-0 right-0 h-screen w-80 max-w-[85vw] z-50 xl:hidden mobile-menu
+        bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl
+        transform transition-transform duration-500 ease-out
+        ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+        shadow-2xl border-l border-white/20 dark:border-gray-700/50
+      `}>
+        <div className="flex flex-col h-full">
+          {/* Mobile Header */}
+          <div className="flex justify-between items-center p-6 border-b border-gray-200/20 dark:border-gray-700/30">
+            <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Menu
             </span>
+            <button 
+              onClick={closeMenu} 
+              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+            >
+              <FiX className="text-xl" />
+            </button>
           </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center space-x-4 justify-center -translate-x-4">
-            {navLinks.map((item) => (
-              <Link
-                key={item}
-                to={`/${item === "Home" ? "" : item.toLowerCase()}`}
-                onClick={closeMenu}
-                className={`relative px-2 py-1 transition-all duration-300 
-        hover:text-blue-700 hover:font-bold dark:hover:text-purple-300 
-        ${
-          location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`
-            ? "text-white dark:text-purple-300 font-bold"
-            : "font-normal"
-        }
-        group
-      `}
-              >
-                {item}
-                <span
-                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 dark:bg-purple-300 
-        transition-all duration-300 group-hover:w-full"
-                />
-              </Link>
-            ))}
+          {/* Mobile Navigation Links */}
+          <div className="flex-1 px-6 py-4 space-y-2 overflow-y-auto">
+            {navLinks.map((item, index) => {
+              const isActive = location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`;
+              return (
+                <Link
+                  key={item}
+                  to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                  onClick={closeMenu}
+                  className={`
+                    flex items-center px-4 py-3 rounded-xl transition-all duration-300
+                    text-lg font-medium transform hover:scale-105 hover:shadow-lg
+                    ${isActive 
+                      ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-600 dark:text-purple-400 shadow-lg' 
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-800/50'
+                    }
+                  `}
+                  style={{ 
+                    animationDelay: `${index * 100}ms`,
+                    animation: isOpen ? 'slideInRight 0.5s ease-out forwards' : 'none'
+                  }}
+                >
+                  <span>{item}</span>
+                  {isActive && (
+                    <div className="ml-auto w-2 h-2 bg-blue-500 dark:bg-purple-400 rounded-full animate-pulse" />
+                  )}
+                </Link>
+              );
+            })}
 
-            {currentUser ? (
-              <>
+            {/* Mobile Auth Section */}
+            <div className="pt-4 border-t border-gray-200/20 dark:border-gray-700/30 space-y-2">
+              <SignedIn>
                 <Link
                   to="/favorites"
                   onClick={closeMenu}
-                  className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
+                  className="flex items-center space-x-3 px-4 py-3 rounded-xl
+                    hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-300"
                 >
                   <FaHeart className="text-red-400" />
-                  <span>Favorites</span>
+                  <span className="text-lg font-medium">Favorites</span>
                   {favorites.length > 0 && (
-                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                    <span className="ml-auto bg-red-500 text-white text-sm px-2 py-1 rounded-full">
                       {favorites.length}
                     </span>
                   )}
@@ -156,149 +380,58 @@ const Navbar = () => {
 
                 <button
                   onClick={() => {
-                    logout();
+                    signOut({ redirectUrl: "/" });
                     closeMenu();
-                    navigate("/");
                   }}
-                  className="hover:text-gray-300 dark:hover:text-white"
+                  className="w-full flex items-center px-4 py-3 rounded-xl text-left
+                    hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400
+                    transition-all duration-300 text-lg font-medium"
                 >
                   Sign Out
                 </button>
+              </SignedIn>
 
-                {/* User avatar or initial */}
+              <SignedOut>
                 <Link
-                  to="/profile"
-                  className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center"
-                  title={currentUser.username || "Profile"}
+                  to="/sign-in"
+                  onClick={closeMenu}
+                  className="flex items-center justify-center px-4 py-3 rounded-xl
+                    bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium
+                    transition-all duration-300 hover:scale-105 shadow-lg text-lg"
                 >
-                  {currentUser.username
-                    ? currentUser.username.charAt(0).toUpperCase()
-                    : "U"}
+                  Sign In
                 </Link>
-              </>
-            ) : (
-              <Link
-                to="/sign-in"
-                onClick={closeMenu}
-                className="px-4 py-1.5 rounded-lg bg-blue-500 hover:bg-blue-600 dark:bg-purple-600 
-                  dark:hover:bg-purple-700 text-white transition-all duration-300 shadow-lg 
-                  hover:shadow-blue-500/25 dark:hover:shadow-purple-500/25"
-              >
-                Sign In
-              </Link>
-            )}
-
-            <div className="p-1.5 rounded-lg backdrop-blur-sm bg-white/10 dark:bg-purple-800/40">
-              <DarkModeToggle />
+              </SignedOut>
             </div>
 
-            {/* Language Toggle with enhanced styling */}
-            <button
-              onClick={toggleLanguage}
-              className="px-4 py-1.5 rounded-lg backdrop-blur-sm bg-white/20 hover:bg-white/30 
-                dark:bg-purple-800/40 dark:hover:bg-purple-700/50 transition-all duration-300 
-                font-medium shadow-sm"
-            >
-              {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
-            </button>
-            <div
-              id="google_translate_element"
-              style={{ display: "none" }}
-            ></div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
-            <button
-              onClick={toggleMenu}
-              className="text-2xl focus:outline-none"
-            >
-              {isOpen ? <FiX /> : <FiMenu />}
-            </button>
+            {/* Mobile Language Toggle */}
+            <div className="pt-4">
+              <button
+                onClick={toggleLanguage}
+                className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 
+                  dark:from-gray-800 dark:to-gray-700 font-semibold
+                  transition-all duration-300 hover:scale-105 shadow-sm text-lg"
+              >
+                {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
+              </button>
+            </div>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="fixed top-0 right-0 h-screen w-[80%] bg-[#f8f6ff] dark:bg-[#261946] shadow-lg z-50 transform translate-x-0 transition-transform duration-300 ease-in-out block lg:hidden flex flex-col p-4 space-y-4 gap-[3vh]">
-            {/* Close button at top-right */}
-            <button onClick={closeMenu} className="self-end text-2xl mb-4">
-              <FiX />
-            </button>
-
-            {navLinks.map((item) => {
-              const isActive =
-                location.pathname ===
-                `/${item === "Home" ? "" : item.toLowerCase()}`;
-
-              return (
-                <Link
-                  key={item}
-                  to={`/${item === "Home" ? "" : item.toLowerCase()}`}
-                  onClick={closeMenu}
-                  className={`transition-all duration-300 text-xl
-        hover:text-gray-300 hover:font-bold dark:hover:text-white hover-underline-animation
-        ${
-          isActive
-            ? "font-bold text-blue-500 dark:text-purple-300 active-underline"
-            : "font-normal"
-        }
-      `}
-                >
-                  {item}
-                </Link>
-              );
-            })}
-
-            <SignedIn>
-              <Link
-                to="/favorites"
-                onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white flex items-center space-x-1"
-              >
-                <FaHeart className="text-red-400" />
-                <span>Favorites</span>
-                {favorites.length > 0 && (
-                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                    {favorites.length}
-                  </span>
-                )}
-              </Link>
-            </SignedIn>
-
-            <SignedOut>
-              <Link
-                to="/sign-in"
-                onClick={closeMenu}
-                className="hover:text-gray-300 dark:hover:text-white text-xl"
-              >
-                Sign In
-              </Link>
-            </SignedOut>
-
-            <SignedIn>
-              <button
-                onClick={() => {
-                  signOut({ redirectUrl: "/" });
-                  closeMenu();
-                }}
-                className="hover:text-gray-300 dark:hover:text-white"
-              >
-                Sign Out
-              </button>
-            </SignedIn>
-
-            {/* Mobile Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className="px-3 py-1 rounded bg-white text-blue-600 font-semibold shadow hover:bg-gray-200 transition"
-            >
-              {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
-            </button>
-          </div>
-        )}
       </div>
-    </nav>
+
+      <style jsx>{`
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      `}</style>
+    </>
   );
 };
 
