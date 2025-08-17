@@ -17,11 +17,13 @@ const BackToTop = () => {
   };
 
   return (
-    <button
-      className={`back-to-top ${visible ? 'visible' : 'hidden'}`}
-      onClick={scrollToTop}
-      aria-label="Back to top"
-    >
+<button
+  className={`back-to-top ${visible ? 'visible' : 'hidden'} 
+    bg-gradient-to-r from-[#3b82f6] to-[#accefbff] 
+    dark:from-purple-600 dark:to-blue-600 text-white font-medium px-4 py-2 rounded-full shadow-lg`}
+  onClick={scrollToTop}
+  aria-label="Back to top"
+>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="40"
