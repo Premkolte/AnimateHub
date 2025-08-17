@@ -162,10 +162,6 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-
-
-
-
           <div className="bg-primary-600 dark:bg-accent-600 text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
             100% OPEN-SOURCE
           </div>
