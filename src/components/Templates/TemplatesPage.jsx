@@ -132,7 +132,7 @@ const TemplatesPage = () => {
         <Link
           to="https://github.com/Premkolte/AnimateHub"
           target="_blank"
-          className="inline-block px-6 py-3 text-sm sm:text-base md:text-lg font-semibold tracking-wide rounded-full text-white bg-gradient-to-br from-purple-600 to-pink-500 shadow-md hover:shadow-xl transform transition-all duration-300 hover:scale-105 active:scale-100"
+          className="inline-block px-6 py-3 bg-primary-600 dark:bg-accent-500 text-white rounded-full font-medium text-sm sm:text-base transition hover:bg-primary-700 dark:hover:bg-accent-600 shadow-md transform hover:scale-105 active:scale-100 duration-300 hover:shadow-xl"
         >
           🚀 Get Started
         </Link>
