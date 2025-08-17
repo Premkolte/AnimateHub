@@ -22,24 +22,44 @@ const Badge = ({ count, label, color }) => (
 
 // Skeleton Loader Component
 const SkeletonLoader = () => (
-  <div className="space-y-4">
-    {[1, 2, 3, 4, 5].map((i) => (
-      <div key={i} className="p-4 bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-            <div className="space-y-2">
-              <div className="w-32 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-              <div className="w-24 h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+  <div className="bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+    {/* Table Header */}
+    <div className="grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
+      <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">#</div>
+      <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">Contributor</div>
+      <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">Contributions</div>
+    </div>
+
+    {/* Rows */}
+    <div className="divide-y divide-gray-100 dark:divide-gray-700">
+      {[...Array(10)].map((_, i) => (
+        <div key={i} className="grid grid-cols-12 gap-4 items-center px-6 py-4">
+          {/* Rank */}
+          <div className="col-span-1">
+            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+          </div>
+
+          {/* Contributor Info */}
+          <div className="col-span-6 md:col-span-7">
+            <div className="flex items-center space-x-4">
+              <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
+              <div className="space-y-2">
+                <div className="w-32 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+                <div className="w-24 h-3 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+              </div>
             </div>
           </div>
-          <div className="flex space-x-2">
-            <div className="w-16 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
-            <div className="w-16 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
+
+          {/* Stats */}
+          <div className="col-span-5 md:col-span-4">
+            <div className="flex items-center justify-end space-x-3">
+              <div className="w-16 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
+              <div className="w-16 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
+            </div>
           </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 );
 
@@ -126,46 +146,6 @@ export default function LeaderBoard() {
     }
   }, [contributors]);
 
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-primary-600 dark:text-accent-500 mb-4">
-            GSSoC'25 Leaderboard
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Tracking the amazing contributions from GSSoC'25 participants
-          </p>
-        </div>
-        <SkeletonLoader />
-      </div>
-    );
-  }
-
-  if (contributors.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-8 bg-white dark:bg-secondary-800 rounded-xl shadow-sm max-w-2xl mx-4">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-            <FaGithub className="text-2xl text-blue-600 dark:text-blue-400" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">No Contributions Yet</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Be the first GSSoC'25 participant to contribute to AnimateHub!
-          </p>
-          <a
-            href="https://github.com/Premkolte/AnimateHub"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors"
-          >
-            <FaGithub className="mr-2" /> Start Contributing
-          </a>
-        </div>
-      </div>
-    );
-  }
-
 
 
   return (
@@ -195,7 +175,7 @@ export default function LeaderBoard() {
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Contributors</p>
-                <p className="text-2xl font-bold text-gray-800 dark:text-white">{stats.totalContributors}+</p>
+                <p className="text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.totalContributors}+</p>
               </div>
             </div>
           </div>
@@ -207,7 +187,7 @@ export default function LeaderBoard() {
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Pull Requests</p>
-                <p className="text-2xl font-bold text-gray-800 dark:text-white">{stats.totalPRs}+</p>
+                <p className="text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.totalPRs}+</p>
               </div>
             </div>
           </div>
@@ -219,111 +199,110 @@ export default function LeaderBoard() {
               </div>
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Total Points</p>
-                <p className="text-2xl font-bold text-gray-800 dark:text-white">{stats.totalPoints}</p>
+                <p className="text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.totalPoints}</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Leaderboard */}
-        <div className="bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
-          {/* Table Header */}
-          <div className="grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
-            <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">#</div>
-            <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">Contributor</div>
-            <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">Contributions</div>
-          </div>
+        {loading ? <SkeletonLoader /> :
+          <div className="bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+            {/* Table Header */}
+            <div className="grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
+              <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">#</div>
+              <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">Contributor</div>
+              <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">Contributions</div>
+            </div>
 
-          {/* Contributors List */}
-          <div className="divide-y divide-gray-100 dark:divide-gray-700">
-            {contributors.map((contributor, index) => (
-              <motion.div
-                key={contributor.username}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.03 }}
-                className="group hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
-              >
-                <div className="grid grid-cols-12 gap-4 items-center px-6 py-4">
-                  <div className="col-span-1">
-                    {index < 3 ? (
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${index === 0 ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400' :
+            {/* Contributors List */}
+            <div className="divide-y divide-gray-100 dark:divide-gray-700">
+              {contributors.map((contributor, index) => (
+                <motion.div
+                  key={contributor.username}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.03 }}
+                  className="group hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
+                >
+                  <div className="grid grid-cols-12 gap-4 items-center px-6 py-4">
+                    <div className="col-span-1">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${index === 0 ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30' :
                         index === 1 ? 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300' :
-                          'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400'
+                          index === 2 ? 'bg-amber-100 text-amber-600 dark:bg-amber-900/30' :
+                            'bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400'
                         }`}>
-                        {index === 0 ? <FaTrophy className="text-lg" /> :
-                          index === 1 ? <FaMedal className="text-lg" /> :
-                            <FaStar className="text-lg" />}
+                        <span className="font-medium">{index + 1}</span>
                       </div>
-                    ) : (
-                      <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{index + 1}</span>
-                    )}
-                  </div>
+                    </div>
 
-                  <div className="col-span-6 md:col-span-7">
-                    <div className="flex items-center space-x-4">
-                      <img
-                        src={contributor.avatar}
-                        alt={contributor.username}
-                        className="w-10 h-10 rounded-full border-2 border-white dark:border-gray-700 shadow-sm"
-                      />
-                      <div>
-                        <a
-                          href={contributor.profile}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors"
-                        >
-                          {contributor.username}
-                        </a>
-                        <div className="flex items-center mt-1 space-x-2">
+                    <div className="col-span-6 md:col-span-7">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          src={contributor.avatar}
+                          alt={contributor.username}
+                          className="w-10 h-10 rounded-full border-2 border-white dark:border-gray-700 shadow-sm"
+                        />
+                        <div>
                           <a
-                            href={`https://github.com/${GITHUB_REPO}/pulls?q=is:pr+author:${contributor.username}+is:merged`}
+                            href={contributor.profile}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-accent-400 transition-colors"
+                            className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors"
                           >
-                            View Contributions →
+                            {contributor.username}
                           </a>
+                          <div className="flex items-center mt-1 space-x-2">
+                            <a
+                              href={`https://github.com/${GITHUB_REPO}/pulls?q=is:pr+author:${contributor.username}+is:merged`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-accent-400 transition-colors"
+                            >
+                              View Contributions →
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="col-span-5 md:col-span-4">
-                    <div className="flex items-center justify-end space-x-3">
-                      <Badge
-                        count={contributor.prs}
-                        label={`PR${contributor.prs !== 1 ? 's' : ''}`}
-                        color="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                      />
-                      <Badge
-                        count={contributor.points}
-                        label="Points"
-                        color="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
-                      />
+                    <div className="col-span-5 md:col-span-4">
+                      <div className="flex items-center justify-end space-x-3">
+                        <Badge
+                          count={contributor.prs}
+                          label={`PR${contributor.prs !== 1 ? 's' : ''}`}
+                          color="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                        />
+                        <Badge
+                          count={contributor.points}
+                          label="Points"
+                          color="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* CTA Footer */}
+            <div className="bg-gray-50 dark:bg-gray-800/50 px-6 py-4 text-center border-t border-gray-100 dark:border-gray-700">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                Want to see your name here? Join GSSoC'25 and start contributing!
+              </p>
+              <a
+                href="https://gssoc.girlscript.tech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors"
+              >
+                <FaGithub className="mr-2" /> Join GSSoC'25
+              </a>
+            </div>
           </div>
 
-          {/* CTA Footer */}
-          <div className="bg-gray-50 dark:bg-gray-800/50 px-6 py-4 text-center border-t border-gray-100 dark:border-gray-700">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-              Want to see your name here? Join GSSoC'25 and start contributing!
-            </p>
-            <a
-              href="https://gssoc.girlscript.tech/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors"
-            >
-              <FaGithub className="mr-2" /> Join GSSoC'25
-            </a>
-          </div>
-        </div>
+        }
+
+
 
         {/* About GSSoC Section */}
         <div className="mt-12 bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
@@ -358,6 +337,6 @@ export default function LeaderBoard() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
