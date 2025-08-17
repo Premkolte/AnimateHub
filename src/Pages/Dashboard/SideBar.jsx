@@ -70,7 +70,7 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
       {/* ========== Mobile Sidebar Toggle Button ========== */}
       {/* Visible only in small screens (lg:hidden) */}
       {/* Positioned absolute on right side of screen */}
-      <div className="lg:hidden absolute top-[56%] right-6 -translate-y-1/2 z-50">
+      <div className="lg:hidden absolute top-[15%] right-4 -translate-y-1/2 z-50">
         <button
           className="flex items-center justify-center rounded-xl p-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg hover:scale-105 transition-transform duration-300"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
