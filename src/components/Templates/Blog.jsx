@@ -140,7 +140,7 @@ const Blog = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    
+
     const reader = new FileReader();
     reader.onloadend = () => {
       setImageFile(reader.result);
@@ -159,7 +159,7 @@ const Blog = () => {
       tags: newPost.tags.length ? newPost.tags : ['general'],
       description: newPost.excerpt || newPost.content.substring(0, 150) + '...'
     };
-    
+
     setPosts([newBlogPost, ...posts]);
     setNewPost({
       title: "",
@@ -173,34 +173,34 @@ const Blog = () => {
     setImageFile(null);
     setIsFormOpen(false);
   };
-  
-  const filteredPosts = activeCategory === "All" 
-    ? posts 
+
+  const filteredPosts = activeCategory === "All"
+    ? posts
     : posts.filter(post => post.category === activeCategory);
 
   return (
     <div className="w-full min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-primary-600 to-accent-500 text-white py-24 px-6">
+      <div className="relative py-24 px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-6"
+          <motion.h1
+            className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             The AnimateHub Blog
           </motion.h1>
-          <motion.p 
-            className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-gray-100"
+          <motion.p
+            className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-gray-600 dark:text-gray-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             Latest articles, tutorials, and insights on web development, design, and technology.
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             className="flex flex-wrap justify-center gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -209,7 +209,7 @@ const Blog = () => {
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="bg-white text-primary-700 hover:bg-gray-100 px-6 py-3 rounded-full text-lg font-semibold shadow-lg flex items-center gap-2"
+              className="bg-primary-600 text-white hover:bg-primary-700 px-6 py-3 rounded-full text-lg font-semibold shadow-lg flex items-center gap-2 transition-colors"
               onClick={() => setIsFormOpen(true)}
             >
               Write a Post <FiExternalLink className="text-lg" />
@@ -218,7 +218,7 @@ const Blog = () => {
               href="https://github.com/Premkolte/AnimateHub"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 py-3 rounded-full text-lg font-semibold flex items-center gap-2"
+              className="bg-transparent border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 px-6 py-3 rounded-full text-lg font-semibold flex items-center gap-2 transition-colors"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -227,7 +227,7 @@ const Blog = () => {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Category Filter */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-wrap gap-3 justify-center mb-12">
@@ -235,11 +235,10 @@ const Blog = () => {
             <motion.button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeCategory === category
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCategory === category
                   ? 'bg-primary-600 text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-secondary-800 dark:text-gray-300 dark:hover:bg-secondary-700'
-              }`}
+                }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
@@ -296,7 +295,7 @@ const Blog = () => {
                       </div>
                       <span className="text-sm font-medium">{post.author}</span>
                     </div>
-                    <button 
+                    <button
                       className="text-primary-600 dark:text-accent-500 hover:text-primary-800 dark:hover:text-accent-400 text-sm font-medium flex items-center transition-colors"
                       onClick={() => navigate(`/blog/${post.id}`)}
                     >
@@ -311,18 +310,18 @@ const Blog = () => {
         </div>
 
       </div>
-      
+
       {/* Create Post Modal */}
       <AnimatePresence>
         {isFormOpen && (
-          <motion.div 
+          <motion.div
             className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsFormOpen(false)}
           >
-            <motion.div 
+            <motion.div
               className="bg-white dark:bg-secondary-800 rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -332,14 +331,14 @@ const Blog = () => {
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Create New Post</h2>
-                  <button 
+                  <button
                     onClick={() => setIsFormOpen(false)}
                     className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
                   >
                     ✕
                   </button>
                 </div>
-                
+
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -355,7 +354,7 @@ const Blog = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Excerpt (Short summary)
@@ -370,7 +369,7 @@ const Blog = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Content
@@ -385,7 +384,7 @@ const Blog = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -401,7 +400,7 @@ const Blog = () => {
                         required
                       />
                     </div>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Category
@@ -420,7 +419,7 @@ const Blog = () => {
                       </select>
                     </div>
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Featured Image
@@ -442,15 +441,15 @@ const Blog = () => {
                     </div>
                     {imageFile && (
                       <div className="mt-2">
-                        <img 
-                          src={imageFile} 
-                          alt="Preview" 
+                        <img
+                          src={imageFile}
+                          alt="Preview"
                           className="h-32 w-full object-cover rounded-lg border"
                         />
                       </div>
                     )}
                   </div>
-                  
+
                   <div className="pt-4 flex justify-end space-x-3">
                     <button
                       type="button"
