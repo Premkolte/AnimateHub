@@ -1,14 +1,15 @@
 export const animatedIconSnippets = [
-  {
-    title: "Bouncing Icon",
-    jsxCode: `(props) => {
+    {
+      title: "Bouncing Icon",
+      tags: ['icon', 'animation', 'bounce', 'transform'],
+      jsxCode: `(props) => {
         return (
           <div className="bouncing-icon">
             <i className="fas fa-arrow-down"></i>
           </div>
         );
       }`,
-    cssCode: `.bouncing-icon {
+      cssCode: `.bouncing-icon {
         display: inline-block;
         animation: bounce 2s infinite;
       }
@@ -24,17 +25,18 @@ export const animatedIconSnippets = [
           transform: translateY(-15px);
         }
       }`,
-  },
-  {
-    title: "Rotating Icon",
-    jsxCode: `(props) => {
+    },
+    {
+      title: "Rotating Icon",
+      tags: ['icon', 'animation', 'rotate', 'transform'],
+      jsxCode: `(props) => {
         return (
           <div className="rotating-icon">
             <i className="fas fa-sync-alt"></i>
           </div>
         );
       }`,
-    cssCode: `.rotating-icon {
+      cssCode: `.rotating-icon {
         display: inline-block;
         animation: rotate 2s infinite linear;
       }
@@ -47,17 +49,18 @@ export const animatedIconSnippets = [
           transform: rotate(360deg);
         }
       }`,
-  },
-  {
-    title: "Pulsing Icon",
-    jsxCode: `(props) => {
+    },
+    {
+      title: "Pulsing Icon",
+      tags: ['icon', 'animation', 'pulse', 'scale'],
+      jsxCode: `(props) => {
         return (
           <div className="pulsing-icon">
             <i className="fas fa-heart"></i>
           </div>
         );
       }`,
-    cssCode: `.pulsing-icon {
+      cssCode: `.pulsing-icon {
         display: inline-block;
         animation: pulse 1.5s infinite;
       }
@@ -70,17 +73,18 @@ export const animatedIconSnippets = [
           transform: scale(1.2);
         }
       }`,
-  },
-  {
-    title: "Pinging Icon",
-    jsxCode: `(props) => {
+    },
+    {
+      title: "Pinging Icon",
+      tags: ['icon', 'animation', 'ping', 'scale'],
+      jsxCode: `(props) => {
         return (
           <div className="pinging-icon">
             <i className="fas fa-circle"></i>
           </div>
         );
       }`,
-    cssCode: `.pinging-icon {
+      cssCode: `.pinging-icon {
         display: inline-block;
         animation: ping 1.5s infinite;
       }
@@ -93,17 +97,18 @@ export const animatedIconSnippets = [
           transform: scale(1.2);
         }
       }`,
-  },
-  {
-    title: "Shaking Icon",
-    jsxCode: `(props) => {
+    },
+    {
+      title: "Shaking Icon",
+      tags: ['icon', 'animation', 'shake', 'transform'],
+      jsxCode: `(props) => {
         return (
           <div className="shaking-icon">
             <i className="fas fa-shield-alt"></i>
           </div>
         );
       }`,
-    cssCode: `.shaking-icon {
+      cssCode: `.shaking-icon {
         display: inline-block;
         animation: shake 1.5s infinite;
       }
@@ -119,17 +124,18 @@ export const animatedIconSnippets = [
           transform: translateX(10px);
         }
       }`,
-  },
-  {
-    title: "Floating Icon",
-    jsxCode: `(props) => {
+    },
+    {
+      title: "Floating Icon",
+      tags: ['icon', 'animation', 'float', 'transform'],
+      jsxCode: `(props) => {
         return (
           <div className="floating-icon">
             <i className="fas fa-battery-full"></i>
           </div>
         );
       }`,
-    cssCode: `.floating-icon {
+      cssCode: `.floating-icon {
         display: inline-block;
         animation: float 1.5s infinite;
       }
@@ -142,17 +148,18 @@ export const animatedIconSnippets = [
           transform: translateY(-10px);
         }
       }`,
-  },
-  {
-    title: "Spinning Icon",
-    jsxCode: `(props) => {
+    },
+    {
+      title: "Spinning Icon",
+      tags: ['icon', 'animation', 'spin', 'rotate', 'loading'],
+      jsxCode: `(props) => {
         return (
           <div className="spinning-icon">
             <i className="fas fa-spinner"></i>
           </div>
         );
       }`,
-    cssCode: `.spinning-icon {
+      cssCode: `.spinning-icon {
         display: inline-block;
         animation: spin 1.5s infinite linear;
       }
@@ -165,17 +172,18 @@ export const animatedIconSnippets = [
           transform: rotate(360deg);
         }
       }`,
-  },
-  {
-    title: "Flashing Icon",
-    jsxCode: `(props) => {
+    },
+    {
+      title: "Flashing Icon",
+      tags: ['icon', 'animation', 'flash', 'fade'],
+      jsxCode: `(props) => {
         return (
           <div className="flashing-icon">
             <i className="fas fa-bell"></i>
           </div>
         );
       }`,
-    cssCode: `.flashing-icon {
+      cssCode: `.flashing-icon {
         display: inline-block;
         animation: flash 1.5s infinite;
       }
@@ -188,5 +196,5 @@ export const animatedIconSnippets = [
           opacity: 0.5;
         }
       }`,
-  },
-];
+    },
+  ];

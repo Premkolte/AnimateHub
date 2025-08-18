@@ -1,6 +1,7 @@
 export const dropDownSnippets = [
   {
     title: "Simple Dropdown Snippet",
+    tags: ['dropdown', 'form', 'input', 'select', 'basic'],
     jsxCode: `(props) => (
         <div className="flex items-center space-x-4">
           <select
@@ -25,6 +26,7 @@ export const dropDownSnippets = [
   },
   {
     title: "Grouped Dropdown Snippet",
+    tags: ['dropdown', 'form', 'input', 'select', 'group'],
     jsxCode: `(props) => (
         <div className="flex items-center space-x-4">
           <select
@@ -57,6 +59,7 @@ export const dropDownSnippets = [
   },
   {
     title: "Custom Styled Dropdown Snippet",
+    tags: ['dropdown', 'form', 'input', 'select', 'styled'],
     jsxCode: `(props) => (
         <div className="flex items-center space-x-4">
           <select
@@ -81,6 +84,7 @@ export const dropDownSnippets = [
   },
   {
     title: "Dropdown on hover",
+    tags: ['dropdown', 'navigation', 'hover', 'menu', 'fade'],
     jsxCode: `(props) => (
       <div className="relative inline-block text-left">
     <div className="group">
@@ -110,16 +114,15 @@ export const dropDownSnippets = [
             Open Menu
         </button>
 
-        <!-- Dropdown menu -->
         <div style="position: absolute; left: 0; width: 160px; margin-top: 4px; background-color: white; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); opacity: 0; visibility: hidden; transition: opacity 0.3s;"
             onmouseover="this.style.opacity='1'; this.style.visibility='visible'" onmouseout="this.style.opacity='0'; this.style.visibility='hidden'">
             <div style="padding: 4px 0;">
                 <a href="#" style="display: block; padding: 8px 16px; font-size: 14px; color: #4a5568; text-decoration: none; transition: background-color 0.3s;"
-                   onmouseover="this.style.backgroundColor='#f7fafc'" onmouseout="this.style.backgroundColor='white'">Option 1</a>
+                    onmouseover="this.style.backgroundColor='#f7fafc'" onmouseout="this.style.backgroundColor='white'">Option 1</a>
                 <a href="#" style="display: block; padding: 8px 16px; font-size: 14px; color: #4a5568; text-decoration: none; transition: background-color 0.3s;"
-                   onmouseover="this.style.backgroundColor='#f7fafc'" onmouseout="this.style.backgroundColor='white'">Option 2</a>
+                    onmouseover="this.style.backgroundColor='#f7fafc'" onmouseout="this.style.backgroundColor='white'">Option 2</a>
                 <a href="#" style="display: block; padding: 8px 16px; font-size: 14px; color: #4a5568; text-decoration: none; transition: background-color 0.3s;"
-                   onmouseover="this.style.backgroundColor='#f7fafc'" onmouseout="this.style.backgroundColor='white'">Option 3</a>
+                    onmouseover="this.style.backgroundColor='#f7fafc'" onmouseout="this.style.backgroundColor='white'">Option 3</a>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 export const accordionSnippets = [
   {
     title: "Basic Accordion",
+    tags: ['accordion', 'toggle', 'basic', 'content'],
     cssCode: `<div style="width: 100%; border: 1px solid #e5e7eb; border-radius: 0.5rem; overflow: hidden;">
   <div style="border-bottom: 1px solid #e5e7eb;">
     <div onclick="toggleAccordion(this)" style="padding: 1rem; background-color: #f9fafb; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -92,6 +93,7 @@ return (
   },
   {
     title: "Styled Accordion",
+    tags: ['accordion', 'toggle', 'styled', 'content'],
     cssCode: `<div style="display: flex; flex-direction: column; gap: 0.5rem;">
   <div style="border: 1px solid #e9d5ff; border-radius: 0.5rem; overflow: hidden;">
     <div onclick="toggleStyledAccordion(this)" style="padding: 1rem; background-color: #faf5ff; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -183,6 +185,7 @@ return (
   },
   {
     title: "FAQ Accordion",
+    tags: ['accordion', 'toggle', 'faq', 'content'],
     cssCode: `<div style="display: flex; flex-direction: column; gap: 1rem; max-width: 42rem; margin: 0 auto;">
   <div style="border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #f1f5f9; background-color: white; overflow: hidden;">
     <div onclick="toggleFAQ(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1rem; text-align: left; cursor: pointer;">

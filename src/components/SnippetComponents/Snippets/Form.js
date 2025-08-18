@@ -1,8 +1,8 @@
 // Assuming this is in a file named `formSnippets.js` or similar
 export const formSnippets = [
     {
-
       label: "Checkout Form",
+      tags: ['form', 'input', 'checkout', 'payment', 'button'],
       heading: "Contact Form",
       cssCode: `
         <form style="background-color: #f7f7f7; padding: 20px; border-radius: 5px;">
@@ -33,6 +33,7 @@ export const formSnippets = [
     },
     {
       label: "Contact Form",
+      tags: ['form', 'input', 'contact', 'message', 'button'],
       cssCode: `
         <form style="background-color: #f7f7f7; padding: 20px; border-radius: 5px;">
           <label for="name">Name:</label>
@@ -57,4 +58,3 @@ export const formSnippets = [
         </>`,
     },
   ];
-  

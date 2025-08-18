@@ -1,6 +1,7 @@
 export const ExpandingSearchBarSnippets = [
     {
       title: "Expanding Search Bar",
+      tags: ['search', 'form', 'input', 'expand', 'animation'],
       jsxCode: `<div class="search-container">
           <input type="text" class="search-input" placeholder="Search..." />
           <button class="search-button">
@@ -46,4 +47,3 @@ export const ExpandingSearchBarSnippets = [
       </style>`,
     },
   ];
-  

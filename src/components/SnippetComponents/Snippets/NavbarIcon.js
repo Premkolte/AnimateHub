@@ -3,6 +3,7 @@
 export const navbarIconSnippets = [
     {
       title: 'Search Icon (Animated)',
+      tags: ['icon', 'navbar', 'search', 'hover', 'scale'],
       jsxCode: `() => (
         <div className="flex items-center">
           <input type="text" placeholder="Search..." className="border p-2 rounded-lg focus:outline-none focus:border-blue-500 transition-all duration-300 motion-reduce:transition-none" />
@@ -42,6 +43,7 @@ export const navbarIconSnippets = [
     },
     {
       title: 'Notification Icon (Animated)',
+      tags: ['icon', 'navbar', 'notification', 'hover', 'rotate'],
       jsxCode: `() => (
         <div className="relative">
           <button className="bg-blue-500 text-white p-2 rounded-full transition-all duration-300 transform hover:rotate-12 motion-reduce:transition-none motion-reduce:hover:transform-none">
@@ -74,6 +76,7 @@ export const navbarIconSnippets = [
     },
     {
       title: 'Profile Icon (Animated)',
+      tags: ['icon', 'navbar', 'profile', 'avatar', 'hover', 'rotate'],
       jsxCode: `() => (
         <div className="flex items-center">
           <div className="relative">
@@ -119,6 +122,7 @@ export const navbarIconSnippets = [
     },
     {
       title: 'Menu Icon (Animated)',
+      tags: ['icon', 'navbar', 'menu', 'hamburger', 'hover', 'rotate'],
       jsxCode: `() => (
         <button className="p-2 bg-blue-500 text-white rounded-lg transition-all duration-300 transform hover:rotate-90 motion-reduce:transition-none motion-reduce:hover:transform-none">
           <svg

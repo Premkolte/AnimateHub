@@ -1,11 +1,12 @@
 export const darkModeSnippets = [
     {
       title: 'Simple Dark Mode Toggle',
+      tags: ['dark mode', 'toggle', 'ui', 'theme', 'basic'],
       jsxCode: `(props) => (
         <div className="flex items-center">
           <input type="checkbox" id="dark-mode-toggle" className="sr-only" onChange={props.onToggle} />
           <label htmlFor="dark-mode-toggle" className="cursor-pointer relative">
-           
+            
           </label>
         </div>
       )`,
@@ -28,11 +29,12 @@ export const darkModeSnippets = [
     },
     {
       title: 'Dark Mode Toggle with Theme Switch',
+      tags: ['dark mode', 'toggle', 'ui', 'theme', 'switch'],
       jsxCode: `(props) => (
         <div className="flex items-center">
           <input type="checkbox" id="dark-mode-toggle" className="sr-only" onChange={props.onToggle} />
           <label htmlFor="dark-mode-toggle" className="cursor-pointer relative">
-           
+            
           </label>
         </div>
       )`,
@@ -54,4 +56,3 @@ export const darkModeSnippets = [
       </style>`
     }
   ];
-  

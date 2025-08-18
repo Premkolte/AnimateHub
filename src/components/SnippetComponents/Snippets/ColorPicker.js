@@ -2,6 +2,7 @@
 export const colorPickerSnippets = [
     {
       title: "Simple Color Picker",
+      tags: ['color', 'picker', 'form', 'input', 'basic'],
       jsxCode: `(props) => (
         <input
           type="color"
@@ -17,6 +18,7 @@ export const colorPickerSnippets = [
     },
     {
       title: "Color Picker with Label",
+      tags: ['color', 'picker', 'form', 'input', 'label'],
       jsxCode: `(props) => (
         <div className="flex items-center space-x-4">
           <label htmlFor="colorPicker" className="text-sm font-medium">
@@ -44,6 +46,7 @@ export const colorPickerSnippets = [
     },
     {
       title: "Advanced Color Picker",
+      tags: ['color', 'picker', 'form', 'input', 'stateful', 'preview'],
       jsxCode: `(props) => {
         const [color, setColor] = React.useState("#000000");
         return (
@@ -75,4 +78,3 @@ export const colorPickerSnippets = [
       </div>`,
     },
   ];
-  

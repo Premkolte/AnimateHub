@@ -3,6 +3,7 @@
 export const loginSnippets = [
     {
       title: 'Simple Login Form',
+      tags: ['login', 'form', 'input', 'authentication', 'basic'],
       jsxCode: `(props) => (
         <form className="flex flex-col space-y-4">
           <input type="text" placeholder="Username" className="border p-2 rounded-lg" />
@@ -18,6 +19,7 @@ export const loginSnippets = [
     },
     {
       title: 'Customized Login Form',
+      tags: ['login', 'form', 'input', 'authentication', 'checkbox'],
       jsxCode: `(props) => (
         <form className="flex flex-col space-y-4">
           <input type="text" placeholder="Email" className="border p-2 rounded-lg" />
@@ -40,4 +42,3 @@ export const loginSnippets = [
       </form>`
     }
   ];
-  

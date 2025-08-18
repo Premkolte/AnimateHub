@@ -1,7 +1,7 @@
 export const inputFieldSnippets = [
   {
-    
     title: "Basic Input Field",
+    tags: ['input', 'form', 'basic'],
     jsxCode: `(props) => (
         <input
           type="text"
@@ -13,6 +13,7 @@ export const inputFieldSnippets = [
   },
   {
     title: "Password Input Field",
+    tags: ['input', 'form', 'password', 'secure'],
     jsxCode: `(props) => (
         <input
           type="password"
@@ -24,6 +25,7 @@ export const inputFieldSnippets = [
   },
   {
     title: "Search Input Field",
+    tags: ['input', 'form', 'search'],
     jsxCode: `(props) => (
         <input
           type="text"

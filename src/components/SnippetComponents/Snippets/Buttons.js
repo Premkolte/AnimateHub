@@ -1,6 +1,7 @@
 export const buttonSnippets = [
   {
     label: "Move Right",
+    tags: ['hover', 'slide', 'transform'],
     cssCode:
       '<button style="transform: translateX(5px); background-color: #271FE0; color: white; padding: 10px;">Move Right</button>',
     jsxCode:
@@ -8,6 +9,7 @@ export const buttonSnippets = [
   },
   {
     label: "Move Left",
+    tags: ['hover', 'slide', 'transform'],
     cssCode:
       '<button style="transform: translateX(-5px); background-color: #271FE0; color: white; padding: 10px;">Move Left</button>',
     jsxCode:
@@ -15,6 +17,7 @@ export const buttonSnippets = [
   },
   {
     label: "Move Up",
+    tags: ['hover', 'slide', 'transform'],
     cssCode:
       '<button style="transform: translateY(-5px); background-color: #271FE0; color: white; padding: 10px;">Move Up</button>',
     jsxCode:
@@ -22,6 +25,7 @@ export const buttonSnippets = [
   },
   {
     label: "Move Down",
+    tags: ['hover', 'slide', 'transform'],
     cssCode:
       '<button style="transform: translateY(5px); background-color: #271FE0; color: white; padding: 10px;">Move Down</button>',
     jsxCode:
@@ -29,6 +33,7 @@ export const buttonSnippets = [
   },
   {
     label: "Loading Button",
+    tags: ['cta', 'loading', 'state'],
     cssCode:
       '<button style="background-color: #3b82f6; color: white; padding: 10px; border: none; border-radius: 5px;">Loading...</button>',
     jsxCode:
@@ -36,6 +41,7 @@ export const buttonSnippets = [
   },
   {
     label: "Download Button",
+    tags: ['cta', 'iconic'],
     cssCode:
       '<button style="background-color: #10b981; color: white; padding: 10px; border: none; border-radius: 5px;">Download</button>',
     jsxCode:
@@ -43,6 +49,7 @@ export const buttonSnippets = [
   },
   {
     label: "Prev/Next Buttons",
+    tags: ['navigation', 'group'],
     cssCode: `<div style="display: flex; justify-content: center;">
       <button style="background-color: #3b82f6; color: white; padding: 10px; border: none; border-radius: 5px; margin-right: 5px;">Prev</button>
       <button style="background-color: #3b82f6; color: white; padding: 10px; border: none; border-radius: 5px;">Next</button>
@@ -54,6 +61,7 @@ export const buttonSnippets = [
   },
   {
     label: "Hover me",
+    tags: ['hover', 'scale', 'shadow', 'pseudo-element'],
     cssCode: `.button {
     padding: 1rem 2rem;
     z-index: 30;
@@ -97,16 +105,19 @@ export const buttonSnippets = [
   },
   {
     label: "Zoom out",
+    tags: ['hover', 'scale', 'transform'],
     cssCode: `<button style="background-color: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.2s, transform 0.2s; outline: none;" onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(1.1';" onmouseout="this.style.backgroundColor='#3b82f6'; this.style.transform='scale(1)'">Zoom out</button>`,
     jsxCode: `<button className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 hover:scale-110 motion-reduce:hover:transform-none focus:outline-none">Zoom out</button>`,
   },
   {
     label: "Zoom in",
+    tags: ['hover', 'scale', 'transform'],
     cssCode: `<button style="background-color: #3b82f6; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.2s, transform 0.2s; outline: none;" onmouseover="this.style.backgroundColor='#2563eb'; this.style.transform='scale(0.95)';" onmouseout="this.style.backgroundColor='#3b82f6'; this.style.transform='scale(1)'">Zoom in</button>`,
     jsxCode: `<button className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 hover:scale-95 motion-reduce:hover:transform-none focus:outline-none">Zoom in</button>`,
   },
   {
     label: "Bounce",
+    tags: ['hover', 'bounce', 'animation'],
     cssCode: `.button {
     background-color: #22c55e;
     color: white;
@@ -134,6 +145,7 @@ export const buttonSnippets = [
   },
   {
     label: "Rotate",
+    tags: ['hover', 'rotate', 'transform'],
     cssCode:
       '<button style="background-color: #3b82f6; color: white; padding: 10px; border-radius: 5px; transition: transform 0.2s;">Rotate</button>',
     jsxCode:
@@ -141,6 +153,7 @@ export const buttonSnippets = [
   },
   {
     label: "Expand",
+    tags: ['hover', 'scale', 'transform'],
     cssCode:
       '<button style="background-color: #a855f7; color: white; padding: 10px; border-radius: 5px;">Expand</button>',
     jsxCode:
@@ -148,6 +161,7 @@ export const buttonSnippets = [
   },
   {
     label: "Glow",
+    tags: ['hover', 'shadow', 'glow'],
     cssCode:
       '<button style="background-color: #d97706; color: white; padding: 10px; border-radius: 5px;">Glow</button>',
     jsxCode:
@@ -155,6 +169,7 @@ export const buttonSnippets = [
   },
   {
     label: "Slide",
+    tags: ['hover', 'slide', 'transform'],
     cssCode:
       '<button style="background-color: #4f46e5; color: white; padding: 10px; border-radius: 5px; transition: transform 0.2s;">Slide</button>',
     jsxCode:

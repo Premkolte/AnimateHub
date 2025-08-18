@@ -1,6 +1,7 @@
 export const checkBoxSnippets = [
   {
     title: "Simple Checkbox Snippet",
+    tags: ['checkbox', 'form', 'input', 'basic'],
     jsxCode: `(props) => (
         <div className="flex items-center space-x-4">
           <label className="flex items-center">
@@ -22,6 +23,7 @@ export const checkBoxSnippets = [
   },
   {
     title: "Grouped Checkbox Snippet",
+    tags: ['checkbox', 'form', 'input', 'group'],
     jsxCode: `(props) => (
         <div className="flex items-center space-x-4">
           <div>
