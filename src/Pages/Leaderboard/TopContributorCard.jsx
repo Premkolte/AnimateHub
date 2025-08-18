@@ -1,8 +1,8 @@
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 import confetti from "canvas-confetti";
 
 export default function TopContributorCard({ contributor, rank }) {
-  // Trigger confetti when leaderboard loads (only for top 3)
   useEffect(() => {
     if (rank <= 3) {
       setTimeout(() => {
@@ -11,11 +11,10 @@ export default function TopContributorCard({ contributor, rank }) {
           spread: 60,
           origin: { y: 0.6 },
         });
-      }, 800); // small delay for smoothness
+      }, 800);
     }
   }, [rank]);
 
-  // Confetti on hover
   const handleHover = () => {
     if (rank <= 3) {
       confetti({
@@ -55,3 +54,13 @@ export default function TopContributorCard({ contributor, rank }) {
     </div>
   );
 }
+
+// ✅ Add PropTypes validation
+TopContributorCard.propTypes = {
+  contributor: PropTypes.shape({
+    avatar: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    contributions: PropTypes.number.isRequired,
+  }).isRequired,
+  rank: PropTypes.number.isRequired,
+};

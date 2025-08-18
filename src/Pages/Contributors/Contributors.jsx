@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const TopContributorsCard = ({ contributor, index }) => {
   return (
@@ -35,8 +36,8 @@ const TopContributorsCard = ({ contributor, index }) => {
         </motion.a>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
 const ContributorCard = ({ contributor }) => {
   return (
@@ -64,8 +65,8 @@ const ContributorCard = ({ contributor }) => {
         Visit Profile
       </motion.a>
     </div>
-  )
-}
+  );
+};
 
 const ContributorsSkeleton = ({ length = 20 }) => {
   return (
@@ -76,8 +77,8 @@ const ContributorsSkeleton = ({ length = 20 }) => {
         <p className="bg-primary-500 dark:bg-accent-500 w-32 h-1 rounded-full" />
       </div>
       <div className="mx-auto flex flex-wrap justify-center items-center mb-8 gap-5 w-full">
-        {[...Array(length)].slice(0, 3).map((_) => (
-          <div key={_} className="relative rounded-lg flex-1 mx-auto max-w-sm shadow-md bg-primary-50 border-primary-200 border-3 dark:bg-secondary-800">
+        {[...Array(length)].slice(0, 3).map((_, i) => (
+          <div key={i} className="relative rounded-lg flex-1 mx-auto max-w-sm shadow-md bg-primary-50 border-primary-200 border-3 dark:bg-secondary-800">
             <div className="flex flex-col items-center bg-clip-padding backdrop-filter backdrop-blur-sm p-4 rounded-lg animate-pulse">
               <div className="w-24 h-24 bg-gray-300 dark:bg-gray-700 rounded-full mb-4"></div>
               <div className="h-6 w-32 bg-gray-300 dark:bg-gray-700 rounded mb-2"></div>
@@ -91,13 +92,15 @@ const ContributorsSkeleton = ({ length = 20 }) => {
       {/* Other Contributors Grid */}
       <div className="flex justify-center items-center flex-col gap-2">
         <h3 className="text-primary-500 dark:text-accent-500 font-bold text-4xl">All Contributors</h3>
-        <h6 className="text-lg">Every contribution matters! Thank you to all our amazing contributors who help make
-          AnimateHub better.</h6>
+        <h6 className="text-lg">
+          Every contribution matters! Thank you to all our amazing contributors who help make
+          AnimateHub better.
+        </h6>
         <p className="bg-primary-500 dark:bg-accent-500 w-32 h-1 rounded-full" />
       </div>
       <div className="w-full grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-        {[...Array(length)].slice(3).map((_) => (
-          <div key={_} className="flex flex-col items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow animate-pulse">
+        {[...Array(length)].slice(3).map((_, i) => (
+          <div key={i} className="flex flex-col items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow animate-pulse">
             <div className="w-24 h-24 bg-gray-300 dark:bg-gray-700 rounded-full mb-4"></div>
             <div className="h-5 w-32 bg-gray-300 dark:bg-gray-700 rounded mb-2"></div>
             <div className="h-4 w-24 bg-gray-300 dark:bg-gray-700 rounded mb-4"></div>
@@ -105,11 +108,9 @@ const ContributorsSkeleton = ({ length = 20 }) => {
           </div>
         ))}
       </div>
-    </div >
-  )
-
-}
-
+    </div>
+  );
+};
 
 const Contributors = () => {
   const [contributors, setContributors] = useState([]);
@@ -149,15 +150,15 @@ const Contributors = () => {
       setContributors([]);
 
       const headers = {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'AnimateHub-App',
-        'X-GitHub-Api-Version': '2022-11-28'
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "AnimateHub-App",
+        "X-GitHub-Api-Version": "2022-11-28",
       };
 
       const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-      if (GITHUB_TOKEN && GITHUB_TOKEN.trim() !== '') {
-        headers['Authorization'] = `token ${GITHUB_TOKEN.trim()}`;
+      if (GITHUB_TOKEN && GITHUB_TOKEN.trim() !== "") {
+        headers["Authorization"] = `token ${GITHUB_TOKEN.trim()}`;
       }
 
       const response = await fetch(
@@ -172,7 +173,9 @@ const Contributors = () => {
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        const sortedContributors = data.sort((a, b) => b.contributions - a.contributions);
+        const sortedContributors = data.sort(
+          (a, b) => b.contributions - a.contributions
+        );
         setContributors(sortedContributors);
 
         // Cache the fresh data
@@ -181,7 +184,6 @@ const Contributors = () => {
       } else {
         throw new Error("No contributors found in API response");
       }
-
     } catch (error) {
       console.error("Error fetching contributors:", error);
       setError(`Fetch failed: ${error.message}`);
@@ -196,14 +198,14 @@ const Contributors = () => {
       setLoading(true);
       setError(null);
 
-      // Check if we have recent cached data (cache for 5 minutes for faster updates)
+      // Check cache (5 minutes)
       const cachedData = localStorage.getItem("contributors");
       const cacheTimestamp = localStorage.getItem("contributors_timestamp");
       const now = Date.now();
 
       if (cachedData && cacheTimestamp) {
         const timeDiff = now - parseInt(cacheTimestamp);
-        const fiveMinutes = 5 * 60 * 1000; // 5 minutes in milliseconds
+        const fiveMinutes = 5 * 60 * 1000;
 
         if (timeDiff < fiveMinutes) {
           setContributors(JSON.parse(cachedData));
@@ -212,18 +214,16 @@ const Contributors = () => {
         }
       }
 
-      // Create headers with authentication if token is available
       const headers = {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'AnimateHub-App',
-        'X-GitHub-Api-Version': '2022-11-28'
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "AnimateHub-App",
+        "X-GitHub-Api-Version": "2022-11-28",
       };
 
-      // GitHub token for higher rate limits (5000 requests/hour)
       const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
-      if (GITHUB_TOKEN && GITHUB_TOKEN.trim() !== '') {
-        headers['Authorization'] = `token ${GITHUB_TOKEN.trim()}`;
+      if (GITHUB_TOKEN && GITHUB_TOKEN.trim() !== "") {
+        headers["Authorization"] = `token ${GITHUB_TOKEN.trim()}`;
       }
 
       const response = await fetch(
@@ -233,11 +233,17 @@ const Contributors = () => {
 
       if (!response.ok) {
         if (response.status === 403) {
-          const rateLimitReset = response.headers.get('X-RateLimit-Reset');
-          const resetTime = rateLimitReset ? new Date(parseInt(rateLimitReset) * 1000).toLocaleTimeString() : 'unknown';
-          throw new Error(`GitHub API rate limit exceeded. Resets at ${resetTime}`);
+          const rateLimitReset = response.headers.get("X-RateLimit-Reset");
+          const resetTime = rateLimitReset
+            ? new Date(parseInt(rateLimitReset) * 1000).toLocaleTimeString()
+            : "unknown";
+          throw new Error(
+            `GitHub API rate limit exceeded. Resets at ${resetTime}`
+          );
         }
-        throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `GitHub API error: ${response.status} ${response.statusText}`
+        );
       }
 
       const data = await response.json();
@@ -250,17 +256,15 @@ const Contributors = () => {
         (a, b) => b.contributions - a.contributions
       );
 
-      // Cache the data with timestamp
       localStorage.setItem("contributors", JSON.stringify(sortedContributors));
       localStorage.setItem("contributors_timestamp", now.toString());
 
       setContributors(sortedContributors);
-
     } catch (error) {
       console.error("Error fetching contributors:", error);
       setError(error.message);
 
-      // Try to use cached data as fallback
+      // Try cached fallback
       const cachedData = localStorage.getItem("contributors");
       if (cachedData) {
         try {
@@ -270,7 +274,7 @@ const Contributors = () => {
           } else {
             throw new Error("Invalid cached data");
           }
-        } catch (parseError) {
+        } catch (_e) {
           setContributors(fallbackContributors);
         }
       } else {
@@ -282,13 +286,13 @@ const Contributors = () => {
   };
 
   useEffect(() => {
-    // Force fresh fetch on component mount to ensure real data loads
+    // Force fresh fetch on mount
     forceFreshFetch();
 
-    // Set up periodic refresh every 10 minutes
+    // Periodic refresh every 10 minutes
     const interval = setInterval(() => {
       fetchContributors();
-    }, 10 * 60 * 1000); // 10 minutes
+    }, 10 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -298,18 +302,17 @@ const Contributors = () => {
   return (
     <>
       <div className="w-full flex flex-col items-center justify-center min-h-screen bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 py-24 text-center">
-
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl mb-6 font-bold">Our Amazing Contributors</h1>
-          <h2 className="text-lg max-w-2xl mx-auto font-semibold">A heartfelt thank you to the talented individuals who dedicate their time and skills to
+          <h2 className="text-lg max-w-2xl mx-auto font-semibold">
+            A heartfelt thank you to the talented individuals who dedicate their time and skills to
             make AnimateHub thrive. Your contributions help shape the future of animation
-            components.</h2>
+            components.
+          </h2>
         </div>
 
         {/* Loading State */}
         {loading && <ContributorsSkeleton length={20} />}
-        {/* <ContributorsSkeleton /> */}
-
 
         {/* Error State */}
         {error && !loading && (
@@ -336,8 +339,10 @@ const Contributors = () => {
             {/* Other Contributors Grid */}
             <div className="flex justify-center items-center flex-col gap-2">
               <h3 className="text-primary-500 dark:text-accent-500 font-bold text-4xl">All Contributors</h3>
-              <h6 className="text-lg">Every contribution matters! Thank you to all our amazing contributors who help make
-                AnimateHub better.</h6>
+              <h6 className="text-lg">
+                Every contribution matters! Thank you to all our amazing contributors who help make
+                AnimateHub better.
+              </h6>
               <p className="bg-primary-500 dark:bg-accent-500 w-32 h-1 rounded-full" />
             </div>
             <div className="w-full grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
@@ -358,7 +363,6 @@ const Contributors = () => {
 
         {/* Contribution Button */}
         <div className="flex flex-col justify-center items-center">
-
           <div className="text-3xl font-bold">Become a contributor</div>
 
           <p className="max-w-3xl text-center text-lg mt-8">
@@ -382,3 +386,26 @@ const Contributors = () => {
 };
 
 export default Contributors;
+
+/* ---- PropTypes (add below components) ---- */
+
+const contributorShape = PropTypes.shape({
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  login: PropTypes.string.isRequired,
+  avatar_url: PropTypes.string.isRequired,
+  html_url: PropTypes.string.isRequired,
+  contributions: PropTypes.number.isRequired,
+});
+
+TopContributorsCard.propTypes = {
+  contributor: contributorShape.isRequired,
+  index: PropTypes.number.isRequired,
+};
+
+ContributorCard.propTypes = {
+  contributor: contributorShape.isRequired,
+};
+
+ContributorsSkeleton.propTypes = {
+  length: PropTypes.number,
+};
