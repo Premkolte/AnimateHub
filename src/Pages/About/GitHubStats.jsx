@@ -51,7 +51,7 @@ export default function GitHubStats() {
   ];
 
   return (
-    <section className="py-12 rounded-xl bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white">
+    <section className="py-12 rounded-xl bg-blue-100 dark:bg-secondary-900 text-secondary-900 dark:text-white">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h3 className="text-3xl sm:text-4xl font-extrabold mb-10">
           Project Stats
