@@ -1,6 +1,7 @@
 export const cardSnippets = [
   {
     label: "Basic Card",
+    tags: ['card', 'ui', 'basic', 'content'],
     cssCode: `
         <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; max-width: 300px; margin: 16px auto;">
           <h3>Basic Card</h3>
@@ -14,6 +15,7 @@ export const cardSnippets = [
   },
   {
     label: "Card with Image",
+    tags: ['card', 'ui', 'image', 'content'],
     cssCode: `
         <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; max-width: 300px; margin: 16px auto; text-align: center;">
           <img style="border-radius: 8px 8px 0 0; width: 100%;" src="https://via.placeholder.com/300x150" alt="Card" />
@@ -29,6 +31,7 @@ export const cardSnippets = [
   },
   {
     label: "Card with Button",
+    tags: ['card', 'ui', 'button', 'cta', 'content'],
     cssCode: `
         <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; max-width: 300px; margin: 16px auto; text-align: center;">
           <h3>Card with Button</h3>
@@ -44,6 +47,7 @@ export const cardSnippets = [
   },
   {
     label: "Card with List Group",
+    tags: ['card', 'ui', 'list', 'content'],
     cssCode: `
         <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; max-width: 300px; margin: 16px auto;">
           <h3>Card with List Group</h3>

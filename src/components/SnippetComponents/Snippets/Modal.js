@@ -1,6 +1,7 @@
 export const modalSnippets = [
   {
     title: "Basic Modal",
+    tags: ['modal', 'popup', 'dialog', 'basic', 'fade', 'scale'],
     cssCode: `/* Basic Modal CSS */
 .modal-overlay {
   position: fixed;
@@ -121,6 +122,7 @@ const BasicModal = () => {
   },
   {
     title: "Large Modal",
+    tags: ['modal', 'popup', 'dialog', 'large', 'fade', 'slide'],
     cssCode: `/* Large Modal CSS */
 .large-modal-overlay {
   position: fixed;
@@ -253,6 +255,7 @@ const LargeModal = () => {
   },
   {
     title: "Alert Modal",
+    tags: ['modal', 'popup', 'dialog', 'alert', 'fade', 'bounce'],
     cssCode: `/* Alert Modal CSS */
 .alert-modal-overlay {
   position: fixed;

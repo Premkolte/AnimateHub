@@ -2,6 +2,7 @@
 export const avatarImageSnippets = [
     {
       title: "Simple Avatar Snippet",
+      tags: ['avatar', 'image', 'profile', 'basic'],
       jsxCode: `(props) => (
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MCuXs-CWBXJd56DshzTRxR06gkA6-Wm1Yg&s"
@@ -17,6 +18,7 @@ export const avatarImageSnippets = [
     },
     {
       title: "Avatar with Status Indicator",
+      tags: ['avatar', 'image', 'profile', 'status', 'indicator'],
       jsxCode: `(props) => (
         <div className="relative">
           <img
@@ -37,4 +39,3 @@ export const avatarImageSnippets = [
       </div>`,
     },
   ];
-  

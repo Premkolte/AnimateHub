@@ -1,6 +1,7 @@
 export const couponSnippets = [
     {
       title: "Coupon Code Input",
+      tags: ['coupon', 'form', 'input', 'button', 'cta'],
       jsxCode: `(props) => {
         const [couponCode, setCouponCode] = React.useState("");
   
@@ -49,4 +50,3 @@ export const couponSnippets = [
       }`,
     },
   ];
-  

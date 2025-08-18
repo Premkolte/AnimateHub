@@ -23,6 +23,9 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearchQuery = useDebounce(searchQuery, 200);
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  
 
   const filteredButtons = useMemo(() => {
     if (!debouncedSearchQuery.trim()) {
@@ -42,6 +45,8 @@ function Dashboard() {
     setSearchQuery("");
     setActiveTab(0);
   }, []);
+
+  
 
   const handleKeyDown = useCallback((e) => {
     if (!debouncedSearchQuery.trim() || filteredButtons.length === 0) return;
@@ -102,6 +107,25 @@ function Dashboard() {
                 </svg>
               </button>
             )}
+          </div>
+
+          {/* Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-2 mt-4">
+            <button className="px-3 py-1 text-sm font-medium rounded-full bg-blue-600 text-white">
+            All
+            </button>
+          <button className="px-3 py-1 text-sm font-medium rounded-full bg-gray-200 dark:bg-secondary-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-secondary-600">
+            hover
+          </button>
+          <button className="px-3 py-1 text-sm font-medium rounded-full bg-gray-200 dark:bg-secondary-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-secondary-600">
+            slide
+          </button>
+          <button className="px-3 py-1 text-sm font-medium rounded-full bg-gray-200 dark:bg-secondary-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-secondary-600">
+            animation
+          </button>
+          <button className="px-3 py-1 text-sm font-medium rounded-full bg-gray-200 dark:bg-secondary-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-secondary-600">
+            form
+          </button>
           </div>
           
           {debouncedSearchQuery && (

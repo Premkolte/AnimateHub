@@ -2,6 +2,7 @@
 export const footerSnippets = [
     {
       title: "Simple Footer Snippet",
+      tags: ['footer', 'layout', 'basic'],
       jsxCode: `(props) => (
         <footer className="bg-gray-800 text-white py-4">
           <div className="container mx-auto text-center">
@@ -15,6 +16,7 @@ export const footerSnippets = [
     },
     {
       title: "Footer with Links Snippet",
+      tags: ['footer', 'layout', 'links', 'navigation'],
       jsxCode: `(props) => (
         <footer className="bg-gray-800 text-white py-4">
           <div className="container mx-auto text-center">
@@ -37,4 +39,3 @@ export const footerSnippets = [
       </footer>`,
     },
   ];
-  

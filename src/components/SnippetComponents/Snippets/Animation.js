@@ -1,9 +1,9 @@
 // Snippets/Animation.js
 
 export const animationSnippets = [
-    
     {
       title: 'Pulse Animation',
+      tags: ['animation', 'pulse', 'scale'],
       jsxCode: `(props) => (
         <div className="animate-pulse">
           <p className="text-lg font-bold">Pulse Animation Example</p>
@@ -28,6 +28,7 @@ export const animationSnippets = [
       </style>`
     },{
       title: 'Bounce Animation',
+      tags: ['animation', 'bounce', 'transform'],
       jsxCode: `(props) => (
         <div className="animate-bounce">
           <p className="text-lg font-bold">Bounce Animation Example</p>
@@ -49,4 +50,3 @@ export const animationSnippets = [
       </style>`
     }
   ];
-  
