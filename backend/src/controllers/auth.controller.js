@@ -4,6 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import crypto from "crypto";
 import User from "../models/user.model.js";
 import { sendVerificationEmail } from "../services/emailService.js";
+import sanatizeUserModelResponse from "../functions/sanatizeUserModelResponse.js";
 
 export const registerController = asyncHandler(async (req, res) => {
     const { username, email, fullName, password } = req.body;
@@ -12,14 +13,9 @@ export const registerController = asyncHandler(async (req, res) => {
         throw new ApiError(400, "All fields are required");
     }
 
-    const userWithEmail = await User.findOne({ email });
-    if (userWithEmail) {
-        throw new ApiError(400, "User already exists");
-    }
-
-    const userWithUsername = await User.findOne({ username });
-    if (userWithUsername) {
-        throw new ApiError(400, "A user already exists with this username");
+    const userWithEmailOrUsername = await User.findOne({ $or: [{ email }, { username }] });
+    if (userWithEmailOrUsername) {
+        throw new ApiError(400, "User already exists with this email or username.");
     }
 
     let user = new User({
@@ -40,8 +36,7 @@ export const registerController = asyncHandler(async (req, res) => {
 
     const accessToken = user.generateAccessToken();
 
-    // Fetch user without sensitive fields
-    user = await User.findById(user._id).select("-password -bio -website -role -avatarUrl -__v -_id -emailVerificationToken -emailVerificationExpires -createdAt -updatedAt -resetPasswordToken -resetPasswordExpires");
+    user = sanatizeUserModelResponse(user.toObject(), true)
 
     return res
         .cookie("accessToken", accessToken, {
@@ -61,7 +56,7 @@ export const loginController = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Both fields are required");
     }
 
-    const user = await User.findOne({ username });
+    let user = await User.findOne({ username });
     if (!user) {
         throw new ApiError(404, "User not found");
     }
@@ -73,7 +68,7 @@ export const loginController = asyncHandler(async (req, res) => {
 
     const accessToken = user.generateAccessToken();
 
-    const userObj = await User.findById(user._id).select("-password -bio -website -__v -_id -emailVerificationToken -emailVerificationExpires -createdAt -updatedAt -resetPasswordToken -resetPasswordExpires");
+    user = sanatizeUserModelResponse(user.toObject(), true)
 
     let message = "User logged in successfully";
     if (!user.isVerified) {
@@ -88,7 +83,7 @@ export const loginController = asyncHandler(async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         .status(200)
-        .json(new ApiResponse(200, message, { user: userObj, accessToken }));
+        .json(new ApiResponse(200, message, { user, accessToken }));
 });
 
 export const logoutController = asyncHandler(async (req, res) => {
@@ -128,7 +123,7 @@ export const updatePasswordController = asyncHandler(async (req, res) => {
 
     const accessToken = user.generateAccessToken();
 
-    const userObj = await User.findById(user._id).select("-password -__v -_id -emailVerificationToken -emailVerificationExpires -createdAt -updatedAt -resetPasswordToken -resetPasswordExpires");
+    user = sanatizeUserModelResponse(user.toObject(), true)
 
     return res
         .cookie("accessToken", accessToken, {
@@ -138,5 +133,5 @@ export const updatePasswordController = asyncHandler(async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         .status(200)
-        .json(new ApiResponse(200, "Password updated successfully", { user: userObj, accessToken }));
+        .json(new ApiResponse(200, "Password updated successfully", { user, accessToken }));
 });
