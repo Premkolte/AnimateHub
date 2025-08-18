@@ -90,7 +90,7 @@ const Contact = () => {
             {/* Response Time */}
             <div className="text-center p-4 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-pink-400 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
 
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-8 h-8 text-white" />
               </div>
 
@@ -105,7 +105,7 @@ const Contact = () => {
             {/* Happy Clients */}
             <div className="text-center p-4 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-pink-400 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
 
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600  rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-white" />
               </div>
 
@@ -122,7 +122,7 @@ const Contact = () => {
 
             <div className="text-center p-4 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-pink-400 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               
-              <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Shield className="w-8 h-8 text-white" />
               
               </div>
@@ -279,7 +279,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex justify-center items-center gap-3 w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 disabled:scale-100 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
+                  className="flex justify-center items-center gap-3 w-full px-8 py-4 bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 disabled:scale-100 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
                 >
 
                   {isSubmitting ? (

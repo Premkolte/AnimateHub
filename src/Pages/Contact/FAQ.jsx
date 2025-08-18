@@ -69,7 +69,10 @@ const FAQ = () => {
               </span>
 
               {/* Icon */}
-              <div className="flex-shrink-0 p-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 motion-reduce:group-hover:transform-none">
+
+
+              <div className="flex-shrink-0 p-2 rounded-full bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-6000 text-white transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 motion-reduce:group-hover:transform-none">
+
                 {openItems.has(index) ? (
                   <ChevronUp className="w-5 h-5" />
                 ) : (
