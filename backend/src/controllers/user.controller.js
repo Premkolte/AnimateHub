@@ -4,6 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import crypto from "crypto";
 import User from "../models/user.model.js";
 import { sendVerificationEmail, sendPasswordResetEmail } from "../services/emailService.js";
+import sanatizeUserModelResponse from "../functions/sanatizeUserModelResponse.js";
 
 export const verifyUserMailController = asyncHandler(async (req, res) => {
     const { token } = req.params;
@@ -12,10 +13,10 @@ export const verifyUserMailController = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Verification token is required");
     }
 
-    const user = await User.findOne({
+    let user = await User.findOne({
         emailVerificationToken: token,
         emailVerificationExpires: { $gt: Date.now() }
-    }).select("-password -__v -_id -emailVerificationToken -emailVerificationExpires -createdAt -updatedAt -resetPasswordToken -resetPasswordExpires");
+    })
 
     if (!user) {
         throw new ApiError(400, "Invalid or expired verification token");
@@ -28,6 +29,9 @@ export const verifyUserMailController = asyncHandler(async (req, res) => {
     await user.save();
 
     const accessToken = user.generateAccessToken();
+
+    // remove unwanted fields from the response
+    user = sanatizeUserModelResponse(user.toObject(), true)
 
     return res
         .status(200)
@@ -49,7 +53,7 @@ export const resendVerificationEmail = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Email is required");
     }
 
-    const user = await User.findOne({ email }).select("-password -__v -_id -emailVerificationToken -emailVerificationExpires -createdAt -updatedAt -resetPasswordToken -resetPasswordExpires");
+    let user = await User.findOne({ email })
 
     if (!user) {
         throw new ApiError(404, "User not found");
@@ -115,7 +119,7 @@ export const resetPassword = asyncHandler(async (req, res) => {
     const user = await User.findOne({
         resetPasswordToken: token,
         resetPasswordExpires: { $gt: Date.now() }
-    }).select("-password -__v -_id -emailVerificationToken -emailVerificationExpires -createdAt -updatedAt -resetPasswordToken -resetPasswordExpires");
+    });
 
     if (!user) {
         throw new ApiError(400, "Invalid or expired reset token");

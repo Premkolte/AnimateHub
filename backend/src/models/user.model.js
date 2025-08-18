@@ -27,7 +27,7 @@ const userSchema = new Schema({
         type: Date,
         default: null
     },
-    
+
     resetPasswordToken: {
         type: String,
         default: null
@@ -35,13 +35,6 @@ const userSchema = new Schema({
     resetPasswordExpires: {
         type: Date,
         default: null
-    },
-
-    // For UI library role
-    role: {
-        type: String,
-        enum: ["user", "contributor", "admin"],
-        default: "user"
     },
 
     // Profile customization
@@ -57,6 +50,37 @@ const userSchema = new Schema({
     website: {
         type: String,
         default: ""
+    },
+
+    // Social Links
+    github: {
+        type: String,
+        default: ""
+    },
+    linkedin: {
+        type: String,
+        default: ""
+    },
+    twitter: {
+        type: String,
+        default: ""
+    },
+
+    // Total Contributions
+    totalContributions: {
+        type: Number,
+        default: 0
+    },
+    pendingSubmissions: {
+        type: Number,
+        default: 0
+    },
+
+    // For UI library role
+    role: {
+        type: String,
+        enum: ["user", "contributor", "admin"],
+        default: "user"
     },
 
 
