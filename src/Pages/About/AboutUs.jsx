@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion"; // Import the useReducedMotion hook
 import GitHubStats from "./GitHubStats";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,20 +9,42 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const About = () => {
+  const shouldReduceMotion = useReducedMotion(); // This hook returns true if the user prefers reduced motion
+
   const techUsed = [
     { icon: "⚛️", name: "React 18", desc: "Reusable UI & hooks" },
     { icon: "⚡", name: "Vite 5", desc: "Blazing fast dev server" },
     { icon: "🎨", name: "Tailwind CSS 3", desc: "Utility-first styling" },
     { icon: "🎭", name: "Framer Motion", desc: "Declarative animations" },
   ];
-const [code, setCode] = useState(
-`<motion.div animate={{ x: 100 }} transition={{ duration: 2 }} />`
+  const [code, setCode] = useState(
+    `<motion.div animate={{ x: 100 }} transition={{ duration: 2 }} />`
   );
+
+  // Animation variants for Framer Motion
+  const fadeInLeft = {
+    initial: { x: -50, opacity: 0 },
+    animate: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: shouldReduceMotion ? 0 : 0.8 }, // Disable animation if reduced motion is preferred
+    },
+  };
+
+  const fadeInRight = {
+    initial: { x: 50, opacity: 0 },
+    animate: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: shouldReduceMotion ? 0 : 0.8 }, // Disable animation
+    },
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.6 }} // Disable animation
       className="min-h-screen w-full bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white"
     >
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-32">
@@ -30,9 +52,9 @@ const [code, setCode] = useState(
         <section className="flex flex-col md:flex-row items-center gap-12">
           <motion.div
             className="flex-1 space-y-6"
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            variants={fadeInLeft}
+            initial="initial"
+            animate="animate"
           >
             <h1 className="text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-500">
               About AnimateHub
@@ -42,49 +64,48 @@ const [code, setCode] = useState(
               creating beautiful, reusable animations for modern web
               applications.
             </p>
-            <div className="inline-block px-6 py-2 text-sm font-semibold rounded-full bg-gradient-to-r from-primary-600 to-purple-600 text-white dark:from-accent-600 dark:to-purple-400 animate-pulse shadow-lg">
+            <div className="inline-block px-6 py-2 text-sm font-semibold rounded-full bg-gradient-to-r from-primary-600 to-purple-600 text-white dark:from-accent-600 dark:to-purple-400 animate-pulse motion-reduce:animate-none shadow-lg">
               100% OPEN-SOURCE
             </div>
           </motion.div>
-       <motion.div
-      className="flex-1 relative w-full h-64 md:h-96 bg-gradient-to-r from-purple-200 to-indigo-200 dark:from-purple-700 dark:to-indigo-700 rounded-3xl shadow-xl overflow-auto flex flex-col p-4"
-      initial={{ x: 50, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      {/* Background shapes */}
-      <div className="absolute top-4 left-4 w-24 h-24 bg-purple-300 dark:bg-purple-600 rounded-full blur-3xl opacity-40"></div>
-      <div className="absolute bottom-6 right-6 w-32 h-32 bg-indigo-300 dark:bg-indigo-600 rounded-full blur-3xl opacity-30"></div>
+          <motion.div
+            className="flex-1 relative w-full h-64 md:h-96 bg-gradient-to-r from-purple-200 to-indigo-200 dark:from-purple-700 dark:to-indigo-700 rounded-3xl shadow-xl overflow-auto flex flex-col p-4"
+            variants={fadeInRight}
+            initial="initial"
+            animate="animate"
+          >
+            {/* Background shapes */}
+            <div className="absolute top-4 left-4 w-24 h-24 bg-purple-300 dark:bg-purple-600 rounded-full blur-3xl opacity-40"></div>
+            <div className="absolute bottom-6 right-6 w-32 h-32 bg-indigo-300 dark:bg-indigo-600 rounded-full blur-3xl opacity-30"></div>
 
-      {/* Editable code area */}
-      <textarea
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        className="relative text-sm p-4 rounded-xl bg-white dark:bg-secondary-800 text-black dark:text-white w-full h-full resize-none overflow-auto focus:outline-none"
-        placeholder="Type anything here..."
-      />
+            {/* Editable code area */}
+            <textarea
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              className="relative text-sm p-4 rounded-xl bg-white dark:bg-secondary-800 text-black dark:text-white w-full h-full resize-none overflow-auto focus:outline-none"
+              placeholder="Type anything here..."
+            />
 
-      {/* Display typed code safely */}
-      <pre className="mt-2 p-2 bg-gray-100 dark:bg-gray-900 text-sm rounded overflow-auto">
-        {code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-      </pre>
+            {/* Display typed code safely */}
+            <pre className="mt-2 p-2 bg-gray-100 dark:bg-gray-900 text-sm rounded overflow-auto">
+              {code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+            </pre>
 
-      {/* Clear button */}
-      <button
-        onClick={() => setCode("")}
-        className="mt-2 self-end px-4 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 transition"
-      >
-        Clear
-      </button>
-    </motion.div>
-
+            {/* Clear button */}
+            <button
+              onClick={() => setCode("")}
+              className="mt-2 self-end px-4 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 transition motion-reduce:transition-none"
+            >
+              Clear
+            </button>
+          </motion.div>
         </section>
 
         {/* Why Choose Us & What We Offer - Staggered overlapping cards */}
         <section className="relative flex flex-col md:flex-row gap-12">
           <motion.div
             className="md:w-1/2 bg-gradient-to-br from-purple-50 to-white dark:from-secondary-800 dark:to-secondary-700 p-8 rounded-3xl shadow-xl border border-purple-200 dark:border-secondary-700 -mt-12 md:mt-0 z-10"
-            whileHover={{ scale: 1.05 }}
+            whileHover={shouldReduceMotion ? {} : { scale: 1.05 }} // Disable hover animation
           >
             <h2 className="text-2xl font-bold flex items-center gap-2 mb-4 text-purple-700 dark:text-purple-400">
               ✨ Why Choose Us?
@@ -113,7 +134,7 @@ const [code, setCode] = useState(
 
           <motion.div
             className="md:w-1/2 bg-gradient-to-br from-indigo-50 to-white dark:from-secondary-800 dark:to-secondary-700 p-8 rounded-3xl shadow-xl border border-indigo-200 dark:border-secondary-700 translate-y-12 md:-translate-y-6 z-0"
-            whileHover={{ scale: 1.05 }}
+            whileHover={shouldReduceMotion ? {} : { scale: 1.05 }} // Disable hover animation
           >
             <h2 className="text-2xl font-bold flex items-center gap-2 mb-4 text-indigo-700 dark:text-indigo-400">
               🚀 What We Offer
@@ -146,7 +167,7 @@ const [code, setCode] = useState(
             {techUsed.map((tech) => (
               <div
                 key={tech.name}
-                className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full text-center"
+                className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full text-center motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 <span className="text-4xl">{tech.icon}</span>
                 <h3 className="mt-3 text-lg font-semibold text-blue-600 dark:text-blue-400">
@@ -161,9 +182,7 @@ const [code, setCode] = useState(
         {/* Community & CTA - Alternating layout */}
         <section className="flex flex-col gap-8">
           {/* Join Community Card */}
-          <motion.div
-            className="p-8 rounded-3xl text-center bg-gradient-to-tr from-purple-50 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-purple-200 dark:border-secondary-700 w-full"
-          >
+          <motion.div className="p-8 rounded-3xl text-center bg-gradient-to-tr from-purple-50 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-purple-200 dark:border-secondary-700 w-full">
             <h2 className="text-2xl text-center font-bold mb-4 text-purple-700 dark:text-purple-400 gap-2">
               👥 Join Community
             </h2>
@@ -184,9 +203,7 @@ const [code, setCode] = useState(
           </motion.div>
 
           {/* Ready to Start Card */}
-          <motion.div
-            className="p-8 rounded-3xl text-center bg-gradient-to-tr from-indigo-50 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-indigo-200 dark:border-secondary-700 w-full"
-          >
+          <motion.div className="p-8 rounded-3xl text-center bg-gradient-to-tr from-indigo-50 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-indigo-200 dark:border-secondary-700 w-full">
             <h2 className="text-2xl font-bold mb-4 text-indigo-700 dark:text-indigo-400">
               Ready to Start?
             </h2>
@@ -197,7 +214,7 @@ const [code, setCode] = useState(
               {/* Explore Components Button with moving gradient */}
               <a
                 href="/explore"
-                className="flex-1 text-center py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 bg-[length:200%_200%] animate-gradient-x hover:scale-105 transform transition-all"
+                className="flex-1 text-center py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 bg-[length:200%_200%] animate-gradient-x motion-reduce:animate-none hover:scale-105 transform transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 🚀 Explore Components
               </a>
@@ -207,18 +224,16 @@ const [code, setCode] = useState(
                 href="https://github.com/Premkolte/AnimateHub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 text-center py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 via-blue-300 to-indigo-600 bg-[length:200%_200%] animate-gradient-x hover:scale-105 transform transition-all"
+                className="flex-1 text-center py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 via-blue-300 to-indigo-600 bg-[length:200%_200%] animate-gradient-x motion-reduce:animate-none hover:scale-105 transform transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
               >
                 ⭐ Star on GitHub
               </a>
             </div>
           </motion.div>
         </section>
-        
-        
+
         {/* {Github Info section} */}
         <GitHubStats />
-
 
         {/* Social Media */}
         <section className="text-center p-8 rounded-3xl bg-gradient-to-tr from-purple-200 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-purple-500 dark:border-secondary-700">
@@ -232,21 +247,21 @@ const [code, setCode] = useState(
             <a
               href="https://twitter.com/animatehub"
               aria-label="Twitter"
-              className="hover:text-blue-500 transform hover:scale-110 transition-all"
+              className="hover:text-blue-500 transform hover:scale-110 transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
             >
               <FontAwesomeIcon icon={faTwitter} size="2x" />
             </a>
             <a
               href="https://facebook.com/animatehub"
               aria-label="Facebook"
-              className="hover:text-blue-700 transform hover:scale-110 transition-all"
+              className="hover:text-blue-700 transform hover:scale-110 transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
             >
               <FontAwesomeIcon icon={faFacebook} size="2x" />
             </a>
             <a
               href="https://linkedin.com/company/animatehub"
               aria-label="LinkedIn"
-              className="hover:text-blue-800 transform hover:scale-110 transition-all"
+              className="hover:text-blue-800 transform hover:scale-110 transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
             >
               <FontAwesomeIcon icon={faLinkedin} size="2x" />
             </a>

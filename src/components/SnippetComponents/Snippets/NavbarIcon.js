@@ -5,8 +5,8 @@ export const navbarIconSnippets = [
       title: 'Search Icon (Animated)',
       jsxCode: `() => (
         <div className="flex items-center">
-          <input type="text" placeholder="Search..." className="border p-2 rounded-lg focus:outline-none focus:border-blue-500 transition-all duration-300" />
-          <button className="ml-2 bg-blue-500 text-white p-2 rounded-lg transition-all duration-300 transform hover:scale-110">
+          <input type="text" placeholder="Search..." className="border p-2 rounded-lg focus:outline-none focus:border-blue-500 transition-all duration-300 motion-reduce:transition-none" />
+          <button className="ml-2 bg-blue-500 text-white p-2 rounded-lg transition-all duration-300 transform hover:scale-110 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -44,7 +44,7 @@ export const navbarIconSnippets = [
       title: 'Notification Icon (Animated)',
       jsxCode: `() => (
         <div className="relative">
-          <button className="bg-blue-500 text-white p-2 rounded-full transition-all duration-300 transform hover:rotate-12">
+          <button className="bg-blue-500 text-white p-2 rounded-full transition-all duration-300 transform hover:rotate-12 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -77,7 +77,7 @@ export const navbarIconSnippets = [
       jsxCode: `() => (
         <div className="flex items-center">
           <div className="relative">
-            <button className="bg-blue-500 text-white p-2 rounded-full transition-all duration-300 transform hover:rotate-12">
+            <button className="bg-blue-500 text-white p-2 rounded-full transition-all duration-300 transform hover:rotate-12 motion-reduce:transition-none motion-reduce:hover:transform-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -120,7 +120,7 @@ export const navbarIconSnippets = [
     {
       title: 'Menu Icon (Animated)',
       jsxCode: `() => (
-        <button className="p-2 bg-blue-500 text-white rounded-lg transition-all duration-300 transform hover:rotate-90">
+        <button className="p-2 bg-blue-500 text-white rounded-lg transition-all duration-300 transform hover:rotate-90 motion-reduce:transition-none motion-reduce:hover:transform-none">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -145,4 +145,3 @@ export const navbarIconSnippets = [
     }
     // Add more icon snippets as needed
   ];
-  

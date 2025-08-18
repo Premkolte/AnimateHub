@@ -130,10 +130,10 @@ const HoverTooltip = () => {
       
       <div className="flex justify-center py-8">
         <div className="relative inline-block group">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors motion-reduce:transition-none">
             Hover me
           </button>
-          <div className={\`absolute z-10 px-3 py-2 text-sm text-white bg-gray-900 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap \${
+          <div className={\`absolute z-10 px-3 py-2 text-sm text-white bg-gray-900 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 motion-reduce:transition-none pointer-events-none whitespace-nowrap \${
             position === 'top' ? '-top-10 left-1/2 transform -translate-x-1/2 -translate-y-1' :
             position === 'bottom' ? '-bottom-10 left-1/2 transform -translate-x-1/2 translate-y-1' :
             position === 'left' ? 'top-1/2 -left-3 transform -translate-x-full -translate-y-1/2' :
@@ -151,7 +151,7 @@ const HoverTooltip = () => {
       </div>
     </div>
   );
-};`
+};`,
   },
   {
     title: "Click Tooltip",
@@ -305,13 +305,13 @@ const ClickTooltip = () => {
         <div className="relative" ref={tooltipRef}>
           <button
             onClick={toggleTooltip}
-            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors motion-reduce:transition-none"
           >
             Click me
           </button>
           
           {isOpen && (
-            <div className={\`absolute z-20 bg-gray-700 text-white p-4 rounded-lg shadow-xl min-w-[200px] transform transition-all duration-200 \${
+            <div className={\`absolute z-20 bg-gray-700 text-white p-4 rounded-lg shadow-xl min-w-[200px] transform transition-all duration-200 motion-reduce:transition-none motion-reduce:transform-none \${
               position === 'top' 
                 ? '-top-3 left-1/2 -translate-x-1/2 -translate-y-full' 
                 : '-bottom-3 left-1/2 -translate-x-1/2 translate-y-full'
@@ -339,7 +339,7 @@ const ClickTooltip = () => {
       </div>
     </div>
   );
-};`
+};`,
   },
   {
     title: "Rich Tooltip",
@@ -488,7 +488,7 @@ const RichTooltip = () => {
           <button
             onMouseEnter={() => showTooltip(tooltip.id)}
             onMouseLeave={hideTooltip}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-200 motion-reduce:transition-none shadow-lg hover:shadow-xl transform hover:scale-105 motion-reduce:hover:transform-none"
           >
             <span className="text-xl">{tooltip.icon}</span>
           </button>
@@ -497,7 +497,7 @@ const RichTooltip = () => {
             <div
               onMouseEnter={keepTooltip}
               onMouseLeave={hideTooltip}
-              className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 bg-gradient-to-br from-indigo-600 to-purple-700 text-white p-4 rounded-xl shadow-2xl min-w-[250px] z-20 opacity-0 animate-fadeIn"
+              className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 bg-gradient-to-br from-indigo-600 to-purple-700 text-white p-4 rounded-xl shadow-2xl min-w-[250px] z-20 opacity-0 animate-fadeIn motion-reduce:animate-none motion-reduce:transform-none"
               style={{
                 animation: 'fadeInUp 0.3s ease-out forwards'
               }}
@@ -534,6 +534,6 @@ const RichTooltip = () => {
       \`}</style>
     </div>
   );
-};`
-  }
+};`,
+  },
 ];

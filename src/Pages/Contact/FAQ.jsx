@@ -40,8 +40,8 @@ const FAQ = () => {
       <div className="text-center mb-12">
         <h2
           className="text-3xl md:text-4xl font-bold mb-4 
-               bg-black dark:bg-gradient-to-r dark:from-blue-600 dark:via-purple-600 dark:to-indigo-600 
-               bg-clip-text text-transparent"
+                   bg-black dark:bg-gradient-to-r dark:from-blue-600 dark:via-purple-600 dark:to-indigo-600 
+                   bg-clip-text text-transparent"
         >
           Frequently Asked Questions
         </h2>
@@ -50,7 +50,6 @@ const FAQ = () => {
         <p className="text-gray-600 dark:text-gray-600 text-lg">
           Find answers to common questions about our services
         </p>
-
       </div>
 
       {/* FAQ Items List */}
@@ -58,33 +57,33 @@ const FAQ = () => {
         {faqData.map((item, index) => (
           <div
             key={index}
-            className="group bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-pink-400 dark:border-gray-700 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+            className="group bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-pink-400 dark:border-gray-700 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 motion-reduce:transition-none"
           >
             {/* FAQ Question Button */}
             <button
               onClick={() => toggleItem(index)}
-              className="w-full px-8 py-6 text-left flex items-center justify-between focus:outline-none focus:ring-4 focus:ring-blue-500/20 rounded-2xl transition-all duration-300 hover:bg-white/80 dark:hover:bg-gray-800/80"
+              className="w-full px-8 py-6 text-left flex items-center justify-between focus:outline-none focus:ring-4 focus:ring-blue-500/20 rounded-2xl transition-all duration-300 motion-reduce:transition-none hover:bg-white/80 dark:hover:bg-gray-800/80"
             >
               <span className="font-semibold text-gray-900 dark:text-white text-lg pr-4">
                 {item.question}
               </span>
 
               {/* Icon */}
-              <div className="flex-shrink-0 p-2 rounded-full bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600 text-white transition-transform duration-300 group-hover:scale-110">
+
+
+              <div className="flex-shrink-0 p-2 rounded-full bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-6000 text-white transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 motion-reduce:group-hover:transform-none">
+
                 {openItems.has(index) ? (
                   <ChevronUp className="w-5 h-5" />
                 ) : (
                   <ChevronDown className="w-5 h-5" />
                 )}
               </div>
-
-              
             </button>
 
             {/* FAQ Answer */}
-
             <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out ${
+              className={`overflow-hidden transition-all duration-500 ease-in-out motion-reduce:transition-none ${
                 openItems.has(index)
                   ? "max-h-96 opacity-100"
                   : "max-h-0 opacity-0"
@@ -99,16 +98,11 @@ const FAQ = () => {
                   className="text-gray-700 dark:text-gray-300 leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: item.answer }}
                 ></p>
-
               </div>
             </div>
-
-            {/* End of FAQ Item */}
           </div>
         ))}
       </div>
-
-      {/* Extra spacing at bottom */}
     </div>
   );
 };
