@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion"; // Import the useReducedMotion hook
 import GitHubStats from "./GitHubStats";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Journey from "./Journey";
 import {
   faTwitter,
   faFacebook,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
+import CoreTeam from "./CoreTeam";
+import Insights from "./Insights";
 
 const About = () => {
   const shouldReduceMotion = useReducedMotion(); // This hook returns true if the user prefers reduced motion
@@ -18,7 +21,7 @@ const About = () => {
     { icon: "🎭", name: "Framer Motion", desc: "Declarative animations" },
   ];
   const [code, setCode] = useState(
-    `<motion.div animate={{ x: 100 }} transition={{ duration: 2 }} />`
+    `Type something excited!`
   );
 
   // Animation variants for Framer Motion
@@ -100,6 +103,69 @@ const About = () => {
             </button>
           </motion.div>
         </section>
+        <section className="flex w-full min-h-[300px] rounded-2xl shadow-xl overflow-hidden">
+  {/* Left div */}
+  <motion.div
+    className="flex-1 bg-gradient-to-br from-purple-700 to-pink-600 dark:from-purple-900 dark:to-pink-800 text-white flex items-center justify-center p-8"
+    whileHover={{ scale: 1.05 }}
+    transition={{ type: "spring", stiffness: 200 }}
+  >
+    <h2 className="text-3xl font-extrabold tracking-wide">Mission</h2>
+  </motion.div>
+
+  {/* Right div */}
+  <motion.div
+    className="flex-[3] bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 flex items-center p-8"
+    initial={{ opacity: 0, x: 50 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+  >
+    <p className="text-lg leading-relaxed">
+      Our mission is to empower developers and creators by providing
+      <span className="font-semibold text-purple-600 dark:text-purple-400">
+        {" "}
+        ready-to-use HTML, CSS, JS, and React components
+      </span>
+      for stunning animations, making modern web design accessible, fun,
+      and effortless.
+    </p>
+  </motion.div>
+</section>
+
+        <section className="flex w-full min-h-[300px] rounded-2xl shadow-xl overflow-hidden">
+  {/* Left div */}
+  <motion.div
+    className="flex-[3] bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 flex items-center p-8"
+    initial={{ opacity: 0, x: 50 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+  >
+    <p className="text-lg leading-relaxed">
+      Our vision is to create a community where developers and designers can
+      <span className="font-semibold text-purple-600 dark:text-purple-400">
+        {" "}
+        innovate with ready-made animation components
+      </span>
+      , learn from each other, and bring their creative ideas to life with
+      modern, effortless web design.
+    </p>
+  </motion.div>
+
+  {/* Right div */}
+  <motion.div
+    className="flex-1 bg-gradient-to-br from-purple-700 to-pink-600 dark:from-purple-900 dark:to-pink-800 text-white flex items-center justify-center p-8"
+    whileHover={{ scale: 1.05 }}
+    transition={{ type: "spring", stiffness: 200 }}
+  >
+    <h2 className="text-3xl font-extrabold tracking-wide">Vision</h2>
+  </motion.div>
+</section>
+
+        <Journey></Journey>
+
+        <CoreTeam></CoreTeam>
+
+        <Insights></Insights>
 
         {/* Why Choose Us & What We Offer - Staggered overlapping cards */}
         <section className="relative flex flex-col md:flex-row gap-12">
@@ -234,6 +300,40 @@ const About = () => {
 
         {/* {Github Info section} */}
         <GitHubStats />
+
+        <section className="w-full py-20 bg-gradient-to-r from-blue-300 to-pink-300 dark:from-gray-800 dark:to-purple-900 text-black dark:text-white rounded-3xl text-center px-6 transition-colors duration-500">
+  {/* Tagline */}
+  <h2 className="text-3xl md:text-3xl font-extrabold mb-4">
+    Ready to Begin Your AnimateHub Adventure?
+  </h2>
+
+  {/* Subheading / Description */}
+  <p className="text-base text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+    Explore creative animation components, enhance your projects, and
+    join a vibrant developer community. Your journey starts here!
+  </p>
+
+  {/* Buttons */}
+  <div className="flex flex-col sm:flex-row justify-center gap-4">
+    <a
+      href="https://animate-hub.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="px-6 py-3 bg-white dark:bg-gray-100 text-purple-700 dark:text-purple-700 font-semibold rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-200 transition"
+    >
+      Visit AnimateHub
+    </a>
+
+    <a
+      href="https://github.com/Premkolte/AnimateHub"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="px-6 py-3 bg-transparent border-2 border-white dark:border-gray-300 text-white dark:text-gray-300 font-semibold rounded-full shadow-lg hover:bg-white hover:text-purple-700 dark:hover:bg-gray-200 dark:hover:text-purple-700 transition"
+    >
+      Explore on GitHub
+    </a>
+  </div>
+</section>
 
         {/* Social Media */}
         <section className="text-center p-8 rounded-3xl bg-gradient-to-tr from-purple-200 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-purple-500 dark:border-secondary-700">
