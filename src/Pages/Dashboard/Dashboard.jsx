@@ -46,8 +46,6 @@ function Dashboard() {
     setActiveTab(0);
   }, []);
 
-  
-
   const handleKeyDown = useCallback((e) => {
     if (!debouncedSearchQuery.trim() || filteredButtons.length === 0) return;
     const currentIndex = filteredButtons.findIndex(({ originalIndex }) => originalIndex === activeTab);
@@ -84,7 +82,7 @@ function Dashboard() {
       <div className="container mx-auto px-4 pt-8">
         <WelcomeMessage />
         {/* Search Bar */}
-        <div className="max-w-md mx-auto mb-6">
+        {/* <div className="max-w-md mx-auto mb-6">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FaSearch className="h-4 w-4 text-gray-400 dark:text-gray-500" />
@@ -109,25 +107,6 @@ function Dashboard() {
             )}
           </div>
 
-          {/* Filter Buttons */}
-          <div className="flex flex-wrap justify-center gap-2 mt-4">
-            <button className="px-3 py-1 text-sm font-medium rounded-full bg-blue-600 text-white">
-            All
-            </button>
-          <button className="px-3 py-1 text-sm font-medium rounded-full bg-gray-200 dark:bg-secondary-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-secondary-600">
-            hover
-          </button>
-          <button className="px-3 py-1 text-sm font-medium rounded-full bg-gray-200 dark:bg-secondary-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-secondary-600">
-            slide
-          </button>
-          <button className="px-3 py-1 text-sm font-medium rounded-full bg-gray-200 dark:bg-secondary-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-secondary-600">
-            animation
-          </button>
-          <button className="px-3 py-1 text-sm font-medium rounded-full bg-gray-200 dark:bg-secondary-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-secondary-600">
-            form
-          </button>
-          </div>
-          
           {debouncedSearchQuery && (
             <div className="mt-2 text-sm text-gray-600 dark:text-gray-400 text-center">
               {filteredButtons.length > 0 
@@ -141,7 +120,7 @@ function Dashboard() {
               )}
             </div>
           )}
-        </div>
+        </div> */}
       </div>
       <div className="h-screen flex flex-row">
         <SideBar 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "../UI/Modal";
 import { accordionSnippets } from "./Snippets/Accordion";
+import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
 
 // Functional Accordion Components
 const BasicAccordion = () => {
