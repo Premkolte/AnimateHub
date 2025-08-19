@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import DarkModeToggle from "../UI/DarkModeToggle";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
@@ -9,8 +9,6 @@ import { useAuthStore } from "../../store/authStore";
 import {
   SignedIn,
   SignedOut,
-  UserButton,
-  useUser,
   useClerk,
 } from "@clerk/clerk-react";
 import "../layout/Navbar.css";
@@ -19,6 +17,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { signOut } = useClerk();
   const { favorites } = useFavorites();
   const { currentUser, logout } = useAuthStore();
   const [language, setLanguage] = useState("en");
@@ -148,11 +148,12 @@ const Navbar = () => {
             {/* Desktop Navigation */}
             <div className="hidden xl:flex items-center space-x-1 xl:space-x-2">
               {navLinks.map((item, index) => {
-                const isActive = location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`;
+                const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+                const isActive = location.pathname === path;
                 return (
                   <Link
                     key={item}
-                    to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                    to={path}
                     onClick={closeMenu}
                     className={`
                       relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
@@ -270,7 +271,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Button */}
-              <button
+            <button
               onClick={toggleMenu}
               className={`xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${
                 scrolled 
@@ -290,7 +291,7 @@ const Navbar = () => {
                   ${isOpen ? 'opacity-0' : ''}
                 `} />
                 <span className={`
-                  absolute top-4.5 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
+                  absolute top-[18px] left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
                   ${scrolled ? 'bg-gray-700 dark:bg-gray-300' : 'bg-white'}
                   ${isOpen ? '-rotate-45 -translate-y-2' : ''}
                 `} />
@@ -298,7 +299,6 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-
         <div id="google_translate_element" style={{ display: "none" }}></div>
       </nav>
 
@@ -333,11 +333,12 @@ const Navbar = () => {
           {/* Mobile Navigation Links */}
           <div className="flex-1 px-6 py-4 space-y-2 overflow-y-auto">
             {navLinks.map((item, index) => {
-              const isActive = location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`;
+              const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+              const isActive = location.pathname === path;
               return (
                 <Link
                   key={item}
-                  to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                  to={path}
                   onClick={closeMenu}
                   className={`
                     flex items-center px-4 py-3 rounded-xl transition-all duration-300
@@ -377,7 +378,6 @@ const Navbar = () => {
                     </span>
                   )}
                 </Link>
-
                 <button
                   onClick={() => {
                     signOut({ redirectUrl: "/" });
@@ -390,7 +390,6 @@ const Navbar = () => {
                   Sign Out
                 </button>
               </SignedIn>
-
               <SignedOut>
                 <Link
                   to="/sign-in"
@@ -419,7 +418,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes slideInRight {
           from {
             opacity: 0;
