@@ -46,8 +46,6 @@ function Dashboard() {
     setActiveTab(0);
   }, []);
 
-  
-
   const handleKeyDown = useCallback((e) => {
     if (!debouncedSearchQuery.trim() || filteredButtons.length === 0) return;
     const currentIndex = filteredButtons.findIndex(({ originalIndex }) => originalIndex === activeTab);
