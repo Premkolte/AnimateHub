@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { IoMdMenu, IoMdClose } from "react-icons/io"; // Not used now but imported
+import { useState, useEffect } from "react";
 import { Buttons } from "./Buttons"; // Importing button list from Buttons.js
 import { useNavigate } from "react-router-dom"; // For navigating to different routes
 import { PanelLeft, PanelRight, Search, Command, Sparkles } from "lucide-react"; // Enhanced icons
@@ -11,15 +10,46 @@ import { PanelLeft, PanelRight, Search, Command, Sparkles } from "lucide-react";
  * - Micro-interactions and smooth transitions
  * - Improved accessibility and visual hierarchy
  * - Advanced gradient effects and backdrop blur
+ * - Integrated search functionality
  */
-function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
+function SideBar({ activeTab, setActiveTab }) {
   // State to manage open/close for mobile sidebar
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  // Search functionality state
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredButtons, setFilteredButtons] = useState([]);
 
   // Hook to navigate programmatically to routes
   const navigate = useNavigate();
+
+  /**
+   * Handle search input changes
+   */
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    
+    if (query.trim() === "") {
+      setFilteredButtons([]);
+    } else {
+      const filtered = Buttons.map((button, index) => ({ button, originalIndex: index }))
+        .filter(({ button }) => 
+          button.toLowerCase().includes(query.toLowerCase())
+        );
+      setFilteredButtons(filtered);
+    }
+  };
+
+  /**
+   * Clear search functionality
+   */
+  const clearSearch = () => {
+    setSearchQuery("");
+    setFilteredButtons([]);
+  };
 
   /**
    * Enhanced mouse tracking for advanced hover effects
@@ -91,7 +121,7 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
   return (
     <>
       {/* ========== Enhanced Mobile Toggle Button ========== */}
-      <div className="lg:hidden fixed top-[15%] right-4 -translate-y-1/2 z-50">
+      <div className="lg:hidden fixed top-[16%] right-4 -translate-y-1/2 z-50">
         <button
           className="group relative flex items-center justify-center rounded-2xl p-3 bg-gradient-to-br from-purple-600 via-purple-700 to-blue-600 text-white shadow-2xl hover:shadow-purple-500/25 hover:scale-110 active:scale-95 transition-all duration-300 backdrop-blur-sm border border-white/20"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -130,7 +160,7 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
         hover:shadow-purple-500/10 dark:hover:shadow-purple-400/10`}
         style={{
           maxHeight: "100vh",
-          width: "280px", // Slightly wider for better content spacing
+          width: "320px", // Slightly wider for better content spacing
         }}
       >
         {/* Animated gradient border */}
@@ -139,7 +169,7 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
         {/* Sidebar Inner Wrapper */}
         <div className="relative p-6 h-full flex flex-col justify-between">
           {/* ========== Header Section ========== */}
-          <div className="mb-6">
+          <div className="mb-6 space-y-4">
             {/* Enhanced "My Snippets" Button */}
             <button
               className="group relative bg-gradient-to-r from-blue-500 via-purple-600 to-indigo-600 text-white py-3 px-5 rounded-2xl text-sm font-semibold shadow-lg hover:shadow-xl hover:shadow-purple-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 w-full overflow-hidden"
@@ -157,6 +187,59 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
                 <span>My Snippets</span>
               </div>
             </button>
+
+            {/* ========== Enhanced Search Input ========== */}
+            <div className="relative">
+              {/* Search Icon */}
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                <Search className="h-4 w-4 text-gray-400 dark:text-gray-500 transition-colors duration-200" />
+              </div>
+              
+              {/* Search Input */}
+              <input
+                type="text"
+                placeholder="Search components..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="block w-full pl-10 pr-10 py-3 border border-gray-300/50 dark:border-secondary-600/50 rounded-xl 
+                bg-white/70 dark:bg-secondary-800/70 backdrop-blur-sm
+                text-secondary-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 
+                focus:outline-none focus:ring-2 focus:ring-purple-500/50 dark:focus:ring-purple-400/50 
+                focus:border-purple-500/50 dark:focus:border-purple-400/50 focus:bg-white/90 dark:focus:bg-secondary-800/90
+                hover:border-gray-400/50 dark:hover:border-secondary-500/50
+                transition-all duration-300 text-sm shadow-sm hover:shadow-md focus:shadow-lg"
+              />
+              
+              {/* Clear Button */}
+              {searchQuery && (
+                <button
+                  onClick={clearSearch}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 
+                  hover:bg-gray-100/50 dark:hover:bg-secondary-700/50 rounded-r-xl transition-all duration-200 z-10
+                  active:scale-95"
+                  title="Clear search"
+                >
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+              
+              {/* Animated border on focus */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 opacity-0 hover:opacity-30 focus-within:opacity-50 transition-opacity duration-300 pointer-events-none"></div>
+            </div>
+
+            {/* Search Results Counter */}
+            {searchQuery && (
+              <div className="text-xs text-gray-500 dark:text-gray-400 px-2">
+                {buttonsToShow.length} component{buttonsToShow.length !== 1 ? 's' : ''} found
+                {searchQuery && (
+                  <span className="ml-2 px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-lg font-medium">
+                    "{searchQuery}"
+                  </span>
+                )}
+              </div>
+            )}
           </div>
 
           {/* ========== Enhanced Buttons Section ========== */}
@@ -166,11 +249,11 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
                 <button
                   key={originalIndex}
                   className={`group relative block text-left w-full py-3 px-4 text-sm font-medium transition-all duration-300 overflow-hidden rounded-xl backdrop-blur-sm
-        ${
-          activeTab === originalIndex
-            ? "bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 text-white shadow-lg shadow-purple-500/30 scale-[1.02] border border-purple-400/50"
-            : "bg-white/50 dark:bg-secondary-800/50 text-secondary-900 dark:text-gray-200 hover:bg-white/70 dark:hover:bg-secondary-800/70 hover:scale-[1.01] border border-transparent hover:border-purple-300/30 dark:hover:border-purple-600/30"
-        }`}
+                  ${
+                    activeTab === originalIndex
+                      ? "bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 text-white shadow-lg shadow-purple-500/30 scale-[1.02] border border-purple-400/50"
+                      : "bg-white/50 dark:bg-secondary-800/50 text-secondary-900 dark:text-gray-200 hover:bg-white/70 dark:hover:bg-secondary-800/70 hover:scale-[1.01] border border-transparent hover:border-purple-300/30 dark:hover:border-purple-600/30"
+                  }`}
                   onClick={() => handleTabClick(originalIndex)}
                   onMouseMove={(e) => handleMouseMove(e, originalIndex)}
                   onMouseLeave={() => setHoveredIndex(null)}
@@ -219,7 +302,17 @@ function SideBar({ activeTab, setActiveTab, filteredButtons, searchQuery }) {
                 <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-secondary-800 dark:to-secondary-700 rounded-2xl p-6 border border-gray-200/50 dark:border-secondary-600/50">
                   <Search className="mx-auto mb-3 text-gray-400 dark:text-gray-500" size={32} />
                   <p className="text-gray-600 dark:text-gray-300 font-medium mb-1">No components found</p>
-                  <p className="text-gray-500 dark:text-gray-400 text-xs">Try a different search term</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs">
+                    {searchQuery ? `No results for "${searchQuery}"` : "Try a different search term"}
+                  </p>
+                  {searchQuery && (
+                    <button
+                      onClick={clearSearch}
+                      className="mt-3 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 text-sm font-medium transition-colors duration-200"
+                    >
+                      Clear search
+                    </button>
+                  )}
                 </div>
               </div>
             )}
