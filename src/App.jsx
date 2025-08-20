@@ -32,7 +32,6 @@ import TemplatesRoutes from "./components/Templates/TemplatesRoutes";
 import LoginPage from "./Pages/Auth/LoginPage";
 import SignupPage from "./Pages/Auth/SignUpPage";
 import FavoritesPage from "./Pages/Favorites/FavoritesPage";
-import ForgotPasswordPage from "./Pages/Auth/ForgotPasswordPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from './Pages/Dashboard/MySnippet';
@@ -82,7 +81,6 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
             <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-            <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
 
 
 
