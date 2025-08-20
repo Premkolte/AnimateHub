@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import DarkModeToggle from "../UI/DarkModeToggle";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
-import {
-  SignedIn,
-  SignedOut,
-  UserButton,
-  useUser,
-  useClerk,
-} from "@clerk/clerk-react";
 import "../layout/Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { favorites } = useFavorites();
   const { currentUser, logout } = useAuthStore();
   const [language, setLanguage] = useState("en");
@@ -107,9 +101,11 @@ const Navbar = () => {
       <nav
         className={`
           w-full backdrop-blur-md transition-all duration-500 ease-out
+
           ${scrolled 
             ? 'bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200' 
-            : 'bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200'
+            : 'bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200'
+
           }
           py-3 sticky top-0 left-0 z-50
           ${scrolled ? 'shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]' : 'shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]'}
@@ -132,11 +128,10 @@ const Navbar = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 rounded-full blur-lg group-hover:opacity-30 transition-opacity duration-300"></div>
                 </div>
-                <span className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${
-                  scrolled 
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' 
-                    : 'bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent'
-                }`}>
+                <span className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${scrolled
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'
+                  : 'bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent'
+                  }`}>
                   AnimateHub
                 </span>
               </Link>
@@ -148,42 +143,66 @@ const Navbar = () => {
             {/* Desktop Navigation */}
             <div className="hidden xl:flex items-center space-x-1 xl:space-x-2">
               {navLinks.map((item, index) => {
-                const isActive = location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`;
+                const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+                const isActive = location.pathname === path;
                 return (
                   <Link
                     key={item}
-                    to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                    to={path}
                     onClick={closeMenu}
                     className={`
                       relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
                       font-medium text-sm xl:text-base
-                      ${scrolled 
-                        ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300' 
-                        : 'hover:bg-white/20 dark:hover:bg-purple-800/30 text-white/90 dark:text-gray-200'
+                      ${scrolled
+                        ? 'text-gray-700 dark:text-gray-300'
+                        : 'text-white/90 dark:text-gray-200'
                       }
-                      hover:shadow-lg hover:shadow-white/10
-                      transform hover:scale-105 hover:-translate-y-0.5
-                      ${isActive 
+                      hover:shadow-lg 
+                      transform hover:scale-105
+                      ${isActive
                         ? scrolled
-                          ? 'text-blue-600 dark:text-purple-400 bg-blue-50 dark:bg-purple-900/40 shadow-lg'
-                          : 'text-white dark:text-purple-200 bg-white/10 dark:bg-purple-700/40 shadow-lg'
+                          ? 'bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400'
+                          : 'bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200'
                         : ''
                       }
                       group overflow-hidden
                     `}
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <span className="relative z-10">{item}</span>
+                    <span className="relative z-10">
+                      {item}
+                    </span>
+                    
+                    {/* Enhanced active indicator dot */}
+                    {isActive && (
+                      <div className="absolute -top-1.5 right-1 w-3 h-3 rounded-full
+                        bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500
+                        animate-pulse
+                        before:content-[''] before:absolute before:inset-0
+                        before:rounded-full before:bg-gradient-to-br
+                        before:from-cyan-400 before:via-purple-500 before:to-pink-500
+                        before:animate-[spin_3s_linear_infinite]
+                        after:content-[''] after:absolute after:inset-[-2px]
+                        after:rounded-full after:bg-gradient-to-r
+                        after:from-blue-500/30 after:to-purple-500/30
+                        after:blur-sm after:animate-pulse
+                        shadow-[0_0_15px_rgba(147,51,234,0.5)]">
+                      </div>
+                    )}
+
+                    {/* Side accent for active state */}
+                    {isActive && (
+                      <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-lg" />
+                    )}
+
+                    {/* Bottom accent */}
                     <div className={`
-                      absolute bottom-0 left-0 h-0.5 bg-gradient-to-r transition-all duration-300
-                      ${scrolled 
-                        ? 'from-blue-500 to-purple-500' 
-                        : 'from-white to-blue-200 dark:from-purple-300 dark:to-pink-300'
-                      }
-                      ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}
+                      absolute bottom-0 left-0 h-[2px] w-full transform origin-left
+                      transition-transform duration-300 ease-out
+                      bg-gradient-to-r from-blue-500 to-purple-500
+                      scale-x-0 group-hover:scale-x-100
+                      ${isActive ? 'scale-x-100' : ''}
                     `} />
-                    {/* Animated background on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
                   </Link>
                 );
               })}
@@ -270,13 +289,12 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Button */}
-              <button
+            <button
               onClick={toggleMenu}
-              className={`xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${
-                scrolled 
-                  ? 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700' 
-                  : 'bg-white/10 hover:bg-white/20'
-              }`}
+              className={`xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${scrolled
+                ? 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
+                : 'bg-white/10 hover:bg-white/20'
+                }`}
             >
               <div className="relative w-6 h-6">
                 <span className={`
@@ -290,7 +308,7 @@ const Navbar = () => {
                   ${isOpen ? 'opacity-0' : ''}
                 `} />
                 <span className={`
-                  absolute top-4.5 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
+                  absolute top-[18px] left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
                   ${scrolled ? 'bg-gray-700 dark:bg-gray-300' : 'bg-white'}
                   ${isOpen ? '-rotate-45 -translate-y-2' : ''}
                 `} />
@@ -298,7 +316,6 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-
         <div id="google_translate_element" style={{ display: "none" }}></div>
       </nav>
 
@@ -322,8 +339,8 @@ const Navbar = () => {
             <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Menu
             </span>
-            <button 
-              onClick={closeMenu} 
+            <button
+              onClick={closeMenu}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
             >
               <FiX className="text-xl" />
@@ -333,28 +350,31 @@ const Navbar = () => {
           {/* Mobile Navigation Links */}
           <div className="flex-1 px-6 py-4 space-y-2 overflow-y-auto">
             {navLinks.map((item, index) => {
-              const isActive = location.pathname === `/${item === "Home" ? "" : item.toLowerCase()}`;
+              const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+              const isActive = location.pathname === path;
               return (
                 <Link
                   key={item}
-                  to={`/${item === "Home" ? "" : item.toLowerCase()}`}
+                  to={path}
                   onClick={closeMenu}
                   className={`
                     flex items-center px-4 py-3 rounded-xl transition-all duration-300
-                    text-lg font-medium transform hover:scale-105 hover:shadow-lg
-                    ${isActive 
-                      ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-600 dark:text-purple-400 shadow-lg' 
+                    text-lg font-medium transform hover:scale-105
+                    ${isActive
+                      ? 'bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-500 dark:border-purple-500'
                       : 'hover:bg-gray-100 dark:hover:bg-gray-800/50'
                     }
                   `}
-                  style={{ 
+                  style={{
                     animationDelay: `${index * 100}ms`,
                     animation: isOpen ? 'slideInRight 0.5s ease-out forwards' : 'none'
                   }}
                 >
-                  <span>{item}</span>
+                  <span className={isActive ? 'text-blue-600 dark:text-purple-400' : ''}>
+                    {item}
+                  </span>
                   {isActive && (
-                    <div className="ml-auto w-2 h-2 bg-blue-500 dark:bg-purple-400 rounded-full animate-pulse" />
+                    <div className="ml-auto h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
                   )}
                 </Link>
               );
@@ -362,7 +382,7 @@ const Navbar = () => {
 
             {/* Mobile Auth Section */}
             <div className="pt-4 border-t border-gray-200/20 dark:border-gray-700/30 space-y-2">
-              <SignedIn>
+              {currentUser ? <>
                 <Link
                   to="/favorites"
                   onClick={closeMenu}
@@ -377,10 +397,9 @@ const Navbar = () => {
                     </span>
                   )}
                 </Link>
-
                 <button
                   onClick={() => {
-                    signOut({ redirectUrl: "/" });
+                    logout();
                     closeMenu();
                   }}
                   className="w-full flex items-center px-4 py-3 rounded-xl text-left
@@ -389,37 +408,40 @@ const Navbar = () => {
                 >
                   Sign Out
                 </button>
-              </SignedIn>
-
-              <SignedOut>
-                <Link
-                  to="/sign-in"
-                  onClick={closeMenu}
-                  className="flex items-center justify-center px-4 py-3 rounded-xl
-                    bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium
-                    transition-all duration-300 hover:scale-105 shadow-lg text-lg"
-                >
-                  Sign In
-                </Link>
-              </SignedOut>
+              </>
+                : <>
+                  <Link
+                    to="/sign-in"
+                    onClick={closeMenu}
+                    className="flex items-center justify-center px-4 py-2.5 rounded-lg
+                      bg-gradient-to-r from-blue-500 to-blue-600 text-white 
+                      transition-all duration-300 hover:scale-105 shadow-lg 
+                      text-base font-medium"
+                  >
+                    Sign In
+                  </Link>
+                </>
+              }
             </div>
 
             {/* Mobile Language Toggle */}
             <div className="pt-4">
               <button
                 onClick={toggleLanguage}
-                className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 
-                  dark:from-gray-800 dark:to-gray-700 font-semibold
-                  transition-all duration-300 hover:scale-105 shadow-sm text-lg"
+                className="w-full px-4 py-2.5 rounded-lg bg-gradient-to-r 
+                  from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 
+                  font-medium text-base transition-all duration-300 
+                  hover:scale-105 shadow-sm flex items-center justify-center space-x-2"
               >
-                {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
+                <span>{language === "en" ? "🇮🇳" : "🇬🇧"}</span>
+                <span>{language === "en" ? "हिंदी" : "English"}</span>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes slideInRight {
           from {
             opacity: 0;
@@ -428,6 +450,17 @@ const Navbar = () => {
           to {
             opacity: 1;
             transform: translateX(0);
+          }
+        }
+
+        @keyframes glow {
+          0%, 100% { 
+            box-shadow: 0 0 15px rgba(147,51,234,0.5),
+                       0 0 30px rgba(147,51,234,0.3); 
+          }
+          50% { 
+            box-shadow: 0 0 25px rgba(147,51,234,0.8),
+                       0 0 40px rgba(147,51,234,0.5); 
           }
         }
       `}</style>

@@ -32,11 +32,14 @@ import TemplatesRoutes from "./components/Templates/TemplatesRoutes";
 import LoginPage from "./Pages/Auth/LoginPage";
 import SignupPage from "./Pages/Auth/SignUpPage";
 import FavoritesPage from "./Pages/Favorites/FavoritesPage";
-import ForgotPasswordPage from "./Pages/Auth/ForgotPasswordPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from './Pages/Dashboard/MySnippet';
+
 import Playground from "./Pages/Playground/Code_Playground";
+
+import ContributorGuide from "./Pages/Contributors/ContributorGuide";
+
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -78,13 +81,13 @@ function App() {
             <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
             <Route path="/templates/*" element={<TemplatesRoutes />} />
             <Route path="/my-snippets" element={<MySnippet />} />
+            <Route path="/contributor-guide" element={<ContributorGuide />} />
 
             {/* Auth Routes */}
             <Route path="/sign-in" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
             <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-            <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
 
 
 

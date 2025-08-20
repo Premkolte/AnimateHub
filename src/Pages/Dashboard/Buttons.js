@@ -27,7 +27,7 @@ export const Buttons = [
     "PaymentFormSnippets",
     "PillNavigationSnippets",
     "PricingSnippets",
-    "ProfileCardSnippet",
+    "ProfileCardSnippets",
     "ProgressBarSnippets",
     "QuoteSlideshowSnippets",
     "RadioSnippets",

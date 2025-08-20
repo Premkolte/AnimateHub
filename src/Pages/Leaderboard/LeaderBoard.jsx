@@ -152,15 +152,23 @@ export default function LeaderBoard() {
   // Calculate stats when contributors data is loaded
   useEffect(() => {
     if (contributors.length > 0) {
-      const totalPRs = contributors.reduce((sum, c) => sum + c.prs, 0);
-      const totalPoints = contributors.reduce((sum, c) => sum + c.points, 0);
+      const totalPRs = contributors.reduce((sum, c) => sum + Number(c.prs), 0);
+      const totalPoints = contributors.reduce((sum, c) => sum + Number(c.points), 0);
+
+      const flooredTotalPRs = Math.floor(totalPRs / 10) * 10;
+      const flooredTotalPoints = Math.floor(totalPoints / 10) * 10;
+      const flooredContributorsCount = Math.floor(contributors.length / 10) * 10;
+
+      // console.log(flooredContributorsCount,flooredTotalPoints,flooredTotalPRs)
+
       setStats({
-        totalPRs,
-        totalContributors: contributors.length,
-        totalPoints
+        flooredTotalPRs,
+        totalContributors: flooredContributorsCount,
+        flooredTotalPoints,
       });
     }
   }, [contributors]);
+
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-secondary-900 py-6 sm:py-12 px-2 sm:px-4">
@@ -201,7 +209,7 @@ export default function LeaderBoard() {
               </div>
               <div className="min-w-0">
                 <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Pull Requests</p>
-                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.totalPRs}+</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.flooredTotalPRs}+</p>
               </div>
             </div>
           </div>
@@ -213,7 +221,7 @@ export default function LeaderBoard() {
               </div>
               <div className="min-w-0">
                 <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Total Points</p>
-                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.totalPoints}</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.flooredTotalPoints}+</p>
               </div>
             </div>
           </div>
