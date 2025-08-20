@@ -285,6 +285,8 @@ const HomePage = () => {
           </div>
 
           <motion.a
+            target="_blank"
+            rel="noopener noreferrer"
             href="https://github.com/Premkolte/AnimateHub"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
