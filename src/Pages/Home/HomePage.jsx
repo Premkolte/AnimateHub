@@ -330,24 +330,26 @@ const HomePage = () => {
             your projects.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 transition-all duration-300 ease-out hover:scale-105">
+          <div className="flex flex-wrap justify-center gap-4">
             <Link to="/templates">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-primary-600 dark:bg-accent-500 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all duration-700 ease-in-out hover:scale-105"
+                  // Framer Motion now handles the entire hover animation
+                  whileHover={{ scale: 1.05}} // Added a subtle "lift" effect
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="bg-primary-600 dark:bg-accent-500 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-shadow transition-all duration-300 ease-out hover:scale-105"
               >
                 View Templates
               </motion.button>
             </Link>
 
             <motion.a
-              whileHover={{ scale: 1.05 }}
+              // Framer Motion also handles this animation
+              whileHover={{ scale: 1.05}}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               href="https://github.com/Premkolte/AnimateHub/issues/new/choose"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center bg-secondary-800 dark:bg-secondary-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all duration-700 ease-in-out hover:scale-105"
+              className="flex items-center bg-secondary-800 dark:bg-secondary-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-shadow transition-all duration-300 ease-out hover:scale-105"
             >
               <LuLayoutTemplate className="inline-block mr-2 text-xl" />
               Submit a Template
@@ -382,8 +384,9 @@ const HomePage = () => {
           <div className="flex flex-wrap justify-center gap-6">
             <Link to="/contributors">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-primary-600 dark:bg-accent-500 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all"
+                whileHover={{ scale: 1.05}} // Added a subtle "lift" effect
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="bg-primary-600 dark:bg-accent-500 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all duration-300 ease-out hover:scale-105"
               >
                 View Contributors
               </motion.button>
@@ -391,11 +394,12 @@ const HomePage = () => {
 
             <motion.a
               onClick={()=>navigate('/contributor-guide')}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05}} // Added a subtle "lift" effect
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
               // href="https://github.com/Premkolte/AnimateHub"
               target="_blank"
               rel="noopener noreferrer"
-              className="cursor-pointer flex items-center bg-secondary-800 dark:bg-secondary-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all"
+              className="cursor-pointer flex items-center bg-secondary-800 dark:bg-secondary-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all duration-300 ease-out hover:scale-105"
             >
               <BsGithub className="inline-block mr-2 text-xl" />
               Become a Contributor
