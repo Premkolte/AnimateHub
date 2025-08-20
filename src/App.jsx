@@ -35,6 +35,7 @@ import FavoritesPage from "./Pages/Favorites/FavoritesPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from './Pages/Dashboard/MySnippet';
+import ContributorGuide from "./Pages/Contributors/ContributorGuide";
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -75,6 +76,7 @@ function App() {
             <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
             <Route path="/templates/*" element={<TemplatesRoutes />} />
             <Route path="/my-snippets" element={<MySnippet />} />
+            <Route path="/contributor-guide" element={<ContributorGuide />} />
 
             {/* Auth Routes */}
             <Route path="/sign-in" element={<LoginPage />} />
