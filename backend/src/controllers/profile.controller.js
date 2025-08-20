@@ -29,13 +29,13 @@ export const updateProfile = asyncHandler(async (req, res) => {
 
     // Prepare update object
     const updateFields = {};
-    if (username) updateFields.username = username.toLowerCase();
-    if (fullName) updateFields.fullName = fullName;
-    if (bio !== undefined) updateFields.bio = bio;
-    if (website !== undefined) updateFields.website = website;
-    if (github !== undefined) updateFields.github = github;
-    if (linkedin !== undefined) updateFields.linkedin = linkedin;
-    if (twitter !== undefined) updateFields.twitter = twitter;
+    if (username?.trim()) updateFields.username = username.toLowerCase().trim();
+    if (fullName?.trim()) updateFields.fullName = fullName.trim();
+    if (bio !== undefined) updateFields.bio = bio.trim();
+    if (website !== undefined) updateFields.website = website.trim();
+    if (github !== undefined) updateFields.github = github.trim();
+    if (linkedin !== undefined) updateFields.linkedin = linkedin.trim();
+    if (twitter !== undefined) updateFields.twitter = twitter.trim();
 
     // Handle file upload if present
     if (file) {

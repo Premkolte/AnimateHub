@@ -5,7 +5,7 @@ import upload from "../utils/fileUpload.js";
 
 const router = Router();
 
-// Public route to get any user's profile by username - /profile/:username
+// Public route to get any user's profile by username - /profile/u/:username
 router.get("/u/:username", getProfile);
 
 // Protected routes (require authentication)
