@@ -36,6 +36,7 @@ import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from './Pages/Dashboard/MySnippet';
 import ContributorGuide from "./Pages/Contributors/ContributorGuide";
+import ProfilePage from "./Pages/Profile/ProfilePage";
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -84,6 +85,9 @@ function App() {
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
             <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
+
+            {/* Profile Routes */}
+            <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
 
           </Route>
