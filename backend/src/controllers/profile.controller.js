@@ -2,7 +2,7 @@
 
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { User } from "../models/user.model.js";
+import User from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 
 import sanatizeUserModelResponse from "../functions/sanatizeUserModelResponse.js";
@@ -42,7 +42,7 @@ export const updateProfile = asyncHandler(async (req, res) => {
         try {
             // Convert buffer to base64
             const base64Image = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
-            
+
             // Upload to Cloudinary using base64
             const result = await cloudinary.uploader.upload(base64Image, {
                 folder: 'animatehub/profile-pictures',
@@ -93,11 +93,11 @@ export const getProfile = asyncHandler(async (req, res) => {
 
     let user = await User.findOne({ username: username.toLowerCase() })
 
-    user = sanatizeUserModelResponse(user.toObject(), false)
-
     if (!user) {
         throw new ApiError(404, "User not found");
     }
+
+    user = sanatizeUserModelResponse(user.toObject(), false)
 
     return res.status(200).json(
         new ApiResponse(200, "Profile retrieved successfully", user)
