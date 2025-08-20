@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose"
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const componentSchema = new Schema({
     name: {
@@ -44,6 +45,9 @@ const componentSchema = new Schema({
     }
 
 }, { timestamps: true })
+
+// Add pagination plugin to the schema
+componentSchema.plugin(mongoosePaginate);
 
 const Component = model("Component", componentSchema)
 export default Component;
