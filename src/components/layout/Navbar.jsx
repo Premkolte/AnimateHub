@@ -6,11 +6,6 @@ import { FaHeart } from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
-import {
-  SignedIn,
-  SignedOut,
-  useClerk,
-} from "@clerk/clerk-react";
 import "../layout/Navbar.css";
 
 const Navbar = () => {
@@ -18,7 +13,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { signOut } = useClerk();
   const { favorites } = useFavorites();
   const { currentUser, logout } = useAuthStore();
   const [language, setLanguage] = useState("en");
@@ -107,9 +101,11 @@ const Navbar = () => {
       <nav
         className={`
           w-full backdrop-blur-md transition-all duration-500 ease-out
+
           ${scrolled 
             ? 'bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200' 
             : 'bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200'
+
           }
           py-3 sticky top-0 left-0 z-50
           ${scrolled ? 'shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]' : 'shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]'}
@@ -132,11 +128,10 @@ const Navbar = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 rounded-full blur-lg group-hover:opacity-30 transition-opacity duration-300"></div>
                 </div>
-                <span className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${
-                  scrolled 
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' 
-                    : 'bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent'
-                }`}>
+                <span className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${scrolled
+                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'
+                  : 'bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent'
+                  }`}>
                   AnimateHub
                 </span>
               </Link>
@@ -158,13 +153,13 @@ const Navbar = () => {
                     className={`
                       relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
                       font-medium text-sm xl:text-base
-                      ${scrolled 
-                        ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300' 
+                      ${scrolled
+                        ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
                         : 'hover:bg-white/20 dark:hover:bg-purple-800/30 text-white/90 dark:text-gray-200'
                       }
                       hover:shadow-lg hover:shadow-white/10
                       transform hover:scale-105 hover:-translate-y-0.5
-                      ${isActive 
+                      ${isActive
                         ? scrolled
                           ? 'text-blue-600 dark:text-purple-400 bg-blue-50 dark:bg-purple-900/40 shadow-lg'
                           : 'text-white dark:text-purple-200 bg-white/10 dark:bg-purple-700/40 shadow-lg'
@@ -177,8 +172,8 @@ const Navbar = () => {
                     <span className="relative z-10">{item}</span>
                     <div className={`
                       absolute bottom-0 left-0 h-0.5 bg-gradient-to-r transition-all duration-300
-                      ${scrolled 
-                        ? 'from-blue-500 to-purple-500' 
+                      ${scrolled
+                        ? 'from-blue-500 to-purple-500'
                         : 'from-white to-blue-200 dark:from-purple-300 dark:to-pink-300'
                       }
                       ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}
@@ -273,11 +268,10 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMenu}
-              className={`xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${
-                scrolled 
-                  ? 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700' 
-                  : 'bg-white/10 hover:bg-white/20'
-              }`}
+              className={`xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${scrolled
+                ? 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
+                : 'bg-white/10 hover:bg-white/20'
+                }`}
             >
               <div className="relative w-6 h-6">
                 <span className={`
@@ -322,8 +316,8 @@ const Navbar = () => {
             <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Menu
             </span>
-            <button 
-              onClick={closeMenu} 
+            <button
+              onClick={closeMenu}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
             >
               <FiX className="text-xl" />
@@ -343,12 +337,12 @@ const Navbar = () => {
                   className={`
                     flex items-center px-4 py-3 rounded-xl transition-all duration-300
                     text-lg font-medium transform hover:scale-105 hover:shadow-lg
-                    ${isActive 
-                      ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-600 dark:text-purple-400 shadow-lg' 
+                    ${isActive
+                      ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-600 dark:text-purple-400 shadow-lg'
                       : 'hover:bg-gray-100 dark:hover:bg-gray-800/50'
                     }
                   `}
-                  style={{ 
+                  style={{
                     animationDelay: `${index * 100}ms`,
                     animation: isOpen ? 'slideInRight 0.5s ease-out forwards' : 'none'
                   }}
@@ -363,7 +357,7 @@ const Navbar = () => {
 
             {/* Mobile Auth Section */}
             <div className="pt-4 border-t border-gray-200/20 dark:border-gray-700/30 space-y-2">
-              <SignedIn>
+              {currentUser ? <>
                 <Link
                   to="/favorites"
                   onClick={closeMenu}
@@ -380,7 +374,7 @@ const Navbar = () => {
                 </Link>
                 <button
                   onClick={() => {
-                    signOut({ redirectUrl: "/" });
+                    logout();
                     closeMenu();
                   }}
                   className="w-full flex items-center px-4 py-3 rounded-xl text-left
@@ -389,18 +383,19 @@ const Navbar = () => {
                 >
                   Sign Out
                 </button>
-              </SignedIn>
-              <SignedOut>
-                <Link
-                  to="/sign-in"
-                  onClick={closeMenu}
-                  className="flex items-center justify-center px-4 py-3 rounded-xl
+              </>
+                : <>
+                  <Link
+                    to="/sign-in"
+                    onClick={closeMenu}
+                    className="flex items-center justify-center px-4 py-3 rounded-xl
                     bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium
                     transition-all duration-300 hover:scale-105 shadow-lg text-lg"
-                >
-                  Sign In
-                </Link>
-              </SignedOut>
+                  >
+                    Sign In
+                  </Link>
+                </>
+              }
             </div>
 
             {/* Mobile Language Toggle */}

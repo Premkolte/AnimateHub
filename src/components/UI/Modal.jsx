@@ -3,12 +3,13 @@ import { IoMdClose } from 'react-icons/io';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import StringToReactComponent from 'string-to-react-component';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '../../store/authStore';
 
 function Modal({ showModal, onClose, jsxCode, cssCode }) {
   const [copyStatus, setCopyStatus] = useState('');
   const [isFavorited, setIsFavorited] = useState(false);
+  const { currentUser } = useAuthStore()
 
   if (!showModal) return null;
 
@@ -33,7 +34,7 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
         </button>
 
         {/* Favorite Button - Only show when signed in */}
-        <SignedIn>
+        {currentUser &&
           <button
             className="absolute top-4 right-12 text-2xl text-secondary-700 dark:text-white hover:text-red-500 transition-colors"
             onClick={handleFavorite}
@@ -41,7 +42,7 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
           >
             {isFavorited ? <AiFillHeart className="text-red-500" /> : <AiOutlineHeart />}
           </button>
-        </SignedIn>
+        }
 
         <div className="p-10 flex justify-center items-center">
           <StringToReactComponent>
@@ -75,7 +76,7 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
           </div>
 
           {/* Sign-in prompt for additional features */}
-          <SignedOut>
+          {!currentUser &&
             <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-200 dark:border-indigo-700 rounded-lg p-4 w-full">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
@@ -105,7 +106,7 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
                 </div>
               </div>
             </div>
-          </SignedOut>
+          }
         </div>
       </div>
     </div>
