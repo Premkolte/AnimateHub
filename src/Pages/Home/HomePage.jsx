@@ -18,6 +18,18 @@ import PricingSection from "./Pricing";
 const HomePage = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuthStore();
+  // State for mouse position and hover status
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Handler to update mouse position
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
   const steps = [
     {
@@ -169,7 +181,8 @@ const HomePage = () => {
           <motion.p
             className="text-4xl md:text-6xl mb-6"
             whileHover={{ scale: 1.05 }}
-          >
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            >
             Animation UI Library <br /> for Developers
           </motion.p>
           <p className="text-md mb-10">
@@ -180,35 +193,49 @@ const HomePage = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              className="bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg browse-components-button transition-colors duration-200"
-              onClick={() => {
-                navigate("/explore");
-              }}
-            >
-              Browse Components
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              className="border-2 border-primary-600 dark:border-accent-600 text-primary-600 dark:text-accent-600 hover:bg-primary-600 hover:text-white dark:hover:bg-accent-600 dark:hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg get-started-button transition-all duration-200"
-              onClick={() => {
-                window.location.href =
-                  "https://github.com/Premkolte/AnimateHub";
-              }}
-            >
-              Get Started
-            </motion.button>
+              {/* --- BROWSE COMPONENTS BUTTON MODIFIED --- */}
+              <motion.button
+                  style={{ position: "relative", overflow: "hidden" }}
+                  className="browse-components-button rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-md"
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  onClick={() => navigate("/explore")}
+              >
+                  <motion.div
+                      className="pointer-events-none absolute -inset-px rounded-full"
+                      style={{
+                          background: `radial-gradient(250px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 222, 105, 0.5), transparent 80%)`,
+                      }}
+                      animate={{ opacity: isHovered ? 1 : 0 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                  />
+                  <span className="relative z-10">
+                      Browse Components
+                  </span>
+              </motion.button>
+
+              {/* Fancy Secondary Button */}
+              <motion.button
+                  className="get-started-button rounded-full border-2 border-blue-400 bg-transparent px-8 py-4 text-lg font-semibold text-blue-600 hover:bg-blue-400 hover:text-white shadow-sm hover:shadow-md transition-all duration-300 ease-out hover:scale-105"
+                  whileHover={{ scale:1.035 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  onClick={() => window.location.href = "https://github.com/Premkolte/AnimateHub"}
+              >
+                  Get Started
+              </motion.button>
 
             {/* Favorites Button - Only show for signed in users */}
             {currentUser ? (
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-colors duration-200 flex items-center gap-2"
-                onClick={() => {
-                  navigate("/favorites");
-                }}
-              >
+                <motion.button
+                    className="flex items-center gap-2 rounded-full bg-gradient-to-br from-red-500 to-pink-500 px-8 py-4 text-lg font-semibold text-white shadow-md hover:shadow-lg transition-all duration-300 ease-out hover:scale-105"
+                    whileHover={{ scale:1.035 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    onClick={() => navigate("/favorites")}
+                >
                 <FaHeart />
                 My Favorites
                 {/* -------------- will be implemented later */}
@@ -221,11 +248,10 @@ const HomePage = () => {
               </motion.button>
             ) : (
               <motion.button
-                whileHover={{ scale: 1.1 }}
-                className="border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 flex items-center gap-2"
-                onClick={() => {
-                  navigate("/sign-in");
-                }}
+                className="flex items-center gap-2 rounded-full border-2 border-red-400 bg-transparent px-8 py-4 text-lg font-semibold text-red-600 hover:bg-red-400 hover:text-white shadow-sm hover:shadow-md transition-all duration-300 ease-out hover:scale-105"
+                whileHover={{ scale:1.035 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                onClick={() => navigate("/sign-in")}
               >
                 <FaHeart />
                 Sign In for Favorites
@@ -238,20 +264,22 @@ const HomePage = () => {
           <div className="flex space-x-6">
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://developer.mozilla.org/en-US/docs/Web/HTML"
             >
               <FaHtml5 className="h-12 w-12" />
             </a>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://developer.mozilla.org/en-US/docs/Web/CSS"
             >
               <FaCss3Alt className="h-12 w-12" />
             </a>
-            <a target="_blank" href="https://react.dev/learn">
+            <a target="_blank" rel="noopener noreferrer" href="https://react.dev/learn">
               <FaReact className="h-12 w-12" />
             </a>
-            <a target="_blank" href="https://tailwindcss.com/">
+            <a target="_blank" rel="noopener noreferrer" href="https://tailwindcss.com/">
               <BiLogoTailwindCss className="h-12 w-12" />
             </a>
           </div>
