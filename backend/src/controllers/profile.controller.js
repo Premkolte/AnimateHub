@@ -5,8 +5,10 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 
+import sanatizeUserModelResponse from "../functions/sanatizeUserModelResponse.js";
+
 // Update user profile
-const updateProfile = asyncHandler(async (req, res) => {
+export const updateProfile = asyncHandler(async (req, res) => {
     const { username, fullName, bio, website, github, linkedin, twitter } = req.body;
     const userId = req.user._id;
 
@@ -33,11 +35,14 @@ const updateProfile = asyncHandler(async (req, res) => {
     if (twitter !== undefined) updateFields.twitter = twitter;
 
     // Update user
-    const updatedUser = await User.findByIdAndUpdate(
+    let updatedUser = await User.findByIdAndUpdate(
         userId,
         { $set: updateFields },
         { new: true, runValidators: true }
-    ).select("-password -refreshToken -resetPasswordToken -resetPasswordExpires -emailVerificationToken -emailVerificationExpires");
+    )
+
+    updatedUser = sanatizeUserModelResponse(updatedUser.toObject(), false)
+
 
     if (!updatedUser) {
         throw new ApiError(404, "User not found");
@@ -48,11 +53,18 @@ const updateProfile = asyncHandler(async (req, res) => {
     );
 });
 
-// Get user profile
-const getProfile = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id).select(
-        "-password -refreshToken -resetPasswordToken -resetPasswordExpires -emailVerificationToken -emailVerificationExpires"
-    );
+
+// Get user profile by username
+export const getProfile = asyncHandler(async (req, res) => {
+    const { username } = req.params;
+
+    if (!username?.trim()) {
+        throw new ApiError(400, "Username is required");
+    }
+
+    let user = await User.findOne({ username: username.toLowerCase() })
+
+    user = sanatizeUserModelResponse(user.toObject(), false)
 
     if (!user) {
         throw new ApiError(404, "User not found");
@@ -63,7 +75,4 @@ const getProfile = asyncHandler(async (req, res) => {
     );
 });
 
-export {
-    updateProfile,
-    getProfile
-};
+
