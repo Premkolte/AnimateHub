@@ -16,21 +16,21 @@ const CountdownTimeSnippets = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#eff6ff] dark:bg-secondary-900 rounded-lg ">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gradient-to-br from-white via-gray-50/30 to-blue-50/30 dark:from-gray-900 dark:via-gray-800/80 dark:to-gray-900/50 rounded-lg ">
       {countdownTimeSnippets.map((snippet, index) => (
         <div
           key={index}
           className="
-  p-8 pt-14 
-  bg-[#dbeafe]
- dark:bg-secondary-700 
-  text-secondary-900 dark:text-white 
-  rounded-lg 
-border border-blue-300 dark:border-[#a855f7]
-  shadow-lg shadow-[0_4px_20px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] 
-  flex flex-col items-center justify-evenly gap-10 relative 
-  text-sm
-"
+            p-8 pt-14 
+          bg-[#dbeafe]
+          dark:bg-secondary-800 
+          text-secondary-900 dark:text-white 
+            rounded-lg 
+            border border-blue-300 dark:border-[#a855f7]
+            shadow-lg shadow-[0_4px_20px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] 
+            flex flex-col items-center justify-evenly gap-10 relative 
+            text-sm
+          "
         >
           <h2 className="text-lg font-bold mb-2">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>

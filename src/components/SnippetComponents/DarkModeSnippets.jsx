@@ -22,18 +22,18 @@ const DarkModeSnippets = () => {
         }`}
     >
       <div
-        className="
-  p-8 pt-14 
-  bg-[#dbeafe]
- dark:bg-secondary-700 
-  text-secondary-900 dark:text-white 
-  rounded-lg 
-border border-blue-300 dark:border-[#a855f7]
-  shadow-lg shadow-[0_4px_20px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] 
-  flex flex-col items-center justify-evenly gap-10 relative 
-  text-sm
-"
-      >
+          className="
+            p-8 pt-14 
+          bg-[#dbeafe]
+          dark:bg-secondary-800 
+          text-secondary-900 dark:text-white 
+            rounded-lg 
+            border border-blue-300 dark:border-[#a855f7]
+            shadow-lg shadow-[0_4px_20px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] 
+            flex flex-col items-center justify-evenly gap-10 relative 
+            text-sm
+          "
+        >
         <h2 className="text-xl font-bold mb-4">Dark Mode Toggle</h2>
 
         <div className="flex items-center mb-4">
