@@ -209,7 +209,7 @@ const SignupPage = () => {
                   whileTap={{ scale: 0.9 }}
                   type="button"
                   onClick={togglePasswordVisibility}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-secondary-400 hover:text-primary-600 dark:hover:text-accent-500 transition-colors duration-200 p-1"
+                  className="absolute right-4 top-[30%] transform text-secondary-400 hover:text-primary-600 dark:hover:text-accent-500 transition-colors duration-200 p-1"
                 >
                   {passwordVisible ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
                 </motion.button>
