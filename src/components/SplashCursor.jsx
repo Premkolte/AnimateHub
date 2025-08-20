@@ -2,20 +2,21 @@
 import { useEffect, useRef } from 'react';
 
 function SplashCursor({
+  // Add CAPTURE_RESOLUTION to props with a default value
   SIM_RESOLUTION = 128,
-  DYE_RESOLUTION = 1440,
-  CAPTURE_RESOLUTION = 512,
-  DENSITY_DISSIPATION = 3.5,
-  VELOCITY_DISSIPATION = 2,
-  PRESSURE = 0.1,
+  DYE_RESOLUTION = 1024,
+  DENSITY_DISSIPATION = 4.0,
+  VELOCITY_DISSIPATION = 2.5,
+  PRESSURE = 0.8,
   PRESSURE_ITERATIONS = 20,
-  CURL = 3,
-  SPLAT_RADIUS = 0.2,
-  SPLAT_FORCE = 6000,
+  CURL = 2,
+  SPLAT_RADIUS = 0.15,
+  SPLAT_FORCE = 3000,
   SHADING = true,
-  COLOR_UPDATE_SPEED = 10,
-  BACK_COLOR = { r: 0.5, g: 0, b: 0 },
-  TRANSPARENT = true
+  COLOR_UPDATE_SPEED = 5,
+  BACK_COLOR = { r: 0, g: 0, b: 0 },
+  TRANSPARENT = true,
+  CAPTURE_RESOLUTION = 512, // Added this line
 }) {
   const canvasRef = useRef(null);
   const animationFrameRef = useRef();
@@ -76,7 +77,7 @@ function SplashCursor({
       if (!isWebGL2)
         gl =
           canvas.getContext('webgl', params) ||
-          canvas.getContext('experimental-webgl', params);
+          canvas.getContext('experimental-web-gl', params);
 
       let halfFloat;
       let supportLinearFiltering;
@@ -931,13 +932,23 @@ function SplashCursor({
       splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
     }
 
+    // Modified color generation for more subtle colors
+    function generateColor() {
+      let c = HSVtoRGB(Math.random(), 0.7, 0.7); // Reduced saturation and value
+      c.r *= 0.08; // Reduced color intensity
+      c.g *= 0.08;
+      c.b *= 0.08;
+      return c;
+    }
+
+    // Modified click splat for gentler effects
     function clickSplat(pointer) {
       const color = generateColor();
-      color.r *= 10.0;
-      color.g *= 10.0;
-      color.b *= 10.0;
-      let dx = 10 * (Math.random() - 0.5);
-      let dy = 30 * (Math.random() - 0.5);
+      color.r *= 3.0; // Reduced from 10.0
+      color.g *= 3.0;
+      color.b *= 3.0;
+      let dx = 5 * (Math.random() - 0.5); // Reduced spread
+      let dy = 10 * (Math.random() - 0.5);
       splat(pointer.texcoordX, pointer.texcoordY, dx, dy, color);
     }
 
@@ -1007,14 +1018,6 @@ function SplashCursor({
       let aspectRatio = canvas.width / canvas.height;
       if (aspectRatio > 1) delta /= aspectRatio;
       return delta;
-    }
-
-    function generateColor() {
-      let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-      c.r *= 0.15;
-      c.g *= 0.15;
-      c.b *= 0.15;
-      return c;
     }
 
     function HSVtoRGB(h, s, v) {
@@ -1110,12 +1113,20 @@ function SplashCursor({
       document.body.removeEventListener('mousemove', handleFirstMouseMove);
     });
 
+    // Throttle mousemove events for better performance
+    let lastMove = 0;
+    const moveThreshold = 16; // 60fps throttle
+
+    // Modified mousemove handler
     window.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastMove < moveThreshold) return;
+      lastMove = now;
+
       let pointer = pointers[0];
       let posX = scaleByPixelRatio(e.clientX);
       let posY = scaleByPixelRatio(e.clientY);
-      let color = pointer.color;
-      updatePointerMoveData(pointer, posX, posY, color);
+      updatePointerMoveData(pointer, posX, posY, pointer.color);
     });
 
     document.body.addEventListener('touchstart', function handleFirstTouchStart(e) {
@@ -1175,7 +1186,6 @@ function SplashCursor({
   }, [
     SIM_RESOLUTION,
     DYE_RESOLUTION,
-    CAPTURE_RESOLUTION,
     DENSITY_DISSIPATION,
     VELOCITY_DISSIPATION,
     PRESSURE,
@@ -1187,7 +1197,26 @@ function SplashCursor({
     COLOR_UPDATE_SPEED,
     BACK_COLOR,
     TRANSPARENT,
+    // Remove CAPTURE_RESOLUTION if it's not actually used in the effect
   ]);
+
+  // Add resize handler to prevent excessive canvas size
+  useEffect(() => {
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      
+      // Limit canvas size for better performance
+      const maxDimension = 1920;
+      const scale = Math.min(1, maxDimension / window.innerWidth);
+      canvas.style.transform = `scale(${scale})`;
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div
@@ -1199,15 +1228,16 @@ function SplashCursor({
         pointerEvents: 'none',
         width: '100%',
         height: '100%',
+        opacity: 0.8, // Reduced overall opacity
       }}
     >
       <canvas
         ref={canvasRef}
-        id="fluid"
         style={{
           width: '100vw',
           height: '100vh',
           display: 'block',
+          filter: 'blur(0.5px)', // Slight blur for smoother appearance
         }}
       />
     </div>
