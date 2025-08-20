@@ -244,7 +244,7 @@ const ContributorGuide = () => {
             {steps.map((step, index) => (
               <div key={index} className="bg-white/95 dark:bg-gray-900/95 rounded-xl shadow-2xl p-6 border-l-4 border-[#3b82f6] dark:border-purple-600 hover:shadow-[0_8px_32px_0_rgba(59,130,246,0.37)] dark:hover:shadow-[0_8px_32px_0_rgba(147,51,234,0.37)] transition-all duration-300 transform hover:scale-105">
                 <div className="flex items-center mb-4">
-                  <div className="bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-900 dark:to-purple-700 p-3 rounded-full mr-4 text-white">
+                  <div className="bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-700 p-3 rounded-full mr-4 text-white">
                     {step.icon}
                   </div>
                   <div>
@@ -264,22 +264,22 @@ const ContributorGuide = () => {
           <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-8 text-center">
             Essential Git Commands
           </h2>
-          <div className="bg-gray-900 dark:bg-gray-950 rounded-xl p-6 shadow-2xl border border-white/20 dark:border-gray-700/50">
-            <div className="grid gap-4">
+          <div className="w-full bg-gray-900 dark:bg-gray-950 rounded-xl p-4 md:p-6 shadow-2xl border border-white/20 dark:border-gray-700/50">
+            <div className="space-y-4">
               {commands.map((cmd) => (
-                <div key={cmd.id} className="bg-gray-800 dark:bg-gray-900 rounded-lg p-4 border border-gray-700 dark:border-gray-600">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="text-[#accefbff] dark:text-purple-400 font-semibold">{cmd.title}</h4>
+                <div key={cmd.id} className="bg-gray-800 dark:bg-gray-900 rounded-lg p-3 md:p-4 border border-gray-700 dark:border-gray-600">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-2">
+                    <h4 className="text-[#accefbff] dark:text-purple-400 font-semibold text-sm md:text-base">{cmd.title}</h4>
                     <button
                       onClick={() => copyToClipboard(cmd.command, cmd.id)}
-                      className="flex items-center space-x-2 bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500 px-3 py-1 rounded text-sm text-white transition-all duration-300 hover:scale-105"
+                      className="flex items-center justify-center space-x-2 bg-gray-700 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-500 px-3 py-2 rounded text-sm text-white transition-all duration-300 hover:scale-105 self-start sm:self-center"
                     >
                       {copiedCommand === cmd.id ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       <span>{copiedCommand === cmd.id ? 'Copied!' : 'Copy'}</span>
                     </button>
                   </div>
-                  <code className="text-[#3b82f6] dark:text-purple-300 block mb-2 font-mono">{cmd.command}</code>
-                  <p className="text-gray-400 dark:text-gray-400 text-sm">{cmd.description}</p>
+                  <code className="text-[#3b82f6] dark:text-purple-300 block mb-2 font-mono text-sm md:text-base break-all">{cmd.command}</code>
+                  <p className="text-gray-400 dark:text-gray-400 text-xs md:text-sm">{cmd.description}</p>
                 </div>
               ))}
             </div>
@@ -298,26 +298,26 @@ const ContributorGuide = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 shadow-2xl border border-blue-200/30 dark:border-purple-700/30">
-            <div className="grid gap-8">
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-4 md:p-8 shadow-2xl border border-blue-200/30 dark:border-purple-700/30">
+            <div className="space-y-6 md:space-y-8">
               {prSteps.map((step, index) => (
-                <div key={index} className="flex items-start space-x-6 group">
-                  <div className="flex-shrink-0">
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 dark:from-purple-600 dark:to-blue-500 p-4 rounded-full text-white shadow-lg group-hover:scale-110 transition-all duration-300">
+                <div key={index} className="flex flex-col md:flex-row md:items-start space-y-4 md:space-y-0 md:space-x-6 group">
+                  <div className="flex-shrink-0 self-center md:self-start">
+                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 dark:from-purple-600 dark:to-blue-500 p-3 md:p-4 rounded-full text-white shadow-lg group-hover:scale-110 transition-all duration-300">
                       {step.icon}
                     </div>
-                    <div className="w-px h-12 bg-gradient-to-b from-blue-300 to-purple-300 dark:from-purple-500 dark:to-blue-500 mx-auto mt-4 last:hidden"></div>
+                    <div className="hidden md:block w-px h-12 bg-gradient-to-b from-blue-300 to-purple-300 dark:from-purple-500 dark:to-blue-500 mx-auto mt-4 last:hidden"></div>
                   </div>
-                  <div className="flex-1 bg-white/80 dark:bg-gray-800/80 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm border border-white/50 dark:border-gray-700/50">
+                  <div className="flex-1 bg-white/80 dark:bg-gray-800/80 rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm border border-white/50 dark:border-gray-700/50">
                     <div className="flex items-center mb-3">
                       <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent font-bold text-sm">
                         STEP {index + 1}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-3">{step.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">{step.description}</p>
+                    <h3 className="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-3">{step.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm md:text-base">{step.description}</p>
                     <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-3 border-l-4 border-blue-400 dark:border-blue-500">
-                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                      <p className="text-xs md:text-sm text-blue-700 dark:text-blue-300">
                         <span className="font-semibold">💡 Pro tip:</span> {step.tip}
                       </p>
                     </div>
@@ -400,7 +400,7 @@ const ContributorGuide = () => {
                 className="bg-white/95 dark:bg-gray-900/95 rounded-xl shadow-2xl p-6 hover:shadow-[0_8px_32px_0_rgba(59,130,246,0.37)] dark:hover:shadow-[0_8px_32px_0_rgba(147,51,234,0.37)] transition-all duration-500 transform hover:-translate-y-1 hover:scale-105 group border border-gray-200/20 dark:border-gray-700/50"
               >
                 <div className="flex items-center mb-4">
-                  <div className="bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-900 dark:to-purple-700 p-3 rounded-full mr-4 text-white group-hover:scale-110 transition-transform duration-300">
+                  <div className="bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-700 p-3 rounded-full mr-4 text-white group-hover:scale-110 transition-transform duration-300">
                     {resource.icon}
                   </div>
                   <ExternalLink className="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-[#3b82f6] dark:group-hover:text-purple-400 transition-colors duration-300" />
