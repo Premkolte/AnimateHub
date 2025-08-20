@@ -26,7 +26,7 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  const navLinks = ["Home", "Explore", "About", "AnimationPlayground", "LeaderBoard", "Contact"];
+  const navLinks = ["Home", "Explore", "About", "AnimationPlayground","Playground", "LeaderBoard", "Contact"];
 
   // Handle scroll effect
   useEffect(() => {

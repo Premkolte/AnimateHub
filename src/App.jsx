@@ -36,6 +36,7 @@ import ForgotPasswordPage from "./Pages/Auth/ForgotPasswordPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from './Pages/Dashboard/MySnippet';
+import Playground from "./Pages/Playground/Code_Playground";
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -69,6 +70,7 @@ function App() {
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/animationplayground" element={<AnimationPlayground />} />
+            <Route path="/playground" element={<Playground />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/contributors" element={<Contributors />} />
