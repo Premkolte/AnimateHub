@@ -358,11 +358,12 @@ const HomePage = () => {
             </Link>
 
             <motion.a
+              onClick={()=>navigate('/contributor-guide')}
               whileHover={{ scale: 1.05 }}
-              href="https://github.com/Premkolte/AnimateHub"
+              // href="https://github.com/Premkolte/AnimateHub"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center bg-secondary-800 dark:bg-secondary-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all"
+              className="cursor-pointer flex items-center bg-secondary-800 dark:bg-secondary-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all"
             >
               <BsGithub className="inline-block mr-2 text-xl" />
               Become a Contributor
