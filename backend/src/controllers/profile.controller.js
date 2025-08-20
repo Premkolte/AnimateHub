@@ -6,11 +6,14 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 
 import sanatizeUserModelResponse from "../functions/sanatizeUserModelResponse.js";
+import cloudinary from "../utils/cloudinary.js";
+
 
 // Update user profile
 export const updateProfile = asyncHandler(async (req, res) => {
     const { username, fullName, bio, website, github, linkedin, twitter } = req.body;
     const userId = req.user._id;
+    const file = req.file; // Optional if user upload it we will get it.
 
     // Check if username is being updated and if it's already taken
     if (username) {
@@ -33,6 +36,32 @@ export const updateProfile = asyncHandler(async (req, res) => {
     if (github !== undefined) updateFields.github = github;
     if (linkedin !== undefined) updateFields.linkedin = linkedin;
     if (twitter !== undefined) updateFields.twitter = twitter;
+
+    // Handle file upload if present
+    if (file) {
+        try {
+            // Convert buffer to base64
+            const base64Image = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
+            
+            // Upload to Cloudinary using base64
+            const result = await cloudinary.uploader.upload(base64Image, {
+                folder: 'animatehub/profile-pictures',
+                width: 300,
+                height: 300,
+                gravity: 'face',
+                crop: 'fill',
+                format: 'webp',  // Convert to webp for better compression
+                quality: 'auto',
+                fetch_format: 'auto'
+            });
+
+            // Add the Cloudinary URL to update fields
+            updateFields.avatarUrl = result.secure_url;
+        } catch (error) {
+            console.error('Error uploading to Cloudinary:', error);
+            throw new ApiError(500, 'Error uploading profile picture');
+        }
+    }
 
     // Update user
     let updatedUser = await User.findByIdAndUpdate(
