@@ -336,7 +336,7 @@ const HomePage = () => {
                   // Framer Motion now handles the entire hover animation
                   whileHover={{ scale: 1.05}} // Added a subtle "lift" effect
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="bg-primary-600 dark:bg-accent-500 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-shadow transition-all duration-300 ease-out hover:scale-105"
+                  className="bg-primary-600 dark:bg-accent-500 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all duration-300 ease-out hover:scale-105"
               >
                 View Templates
               </motion.button>
@@ -349,7 +349,7 @@ const HomePage = () => {
               href="https://github.com/Premkolte/AnimateHub/issues/new/choose"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center bg-secondary-800 dark:bg-secondary-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-shadow transition-all duration-300 ease-out hover:scale-105"
+              className="flex items-center bg-secondary-800 dark:bg-secondary-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:shadow-xl transition-all duration-300 ease-out hover:scale-105"
             >
               <LuLayoutTemplate className="inline-block mr-2 text-xl" />
               Submit a Template
