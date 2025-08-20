@@ -154,32 +154,55 @@ const Navbar = () => {
                       relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
                       font-medium text-sm xl:text-base
                       ${scrolled
-                        ? 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
-                        : 'hover:bg-white/20 dark:hover:bg-purple-800/30 text-white/90 dark:text-gray-200'
+                        ? 'text-gray-700 dark:text-gray-300'
+                        : 'text-white/90 dark:text-gray-200'
                       }
-                      hover:shadow-lg hover:shadow-white/10
-                      transform hover:scale-105 hover:-translate-y-0.5
+                      hover:shadow-lg 
+                      transform hover:scale-105
                       ${isActive
                         ? scrolled
-                          ? 'text-blue-600 dark:text-purple-400 bg-blue-50 dark:bg-purple-900/40 shadow-lg'
-                          : 'text-white dark:text-purple-200 bg-white/10 dark:bg-purple-700/40 shadow-lg'
+                          ? 'bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400'
+                          : 'bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200'
                         : ''
                       }
                       group overflow-hidden
                     `}
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <span className="relative z-10">{item}</span>
+                    <span className="relative z-10">
+                      {item}
+                    </span>
+                    
+                    {/* Enhanced active indicator dot */}
+                    {isActive && (
+                      <div className="absolute -top-1.5 right-1 w-3 h-3 rounded-full
+                        bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500
+                        animate-pulse
+                        before:content-[''] before:absolute before:inset-0
+                        before:rounded-full before:bg-gradient-to-br
+                        before:from-cyan-400 before:via-purple-500 before:to-pink-500
+                        before:animate-[spin_3s_linear_infinite]
+                        after:content-[''] after:absolute after:inset-[-2px]
+                        after:rounded-full after:bg-gradient-to-r
+                        after:from-blue-500/30 after:to-purple-500/30
+                        after:blur-sm after:animate-pulse
+                        shadow-[0_0_15px_rgba(147,51,234,0.5)]">
+                      </div>
+                    )}
+
+                    {/* Side accent for active state */}
+                    {isActive && (
+                      <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-lg" />
+                    )}
+
+                    {/* Bottom accent */}
                     <div className={`
-                      absolute bottom-0 left-0 h-0.5 bg-gradient-to-r transition-all duration-300
-                      ${scrolled
-                        ? 'from-blue-500 to-purple-500'
-                        : 'from-white to-blue-200 dark:from-purple-300 dark:to-pink-300'
-                      }
-                      ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}
+                      absolute bottom-0 left-0 h-[2px] w-full transform origin-left
+                      transition-transform duration-300 ease-out
+                      bg-gradient-to-r from-blue-500 to-purple-500
+                      scale-x-0 group-hover:scale-x-100
+                      ${isActive ? 'scale-x-100' : ''}
                     `} />
-                    {/* Animated background on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
                   </Link>
                 );
               })}
@@ -336,9 +359,9 @@ const Navbar = () => {
                   onClick={closeMenu}
                   className={`
                     flex items-center px-4 py-3 rounded-xl transition-all duration-300
-                    text-lg font-medium transform hover:scale-105 hover:shadow-lg
+                    text-lg font-medium transform hover:scale-105
                     ${isActive
-                      ? 'bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-600 dark:text-purple-400 shadow-lg'
+                      ? 'bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-500 dark:border-purple-500'
                       : 'hover:bg-gray-100 dark:hover:bg-gray-800/50'
                     }
                   `}
@@ -347,9 +370,11 @@ const Navbar = () => {
                     animation: isOpen ? 'slideInRight 0.5s ease-out forwards' : 'none'
                   }}
                 >
-                  <span>{item}</span>
+                  <span className={isActive ? 'text-blue-600 dark:text-purple-400' : ''}>
+                    {item}
+                  </span>
                   {isActive && (
-                    <div className="ml-auto w-2 h-2 bg-blue-500 dark:bg-purple-400 rounded-full animate-pulse" />
+                    <div className="ml-auto h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
                   )}
                 </Link>
               );
@@ -388,9 +413,10 @@ const Navbar = () => {
                   <Link
                     to="/sign-in"
                     onClick={closeMenu}
-                    className="flex items-center justify-center px-4 py-3 rounded-xl
-                    bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium
-                    transition-all duration-300 hover:scale-105 shadow-lg text-lg"
+                    className="flex items-center justify-center px-4 py-2.5 rounded-lg
+                      bg-gradient-to-r from-blue-500 to-blue-600 text-white 
+                      transition-all duration-300 hover:scale-105 shadow-lg 
+                      text-base font-medium"
                   >
                     Sign In
                   </Link>
@@ -402,11 +428,13 @@ const Navbar = () => {
             <div className="pt-4">
               <button
                 onClick={toggleLanguage}
-                className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 
-                  dark:from-gray-800 dark:to-gray-700 font-semibold
-                  transition-all duration-300 hover:scale-105 shadow-sm text-lg"
+                className="w-full px-4 py-2.5 rounded-lg bg-gradient-to-r 
+                  from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 
+                  font-medium text-base transition-all duration-300 
+                  hover:scale-105 shadow-sm flex items-center justify-center space-x-2"
               >
-                {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
+                <span>{language === "en" ? "🇮🇳" : "🇬🇧"}</span>
+                <span>{language === "en" ? "हिंदी" : "English"}</span>
               </button>
             </div>
           </div>
@@ -422,6 +450,17 @@ const Navbar = () => {
           to {
             opacity: 1;
             transform: translateX(0);
+          }
+        }
+
+        @keyframes glow {
+          0%, 100% { 
+            box-shadow: 0 0 15px rgba(147,51,234,0.5),
+                       0 0 30px rgba(147,51,234,0.3); 
+          }
+          50% { 
+            box-shadow: 0 0 25px rgba(147,51,234,0.8),
+                       0 0 40px rgba(147,51,234,0.5); 
           }
         }
       `}</style>
