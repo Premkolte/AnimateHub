@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 // FAQ Component
@@ -6,6 +6,8 @@ const FAQ = () => {
   // State to track which FAQ items are open
   const [openItems, setOpenItems] = useState(new Set());
 
+  // Refs for each FAQ answer container
+  const answerRefs = useRef([]);
   // Function to toggle an FAQ item open/closed
   const toggleItem = (index) => {
     const newOpenItems = new Set(openItems);
@@ -83,10 +85,16 @@ const FAQ = () => {
 
             {/* FAQ Answer */}
             <div
-              className={`overflow-hidden transition-all duration-500 ease-in-out motion-reduce:transition-none ${
+              ref={(el) => (answerRefs.current[index] = el)}
+              style={{
+                maxHeight: openItems.has(index)
+                  ? answerRefs.current[index]?.scrollHeight + "px"
+                  : "0px",
+              }}
+              className={`overflow-hidden transition-all ease-in-out motion-reduce:transition-none ${
                 openItems.has(index)
-                  ? "max-h-96 opacity-100"
-                  : "max-h-0 opacity-0"
+                  ? "duration-700 opacity-100"
+                  : "duration-500 opacity-0"
               }`}
             >
               <div className="px-8 pb-6">
