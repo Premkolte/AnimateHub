@@ -40,6 +40,7 @@ app.use(cookieParser())
 // all routes are meant to be imported here
 import authRoute from "./routes/auth.route.js"
 import componentsRoute from "./routes/components.route.js"
+import profileRoute from "./routes/profile.route.js"
 
 
 
@@ -53,6 +54,7 @@ import componentsRoute from "./routes/components.route.js"
 // all routes will be declared here
 app.use("/api/auth", authRoute)
 app.use("/api/components", componentsRoute)
+app.use("/api/profile", profileRoute)
 
 
 
