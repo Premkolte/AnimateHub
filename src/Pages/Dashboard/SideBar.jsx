@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Buttons } from "./Buttons"; // Importing button list from Buttons.js
 import { useNavigate } from "react-router-dom"; // For navigating to different routes
-import { PanelLeft, PanelRight, Search, Command, Sparkles } from "lucide-react"; // Enhanced icons
+import { PanelLeft, PanelRight, Search, Command, Sparkles, Filter, ChevronDown } from "lucide-react"; // Enhanced icons
 
 /**
  * Enhanced Sidebar Component
@@ -10,7 +10,7 @@ import { PanelLeft, PanelRight, Search, Command, Sparkles } from "lucide-react";
  * - Micro-interactions and smooth transitions
  * - Improved accessibility and visual hierarchy
  * - Advanced gradient effects and backdrop blur
- * - Integrated search functionality
+ * - Integrated search functionality with filter categories
  */
 function SideBar({ activeTab, setActiveTab }) {
   // State to manage open/close for mobile sidebar
@@ -20,7 +20,20 @@ function SideBar({ activeTab, setActiveTab }) {
   
   // Search functionality state
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState("All");
   const [filteredButtons, setFilteredButtons] = useState([]);
+
+  // Available filter categories
+  const filterCategories = [
+    "All",
+    "hover",
+    "slide",
+    "animation",
+    "form",
+    "button",
+    "card",
+    "input",
+  ];
 
   // Hook to navigate programmatically to routes
   const navigate = useNavigate();
@@ -31,23 +44,47 @@ function SideBar({ activeTab, setActiveTab }) {
   const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    
-    if (query.trim() === "") {
-      setFilteredButtons([]);
-    } else {
-      const filtered = Buttons.map((button, index) => ({ button, originalIndex: index }))
-        .filter(({ button }) => 
-          button.toLowerCase().includes(query.toLowerCase())
-        );
-      setFilteredButtons(filtered);
-    }
+    updateFilteredButtons(query, activeFilter);
   };
 
   /**
-   * Clear search functionality
+   * Handle filter category changes
+   */
+  const handleFilterChange = (e) => {
+    const filter = e.target.value;
+    setActiveFilter(filter);
+    updateFilteredButtons(searchQuery, filter);
+  };
+
+  /**
+   * Update filtered buttons based on search query and filter category
+   */
+  const updateFilteredButtons = (query, filter) => {
+    let buttons = Buttons.map((button, index) => ({ button, originalIndex: index }));
+
+    // Apply search filter
+    if (query.trim() !== "") {
+      buttons = buttons.filter(({ button }) => 
+        button.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+
+    // Apply category filter
+    if (filter !== "All") {
+      buttons = buttons.filter(({ button }) =>
+        button.toLowerCase().includes(filter.toLowerCase())
+      );
+    }
+
+    setFilteredButtons(buttons);
+  };
+
+  /**
+   * Clear search and filter functionality
    */
   const clearSearch = () => {
     setSearchQuery("");
+    setActiveFilter("All");
     setFilteredButtons([]);
   };
 
@@ -78,7 +115,7 @@ function SideBar({ activeTab, setActiveTab }) {
   /**
    * Decide which buttons to render
    */
-  const buttonsToShow = searchQuery
+  const buttonsToShow = (searchQuery || activeFilter !== "All") 
     ? filteredButtons
     : Buttons.map((button, index) => ({ button, originalIndex: index }));
 
@@ -117,6 +154,11 @@ function SideBar({ activeTab, setActiveTab }) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isSidebarOpen]);
+
+  // Initialize filtered buttons on component mount
+  useEffect(() => {
+    updateFilteredButtons(searchQuery, activeFilter);
+  }, []);
 
   return (
     <>
@@ -211,13 +253,13 @@ function SideBar({ activeTab, setActiveTab }) {
               />
               
               {/* Clear Button */}
-              {searchQuery && (
+              {(searchQuery || activeFilter !== "All") && (
                 <button
                   onClick={clearSearch}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 
                   hover:bg-gray-100/50 dark:hover:bg-secondary-700/50 rounded-r-xl transition-all duration-200 z-10
                   active:scale-95"
-                  title="Clear search"
+                  title="Clear search and filters"
                 >
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -229,15 +271,62 @@ function SideBar({ activeTab, setActiveTab }) {
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 opacity-0 hover:opacity-30 focus-within:opacity-50 transition-opacity duration-300 pointer-events-none"></div>
             </div>
 
-            {/* Search Results Counter */}
-            {searchQuery && (
-              <div className="text-xs text-gray-500 dark:text-gray-400 px-2">
-                {buttonsToShow.length} component{buttonsToShow.length !== 1 ? 's' : ''} found
-                {searchQuery && (
-                  <span className="ml-2 px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-lg font-medium">
-                    "{searchQuery}"
-                  </span>
-                )}
+            {/* ========== Enhanced Filter Select Dropdown ========== */}
+            <div className="relative">
+              {/* Filter Icon */}
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                <Filter className="h-4 w-4 text-gray-400 dark:text-gray-500 transition-colors duration-200" />
+              </div>
+              
+              {/* Custom Select with Chevron */}
+              <div className="relative">
+                <select
+                  value={activeFilter}
+                  onChange={handleFilterChange}
+                  className="block w-full pl-10 pr-10 py-3 border border-gray-300/50 dark:border-secondary-600/50 rounded-xl 
+                  bg-white/70 dark:bg-secondary-800/70 backdrop-blur-sm
+                  text-secondary-900 dark:text-white 
+                  focus:outline-none focus:ring-2 focus:ring-purple-500/50 dark:focus:ring-purple-400/50 
+                  focus:border-purple-500/50 dark:focus:border-purple-400/50 focus:bg-white/90 dark:focus:bg-secondary-800/90
+                  hover:border-gray-400/50 dark:hover:border-secondary-500/50
+                  transition-all duration-300 text-sm shadow-sm hover:shadow-md focus:shadow-lg
+                  appearance-none cursor-pointer"
+                >
+                  {filterCategories.map((category) => (
+                    <option key={category} value={category} className="bg-white dark:bg-secondary-800">
+                      {category === "All" ? "All Categories" : `${category.charAt(0).toUpperCase() + category.slice(1)} Components`}
+                    </option>
+                  ))}
+                </select>
+                
+                {/* Custom Chevron Icon */}
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none z-10">
+                  <ChevronDown className="h-4 w-4 text-gray-400 dark:text-gray-500 transition-transform duration-200" />
+                </div>
+              </div>
+              
+              {/* Animated border on focus */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-indigo-500/20 opacity-0 hover:opacity-30 focus-within:opacity-50 transition-opacity duration-300 pointer-events-none"></div>
+            </div>
+
+            {/* Search & Filter Results Counter */}
+            {(searchQuery || activeFilter !== "All") && (
+              <div className="text-xs text-gray-500 dark:text-gray-400 px-2 space-y-1">
+                <div>
+                  {buttonsToShow.length} component{buttonsToShow.length !== 1 ? 's' : ''} found
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {searchQuery && (
+                    <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-lg font-medium">
+                      Search: "{searchQuery}"
+                    </span>
+                  )}
+                  {activeFilter !== "All" && (
+                    <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg font-medium">
+                      Filter: {activeFilter}
+                    </span>
+                  )}
+                </div>
               </div>
             )}
           </div>
@@ -302,17 +391,20 @@ function SideBar({ activeTab, setActiveTab }) {
                 <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-secondary-800 dark:to-secondary-700 rounded-2xl p-6 border border-gray-200/50 dark:border-secondary-600/50">
                   <Search className="mx-auto mb-3 text-gray-400 dark:text-gray-500" size={32} />
                   <p className="text-gray-600 dark:text-gray-300 font-medium mb-1">No components found</p>
-                  <p className="text-gray-500 dark:text-gray-400 text-xs">
-                    {searchQuery ? `No results for "${searchQuery}"` : "Try a different search term"}
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mb-3">
+                    {(searchQuery && activeFilter !== "All") 
+                      ? `No results for "${searchQuery}" in ${activeFilter} category`
+                      : searchQuery 
+                        ? `No results for "${searchQuery}"`
+                        : `No ${activeFilter} components found`
+                    }
                   </p>
-                  {searchQuery && (
-                    <button
-                      onClick={clearSearch}
-                      className="mt-3 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 text-sm font-medium transition-colors duration-200"
-                    >
-                      Clear search
-                    </button>
-                  )}
+                  <button
+                    onClick={clearSearch}
+                    className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 text-sm font-medium transition-colors duration-200"
+                  >
+                    Clear filters
+                  </button>
                 </div>
               </div>
             )}
