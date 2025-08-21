@@ -87,28 +87,28 @@ const ProfilePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-secondary-900 py-8 sm:py-12 px-4 sm:px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white dark:bg-secondary-800 rounded-2xl shadow-sm border border-gray-200 dark:border-secondary-700 overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        <div className="bg-white dark:bg-secondary-800 rounded-2xl shadow-lg border border-gray-200 dark:border-secondary-700 overflow-hidden">
           {/* Profile Header */}
           <div className="p-6 md:p-8">
             <div className="flex flex-col md:flex-row gap-8">
               {/* Profile Picture */}
               <div className="flex-shrink-0 h-fit flex justify-center">
-                <div className="relative group">
+                <div className="relative">
                   <img
                     src={tempData.avatarUrl}
                     alt={`${tempData.fullName}'s profile`}
-                    className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-secondary-700 object-cover shadow-md"
+                    className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-secondary-800 object-cover shadow-lg"
                     width={160}
                     height={160}
                   />
                   {isEditing && (
                     <button
                       onClick={triggerFileInput}
-                      className="absolute -bottom-2 -right-2 bg-primary-500 text-white p-2 rounded-full hover:bg-primary-600 transition-all transform hover:scale-110"
+                      className="absolute -bottom-2 -right-2 bg-blue-500 text-white p-2.5 rounded-full hover:bg-blue-600 transition-all transform hover:scale-110 shadow-md"
                       aria-label="Change profile picture"
                     >
-                      <FiEdit2 size={18} />
+                      <FiEdit2 size={18} className="shrink-0" />
                     </button>
                   )}
                   <input
@@ -124,32 +124,37 @@ const ProfilePage = () => {
 
               {/* User Info */}
               <div className="flex-1 mt-6 md:mt-0">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-                  <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
-                    {tempData.username}
-                  </h1>
-                  <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                  <div>
+                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                      {tempData.username}
+                    </h1>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      Member since {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    </p>
+                  </div>
+                  <div className="flex gap-3 flex-wrap">
                     {!isEditing ? (
                       <button
                         onClick={() => setIsEditing(true)}
-                        className="px-4 py-2 text-sm font-medium bg-gray-100 dark:bg-secondary-700 hover:bg-gray-200 dark:hover:bg-secondary-600 rounded-md transition-colors flex items-center gap-2"
+                        className="px-5 py-2.5 text-sm font-medium bg-white dark:bg-secondary-700 hover:bg-gray-50 dark:hover:bg-secondary-600 rounded-lg transition-all flex items-center gap-2 border border-gray-200 dark:border-secondary-600 text-gray-700 dark:text-gray-200 hover:text-gray-900 hover:shadow-sm"
                       >
-                        <FiEdit2 size={16} />
+                        <FiEdit2 size={16} className="shrink-0" />
                         Edit Profile
                       </button>
                     ) : (
                       <>
                         <button
                           onClick={resetForm}
-                          className="px-4 py-2 text-sm font-medium bg-gray-100 dark:bg-secondary-700 hover:bg-gray-200 dark:hover:bg-secondary-600 rounded-md transition-colors"
+                          className="px-5 py-2.5 text-sm font-medium bg-white dark:bg-secondary-700 hover:bg-gray-50 dark:hover:bg-secondary-600 rounded-lg transition-all border border-gray-200 dark:border-secondary-600 text-gray-700 dark:text-gray-200 hover:text-gray-900"
                         >
                           Cancel
                         </button>
                         <button
                           onClick={handleSave}
-                          className="px-4 py-2 text-sm font-medium bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors flex items-center gap-2"
+                          className="px-5 py-2.5 text-sm font-medium bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all flex items-center gap-2 shadow-md hover:shadow-lg"
                         >
-                          <FiSave size={16} />
+                          <FiSave size={16} className="shrink-0" />
                           Save Changes
                         </button>
                       </>
