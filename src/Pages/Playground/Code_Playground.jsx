@@ -2,8 +2,259 @@ import { useState, useEffect } from "react";
 import { Code, Eye, Play, Maximize2, Copy, Check, Sun, Moon } from "lucide-react";
 
 export default function Playground() {
-  const [html, setHtml] = useState("<h1>Welcome to AnimateHub</h1>");
-  const [css, setCss] = useState("h1 { color: Blue; text-align: center; }");
+  const [html, setHtml] = useState(`
+    <div class="welcome-container">
+      <h1 class="welcome-text">
+        <span class="word welcome-word">
+          <span class="letter">W</span>
+          <span class="letter">e</span>
+          <span class="letter">l</span>
+          <span class="letter">c</span>
+          <span class="letter">o</span>
+          <span class="letter">m</span>
+          <span class="letter">e</span>
+        </span>
+        <span class="word to-word">
+          <span class="letter">t</span>
+          <span class="letter">o</span>
+        </span>
+        <span class="word animate-word">
+          <span class="letter glow">A</span>
+          <span class="letter glow">n</span>
+          <span class="letter glow">i</span>
+          <span class="letter glow">m</span>
+          <span class="letter glow">a</span>
+          <span class="letter glow">t</span>
+          <span class="letter glow">e</span>
+          <span class="letter glow">H</span>
+          <span class="letter glow">u</span>
+          <span class="letter glow">b</span>
+        </span>
+      </h1>
+      <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+      </div>
+    </div>
+  `);
+  
+  const [css, setCss] = useState(`
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-text {
+      font-size: 4rem;
+      font-weight: bold;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Arial Black', Arial, sans-serif;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: textFloat 4s ease-in-out infinite;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5em;
+    }
+
+    .word {
+      display: inline-flex;
+    }
+
+    .letter {
+      display: inline-block;
+      animation: bounce 2s infinite;
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
+
+    .letter:nth-child(1) { animation-delay: 0.1s; }
+    .letter:nth-child(2) { animation-delay: 0.2s; }
+    .letter:nth-child(3) { animation-delay: 0.3s; }
+    .letter:nth-child(4) { animation-delay: 0.4s; }
+    .letter:nth-child(5) { animation-delay: 0.5s; }
+    .letter:nth-child(6) { animation-delay: 0.6s; }
+    .letter:nth-child(7) { animation-delay: 0.7s; }
+    .letter:nth-child(8) { animation-delay: 0.8s; }
+    .letter:nth-child(9) { animation-delay: 0.9s; }
+    .letter:nth-child(10) { animation-delay: 1s; }
+
+    .letter.glow {
+      background: linear-gradient(45deg, #4ecdc4, #45b7d1, #667eea, #764ba2);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: bounce 2s infinite, gradientShift 3s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(70, 176, 209, 0.5);
+    }
+
+    .letter:hover {
+      transform: scale(1.3) rotate(10deg);
+      text-shadow: 0 0 30px currentColor;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) rotateZ(0deg);
+      }
+      40% {
+        transform: translateY(-20px) rotateZ(5deg);
+      }
+      60% {
+        transform: translateY(-10px) rotateZ(-3deg);
+      }
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes textFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .sparkles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #ffffff;
+      border-radius: 50%;
+      animation: sparkleFloat 4s infinite linear;
+      opacity: 0;
+    }
+
+    .sparkle:nth-child(1) {
+      left: 20%;
+      top: 20%;
+      animation-delay: 0s;
+      animation-duration: 3s;
+    }
+
+    .sparkle:nth-child(2) {
+      left: 80%;
+      top: 30%;
+      animation-delay: 1s;
+      animation-duration: 4s;
+    }
+
+    .sparkle:nth-child(3) {
+      left: 60%;
+      top: 70%;
+      animation-delay: 2s;
+      animation-duration: 3.5s;
+    }
+
+    .sparkle:nth-child(4) {
+      left: 30%;
+      top: 80%;
+      animation-delay: 1.5s;
+      animation-duration: 4.5s;
+    }
+
+    .sparkle:nth-child(5) {
+      left: 90%;
+      top: 60%;
+      animation-delay: 0.5s;
+      animation-duration: 3.8s;
+    }
+
+    @keyframes sparkleFloat {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0);
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1);
+      }
+      90% {
+        opacity: 1;
+        transform: translateY(-100px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(0);
+      }
+    }
+
+    /* Pulse effect for the entire container */
+    .welcome-container::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.7;
+      }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .welcome-text {
+        font-size: 2.5rem;
+        flex-direction: column;
+        gap: 0.2em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .welcome-text {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 0.1em;
+      }
+    }
+  `);
+  
   const [srcDoc, setSrcDoc] = useState("");
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [copiedHtml, setCopiedHtml] = useState(false);
@@ -135,9 +386,9 @@ export default function Playground() {
       </div>
 
       {/* Enhanced Editor Section - Now at Bottom */}
-      <div className="flex flex-col md:flex-row h-auto md:h-64 lg:h-72 xl:h-96 p-4 sm:p-6 gap-6 sm:gap-8 md:gap-10 bg-blue-200/50 dark:bg-gray-900/50 mb-4 sm:mb-6">
+      <div className="flex flex-col xl:flex-row h-auto xl:h-96 p-4 sm:p-6 gap-6 sm:gap-8 xl:gap-10 bg-blue-200/50 dark:bg-gray-900/50 mb-4 sm:mb-6">
         {/* HTML Editor */}
-        <div className="flex flex-col w-full md:w-1/2 h-64 sm:h-72 md:h-full">
+        <div className="flex flex-col w-full xl:w-1/2 h-64 sm:h-72 xl:h-full">
           <div className="flex items-center justify-between mb-2 sm:mb-3">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 sm:w-3 sm:h-3 bg-orange-500 rounded-full"></div>
@@ -174,7 +425,7 @@ export default function Playground() {
         </div>
 
         {/* CSS Editor */}
-        <div className="flex flex-col w-full md:w-1/2 h-64 sm:h-72 md:h-full">
+        <div className="flex flex-col w-full xl:w-1/2 h-64 sm:h-72 xl:h-full">
           <div className="flex items-center justify-between mb-2 sm:mb-3">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 sm:w-3 sm:h-3 bg-blue-500 rounded-full"></div>
