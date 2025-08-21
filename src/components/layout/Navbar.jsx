@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import DarkModeToggle from "../UI/DarkModeToggle";
-import { FiX } from "react-icons/fi";
+import { FiX, FiUser, FiSettings, FiLogOut, FiChevronDown } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
@@ -11,14 +11,17 @@ import "../layout/Navbar.css";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { favorites } = useFavorites();
   const { currentUser, logout } = useAuthStore();
   const [language, setLanguage] = useState("en");
+  const profileRef = useRef(null);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+  const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
 
   const navLinks = ["Home", "Explore", "About", "AnimationPlayground","Playground", "LeaderBoard", "Contact"];
 
@@ -37,10 +40,14 @@ const Navbar = () => {
       if (isOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.menu-button')) {
         setIsOpen(false);
       }
+      // Close profile dropdown when clicking outside
+      if (isProfileOpen && profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
+  }, [isOpen, isProfileOpen]);
 
   useEffect(() => {
     // Hide Google Translate UI
@@ -94,6 +101,13 @@ const Navbar = () => {
     const newLang = language === "en" ? "hi" : "en";
     setLanguage(newLang);
     changeLanguage(newLang);
+    setIsProfileOpen(false); // Close dropdown when language changes
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsProfileOpen(false);
+    navigate("/");
   };
 
   return (
@@ -101,11 +115,9 @@ const Navbar = () => {
       <nav
         className={`
           w-full backdrop-blur-md transition-all duration-500 ease-out
-
           ${scrolled 
             ? 'bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200' 
             : 'bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200'
-
           }
           py-3 sticky top-0 left-0 z-50
           ${scrolled ? 'shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]' : 'shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]'}
@@ -208,84 +220,189 @@ const Navbar = () => {
               })}
             </div>
 
-            {/* Desktop Actions */}
-            <div className="hidden xl:flex items-center space-x-3 xl:space-x-4">
-              {currentUser ? (
-                <>
-                  {/* Favorites Link */}
-                  <Link
-                    to="/favorites"
-                    onClick={closeMenu}
-                    className="relative group flex items-center space-x-2 px-3 py-2 rounded-lg
-                      bg-white/10 dark:bg-purple-800/30 hover:bg-white/20 dark:hover:bg-purple-700/40
-                      transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                  >
-                    <FaHeart className="text-red-400 transition-transform duration-300 group-hover:scale-110" />
-                    <span className="text-sm font-medium">Favorites</span>
-                    {favorites.length > 0 && (
-                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full
-                        animate-pulse shadow-lg transform scale-110">
-                        {favorites.length}
-                      </span>
-                    )}
-                  </Link>
-
-                  {/* Sign Out Button */}
-                  <button
-                    onClick={() => {
-                      logout();
-                      closeMenu();
-                      navigate("/");
-                    }}
-                    className="px-4 py-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300
-                      transition-all duration-300 hover:scale-105 font-medium text-sm"
-                  >
-                    Sign Out
-                  </button>
-
-                  {/* User Profile */}
-                  <Link
-                    to="/profile"
-                    className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 
-                      text-white flex items-center justify-center font-bold text-sm
-                      hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 
-                      hover:scale-110 transform ring-2 ring-white/20"
-                    title={currentUser.username || "Profile"}
-                  >
-                    {currentUser.username
-                      ? currentUser.username.charAt(0).toUpperCase()
-                      : "U"}
-                  </Link>
-                </>
-              ) : (
-                <Link
-                  to="/sign-in"
-                  onClick={closeMenu}
-                  className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 
-                    dark:from-purple-600 dark:to-purple-700 text-white font-medium
-                    transition-all duration-300 hover:scale-105 hover:shadow-xl 
-                    hover:shadow-blue-500/25 dark:hover:shadow-purple-500/25
-                    transform hover:-translate-y-0.5"
+            {/* Desktop Actions - Profile Avatar with Dropdown */}
+            <div className="hidden xl:flex items-center">
+              {/* Profile Avatar Dropdown */}
+              <div className="relative" ref={profileRef}>
+                <button
+                  onClick={toggleProfile}
+                  className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 
+                    hover:from-blue-600 hover:to-purple-700 text-white flex items-center justify-center 
+                    font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg 
+                    hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group"
+                  title="Profile Menu"
                 >
-                  Sign In
-                </Link>
-              )}
+                  {currentUser ? (
+                    currentUser.username ? currentUser.username.charAt(0).toUpperCase() : "U"
+                  ) : (
+                    <FiUser className="text-lg" />
+                  )}
+                  <div className="absolute -bottom-1 -right-1">
+                    <FiChevronDown className={`text-xs bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full p-0.5 transition-transform duration-300 ${isProfileOpen ? 'rotate-180' : ''}`} />
+                  </div>
+                </button>
 
-              {/* Dark Mode Toggle */}
-              <div className="p-2 rounded-lg backdrop-blur-sm bg-white/10 dark:bg-purple-800/40
-                hover:bg-white/20 dark:hover:bg-purple-700/50 transition-all duration-300">
-                <DarkModeToggle />
+                {/* Dropdown Menu */}
+                <div className={`
+                  absolute right-0 top-full mt-2 w-64 rounded-xl shadow-2xl z-50
+                  bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/50
+                  transform origin-top-right transition-all duration-300 ease-out
+                  ${isProfileOpen 
+                    ? 'opacity-100 scale-100 translate-y-0' 
+                    : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+                  }
+                `}>
+                  {currentUser ? (
+                    // Logged In User Menu
+                    <>
+                      {/* Profile Header */}
+                      <div className="p-4 border-b border-gray-200/20 dark:border-gray-700/30">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 
+                            text-white flex items-center justify-center font-bold text-lg ring-2 ring-blue-500/20">
+                            {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : "U"}
+                          </div>
+                          <div>
+                            <p className="font-semibold text-gray-800 dark:text-gray-200">
+                              {currentUser.username || "User"}
+                            </p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                              {currentUser.email || "user@example.com"}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* User Menu Items */}
+                      <div className="p-2 space-y-1">
+                        <Link
+                          to="/profile"
+                          onClick={() => setIsProfileOpen(false)}
+                          className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
+                            hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200
+                            text-gray-700 dark:text-gray-300 group"
+                        >
+                          <FiUser className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
+                          <span className="font-medium">Profile</span>
+                        </Link>
+
+                        <Link
+                          to="/favorites"
+                          onClick={() => setIsProfileOpen(false)}
+                          className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
+                            hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200
+                            text-gray-700 dark:text-gray-300 group relative"
+                        >
+                          <FaHeart className="text-red-500 group-hover:scale-110 transition-transform duration-200" />
+                          <span className="font-medium">Favorites</span>
+                          {favorites.length > 0 && (
+                            <span className="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                              {favorites.length}
+                            </span>
+                          )}
+                        </Link>
+
+                        <div className="border-t border-gray-200/20 dark:border-gray-700/30 my-2"></div>
+
+                        {/* Dark Mode Toggle */}
+                        <div className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
+                          hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
+                          <div className="text-yellow-500">
+                            <DarkModeToggle />
+                          </div>
+                          <span className="font-medium text-gray-700 dark:text-gray-300">
+                            <span className="dark:hidden">Dark Mode</span>
+                            <span className="hidden dark:inline">Light Mode</span>
+                          </span>
+                        </div>
+
+                        {/* Language Toggle */}
+                        <button
+                          onClick={toggleLanguage}
+                          className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg
+                            hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200
+                            text-gray-700 dark:text-gray-300 group"
+                        >
+                          <span className="text-lg">
+                            {language === "en" ? "🇮🇳" : "🇬🇧"}
+                          </span>
+                          <span className="font-medium">
+                            {language === "en" ? "हिंदी" : "English"}
+                          </span>
+                        </button>
+
+                        <div className="border-t border-gray-200/20 dark:border-gray-700/30 my-2"></div>
+
+                        <button
+                          onClick={handleLogout}
+                          className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg
+                            hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200
+                            text-red-600 dark:text-red-400 group"
+                        >
+                          <FiLogOut className="group-hover:scale-110 transition-transform duration-200" />
+                          <span className="font-medium">Sign Out</span>
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    // Guest User Menu
+                    <div className="p-2 space-y-1">
+                      <div className="p-4 border-b border-gray-200/20 dark:border-gray-700/30">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-gray-400 to-gray-600 
+                            text-white flex items-center justify-center font-bold text-lg">
+                            <FiUser className="text-xl" />
+                          </div>
+                          <div>
+                            <p className="font-semibold text-gray-800 dark:text-gray-200">Guest User</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Not signed in</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Link
+                        to="/sign-in"
+                        onClick={() => setIsProfileOpen(false)}
+                        className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
+                          hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200
+                          text-blue-600 dark:text-blue-400 group"
+                      >
+                        <FiUser className="group-hover:scale-110 transition-transform duration-200" />
+                        <span className="font-medium">Sign In</span>
+                      </Link>
+
+                      <div className="border-t border-gray-200/20 dark:border-gray-700/30 my-2"></div>
+
+                      {/* Dark Mode Toggle */}
+                      <div className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
+                        hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200">
+                        <div className="text-yellow-500">
+                          <DarkModeToggle />
+                        </div>
+                        <span className="font-medium text-gray-700 dark:text-gray-300">
+                          <span className="dark:hidden">Dark Mode</span>
+                          <span className="hidden dark:inline">Light Mode</span>
+                        </span>
+                      </div>
+
+                      {/* Language Toggle */}
+                      <button
+                        onClick={toggleLanguage}
+                        className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg
+                          hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200
+                          text-gray-700 dark:text-gray-300 group"
+                      >
+                        <span className="text-lg">
+                          {language === "en" ? "🇮🇳" : "🇬🇧"}
+                        </span>
+                        <span className="font-medium">
+                          {language === "en" ? "हिंदी" : "English"}
+                        </span>
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
-
-              {/* Language Toggle */}
-              <button
-                onClick={toggleLanguage}
-                className="px-4 py-2 rounded-lg backdrop-blur-sm bg-white/20 hover:bg-white/30 
-                  dark:bg-purple-800/40 dark:hover:bg-purple-700/50 transition-all duration-300 
-                  font-medium shadow-sm hover:scale-105 hover:shadow-lg text-sm"
-              >
-                {language === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English"}
-              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -383,6 +500,15 @@ const Navbar = () => {
             {/* Mobile Auth Section */}
             <div className="pt-4 border-t border-gray-200/20 dark:border-gray-700/30 space-y-2">
               {currentUser ? <>
+                <Link
+                  to="/profile"
+                  onClick={closeMenu}
+                  className="flex items-center space-x-3 px-4 py-3 rounded-xl
+                    hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-300"
+                >
+                  <FiUser className="text-blue-500" />
+                  <span className="text-lg font-medium">Profile</span>
+                </Link>
                 <Link
                   to="/favorites"
                   onClick={closeMenu}
