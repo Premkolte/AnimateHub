@@ -276,7 +276,7 @@ const Navbar = () => {
                       {/* User Menu Items */}
                       <div className="p-2 space-y-1">
                         <Link
-                          to="/profile"
+                          to={`/profile/${currentUser.username}`}
                           onClick={() => setIsProfileOpen(false)}
                           className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
                             hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200
