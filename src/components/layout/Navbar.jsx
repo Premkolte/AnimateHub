@@ -322,17 +322,16 @@ const Navbar = () => {
               <div className="relative" ref={profileRef}>
                 <button
                   onClick={toggleProfile}
-                  className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 
-                    hover:from-blue-600 hover:to-purple-700 text-white flex items-center justify-center 
-                    font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg 
-                    hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group"
+                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group ${
+                    !currentUser?.avatarUrl && 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white'
+                  }`}
                   title="Profile Menu"
                 >
                   {currentUser ? (
-                    currentUser.username ? (
-                      currentUser.username.charAt(0).toUpperCase()
+                    currentUser.avatarUrl ? (
+                      <img src={currentUser.avatarUrl} alt={currentUser.username} className="w-full h-full rounded-full object-cover" />
                     ) : (
-                      "U"
+                      <span>{currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}</span>
                     )
                   ) : (
                     <FiUser className="text-lg" />
@@ -365,14 +364,22 @@ const Navbar = () => {
                       {/* Profile Header */}
                       <div className="p-4 border-b border-gray-200/20 dark:border-gray-700/30">
                         <div className="flex items-center space-x-3">
-                          <div
-                            className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 
-                            text-white flex items-center justify-center font-bold text-lg ring-2 ring-blue-500/20"
-                          >
-                            {currentUser.username
-                              ? currentUser.username.charAt(0).toUpperCase()
-                              : "U"}
-                          </div>
+                          {currentUser.avatarUrl ? (
+                            <img
+                              src={currentUser.avatarUrl}
+                              alt={currentUser.username}
+                              className="w-12 h-12 rounded-full ring-2 ring-blue-500/20 object-cover"
+                            />
+                          ) : (
+                            <div
+                              className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 
+                              text-white flex items-center justify-center font-bold text-lg ring-2 ring-blue-500/20"
+                            >
+                              {currentUser.username
+                                ? currentUser.username.charAt(0).toUpperCase()
+                                : "U"}
+                            </div>
+                          )}
                           <div>
                             <p className="font-semibold text-gray-800 dark:text-gray-200">
                               {currentUser.username || "User"}

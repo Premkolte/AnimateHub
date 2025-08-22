@@ -73,7 +73,7 @@ export const useAuthStore = create((set, get) => ({
             console.log(apiResponse)
             const response = apiResponse.data;
             if (response.success) {
-                set({ currentUser: response.data });
+                set({ currentUser: response.data.user });
                 set({ authError: null })
             } else {
                 if (!silent) toast.error(response.message)
