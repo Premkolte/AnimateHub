@@ -387,7 +387,7 @@ export default function Playground() {
       </div>
 
       {/* Enhanced Editor Section - Now at Bottom */}
-      <div className="flex flex-col xl:flex-row h-auto xl:h-96 p-4 sm:p-6 gap-6 sm:gap-8 xl:gap-10 bg-blue-200/50 dark:bg-gray-900/50 mb-4 sm:mb-6">
+      <div className="flex flex-col xl:flex-row h-auto xl:h-96 p-4 sm:p-6 gap-6 sm:gap-8 xl:gap-10 bg-transparent mb-4 sm:mb-6">
         {/* HTML Editor */}
         <div className="flex flex-col w-full xl:w-1/2 h-64 sm:h-72 xl:h-full">
           <div className="flex items-center justify-between mb-2 sm:mb-3">
@@ -462,7 +462,8 @@ export default function Playground() {
           </div>
         </div>
       </div>
-      <JavascriptCode></JavascriptCode>
+      
+      <JavascriptCode />
 
       {/* Enhanced Footer */}
       <footer className="p-2 sm:p-4 text-center text-xs sm:text-sm bg-gray-800/90 backdrop-blur-sm border-t border-gray-700">

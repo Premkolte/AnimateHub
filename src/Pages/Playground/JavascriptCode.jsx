@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Copy, Check, Code, Play } from "lucide-react";
 
 const JavascriptCode = () => {
-  const [js, setJs] = useState("");
+  const [js, setJs] = useState("console.log('Hello, World!');\nconsole.log('Welcome to the JavaScript playground!');\n\n// Try writing some code here:");
   const [srcDoc, setSrcDoc] = useState("");
   const [copiedJs, setCopiedJs] = useState(false);
 
@@ -12,106 +12,143 @@ const JavascriptCode = () => {
     setTimeout(() => setCopiedJs(false), 1500);
   };
 
-  const runCode = (isDarkMode) => {
-  const source = `
-    <html>
-      <head>
-        <style>
-          body { 
-            font-family: sans-serif; 
-            padding: 10px; 
-            background-color: ${isDarkMode ? '#111827' : '#ffffff'};
-            color: ${isDarkMode ? '#ff99ccff' : '#000000'};
-          }
-        </style>
-      </head>
-      <body>
-        <div id="output"></div>
-        <script>
-          const outputDiv = document.getElementById("output");
-          const log = (...args) => {
-            outputDiv.innerHTML += args.join(" ") + "<br/>";
-          };
-          console.log = log;
-          try {
-            ${js}
-          } catch (err) {
-            outputDiv.innerHTML += '<pre style="color:red;">' + err + '</pre>';
-          }
-        </script>
-      </body>
-    </html>
-  `;
-  setSrcDoc(source);
-};
-
-
+  const runCode = () => {
+    const source = `
+      <html>
+        <head>
+          <style>
+            body { 
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+              padding: 16px; 
+              margin: 0;
+              background-color: #0f172a;
+              color: #e2e8f0;
+              line-height: 1.6;
+            }
+            pre {
+              background-color: #1e293b;
+              padding: 12px;
+              border-radius: 8px;
+              border-left: 4px solid #10b981;
+              margin: 8px 0;
+              color: #e2e8f0;
+            }
+          </style>
+        </head>
+        <body>
+          <div id="output"></div>
+          <script>
+            const outputDiv = document.getElementById("output");
+            const log = (...args) => {
+              const content = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+              ).join(" ");
+              outputDiv.innerHTML += '<pre>' + content + '</pre>';
+            };
+            console.log = log;
+            console.error = (err) => {
+              outputDiv.innerHTML += '<pre style="color: #ef4444; border-left-color: #ef4444;">' + err + '</pre>';
+            };
+            try {
+              ${js}
+            } catch (err) {
+              console.error('Error: ' + err.message);
+            }
+          </script>
+        </body>
+      </html>
+    `;
+    setSrcDoc(source);
+  };
 
   return (
-<div className="flex flex-col xl:flex-row w-full h-72 xl:h-96 gap-4 p-4 sm:p-6">
-      {/* JS Editor */}
-      <div className="flex flex-col w-full xl:w-1/2">
-        <div className="flex items-center justify-between mb-2 sm:mb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-            <h2 className="font-semibold text-sm sm:text-lg text-black dark:text-white">
-              JavaScript
-            </h2>
-          </div>
-          <div className="flex items-center gap-2">
+    <div className="w-full max-h-max bg-transparent p-4 sm:p-6 lg:p-8 border-t-2 border-slate-600">
+      {/* Run Button - Top Center */}
+      <div className="flex justify-center mb-6">
+        <button
+          onClick={() => runCode()}
+          className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 transform hover:scale-105"
+        >
+          <Play className="w-5 h-5" />
+          <span className="text-lg">Run Code</span>
+        </button>
+      </div>
+
+      {/* Main Container */}
+      <div className="flex flex-col lg:flex-row gap-6 max-w-7xl mx-auto">
+        {/* JavaScript Editor */}
+        <div className="flex flex-col w-full lg:w-1/2">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-3 h-3 bg-amber-500 rounded-full shadow-sm"></div>
+              <h2 className="font-bold text-xl text-slate-800 dark:text-slate-200">
+                JavaScript
+              </h2>
+            </div>
             <button
               onClick={() => copyToClipboard(js)}
-              className="p-1.5 sm:p-2 bg-white/50 dark:bg-gray-800/50 hover:bg-white/70 dark:hover:bg-gray-800/70 rounded-lg backdrop-blur-sm transition-all duration-200 group/btn"
+              className="p-3 bg-white/80 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 rounded-xl backdrop-blur-sm transition-all duration-200 shadow-md hover:shadow-lg group"
               title="Copy JavaScript"
             >
               {copiedJs ? (
-                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
+                <Check className="w-5 h-5 text-emerald-500" />
               ) : (
-                <Copy className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 group-hover/btn:text-yellow-600" />
+                <Copy className="w-5 h-5 text-amber-500 group-hover:text-amber-600" />
               )}
             </button>
-            <button
-              onClick={() => runCode(document.documentElement.classList.contains("dark"))}
-              className="p-1.5 sm:p-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg backdrop-blur-sm transition-all duration-200 flex items-center gap-1"
-            >
-              <Play className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">Run</span>
-            </button>
+          </div>
+
+          <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
+            <textarea
+              value={js}
+              onChange={(e) => setJs(e.target.value)}
+              className="w-full h-80 p-6 bg-slate-900/95 backdrop-blur-sm text-amber-300 font-mono text-sm lg:text-base resize-none focus:outline-none focus:ring-4 focus:ring-amber-400/30 transition-all duration-200 leading-relaxed"
+              placeholder=""
+            />
+            <div className="absolute top-4 right-4 opacity-30">
+              <Code className="w-6 h-6 text-amber-400" />
+            </div>
           </div>
         </div>
 
-        <div className="relative flex-1 rounded-lg sm:rounded-xl overflow-hidden shadow-xl border border-gray-300/50 dark:border-gray-600/50">
-          <textarea
-            value={js}
-            onChange={(e) => setJs(e.target.value)}
-            className="w-full h-full p-2 sm:p-4 bg-gray-900/95 backdrop-blur-sm text-yellow-400 font-mono text-xs sm:text-sm resize-none focus:outline-none focus:ring-2 focus:ring-yellow-400/50 transition-all duration-200"
-            placeholder="// Write your JavaScript here"
-          />
-          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 opacity-30">
-            <Code className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
+        {/* Output */}
+        <div className="flex flex-col w-full lg:w-1/2">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-3 h-3 bg-emerald-500 rounded-full shadow-sm"></div>
+              <h2 className="font-bold text-xl text-slate-800 dark:text-slate-200 my-2">
+                Output
+              </h2>
+            </div>
           </div>
-        </div>
-      </div>
-
-      {/* Output */}
-      <div className="flex flex-col w-full xl:w-1/2">
-        <div className="flex items-center justify-between mb-2 sm:mb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-            <h2 className="font-semibold text-base sm:text-xl text-black dark:text-white">
-  Output
-</h2>
-
+          
+          <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
+            <p className="w-full py-1 text-sm font-medium text-amber-600 bg-amber-50 border border-amber-200 rounded-md dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800">
+              ⚠️ No output — check your code for errors.
+            </p>
+            <iframe
+              srcDoc={srcDoc}
+              title="output"
+              sandbox="allow-scripts"
+              frameBorder="0"
+              className="w-full h-80 bg-slate-900/95 backdrop-blur-sm"
+            />
+            {!srcDoc && (
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm flex-col">
+                <p className="absolute top-0 w-full py-1 text-sm font-medium text-amber-600 bg-amber-50 border border-amber-200 rounded-md mb-3 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800">
+                  ⚠️ No output — check your code for errors.
+                </p>
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
+                    <Play className="w-8 h-8 text-emerald-500" />
+                  </div>
+                  <p className="text-slate-500 dark:text-slate-400 font-medium">
+                    Click "Run Code" to see output
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-        <div className="relative flex-1 rounded-lg sm:rounded-xl overflow-hidden shadow-xl border border-gray-300/50 dark:border-gray-600/50">
-          <iframe
-            srcDoc={srcDoc}
-            title="output"
-            sandbox="allow-scripts"
-            frameBorder="0"
-            className="w-full h-full bg-white dark:bg-gray-900"
-          />
         </div>
       </div>
     </div>
