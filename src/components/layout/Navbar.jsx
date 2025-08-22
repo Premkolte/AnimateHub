@@ -28,7 +28,7 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
-  
+
 
   const navLinks = [
     "Home",
@@ -155,16 +155,14 @@ const Navbar = () => {
       <nav
         className={`
           w-full backdrop-blur-md transition-all duration-500 ease-out
-          ${
-            scrolled
-              ? "bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200"
-              : "bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200"
+          ${scrolled
+            ? "bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200"
+            : "bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200"
           }
           py-3 sticky top-0 left-0 z-50
-          ${
-            scrolled
-              ? "shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
-              : "shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
+          ${scrolled
+            ? "shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
+            : "shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
           }
         `}
       >
@@ -186,66 +184,62 @@ const Navbar = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 rounded-full blur-lg group-hover:opacity-30 transition-opacity duration-300"></div>
                 </div>
                 <span
-                  className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${
-                    scrolled
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                      : "bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent"
-                  }`}
+                  className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${scrolled
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                    : "bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent"
+                    }`}
                 >
                   AnimateHub
                 </span>
               </Link>
-              <div className="xl:hidden">
-                <DarkModeToggle />
-              </div>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden xl:flex items-center space-x-1 xl:space-x-2">
               {navLinks.map((item, index) => {
-        // skip old Playground & AnimationPlayground
-        if (item === "Playground" || item === "AnimationPlayground") {
-          return null;
-        }
+                // skip old Playground & AnimationPlayground
+                if (item === "Playground" || item === "AnimationPlayground") {
+                  return null;
+                }
 
-        if (item === "Playgrounds") {
-          return (
-            <div key="playgrounds" className="relative" ref={dropdownRef}>
-              <button
-                onClick={toggleDropdown}
-                className={`relative px-4 py-2 rounded-lg font-medium flex items-center
+                if (item === "Playgrounds") {
+                  return (
+                    <div key="playgrounds" className="relative" ref={dropdownRef}>
+                      <button
+                        onClick={toggleDropdown}
+                        className={`relative px-4 py-2 rounded-lg font-medium flex items-center
                   ${scrolled ? "text-gray-700 dark:text-gray-300" : "text-white/90"}`}
-              >
-                Playgrounds <FiChevronDown className="ml-1" />
-              </button>
+                      >
+                        Playgrounds <FiChevronDown className="ml-1" />
+                      </button>
 
-              {openDropdown && (
-                <div className="absolute left-0 w-56 text-black dark:text-white bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-2 z-50">
-                  <Link
-                    to="/animationplayground"
-                    onClick={() => {
-                      closeMenu();
-                      setOpenDropdown(false);
-                    }}
-                    className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
-                  >
-                    Animation Playground
-                  </Link>
-                  <Link
-                    to="/playground"
-                    onClick={() => {
-                      closeMenu();
-                      setOpenDropdown(false);
-                    }}
-                    className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
-                  >
-                    Playground
-                  </Link>
-                </div>
-              )}
-            </div>
-          );
-        }
+                      {openDropdown && (
+                        <div className="absolute left-0 w-56 text-black dark:text-white bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-2 z-50">
+                          <Link
+                            to="/animationplayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                          >
+                            Animation Playground
+                          </Link>
+                          <Link
+                            to="/playground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                          >
+                            Playground
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
 
                 // Normal items
                 const path = item === "Home" ? "/" : `/${item.toLowerCase()}`;
@@ -258,19 +252,17 @@ const Navbar = () => {
                     className={`
                       relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
                       font-medium text-sm xl:text-base
-                      ${
-                        scrolled
-                          ? "text-gray-700 dark:text-gray-300"
-                          : "text-white/90 dark:text-gray-200"
+                      ${scrolled
+                        ? "text-gray-700 dark:text-gray-300"
+                        : "text-white/90 dark:text-gray-200"
                       }
                       hover:shadow-lg 
                       transform hover:scale-105
-                      ${
-                        isActive
-                          ? scrolled
-                            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-                            : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
-                          : ""
+                      ${isActive
+                        ? scrolled
+                          ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                          : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
+                        : ""
                       }
                       group overflow-hidden
                     `}
@@ -316,15 +308,16 @@ const Navbar = () => {
               })}
             </div>
 
-            {/* Desktop Actions - Profile Avatar with Dropdown */}
-            <div className="hidden xl:flex items-center">
+            {/* Desktop Actions - Profile with Dark Mode Toggle */}
+            <div className="flex items-center space-x-4">
+              <DarkModeToggle />
+
               {/* Profile Avatar Dropdown */}
               <div className="relative" ref={profileRef}>
                 <button
                   onClick={toggleProfile}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group ${
-                    !currentUser?.avatarUrl && 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white'
-                  }`}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group ${!currentUser?.avatarUrl && 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white'
+                    }`}
                   title="Profile Menu"
                 >
                   {currentUser ? (
@@ -338,9 +331,8 @@ const Navbar = () => {
                   )}
                   <div className="absolute -bottom-1 -right-1">
                     <FiChevronDown
-                      className={`text-xs bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full p-0.5 transition-transform duration-300 ${
-                        isProfileOpen ? "rotate-180" : ""
-                      }`}
+                      className={`text-xs bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full p-0.5 transition-transform duration-300 ${isProfileOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </div>
                 </button>
@@ -351,11 +343,10 @@ const Navbar = () => {
                   absolute right-0 top-full mt-2 w-64 rounded-xl shadow-2xl z-50
                   bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/50
                   transform origin-top-right transition-all duration-300 ease-out
-                  ${
-                    isProfileOpen
+                  ${isProfileOpen
                       ? "opacity-100 scale-100 translate-y-0"
                       : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                  }
+                    }
                 `}
                 >
                   {currentUser ? (
@@ -422,22 +413,6 @@ const Navbar = () => {
 
                         <div className="border-t border-gray-200/20 dark:border-gray-700/30 my-2"></div>
 
-                        {/* Dark Mode Toggle */}
-                        <div
-                          className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
-                          hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200"
-                        >
-                          <div className="text-yellow-500">
-                            <DarkModeToggle />
-                          </div>
-                          <span className="font-medium text-gray-700 dark:text-gray-300">
-                            <span className="dark:hidden">Dark Mode</span>
-                            <span className="hidden dark:inline">
-                              Light Mode
-                            </span>
-                          </span>
-                        </div>
-
                         {/* Language Toggle */}
                         <button
                           onClick={toggleLanguage}
@@ -501,20 +476,6 @@ const Navbar = () => {
 
                       <div className="border-t border-gray-200/20 dark:border-gray-700/30 my-2"></div>
 
-                      {/* Dark Mode Toggle */}
-                      <div
-                        className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
-                        hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200"
-                      >
-                        <div className="text-yellow-500">
-                          <DarkModeToggle />
-                        </div>
-                        <span className="font-medium text-gray-700 dark:text-gray-300">
-                          <span className="dark:hidden">Dark Mode</span>
-                          <span className="hidden dark:inline">Light Mode</span>
-                        </span>
-                      </div>
-
                       {/* Language Toggle */}
                       <button
                         onClick={toggleLanguage}
@@ -533,41 +494,42 @@ const Navbar = () => {
                   )}
                 </div>
               </div>
-            </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={toggleMenu}
-              className={`xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${
-                scrolled
+              {/* Mobile Menu Button */}
+              <button
+                onClick={toggleMenu}
+                className={` xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${scrolled
                   ? "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
                   : "bg-white/10 hover:bg-white/20"
-              }`}
-            >
-              <div className="relative w-6 h-6">
-                <span
-                  className={`
+                  }`}
+                aria-label="Toggle menu"
+              >
+                <div className="relative w-6 h-6">
+                  <span
+                    className={`
                   absolute top-1.5 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
                   ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
                   ${isOpen ? "rotate-45 translate-y-2" : ""}
                 `}
-                />
-                <span
-                  className={`
+                  />
+                  <span
+                    className={`
                   absolute top-3 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
                   ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
                   ${isOpen ? "opacity-0" : ""}
                 `}
-                />
-                <span
-                  className={`
+                  />
+                  <span
+                    className={`
                   absolute top-[18px] left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
                   ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
                   ${isOpen ? "-rotate-45 -translate-y-2" : ""}
                 `}
-                />
-              </div>
-            </button>
+                  />
+                </div>
+              </button>
+            </div>
+
           </div>
         </div>
         <div id="google_translate_element" style={{ display: "none" }}></div>
@@ -646,10 +608,9 @@ const Navbar = () => {
                   className={`
                     flex items-center px-4 py-3 rounded-xl transition-all duration-300
                     text-lg font-medium transform hover:scale-105
-                    ${
-                      isActive
-                        ? "bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-500 dark:border-purple-500"
-                        : "hover:bg-gray-100 dark:hover:bg-gray-800/50"
+                    ${isActive
+                      ? "bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-500 dark:border-purple-500"
+                      : "hover:bg-gray-100 dark:hover:bg-gray-800/50"
                     }
                   `}
                   style={{
@@ -673,74 +634,6 @@ const Navbar = () => {
               );
             })}
 
-            {/* Mobile Auth Section */}
-            <div className="pt-4 border-t border-gray-200/20 dark:border-gray-700/30 space-y-2">
-              {currentUser ? (
-                <>
-                  <Link
-                    to="/profile"
-                    onClick={closeMenu}
-                    className="flex items-center space-x-3 px-4 py-3 rounded-xl
-                    hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-300"
-                  >
-                    <FiUser className="text-blue-500" />
-                    <span className="text-lg font-medium">Profile</span>
-                  </Link>
-                  <Link
-                    to="/favorites"
-                    onClick={closeMenu}
-                    className="flex items-center space-x-3 px-4 py-3 rounded-xl
-                    hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-all duration-300"
-                  >
-                    <FaHeart className="text-red-400" />
-                    <span className="text-lg font-medium">Favorites</span>
-                    {favorites.length > 0 && (
-                      <span className="ml-auto bg-red-500 text-white text-sm px-2 py-1 rounded-full">
-                        {favorites.length}
-                      </span>
-                    )}
-                  </Link>
-                  <button
-                    onClick={() => {
-                      logout();
-                      closeMenu();
-                    }}
-                    className="w-full flex items-center px-4 py-3 rounded-xl text-left
-                    hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400
-                    transition-all duration-300 text-lg font-medium"
-                  >
-                    Sign Out
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/sign-in"
-                    onClick={closeMenu}
-                    className="flex items-center justify-center px-4 py-2.5 rounded-lg
-                      bg-gradient-to-r from-blue-500 to-blue-600 text-white 
-                      transition-all duration-300 hover:scale-105 shadow-lg 
-                      text-base font-medium"
-                  >
-                    Sign In
-                  </Link>
-                </>
-              )}
-            </div>
-
-            {/* Mobile Language Toggle */}
-            <div className="pt-4">
-              <button
-                onClick={toggleLanguage}
-                className="w-full px-4 py-2.5 rounded-lg bg-gradient-to-r 
-                  from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 
-                  font-medium text-base transition-all duration-300 
-                  hover:scale-105 shadow-sm flex items-center justify-center space-x-2"
-              >
-                <span>{language === "en" ? "🇮🇳" : "🇬🇧"}</span>
-                <span>{language === "en" ? "हिंदी" : "English"}</span>
-              </button>
-            </div>
           </div>
         </div>
       </div>
