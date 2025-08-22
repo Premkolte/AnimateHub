@@ -61,7 +61,7 @@ const ProfilePage = () => {
   }, [username]);
 
   useEffect(() => {
-    console.log(userData)
+    // Removed unnecessary console.log(userData)
   }, [userData])
 
 
