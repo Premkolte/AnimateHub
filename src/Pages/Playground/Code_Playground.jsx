@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Code, Eye, Play, Maximize2, Copy, Check, Sun, Moon } from "lucide-react";
+import JavascriptCode from "./JavascriptCode";
 
 export default function Playground() {
   const [html, setHtml] = useState(`
@@ -461,6 +462,7 @@ export default function Playground() {
           </div>
         </div>
       </div>
+      <JavascriptCode></JavascriptCode>
 
       {/* Enhanced Footer */}
       <footer className="p-2 sm:p-4 text-center text-xs sm:text-sm bg-gray-800/90 backdrop-blur-sm border-t border-gray-700">
