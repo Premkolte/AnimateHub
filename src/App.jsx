@@ -24,6 +24,7 @@ import AboutUs from "./Pages/About/AboutUs";
 import ContactUs from "./Pages/Contact/ContactUs";
 import Leaderboard from "./Pages/Leaderboard/LeaderBoard";
 import AnimationPlayground from "./Pages/AnimationPlayground";
+import Blog from "./Pages/BlogPage";
 
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import Contributors from "./Pages/Contributors/Contributors";
@@ -74,6 +75,7 @@ function App() {
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/animationplayground" element={<AnimationPlayground />} />
+            <Route path="/blogs" element={<Blog />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/contact" element={<ContactUs />} />
