@@ -12,7 +12,7 @@ const JavascriptCode = () => {
     setTimeout(() => setCopiedJs(false), 1500);
   };
 
-  const runCode = (isDarkMode) => {
+  const runCode = () => {
     const source = `
       <html>
         <head>
@@ -21,16 +21,17 @@ const JavascriptCode = () => {
               font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
               padding: 16px; 
               margin: 0;
-              background-color: ${isDarkMode ? '#0f172a' : '#f8fafc'};
-              color: ${isDarkMode ? '#e2e8f0' : '#1e293b'};
+              background-color: #0f172a;
+              color: #e2e8f0;
               line-height: 1.6;
             }
             pre {
-              background-color: ${isDarkMode ? '#1e293b' : '#f1f5f9'};
+              background-color: #1e293b;
               padding: 12px;
               border-radius: 8px;
-              border-left: 4px solid ${isDarkMode ? '#3b82f6' : '#2563eb'};
+              border-left: 4px solid #10b981;
               margin: 8px 0;
+              color: #e2e8f0;
             }
           </style>
         </head>
@@ -61,11 +62,11 @@ const JavascriptCode = () => {
   };
 
   return (
-    <div className="w-full max-h-max bg-transparent p-4 sm:p-6 lg:p-8">
+    <div className="w-full max-h-max bg-transparent p-4 sm:p-6 lg:p-8 border-t-2 border-slate-600">
       {/* Run Button - Top Center */}
       <div className="flex justify-center mb-6">
         <button
-          onClick={() => runCode(document.documentElement.classList.contains("dark"))}
+          onClick={() => runCode()}
           className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 transform hover:scale-105"
         >
           <Play className="w-5 h-5" />
@@ -97,11 +98,11 @@ const JavascriptCode = () => {
             </button>
           </div>
 
-          <div className="relative h-64 rounded-2xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
+          <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
             <textarea
               value={js}
               onChange={(e) => setJs(e.target.value)}
-              className="w-full h-64 p-6 bg-slate-900/95 backdrop-blur-sm text-amber-300 font-mono text-sm lg:text-base resize-none focus:outline-none focus:ring-4 focus:ring-amber-400/30 transition-all duration-200 leading-relaxed"
+              className="w-full h-80 p-6 bg-slate-900/95 backdrop-blur-sm text-amber-300 font-mono text-sm lg:text-base resize-none focus:outline-none focus:ring-4 focus:ring-amber-400/30 transition-all duration-200 leading-relaxed"
               placeholder=""
             />
             <div className="absolute top-4 right-4 opacity-30">
@@ -121,16 +122,22 @@ const JavascriptCode = () => {
             </div>
           </div>
           
-          <div className="relative h-64 rounded-2xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
+          <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
+            <p className="w-full py-1 text-sm font-medium text-amber-600 bg-amber-50 border border-amber-200 rounded-md dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800">
+              ⚠️ No output — check your code for errors.
+            </p>
             <iframe
               srcDoc={srcDoc}
               title="output"
               sandbox="allow-scripts"
               frameBorder="0"
-              className="w-full h-64 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800"
+              className="w-full h-80 bg-slate-900/95 backdrop-blur-sm"
             />
             {!srcDoc && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800">
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-900/95 backdrop-blur-sm flex-col">
+                <p className="absolute top-0 w-full py-1 text-sm font-medium text-amber-600 bg-amber-50 border border-amber-200 rounded-md mb-3 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800">
+                  ⚠️ No output — check your code for errors.
+                </p>
                 <div className="text-center">
                   <div className="w-16 h-16 mx-auto mb-4 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center">
                     <Play className="w-8 h-8 text-emerald-500" />
