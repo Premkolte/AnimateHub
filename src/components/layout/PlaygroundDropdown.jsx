@@ -16,16 +16,16 @@ const PlaygroundDropdown = () => {
       </button>
 
       {open && (
-        <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-50">
+        <div className="absolute left-0 mt-2 w-48 bg-red shadow-lg rounded-lg z-50">
           <Link
             to="/animation-playground"
-            className="block px-4 py-2 hover:bg-gray-100"
+            className="block px-4 py-2"
           >
             AnimationPlayground
           </Link>
           <Link
             to="/playground"
-            className="block px-4 py-2 hover:bg-gray-100"
+            className="block px-4 py-2 "
           >
             Playground
           </Link>

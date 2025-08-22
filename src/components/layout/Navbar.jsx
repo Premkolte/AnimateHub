@@ -220,14 +220,14 @@ const Navbar = () => {
               </button>
 
               {openDropdown && (
-                <div className="absolute left-0 w-56 text-black bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-2 z-50">
+                <div className="absolute left-0 w-56 text-black dark:text-white bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-2 z-50">
                   <Link
                     to="/animationplayground"
                     onClick={() => {
                       closeMenu();
                       setOpenDropdown(false);
                     }}
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
                   >
                     Animation Playground
                   </Link>
@@ -237,7 +237,7 @@ const Navbar = () => {
                       closeMenu();
                       setOpenDropdown(false);
                     }}
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
                   >
                     Playground
                   </Link>
