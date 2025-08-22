@@ -1,10 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FiEdit2, FiSave, FiLink, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
+import { axiosInstance } from '../../utils/axiosInstance';
 
 const ProfilePage = () => {
-  // Initial user data
-  const initialUserData = {
+  const { username } = useParams();
+
+  // The data we are going to populate
+  const [userData, setUserData] = useState({
     username: 'johndoe',
     fullName: 'John Doe',
     email: 'johndoe@gmail.com',
@@ -18,59 +22,112 @@ const ProfilePage = () => {
     totalContributions: 12,
     pendingSubmissions: 3,
     role: 'user'
+  });
+  const [isEditing, setIsEditing] = useState(false);
+  const fileInputRef = useRef(null);
+
+
+  // --------------- API CALLS ---------------
+  const fetchUserData = async () => {
+    try {
+      const apiResponse = await axiosInstance.get(`/profile/u/${username}`);
+      const response = apiResponse.data;
+
+      if (response.success) {
+        setUserData(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
   };
 
-  const [userData, setUserData] = useState(initialUserData);
-  const [isEditing, setIsEditing] = useState(false);
-  const [tempData, setTempData] = useState({ ...initialUserData });
-  const fileInputRef = useRef(null);
+
+  const updateUserData = async (updatedData) => {
+    try {
+      const apiResponse = await axiosInstance.patch(`/profile/update`, updatedData);
+      const response = apiResponse.data;
+      setUserData(response.data);
+      return response;
+    } catch (error) {
+      console.error('Error updating user data:', error);
+      throw error;
+    }
+  }
+  // --------------- API CALLS ---------------
+
+
+  useEffect(() => {
+    fetchUserData();
+  }, [username, fetchUserData]);
+
+  useEffect(() => {
+    // Removed unnecessary console.log(userData)
+  }, [userData])
+
 
   // Handle text input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setTempData(prev => ({
+    setUserData(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
   // Save profile changes
-  const handleSave = () => {
-    // In a real app, you would make an API call here
-    setUserData({ ...tempData });
-    setIsEditing(false);
-    toast.success('Profile updated successfully!');
+  const handleSave = async () => {
+    try {
+      await updateUserData(userData);
+      setIsEditing(false);
+      toast.success('Profile updated successfully!');
+    } catch (error) {
+      toast.error('Failed to update profile');
+    }
   };
 
   // Handle profile picture change
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      // Check file type
-      if (!file.type.startsWith('image/')) {
-        toast.error('Please select an image file');
-        return;
-      }
+    if (!file) return;
 
-      // Check file size (max 2MB)
-      if (file.size > 2 * 1024 * 1024) {
-        toast.error('Image size should be less than 2MB');
-        return;
-      }
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
 
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        // In a real app, you would upload the image to your server here
-        // and then update the avatarUrl with the returned URL
-        setTempData(prev => ({
+    // Check file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size should be less than 5MB');
+      return;
+    }
+
+    try {
+      // Create form data for file upload
+      const formData = new FormData();
+      formData.append('avatar', file);
+
+      // API call to update avatar
+      const apiResponse = await axiosInstance.patch('/profile/update/avatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const response = apiResponse.data;
+
+      if (response.success) {
+        setUserData(prev => ({
           ...prev,
-          avatarUrl: reader.result
+          avatarUrl: response.data.avatarUrl,
         }));
-      };
-      reader.onerror = () => {
-        toast.error('Error reading the image file');
-      };
-      reader.readAsDataURL(file);
+        toast.success('Profile picture updated successfully!');
+      } else {
+        toast.error(response.message || 'Failed to update profile picture');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast.error('Failed to update profile picture');
     }
   };
 
@@ -81,7 +138,7 @@ const ProfilePage = () => {
 
   // Reset form
   const resetForm = () => {
-    setTempData({ ...userData });
+    fetchUserData();
     setIsEditing(false);
   };
 
@@ -96,8 +153,8 @@ const ProfilePage = () => {
               <div className="flex-shrink-0 h-fit flex justify-center">
                 <div className="relative">
                   <img
-                    src={tempData.avatarUrl}
-                    alt={`${tempData.fullName}'s profile`}
+                    src={userData.avatarUrl}
+                    alt={`${userData.fullName}'s profile`}
                     className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-secondary-800 object-cover shadow-lg"
                     width={160}
                     height={160}
@@ -123,15 +180,12 @@ const ProfilePage = () => {
               </div>
 
               {/* User Info */}
-              <div className="flex-1 mt-6 md:mt-0">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+              <div className="flex-1 flex flex-col gap-y-4">
+                <div className="flex flex-col sm:flex-row items-center gap-4">
                   <div>
-                    <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-                      {tempData.username}
+                    <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
+                      {userData.username}
                     </h1>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      Member since {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                    </p>
                   </div>
                   <div className="flex gap-3 flex-wrap">
                     {!isEditing ? (
@@ -163,30 +217,28 @@ const ProfilePage = () => {
                 </div>
 
                 {/* Stats */}
-                <div className="flex gap-8 mb-6">
+                <div className="flex gap-8">
                   <div className="text-center">
-                    <p className="text-xl font-bold text-gray-900 dark:text-white">
+                    <p className="text-sm font-normal text-gray-900 dark:text-white">
                       {userData.totalContributions}
+                      <span className='text-gray-500 dark:text-gray-400'>{" "}components</span>
                     </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Contributions</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-xl font-bold text-gray-900 dark:text-white">
+                    <p className="text-sm font-normal text-gray-900 dark:text-white">
                       {userData.pendingSubmissions}
+                      <span className='text-gray-500 dark:text-gray-400'>{" "}Followers</span>
                     </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Pending</p>
                   </div>
-                  {userData.role === 'admin' && (
-                    <div className="text-center">
-                      <span className="inline-block px-2.5 py-0.5 text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 rounded-full">
-                        Admin
-                      </span>
-                    </div>
-                  )}
+                  <div className="text-center">
+                    <p className="text-sm font-normal px-2.5 py-0.5 bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 rounded-full">
+                      {userData.role}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Full Name */}
-                <div className="mb-4">
+                <>
                   {isEditing ? (
                     <div className="space-y-1">
                       <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -196,7 +248,7 @@ const ProfilePage = () => {
                         id="fullName"
                         type="text"
                         name="fullName"
-                        value={tempData.fullName}
+                        value={userData.fullName}
                         onChange={handleInputChange}
                         className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-secondary-600 rounded-md bg-white dark:bg-secondary-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Enter your full name"
@@ -207,10 +259,10 @@ const ProfilePage = () => {
                       {userData.fullName}
                     </h2>
                   )}
-                </div>
+                </>
 
                 {/* Bio */}
-                <div className="mb-6">
+                <>
                   {isEditing ? (
                     <div className="space-y-1">
                       <label htmlFor="bio" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -219,7 +271,7 @@ const ProfilePage = () => {
                       <textarea
                         id="bio"
                         name="bio"
-                        value={tempData.bio}
+                        value={userData.bio}
                         onChange={handleInputChange}
                         className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-secondary-600 rounded-md bg-white dark:bg-secondary-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         rows="3"
@@ -231,10 +283,10 @@ const ProfilePage = () => {
                       {userData.bio || 'No bio provided.'}
                     </p>
                   )}
-                </div>
+                </>
 
                 {/* Email */}
-                {!userData.email && <>
+                {userData.email && <>
                   <div className="mb-6">
                     <div className="flex items-center gap-2">
                       <span className="text-gray-600 dark:text-gray-400">Email:</span>
@@ -264,7 +316,7 @@ const ProfilePage = () => {
                           <input
                             type="url"
                             name="website"
-                            value={tempData.website}
+                            value={userData.website}
                             onChange={handleInputChange}
                             placeholder="https://example.com"
                             className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-secondary-600 rounded-md bg-white dark:bg-secondary-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -275,7 +327,7 @@ const ProfilePage = () => {
                           <input
                             type="text"
                             name="github"
-                            value={tempData.github}
+                            value={userData.github}
                             onChange={handleInputChange}
                             placeholder="GitHub username"
                             className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-secondary-600 rounded-md bg-white dark:bg-secondary-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -286,7 +338,7 @@ const ProfilePage = () => {
                           <input
                             type="text"
                             name="linkedin"
-                            value={tempData.linkedin}
+                            value={userData.linkedin}
                             onChange={handleInputChange}
                             placeholder="LinkedIn username"
                             className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-secondary-600 rounded-md bg-white dark:bg-secondary-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -297,7 +349,7 @@ const ProfilePage = () => {
                           <input
                             type="text"
                             name="twitter"
-                            value={tempData.twitter}
+                            value={userData.twitter}
                             onChange={handleInputChange}
                             placeholder="Twitter username"
                             className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-secondary-600 rounded-md bg-white dark:bg-secondary-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -363,12 +415,16 @@ const ProfilePage = () => {
 
           {/* Posts */}
           <div className="p-6 md:p-8">
-            <h2 className="text-2xl font-bold mb-4">Posts</h2>
+            <h2 className="text-2xl font-bold mb-4">Components</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[...Array(12)].map((_, index) => (
-                <div key={index} className="bg-white dark:bg-secondary-800 rounded-2xl shadow-sm border border-gray-200 dark:border-secondary-700 p-4">
-                  <h3 className="text-lg font-semibold mb-2">Post {index + 1}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">This is a sample post description.</p>
+                <div key={index} className="flex flex-col gap-y-4 bg-white dark:bg-secondary-800 rounded-2xl shadow-sm border border-gray-200 dark:border-secondary-700 p-4">
+                  <h3 className="text-lg font-medium">Component {index + 1}</h3>
+                  <h2 className='text-xl font-semibold'>Component Name</h2>
+                  <p className="text-gray-600 dark:text-gray-400">This is a sample component description.</p>
+
+                  <button className='text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors'>View Component</button>
+
                 </div>
               ))}
             </div>
