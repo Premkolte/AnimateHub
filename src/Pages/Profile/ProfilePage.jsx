@@ -58,7 +58,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     fetchUserData();
-  }, [username]);
+  }, [username, fetchUserData]);
 
   useEffect(() => {
     // Removed unnecessary console.log(userData)
