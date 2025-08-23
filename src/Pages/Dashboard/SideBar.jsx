@@ -1,7 +1,18 @@
 import { useState, useEffect } from "react";
 import { Buttons } from "./Buttons"; // Importing button list from Buttons.js
 import { useNavigate } from "react-router-dom"; // For navigating to different routes
-import { PanelLeft, PanelRight, Search, Command, Sparkles, Filter, ChevronDown } from "lucide-react"; // Enhanced icons
+import {
+  PanelLeft,
+  PanelRight,
+  Search,
+  Command,
+  Sparkles,
+  Filter,
+  ChevronDown,
+} from "lucide-react"; // Enhanced icons
+import ColorPalettePicker from "../Profile/PalettesPage";
+import { motion } from "framer-motion";
+import { Palette } from "lucide-react";
 
 /**
  * Enhanced Sidebar Component
@@ -17,7 +28,7 @@ function SideBar({ activeTab, setActiveTab }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
+
   // Search functionality state
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
@@ -60,11 +71,14 @@ function SideBar({ activeTab, setActiveTab }) {
    * Update filtered buttons based on search query and filter category
    */
   const updateFilteredButtons = (query, filter) => {
-    let buttons = Buttons.map((button, index) => ({ button, originalIndex: index }));
+    let buttons = Buttons.map((button, index) => ({
+      button,
+      originalIndex: index,
+    }));
 
     // Apply search filter
     if (query.trim() !== "") {
-      buttons = buttons.filter(({ button }) => 
+      buttons = buttons.filter(({ button }) =>
         button.toLowerCase().includes(query.toLowerCase())
       );
     }
@@ -115,9 +129,10 @@ function SideBar({ activeTab, setActiveTab }) {
   /**
    * Decide which buttons to render
    */
-  const buttonsToShow = (searchQuery || activeFilter !== "All") 
-    ? filteredButtons
-    : Buttons.map((button, index) => ({ button, originalIndex: index }));
+  const buttonsToShow =
+    searchQuery || activeFilter !== "All"
+      ? filteredButtons
+      : Buttons.map((button, index) => ({ button, originalIndex: index }));
 
   /**
    * Enhanced highlight matching with better styling
@@ -170,12 +185,12 @@ function SideBar({ activeTab, setActiveTab }) {
         >
           {/* Animated background glow */}
           <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
-          
+
           {/* Icon with rotation animation */}
           <div className="relative z-10 transition-transform duration-300 group-hover:rotate-12">
             {isSidebarOpen ? <PanelRight size={24} /> : <PanelLeft size={24} />}
           </div>
-          
+
           {/* Ripple effect */}
           <div className="absolute inset-0 rounded-2xl bg-white/20 scale-0 group-active:scale-100 transition-transform duration-200"></div>
         </button>
@@ -207,10 +222,23 @@ function SideBar({ activeTab, setActiveTab }) {
       >
         {/* Animated gradient border */}
         <div className="absolute inset-0 bg-gradient-to-b from-purple-500/20 via-transparent to-blue-500/20 rounded-r-3xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-        
+
         {/* Sidebar Inner Wrapper */}
         <div className="relative p-6 h-full flex flex-col justify-between">
           {/* ========== Header Section ========== */}
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/palettes")}
+            className="w-full px-4 py-2 mt-2 mb-4 rounded-xl 
+             text-white font-medium flex items-center justify-center gap-2
+             shadow-md bg-gradient-to-r from-pink-500 via-purple-500 via-blue-500 to-green-400
+             hover:opacity-90 transition-all"
+          >
+            <Palette className="w-4 h-4" /> Color Palettes
+          </motion.button>
+
           <div className="mb-6 space-y-4">
             {/* Enhanced "My Snippets" Button */}
             <button
@@ -222,7 +250,7 @@ function SideBar({ activeTab, setActiveTab }) {
             >
               {/* Animated background shimmer */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
+
               {/* Content */}
               <div className="relative flex items-center justify-center gap-2">
                 <Sparkles size={16} className="animate-pulse" />
@@ -236,7 +264,7 @@ function SideBar({ activeTab, setActiveTab }) {
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                 <Search className="h-4 w-4 text-gray-400 dark:text-gray-500 transition-colors duration-200" />
               </div>
-              
+
               {/* Search Input */}
               <input
                 type="text"
@@ -251,7 +279,7 @@ function SideBar({ activeTab, setActiveTab }) {
                 hover:border-gray-400/50 dark:hover:border-secondary-500/50
                 transition-all duration-300 text-sm shadow-sm hover:shadow-md focus:shadow-lg"
               />
-              
+
               {/* Clear Button */}
               {(searchQuery || activeFilter !== "All") && (
                 <button
@@ -261,12 +289,22 @@ function SideBar({ activeTab, setActiveTab }) {
                   active:scale-95"
                   title="Clear search and filters"
                 >
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               )}
-              
+
               {/* Animated border on focus */}
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 opacity-0 hover:opacity-30 focus-within:opacity-50 transition-opacity duration-300 pointer-events-none"></div>
             </div>
@@ -277,7 +315,7 @@ function SideBar({ activeTab, setActiveTab }) {
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                 <Filter className="h-4 w-4 text-gray-400 dark:text-gray-500 transition-colors duration-200" />
               </div>
-              
+
               {/* Custom Select with Chevron */}
               <div className="relative">
                 <select
@@ -293,18 +331,26 @@ function SideBar({ activeTab, setActiveTab }) {
                   appearance-none cursor-pointer"
                 >
                   {filterCategories.map((category) => (
-                    <option key={category} value={category} className="bg-white dark:bg-secondary-800">
-                      {category === "All" ? "All Categories" : `${category.charAt(0).toUpperCase() + category.slice(1)} Components`}
+                    <option
+                      key={category}
+                      value={category}
+                      className="bg-white dark:bg-secondary-800"
+                    >
+                      {category === "All"
+                        ? "All Categories"
+                        : `${
+                            category.charAt(0).toUpperCase() + category.slice(1)
+                          } Components`}
                     </option>
                   ))}
                 </select>
-                
+
                 {/* Custom Chevron Icon */}
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none z-10">
                   <ChevronDown className="h-4 w-4 text-gray-400 dark:text-gray-500 transition-transform duration-200" />
                 </div>
               </div>
-              
+
               {/* Animated border on focus */}
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-indigo-500/20 opacity-0 hover:opacity-30 focus-within:opacity-50 transition-opacity duration-300 pointer-events-none"></div>
             </div>
@@ -313,7 +359,8 @@ function SideBar({ activeTab, setActiveTab }) {
             {(searchQuery || activeFilter !== "All") && (
               <div className="text-xs text-gray-500 dark:text-gray-400 px-2 space-y-1">
                 <div>
-                  {buttonsToShow.length} component{buttonsToShow.length !== 1 ? 's' : ''} found
+                  {buttonsToShow.length} component
+                  {buttonsToShow.length !== 1 ? "s" : ""} found
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {searchQuery && (
@@ -348,15 +395,16 @@ function SideBar({ activeTab, setActiveTab }) {
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
                   {/* Dynamic gradient overlay on hover */}
-                  {hoveredIndex === originalIndex && activeTab !== originalIndex && (
-                    <div 
-                      className="absolute inset-0 bg-gradient-radial from-purple-500/10 to-transparent opacity-50 pointer-events-none transition-opacity duration-300"
-                      style={{
-                        background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(147, 51, 234, 0.1) 0%, transparent 50%)`
-                      }}
-                    />
-                  )}
-                  
+                  {hoveredIndex === originalIndex &&
+                    activeTab !== originalIndex && (
+                      <div
+                        className="absolute inset-0 bg-gradient-radial from-purple-500/10 to-transparent opacity-50 pointer-events-none transition-opacity duration-300"
+                        style={{
+                          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(147, 51, 234, 0.1) 0%, transparent 50%)`,
+                        }}
+                      />
+                    )}
+
                   {/* Content */}
                   <div className="relative z-10">
                     {searchQuery ? highlightMatch(button, searchQuery) : button}
@@ -367,7 +415,7 @@ function SideBar({ activeTab, setActiveTab }) {
                     <>
                       {/* Bottom gradient line */}
                       <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 transition-all duration-500 group-hover:w-full"></span>
-                      
+
                       {/* Side accent */}
                       <span className="absolute left-0 top-0 w-0.5 h-0 bg-gradient-to-b from-purple-500 to-blue-500 transition-all duration-300 group-hover:h-full"></span>
                     </>
@@ -378,7 +426,7 @@ function SideBar({ activeTab, setActiveTab }) {
                     <>
                       {/* Animated shimmer effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-shimmer"></div>
-                      
+
                       {/* Pulsing border */}
                       <div className="absolute inset-0 rounded-xl border-2 border-purple-400/50 animate-pulse"></div>
                     </>
@@ -389,15 +437,19 @@ function SideBar({ activeTab, setActiveTab }) {
               // ========== Enhanced No Results UI ==========
               <div className="text-center py-12 px-4">
                 <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-secondary-800 dark:to-secondary-700 rounded-2xl p-6 border border-gray-200/50 dark:border-secondary-600/50">
-                  <Search className="mx-auto mb-3 text-gray-400 dark:text-gray-500" size={32} />
-                  <p className="text-gray-600 dark:text-gray-300 font-medium mb-1">No components found</p>
+                  <Search
+                    className="mx-auto mb-3 text-gray-400 dark:text-gray-500"
+                    size={32}
+                  />
+                  <p className="text-gray-600 dark:text-gray-300 font-medium mb-1">
+                    No components found
+                  </p>
                   <p className="text-gray-500 dark:text-gray-400 text-xs mb-3">
-                    {(searchQuery && activeFilter !== "All") 
+                    {searchQuery && activeFilter !== "All"
                       ? `No results for "${searchQuery}" in ${activeFilter} category`
-                      : searchQuery 
-                        ? `No results for "${searchQuery}"`
-                        : `No ${activeFilter} components found`
-                    }
+                      : searchQuery
+                      ? `No results for "${searchQuery}"`
+                      : `No ${activeFilter} components found`}
                   </p>
                   <button
                     onClick={clearSearch}
@@ -431,26 +483,34 @@ function SideBar({ activeTab, setActiveTab }) {
       {/* Custom CSS for animations */}
       <style jsx>{`
         @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
         }
         .animate-shimmer {
           animation: shimmer 2s infinite;
         }
-        
+
         .animate-in {
           animation-fill-mode: both;
         }
-        
+
         .fade-in {
           animation-name: fadeIn;
         }
-        
+
         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
-        
+
         .bg-gradient-radial {
           background: radial-gradient(circle, var(--tw-gradient-stops));
         }
