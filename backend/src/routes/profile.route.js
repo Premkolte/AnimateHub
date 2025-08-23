@@ -17,10 +17,10 @@ router.patch("/update", updateProfile);
 // Update current user's avatar - /profile/update/avatar
 router.patch("/update/avatar", upload.single("avatar"), updateAvatar);
 
-// Get current user's pending componenets
+// Get current user's pending components
 router.get("/pending-components", getPendingComponentsOfLoggedInUser);
 
-// Get current user's rejected componenets
+// Get current user's rejected components
 router.get("/rejected-components", getRejectedComponentsOfLoggedInUser);
 
 export default router;
