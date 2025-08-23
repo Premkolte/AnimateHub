@@ -37,6 +37,12 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+   likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", // users who liked the blog
+      },
+    ],
     tags: [
       {
         type: String,
