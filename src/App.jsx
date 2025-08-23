@@ -1,7 +1,12 @@
-import { BrowserRouter as Router, Route, Routes, Outlet } from "react-router-dom";
-import { Analytics } from '@vercel/analytics/react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Outlet,
+} from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { SpeedInsights } from "@vercel/speed-insights/react"
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Import Layout --------------------------
 import Navbar from "./components/layout/Navbar";
@@ -16,8 +21,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./Pages/Auth/ProtectedRoute";
 import AppProvider from "./providers/AppProvider";
 
-
-
 // Import pages ---------------------------
 import HomePage from "./Pages/Home/HomePage";
 import AboutUs from "./Pages/About/AboutUs";
@@ -26,7 +29,7 @@ import Leaderboard from "./Pages/Leaderboard/LeaderBoard";
 import AnimationPlayground from "./Pages/AnimationPlayground";
 import Blog from "./Pages/BlogPage";
 
-import Dashboard from "./Pages/Dashboard/Dashboard"
+import Dashboard from "./Pages/Dashboard/Dashboard";
 import Contributors from "./Pages/Contributors/Contributors";
 import PaymentPage from "./Pages/Payment/Payment";
 import TemplatesRoutes from "./components/Templates/TemplatesRoutes";
@@ -35,13 +38,14 @@ import SignupPage from "./Pages/Auth/SignUpPage";
 import FavoritesPage from "./Pages/Favorites/FavoritesPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
-import MySnippet from './Pages/Dashboard/MySnippet';
+import MySnippet from "./Pages/Dashboard/MySnippet";
 
 import Playground from "./Pages/Playground/Code_Playground";
 
 import ContributorGuide from "./Pages/Contributors/ContributorGuide";
 import ProfilePage from "./Pages/Profile/ProfilePage";
-
+import PalettesPage from "./Pages/Profile/PalettesPage";
+import SideBar from "./Pages/Dashboard/SideBar"; // ✅ check correct path
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -62,7 +66,6 @@ function Layout() {
 function App() {
   return (
     <AppProvider>
-
       <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <SplashCursor />
         <ScrollToTop />
@@ -74,14 +77,31 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/animationplayground" element={<AnimationPlayground />} />
+            <Route
+              path="/animationplayground"
+              element={<AnimationPlayground />}
+            />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/contributors" element={<Contributors />} />
-            <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
-            <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+            <Route
+              path="/favorites"
+              element={
+                <ProtectedRoute>
+                  <FavoritesPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment"
+              element={
+                <ProtectedRoute>
+                  <PaymentPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/templates/*" element={<TemplatesRoutes />} />
             <Route path="/my-snippets" element={<MySnippet />} />
             <Route path="/contributor-guide" element={<ContributorGuide />} />
@@ -90,22 +110,29 @@ function App() {
             <Route path="/sign-in" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
-            <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-
+            <Route
+              path="/reset-password/:token"
+              element={<ResetPasswordPage />}
+            />
 
             {/* Profile Routes */}
-            <Route path="/profile/:username" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-
-
+            <Route
+              path="/profile/:username"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/sidebar" element={<SideBar />} />
+            <Route path="/palettes" element={<PalettesPage />} />
           </Route>
-
         </Routes>
 
         <Analytics />
       </Router>
       <SpeedInsights />
     </AppProvider>
-
   );
 }
 
