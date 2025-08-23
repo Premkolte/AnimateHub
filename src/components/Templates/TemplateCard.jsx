@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const TemplateCard = ({ template }) => {
   return (
     <motion.div
-      className="group relative p-6 sm:p-8 h-auto min-h-[280px] rounded-2xl border border-gray-200/50 dark:border-white/10 bg-gradient-to-br from-blue-50/80 to-indigo-50/80 dark:from-gray-800/90 dark:to-secondary-900/90 backdrop-blur-xl text-secondary-900 dark:text-white flex flex-col justify-between shadow-lg transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-primary-500/20 dark:hover:shadow-accent-500/20 overflow-hidden"
+      className="group relative p-6 sm:p-8 h-auto min-h-[280px] rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl text-secondary-900 dark:text-white flex flex-col justify-between shadow-lg transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-primary-500/20 dark:hover:shadow-accent-500/20 overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
