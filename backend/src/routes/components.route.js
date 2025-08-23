@@ -4,7 +4,7 @@ import {
     getAllComponents,
     getComponentById,
     updateComponent,
-    deleteComponent
+    deleteComponent,
 } from "../controllers/components.controller.js";
 
 import upload from "../utils/fileUpload.js";
@@ -22,5 +22,6 @@ router.use(authMiddleware);
 router.post("/create", upload.single("code"), createComponent);
 router.put("/update/:id", upload.single("code"), updateComponent);
 router.delete("/delete/:id", deleteComponent);
+
 
 export default router;

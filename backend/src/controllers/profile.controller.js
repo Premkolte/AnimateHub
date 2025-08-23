@@ -118,11 +118,20 @@ export const getProfile = asyncHandler(async (req, res) => {
         throw new ApiError(404, "User not found");
     }
 
+    // sanitize user object
     user = sanatizeUserModelResponse(user.toObject(), false)
+
+    if (req.user.username.toLowerCase() !== username.toLowerCase()) {
+        // Remove unwanted fields if user is not accessing his own profile
+        user.email = undefined;
+        user.pendingSubmissions = undefined;
+        user.isMyProfile = false;
+    } else {
+        user.isMyProfile = true;
+    }
+
 
     return res.status(200).json(
         new ApiResponse(200, "Profile retrieved successfully", user)
     );
 });
-
-

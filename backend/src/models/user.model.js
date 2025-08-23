@@ -79,7 +79,7 @@ const userSchema = new Schema({
     // For UI library role
     role: {
         type: String,
-        enum: ["user", "contributor", "admin"],
+        enum: ["owner", "admin", "contributor", "user"],
         default: "user"
     },
 
