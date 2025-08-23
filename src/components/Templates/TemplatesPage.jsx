@@ -234,7 +234,7 @@ const TemplatesPage = () => {
                   rotateX: 5,
                   transition: { duration: 0.3 }
                 }}
-                className="group p-6 rounded-xl border border-primary-200 dark:border-secondary-700 bg-primary-50 dark:bg-secondary-800 shadow-sm hover:shadow-2xl duration-300 hover:border-primary-500 dark:hover:border-accent-500 transition-all relative overflow-hidden"
+                className="group p-6 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl shadow-sm hover:shadow-2xl duration-300 hover:border-primary-500 dark:hover:border-accent-500 transition-all relative overflow-hidden"
               >
                 {/* Animated background gradient on hover */}
                 <motion.div
@@ -288,7 +288,7 @@ const TemplatesPage = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="bg-gradient-to-r from-primary-50/50 to-accent-50/50 dark:from-secondary-800/50 dark:to-secondary-700/50 rounded-3xl p-8 md:p-12 border border-primary-200 dark:border-secondary-600 shadow-lg backdrop-blur-sm"
+          className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-primary-200 dark:border-secondary-600 shadow-lg"
         >
           <motion.h1
             className="text-4xl md:text-5xl font-extrabold leading-tight text-secondary-900 dark:text-white transition-colors mb-6"
