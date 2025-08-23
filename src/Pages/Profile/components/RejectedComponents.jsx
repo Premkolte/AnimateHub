@@ -1,17 +1,149 @@
-export default function RejectedComponents() {
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[...Array(12)].map((_, index) => (
-                <div key={index} className="flex flex-col gap-y-4 bg-white dark:bg-secondary-800 rounded-2xl shadow-sm border border-gray-200 dark:border-secondary-700 p-4">
-                    <h3 className="text-lg font-medium">Component {index + 1}</h3>
-                    <h2 className='text-xl font-semibold'>Component Name</h2>
-                    <p className="text-gray-600 dark:text-gray-400">This is a sample component description.</p>
-                    <p className="text-red-500">Reason: Component failed to meet the required criteria</p>
+import { useEffect, useState } from "react";
+import { axiosInstance } from "../../../utils/axiosInstance";
+import { FiRefreshCw, FiAlertCircle, FiXCircle } from "react-icons/fi";
 
-                    <button className='text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors'>View Component</button>
-
-                </div>
-            ))}
+const RejectedCard = ({ component, index }) => (
+  <div className="flex flex-col gap-y-4 bg-white dark:bg-secondary-800 rounded-2xl shadow-sm border border-gray-200 dark:border-secondary-700 p-6 hover:shadow-md transition-shadow duration-200 h-full">
+    <div className="flex justify-between items-start">
+      <div className="flex items-center space-x-2">
+        <FiXCircle className="w-5 h-5 text-red-500" />
+        <span className="text-sm font-medium text-red-700 dark:text-red-400">
+          Rejected
+        </span>
+      </div>
+      <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+        {component.category || 'General'}
+      </span>
+    </div>
+    
+    <div>
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{component.name}</h2>
+      <p className="text-gray-600 dark:text-gray-400 mt-1">
+        {component.description || 'No description available'}
+      </p>
+      {component.rejectionReason && (
+        <div className="mt-2 p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
+          <p className="text-sm text-red-700 dark:text-red-300">
+            <span className="font-medium">Reason: </span>
+            {component.rejectionReason}
+          </p>
         </div>
-    )
+      )}
+    </div>
+
+    <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+      <div className="flex justify-between items-center">
+        <span className="text-sm text-gray-500 dark:text-gray-400">
+          Rejected on {new Date(component.updatedAt).toLocaleDateString()}
+        </span>
+        <button 
+          className="inline-flex items-center text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium text-sm"
+          onClick={() => console.log('View rejected component:', component.id)}
+        >
+          View Details
+          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+export default function RejectedComponents() {
+  const [rejectedComponents, setRejectedComponents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchRejectedComponents = async (showLoading = true) => {
+    try {
+      if (showLoading) setLoading(true);
+      setError(null);
+      const { data } = await axiosInstance.get("/profile/rejected-components");
+      if (data.success) {
+        setRejectedComponents(data.data || []);
+      }
+    } catch (err) {
+      console.error('Failed to fetch rejected components:', err);
+      setError(err.response?.data?.message || 'Failed to load rejected components. Please try again.');
+    } finally {
+      if (showLoading) setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchRejectedComponents();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12">
+        <FiRefreshCw className="w-12 h-12 text-blue-500 animate-spin mb-4" />
+        <p className="text-gray-600 dark:text-gray-400">Loading rejected components...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/50 mb-4">
+          <FiAlertCircle className="w-8 h-8 text-red-500 dark:text-red-400" />
+        </div>
+        <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Something went wrong</h3>
+        <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md mx-auto">{error}</p>
+        <button
+          onClick={() => fetchRejectedComponents()}
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          disabled={loading}
+        >
+          <FiRefreshCw className="mr-2 -ml-1 h-4 w-4" />
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Rejected Components</h1>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            {rejectedComponents.length} {rejectedComponents.length === 1 ? 'component' : 'components'} were not approved
+          </p>
+        </div>
+        <button
+          onClick={() => fetchRejectedComponents(true)}
+          className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-secondary-700 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          disabled={loading}
+        >
+          <FiRefreshCw className={`mr-2 h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+          Refresh
+        </button>
+      </div>
+
+      {rejectedComponents.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {rejectedComponents.map((component, index) => (
+            <RejectedCard 
+              key={component.id || index} 
+              component={component} 
+              index={index}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-16 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+            <FiXCircle className="w-8 h-8 text-red-500" />
+          </div>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">No Rejected Components</h3>
+          <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+            You don't have any rejected components. All your components have been approved or are pending review.
+          </p>
+        </div>
+      )}
+    </div>
+  );
 }

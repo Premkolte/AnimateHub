@@ -31,7 +31,7 @@ export const approveComponentController = asyncHandler(async (req, res) => {
         throw new ApiError(500, message, data);
     }
 
-    component.repoLink = data.html_url;
+    component.repoLink = data.content.html_url;
     component.code = undefined;
     component.approvedBy = req.user._id;
 

@@ -182,10 +182,20 @@ export const deleteComponent = asyncHandler(async (req, res) => {
 });
 
 
-// User is owner of the component - he can see the pending and rejected components
+// User is owner of the component - he can see the approved, pending and rejected components
+export const getApprovedComponentsOfLoggedInUser = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    const components = await Component.find({ submittedBy: userId, status: "approved" });
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, "Components retrieved successfully", components));
+})
+
+
 export const getPendingComponentsOfLoggedInUser = asyncHandler(async (req, res) => {
     const userId = req.user._id;
-    const isAdmin = req.user.role === 'admin';
 
     const components = await Component.find({ submittedBy: userId, status: "pending" });
 
@@ -197,7 +207,6 @@ export const getPendingComponentsOfLoggedInUser = asyncHandler(async (req, res) 
 
 export const getRejectedComponentsOfLoggedInUser = asyncHandler(async (req, res) => {
     const userId = req.user._id;
-    const isAdmin = req.user.role === 'admin';
 
     const components = await Component.find({ submittedBy: userId, status: "rejected" });
 
