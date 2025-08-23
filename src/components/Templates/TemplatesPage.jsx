@@ -4,11 +4,13 @@ import { FaHtml5, FaCss3Alt, FaReact } from "react-icons/fa";
 import { BiLogoTailwindCss } from "react-icons/bi";
 import { templates } from "./AvailableTemplates";
 import TemplateCard from "./TemplateCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BookOpen, Github } from "lucide-react";
 
 const TemplatesPage = () => {
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const navigate = useNavigate()
 
   const features = [
     {
@@ -137,26 +139,37 @@ const TemplatesPage = () => {
               boxShadow: "0 20px 40px rgba(0,0,0,0.15)" 
             }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 text-lg font-semibold text-white bg-black rounded-full shadow-lg hover:shadow-2xl transition-all duration-300"
+            className="flex items-center justify-center gap-3 px-6 py-3 text-lg font-semibold text-white bg-black rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 group"
             onClick={() => {
-              window.location.href = "https://github.com/Premkolte/AnimateHub";
+               window.open("https://github.com/Premkolte/AnimateHub", "_blank");
             }}
           >
-            Get Started
+            <motion.div
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Github size={20} className="group-hover:scale-110 transition-transform duration-200" />
+            </motion.div>
+            View Repository
           </motion.button>
+          
           <motion.button
             whileHover={{ 
-              scale: 1.05,
-              backgroundColor: "rgb(37 99 235)",
-              color: "white"
+              scale: 1.05
             }}
             whileTap={{ scale: 0.95 }}
-            className="border-2 border-primary-600 dark:border-accent-600 text-primary-600 dark:text-accent-600 hover:bg-primary-600 hover:text-white dark:hover:bg-accent-600 dark:hover:text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg get-started-button transition-all duration-200"
+            className="flex items-center justify-center gap-3 border-2 border-blue-600 dark:border-accent-600 text-blue-600 dark:text-accent-600 hover:bg-blue-600 hover:text-white dark:hover:bg-accent-600 dark:hover:text-slate-100 px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all duration-200 group"
             onClick={() => {
-              window.location.href = "https://github.com/Premkolte/AnimateHub";
+              navigate("/contributor-guide")
             }}
           >
-            Contribute on GitHub
+            <motion.div
+              whileHover={{ rotateY: 180 }}
+              transition={{ duration: 0.6 }}
+            >
+              <BookOpen size={20} className="group-hover:scale-110 transition-transform duration-200" />
+            </motion.div>
+            GitHub Guide
           </motion.button>
         </motion.div>
       </motion.section>
@@ -315,8 +328,7 @@ const TemplatesPage = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
           >
             <Link
-              to="https://github.com/Premkolte/AnimateHub"
-              target="_blank"
+              to="/contributor-guide"
               className="inline-block"
             >
               <motion.div
