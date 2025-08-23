@@ -21,7 +21,7 @@ const CountdownTimeSnippets = () => {
         <div
           key={index}
           className="
-            p-8 pt-14 
+            p-2 pt-14 
           bg-[#dbeafe]
           dark:bg-secondary-800 
           text-secondary-900 dark:text-white 
@@ -32,7 +32,7 @@ const CountdownTimeSnippets = () => {
             text-sm
           "
         >
-          <h2 className="text-lg font-bold mb-2">{snippet.title}</h2>
+          <h2 className="text-lg text-center font-bold mb-2">{snippet.title}</h2>
           <StringToReactComponent>{snippet.jsxCode}</StringToReactComponent>
           <div className="mt-4 flex justify-end">
             <button
