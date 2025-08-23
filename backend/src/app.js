@@ -23,7 +23,7 @@ const corsOptions = {
     credentials: true // if you're using cookies or sessions
 };
 app.use(cors(corsOptions));
- 
+
 
 
 // ~--------------------- LIMIT JSON | ENABLING COOKIES
@@ -41,7 +41,7 @@ app.use(cookieParser())
 import authRoute from "./routes/auth.route.js"
 import componentsRoute from "./routes/components.route.js"
 import profileRoute from "./routes/profile.route.js"
-
+import adminRoute from "./routes/admin.route.js"
 
 
 
@@ -55,6 +55,7 @@ import profileRoute from "./routes/profile.route.js"
 app.use("/api/auth", authRoute)
 app.use("/api/components", componentsRoute)
 app.use("/api/profile", profileRoute)
+app.use("/api/admin", adminRoute)
 
 
 

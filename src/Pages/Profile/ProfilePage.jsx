@@ -491,7 +491,7 @@ const ProfilePage = () => {
                       <svg className="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeTab === 'all' ? 2 : 1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                       </svg>
-                      <span>POSTS</span>
+                      <span>All components</span>
                       {activeTab === 'all' && (
                         <div className="absolute -bottom-px left-0 right-0 h-0.5 bg-gray-900 dark:bg-white"></div>
                       )}
@@ -510,7 +510,7 @@ const ProfilePage = () => {
                           <svg className="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeTab === 'pending' ? 2 : 1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                          <span>PENDING</span>
+                          <span>Pending Components</span>
                           {userData.pendingSubmissions > 0 && (
                             <span className="absolute -top-1 right-4 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                               {userData.pendingSubmissions}
@@ -532,7 +532,7 @@ const ProfilePage = () => {
                           <svg className="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeTab === 'rejected' ? 2 : 1.5} d="M6 18L18 6M6 6l12 12" />
                           </svg>
-                          <span>REJECTED</span>
+                          <span>Rejected Components</span>
                           {userData.rejectedSubmissions > 0 && (
                             <span className="absolute -top-1 right-4 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                               {userData.rejectedSubmissions}
