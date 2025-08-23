@@ -76,7 +76,7 @@ const TemplateCard = ({ template }) => {
           </motion.p>
         </div>
 
-        {/* Enhanced single button */}
+        {/* Enhanced single button - FIXED VERSION */}
         <motion.div 
           className="flex justify-center mt-auto"
           initial={{ opacity: 0, y: 10 }}
@@ -87,41 +87,50 @@ const TemplateCard = ({ template }) => {
             to={`/templates/${template.name}`}
             className="relative inline-block group/btn"
           >
-            <motion.div
+            <motion.button
               whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)"
+                scale: 1.03,
+                boxShadow: "0 15px 35px rgba(59, 130, 246, 0.4)",
+                transition: { duration: 0.3 }
               }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white rounded-full font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden"
+              whileTap={{ 
+                scale: 0.98,
+                transition: { duration: 0.1 }
+              }}
+              className="relative px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group/button"
             >
-              {/* Shimmer effect */}
+              {/* Animated background overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover/button:translate-x-full transition-transform duration-700 ease-out" />
+              
+              {/* Button content */}
+              <div className="relative z-10 flex items-center justify-center gap-2">
+                <span className="transition-all duration-300 group-hover/button:tracking-wide">
+                  View Template
+                </span>
+                
+                {/* Animated arrow - FIXED: No more fluttering */}
+                <div className="overflow-hidden w-4">
+                  <motion.div
+                    className="flex items-center justify-center"
+                    whileHover={{
+                      x: 2,
+                      transition: { duration: 0.3, ease: "easeOut" }
+                    }}
+                  >
+                    <span className="text-lg leading-none">→</span>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Pulse effect on hover */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover/btn:opacity-100"
-                initial={{ x: "-100%" }}
-                whileHover={{ 
-                  x: "200%",
-                  transition: { duration: 0.8 }
+                className="absolute inset-0 rounded-full bg-white/20 scale-0 group-hover/button:scale-100 opacity-0 group-hover/button:opacity-100"
+                transition={{ 
+                  scale: { duration: 0.4, ease: "easeOut" },
+                  opacity: { duration: 0.3 }
                 }}
               />
-              
-              {/* Button text */}
-              <span className="relative z-10 flex items-center gap-2">
-                <motion.span
-                  whileHover={{ x: -2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  View Template
-                </motion.span>
-                <motion.span
-                  className="text-lg"
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  →
-                </motion.span>
-              </span>
-            </motion.div>
+            </motion.button>
           </Link>
         </motion.div>
       </div>
