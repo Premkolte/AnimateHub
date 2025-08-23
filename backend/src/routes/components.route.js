@@ -5,8 +5,6 @@ import {
     getComponentById,
     updateComponent,
     deleteComponent,
-    getPendingComponentsOfLoggedInUser,
-    getRejectedComponentsOfLoggedInUser
 } from "../controllers/components.controller.js";
 
 import upload from "../utils/fileUpload.js";
@@ -25,7 +23,5 @@ router.post("/create", upload.single("code"), createComponent);
 router.put("/update/:id", upload.single("code"), updateComponent);
 router.delete("/delete/:id", deleteComponent);
 
-router.get("/pending", getPendingComponentsOfLoggedInUser);
-router.get("/rejected", getRejectedComponentsOfLoggedInUser);
 
 export default router;
