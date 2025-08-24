@@ -35,6 +35,12 @@ const PlaygroundDropdown = () => {
           >
             FramerPlayground
           </Link>
+          <Link
+            to="/colorgradientplayground"
+            className="block px-4 py-2 "
+          >
+            ColorGradientPlayground
+          </Link>
         </div>
       )}
     </div>

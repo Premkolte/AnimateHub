@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import img1 from "/assets/testimonials/img5.jpg";
 import img2 from "/assets/testimonials/img2.jpeg";
 import img3 from "/assets/testimonials/img.jpeg";
@@ -62,6 +63,12 @@ const TestimonialCard = ({ text, name, image }) => {
   );
 };
 
+TestimonialCard.propTypes = {
+  text: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+};
+
 const TestimonialSection = () => {
   const [isPaused, setIsPaused] = useState(false);
   const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
@@ -95,7 +102,6 @@ const TestimonialSection = () => {
           </p>
         </div>
         <div className="relative">
-
           {/* for left side shadow */}
           <div className="absolute -left-2 top-0 w-8 sm:w-16 md:w-24 h-full bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
           {/* for right side shadow */}
