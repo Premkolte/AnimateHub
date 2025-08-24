@@ -4,6 +4,11 @@ import { Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { axiosInstance } from '../../utils/axiosInstance';
+
+// Verify email reminder
+import VerifyEmailReminder from './components/VerifyEmailReminder';
+
+// Components bottom tabs
 import AllComponents from './components/AllComponents';
 import PendingComponents from './components/PendingComponents';
 import RejectedComponents from './components/RejectedComponents';
@@ -153,6 +158,10 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-secondary-900 py-8 sm:py-12 px-4 sm:px-6">
       <div className="">
+
+        {/* Verify email reminder */}
+        {userData.isMyProfile && userData.isVerified === false && <VerifyEmailReminder />}
+
         <div className="bg-white dark:bg-secondary-800 rounded-2xl shadow-lg border border-gray-200 dark:border-secondary-700 overflow-hidden">
           {/* Profile Header */}
           <div className="p-6 md:p-8">
