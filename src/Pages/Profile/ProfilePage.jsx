@@ -485,7 +485,7 @@ const ProfilePage = () => {
           </div>
 
           {/* Tabs Section */}
-          <div className="border-t border-gray-200 dark:border-gray-700">
+          <div className="border-t border-gray-200 dark:border-gray-700 min-h-screen">
             {/* Tabs Navigation */}
             <div className="flex justify-center">
               <div className="w-full max-w-3xl">
