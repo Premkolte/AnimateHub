@@ -1,7 +1,9 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+
 import Component from "../models/components.model.js";
+import User from "../models/user.model.js";
 
 // Create a new component - only logged in users can create components
 export const createComponent = asyncHandler(async (req, res) => {
@@ -184,7 +186,16 @@ export const deleteComponent = asyncHandler(async (req, res) => {
 
 // User is owner of the component - he can see the approved, pending and rejected components
 export const getApprovedComponentsOfLoggedInUser = asyncHandler(async (req, res) => {
-    const userId = req.user._id;
+    const { username } = req.params;
+    const user = await User.findOne({ username }).select('_id').lean()
+    
+console.log(user)
+
+    if (!user){
+        throw new ApiError(404, "No user found with this username, please refresh the page or try later.")
+    }
+
+    const userId = user._id;
 
     const components = await Component.find({ submittedBy: userId, status: "approved" });
 
