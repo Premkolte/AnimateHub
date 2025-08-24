@@ -226,6 +226,17 @@ function SideBar({ activeTab, setActiveTab }) {
         {/* Sidebar Inner Wrapper */}
         <div className="relative p-6 h-full flex flex-col justify-between">
           {/* ========== Header Section ========== */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/resourcehub")}
+            className="w-full px-4 py-2 mt-2 mb-4 rounded-xl 
+             text-white font-medium flex items-center justify-center gap-2
+             shadow-md bg-gradient-to-r from-teal-500 via-indigo-800 to-orange-500
+             hover:opacity-90 transition-all"
+          >
+           ⚡Resource Hub
+          </motion.button>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
