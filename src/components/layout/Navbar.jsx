@@ -36,6 +36,7 @@ const Navbar = () => {
     "About",
     "Playgrounds",
     "LeaderBoard",
+    "Challenge",
     "Blogs",
     "Contact",
   ];

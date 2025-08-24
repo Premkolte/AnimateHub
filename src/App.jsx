@@ -28,6 +28,7 @@ import ContactUs from "./Pages/Contact/ContactUs";
 import Leaderboard from "./Pages/Leaderboard/LeaderBoard";
 import AnimationPlayground from "./Pages/AnimationPlayground";
 import Blog from "./Pages/BlogPage";
+import ChallengeMode from "./Pages/ChallengeMode";
 
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Contributors from "./Pages/Contributors/Contributors";
@@ -81,6 +82,7 @@ function App() {
               path="/animationplayground"
               element={<AnimationPlayground />}
             />
+            <Route path="/challenge" element={<ChallengeMode />} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
