@@ -3,6 +3,26 @@ import { axiosInstance } from "../../../utils/axiosInstance";
 import { FiRefreshCw, FiAlertCircle, FiBox } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 
+// Skeleton Loader Component
+const SkeletonCard = () => (
+  <div className="flex flex-col gap-y-4 bg-white dark:bg-secondary-800 rounded-2xl shadow-sm border border-gray-200 dark:border-secondary-700 p-6 h-full">
+    <div className="flex justify-between">
+      <div className="h-4 w-20 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+      <div className="h-6 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
+    </div>
+    <div className="h-6 w-3/4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+    <div className="space-y-2 flex-grow">
+      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-5/6"></div>
+      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-2/3"></div>
+    </div>
+    <div className="flex justify-between items-center pt-4 border-t border-gray-100 dark:border-gray-700">
+      <div className="h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+      <div className="h-4 w-20 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+    </div>
+  </div>
+);
+
 const ComponentCard = ({ component, index }) => (
   <div className="flex flex-col gap-y-4 bg-white dark:bg-secondary-800 rounded-2xl shadow-sm border border-gray-200 dark:border-secondary-700 p-6 hover:shadow-md transition-shadow duration-200 h-full">
     <div className="flex justify-between items-start">
@@ -61,15 +81,6 @@ export default function AllComponents() {
     fetchAllComponents();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center py-12">
-        <FiRefreshCw className="w-12 h-12 text-blue-500 animate-spin mb-4" />
-        <p className="text-gray-600 dark:text-gray-400">Loading components...</p>
-      </div>
-    );
-  }
-
   if (error) {
     return (
       <div className="text-center py-12">
@@ -107,7 +118,13 @@ export default function AllComponents() {
         </button>
       </div>
 
-      {components.length > 0 ? (
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      ) : components.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {components.map((component, index) => (
             <ComponentCard key={component.id || index} component={component} index={index} />
@@ -132,6 +149,8 @@ export default function AllComponents() {
           </div>
         </div>
       )}
+
+
     </div>
   );
 }
