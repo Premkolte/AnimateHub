@@ -342,14 +342,14 @@ export default function BlogHub() {
         <div className="flex justify-end">
           <button
             onClick={() => setShowAdd(true)}
+            // Mobile sizing
+            // Tablet sizing
+            // Desktop sizing
+            // Large screen sizing
             className="group bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 hover:scale-110 overflow-hidden border-2 border-white/20
-            /* Mobile sizing */
             px-4 py-2.5 text-sm
-            /* Tablet sizing */
             sm:px-5 sm:py-3 sm:text-base
-            /* Desktop sizing */
             md:px-6 md:py-3 md:text-base
-            /* Large screen sizing */
             lg:px-6 lg:py-3"
             style={{ boxShadow: "0 8px 32px rgba(59, 130, 246, 0.3)" }}
           >
