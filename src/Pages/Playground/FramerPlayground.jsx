@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 const FramerPlayground = () => {
-
   // Default code snippet for the editor
   // Provides a live preview with gradient background, heading, paragraph, and clickable button
-  
+
   const [code, setCode] = useState(
-  `<div style="
+    `<div style="
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -19,6 +18,8 @@ const FramerPlayground = () => {
       text-align: center;
       border-radius: 12px;
       padding: 20px;
+
+
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
       overflow: hidden;
   ">
@@ -31,6 +32,7 @@ const FramerPlayground = () => {
         padding: 10px 20px;
         border: none;
         border-radius: 8px;
+        
         background-color: #f53e50ff;
         color: #fff;
         cursor: pointer;
@@ -48,11 +50,12 @@ const FramerPlayground = () => {
         justify-content: center;
     ">
       <div style="
+
           width: 60px; height: 60px; background: #6a11cb; border-radius: 50%;
           animation: bounce 1s infinite alternate;
       "></div>
       <div style="
-          width: 60px; height: 60px; background: #2575fc; border-radius: 50%;
+          width: 60px; height: 60px; background: #f754c9ff; border-radius: 50%;
           animation: bounce 1s 0.2s infinite alternate;
       "></div>
       <div style="
@@ -60,6 +63,7 @@ const FramerPlayground = () => {
           animation: bounce 1s 0.4s infinite alternate;
       "></div>
     </div>
+
 
     <style>
       @keyframes fadeIn {
@@ -73,7 +77,10 @@ const FramerPlayground = () => {
     </style>
 
   </div>`
-);
+  );
+
+
+  
 
   // Current device for preview
   const [device, setDevice] = useState("desktop");
@@ -89,7 +96,6 @@ const FramerPlayground = () => {
 
   return (
     <div className="flex flex-col space-y-6">
-
       {/* Main Heading */}
       <div className="text-center py-8 px-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
         <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-800 via-purple-800 to-pink-600 drop-shadow-md">
@@ -100,14 +106,12 @@ const FramerPlayground = () => {
         </p>
       </div>
 
-
       {/* Code Editor Heading */}
       <div className="text-left px-2 md:px-6 lg:px-12">
         <h2 className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-100">
           Code Editor (HTML / CSS)
         </h2>
       </div>
-
 
       {/* Code Editor Textarea */}
       <div className="px-2 md:px-6 lg:px-12">
@@ -119,8 +123,8 @@ const FramerPlayground = () => {
         />
       </div>
 
-
       {/* Device Switcher Buttons */}
+
       <div className="flex justify-center gap-4">
         {devices.map((d) => (
           <motion.button
@@ -139,8 +143,8 @@ const FramerPlayground = () => {
         ))}
       </div>
 
-
       {/* Live Preview */}
+
       <motion.div
         className="border-2 border-gray-400 rounded-xl overflow-auto shadow-lg bg-white dark:bg-[#1a1f2b] transition-all duration-500"
         style={{
@@ -158,13 +162,7 @@ const FramerPlayground = () => {
         />
       </motion.div>
     </div>
-
-
   );
-
-
 };
-
-
 
 export default FramerPlayground;
