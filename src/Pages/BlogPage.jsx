@@ -651,8 +651,7 @@ export default function BlogHub() {
               <motion.article
                 key={b.id}
                 id={`blog-${b.id}`}
-                whileHover={{ y: -6, scale: 1.03, boxShadow: "0 8px 32px rgba(60,60,120,0.12)" }}
-                className="group rounded-3xl overflow-hidden border border-transparent hover:border-r-4 hover:border-r-blue-500 dark:hover:border-r-blue-400 bg-gradient-to-br from-white/80 to-blue-50 dark:from-slate-900/80 dark:to-slate-800/80 shadow-lg hover:shadow-2xl transition-all duration-300 backdrop-blur-lg flex flex-col h-full relative"
+                className="group rounded-3xl overflow-hidden border border-transparent border-r-4 border-r-transparent hover:border-r-blue-500 dark:hover:border-r-blue-400 bg-gradient-to-br from-white/80 to-blue-50 dark:from-slate-900/80 dark:to-slate-800/80 shadow-lg hover:shadow-2xl transition-all duration-300 backdrop-blur-lg flex flex-col h-full relative"
               >
                                  <div className="relative">
                    <img
