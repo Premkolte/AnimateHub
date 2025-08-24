@@ -7,7 +7,7 @@ const FramerPlayground = () => {
   // Provides a live preview with gradient background, heading, paragraph, and clickable button
   
   const [code, setCode] = useState(
-    `<div style="
+  `<div style="
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,12 +20,14 @@ const FramerPlayground = () => {
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      overflow: hidden;
   ">
-
-    <h1 style="font-size: 2rem; margin-bottom: 10px;">Welcome to Framer Playground!</h1>
-    <p style="font-size: 1rem;">Edit this code and see live results instantly!</p>
+    
+    <h1 style="font-size: 2rem; margin-bottom: 10px; animation: fadeIn 1s ease-out;">Welcome to Framer Playground!</h1>
+    <p style="font-size: 1rem; margin-bottom: 20px; animation: fadeIn 1.5s ease-out;">Edit this code and see live results instantly!</p>
+    
     <button style="
-        margin-top: 20px;
+        margin-bottom: 20px;
         padding: 10px 20px;
         border: none;
         border-radius: 8px;
@@ -33,11 +35,45 @@ const FramerPlayground = () => {
         color: #fff;
         cursor: pointer;
         font-weight: bold;
-    " onclick="alert('Hello from Framer Playground!')">Click Me</button>
+        transition: transform 0.2s;
+    " 
+    onclick="alert('Hello from Framer Playground!'); this.style.transform='scale(1.1)'; setTimeout(()=>{this.style.transform='scale(1)';},200);">
+      Click Me
+    </button>
+    
+    <div style="
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    ">
+      <div style="
+          width: 60px; height: 60px; background: #6a11cb; border-radius: 50%;
+          animation: bounce 1s infinite alternate;
+      "></div>
+      <div style="
+          width: 60px; height: 60px; background: #2575fc; border-radius: 50%;
+          animation: bounce 1s 0.2s infinite alternate;
+      "></div>
+      <div style="
+          width: 60px; height: 60px; background: #f53e50ff; border-radius: 50%;
+          animation: bounce 1s 0.4s infinite alternate;
+      "></div>
+    </div>
+
+    <style>
+      @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(-10px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes bounce {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-15px); }
+      }
+    </style>
+
   </div>`
-
-
-  );
+);
 
   // Current device for preview
   const [device, setDevice] = useState("desktop");
