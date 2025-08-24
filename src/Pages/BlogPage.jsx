@@ -338,12 +338,41 @@ export default function BlogHub() {
       className="min-h-screen w-full py-10 px-4 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 text-slate-900 dark:text-slate-100"
     >
       <div className="max-w-7xl mx-auto space-y-10">
+        {/* Add Blog Button Container - Top Right */}
+        <div className="flex justify-end">
+          <button
+            onClick={() => setShowAdd(true)}
+            className="group bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-500 hover:scale-110 overflow-hidden border-2 border-white/20
+            /* Mobile sizing */
+            px-4 py-2.5 text-sm
+            /* Tablet sizing */
+            sm:px-5 sm:py-3 sm:text-base
+            /* Desktop sizing */
+            md:px-6 md:py-3 md:text-base
+            /* Large screen sizing */
+            lg:px-6 lg:py-3"
+            style={{ boxShadow: "0 8px 32px rgba(59, 130, 246, 0.3)" }}
+          >
+            {/* Background Animation */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
+            
+            {/* Shine Effect */}
+            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full"></div>
+            
+            {/* Button Content */}
+            <span className="relative z-10 flex items-center gap-1 sm:gap-2">
+              <span className="group-hover:rotate-12 transition-transform duration-300 text-sm sm:text-base">➕</span>
+              <span>Add Blog</span>
+            </span>
+          </button>
+        </div>
+
         {/* Header */}
         <motion.section
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="text-center space-y-4"
+          className="text-center space-y-4 relative"
         >
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-2 shadow-lg">
             <span className="text-3xl">📝</span>
@@ -355,14 +384,41 @@ export default function BlogHub() {
             Tutorials, showcases, and behind-the-scenes stories from the animation community.
           </p>
 
-          {/* Quick Filters */}
-          <div className="flex flex-wrap gap-3 justify-center mt-4">
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search tutorials, tags, authors…"
-              className="flex-grow min-w-[250px] px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80 focus:ring-2 focus:ring-blue-500"
-            />
+          {/* Search & Reset Row */}
+          <div className="flex flex-wrap sm:flex-nowrap gap-3 justify-center mt-4">
+            <div className="relative w-96">
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search tutorials, tags, authors…"
+                className="w-full px-4 py-2 pr-20 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80 focus:ring-2 focus:ring-blue-500 flex-shrink"
+              />
+              {query && (
+                <button
+                  onClick={() => setQuery("")}
+                  className="absolute right-12 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                  title="Clear search"
+                >
+                  ✕
+                </button>
+              )}
+              <button
+                onClick={() => {
+                  setQuery("");
+                  setCategory("");
+                  setActiveTag("");
+                  setSort("newest");
+                }}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                title="Reset all filters"
+              >
+                ✗
+              </button>
+            </div>
+          </div>
+
+          {/* Filter Selects Row */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 justify-center mt-3 max-w-md mx-auto">
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -390,172 +446,265 @@ export default function BlogHub() {
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80"
+              className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80 col-span-2 sm:col-span-1"
             >
               <option value="sort">Sort By</option>
               <option value="newest">Newest</option>
               <option value="likes">Most Liked</option>
             </select>
-            <button
-              onClick={() => {
-                setQuery("");
-                setCategory("");
-                setActiveTag("");
-                setSort("newest");
-              }}
-              className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-blue-100 dark:hover:bg-slate-700"
-            >
-              Reset
-            </button>
-            <button
-              onClick={() => setShowAdd((s) => !s)}
-              className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-500 shadow"
-            >
-              {showAdd ? "Close" : "➕ Add Blog"}
-            </button>
           </div>
         </motion.section>
 
-        {/* Add Blog Panel */}
-        <AnimatePresence>
-          {showAdd && (
-            <motion.form
-              onSubmit={submitBlog}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="bg-white/80 dark:bg-slate-800/80 backdrop-blur p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4"
-            >
-              <h3 className="text-xl font-semibold">Create a New Blog</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <input
-                  required
-                  placeholder="Title"
-                  className="px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-700"
-                  value={newBlog.title}
-                  onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
-                />
-                <input
-                  placeholder="Author (optional)"
-                  className="px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-700"
-                  value={newBlog.author}
-                  onChange={(e) => setNewBlog({ ...newBlog, author: e.target.value })}
-                />
-                <input
-                  placeholder="Category (e.g., CSS, GSAP, Three.js)"
-                  className="px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-700"
-                  value={newBlog.category}
-                  onChange={(e) => setNewBlog({ ...newBlog, category: e.target.value })}
-                />
-                <input
-                  placeholder="Tags (comma separated)"
-                  className="px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-700"
-                  value={newBlog.tags}
-                  onChange={(e) => setNewBlog({ ...newBlog, tags: e.target.value })}
-                />
-                <input
-                  placeholder="Cover Image URL (optional)"
-                  className="px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-700 md:col-span-2"
-                  value={newBlog.cover}
-                  onChange={(e) => setNewBlog({ ...newBlog, cover: e.target.value })}
-                />
-                <textarea
-                  required
-                  placeholder="Short excerpt"
-                  rows={2}
-                  className="px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-700 md:col-span-2"
-                  value={newBlog.excerpt}
-                  onChange={(e) => setNewBlog({ ...newBlog, excerpt: e.target.value })}
-                />
-                <textarea
-                  required
-                  placeholder="Full content (Markdown allowed)"
-                  rows={6}
-                  className="px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-700 md:col-span-2"
-                  value={newBlog.content}
-                  onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
-                />
+        {/* Enhanced Sidebar Widgets Row */}
+        <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch mt-8">
+          {/* Top Liked */}
+          <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-blue-200 to-blue-300 dark:from-blue-700 to-blue-600 bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 dark:from-slate-900/90 dark:via-blue-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-5 dark:opacity-10">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400 rounded-full -translate-y-16 translate-x-16"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-300 rounded-full translate-y-12 -translate-x-12"></div>
+            </div>
+            
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-2xl">📈</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl text-slate-800 dark:text-slate-100">Top Liked</h4>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Most popular posts</p>
+                </div>
               </div>
-              <div className="flex gap-3 justify-end">
-                <button
-                  type="button"
-                  onClick={() => setShowAdd(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600"
-                >
-                  Cancel
-                </button>
-                <button
-                  className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-500"
-                  type="submit"
-                >
-                  Save Blog
-                </button>
+              
+              <ul className="space-y-4 flex-1">
+                {topLiked.map((b, index) => (
+                  <li key={b.id} className="group">
+                    <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60 dark:bg-slate-800/60 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 hover:scale-105 hover:shadow-lg border border-white/20 dark:border-slate-700/20">
+                      <div className="flex-shrink-0">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
+                          index === 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' :
+                          index === 1 ? 'bg-gradient-to-r from-gray-300 to-gray-400' :
+                          index === 2 ? 'bg-gradient-to-r from-amber-600 to-amber-700' :
+                          'bg-gradient-to-r from-blue-500 to-blue-600'
+                        }`}>
+                          {index + 1}
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <button
+                          className="text-left hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition text-sm font-medium text-slate-700 dark:text-slate-200 line-clamp-2"
+                          onClick={() => openModal(b)}
+                        >
+                          {b.title}
+                        </button>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs font-bold shadow-lg">
+                          ❤️ {likes[b.id] || 0}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Trending Tags */}
+          <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-purple-200 to-purple-300 dark:from-purple-700 to-purple-600 bg-gradient-to-br from-white/90 via-purple-50/50 to-white/90 dark:from-slate-900/90 dark:via-purple-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-5 dark:opacity-10">
+              <div className="absolute top-0 left-0 w-28 h-28 bg-purple-400 rounded-full -translate-y-14 -translate-x-14"></div>
+              <div className="absolute bottom-0 right-0 w-20 h-20 bg-purple-300 rounded-full translate-y-10 translate-x-10"></div>
+            </div>
+            
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-2xl">🔥</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl text-slate-800 dark:text-slate-100">Trending Tags</h4>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Hot topics now</p>
+                </div>
               </div>
-            </motion.form>
-          )}
-        </AnimatePresence>
+              
+              <div className="flex flex-wrap gap-3 flex-1">
+                {trendingTags.map(([t, n]) => (
+                  <button
+                    key={t}
+                    onClick={() => setActiveTag(t === activeTag ? "" : t)}
+                    className={`group relative px-4 py-2.5 rounded-2xl font-semibold shadow-lg transition-all duration-300 hover:scale-110 border-2 ${
+                      activeTag === t
+                        ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white border-purple-600 shadow-purple-500/25"
+                        : "bg-gradient-to-r from-white/80 to-purple-50/80 dark:from-slate-800/80 dark:to-purple-900/20 text-slate-700 dark:text-slate-200 border-purple-200 dark:border-purple-700 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-purple-500/20"
+                    }`}
+                    title={`${n} post(s)`}
+                  >
+                    <span className="relative z-10">#{t}</span>
+                    {activeTag === t && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl animate-pulse"></div>
+                    )}
+                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-orange-400 to-red-500 rounded-full text-white text-xs flex items-center justify-center font-bold shadow-lg">
+                      {n}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* My Bookmarks */}
+          <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-yellow-200 to-yellow-300 dark:from-yellow-700 to-yellow-600 bg-gradient-to-br from-white/90 via-yellow-50/50 to-white/90 dark:from-slate-900/90 dark:via-yellow-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-5 dark:opacity-10">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-400 rounded-full -translate-y-12 translate-x-12"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-300 rounded-full translate-y-16 -translate-x-16"></div>
+            </div>
+            
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-2xl">🔖</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-xl text-slate-800 dark:text-slate-100">My Bookmarks</h4>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Saved for later</p>
+                </div>
+              </div>
+              
+              {blogs.filter((b) => bookmarks.has(b.id)).length ? (
+                <ul className="space-y-4 flex-1">
+                  {blogs
+                    .filter((b) => bookmarks.has(b.id))
+                    .map((b) => (
+                      <li key={b.id} className="group">
+                        <div className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white/60 dark:bg-slate-800/60 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-all duration-300 hover:scale-105 hover:shadow-lg border border-white/20 dark:border-slate-700/20">
+                          <div className="flex-1 min-w-0">
+                            <button
+                              className="text-left text-sm hover:underline hover:text-yellow-600 dark:hover:text-yellow-400 transition font-medium text-slate-700 dark:text-slate-200 line-clamp-2"
+                              onClick={() => openModal(b)}
+                            >
+                              {b.title}
+                            </button>
+                          </div>
+                          <button
+                            onClick={() => toggleBookmark(b.id)}
+                            className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 group-hover:shadow-yellow-500/25"
+                            title="Remove bookmark"
+                          >
+                            <span className="text-sm">×</span>
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              ) : (
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                    <span className="text-3xl">📚</span>
+                  </div>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mb-2">
+                    No bookmarks yet
+                  </p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500">
+                    Save your favorite posts to read later!
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Visual Separator */}
+        <div className="flex items-center justify-center my-16">
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent"></div>
+            <div className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg"></div>
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent"></div>
+          </div>
+        </div>
+
+        {/* Blogs Section Heading */}
+        <motion.section
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          className="text-center mt-20 mb-8"
+        >
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-4 shadow-lg">
+            <span className="text-2xl">📚</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
+            Discover Amazing Content
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            Explore our curated collection of tutorials, showcases, and insights from the animation community
+          </p>
+        </motion.section>
 
         {/* Main Grid */}
-        <section className="grid lg:grid-cols-12 gap-8">
+        <section className="grid lg:grid-cols-12 gap-8 mt-8">
           {/* Blog Grid */}
-          <div className="lg:col-span-8 grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="lg:col-span-12 grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {visibleBlogs.map((b) => (
               <motion.article
                 key={b.id}
                 id={`blog-${b.id}`}
-                whileHover={{ y: -4 }}
-                className="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 shadow hover:shadow-lg transition"
+                whileHover={{ y: -6, scale: 1.03, boxShadow: "0 8px 32px rgba(60,60,120,0.12)" }}
+                className="group rounded-3xl overflow-hidden border border-transparent hover:border-r-4 hover:border-r-blue-500 dark:hover:border-r-blue-400 bg-gradient-to-br from-white/80 to-blue-50 dark:from-slate-900/80 dark:to-slate-800/80 shadow-lg hover:shadow-2xl transition-all duration-300 backdrop-blur-lg flex flex-col h-full relative"
               >
-                <div className="relative">
-                  <img
-                    src={b.cover}
-                    alt={b.title}
-                    className="h-40 w-full object-cover"
-                    loading="lazy"
-                  />
-                  <button
-                    onClick={() => toggleBookmark(b.id)}
-                    className={`absolute top-3 right-3 rounded-full px-3 py-1 text-sm backdrop-blur ${
-                      bookmarks.has(b.id)
-                        ? "bg-yellow-400 text-black"
-                        : "bg-white/70 dark:bg-slate-900/60"
-                    }`}
-                  >
-                    {bookmarks.has(b.id) ? "🔖 Saved" : "🔖 Save"}
-                  </button>
-                </div>
-
-                <div className="p-4 space-y-3">
+                                 <div className="relative">
+                   <img
+                     src={b.cover}
+                     alt={b.title}
+                     className="h-44 w-full object-cover"
+                     loading="lazy"
+                     style={{ borderTopLeftRadius: '1.5rem', borderTopRightRadius: '1.5rem' }}
+                   />
+                   <button
+                     onClick={() => toggleBookmark(b.id)}
+                     className={`absolute top-3 right-3 rounded-full px-3 py-1 text-sm font-semibold shadow backdrop-blur-lg transition ${
+                       bookmarks.has(b.id)
+                         ? "bg-gradient-to-r from-yellow-400 to-yellow-300 text-black"
+                         : "bg-white/80 dark:bg-slate-900/70"
+                     }`}
+                   >
+                     {bookmarks.has(b.id) ? "🔖 Saved" : "🔖 Save"}
+                   </button>
+                 </div>
+                 <div className="p-5 flex flex-col flex-1 space-y-4">
+                  {/* Author and Meta */}
                   <div className="flex items-center gap-3">
                     <img
                       src={b.author.avatar}
                       alt={b.author.name}
                       className="w-8 h-8 rounded-full"
                     />
-                    <div className="text-xs text-slate-500 dark:text-slate-400">
-                      <div className="font-medium text-slate-700 dark:text-slate-200">
-                        {b.author.name}
-                      </div>
-                      <div>
+                    <div className="flex flex-col text-xs text-slate-500 dark:text-slate-400">
+                      <span className="font-medium text-slate-700 dark:text-slate-200">{b.author.name}</span>
+                      <span>
                         {new Date(b.date).toLocaleDateString()} • {b.readTime} min read
-                      </div>
+                      </span>
                     </div>
                   </div>
 
-                  <h3 className="font-bold text-lg line-clamp-2">{b.title}</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3">
-                    {b.excerpt}
-                  </p>
+                  {/* Title & Excerpt */}
+                  <div>
+                    <h3 className="font-bold text-lg line-clamp-2 mb-1">{b.title}</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3">{b.excerpt}</p>
+                  </div>
 
+                  {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {b.tags.map((t) => (
                       <button
                         key={t}
                         onClick={() => setActiveTag(t === activeTag ? "" : t)}
-                        className={`text-xs px-2 py-1 rounded-full border ${
+                        className={`text-xs px-3 py-1 rounded-full font-semibold shadow transition ${
                           activeTag === t
-                            ? "bg-blue-600 text-white border-blue-600"
-                            : "border-slate-300 dark:border-slate-600"
+                            ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                            : "bg-slate-100 dark:bg-slate-700"
                         }`}
                       >
                         #{t}
@@ -563,32 +712,61 @@ export default function BlogHub() {
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between pt-1">
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => toggleLike(b.id)}
-                        className={`text-sm px-2 py-1 rounded-lg ${
-                          likedByMe.has(b.id)
-                            ? "bg-rose-500 text-white"
-                            : "bg-slate-100 dark:bg-slate-700"
-                        }`}
-                      >
-                        ❤️ {likes[b.id] || 0}
-                      </button>
-                      <button
-                        onClick={() => copyShareLink(b.id)}
-                        className="text-sm px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-700"
-                        title="Copy share link"
-                      >
-                        🔗 Share
-                      </button>
-                    </div>
+                  {/* Actions */}
+                  <div className="flex items-center gap-3 justify-start">
+                    <button
+                      onClick={() => toggleLike(b.id)}
+                      className={`group relative px-3 py-2 rounded-xl font-medium transition-all duration-300 hover:scale-105 overflow-hidden ${
+                        likedByMe.has(b.id)
+                          ? "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg hover:shadow-rose-500/25"
+                          : "bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 hover:from-rose-100 hover:to-pink-100 dark:hover:from-rose-900 dark:hover:to-pink-900"
+                      }`}
+                    >
+                      {/* Shine Effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                      
+                      <span className="relative z-10 flex items-center gap-1">
+                        <span className={`transition-transform duration-300 ${likedByMe.has(b.id) ? 'group-hover:scale-125' : 'group-hover:scale-110'}`}>
+                          ❤️
+                        </span>
+                        <span className="font-semibold">{likes[b.id] || 0}</span>
+                      </span>
+                    </button>
+                    
+                    <button
+                      onClick={() => copyShareLink(b.id)}
+                      className="group relative px-3 py-2 rounded-xl bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 font-medium hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900 dark:hover:to-purple-900 transition-all duration-300 hover:scale-105 overflow-hidden"
+                      title="Copy share link"
+                    >
+                      {/* Shine Effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                      
+                      <span className="relative z-10 flex items-center gap-1">
+                        <span className="group-hover:rotate-12 transition-transform duration-300">🔗</span>
+                        <span>Share</span>
+                      </span>
+                    </button>
+                  </div>
 
+                  {/* Read More Button - centered and styled */}
+                  <div className="mt-6 flex justify-center">
                     <button
                       onClick={() => openModal(b)}
-                      className="text-sm px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-500"
+                      className="group relative px-8 py-3 rounded-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 overflow-hidden"
+                      style={{ boxShadow: "0 4px 24px rgba(60,60,120,0.15)" }}
                     >
-                      Read More
+                      {/* Background Animation */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      
+                      {/* Shine Effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                      
+                      {/* Button Content */}
+                      <span className="relative z-10 flex items-center gap-2">
+                        <span className="group-hover:rotate-12 transition-transform duration-300">📖</span>
+                        <span>Read More</span>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -601,228 +779,414 @@ export default function BlogHub() {
               </div>
             )}
           </div>
-
-          {/* Sidebar */}
-          <aside className="lg:col-span-4 space-y-6">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 p-5 bg-white/80 dark:bg-slate-800/80">
-              <h4 className="font-semibold mb-3">📈 Top Liked</h4>
-              <ul className="space-y-3">
-                {topLiked.map((b) => (
-                  <li key={b.id} className="text-sm flex items-start gap-2">
-                    <span>❤️ {likes[b.id] || 0}</span>
-                    <button
-                      className="text-left hover:underline"
-                      onClick={() => openModal(b)}
-                    >
-                      {b.title}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 p-5 bg-white/80 dark:bg-slate-800/80">
-              <h4 className="font-semibold mb-3">🔥 Trending Tags</h4>
-              <div className="flex flex-wrap gap-2">
-                {trendingTags.map(([t, n]) => (
-                  <button
-                    key={t}
-                    onClick={() => setActiveTag(t === activeTag ? "" : t)}
-                    className={`text-xs px-3 py-1.5 rounded-full border ${
-                      activeTag === t
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "border-slate-300 dark:border-slate-600"
-                    }`}
-                    title={`${n} post(s)`}
-                  >
-                    #{t}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 p-5 bg-white/80 dark:bg-slate-800/80">
-              <h4 className="font-semibold mb-3">🔖 My Bookmarks</h4>
-              {blogs.filter((b) => bookmarks.has(b.id)).length ? (
-                <ul className="space-y-3">
-                  {blogs
-                    .filter((b) => bookmarks.has(b.id))
-                    .map((b) => (
-                      <li key={b.id} className="flex items-center justify-between gap-2">
-                        <button
-                          className="text-left text-sm hover:underline"
-                          onClick={() => openModal(b)}
-                        >
-                          {b.title}
-                        </button>
-                        <button
-                          onClick={() => toggleBookmark(b.id)}
-                          className="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-700"
-                        >
-                          Remove
-                        </button>
-                      </li>
-                    ))}
-                </ul>
-              ) : (
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  No bookmarks yet. Save your favorite posts!
-                </p>
-              )}
-            </div>
-          </aside>
         </section>
       </div>
 
-      {/* Read More Modal */}
+      {/* Add Blog Modal */}
       <AnimatePresence>
-        {modalBlog && (
+        {showAdd && (
           <motion.div
-            className="fixed inset-0 z-50"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <div
-              className="absolute inset-0 bg-black/50"
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setShowAdd(false)}
+            />
+            <motion.form
+              onSubmit={submitBlog}
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="relative z-10 w-full max-w-3xl max-h-[85vh] my-8 bg-gradient-to-br from-white/95 via-blue-50/50 to-purple-50/50 dark:from-slate-900/95 dark:via-slate-800/50 dark:to-purple-900/20 rounded-3xl shadow-2xl border-4 border-transparent backdrop-blur-xl overflow-hidden"
+            >
+              {/* Enhanced Header */}
+              <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 p-4 text-white relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -translate-y-16 translate-x-16"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full translate-y-12 -translate-x-12"></div>
+                </div>
+                
+                <div className="relative z-10 flex items-center gap-4">
+                  <div className="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                    <span className="text-xl">✍️</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Create a New Blog</h3>
+                    <p className="text-blue-100 text-sm">Share your knowledge with the community</p>
+                  </div>
+                </div>
+                
+                <button
+                  type="button"
+                  onClick={() => setShowAdd(false)}
+                  className="absolute top-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 hover:scale-110 z-20"
+                  title="Close"
+                >
+                  <span className="text-white text-base font-bold">×</span>
+                </button>
+              </div>
+
+              {/* Enhanced Form Content */}
+              <div className="p-4 space-y-4 overflow-y-auto max-h-[calc(85vh-120px)]">
+                {/* Title and Author Row */}
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                      Blog Title *
+                    </label>
+                    <input
+                      required
+                      placeholder="Enter your blog title..."
+                      className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      value={newBlog.title}
+                      onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
+                    />
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                      Author Name
+                    </label>
+                    <input
+                      placeholder="Your name (optional)"
+                      className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      value={newBlog.author}
+                      onChange={(e) => setNewBlog({ ...newBlog, author: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                {/* Category and Tags Row */}
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      Category
+                    </label>
+                    <input
+                      placeholder="e.g., CSS, GSAP, Three.js..."
+                      className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      value={newBlog.category}
+                      onChange={(e) => setNewBlog({ ...newBlog, category: e.target.value })}
+                    />
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                      Tags
+                    </label>
+                    <input
+                      placeholder="Comma separated tags..."
+                      className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      value={newBlog.tags}
+                      onChange={(e) => setNewBlog({ ...newBlog, tags: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                {/* Cover Image */}
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                    Cover Image URL
+                  </label>
+                  <input
+                    placeholder="https://example.com/image.jpg (optional)"
+                    className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-pink-500 focus:ring-4 focus:ring-pink-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                    value={newBlog.cover}
+                    onChange={(e) => setNewBlog({ ...newBlog, cover: e.target.value })}
+                  />
+                </div>
+
+                {/* Excerpt */}
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                    Short Excerpt *
+                  </label>
+                  <textarea
+                    required
+                    placeholder="Write a brief description of your blog..."
+                    rows={2}
+                    className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none"
+                    value={newBlog.excerpt}
+                    onChange={(e) => setNewBlog({ ...newBlog, excerpt: e.target.value })}
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-rose-500 rounded-full"></span>
+                    Blog Content *
+                  </label>
+                  <textarea
+                    required
+                    placeholder="Write your full blog content here... (Markdown supported)"
+                    rows={5}
+                    className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none"
+                    value={newBlog.content}
+                    onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
+                  />
+                </div>
+
+                {/* Enhanced Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 justify-end pt-3 border-t border-slate-200 dark:border-slate-700">
+                  <button
+                    type="button"
+                    onClick={() => setShowAdd(false)}
+                    className="px-5 py-2.5 rounded-xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300 hover:scale-105"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform"
+                    type="submit"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span>🚀</span>
+                      <span>Publish Blog</span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </motion.form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Read More Modal */}
+      <AnimatePresence>
+        {modalBlog && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
               onClick={closeModal}
             />
             <motion.div
               initial={{ y: 40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+              animate={{ y: -20, opacity: 1 }}
               exit={{ y: 40, opacity: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              className="relative z-10 max-w-4xl mx-auto my-10 bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-2xl"
+              className="relative z-10 w-full max-w-4xl max-h-[90vh] sm:max-h-[85vh] bg-gradient-to-br from-white/95 via-blue-50/50 to-purple-50/50 dark:from-slate-900/95 dark:via-slate-800/50 dark:to-purple-900/20 rounded-3xl overflow-hidden border-4 border-transparent shadow-2xl backdrop-blur-xl"
             >
-              <img
-                src={modalBlog.cover}
-                alt={modalBlog.title}
-                className="h-60 w-full object-cover"
-              />
-              <div className="p-6 space-y-5">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={modalBlog.author.avatar}
-                      alt={modalBlog.author.name}
-                      className="w-10 h-10 rounded-full"
-                    />
-                    <div className="text-sm text-slate-500 dark:text-slate-400">
-                      <div className="font-semibold text-slate-800 dark:text-slate-100">
-                        {modalBlog.author.name}
-                      </div>
-                      <div>
-                        {new Date(modalBlog.date).toLocaleDateString()} • {modalBlog.readTime} min
-                        read
-                      </div>
+              {/* Enhanced Header */}
+              <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 p-4 text-white relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full -translate-y-16 translate-x-16"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white rounded-full translate-y-12 -translate-x-12"></div>
+                </div>
+                
+                {/* Header Content */}
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                      <span className="text-xl">📖</span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold">Blog Post</h3>
+                      <p className="text-blue-100 text-sm">Reading experience</p>
                     </div>
                   </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => toggleLike(modalBlog.id)}
-                      className={`px-3 py-1.5 rounded-lg text-sm ${
-                        likedByMe.has(modalBlog.id)
-                          ? "bg-rose-500 text-white"
-                          : "bg-slate-100 dark:bg-slate-700"
-                      }`}
-                    >
-                      ❤️ {likes[modalBlog.id] || 0}
-                    </button>
-                    <button
-                      onClick={() => toggleBookmark(modalBlog.id)}
-                      className={`px-3 py-1.5 rounded-lg text-sm ${
-                        bookmarks.has(modalBlog.id)
-                          ? "bg-yellow-400 text-black"
-                          : "bg-slate-100 dark:bg-slate-700"
-                      }`}
-                    >
-                      🔖 {bookmarks.has(modalBlog.id) ? "Saved" : "Save"}
-                    </button>
-                    <button
-                      onClick={() => copyShareLink(modalBlog.id)}
-                      className="px-3 py-1.5 rounded-lg text-sm bg-slate-100 dark:bg-slate-700"
-                    >
-                      🔗 Copy Link
-                    </button>
-                    <button
-                      onClick={closeModal}
-                      className="px-3 py-1.5 rounded-lg text-sm bg-slate-100 dark:bg-slate-700"
-                    >
-                      ✖
-                    </button>
-                  </div>
+                  
+                  {/* Enhanced Close Button */}
+                  <button
+                    onClick={closeModal}
+                    className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                    title="Close"
+                  >
+                    <span className="text-white text-base font-bold">×</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Enhanced Content */}
+              <div className="overflow-y-auto max-h-[calc(90vh-120px)] sm:max-h-[calc(85vh-120px)]">
+                {/* Responsive Image */}
+                <div className="relative">
+                  <img
+                    src={modalBlog.cover}
+                    alt={modalBlog.title}
+                    className="h-48 sm:h-56 md:h-64 w-full object-cover"
+                    style={{ borderTopLeftRadius: '1.5rem', borderTopRightRadius: '1.5rem' }}
+                  />
                 </div>
 
-                <h2 className="text-2xl font-bold">{modalBlog.title}</h2>
-                <div className="flex flex-wrap gap-2">
-                  {modalBlog.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-600"
-                    >
-                      #{t}
-                    </span>
-                  ))}
-                </div>
-
-                <article className="prose dark:prose-invert max-w-none">
-                  {modalBlog.content.split("\n").map((p, i) => (
-                    <p key={i}>{p}</p>
-                  ))}
-                </article>
-
-                {/* Comments */}
-                <div className="pt-2">
-                  <h4 className="font-semibold mb-3">Comments</h4>
-                  <div className="space-y-3 mb-4">
-                    {(comments[modalBlog.id] || []).map((c) => (
-                      <div
-                        key={c.ts}
-                        className="flex items-start justify-between gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800"
-                      >
-                        <div>
-                          <div className="text-sm font-semibold">{c.name}</div>
-                          <div className="text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap">
-                            {c.text}
-                          </div>
-                          <div className="text-xs text-slate-500 mt-1">
-                            {new Date(c.ts).toLocaleString()}
-                          </div>
+                {/* Enhanced Content Section */}
+                <div className="p-4 sm:p-6 md:p-8 space-y-6">
+                  {/* Enhanced Header Section */}
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-slate-700 border border-slate-200 dark:border-slate-600">
+                    {/* Author Info */}
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={modalBlog.author.avatar}
+                        alt={modalBlog.author.name}
+                        className="w-10 h-10 rounded-full ring-2 ring-blue-200 dark:ring-blue-700"
+                      />
+                      <div className="text-sm text-slate-700 dark:text-slate-200">
+                        <div className="font-semibold text-slate-800 dark:text-slate-100">
+                          {modalBlog.author.name}
                         </div>
-                        <button
-                          onClick={() => deleteComment(modalBlog.id, c.ts)}
-                          className="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-700"
-                        >
-                          Delete
-                        </button>
+                        <div className="text-slate-600 dark:text-slate-400">
+                          {new Date(modalBlog.date).toLocaleDateString()} • {modalBlog.readTime} min read
+                        </div>
                       </div>
-                    ))}
-                    {!((comments[modalBlog.id] || []).length) && (
-                      <div className="text-sm text-slate-500">No comments yet — be first!</div>
-                    )}
-                  </div>
+                    </div>
 
-                  <form onSubmit={submitComment} className="grid sm:grid-cols-5 gap-3">
-                    <input
-                      required
-                      placeholder="Your name"
-                      className="sm:col-span-2 px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-800"
-                      value={newComment.name}
-                      onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
-                    />
-                    <input
-                      required
-                      placeholder="Write a comment…"
-                      className="sm:col-span-3 px-4 py-2 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-800"
-                      value={newComment.text}
-                      onChange={(e) => setNewComment({ ...newComment, text: e.target.value })}
-                    />
-                    <div className="sm:col-span-5 flex justify-end">
-                      <button className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-500">
-                        Post Comment
+                    {/* Enhanced Action Buttons */}
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => toggleLike(modalBlog.id)}
+                        className={`group relative px-3 py-2 rounded-xl font-medium transition-all duration-300 hover:scale-105 overflow-hidden ${
+                          likedByMe.has(modalBlog.id)
+                            ? "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg hover:shadow-rose-500/25"
+                            : "bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 hover:from-rose-100 hover:to-pink-100 dark:hover:from-rose-900 dark:hover:to-pink-900"
+                        }`}
+                      >
+                        {/* Shine Effect */}
+                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                        
+                        <span className="relative z-10 flex items-center gap-1">
+                          <span className={`transition-transform duration-300 ${likedByMe.has(modalBlog.id) ? 'group-hover:scale-125' : 'group-hover:scale-110'}`}>
+                            ❤️
+                          </span>
+                          <span className="font-semibold">{likes[modalBlog.id] || 0}</span>
+                        </span>
+                      </button>
+                      
+                      <button
+                        onClick={() => toggleBookmark(modalBlog.id)}
+                        className={`group relative px-3 py-2 rounded-xl font-medium transition-all duration-300 hover:scale-105 overflow-hidden ${
+                          bookmarks.has(modalBlog.id)
+                            ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-black shadow-lg hover:shadow-yellow-500/25"
+                            : "bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 hover:from-yellow-100 hover:to-yellow-200 dark:hover:from-yellow-900 dark:hover:to-yellow-800"
+                        }`}
+                      >
+                        {/* Shine Effect */}
+                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                        
+                        <span className="relative z-10 flex items-center gap-1">
+                          <span className="group-hover:rotate-12 transition-transform duration-300">🔖</span>
+                          <span>{bookmarks.has(modalBlog.id) ? "Saved" : "Save"}</span>
+                        </span>
+                      </button>
+                      
+                      <button
+                        onClick={() => copyShareLink(modalBlog.id)}
+                        className="group relative px-3 py-2 rounded-xl bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 font-medium hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900 dark:hover:to-purple-900 transition-all duration-300 hover:scale-105 overflow-hidden"
+                        title="Copy share link"
+                      >
+                        {/* Shine Effect */}
+                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                        
+                        <span className="relative z-10 flex items-center gap-1">
+                          <span className="group-hover:rotate-12 transition-transform duration-300">🔗</span>
+                          <span>Share</span>
+                        </span>
                       </button>
                     </div>
-                  </form>
+                  </div>
+
+                  {/* Enhanced Title and Tags */}
+                  <div className="space-y-4">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100 leading-tight">
+                      {modalBlog.title}
+                    </h2>
+                    <div className="flex flex-wrap gap-2">
+                      {modalBlog.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 font-medium border border-blue-200 dark:border-blue-700"
+                        >
+                          #{t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Enhanced Article Content */}
+                  <article className="prose dark:prose-invert max-w-none text-base sm:text-lg leading-relaxed">
+                    {modalBlog.content.split("\n").map((p, i) => (
+                      <p key={i} className="mb-4 text-slate-700 dark:text-slate-200">{p}</p>
+                    ))}
+                  </article>
+
+                  {/* Enhanced Comments Section */}
+                  <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
+                    <h4 className="font-bold text-lg mb-4 text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                      <span className="text-xl">💬</span>
+                      Comments
+                    </h4>
+                    <div className="space-y-4 mb-6">
+                      {(comments[modalBlog.id] || []).map((c) => (
+                        <div
+                          key={c.ts}
+                          className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 p-4 rounded-2xl bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-slate-700 border border-slate-200 dark:border-slate-600"
+                        >
+                          <div className="flex-1">
+                            <div className="text-sm font-semibold text-slate-800 dark:text-slate-100">{c.name}</div>
+                            <div className="text-sm text-slate-600 dark:text-slate-300 whitespace-pre-wrap mt-1">
+                              {c.text}
+                            </div>
+                            <div className="text-xs text-slate-500 mt-2">
+                              {new Date(c.ts).toLocaleString()}
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => deleteComment(modalBlog.id, c.ts)}
+                            className="text-xs px-3 py-1.5 rounded-lg bg-gradient-to-r from-rose-100 to-pink-100 dark:from-rose-900 dark:to-pink-900 text-rose-700 dark:text-rose-300 hover:from-rose-200 hover:to-pink-200 dark:hover:from-rose-800 dark:hover:to-pink-800 transition-all duration-300 self-start sm:self-auto"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      ))}
+                      {!((comments[modalBlog.id] || []).length) && (
+                        <div className="text-center py-8 text-slate-500 dark:text-slate-400">
+                          <div className="text-4xl mb-2">💭</div>
+                          <p className="text-sm">No comments yet — be first!</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Enhanced Comment Form */}
+                    <form onSubmit={submitComment} className="grid grid-cols-1 sm:grid-cols-5 gap-3 p-4 rounded-2xl bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-slate-700 border border-slate-200 dark:border-slate-600">
+                      <input
+                        required
+                        placeholder="Your name"
+                        className="sm:col-span-2 px-4 py-3 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all duration-300"
+                        value={newComment.name}
+                        onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
+                      />
+                      <input
+                        required
+                        placeholder="Write a comment…"
+                        className="sm:col-span-3 px-4 py-3 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all duration-300"
+                        value={newComment.text}
+                        onChange={(e) => setNewComment({ ...newComment, text: e.target.value })}
+                      />
+                      <div className="sm:col-span-5 flex justify-end">
+                        <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                          <span className="flex items-center gap-2">
+                            <span>📝</span>
+                            <span>Post Comment</span>
+                          </span>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </motion.div>
