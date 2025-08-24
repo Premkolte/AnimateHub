@@ -247,6 +247,16 @@ const Navbar = () => {
                           >
                             Framer Playground
                           </Link>
+                          <Link
+                            to="/ColorGradientPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                          >
+                            Gradient Playground
+                          </Link>
                         </div>
                       )}
                     </div>
