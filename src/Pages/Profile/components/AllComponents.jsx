@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../../utils/axiosInstance";
 import { FiRefreshCw, FiAlertCircle, FiBox } from "react-icons/fi";
+import { useParams } from "react-router-dom";
 
 const ComponentCard = ({ component, index }) => (
   <div className="flex flex-col gap-y-4 bg-white dark:bg-secondary-800 rounded-2xl shadow-sm border border-gray-200 dark:border-secondary-700 p-6 hover:shadow-md transition-shadow duration-200 h-full">
@@ -18,9 +19,9 @@ const ComponentCard = ({ component, index }) => (
       <span className="text-sm text-gray-500 dark:text-gray-400">
         {new Date(component.createdAt).toLocaleDateString()}
       </span>
-      <a 
-        href={component.repoLink} 
-        target="_blank" 
+      <a
+        href={component.repoLink}
+        target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors font-medium text-sm"
       >
@@ -38,11 +39,13 @@ export default function AllComponents() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const { username } = useParams()
+
   const fetchAllComponents = async (showLoading = true) => {
     try {
       if (showLoading) setLoading(true);
       setError(null);
-      const { data } = await axiosInstance.get("/profile/approved-components");
+      const { data } = await axiosInstance.get(`/profile/approved-components/${username}`);
       if (data.success) {
         setComponents(data.data || []);
       }

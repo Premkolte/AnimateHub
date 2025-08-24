@@ -18,7 +18,7 @@ router.patch("/update", updateProfile);
 router.patch("/update/avatar", upload.single("avatar"), updateAvatar);
 
 // Get current user's approved components
-router.get("/approved-components", getApprovedComponentsOfLoggedInUser)
+router.get("/approved-components/:username", getApprovedComponentsOfLoggedInUser)
 
 // Get current user's pending components
 router.get("/pending-components", getPendingComponentsOfLoggedInUser);
