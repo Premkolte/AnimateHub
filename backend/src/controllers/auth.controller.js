@@ -108,7 +108,7 @@ export const updatePasswordController = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Both fields are required");
     }
 
-    const user = await User.findById(req.user.id);
+    let user = await User.findById(req.user.id);
     if (!user) {
         throw new ApiError(404, "User not found");
     }
