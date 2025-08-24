@@ -48,7 +48,12 @@ import FramerPlayground from "./Pages/Playground/FramerPlayground";
 import ContributorGuide from "./Pages/Contributors/ContributorGuide";
 import ProfilePage from "./Pages/Profile/ProfilePage";
 import PalettesPage from "./Pages/Profile/PalettesPage";
-import SideBar from "./Pages/Dashboard/SideBar"; 
+
+
+
+import SideBar from "./Pages/Dashboard/SideBar";
+import Resourcehub from "./Pages/Profile/Resourcehub";
+
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -132,6 +137,7 @@ function App() {
             />
             <Route path="/sidebar" element={<SideBar />} />
             <Route path="/palettes" element={<PalettesPage />} />
+            <Route path="/resourcehub" element={<Resourcehub />} />
           </Route>
         </Routes>
 
