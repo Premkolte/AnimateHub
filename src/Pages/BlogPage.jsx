@@ -361,7 +361,7 @@ export default function BlogHub() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search tutorials, tags, authors…"
-              className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80 focus:ring-2 focus:ring-blue-500"
+              className="flex-grow min-w-[250px] px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80 focus:ring-2 focus:ring-blue-500"
             />
             <select
               value={category}
@@ -392,6 +392,7 @@ export default function BlogHub() {
               onChange={(e) => setSort(e.target.value)}
               className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-800/80"
             >
+              <option value="sort">Sort By</option>
               <option value="newest">Newest</option>
               <option value="likes">Most Liked</option>
             </select>
