@@ -29,6 +29,12 @@ const PlaygroundDropdown = () => {
           >
             Playground
           </Link>
+          <Link
+            to="/framerplayground"
+            className="block px-4 py-2 "
+          >
+            FramerPlayground
+          </Link>
         </div>
       )}
     </div>
