@@ -42,12 +42,18 @@ import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from "./Pages/Dashboard/MySnippet";
 
 import Playground from "./Pages/Playground/Code_Playground";
+import FramerPlayground from "./Pages/Playground/FramerPlayground";
+
 
 import ContributorGuide from "./Pages/Contributors/ContributorGuide";
 import ProfilePage from "./Pages/Profile/ProfilePage";
 import PalettesPage from "./Pages/Profile/PalettesPage";
+
+
+
 import SideBar from "./Pages/Dashboard/SideBar";
 import Resourcehub from "./Pages/Profile/Resourcehub";
+
 
 // Layout component that includes Navbar, Footer and an Outlet
 function Layout() {
@@ -86,6 +92,8 @@ function App() {
             <Route path="/challenge" element={<ChallengeMode />} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/playground" element={<Playground />} />
+            <Route path="/framerplayground" element={<FramerPlayground />} />
+
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/contributors" element={<Contributors />} />

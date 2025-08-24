@@ -235,7 +235,17 @@ const Navbar = () => {
                             }}
                             className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
                           >
-                            Playground
+                            Code Playground
+                          </Link>
+                          <Link
+                            to="/framerplayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                          >
+                            Framer Playground
                           </Link>
                         </div>
                       )}
