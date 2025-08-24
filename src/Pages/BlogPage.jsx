@@ -882,8 +882,7 @@ export default function BlogHub() {
                       Tags
                     </label>
                     <input
-                      placeholder="Comma separated tags..."
-                      className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
                       value={newBlog.tags}
                       onChange={(e) => setNewBlog({ ...newBlog, tags: e.target.value })}
                     />
