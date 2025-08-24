@@ -12,51 +12,29 @@ const Chatbot = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const toggleChatbot = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleChatbot = () => setIsOpen(!isOpen);
 
   const handleSendMessage = () => {
     if (userMessage.trim() === '') return;
 
-    const newMessage = { 
-      sender: 'user', 
-      text: userMessage, 
-      timestamp: new Date() 
-    };
-    
+    const newMessage = { sender: 'user', text: userMessage, timestamp: new Date() };
     setMessages(prev => [...prev, newMessage]);
     setUserMessage('');
     setIsTyping(true);
 
-    // Simulate bot typing and response
     setTimeout(() => {
       const botResponse = getBotResponse(userMessage);
-      setMessages(prev => [...prev, { 
-        sender: 'bot', 
-        text: botResponse, 
-        timestamp: new Date() 
-      }]);
+      setMessages(prev => [...prev, { sender: 'bot', text: botResponse, timestamp: new Date() }]);
       setIsTyping(false);
     }, 1500);
   };
 
-  const getBotResponse = (message) => {
-    const lowerMessage = message.toLowerCase();
-    
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-      return '✨ Hello! I\'m excited to help you. What would you like to know?';
-    }
-    if (lowerMessage.includes('help')) {
-      return '🤝 I\'m here to assist you! You can ask me about features, get support, or just chat.';
-    }
-    if (lowerMessage.includes('thanks') || lowerMessage.includes('thank you')) {
-      return '😊 You\'re very welcome! Is there anything else I can help you with?';
-    }
-    if (lowerMessage.includes('bye') || lowerMessage.includes('goodbye')) {
-      return '👋 Goodbye! Feel free to reach out anytime you need assistance.';
-    }
-    
+  const getBotResponse = (msg) => {
+    const lower = msg.toLowerCase();
+    if (lower.includes('hello') || lower.includes('hi')) return '✨ Hello! I\'m excited to help you. What would you like to know?';
+    if (lower.includes('help')) return '🤝 I\'m here to assist you! You can ask me about features, get support, or just chat.';
+    if (lower.includes('thanks')) return '😊 You\'re very welcome! Is there anything else I can help you with?';
+    if (lower.includes('bye')) return '👋 Goodbye! Feel free to reach out anytime you need assistance.';
     return '🤔 That\'s an interesting question! I\'m still learning, but I\'d love to help you find the answer.';
   };
 
@@ -66,20 +44,16 @@ const Chatbot = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200 && !hasScrolled) {
-        setHasScrolled(true);
-      } else if (window.scrollY <= 200 && hasScrolled) {
-        setHasScrolled(false);
-      }
+      if (window.scrollY > 200 && !hasScrolled) setHasScrolled(true);
+      else if (window.scrollY <= 200 && hasScrolled) setHasScrolled(false);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasScrolled]);
 
   return (
     <>
-      {/* Modern Floating Button */}
+      {/* Floating Button */}
       <motion.div
         className="fixed right-6 z-50"
         initial={{ bottom: 24 }}
@@ -89,17 +63,12 @@ const Chatbot = () => {
         <motion.button
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
-          className="relative bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600  text-white p-4 rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
+          className="relative bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600 text-white p-4 rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
           onClick={toggleChatbot}
         >
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
             {isOpen ? <FaTimes size={24} /> : <FaCommentDots size={24} />}
           </motion.div>
-          
-          {/* Notification dot */}
           {!isOpen && (
             <motion.div
               className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
@@ -110,7 +79,7 @@ const Chatbot = () => {
         </motion.button>
       </motion.div>
 
-      {/* Modern Chatbot Window */}
+      {/* Chatbot Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -118,7 +87,7 @@ const Chatbot = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed bottom-24 right-6 w-80 bg-white/95 backdrop-blur-xl border border-gray-200/50 rounded-2xl shadow-2xl z-50 overflow-hidden"
+            className="fixed bottom-24 right-6 w-80 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-2xl z-50 overflow-hidden"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600 p-4">
@@ -143,69 +112,56 @@ const Chatbot = () => {
               </div>
             </div>
 
-            {/* Messages Container */}
-            <div className="h-80 p-4 overflow-y-auto bg-gradient-to-b from-gray-50/50 to-white/50">
+            {/* Messages */}
+            <div className="h-80 p-4 overflow-y-auto bg-gradient-to-b from-gray-50/50 to-white/50 dark:from-gray-800/50 dark:to-gray-900/50">
               <div className="space-y-4">
-                {messages.map((message, index) => (
+                {messages.map((m, i) => (
                   <motion.div
-                    key={index}
+                    key={i}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                    transition={{ delay: i * 0.1 }}
+                    className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className={`flex items-end space-x-2 max-w-[75%] ${
-                      message.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''
-                    }`}>
+                    <div className={`flex items-end space-x-2 max-w-[75%] ${m.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
                       {/* Avatar */}
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-xs ${
-                        message.sender === 'user' 
+                        m.sender === 'user' 
                           ? 'bg-gradient-to-r from-blue-500 to-purple-500' 
                           : 'bg-gradient-to-r from-gray-600 to-gray-700'
                       }`}>
-                        {message.sender === 'user' ? <FaUser size={12} /> : <FaRobot size={12} />}
+                        {m.sender === 'user' ? <FaUser size={12} /> : <FaRobot size={12} />}
                       </div>
-                      
-                      {/* Message Bubble */}
+                      {/* Bubble */}
                       <div className={`px-4 py-3 rounded-2xl shadow-sm ${
-                        message.sender === 'user'
+                        m.sender === 'user'
                           ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-br-md'
-                          : 'bg-white border border-gray-200 text-gray-800 rounded-bl-md'
+                          : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-md'
                       }`}>
-                        <p className="text-sm leading-relaxed">{message.text}</p>
-                        <p className={`text-xs mt-1 ${
-                          message.sender === 'user' ? 'text-white/70' : 'text-gray-500'
-                        }`}>
-                          {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        <p className="text-sm leading-relaxed">{m.text}</p>
+                        <p className={`text-xs mt-1 ${m.sender === 'user' ? 'text-white/70' : 'text-gray-500 dark:text-gray-400'}`}>
+                          {m.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </p>
                       </div>
                     </div>
                   </motion.div>
                 ))}
-                
-                {/* Typing Indicator */}
+
+                {/* Typing indicator */}
                 {isTyping && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex justify-start"
-                  >
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex justify-start">
                     <div className="flex items-end space-x-2">
                       <div className="w-8 h-8 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full flex items-center justify-center text-white">
                         <FaRobot size={12} />
                       </div>
-                      <div className="bg-white border border-gray-200 px-4 py-3 rounded-2xl rounded-bl-md">
+                      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-4 py-3 rounded-2xl rounded-bl-md">
                         <div className="flex space-x-1">
                           {[0, 1, 2].map((i) => (
                             <motion.div
                               key={i}
-                              className="w-2 h-2 bg-gray-400 rounded-full"
+                              className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full"
                               animate={{ y: [0, -8, 0] }}
-                              transition={{
-                                repeat: Infinity,
-                                duration: 1.5,
-                                delay: i * 0.2,
-                              }}
+                              transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.2 }}
                             />
                           ))}
                         </div>
@@ -213,18 +169,18 @@ const Chatbot = () => {
                     </div>
                   </motion.div>
                 )}
-                
+
                 <div ref={messagesEndRef} />
               </div>
             </div>
 
-            {/* Input Area */}
-            <div className="p-4 bg-white/80 backdrop-blur-sm border-t border-gray-200/50">
+            {/* Input */}
+            <div className="p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-t border-gray-200/50 dark:border-gray-700/50">
               <div className="flex space-x-3">
                 <input
                   type="text"
                   placeholder="Type your message..."
-                  className="flex-1 px-4 py-3 bg-gray-100/50 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent text-gray-800 placeholder-gray-500 transition-all duration-200"
+                  className="flex-1 px-4 py-3 bg-gray-100/50 dark:bg-gray-800/50 border border-gray-200/50 dark:border-gray-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-200"
                   value={userMessage}
                   onChange={(e) => setUserMessage(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
