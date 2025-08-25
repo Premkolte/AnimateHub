@@ -187,7 +187,7 @@ const ChallengeMode = () => {
           ))}
         </div>
         
-        <div className="grid grid-cols-7 gap-2 text-sm" aria-label="calendar-grid">
+        <div className="grid grid-cols-7 gap-x-2 gap-y-3 text-sm" aria-label="calendar-grid">
           {Array.from({ length: first.getDay() }).map((_, i) => (
             <div key={`b-${i}`} />
           ))}
@@ -203,14 +203,21 @@ const ChallengeMode = () => {
               <div
                 key={day}
                 className={[
-                  "h-10 w-10 rounded-2xl flex items-center justify-center border-2 transition-all duration-300 cursor-pointer transform hover:scale-110 font-semibold",
+                  "flex items-center justify-center font-semibold transition-all duration-300 cursor-pointer",
+                  "h-9 w-9 sm:h-10 sm:w-10 rounded-xl border-2",
                   done
                     ? "bg-gradient-to-br from-emerald-400 to-emerald-600 border-emerald-500 text-white shadow-lg shadow-emerald-500/30"
                     : "bg-white/80 dark:bg-slate-700/80 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-600",
                   isToday
-                    ? "ring-4 ring-blue-500/50 ring-offset-2 ring-offset-white dark:ring-offset-slate-800 scale-110"
+                    ? "ring-4 ring-blue-500/50 ring-offset-2 ring-offset-white dark:ring-offset-slate-800 scale-105 z-10"
                     : "",
                 ].join(" ")}
+                style={{
+                  minWidth: "2.25rem",
+                  minHeight: "2.25rem",
+                  maxWidth: "2.5rem",
+                  maxHeight: "2.5rem",
+                }}
                 title={done ? "Completed ✅" : "Incomplete"}
               >
                 <span className={isToday ? "font-bold" : ""}>{day}</span>
@@ -268,40 +275,48 @@ const ChallengeMode = () => {
           {/* Progress + Calendar section */}
           <div className="mt-8 sm:mt-12 flex flex-col xl:flex-row justify-between items-start gap-6 lg:gap-8">
             {/* Left side - Progress Card */}
-            <div className="w-full xl:flex-1 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 ring-1 ring-slate-200/20 dark:ring-slate-700/20">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">📊</span>
+            <div className="w-full xl:flex-1 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border-2 border-primary-500 dark:border-accent-500 ring-2 ring-primary-500/20 dark:ring-accent-500/20 relative overflow-hidden">
+              {/* Decorative gradient blobs */}
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-primary-500/30 to-accent-500/30 rounded-full blur-2xl pointer-events-none"></div>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-br from-accent-500/20 to-primary-500/20 rounded-full blur-2xl pointer-events-none"></div>
+              <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-gradient-to-br from-primary-600/10 to-accent-600/10 rounded-full blur-xl pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg animate-bounce-slow">
+                  <span className="text-white font-bold text-2xl">📊</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">
+                <h3 className="text-3xl font-extrabold bg-gradient-to-r from-primary-600 to-accent-600 dark:from-primary-400 dark:to-accent-400 bg-clip-text text-transparent tracking-tight drop-shadow">
                   Your Progress
                 </h3>
+                <span className="ml-auto px-4 py-2 rounded-full bg-gradient-to-r from-primary-100 to-accent-100 dark:from-primary-900/40 dark:to-accent-900/40 text-primary-700 dark:text-accent-200 font-semibold shadow">
+                  {completionRate}%
+                </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
-                <div className="bg-gradient-to-br from-yellow-400 to-orange-500 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
-                  <div className="text-3xl sm:text-4xl font-black">{progress.totalPoints}</div>
-                  <div className="text-yellow-100 font-medium">Total Points</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                <div className="flex flex-col items-center justify-center bg-gradient-to-br from-yellow-400 to-orange-500 p-6 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300 border-2 border-yellow-300">
+                  <div className="text-4xl font-black drop-shadow-lg animate-pop">{progress.totalPoints}</div>
+                  <div className="text-yellow-100 font-medium mt-2 tracking-wide">Total Points</div>
                 </div>
-                <div className="bg-gradient-to-br from-red-500 to-pink-600 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
-                  <div className="text-3xl sm:text-4xl font-black">{streak}</div>
-                  <div className="text-red-100 font-medium">Current Streak</div>
+                <div className="flex flex-col items-center justify-center bg-gradient-to-br from-red-500 to-pink-600 p-6 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300 border-2 border-pink-300">
+                  <div className="text-4xl font-black drop-shadow-lg animate-pop">{streak}</div>
+                  <div className="text-red-100 font-medium mt-2 tracking-wide">Current Streak</div>
                 </div>
-                <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
-                  <div className="text-3xl sm:text-4xl font-black">{progress.completedDates.length}</div>
-                  <div className="text-green-100 font-medium">Completed</div>
+                <div className="flex flex-col items-center justify-center bg-gradient-to-br from-green-500 to-emerald-600 p-6 rounded-2xl text-white shadow-xl hover:scale-105 transition-transform duration-300 border-2 border-green-300">
+                  <div className="text-4xl font-black drop-shadow-lg animate-pop">{progress.completedDates.length}</div>
+                  <div className="text-green-100 font-medium mt-2 tracking-wide">Completed</div>
                 </div>
               </div>
 
               {/* Enhanced Progress Bar */}
-              <div className="space-y-3">
+              <div className="space-y-3 mt-2">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-600 dark:text-slate-300 font-medium">Monthly Progress</span>
-                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{completionRate}%</span>
+                  <span className="text-xl font-bold bg-gradient-to-r from-primary-600 to-accent-600 dark:from-primary-400 dark:to-accent-400 bg-clip-text text-transparent">{completionRate}%</span>
                 </div>
-                <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-4 overflow-hidden shadow-inner">
+                <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-5 overflow-hidden shadow-inner border border-primary-200 dark:border-accent-700">
                   <div
-                    className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-full rounded-full transition-all duration-1000 ease-out shadow-lg relative overflow-hidden"
+                    className="bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500 dark:from-primary-400 dark:via-accent-400 dark:to-primary-400 h-full rounded-full transition-all duration-1000 ease-out shadow-lg relative overflow-hidden animate-progress"
                     style={{ width: `${completionRate}%` }}
                   >
                     <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
@@ -311,7 +326,7 @@ const ChallengeMode = () => {
             </div>
 
             {/* Right side - Calendar */}
-            <div className="w-full xl:w-[400px] flex-shrink-0">
+            <div className="w-full xl:w-[400px] flex-shrink-0 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl p-6 rounded-3xl shadow-2xl border-2 border-primary-500 dark:border-accent-500 ring-2 ring-primary-500/20 dark:ring-accent-500/20 relative overflow-hidden">
               <MiniCalendar />
             </div>
           </div>
@@ -320,9 +335,10 @@ const ChallengeMode = () => {
         {/* Challenge Card */}
         <section className="grid lg:grid-cols-5 gap-6 lg:gap-8">
           {/* Editor + Actions */}
-          <div className="lg:col-span-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl p-6 rounded-3xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl space-y-6 ring-1 ring-slate-200/20 dark:ring-slate-700/20">
+          <div className="lg:col-span-3 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl p-6 rounded-3xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl space-y-6 ring-2 ring-primary-500/20 dark:ring-accent-500/20 relative overflow-hidden">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               <div className="flex-1">
+                {/* Challenge Info */}
                 <div className="flex items-center gap-2 mb-2">
                   <div className="text-xs uppercase tracking-widest text-slate-500 font-bold px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-full">
                     Challenge #{challenge.id} / 30
@@ -340,32 +356,36 @@ const ChallengeMode = () => {
                 <h2 className="text-2xl sm:text-3xl font-bold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-200 bg-clip-text text-transparent">
                   {challenge.title}
                 </h2>
-                <div className="space-y-2 text-sm sm:text-base">
+                {/* Enhanced Target & Keywords */}
+                <div className="flex flex-col gap-3 mt-4">
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-purple-600 dark:text-purple-400">🎯 Target:</span>
-                    <span className="text-slate-600 dark:text-slate-300">{challenge.targetTip}</span>
+                    <span className="inline-block px-2 py-1 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-semibold text-xs">Target</span>
+                    <span className="text-slate-700 dark:text-slate-200 font-medium">{challenge.targetTip}</span>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <span className="font-semibold text-blue-600 dark:text-blue-400 mt-0.5">🔍 Keywords:</span>
-                    <div className="flex flex-wrap gap-1">
-                      {challenge.checks.map((check, i) => (
-                        <span key={i} className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-lg text-xs font-mono">
-                          {check}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="inline-block px-2 py-1 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 font-semibold text-xs">Keywords</span>
+                    {challenge.checks.map((check, i) => (
+                      <span key={i} className="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-mono border border-slate-200 dark:border-slate-600">
+                        {check}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              <div className="text-center sm:text-right bg-gradient-to-br from-purple-500 to-pink-600 p-4 rounded-2xl text-white shadow-lg min-w-[120px]">
-                <div className="text-xs font-medium opacity-90">Your Points</div>
-                <div className="text-3xl font-black">{progress.totalPoints}</div>
-                <div className="text-xs opacity-90 mt-1">
-                  🔥 <span className="font-semibold">{streak}</span> day streak
+              {/* Simple Stats Section */}
+              <div className="flex flex-col gap-2 min-w-[160px] max-w-[220px] bg-gradient-to-br from-white/95 to-blue-100 dark:from-slate-900/95 dark:to-blue-900/80 border px-4 py-4 border-blue-200 dark:border-blue-700 rounded-xl shadow-lg">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">Total Points :</span>
+                  <span className="text-xl font-bold text-blue-700 dark:text-blue-300">{progress.totalPoints}</span>
                 </div>
-                <div className="text-xs font-bold mt-2 px-2 py-1 bg-white/20 rounded-lg">
-                  +{challenge.points} pts
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">Streak :</span>
+                  <span className="text-lg font-bold text-purple-700 dark:text-purple-300">{streak} days</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">Today's Points :</span>
+                  <span className="text-base font-bold text-pink-700 dark:text-pink-300">+{challenge.points}</span>
                 </div>
               </div>
             </div>
@@ -386,31 +406,41 @@ const ChallengeMode = () => {
             </div>
 
             <div className="flex flex-wrap gap-3">
+              {/* Run Code Button */}
               <button
                 onClick={runCode}
-                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 transition-all duration-300 font-semibold text-slate-700 dark:text-slate-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-bold border-2 border-cyan-300 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 active:scale-95 focus:ring-4 focus:ring-cyan-400/40"
+                style={{ boxShadow: "0 4px 24px rgba(0, 180, 255, 0.10)" }}
               >
-                <span>▶️</span>
+                <span className="animate-spin-slow">▶️</span>
                 <span>Run Code</span>
               </button>
+
+              {/* Submit Solution Button */}
               <button
                 onClick={submit}
-                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold border-2 border-purple-400 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 active:scale-95 focus:ring-4 focus:ring-purple-400/40"
+                style={{ boxShadow: "0 4px 24px rgba(180, 0, 255, 0.10)" }}
               >
-                <span>✅</span>
+                <span className="animate-bounce">✅</span>
                 <span>Submit Solution</span>
               </button>
+
+              {/* Reset Button */}
               <button
                 onClick={() => {
                   setCode(challenge.starter);
                   setSubmitted(false);
                   setScoreMsg("");
                 }}
-                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 hover:bg-amber-50 dark:hover:bg-slate-600 transition-all duration-300 font-semibold text-slate-700 dark:text-slate-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-yellow-300 to-orange-400 text-slate-800 font-semibold border-2 border-yellow-300 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 active:scale-95 focus:ring-4 focus:ring-yellow-300/40"
+                style={{ boxShadow: "0 4px 24px rgba(255, 200, 0, 0.10)" }}
               >
-                <span>♻️</span>
+                <span className="animate-spin">♻️</span>
                 <span className="hidden sm:inline">Reset</span>
               </button>
+
+              {/* Clear Progress Button */}
               <button
                 onClick={() => {
                   const cleared = {
@@ -424,9 +454,10 @@ const ChallengeMode = () => {
                   setSubmitted(false);
                   setScoreMsg("");
                 }}
-                className="ml-auto flex items-center gap-2 px-6 py-3 rounded-2xl bg-white dark:bg-slate-700 border-2 border-red-200 dark:border-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="ml-auto flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-red-400 to-rose-600 text-white font-semibold border-2 border-red-400 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 active:scale-95 focus:ring-4 focus:ring-red-400/40"
+                style={{ boxShadow: "0 4px 24px rgba(255, 0, 60, 0.10)" }}
               >
-                <span>🗑</span>
+                <span className="animate-shake">🗑</span>
                 <span className="hidden sm:inline">Clear Progress</span>
               </button>
             </div>
@@ -445,7 +476,7 @@ const ChallengeMode = () => {
           </div>
 
           {/* Preview Pane */}
-          <div className="lg:col-span-2 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl p-6 rounded-3xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl space-y-4 ring-1 ring-slate-200/20 dark:ring-slate-700/20">
+          <div className="lg:col-span-2 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl p-6 rounded-3xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl space-y-4 ring-2 ring-primary-500/20 dark:ring-accent-500/20 relative overflow-hidden">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
@@ -483,7 +514,7 @@ const ChallengeMode = () => {
 
         {/* Footer Callouts */}
         <section className="grid md:grid-cols-3 gap-6">
-          <div className="group p-6 rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl ring-1 ring-slate-200/20 dark:ring-slate-700/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1">
+          <div className="group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
                 <span className="text-white font-bold">🔄</span>
@@ -497,7 +528,7 @@ const ChallengeMode = () => {
             </p>
           </div>
 
-          <div className="group p-6 rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl ring-1 ring-slate-200/20 dark:ring-slate-700/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1">
+          <div className="group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <span className="text-white font-bold">🏆</span>
@@ -511,7 +542,7 @@ const ChallengeMode = () => {
             </p>
           </div>
 
-          <div className="group p-6 rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl ring-1 ring-slate-200/20 dark:ring-slate-700/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1">
+          <div className="group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center group-hover:bounce transition-all duration-300">
                 <span className="text-white font-bold">🚀</span>
@@ -528,7 +559,7 @@ const ChallengeMode = () => {
 
         {/* Footer */}
         <footer className="text-center py-8">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-full border border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl rounded-full border-2 border-primary-500 dark:border-accent-500 shadow-xl">
             <span className="text-2xl">✨</span>
             <span className="font-semibold text-slate-600 dark:text-slate-300">
               Keep animating, keep growing!
@@ -542,3 +573,22 @@ const ChallengeMode = () => {
 };
 
 export default ChallengeMode;
+
+/* Add these custom animations to your global CSS:
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-8px);}
+}
+@keyframes pop {
+  0% { transform: scale(1);}
+  60% { transform: scale(1.15);}
+  100% { transform: scale(1);}
+}
+@keyframes progress {
+  0% { width: 0;}
+  100% { width: var(--tw-width);}
+}
+.animate-bounce-slow { animation: bounce-slow 2s infinite; }
+.animate-pop { animation: pop 1s; }
+.animate-progress { animation: progress 1.2s cubic-bezier(.4,0,.2,1); }
+*/
