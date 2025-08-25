@@ -36,16 +36,6 @@ const computeStreak = (completedDates) => {
   return streak;
 };
 
-/* ----------------------- Challenge Bank (30 items) ---------------------- */
-/**
- * Each challenge has minimal auto-checks:
- *  - "includes": substring checks on the user's code (simple MVP validator)
- *  - points: awarded if all checks pass
- *  - starter: preloaded code
- *  - targetTip: description of expected effect
- */
-
-
 /* ----------------------------- Main Component --------------------------- */
 const ChallengeMode = () => {
   const [progress, setProgress] = useState(loadProgress());
@@ -174,27 +164,30 @@ const ChallengeMode = () => {
     const completedSet = new Set(progress.completedDates);
 
     return (
-      <div className="w-full sm:w-[320px] bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-xl">
-        <div className="flex items-center justify-between mb-2">
-          <div className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+      <div className="w-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-3xl p-6 shadow-2xl ring-1 ring-slate-200/20 dark:ring-slate-700/20">
+        <div className="flex items-center justify-between mb-4">
+          <div className="text-lg font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">
             {d.toLocaleString("default", { month: "long" })} {year}
           </div>
-          <div className="text-xs text-slate-500">
-            Streak: <span className="font-semibold">{streak}</span> • Best:{" "}
-            <span className="font-semibold">{progress.streakBest || 0}</span>
+          <div className="flex items-center gap-3 text-sm">
+            <div className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full font-semibold shadow-lg">
+              <span>🔥</span>
+              <span>{streak}</span>
+            </div>
+            <div className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold shadow-lg">
+              <span>⭐</span>
+              <span>{progress.streakBest || 0}</span>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-7 gap-1 text-xs text-slate-500 mb-1">
-          {["S","M","T","W","T","F","S"].map((d) => (
-            <div key={d} className="text-center">{d}</div>
+        <div className="grid grid-cols-7 gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 mb-3">
+          {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map((d) => (
+            <div key={d} className="text-center py-1">{d}</div>
           ))}
         </div>
-        {/* leading blanks */}
-        <div
-          className="grid grid-cols-7 gap-1 text-sm"
-          aria-label="calendar-grid"
-        >
+        
+        <div className="grid grid-cols-7 gap-2 text-sm" aria-label="calendar-grid">
           {Array.from({ length: first.getDay() }).map((_, i) => (
             <div key={`b-${i}`} />
           ))}
@@ -210,33 +203,32 @@ const ChallengeMode = () => {
               <div
                 key={day}
                 className={[
-                  "h-8 rounded-lg flex items-center justify-center border",
-                  "transition-all",
+                  "h-10 w-10 rounded-2xl flex items-center justify-center border-2 transition-all duration-300 cursor-pointer transform hover:scale-110 font-semibold",
                   done
-                    ? "bg-green-100 dark:bg-green-900/30 border-green-300 dark:border-green-700"
-                    : "bg-white/70 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700",
+                    ? "bg-gradient-to-br from-emerald-400 to-emerald-600 border-emerald-500 text-white shadow-lg shadow-emerald-500/30"
+                    : "bg-white/80 dark:bg-slate-700/80 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-600",
                   isToday
-                    ? "ring-2 ring-blue-500 font-semibold"
-                    : "hover:bg-blue-50 dark:hover:bg-slate-700/50",
+                    ? "ring-4 ring-blue-500/50 ring-offset-2 ring-offset-white dark:ring-offset-slate-800 scale-110"
+                    : "",
                 ].join(" ")}
                 title={done ? "Completed ✅" : "Incomplete"}
               >
-                {day}
-                {done && <span className="ml-1">✅</span>}
+                <span className={isToday ? "font-bold" : ""}>{day}</span>
               </div>
             );
           })}
         </div>
 
-        <div className="mt-3">
-          <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+        <div className="mt-6 space-y-3">
+          <div className="flex justify-between items-center text-sm font-medium">
+            <span className="text-slate-600 dark:text-slate-300">Monthly Progress</span>
+            <span className="text-slate-800 dark:text-white font-bold">{completionRate}%</span>
+          </div>
+          <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-3 overflow-hidden shadow-inner">
             <div
-              className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600"
+              className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-700 ease-out shadow-lg"
               style={{ width: `${completionRate}%` }}
             />
-          </div>
-          <div className="text-right text-xs text-slate-500 mt-1">
-            Month Progress: {completionRate}%
           </div>
         </div>
       </div>
@@ -245,117 +237,168 @@ const ChallengeMode = () => {
 
   /* ------------------------------ UI Render ------------------------------ */
   return (
-    <div className="min-h-screen w-full py-8 px-4 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 text-slate-900 dark:text-white">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen w-full py-4 sm:py-8 px-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-900 dark:text-white relative overflow-x-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-indigo-400/10 to-cyan-600/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 relative z-10">
         {/* Header */}
         <section className="relative">
-          <div className="text-center space-y-4">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-2 shadow-lg">
-              <span className="text-2xl">🔥</span>
+          <div className="text-center space-y-6">
+            <div className="flex justify-center">
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 rounded-3xl mb-4 shadow-2xl flex items-center justify-center transform rotate-12 hover:rotate-0 transition-transform duration-500">
+                  <span className="text-3xl transform -rotate-12">🔥</span>
+                </div>
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-lg opacity-30 -z-10"></div>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
               Challenge Mode
             </h1>
-            <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              Solve one animation challenge every day. Earn points, build a streak, and level up your motion skills.
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              Master animation one challenge at a time. Build your streak, earn points, and become a motion design expert.
             </p>
           </div>
 
           {/* Progress + Calendar section */}
-<div className="mt-6 flex justify-between items-start gap-6">
-  {/* Left side - Bigger Progress Card */}
-  <div className="flex-1 bg-white/80 dark:bg-slate-800/80 p-6 rounded-2xl shadow-md">
-    <h3 className="text-3xl font-bold text-slate-700 dark:text-slate-200 mb-4">
-      Your Progress
-    </h3>
-
-    <div className="space-y-5 text-slate-600 dark:text-slate-300">
-      <p className="text-lg">⭐ {progress.totalPoints} pts</p>
-      <p className="text-lg">🔥 Streak: {streak} days</p>
-      <p className="text-lg">✅ Completed: {progress.completedDates.length}/30</p>
-    </div>
-
-    {/* Big Progress Bar */}
-    <div className="mt-6 w-full bg-slate-200 rounded-full h-5">
-      <div
-        className="bg-gradient-to-r from-blue-500 to-purple-600 h-4 rounded-full transition-all duration-500"
-        style={{ width: `${completionRate}%` }}
-      ></div>
-    </div>
-  </div>
-
-  {/* Right side - Calendar */}
-  <div className="w-[350px]">
-    <MiniCalendar />
-  </div>
-</div>
-
-        </section>
-
-        {/* Challenge Card */}
-        <section className="grid lg:grid-cols-5 gap-8">
-          {/* Editor + Actions */}
-          <div className="lg:col-span-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl space-y-4">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="text-xs uppercase tracking-wider text-slate-500">
-                  Today’s Challenge • #{challenge.id} / 30
+          <div className="mt-8 sm:mt-12 flex flex-col xl:flex-row justify-between items-start gap-6 lg:gap-8">
+            {/* Left side - Progress Card */}
+            <div className="w-full xl:flex-1 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 ring-1 ring-slate-200/20 dark:ring-slate-700/20">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">📊</span>
                 </div>
-                <h2 className="text-2xl font-bold mt-1">{challenge.title}</h2>
-                <div className="text-sm text-slate-500">
-                  Difficulty:{" "}
-                  <span
-                    className={
-                      challenge.difficulty === "Easy"
-                        ? "text-green-600"
-                        : challenge.difficulty === "Medium"
-                        ? "text-amber-600"
-                        : "text-rose-600"
-                    }
-                  >
-                    {challenge.difficulty}
-                  </span>{" "}
-                  • Points: <b>{challenge.points}</b>
+                <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">
+                  Your Progress
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                <div className="bg-gradient-to-br from-yellow-400 to-orange-500 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                  <div className="text-3xl sm:text-4xl font-black">{progress.totalPoints}</div>
+                  <div className="text-yellow-100 font-medium">Total Points</div>
                 </div>
-                <div className="mt-2 text-slate-600 dark:text-slate-300">
-                  <b>Target:</b> {challenge.targetTip}
+                <div className="bg-gradient-to-br from-red-500 to-pink-600 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                  <div className="text-3xl sm:text-4xl font-black">{streak}</div>
+                  <div className="text-red-100 font-medium">Current Streak</div>
                 </div>
-                <div className="mt-1 text-xs text-slate-500">
-                  Checker looks for: {challenge.checks.join(", ")}
+                <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+                  <div className="text-3xl sm:text-4xl font-black">{progress.completedDates.length}</div>
+                  <div className="text-green-100 font-medium">Completed</div>
                 </div>
               </div>
 
-              <div className="text-right">
-                <div className="text-xs text-slate-500">Your Points</div>
-                <div className="text-3xl font-extrabold">
-                  {progress.totalPoints}
+              {/* Enhanced Progress Bar */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-600 dark:text-slate-300 font-medium">Monthly Progress</span>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{completionRate}%</span>
                 </div>
-                <div className="mt-1 text-xs text-slate-500">
-                  Streak: <b>{streak}</b> days
+                <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-4 overflow-hidden shadow-inner">
+                  <div
+                    className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-full rounded-full transition-all duration-1000 ease-out shadow-lg relative overflow-hidden"
+                    style={{ width: `${completionRate}%` }}
+                  >
+                    <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <textarea
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              spellCheck={false}
-              className="w-full h-80 md:h-96 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-mono text-sm p-4 focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="Write HTML/CSS/JS here…"
-            />
+            {/* Right side - Calendar */}
+            <div className="w-full xl:w-[400px] flex-shrink-0">
+              <MiniCalendar />
+            </div>
+          </div>
+        </section>
+
+        {/* Challenge Card */}
+        <section className="grid lg:grid-cols-5 gap-6 lg:gap-8">
+          {/* Editor + Actions */}
+          <div className="lg:col-span-3 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl p-6 rounded-3xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl space-y-6 ring-1 ring-slate-200/20 dark:ring-slate-700/20">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="text-xs uppercase tracking-widest text-slate-500 font-bold px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-full">
+                    Challenge #{challenge.id} / 30
+                  </div>
+                  <div className={`text-xs font-bold px-3 py-1 rounded-full ${
+                    challenge.difficulty === "Easy"
+                      ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                      : challenge.difficulty === "Medium"
+                      ? "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+                      : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                  }`}>
+                    {challenge.difficulty}
+                  </div>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold mb-3 bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-200 bg-clip-text text-transparent">
+                  {challenge.title}
+                </h2>
+                <div className="space-y-2 text-sm sm:text-base">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-purple-600 dark:text-purple-400">🎯 Target:</span>
+                    <span className="text-slate-600 dark:text-slate-300">{challenge.targetTip}</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-semibold text-blue-600 dark:text-blue-400 mt-0.5">🔍 Keywords:</span>
+                    <div className="flex flex-wrap gap-1">
+                      {challenge.checks.map((check, i) => (
+                        <span key={i} className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-lg text-xs font-mono">
+                          {check}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center sm:text-right bg-gradient-to-br from-purple-500 to-pink-600 p-4 rounded-2xl text-white shadow-lg min-w-[120px]">
+                <div className="text-xs font-medium opacity-90">Your Points</div>
+                <div className="text-3xl font-black">{progress.totalPoints}</div>
+                <div className="text-xs opacity-90 mt-1">
+                  🔥 <span className="font-semibold">{streak}</span> day streak
+                </div>
+                <div className="text-xs font-bold mt-2 px-2 py-1 bg-white/20 rounded-lg">
+                  +{challenge.points} pts
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <textarea
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                spellCheck={false}
+                className="w-full h-80 md:h-96 rounded-2xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-mono text-sm p-4 focus:ring-4 focus:ring-blue-500/30 focus:border-blue-500 outline-none transition-all duration-300 shadow-inner resize-none"
+                placeholder="Write your HTML/CSS/JS animation here..."
+              />
+              <div className="absolute top-3 right-3 flex gap-1">
+                <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+              </div>
+            </div>
 
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={runCode}
-                className="px-4 py-2 rounded-xl bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 transition"
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 transition-all duration-300 font-semibold text-slate-700 dark:text-slate-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
-                ▶️ Run
+                <span>▶️</span>
+                <span>Run Code</span>
               </button>
               <button
                 onClick={submit}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition"
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
-                ✅ Submit
+                <span>✅</span>
+                <span>Submit Solution</span>
               </button>
               <button
                 onClick={() => {
@@ -363,9 +406,10 @@ const ChallengeMode = () => {
                   setSubmitted(false);
                   setScoreMsg("");
                 }}
-                className="px-4 py-2 rounded-xl bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 transition"
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 hover:bg-amber-50 dark:hover:bg-slate-600 transition-all duration-300 font-semibold text-slate-700 dark:text-slate-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
-                ♻️ Reset Starter
+                <span>♻️</span>
+                <span className="hidden sm:inline">Reset</span>
               </button>
               <button
                 onClick={() => {
@@ -380,19 +424,20 @@ const ChallengeMode = () => {
                   setSubmitted(false);
                   setScoreMsg("");
                 }}
-                className="ml-auto px-4 py-2 rounded-xl bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 text-rose-600 dark:text-rose-300 transition"
+                className="ml-auto flex items-center gap-2 px-6 py-3 rounded-2xl bg-white dark:bg-slate-700 border-2 border-red-200 dark:border-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400 font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
-                🗑 Reset Progress
+                <span>🗑</span>
+                <span className="hidden sm:inline">Clear Progress</span>
               </button>
             </div>
 
             {submitted && (
               <div
-                className={`mt-2 text-sm px-4 py-3 rounded-xl border ${
+                className={`p-4 rounded-2xl border-2 font-medium shadow-lg ${
                   scoreMsg.startsWith("✅")
-                    ? "bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-700 text-green-700 dark:text-green-200"
-                    : "bg-amber-50 dark:bg-amber-900/20 border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-200"
-                }`}
+                    ? "bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-300 dark:border-green-600 text-green-800 dark:text-green-200"
+                    : "bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-amber-300 dark:border-amber-600 text-amber-800 dark:text-amber-200"
+                } animate-pulse`}
               >
                 {scoreMsg}
               </div>
@@ -400,52 +445,97 @@ const ChallengeMode = () => {
           </div>
 
           {/* Preview Pane */}
-          <div className="lg:col-span-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl space-y-3">
+          <div className="lg:col-span-2 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl p-6 rounded-3xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl space-y-4 ring-1 ring-slate-200/20 dark:ring-slate-700/20">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-semibold">Preview</h3>
-              <span className="text-xs text-slate-500">
-                Sandbox iframe (HTML/CSS/JS)
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold">👁️</span>
+                </div>
+                <h3 className="text-xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">
+                  Live Preview
+                </h3>
+              </div>
+              <span className="text-xs text-slate-500 font-medium px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-full">
+                HTML/CSS/JS Sandbox
               </span>
             </div>
-            <div className="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+            
+            <div className="rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-2xl relative">
+              <div className="absolute top-0 left-0 right-0 h-8 bg-slate-100 dark:bg-slate-800 flex items-center justify-center gap-2 border-b border-slate-200 dark:border-slate-700">
+                <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+              </div>
               <iframe
                 ref={iframeRef}
                 title="challenge-preview"
-                className="w-full h-96"
+                className="w-full h-96 mt-8"
               />
             </div>
-            <div className="text-xs text-slate-500">
-              Tip: Use <code>@keyframes</code>, <code>animation</code>,{" "}
-              <code>transform</code>, <code>opacity</code>, etc. Then press
-              <b> Run</b> → <b>Submit</b>.
+            
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-4 rounded-2xl border border-blue-200 dark:border-blue-700">
+              <div className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
+                <span className="font-semibold">💡 Pro Tip:</span> Use CSS properties like <code className="bg-white/50 dark:bg-slate-800/50 px-1 py-0.5 rounded text-xs">@keyframes</code>, <code className="bg-white/50 dark:bg-slate-800/50 px-1 py-0.5 rounded text-xs">transform</code>, <code className="bg-white/50 dark:bg-slate-800/50 px-1 py-0.5 rounded text-xs">animation</code>, and <code className="bg-white/50 dark:bg-slate-800/50 px-1 py-0.5 rounded text-xs">opacity</code> to create smooth animations.
+              </div>
             </div>
           </div>
         </section>
 
         {/* Footer Callouts */}
         <section className="grid md:grid-cols-3 gap-6">
-          <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 shadow">
-            <div className="text-lg font-semibold">Monthly Rotation</div>
-            <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
-              30 challenges repeat each month. If you miss a day, keep going —
-              streaks resume when you complete the current day’s task.
+          <div className="group p-6 rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl ring-1 ring-slate-200/20 dark:ring-slate-700/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                <span className="text-white font-bold">🔄</span>
+              </div>
+              <div className="text-xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">
+                Monthly Rotation
+              </div>
+            </div>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+              30 unique challenges cycle each month. Miss a day? No worries! Jump back in anytime to continue your learning journey.
             </p>
           </div>
-          <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 shadow">
-            <div className="text-lg font-semibold">Points & Streaks</div>
-            <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
-              Completing a challenge awards points. Keep a daily streak to push
-              your best score!
+
+          <div className="group p-6 rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl ring-1 ring-slate-200/20 dark:ring-slate-700/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span className="text-white font-bold">🏆</span>
+              </div>
+              <div className="text-xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">
+                Points & Streaks
+              </div>
+            </div>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+              Every completed challenge earns points. Build daily streaks to maximize your learning momentum and track your progress.
             </p>
           </div>
-          <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 shadow">
-            <div className="text-lg font-semibold">What’s Next?</div>
-            <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
-              We’ll add difficulty filters, weekly events, and global leaderboards
-              (backend) later. For now, enjoy the practice loop 💪
+
+          <div className="group p-6 rounded-3xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl ring-1 ring-slate-200/20 dark:ring-slate-700/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center group-hover:bounce transition-all duration-300">
+                <span className="text-white font-bold">🚀</span>
+              </div>
+              <div className="text-xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">
+                What's Next?
+              </div>
+            </div>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+              Coming soon: difficulty filters, weekly events, global leaderboards, and community features. Keep practicing! 💪
             </p>
           </div>
         </section>
+
+        {/* Footer */}
+        <footer className="text-center py-8">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-full border border-slate-200/50 dark:border-slate-700/50 shadow-xl">
+            <span className="text-2xl">✨</span>
+            <span className="font-semibold text-slate-600 dark:text-slate-300">
+              Keep animating, keep growing!
+            </span>
+            <span className="text-2xl">✨</span>
+          </div>
+        </footer>
       </div>
     </div>
   );
