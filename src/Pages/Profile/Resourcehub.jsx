@@ -1,5 +1,54 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
+import { 
+  Zap, 
+  Heart, 
+  Palette, 
+  Sparkles, 
+  Hash, 
+  Star, 
+  Eye, 
+  Package, 
+  Layout, 
+  Layers, 
+  Grid, 
+  Component, 
+  Image, 
+  Play, 
+  Wand2, 
+  Shapes,
+  Code,
+  Paintbrush,
+  Camera,
+  Download,
+  Wind,
+  FormInput,
+  Search
+} from "lucide-react";
+
+// Icon mapping for each resource
+const resourceIcons = {
+  "Framer Motion": Zap,
+  "GSAP": Heart,
+  "React Spring": Sparkles,
+  "Motion One": Play,
+  "Lucide Icons": Hash,
+  "Heroicons": Star,
+  "Phosphor Icons": Eye,
+  "React Icons": Package,
+  "shadcn/ui": Layout,
+  "Radix UI": Layers,
+  "Chakra UI": Grid,
+  "Material UI": Component,
+  "LottieFiles": Image,
+  "Animista": Wand2,
+  "Haikei": Shapes,
+  "SVG Repo": Download,
+  "Tailwind CSS": Wind,
+  "React Hook Form": FormInput,
+  "Figma": Paintbrush,
+  "Unsplash": Camera
+};
 
 // List of resources to display in the hub
 const resources = [
@@ -78,6 +127,12 @@ const resources = [
     description: "React components for faster web development.",
     url: "https://mui.com/",
   },
+  {
+    name: "Tailwind CSS",
+    category: "UI",
+    description: "A utility-first CSS framework for rapid UI development.",
+    url: "https://tailwindcss.com/",
+  },
   // Tools
   {
     name: "LottieFiles",
@@ -103,86 +158,129 @@ const resources = [
     description: "Thousands of free SVG icons & illustrations.",
     url: "https://www.svgrepo.com/",
   },
+  {
+    name: "React Hook Form",
+    category: "Tools",
+    description: "Performant, flexible forms with easy validation.",
+    url: "https://react-hook-form.com/",
+  },
+  {
+    name: "Figma",
+    category: "Tools",
+    description: "Collaborative interface design tool.",
+    url: "https://www.figma.com/",
+  },
+  {
+    name: "Unsplash",
+    category: "Tools",
+    description: "High-quality photos for your projects.",
+    url: "https://unsplash.com/",
+  },
 ];
 
-// Define colors for each category: background, border, and text
-const categoryColors = {
-  Animation: {
-    bg: "bg-pink-100",
-    border: "border-pink-600",
-    text: "text-pink-600",
-  },
-  Icons: {
-    bg: "bg-green-100",
-    border: "border-green-600",
-    text: "text-green-600",
-  },
-  UI: {
-    bg: "bg-purple-100",
-    border: "border-purple-600",
-    text: "text-purple-600",
-  },
-  Tools: {
-    bg: "bg-yellow-100",
-    border: "border-yellow-600",
-    text: "text-yellow-600",
-  },
+// Single color scheme for all cards
+const cardColors = {
+  gradient: "from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000",
+  border: "border-blue-200 dark:border-gray-700",
+  badgeGradient: "from-blue-500 to-indigo-500",
+  iconColor: "text-blue-600 dark:text-blue-400",
 };
 
 const Resourcehub = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Filter resources based on search term
+  const filteredResources = useMemo(() => {
+    if (!searchTerm) return resources;
+    
+    return resources.filter(resource => 
+      resource.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
   return (
-    <div className="p-8 max-w-7xl mx-auto">
+    <div className="p-8 max-w-7xl mx-auto min-h-screen">
       {/* Main heading with gradient text */}
       <h1 className="text-5xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-800 mt-10 mb-6">
         ✨ Resources Hub ✨
       </h1>
 
       {/* Subheading / description */}
-      <p className="text-center mb-12 text-gray-600 dark:text-gray-400 text-lg">
+      <p className="text-center mb-8 text-gray-600 dark:text-gray-400 text-lg">
         A curated collection of animation, icon, UI libraries & tools for
         developers.
       </p>
 
+      {/* Search Bar */}
+      <div className="relative max-w-md mx-auto mb-12">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
+          <input
+            type="text"
+            placeholder="Search resources..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl border-2 border-blue-200 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-500 focus:outline-none transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+          />
+        </div>
+      </div>
+
       {/* Grid layout for resource cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {resources.map((res, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ y: -5, scale: 1.03 }} // Animate lift & scale on hover
-            className="p-6 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-md transition-all duration-300 bg-white dark:bg-gray-900 flex flex-col justify-between hover:shadow-[0_4px_15px_rgba(79,70,229,0.3)]"
-          >
-            <div>
-              {/* Resource name */}
-              <h2 className="text-2xl font-semibold mb-3">{res.name}</h2>
-
-              {/* Category badge with light bg, colored border and text */}
-              <span
-                className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-3 border ${
-                  categoryColors[res.category].border
-                } ${categoryColors[res.category].bg} ${
-                  categoryColors[res.category].text
-                }`}
-              >
-                {res.category}
-              </span>
-
-              {/* Resource description */}
-              <p className="text-gray-600 dark:text-gray-300">
-                {res.description}
-              </p>
-            </div>
-
-            {/* Visit button with gradient background */}
-            <a
-              href={res.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-block w-full text-center py-2 rounded-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow hover:from-purple-600 hover:to-blue-500 transition-all duration-300"
+        {filteredResources.map((res, index) => {
+          const IconComponent = resourceIcons[res.name];
+          
+          return (
+            <motion.div
+              key={index}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className={`relative flex flex-col bg-gradient-to-br ${cardColors.gradient} backdrop-blur-xl border-2 ${cardColors.border} p-6 sm:p-8 rounded-3xl w-full min-h-[280px] transition-all duration-500 ease-out group overflow-hidden shadow-lg hover:shadow-2xl`}
             >
-              Visit →
-            </a>
-          </motion.div>
-        ))}
+              {/* Decorative gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Icon and Category Badge */}
+                <div className="flex items-center justify-between mb-4">
+                  {IconComponent && (
+                    <div className={`p-3 rounded-2xl bg-white/50 dark:bg-black/20 ${cardColors.iconColor}`}>
+                      <IconComponent size={24} />
+                    </div>
+                  )}
+                  
+                  {/* Category badge with gradient background */}
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${cardColors.badgeGradient} shadow-md`}>
+                    {res.category}
+                  </span>
+                </div>
+
+                {/* Resource name */}
+                <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors">
+                  {res.name}
+                </h2>
+
+                {/* Resource description */}
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed flex-grow">
+                  {res.description}
+                </p>
+
+                {/* Visit button with enhanced styling */}
+                <a
+                  href={res.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:from-purple-600 hover:to-blue-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  <span>Visit</span>
+                  <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
