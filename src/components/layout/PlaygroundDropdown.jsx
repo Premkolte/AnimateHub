@@ -41,6 +41,12 @@ const PlaygroundDropdown = () => {
           >
             ColorGradientPlayground
           </Link>
+          <Link
+            to="/tailwindplayground"
+            className="block px-4 py-2 "
+          >
+            TailwindPlayground
+          </Link>
         </div>
       )}
     </div>
