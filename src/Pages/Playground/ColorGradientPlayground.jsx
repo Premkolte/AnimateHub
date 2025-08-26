@@ -1,219 +1,131 @@
-import React, { useState, useRef, useEffect } from "react";
-import { HexColorPicker } from "react-colorful"; // External lightweight color picker component
-import { Copy } from "lucide-react"; // Copy icon for the button
+import React, { useState, useEffect } from "react";
+import { HexColorPicker } from "react-colorful";
+import { Copy } from "lucide-react";
 
-/**
- * ColorGradientPlayground Component
- *
- * 🎨 Purpose:
- * - A playground to create beautiful linear gradients using **four colors**.
- * - Provides real-time preview of gradient changes.
- * - Lets users copy gradient CSS code with a single click.
- * - Uses TailwindCSS for modern UI styling.
- * - Includes popup color pickers that can be toggled open/close.
- */
+const getRandomColor = () =>
+  "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0");
+
 const ColorGradientPlayground = () => {
-  // ------------------- State Management -------------------
-
-  // Gradient color states
-  const [color1, setColor1] = useState("#c8264c"); // Default pink
-  const [color2, setColor2] = useState("#140416"); // Default dark purple/black
-  const [color3, setColor3] = useState("#1c92d2"); // Default steel blue
-  const [color4, setColor4] = useState("#f2fcfe"); // Default light white-blue
-
-  // State to track "Copy" button feedback
+  const [numColors, setNumColors] = useState(4);
+  const [colors, setColors] = useState([
+    "#c8264c",
+    "#140416",
+    "#1c92d2",
+    "#f2fcfe",
+  ]);
   const [copied, setCopied] = useState(false);
+  const [showPickers, setShowPickers] = useState([false, false, false, false]);
 
-  // Boolean flags to show/hide each color picker
-  const [showPicker1, setShowPicker1] = useState(false);
-  const [showPicker2, setShowPicker2] = useState(false);
-  const [showPicker3, setShowPicker3] = useState(false);
-  const [showPicker4, setShowPicker4] = useState(false);
-
-  // ------------------- Refs for Detecting Outside Clicks -------------------
-
-  // Each picker needs a ref to detect outside clicks
-  const picker1Ref = useRef();
-  const picker2Ref = useRef();
-  const picker3Ref = useRef();
-  const picker4Ref = useRef();
-
-  // ------------------- Gradient Style -------------------
-
-  /**
-   * CSS object that defines the preview gradient.
-   * Gradient angle = 135deg.
-   * Includes smooth transition animation when colors update.
-   */
-  const gradientStyle = {
-    background: `linear-gradient(135deg, ${color1}, ${color2}, ${color3}, ${color4})`,
-    transition: "background 0.5s ease",
-  };
-
-  // ------------------- Copy Gradient Function -------------------
-
-  /**
-   * Copies the gradient CSS rule to clipboard.
-   * Provides temporary "Copied!" feedback on the button.
-   */
-  const copyGradient = () => {
-    // Write text to clipboard
-    navigator.clipboard.writeText(
-      `background: linear-gradient(135deg, ${color1}, ${color2}, ${color3}, ${color4});`
-    );
-
-    // Trigger feedback
-    setCopied(true);
-
-    // Reset feedback after 1.5 seconds
-    setTimeout(() => setCopied(false), 1500);
-  };
-
-  // ------------------- Color Picker Button Subcomponent -------------------
-
-  /**
-   * ColorPickerButton Component
-   *
-   * Reusable UI component for each color circle + popup color picker.
-   *
-   * Props:
-   * - label       → Text label (e.g., "Color 1")
-   * - color       → Current selected color value
-   * - setColor    → State setter function for color
-   * - showPicker  → Boolean, controls picker visibility
-   * - setShowPicker → Function to toggle picker visibility
-   * - refProp     → Ref for detecting outside clicks
-   */
-  const ColorPickerButton = ({
-    label,
-    color,
-    setColor,
-    showPicker,
-    setShowPicker,
-    refProp,
-  }) => (
-    <div className="flex flex-col items-center gap-2 relative" ref={refProp}>
-      {/* Label above the color circle */}
-      <label className="text-gray-700 dark:text-gray-200 font-medium">
-        {label}
-      </label>
-
-      {/* Circular color swatch (click to open/close picker) */}
-      <div
-        onClick={() => setShowPicker(!showPicker)}
-        className="w-16 h-16 rounded-full cursor-pointer shadow-lg border-2 border-gray-300 dark:border-gray-600 transition-transform transform hover:scale-105"
-        style={{ backgroundColor: color }}
-      ></div>
-
-      {/* Popup color picker (appears when showPicker=true) */}
-      {showPicker && (
-        <div
-          className="absolute bottom-full mb-4 z-50 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl"
-          style={{
-            width: "220px",
-            maxHeight: "300px",
-            overflowY: "auto",
-          }}
-        >
-          {/* Hex color picker from react-colorful */}
-          <HexColorPicker color={color} onChange={setColor} />
-        </div>
-      )}
-    </div>
-  );
-
-  // ------------------- Close Pickers on Outside Click -------------------
-
-  /**
-   * Effect hook:
-   * Listens for clicks anywhere in the document.
-   * If click happens outside a picker → close that picker.
-   */
+  // Sync colors and showPickers arrays when numColors changes
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (picker1Ref.current && !picker1Ref.current.contains(event.target))
-        setShowPicker1(false);
+    // Add new colors if needed
+    if (colors.length < numColors) {
+      setColors((prev) => [
+        ...prev,
+        ...Array(numColors - prev.length).fill(0).map(() => getRandomColor()),
+      ]);
+      setShowPickers((prev) => [...prev, ...Array(numColors - prev.length).fill(false)]);
+    }
 
-      if (picker2Ref.current && !picker2Ref.current.contains(event.target))
-        setShowPicker2(false);
+    // Remove extra colors if decreased
+    if (colors.length > numColors) {
+      setColors((prev) => prev.slice(0, numColors));
+      setShowPickers((prev) => prev.slice(0, numColors));
+    }
+  }, [numColors]);
 
-      if (picker3Ref.current && !picker3Ref.current.contains(event.target))
-        setShowPicker3(false);
-
-      if (picker4Ref.current && !picker4Ref.current.contains(event.target))
-        setShowPicker4(false);
+  // Handle clicking outside to close all pickers
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      setShowPickers((prev) => prev.map(() => false));
     };
-
-    // Attach event listener
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup on component unmount
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ------------------- Component UI -------------------
+  const handleColorChange = (index, newColor) => {
+    setColors((prev) => {
+      const copy = [...prev];
+      copy[index] = newColor;
+      return copy;
+    });
+  };
+
+  const togglePicker = (index, e) => {
+    e.stopPropagation(); // Prevent outside click from closing immediately
+    setShowPickers((prev) =>
+      prev.map((val, i) => (i === index ? !val : false))
+    );
+  };
+
+  const copyGradient = () => {
+    navigator.clipboard.writeText(`background: linear-gradient(135deg, ${colors.join(", ")});`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  const gradientStyle = {
+    background: `linear-gradient(135deg, ${colors.join(", ")})`,
+    transition: "background 0.5s ease",
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-6">
-      <div
-        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10 p-8 bg-white dark:bg-gray-800 rounded-3xl border border-pink-600"
-        style={{
-          boxShadow: "0 0 10px rgba(236, 72, 153, 0.4)", // Subtle pink glowing shadow
-        }}
-      >
-        {/* ---------------- Left Column: Controls ---------------- */}
-        <div className="flex flex-col gap-8 justify-center">
-          {/* Heading */}
+      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10 p-8 bg-white dark:bg-gray-800 rounded-3xl border border-pink-600 shadow-lg">
+        {/* Controls */}
+        <div className="flex flex-col gap-6 justify-center">
           <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
             Gradient Playground
           </h1>
-
-          {/* Short description */}
           <p className="text-gray-600 dark:text-gray-300">
-            Pick four colors and generate a stunning gradient. Copy the CSS in
-            one click!
+            Click on a color circle to open the palette and pick your colors.
           </p>
 
-          {/* Color pickers in one row */}
-          <div className="flex gap-6">
-            <ColorPickerButton
-              label="Color 1"
-              color={color1}
-              setColor={setColor1}
-              showPicker={showPicker1}
-              setShowPicker={setShowPicker1}
-              refProp={picker1Ref}
+          {/* Number of colors selector */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setNumColors(Math.max(2, numColors - 1))}
+              className="px-4 py-1 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600"
+            >
+              -
+            </button>
+            <input
+              type="number"
+              className="w-16 text-center rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              value={numColors}
+              min={2}
+              onChange={(e) => setNumColors(Math.max(2, parseInt(e.target.value) || 2))}
             />
-
-            <ColorPickerButton
-              label="Color 2"
-              color={color2}
-              setColor={setColor2}
-              showPicker={showPicker2}
-              setShowPicker={setShowPicker2}
-              refProp={picker2Ref}
-            />
-
-            <ColorPickerButton
-              label="Color 3"
-              color={color3}
-              setColor={setColor3}
-              showPicker={showPicker3}
-              setShowPicker={setShowPicker3}
-              refProp={picker3Ref}
-            />
-
-            <ColorPickerButton
-              label="Color 4"
-              color={color4}
-              setColor={setColor4}
-              showPicker={showPicker4}
-              setShowPicker={setShowPicker4}
-              refProp={picker4Ref}
-            />
+            <button
+              onClick={() => setNumColors(numColors + 1)}
+              className="px-4 py-1 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-600"
+            >
+              +
+            </button>
           </div>
 
-          {/* Copy CSS button */}
+          {/* Color circles */}
+          <div className="flex gap-6 flex-wrap">
+            {colors.map((color, index) => (
+              <div key={index} className="flex flex-col items-center gap-2 relative">
+                <label className="text-gray-700 dark:text-gray-200 font-medium">
+                  Color {index + 1}
+                </label>
+                <div
+                  onClick={(e) => togglePicker(index, e)}
+                  className="w-16 h-16 rounded-full cursor-pointer shadow-lg border-2 border-gray-300 dark:border-gray-600 transition-transform transform hover:scale-105"
+                  style={{ backgroundColor: color }}
+                ></div>
+                {showPickers[index] && (
+                  <div className="absolute bottom-full mb-4 z-50 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl">
+                    <HexColorPicker color={color} onChange={(newColor) => handleColorChange(index, newColor)} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Copy CSS */}
           <button
             onClick={copyGradient}
             className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 shadow-md
@@ -223,25 +135,19 @@ const ColorGradientPlayground = () => {
                   : "bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 active:scale-95"
               }`}
           >
-            {/* Dynamic button text */}
             {copied ? "Copied!" : "Copy CSS"}
-
-            {/* Copy icon */}
             <Copy size={18} />
           </button>
         </div>
 
-        {/* ---------------- Right Column: Preview ---------------- */}
+        {/* Preview */}
         <div className="flex flex-col items-center gap-6">
-          {/* Gradient preview box */}
           <div
             className="w-full h-64 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-transform duration-500"
             style={gradientStyle}
           ></div>
-
-          {/* CSS code preview */}
           <pre className="w-full p-4 rounded-xl bg-gradient-to-r from-pink-100 to-pink-200 dark:from-gray-700 dark:to-gray-800 text-gray-900 dark:text-white font-mono overflow-x-auto text-sm shadow-inner">
-            {`background: linear-gradient(135deg, ${color1}, ${color2}, ${color3}, ${color4});`}
+            {`background: linear-gradient(135deg, ${colors.join(", ")});`}
           </pre>
         </div>
       </div>
