@@ -242,6 +242,55 @@ const ChallengeMode = () => {
     );
   };
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.ctrlKey) {
+        switch (event.key) {
+          case ',':
+            event.preventDefault();
+            runCode();
+            break;
+          case 'Enter':
+            event.preventDefault();
+            submit();
+            break;
+          case 'r':
+          case 'R':
+            event.preventDefault();
+            // Reset function
+            setCode(challenge.starter);
+            setSubmitted(false);
+            setScoreMsg("");
+            break;
+          case 'd':
+          case 'D':
+            event.preventDefault();
+            // Clear progress function
+            const cleared = {
+              completedDates: [],
+              totalPoints: 0,
+              attempts: {},
+              streakBest: 0,
+            };
+            saveProgress(cleared);
+            setProgress(cleared);
+            setSubmitted(false);
+            setScoreMsg("");
+
+            break;
+          default:
+            break;
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [code, challenge.starter]); 
+
+
   /* ------------------------------ UI Render ------------------------------ */
   return (
     <div className="min-h-screen w-full py-4 sm:py-8 px-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-900 dark:text-white relative overflow-x-hidden">
