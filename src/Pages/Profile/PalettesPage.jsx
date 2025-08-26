@@ -68,6 +68,237 @@ const palettes = [
     name: "Shadow Realm",
     colors: ["#232526", "#414345", "#434343", "#000000"],
   },
+
+  {
+    name: "Peach Sorbet",
+    colors: ["#FFDAB9", "#FFB6C1", "#FF7F50", "#FFA07A"],
+  },
+  {
+    name: "Emerald Isle",
+    colors: ["#004d40", "#00796b", "#26a69a", "#80cbc4"],
+  },
+  {
+    name: "Cherry Blossom",
+    colors: ["#ffafbd", "#ffc3a0", "#ffdde1", "#ee9ca7"],
+  },
+  {
+    name: "Steel Blue",
+    colors: ["#1c92d2", "#f2fcfe", "#000046", "#1CB5E0"],
+  },
+  {
+    name: "Royal Gold",
+    colors: ["#f6d365", "#fda085", "#ffd700", "#ffb347"],
+  },
+
+  {
+    name: "Coffee Mocha",
+    colors: ["#4e342e", "#6f4e37", "#a47148", "#d7ccc8"],
+  },
+  {
+    name: "Neon Jungle",
+    colors: ["#00ff87", "#60efff", "#ff6ec4", "#7873f5"],
+  },
+  {
+    name: "Frozen Lake",
+    colors: ["#83a4d4", "#b6fbff", "#2193b0", "#6dd5ed"],
+  },
+  {
+    name: "Blood Moon",
+    colors: ["#870000", "#190a05", "#5a0000", "#ff0000"],
+  },
+
+  {
+    name: "Ivory Pearl",
+    colors: ["#fdfcfb", "#e2d1c3", "#fafafa", "#d6ae7b"],
+  },
+  {
+    name: "Cyberpunk",
+    colors: ["#ff0080", "#7928ca", "#2af598", "#00f2fe"],
+  },
+  {
+    name: "Warm Sand",
+    colors: ["#fceabb", "#f8b500", "#eacda3", "#d6ae7b"],
+  },
+
+  {
+    name: "Tropical Sunset",
+    colors: ["#f83600", "#f9d423", "#fc4a1a", "#f7b733"],
+  },
+  {
+    name: "Ice Cream Pop",
+    colors: ["#f093fb", "#f5576c", "#fbc2eb", "#a6c1ee"],
+  },
+  {
+    name: "Cobalt Storm",
+    colors: ["#00416a", "#e4e5e6", "#2c3e50", "#3498db"],
+  },
+  {
+    name: "Dark Velvet",
+    colors: ["#000000", "#434343", "#1f1c2c", "#928dab"],
+  },
+  {
+    name: "Desert Heat",
+    colors: ["#c79081", "#dfa579", "#e58c8a", "#fbc687"],
+  },
+  {
+    name: "Pink Lemonade",
+    colors: ["#ff9a9e", "#fecfef", "#f6d365", "#fda085"],
+  },
+  {
+    name: "Galaxy Core",
+    colors: ["#0f2027", "#203a43", "#2c5364", "#6441a5"],
+  },
+  {
+    name: "Golden Dust",
+    colors: ["#d4af37", "#ffd700", "#f6d365", "#fda085"],
+  },
+  {
+    name: "Blue Horizon",
+    colors: ["#36d1dc", "#5b86e5", "#1e3c72", "#2a5298"],
+  },
+  {
+    name: "Rose Quartz",
+    colors: ["#e55d87", "#5fc3e4", "#fbc2eb", "#a6c1ee"],
+  },
+  {
+    name: "Fire Ember",
+    colors: ["#f00000", "#ff8008", "#ff512f", "#dd2476"],
+  },
+  {
+    name: "Candyland",
+    colors: ["#ff9a9e", "#fad0c4", "#fbc2eb", "#a1c4fd"],
+  },
+  {
+    name: "Twilight Sky",
+    colors: ["#0f0c29", "#302b63", "#24243e", "#6a11cb"],
+  },
+  {
+    name: "Green Meadow",
+    colors: ["#11998e", "#38ef7d", "#00c9a7", "#92fe9d"],
+  },
+  {
+    name: "Citrus Punch",
+    colors: ["#f9d423", "#ff4e50", "#ff6a00", "#ee0979"],
+  },
+  {
+    name: "Silver Lining",
+    colors: ["#bdc3c7", "#2c3e50", "#e0eafc", "#cfdef3"],
+  },
+  {
+    name: "Royal Indigo",
+    colors: ["#4a00e0", "#8e2de2", "#3a1c71", "#d76d77"],
+  },
+  {
+    name: "Deep Ocean",
+    colors: ["#2c3e50", "#3498db", "#34495e", "#2980b9"],
+  },
+  {
+    name: "Amber Glow",
+    colors: ["#ffb347", "#ffcc33", "#ff6a00", "#f5af19"],
+  },
+  {
+    name: "Rainbow Dash",
+    colors: ["#ff4e50", "#f9d423", "#24c6dc", "#5433ff"],
+  },
+  {
+    name: "Smoky Ash",
+    colors: ["#606c88", "#3f4c6b", "#434343", "#232526"],
+  },
+  {
+    name: "Pink Bliss",
+    colors: ["#ff9a9e", "#fecfef", "#fbc2eb", "#a6c1ee"],
+  },
+  {
+    name: "Royal Rose",
+    colors: ["#ff758c", "#ff7eb3", "#fcb69f", "#ffdde1"],
+  },
+  {
+    name: "Frozen Mist",
+    colors: ["#83a4d4", "#b6fbff", "#cfd9df", "#e2ebf0"],
+  },
+  {
+    name: "Mango Tango",
+    colors: ["#ff9a00", "#ff6a00", "#ff3c00", "#ffce00"],
+  },
+  {
+    name: "Cocoa Bean",
+    colors: ["#3e2723", "#5d4037", "#795548", "#a1887f"],
+  },
+  {
+    name: "Citrus Zest",
+    colors: ["#f7971e", "#ffd200", "#f9d423", "#ff8008"],
+  },
+  {
+    name: "Violet Storm",
+    colors: ["#20002c", "#cbb4d4", "#662d8c", "#ed1e79"],
+  },
+  {
+    name: "Midnight Blue",
+    colors: ["#232526", "#414345", "#000046", "#1CB5E0"],
+  },
+  {
+    name: "Neon Glow",
+    colors: ["#00f2fe", "#4facfe", "#ff0080", "#f80759"],
+  },
+  {
+    name: "Pastel Dreams",
+    colors: ["#a1c4fd", "#c2e9fb", "#d4fc79", "#96e6a1"],
+  },
+  {
+    name: "Wildfire",
+    colors: ["#ff416c", "#ff4b2b", "#ff6a00", "#ee0979"],
+  },
+  {
+    name: "Aqua Marine",
+    colors: ["#1a2980", "#26d0ce", "#13547a", "#80d0c7"],
+  },
+  {
+    name: "Royal Marble",
+    colors: ["#f5f7fa", "#c3cfe2", "#bdc3c7", "#2c3e50"],
+  },
+  {
+    name: "Tangerine",
+    colors: ["#f12711", "#f5af19", "#ff6a00", "#ff9a00"],
+  },
+  {
+    name: "Mystic Teal",
+    colors: ["#136a8a", "#267871", "#00bf8f", "#001510"],
+  },
+  {
+    name: "Amber Rose",
+    colors: ["#f7971e", "#ffd200", "#ff758c", "#ff7eb3"],
+  },
+  {
+    name: "Sakura Bloom",
+    colors: ["#ffb7c5", "#ffdde1", "#ffc1cc", "#ff69b4"],
+  },
+  {
+    name: "Arctic Chill",
+    colors: ["#00d2ff", "#3a7bd5", "#83a4d4", "#b6fbff"],
+  },
+  { name: "Molten Lava", colors: ["#ff0000", "#ff512f", "#f12711", "#a40606"] },
+  {
+    name: "Zen Garden",
+    colors: ["#355C7D", "#6C5B7B", "#C06C84", "#F8B195"],
+  },
+  {
+    name: "Lime Fizz",
+    colors: ["#a8ff78", "#78ffd6", "#56ab2f", "#a8e063"],
+  },
+  {
+    name: "Solar Eclipse",
+    colors: ["#0f2027", "#2c5364", "#232526", "#000000"],
+  },
+  { name: "Berry Crush", colors: ["#8e2de2", "#ff0080", "#fc466b", "#3a1c71"] },
+  {
+    name: "Amber Sunset",
+    colors: ["#ff7e5f", "#feb47b", "#f7971e", "#ffd200"],
+  },
+  {
+    name: "Mystic Ocean",
+    colors: ["#2E3192", "#1BFFFF", "#0F2027", "#2C5364"],
+  },
+  { name: "Dreamscape", colors: ["#00c6ff", "#0072ff", "#7f00ff", "#e100ff"] },
 ];
 
 // 🔘 Reusable Button Component
