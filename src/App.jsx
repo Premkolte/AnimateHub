@@ -54,6 +54,7 @@ import PalettesPage from "./Pages/Profile/PalettesPage";
 import SideBar from "./Pages/Dashboard/SideBar";
 import Resourcehub from "./Pages/Profile/Resourcehub";
 import ColorGradientPlayground from "./Pages/Playground/ColorGradientPlayground";
+import TailwindPlayground from "./Pages/Playground/TailwindPlayground";
 
 
 // Layout component that includes Navbar, Footer and an Outlet
@@ -96,6 +97,8 @@ function App() {
             <Route path="/framerplayground" element={<FramerPlayground />} />
             
             <Route path="/ColorGradientPlayground" element={<ColorGradientPlayground />} />
+            <Route path="/TailwindPlayground" element={<TailwindPlayground />} />
+
 
 
             <Route path="/leaderboard" element={<Leaderboard />} />

@@ -257,6 +257,16 @@ const Navbar = () => {
                           >
                             Gradient Playground
                           </Link>
+                          <Link
+                            to="/TailwindPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                          >
+                            Tailwind Playground
+                          </Link>
                         </div>
                       )}
                     </div>
