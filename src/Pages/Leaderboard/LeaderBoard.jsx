@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaTrophy, FaMedal, FaStar, FaCode, FaUsers, FaGithub } from "react-icons/fa";
+import { FaTrophy, FaStar, FaCode, FaUsers, FaGithub } from "react-icons/fa";
 
 const GITHUB_REPO = "Premkolte/AnimateHub";
-const TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "";
+const TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
+ 
+ 
 
 // Points configuration for different PR levels
 const POINTS = {
@@ -23,18 +25,14 @@ const Badge = ({ count, label, color }) => (
 // Skeleton Loader Component
 const SkeletonLoader = () => (
   <div className="bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
-    {/* Desktop Table Header - Hidden on mobile */}
     <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
       <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">#</div>
       <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">Contributor</div>
       <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">Contributions</div>
     </div>
-
-    {/* Rows */}
     <div className="divide-y divide-gray-100 dark:divide-gray-700">
       {[...Array(10)].map((_, i) => (
         <div key={i} className="p-4 sm:grid sm:grid-cols-12 sm:gap-4 sm:items-center sm:px-6 sm:py-4">
-          {/* Mobile Layout */}
           <div className="flex items-center space-x-3 sm:hidden">
             <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse flex-shrink-0"></div>
             <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse flex-shrink-0"></div>
@@ -46,15 +44,10 @@ const SkeletonLoader = () => (
               </div>
             </div>
           </div>
-
-          {/* Desktop Layout - Hidden on mobile */}
           <div className="hidden sm:contents">
-            {/* Rank */}
             <div className="col-span-1">
               <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
             </div>
-
-            {/* Contributor Info */}
             <div className="col-span-6 md:col-span-7">
               <div className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
@@ -64,8 +57,6 @@ const SkeletonLoader = () => (
                 </div>
               </div>
             </div>
-
-            {/* Stats */}
             <div className="col-span-5 md:col-span-4">
               <div className="flex items-center justify-end space-x-3">
                 <div className="w-16 h-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse"></div>
@@ -93,29 +84,34 @@ export default function LeaderBoard() {
       try {
         let contributorsMap = {};
         let page = 1;
-        let hasMore = true;
+        const MAX_PAGES = 10;
+        let keepFetching = true;
 
-        while (hasMore) {
-          const res = await fetch(
-            `https://api.github.com/repos/${GITHUB_REPO}/pulls?state=closed&per_page=100&page=${page}`,
-            { headers: TOKEN ? { Authorization: `token ${TOKEN}` } : {} }
+        while (keepFetching && page <= MAX_PAGES) {
+          const batch = await Promise.all(
+            Array.from({ length: 5 }, (_, i) =>
+              fetch(
+                `https://api.github.com/repos/${GITHUB_REPO}/pulls?state=closed&per_page=100&page=${page + i}`,
+                { headers: TOKEN ? { Authorization: `token ${TOKEN}` } : {} }
+              ).then(res => res.json())
+            )
           );
 
-          const prs = await res.json();
-          if (prs.length === 0) {
-            hasMore = false;
+          const prs = batch.flat();
+          if (prs.length === 0 || (prs.length === 1 && prs[0].message)) {
+            keepFetching = false;
             break;
           }
 
-          prs.forEach((pr) => {
+          prs.forEach(pr => {
             if (!pr.merged_at) return;
 
-            const labels = pr.labels.map((l) => l.name.toLowerCase());
+            const labels = pr.labels.map(l => l.name.toLowerCase());
             if (!labels.includes("gssoc'25")) return;
 
             const author = pr.user.login;
             let points = 0;
-            labels.forEach((label) => {
+            labels.forEach(label => {
               if (POINTS[label]) points += POINTS[label];
             });
 
@@ -133,7 +129,7 @@ export default function LeaderBoard() {
             contributorsMap[author].prs += 1;
           });
 
-          page++;
+          page += 5;
         }
 
         setContributors(
@@ -149,7 +145,6 @@ export default function LeaderBoard() {
     fetchContributorsWithPoints();
   }, []);
 
-  // Calculate stats when contributors data is loaded
   useEffect(() => {
     if (contributors.length > 0) {
       const totalPRs = contributors.reduce((sum, c) => sum + Number(c.prs), 0);
@@ -159,8 +154,6 @@ export default function LeaderBoard() {
       const flooredTotalPoints = Math.floor(totalPoints / 10) * 10;
       const flooredContributorsCount = Math.floor(contributors.length / 10) * 10;
 
-      // console.log(flooredContributorsCount,flooredTotalPoints,flooredTotalPRs)
-
       setStats({
         flooredTotalPRs,
         totalContributors: flooredContributorsCount,
@@ -169,10 +162,10 @@ export default function LeaderBoard() {
     }
   }, [contributors]);
 
-
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-secondary-900 py-6 sm:py-12 px-2 sm:px-4">
       <div className="max-w-5xl mx-auto">
+        {/* Header */}
         <motion.div
           className="text-center mb-8 sm:mb-12 px-2"
           initial={{ opacity: 0, y: -20 }}
