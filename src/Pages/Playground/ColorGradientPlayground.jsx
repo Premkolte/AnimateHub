@@ -160,7 +160,25 @@ const ColorGradientPlayground = () => {
             <Copy size={18} />
           </button>
 
-          {/* <button
+
+
+
+
+
+
+
+{/* 
+  Random Gradient Button Component
+  --------------------------------
+  - Generates a new set of random colors for the gradient preview
+  - Styled with a flashy multi-color animated gradient background
+  - Uses Shuffle icon from lucide-react instead of emoji
+*/}
+
+
+          <button
+
+          // When clicked, update the `colors` state with new random colors
             onClick={() =>
               setColors(
                 Array.from({ length: numColors }, () => getRandomColor())
@@ -174,65 +192,27 @@ const ColorGradientPlayground = () => {
              transition-all duration-500 active:scale-95"
           >
 
-
+ {/* Shuffle icon from lucide-react */}
+{/* Icon size (20px) */}
+{/* // Keep icon white to match text */}
             <Shuffle size={20} className="text-white" />
-
+ {/* Button label */}
             Random Gradient
 
-          </button> */}
-
-          {/* 
-  Random Gradient Button Component
-  --------------------------------
-  - Generates a new set of random colors for the gradient preview
-  - Styled with a flashy multi-color animated gradient background
-  - Uses Shuffle icon from lucide-react instead of emoji
-*/}
-
-          <button
-            // When clicked, update the `colors` state with new random colors
-            onClick={() =>
-              setColors(
-                Array.from(
-                  { length: numColors }, // create an array of size `numColors`
-                  () => getRandomColor() // fill it with random hex colors
-                )
-              )
-            }
-            // Tailwind classes for layout, colors, animation, and interaction
-            className="
-    flex items-center justify-center gap-2   /* Flexbox: center content horizontally & add gap */
-    px-6 py-3                                /* Padding inside the button */
-    rounded-xl                               /* Rounded corners */
-    font-semibold                            /* Bold text */
-    text-white                               /* White text color */
-    shadow-lg                                /* Drop shadow for depth */
-    bg-[linear-gradient(90deg,               /* Custom multi-color linear gradient */
-      #ff0080, #ff8c00, #40e0d0, 
-      #8a2be2, #ff1493, #00ff7f)]
-    bg-[length:200%_200%]                    /* Make gradient larger than button for animation */
-    animate-gradient-x                       /* Animate gradient shifting (defined in CSS) */
-    transition-all duration-500              /* Smooth transitions on hover/click */
-    active:scale-95                          /* Slight shrink when pressed */
-  "
-          >
-            {/* Shuffle icon from lucide-react */}
-            <Shuffle
-              size={20} // Icon size (20px)
-              className="text-white" // Keep icon white to match text
-            />
-            {/* Button label */}
-            Random Gradient
           </button>
 
-
-
-
-
-
-
-
           
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
         {/* Preview */}
