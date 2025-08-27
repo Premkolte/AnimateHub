@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
 import { Copy } from "lucide-react";
+import { Shuffle } from "lucide-react";
 
 const getRandomColor = () =>
-  "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0");
+  "#" +
+  Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, "0");
 
 const ColorGradientPlayground = () => {
   const [numColors, setNumColors] = useState(4);
@@ -22,9 +26,14 @@ const ColorGradientPlayground = () => {
     if (colors.length < numColors) {
       setColors((prev) => [
         ...prev,
-        ...Array(numColors - prev.length).fill(0).map(() => getRandomColor()),
+        ...Array(numColors - prev.length)
+          .fill(0)
+          .map(() => getRandomColor()),
       ]);
-      setShowPickers((prev) => [...prev, ...Array(numColors - prev.length).fill(false)]);
+      setShowPickers((prev) => [
+        ...prev,
+        ...Array(numColors - prev.length).fill(false),
+      ]);
     }
 
     // Remove extra colors if decreased
@@ -59,7 +68,9 @@ const ColorGradientPlayground = () => {
   };
 
   const copyGradient = () => {
-    navigator.clipboard.writeText(`background: linear-gradient(135deg, ${colors.join(", ")});`);
+    navigator.clipboard.writeText(
+      `background: linear-gradient(135deg, ${colors.join(", ")});`
+    );
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
@@ -94,7 +105,9 @@ const ColorGradientPlayground = () => {
               className="w-16 text-center rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               value={numColors}
               min={2}
-              onChange={(e) => setNumColors(Math.max(2, parseInt(e.target.value) || 2))}
+              onChange={(e) =>
+                setNumColors(Math.max(2, parseInt(e.target.value) || 2))
+              }
             />
             <button
               onClick={() => setNumColors(numColors + 1)}
@@ -107,7 +120,10 @@ const ColorGradientPlayground = () => {
           {/* Color circles */}
           <div className="flex gap-6 flex-wrap">
             {colors.map((color, index) => (
-              <div key={index} className="flex flex-col items-center gap-2 relative">
+              <div
+                key={index}
+                className="flex flex-col items-center gap-2 relative"
+              >
                 <label className="text-gray-700 dark:text-gray-200 font-medium">
                   Color {index + 1}
                 </label>
@@ -118,7 +134,12 @@ const ColorGradientPlayground = () => {
                 ></div>
                 {showPickers[index] && (
                   <div className="absolute bottom-full mb-4 z-50 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl">
-                    <HexColorPicker color={color} onChange={(newColor) => handleColorChange(index, newColor)} />
+                    <HexColorPicker
+                      color={color}
+                      onChange={(newColor) =>
+                        handleColorChange(index, newColor)
+                      }
+                    />
                   </div>
                 )}
               </div>
@@ -128,7 +149,7 @@ const ColorGradientPlayground = () => {
           {/* Copy CSS */}
           <button
             onClick={copyGradient}
-            className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 shadow-md
+            className={`flex items-center justify-center  gap-3 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 shadow-md
               ${
                 copied
                   ? "bg-green-500 hover:bg-green-600"
@@ -138,12 +159,86 @@ const ColorGradientPlayground = () => {
             {copied ? "Copied!" : "Copy CSS"}
             <Copy size={18} />
           </button>
+
+          {/* <button
+            onClick={() =>
+              setColors(
+                Array.from({ length: numColors }, () => getRandomColor())
+              )
+            }
+
+
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white shadow-lg
+             bg-[linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0,#8a2be2,#ff1493,#00ff7f)]
+             bg-[length:200%_200%] animate-gradient-x
+             transition-all duration-500 active:scale-95"
+          >
+
+
+            <Shuffle size={20} className="text-white" />
+
+            Random Gradient
+
+          </button> */}
+
+          {/* 
+  Random Gradient Button Component
+  --------------------------------
+  - Generates a new set of random colors for the gradient preview
+  - Styled with a flashy multi-color animated gradient background
+  - Uses Shuffle icon from lucide-react instead of emoji
+*/}
+
+          <button
+            // When clicked, update the `colors` state with new random colors
+            onClick={() =>
+              setColors(
+                Array.from(
+                  { length: numColors }, // create an array of size `numColors`
+                  () => getRandomColor() // fill it with random hex colors
+                )
+              )
+            }
+            // Tailwind classes for layout, colors, animation, and interaction
+            className="
+    flex items-center justify-center gap-2   /* Flexbox: center content horizontally & add gap */
+    px-6 py-3                                /* Padding inside the button */
+    rounded-xl                               /* Rounded corners */
+    font-semibold                            /* Bold text */
+    text-white                               /* White text color */
+    shadow-lg                                /* Drop shadow for depth */
+    bg-[linear-gradient(90deg,               /* Custom multi-color linear gradient */
+      #ff0080, #ff8c00, #40e0d0, 
+      #8a2be2, #ff1493, #00ff7f)]
+    bg-[length:200%_200%]                    /* Make gradient larger than button for animation */
+    animate-gradient-x                       /* Animate gradient shifting (defined in CSS) */
+    transition-all duration-500              /* Smooth transitions on hover/click */
+    active:scale-95                          /* Slight shrink when pressed */
+  "
+          >
+            {/* Shuffle icon from lucide-react */}
+            <Shuffle
+              size={20} // Icon size (20px)
+              className="text-white" // Keep icon white to match text
+            />
+            {/* Button label */}
+            Random Gradient
+          </button>
+
+
+
+
+
+
+
+
+          
         </div>
 
         {/* Preview */}
         <div className="flex flex-col items-center gap-6">
           <div
-            className="w-full h-64 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-transform duration-500"
+            className="w-full h-80 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-transform duration-500"
             style={gradientStyle}
           ></div>
           <pre className="w-full p-4 rounded-xl bg-gradient-to-r from-pink-100 to-pink-200 dark:from-gray-700 dark:to-gray-800 text-gray-900 dark:text-white font-mono overflow-x-auto text-sm shadow-inner">
