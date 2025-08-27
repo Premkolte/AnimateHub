@@ -1,21 +1,22 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { 
-  Zap, 
-  Heart, 
-  Palette, 
-  Sparkles, 
-  Hash, 
-  Star, 
-  Eye, 
-  Package, 
-  Layout, 
-  Layers, 
-  Grid, 
-  Component, 
-  Image, 
-  Play, 
-  Wand2, 
+import Fuse from "fuse.js"; // For fuzzy search
+import {
+  Zap,
+  Heart,
+  Palette,
+  Sparkles,
+  Hash,
+  Star,
+  Eye,
+  Package,
+  Layout,
+  Layers,
+  Grid,
+  Component,
+  Image,
+  Play,
+  Wand2,
   Shapes,
   Code,
   Paintbrush,
@@ -23,34 +24,34 @@ import {
   Download,
   Wind,
   FormInput,
-  Search
+  Search,
 } from "lucide-react";
 
 // Icon mapping for each resource
 const resourceIcons = {
   "Framer Motion": Zap,
-  "GSAP": Heart,
+  GSAP: Heart,
   "React Spring": Sparkles,
   "Motion One": Play,
   "Lucide Icons": Hash,
-  "Heroicons": Star,
+  Heroicons: Star,
   "Phosphor Icons": Eye,
   "React Icons": Package,
   "shadcn/ui": Layout,
   "Radix UI": Layers,
   "Chakra UI": Grid,
   "Material UI": Component,
-  "LottieFiles": Image,
-  "Animista": Wand2,
-  "Haikei": Shapes,
+  LottieFiles: Image,
+  Animista: Wand2,
+  Haikei: Shapes,
   "SVG Repo": Download,
   "Tailwind CSS": Wind,
   "React Hook Form": FormInput,
-  "Figma": Paintbrush,
-  "Unsplash": Camera
+  Figma: Paintbrush,
+  Unsplash: Camera,
 };
 
-// List of resources to display in the hub
+// List of resources
 const resources = [
   // Animation Libraries
   {
@@ -178,9 +179,10 @@ const resources = [
   },
 ];
 
-// Single color scheme for all cards
+// Card color scheme
 const cardColors = {
-  gradient: "from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000",
+  gradient:
+    "from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000",
   border: "border-blue-200 dark:border-gray-700",
   badgeGradient: "from-blue-500 to-indigo-500",
   iconColor: "text-blue-600 dark:text-blue-400",
@@ -189,24 +191,46 @@ const cardColors = {
 const Resourcehub = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Filter resources based on search term
+  // Configure Fuse.js for fuzzy search
+  const fuse = useMemo(
+    () =>
+      new Fuse(resources, {
+        keys: ["name", "category", "description"],
+        threshold: 0.3,
+      }),
+    [resources]
+  );
+
+  // Filter resources with fuzzy search and highlight matches
   const filteredResources = useMemo(() => {
     if (!searchTerm) return resources;
-    
-    return resources.filter(resource => 
-      resource.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      resource.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      resource.description.toLowerCase().includes(searchTerm.toLowerCase())
+    const results = fuse.search(searchTerm);
+    return results.map((result) => result.item);
+  }, [searchTerm, fuse]);
+
+  // Function to highlight matched search terms
+  const highlightText = (text, query) => {
+    if (!query) return text;
+    const regex = new RegExp(`(${query})`, "gi");
+    return text.split(regex).map((part, i) =>
+      regex.test(part) ? (
+        <mark key={i} className="bg-yellow-300 dark:bg-yellow-600">
+          {part}
+        </mark>
+      ) : (
+        part
+      )
     );
-  }, [searchTerm]);
+  };
+
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-screen">
-      {/* Main heading with gradient text */}
+      {/* Main heading */}
       <h1 className="text-5xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-800 mt-10 mb-6">
         ✨ Resources Hub ✨
       </h1>
 
-      {/* Subheading / description */}
+      {/* Subheading */}
       <p className="text-center mb-8 text-gray-600 dark:text-gray-400 text-lg">
         A curated collection of animation, icon, UI libraries & tools for
         developers.
@@ -215,7 +239,10 @@ const Resourcehub = () => {
       {/* Search Bar */}
       <div className="relative max-w-md mx-auto mb-12">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
+          <Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
+            size={20}
+          />
           <input
             type="text"
             placeholder="Search resources..."
@@ -226,46 +253,48 @@ const Resourcehub = () => {
         </div>
       </div>
 
-      {/* Grid layout for resource cards */}
+      {/* Resource Cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredResources.map((res, index) => {
           const IconComponent = resourceIcons[res.name];
-          
+
           return (
             <motion.div
               key={index}
               whileHover={{ y: -8, scale: 1.02 }}
               className={`relative flex flex-col bg-gradient-to-br ${cardColors.gradient} backdrop-blur-xl border-2 ${cardColors.border} p-6 sm:p-8 rounded-3xl w-full min-h-[280px] transition-all duration-500 ease-out group overflow-hidden shadow-lg hover:shadow-2xl`}
             >
-              {/* Decorative gradient overlay */}
+              {/* Decorative overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
+
               <div className="relative z-10 flex flex-col h-full">
-                {/* Icon and Category Badge */}
+                {/* Icon and category badge */}
                 <div className="flex items-center justify-between mb-4">
                   {IconComponent && (
-                    <div className={`p-3 rounded-2xl bg-white/50 dark:bg-black/20 ${cardColors.iconColor}`}>
+                    <div
+                      className={`p-3 rounded-2xl bg-white/50 dark:bg-black/20 ${cardColors.iconColor}`}
+                    >
                       <IconComponent size={24} />
                     </div>
                   )}
-                  
-                  {/* Category badge with gradient background */}
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${cardColors.badgeGradient} shadow-md`}>
-                    {res.category}
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${cardColors.badgeGradient} shadow-md`}
+                  >
+                    {highlightText(res.category, searchTerm)}
                   </span>
                 </div>
 
                 {/* Resource name */}
                 <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors">
-                  {res.name}
+                  {highlightText(res.name, searchTerm)}
                 </h2>
 
                 {/* Resource description */}
                 <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed flex-grow">
-                  {res.description}
+                  {highlightText(res.description, searchTerm)}
                 </p>
 
-                {/* Visit button with enhanced styling */}
+                {/* Visit button */}
                 <a
                   href={res.url}
                   target="_blank"
@@ -273,8 +302,18 @@ const Resourcehub = () => {
                   className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:from-purple-600 hover:to-blue-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
                   <span>Visit</span>
-                  <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <svg
+                    className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </a>
               </div>
