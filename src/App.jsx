@@ -55,6 +55,7 @@ import SideBar from "./Pages/Dashboard/SideBar";
 import Resourcehub from "./Pages/Profile/Resourcehub";
 import ColorGradientPlayground from "./Pages/Playground/ColorGradientPlayground";
 import TailwindPlayground from "./Pages/Playground/TailwindPlayground";
+import SVGPlayground from "./Pages/Playground/SVGPlayground";
 
 
 // Layout component that includes Navbar, Footer and an Outlet
@@ -98,6 +99,8 @@ function App() {
             
             <Route path="/ColorGradientPlayground" element={<ColorGradientPlayground />} />
             <Route path="/TailwindPlayground" element={<TailwindPlayground />} />
+            <Route path="/SVGPlayground" element={<SVGPlayground />} />
+
 
 
 
