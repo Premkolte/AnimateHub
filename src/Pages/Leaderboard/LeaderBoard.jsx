@@ -185,7 +185,7 @@ export default function LeaderBoard() {
   const PAGE_SIZE = 10; // how many contributors per page
 
 
-  
+
   const [currentPage, setCurrentPage] = useState(1);
 
 
@@ -456,7 +456,7 @@ export default function LeaderBoard() {
                       className={`px-3 py-1 rounded ${
                         currentPage === i + 1
                           ? "bg-blue-500 text-white" // Highlight the active page
-                          : "bg-gray-200" // Inactive page style
+                          : "bg-gray-200 text-black" // Inactive page style
                       }`}
                     >
 
