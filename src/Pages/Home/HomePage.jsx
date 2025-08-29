@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaReact, FaHtml5, FaCss3Alt, FaGithub, FaHeart } from "react-icons/fa";
+import { FaReact, FaHtml5, FaCss3Alt, FaHeart } from "react-icons/fa";
 import { LuLayoutTemplate } from "react-icons/lu";
 import { BiLogoTailwindCss } from "react-icons/bi";
-import { BsGithub, BsPeople, BsStarFill } from "react-icons/bs";
+import { BsGithub, BsStarFill } from "react-icons/bs";
 import { GiTechnoHeart } from "react-icons/gi";
 import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
 import ReactJoyride from "react-joyride";
 import Particles from "../../components/Particles";
-import DynamicGreeting from "./DynamicGreeting";
 import { useAuthStore } from "../../store/authStore";
 import PricingSection from "./Pricing";
 
@@ -168,13 +167,6 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="flex flex-col items-center bg-white dark:bg-[#0f172a]">
-            <div className="mt-6 mb-10 p-[1px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500">
-              <div className="bg-white dark:bg-gray-900 rounded-full px-6 py-4">
-                <DynamicGreeting />
-              </div>
-            </div>
-          </div>
           <div className="bg-primary-600 dark:bg-accent-600 text-white px-4 py-1 rounded-full inline-block text-sm mb-6">
             100% OPEN-SOURCE
           </div>
