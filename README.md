@@ -492,7 +492,7 @@ We are committed to fostering a welcoming and inclusive community. Please read o
 <table align="center">
 <tr>
 <td align="center" width="200">
-<img src="https://gssoc.girlscript.tech/images/favicon/android-chrome-512x512.png" alt="GSSoC'25 Logo" width="120" height="120">
+<img src="./gssoc_logo.png" alt="GSSoC'25 Logo" width="120" height="120">
 <br>
 <strong>GirlScript Summer of Code 2025</strong>
 <br>
