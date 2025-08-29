@@ -9,10 +9,10 @@ import {
   Sparkles,
   Filter,
   ChevronDown,
+  Palette,
 } from "lucide-react"; // Enhanced icons
 import ColorPalettePicker from "../Profile/PalettesPage";
 import { motion } from "framer-motion";
-import { Palette } from "lucide-react";
 
 /**
  * Enhanced Sidebar Component
@@ -207,9 +207,9 @@ function SideBar({ activeTab, setActiveTab }) {
       {/* ========== Enhanced Main Sidebar Container ========== */}
       <div
         className={`fixed top-16 bottom-0 left-0 z-40
-        bg-gradient-to-b from-white/80 via-white/70 to-white/60 
+        bg-gradient-to-b from-white/30 via-white/20 to-white/10 
         dark:from-secondary-900/80 dark:via-secondary-900/70 dark:to-secondary-900/60
-        backdrop-blur-2xl border-r border-gradient-to-b from-white/30 via-white/20 to-white/10
+        backdrop-blur-2xl border-r border-white/30
         dark:border-purple-800/40 shadow-2xl rounded-r-3xl
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         transition-all duration-500 ease-out
@@ -244,7 +244,7 @@ function SideBar({ activeTab, setActiveTab }) {
             onClick={() => navigate("/palettes")}
             className="w-full px-4 py-2 mt-2 mb-4 rounded-xl 
              text-white font-medium flex items-center justify-center gap-2
-             shadow-md bg-gradient-to-r from-pink-500 via-purple-500 via-blue-500 to-green-400
+             shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-green-400
              hover:opacity-90 transition-all"
           >
             <Palette className="w-4 h-4" /> Color Palettes
