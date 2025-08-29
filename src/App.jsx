@@ -28,7 +28,7 @@ import ContactUs from "./Pages/Contact/ContactUs";
 import Leaderboard from "./Pages/Leaderboard/LeaderBoard";
 import AnimationPlayground from "./Pages/AnimationPlayground";
 import Blog from "./Pages/BlogPage";
-import ChallengeMode from "./challenge/ChallengeMode";
+import ChallengeMode from "./Pages/challenge/ChallengeMode";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Contributors from "./Pages/Contributors/Contributors";
