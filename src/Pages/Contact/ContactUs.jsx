@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import FAQ from "./FAQ";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 // Contact Page Component
 const Contact = () => {
@@ -31,15 +32,31 @@ const Contact = () => {
       [e.target.id]: e.target.value,
     });
   };
-
+  const validateEmail = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!formData.name.trim()) {
+      toast.error("Please enter your name");
+      return;
+    }
+    if (!formData.email.trim() || !validateEmail(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (!formData.message.trim()) {
+      toast.error("Please enter your message");
+      return;
+    }
+    
     setIsSubmitting(true);
-
     // Simulate form submission delay
     await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    toast.success("Message sent successfully 🎉");
 
     setSubmitStatus("success");
     setIsSubmitting(false);
@@ -277,7 +294,7 @@ const Contact = () => {
 
               <div className="text-center mt-6">
                 <button
-                  type="submit"
+                  onClick={handleSubmit}
                   disabled={isSubmitting}
                   className="flex justify-center items-center gap-3 w-full px-8 py-4 bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 disabled:scale-100 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
                 >
