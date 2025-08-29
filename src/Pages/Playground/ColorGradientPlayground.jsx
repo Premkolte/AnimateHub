@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
 import { Copy } from "lucide-react";
 import { Shuffle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const getRandomColor = () =>
   "#" +
@@ -19,6 +20,97 @@ const ColorGradientPlayground = () => {
   ]);
   const [copied, setCopied] = useState(false);
   const [showPickers, setShowPickers] = useState([false, false, false, false]);
+  const [gradientType, setGradientType] = useState("linear");
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" }
+    }
+  };
+
+  const colorCircleVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.3, ease: "easeOut" }
+    },
+    hover: {
+      scale: 1.1,
+      transition: { duration: 0.2, ease: "easeInOut" }
+    },
+    tap: { scale: 0.95 }
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      transition: { duration: 0.2, ease: "easeInOut" }
+    },
+    tap: { scale: 0.95 }
+  };
+
+  const pickerVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      y: 10
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.8,
+      y: 10,
+      transition: {
+        duration: 0.2,
+        ease: "easeIn"
+      }
+    }
+  };
+
+  // Gradient type options with their configurations
+  const gradientTypes = [
+    { 
+      value: "linear", 
+      label: "Linear", 
+      description: "Straight line transition"
+    },
+    { 
+      value: "radial", 
+      label: "Radial", 
+      description: "Circular from center"
+    },
+    { 
+      value: "conic", 
+      label: "Conic", 
+      description: "Rotational sweep"
+    }
+  ];
 
   // Sync colors and showPickers arrays when numColors changes
   useEffect(() => {
@@ -67,165 +159,234 @@ const ColorGradientPlayground = () => {
     );
   };
 
+  // Generate CSS gradient string based on type
+  const getGradientCSS = () => {
+    const colorString = colors.join(", ");
+    
+    switch (gradientType) {
+      case "linear":
+        return `linear-gradient(135deg, ${colorString})`;
+      case "radial":
+        return `radial-gradient(circle at center, ${colorString})`;
+      case "conic":
+        return `conic-gradient(from 0deg at center, ${colorString})`;
+      default:
+        return `linear-gradient(135deg, ${colorString})`;
+    }
+  };
+
   const copyGradient = () => {
-    navigator.clipboard.writeText(
-      `background: linear-gradient(135deg, ${colors.join(", ")});`
-    );
+    navigator.clipboard.writeText(`background: ${getGradientCSS()};`);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
 
   const gradientStyle = {
-    background: `linear-gradient(135deg, ${colors.join(", ")})`,
+    background: getGradientCSS(),
     transition: "background 0.5s ease",
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-6">
-      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10 p-8 bg-white dark:bg-gray-800 rounded-3xl border border-pink-600 shadow-lg">
+      <motion.div
+        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10 p-8 bg-white dark:bg-gray-800 rounded-3xl border border-pink-600 shadow-lg"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Controls */}
-        <div className="flex flex-col gap-6 justify-center">
-          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+        <motion.div className="flex flex-col gap-6 justify-center" variants={itemVariants}>
+          <motion.h1 
+            className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight"
+            variants={itemVariants}
+          >
             Gradient Playground
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300">
+          </motion.h1>
+          <motion.p 
+            className="text-gray-600 dark:text-gray-300"
+            variants={itemVariants}
+          >
             Click on a color circle to open the palette and pick your colors.
-          </p>
+          </motion.p>
+
+          {/* Gradient Type Selector */}
+          <motion.div className="space-y-3" variants={itemVariants}>
+            <label className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              Gradient Type
+            </label>
+            <div className="grid grid-cols-3 gap-3">
+              {gradientTypes.map((type) => (
+                <motion.button
+                  key={type.value}
+                  onClick={() => setGradientType(type.value)}
+                  className={`p-3 rounded-xl border-2 transition-all duration-300 text-center ${
+                    gradientType === type.value
+                      ? "border-pink-500 bg-pink-50 dark:bg-pink-900/20 text-pink-700 dark:text-pink-300 shadow-md"
+                      : "border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:border-pink-400 hover:bg-pink-25 dark:hover:bg-pink-900/10"
+                  }`}
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  <div className="font-semibold">{type.label}</div>
+                  <div className="text-xs mt-1 opacity-75">{type.description}</div>
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Number of colors selector */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setNumColors(Math.max(2, numColors - 1))}
-              className="px-4 py-1 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600"
-            >
-              -
-            </button>
-            <input
-              type="number"
-              className="w-16 text-center rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              value={numColors}
-              min={2}
-              onChange={(e) =>
-                setNumColors(Math.max(2, parseInt(e.target.value) || 2))
-              }
-            />
-            <button
-              onClick={() => setNumColors(numColors + 1)}
-              className="px-4 py-1 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-600"
-            >
-              +
-            </button>
-          </div>
+          <motion.div className="flex flex-col gap-2" variants={itemVariants}>
+            <label className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              Color
+            </label>
+
+            <div className="flex items-center gap-2">
+              <motion.button
+                onClick={() => setNumColors(Math.max(2, numColors - 1))}
+                className="px-4 py-1 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                -
+              </motion.button>
+              <motion.input
+                type="number"
+                className="w-16 text-center rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                value={numColors}
+                min={2}
+                onChange={(e) =>
+                  setNumColors(Math.max(2, parseInt(e.target.value) || 2))
+                }
+                whileFocus={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.button
+                onClick={() => setNumColors(numColors + 1)}
+                className="px-4 py-1 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-600"
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                +
+              </motion.button>
+            </div>
+          </motion.div>
 
           {/* Color circles */}
-          <div className="flex gap-6 flex-wrap">
-            {colors.map((color, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center gap-2 relative"
-              >
-                <label className="text-gray-700 dark:text-gray-200 font-medium">
-                  Color {index + 1}
-                </label>
-                <div
-                  onClick={(e) => togglePicker(index, e)}
-                  className="w-16 h-16 rounded-full cursor-pointer shadow-lg border-2 border-gray-300 dark:border-gray-600 transition-transform transform hover:scale-105"
-                  style={{ backgroundColor: color }}
-                ></div>
-                {showPickers[index] && (
-                  <div className="absolute bottom-full mb-4 z-50 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl">
-                    <HexColorPicker
-                      color={color}
-                      onChange={(newColor) =>
-                        handleColorChange(index, newColor)
-                      }
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          <motion.div className="flex gap-6 flex-wrap" variants={itemVariants}>
+            <AnimatePresence>
+              {colors.map((color, index) => (
+                <motion.div
+                  key={index}
+                  className="flex flex-col items-center gap-2 relative"
+                  variants={colorCircleVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  layout
+                >
+                  <label className="text-gray-700 dark:text-gray-200 font-medium">
+                    Color {index + 1}
+                  </label>
+                  <motion.div
+                    onClick={(e) => togglePicker(index, e)}
+                    className="w-16 h-16 rounded-full cursor-pointer shadow-lg border-2 border-gray-300 dark:border-gray-600"
+                    style={{ backgroundColor: color }}
+                    variants={colorCircleVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                  ></motion.div>
+                  <AnimatePresence>
+                    {showPickers[index] && (
+                      <motion.div
+                        className="absolute bottom-full mb-4 z-50 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl"
+                        variants={pickerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                      >
+                        <HexColorPicker
+                          color={color}
+                          onChange={(newColor) =>
+                            handleColorChange(index, newColor)
+                          }
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Copy CSS */}
-          <button
+          <motion.button
             onClick={copyGradient}
-            className={`flex items-center justify-center  gap-3 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 shadow-md
+            className={`flex items-center justify-center gap-3 px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 shadow-md
               ${
                 copied
                   ? "bg-green-500 hover:bg-green-600"
-                  : "bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500 active:scale-95"
+                  : "bg-gradient-to-r from-pink-500 to-orange-400 hover:from-pink-600 hover:to-orange-500"
               }`}
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
           >
             {copied ? "Copied!" : "Copy CSS"}
             <Copy size={18} />
-          </button>
+          </motion.button>
 
-
-
-
-
-
-
-
-{/* 
-  Random Gradient Button Component
-  --------------------------------
-  - Generates a new set of random colors for the gradient preview
-  - Styled with a flashy multi-color animated gradient background
-  - Uses Shuffle icon from lucide-react instead of emoji
-*/}
-
-
-          <button
-
-          // When clicked, update the `colors` state with new random colors
+          {/* Random Gradient Button */}
+          <motion.button
             onClick={() =>
               setColors(
                 Array.from({ length: numColors }, () => getRandomColor())
               )
             }
-
-
             className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white shadow-lg
              bg-[linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0,#8a2be2,#ff1493,#00ff7f)]
              bg-[length:200%_200%] animate-gradient-x
-             transition-all duration-500 active:scale-95"
+             transition-all duration-500"
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
           >
-
- {/* Shuffle icon from lucide-react */}
-{/* Icon size (20px) */}
-{/* // Keep icon white to match text */}
             <Shuffle size={20} className="text-white" />
- {/* Button label */}
             Random Gradient
-
-          </button>
-
-          
-
-
-
-
-
-
-
-
-
-
-
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Preview */}
-        <div className="flex flex-col items-center gap-6">
-          <div
-            className="w-full h-80 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-transform duration-500"
+        <motion.div className="flex flex-col items-center gap-6" variants={itemVariants}>
+          <motion.div
+            className="w-full h-80 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
             style={gradientStyle}
-          ></div>
-          <pre className="w-full p-4 rounded-xl bg-gradient-to-r from-pink-100 to-pink-200 dark:from-gray-700 dark:to-gray-800 text-gray-900 dark:text-white font-mono overflow-x-auto text-sm shadow-inner">
-            {`background: linear-gradient(135deg, ${colors.join(", ")});`}
-          </pre>
-        </div>
-      </div>
+            whileHover={{ 
+              scale: 1.02,
+              transition: { duration: 0.3, ease: "easeOut" }
+            }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              transition: { duration: 0.6, ease: "easeOut" }
+            }}
+          ></motion.div>
+          <motion.pre 
+            className="w-full p-4 rounded-xl bg-gradient-to-r from-pink-100 to-pink-200 dark:from-gray-700 dark:to-gray-800 text-gray-900 dark:text-white font-mono overflow-x-auto text-sm shadow-inner"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              transition: { duration: 0.4, ease: "easeOut", delay: 0.2 }
+            }}
+          >
+            {`background: ${getGradientCSS()};`}
+          </motion.pre>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

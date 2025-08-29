@@ -42,7 +42,7 @@ import authRoute from "./routes/auth.route.js"
 import componentsRoute from "./routes/components.route.js"
 import profileRoute from "./routes/profile.route.js"
 import adminRoute from "./routes/admin.route.js"
-import blogRoute from "../routes/blog.route.js"
+import blogRoute from "./routes/blog.route.js"
 
 
 
@@ -57,7 +57,7 @@ app.use("/api/auth", authRoute)
 app.use("/api/components", componentsRoute)
 app.use("/api/profile", profileRoute)
 app.use("/api/admin", adminRoute)
-app.use("api/blogs",blogRoute)
+app.use("/api/blogs", blogRoute)
 
 
 
