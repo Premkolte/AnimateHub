@@ -1,5 +1,5 @@
 import { useTheme } from 'next-themes';
-import React from 'react';
+import { useEffect } from 'react';
 
 const DarkModeToggle = () => {
   const { theme, setTheme } = useTheme();
@@ -8,15 +8,31 @@ const DarkModeToggle = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey && e.key === 'k') {
+        e.preventDefault();
+        toggleTheme();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [theme]);
+
   return (
     <button
       onClick={toggleTheme}
-      className="rounded-lg p-2 transition-colors bg-gray-200"
-      aria-label="Toggle dark mode"
+      className="rounded-lg p-2 transition-colors bg-gray-200 dark:bg-gray-700"
+      aria-label="Toggle dark mode (Ctrl+K)"
+      title="Toggle dark mode (Ctrl+K)"
     >
       {theme === 'dark' ? (
         <svg
-          className="w-5 h-5 transition-colors text-[rgb(81,32,130)]"
+          className="w-5 h-5 transition-colors text-yellow-300"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +45,7 @@ const DarkModeToggle = () => {
         </svg>
       ) : (
         <svg
-          className="w-5 h-5 transition-colors fill-blue-500"
+          className="w-5 h-5 transition-colors text-gray-800"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"

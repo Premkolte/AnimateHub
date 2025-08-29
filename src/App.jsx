@@ -29,6 +29,7 @@ import Leaderboard from "./Pages/Leaderboard/LeaderBoard";
 import AnimationPlayground from "./Pages/AnimationPlayground";
 import Blog from "./Pages/BlogPage";
 import ChallengeMode from "./Pages/challenge/ChallengeMode";
+import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Contributors from "./Pages/Contributors/Contributors";
@@ -51,7 +52,6 @@ import PalettesPage from "./Pages/Profile/PalettesPage";
 
 
 
-import SideBar from "./Pages/Dashboard/SideBar";
 import Resourcehub from "./Pages/Profile/Resourcehub";
 import ColorGradientPlayground from "./Pages/Playground/ColorGradientPlayground";
 import TailwindPlayground from "./Pages/Playground/TailwindPlayground";
@@ -96,7 +96,7 @@ function App() {
             <Route path="/blogs" element={<Blog />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/framerplayground" element={<FramerPlayground />} />
-            
+
             <Route path="/ColorGradientPlayground" element={<ColorGradientPlayground />} />
             <Route path="/TailwindPlayground" element={<TailwindPlayground />} />
             <Route path="/SVGPlayground" element={<SVGPlayground />} />
@@ -107,22 +107,8 @@ function App() {
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/contributors" element={<Contributors />} />
-            <Route
-              path="/favorites"
-              element={
-                <ProtectedRoute>
-                  <FavoritesPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/payment"
-              element={
-                <ProtectedRoute>
-                  <PaymentPage />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
+            <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
             <Route path="/templates/*" element={<TemplatesRoutes />} />
             <Route path="/my-snippets" element={<MySnippet />} />
             <Route path="/contributor-guide" element={<ContributorGuide />} />
@@ -131,23 +117,13 @@ function App() {
             <Route path="/sign-in" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
-            <Route
-              path="/reset-password/:token"
-              element={<ResetPasswordPage />}
-            />
+            <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
             {/* Profile Routes */}
-            <Route
-              path="/profile/:username"
-              element={
-                <ProtectedRoute>
-                  <ProfilePage />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/sidebar" element={<SideBar />} />
+            <Route path="/profile/:username" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path="/palettes" element={<PalettesPage />} />
             <Route path="/resourcehub" element={<Resourcehub />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
 
