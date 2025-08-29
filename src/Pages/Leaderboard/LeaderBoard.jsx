@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaTrophy, FaStar, FaCode, FaUsers, FaGithub } from "react-icons/fa";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 const GITHUB_REPO = "Premkolte/AnimateHub";
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
- 
- 
 
 // Points configuration for different PR levels
 const POINTS = {
-  level1: 3,  // Easy
-  level2: 7,  // Medium
+  level1: 3, // Easy
+  level2: 7, // Medium
   level3: 10, // Hard/Feature
 };
 
 // Badge component for PR counts
 const Badge = ({ count, label, color }) => (
-  <div className={`flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${color} bg-opacity-20`}>
+  <div
+    className={`flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${color} bg-opacity-20`}
+  >
     <FaCode className="mr-1 sm:mr-1.5 text-xs" />
-    <span>{count} {label}</span>
+    <span>
+      {count} {label}
+    </span>
   </div>
 );
 
@@ -26,13 +29,22 @@ const Badge = ({ count, label, color }) => (
 const SkeletonLoader = () => (
   <div className="bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
     <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
-      <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">#</div>
-      <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">Contributor</div>
-      <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">Contributions</div>
+      <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">
+        #
+      </div>
+      <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">
+        Contributor
+      </div>
+      <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">
+        Contributions
+      </div>
     </div>
     <div className="divide-y divide-gray-100 dark:divide-gray-700">
       {[...Array(10)].map((_, i) => (
-        <div key={i} className="p-4 sm:grid sm:grid-cols-12 sm:gap-4 sm:items-center sm:px-6 sm:py-4">
+        <div
+          key={i}
+          className="p-4 sm:grid sm:grid-cols-12 sm:gap-4 sm:items-center sm:px-6 sm:py-4"
+        >
           <div className="flex items-center space-x-3 sm:hidden">
             <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse flex-shrink-0"></div>
             <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse flex-shrink-0"></div>
@@ -76,7 +88,7 @@ export default function LeaderBoard() {
   const [stats, setStats] = useState({
     totalPRs: 0,
     totalContributors: 0,
-    totalPoints: 0
+    totalPoints: 0,
   });
 
   useEffect(() => {
@@ -91,9 +103,11 @@ export default function LeaderBoard() {
           const batch = await Promise.all(
             Array.from({ length: 5 }, (_, i) =>
               fetch(
-                `https://api.github.com/repos/${GITHUB_REPO}/pulls?state=closed&per_page=100&page=${page + i}`,
+                `https://api.github.com/repos/${GITHUB_REPO}/pulls?state=closed&per_page=100&page=${
+                  page + i
+                }`,
                 { headers: TOKEN ? { Authorization: `token ${TOKEN}` } : {} }
-              ).then(res => res.json())
+              ).then((res) => res.json())
             )
           );
 
@@ -103,15 +117,15 @@ export default function LeaderBoard() {
             break;
           }
 
-          prs.forEach(pr => {
+          prs.forEach((pr) => {
             if (!pr.merged_at) return;
 
-            const labels = pr.labels.map(l => l.name.toLowerCase());
+            const labels = pr.labels.map((l) => l.name.toLowerCase());
             if (!labels.includes("gssoc'25")) return;
 
             const author = pr.user.login;
             let points = 0;
-            labels.forEach(label => {
+            labels.forEach((label) => {
               if (POINTS[label]) points += POINTS[label];
             });
 
@@ -148,11 +162,15 @@ export default function LeaderBoard() {
   useEffect(() => {
     if (contributors.length > 0) {
       const totalPRs = contributors.reduce((sum, c) => sum + Number(c.prs), 0);
-      const totalPoints = contributors.reduce((sum, c) => sum + Number(c.points), 0);
+      const totalPoints = contributors.reduce(
+        (sum, c) => sum + Number(c.points),
+        0
+      );
 
       const flooredTotalPRs = Math.floor(totalPRs / 10) * 10;
       const flooredTotalPoints = Math.floor(totalPoints / 10) * 10;
-      const flooredContributorsCount = Math.floor(contributors.length / 10) * 10;
+      const flooredContributorsCount =
+        Math.floor(contributors.length / 10) * 10;
 
       setStats({
         flooredTotalPRs,
@@ -161,6 +179,24 @@ export default function LeaderBoard() {
       });
     }
   }, [contributors]);
+
+  // Pagination variables and states
+
+  const PAGE_SIZE = 10; // how many contributors per page
+
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+
+  // Calculate which contributors to show on current page
+  const indexOfLast = currentPage * PAGE_SIZE;
+  const indexOfFirst = indexOfLast - PAGE_SIZE;
+  const currentContributors = contributors.slice(indexOfFirst, indexOfLast);
+
+
+
+  const totalPages = Math.ceil(contributors.length / PAGE_SIZE);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-secondary-900 py-6 sm:py-12 px-2 sm:px-4">
@@ -189,8 +225,12 @@ export default function LeaderBoard() {
                 <FaUsers className="text-lg sm:text-2xl" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Contributors</p>
-                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.totalContributors}+</p>
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                  Contributors
+                </p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">
+                  {loading ? "..." : stats.totalContributors}+
+                </p>
               </div>
             </div>
           </div>
@@ -201,8 +241,12 @@ export default function LeaderBoard() {
                 <FaCode className="text-lg sm:text-2xl" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Pull Requests</p>
-                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.flooredTotalPRs}+</p>
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                  Pull Requests
+                </p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">
+                  {loading ? "..." : stats.flooredTotalPRs}+
+                </p>
               </div>
             </div>
           </div>
@@ -213,25 +257,37 @@ export default function LeaderBoard() {
                 <FaStar className="text-lg sm:text-2xl" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Total Points</p>
-                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">{loading ? "..." : stats.flooredTotalPoints}+</p>
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                  Total Points
+                </p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-800 dark:text-white">
+                  {loading ? "..." : stats.flooredTotalPoints}+
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        {loading ? <SkeletonLoader /> :
+        {loading ? (
+          <SkeletonLoader />
+        ) : (
           <div className="bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden mx-2 sm:mx-0">
             {/* Desktop Table Header - Hidden on mobile */}
             <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-700">
-              <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">#</div>
-              <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">Contributor</div>
-              <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">Contributions</div>
+              <div className="col-span-1 text-sm font-medium text-gray-500 dark:text-gray-400">
+                #
+              </div>
+              <div className="col-span-6 md:col-span-7 text-sm font-medium text-gray-500 dark:text-gray-400">
+                Contributor
+              </div>
+              <div className="col-span-5 md:col-span-4 text-sm font-medium text-gray-500 dark:text-gray-400 text-right">
+                Contributions
+              </div>
             </div>
 
             {/* Contributors List */}
             <div className="divide-y divide-gray-100 dark:divide-gray-700">
-              {contributors.map((contributor, index) => (
+              {currentContributors.map((contributor, index) => (
                 <motion.div
                   key={contributor.username}
                   initial={{ opacity: 0, y: 10 }}
@@ -243,13 +299,18 @@ export default function LeaderBoard() {
                   <div className="sm:hidden p-4">
                     <div className="flex items-center space-x-3">
                       {/* Rank Badge */}
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 ${
-                        index === 0 ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30' :
-                        index === 1 ? 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300' :
-                        index === 2 ? 'bg-amber-100 text-amber-600 dark:bg-amber-900/30' :
-                        'bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400'
-                      }`}>
-                        {index + 1}
+                      <div
+                        className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 ${
+                          index === 0
+                            ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30"
+                            : index === 1
+                            ? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                            : index === 2
+                            ? "bg-amber-100 text-amber-600 dark:bg-amber-900/30"
+                            : "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400"
+                        }`}
+                      >
+                        {indexOfFirst + index + 1}
                       </div>
 
                       {/* Avatar */}
@@ -281,12 +342,12 @@ export default function LeaderBoard() {
                             </a>
                           </div>
                         </div>
-                        
+
                         {/* Badges */}
                         <div className="flex items-center space-x-2 mt-2">
                           <Badge
                             count={contributor.prs}
-                            label={`PR${contributor.prs !== 1 ? 's' : ''}`}
+                            label={`PR${contributor.prs !== 1 ? "s" : ""}`}
                             color="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
                           />
                           <Badge
@@ -302,13 +363,20 @@ export default function LeaderBoard() {
                   {/* Desktop Layout - Hidden on mobile */}
                   <div className="hidden sm:grid grid-cols-12 gap-4 items-center px-6 py-4">
                     <div className="col-span-1">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        index === 0 ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30' :
-                        index === 1 ? 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300' :
-                        index === 2 ? 'bg-amber-100 text-amber-600 dark:bg-amber-900/30' :
-                        'bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400'
-                      }`}>
-                        <span className="font-medium">{index + 1}</span>
+                      <div
+                        className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                          index === 0
+                            ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30"
+                            : index === 1
+                            ? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                            : index === 2
+                            ? "bg-amber-100 text-amber-600 dark:bg-amber-900/30"
+                            : "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400"
+                        }`}
+                      >
+                        <span className="font-medium">
+                          {indexOfFirst + index + 1}
+                        </span>
                       </div>
                     </div>
 
@@ -346,7 +414,7 @@ export default function LeaderBoard() {
                       <div className="flex items-center justify-end space-x-3">
                         <Badge
                           count={contributor.prs}
-                          label={`PR${contributor.prs !== 1 ? 's' : ''}`}
+                          label={`PR${contributor.prs !== 1 ? "s" : ""}`}
                           color="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
                         />
                         <Badge
@@ -360,11 +428,72 @@ export default function LeaderBoard() {
                 </motion.div>
               ))}
             </div>
+            
+
+            {/* Pagination Controls */}
+
+            <div className="flex justify-center items-center gap-2 py-4 border-t border-gray-200 dark:border-gray-700">
+              {/* Left Arrow Button (Previous Page) */}
+              <button
+                disabled={currentPage === 1} // Disable if we are already on the first page
+                onClick={() => setCurrentPage((p) => p - 1)} // Go back one page when clicked
+                className="px-3 py-1 rounded-md bg-gray-50 dark:bg-gray-700 text-sm disabled:opacity-50 flex items-center justify-center mt-5"
+              >
+                {/* ChevronLeft Icon for Previous */}
+                <ChevronLeft size={16} />
+              </button>
+
+
+
+              {/* Page Numbers Section */}
+              <div className="flex justify-center gap-2 mt-4">
+                {Array.from(
+                  { length: Math.ceil(contributors.length / PAGE_SIZE) }, // Create an array with total number of pages
+                  (_, i) => (
+                    <button
+                      key={i + 1} // Unique key for each page button
+                      onClick={() => setCurrentPage(i + 1)} // Set page number on click
+                      className={`px-3 py-1 rounded ${
+                        currentPage === i + 1
+                          ? "bg-blue-500 text-white" // Highlight the active page
+                          : "bg-gray-200 text-black" // Inactive page style
+                      }`}
+                    >
+
+
+
+                      {/* Display the page number */}
+                      {i + 1}
+                    </button>
+
+
+
+                  )
+                )}
+              </div>
+
+              {/* Right Arrow Button (Next Page) */}
+              <button
+                disabled={currentPage === totalPages} // Disable if we are already on the last page
+                onClick={() => setCurrentPage((p) => p + 1)} // Move forward one page when clicked
+                className="px-3 py-1 rounded-md bg-gray-50 dark:bg-gray-700 text-sm disabled:opacity-50 flex items-center justify-center mt-5"
+              >
+
+
+
+                {/* ChevronRight Icon for Next */}
+                <ChevronRight size={16} />
+              </button>
+            </div>
+
+
+
 
             {/* CTA Footer */}
             <div className="bg-gray-50 dark:bg-gray-800/50 px-4 sm:px-6 py-4 text-center border-t border-gray-100 dark:border-gray-700">
               <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-3">
-                Want to see your name here? Join GSSoC'25 and start contributing!
+                Want to see your name here? Join GSSoC'25 and start
+                contributing!
               </p>
               <a
                 href="https://gssoc.girlscript.tech/"
@@ -376,21 +505,29 @@ export default function LeaderBoard() {
               </a>
             </div>
           </div>
-        }
+        )}
 
         {/* About GSSoC Section */}
         <div className="mt-8 sm:mt-12 bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 sm:p-6 mx-2 sm:mx-0">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">About GSSoC'25</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4">
+            About GSSoC'25
+          </h2>
           <div className="prose dark:prose-invert max-w-none">
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4">
-              <strong>GirlScript Summer of Code</strong> is a 3-month long open source program organized by GirlScript Foundation to help beginners get started with Open Source Development.
+              <strong>GirlScript Summer of Code</strong> is a 3-month long open
+              source program organized by GirlScript Foundation to help
+              beginners get started with Open Source Development.
             </p>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4">
-              Participants contribute to various projects under the guidance of experienced mentors. This leaderboard tracks the contributions made by GSSoC'25 participants to the AnimateHub project.
+              Participants contribute to various projects under the guidance of
+              experienced mentors. This leaderboard tracks the contributions
+              made by GSSoC'25 participants to the AnimateHub project.
             </p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6">
               <div className="bg-blue-50 dark:bg-blue-900/20 p-3 sm:p-4 rounded-lg">
-                <h3 className="font-semibold text-blue-700 dark:text-blue-400 mb-2 text-sm sm:text-base">How to Participate</h3>
+                <h3 className="font-semibold text-blue-700 dark:text-blue-400 mb-2 text-sm sm:text-base">
+                  How to Participate
+                </h3>
                 <ul className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 space-y-1 sm:space-y-2">
                   <li>• Register on the GSSoC'25 platform</li>
                   <li>• Join the AnimateHub project</li>
@@ -399,7 +536,9 @@ export default function LeaderBoard() {
                 </ul>
               </div>
               <div className="bg-purple-50 dark:bg-purple-900/20 p-3 sm:p-4 rounded-lg">
-                <h3 className="font-semibold text-purple-700 dark:text-purple-400 mb-2 text-sm sm:text-base">Contribution Guidelines</h3>
+                <h3 className="font-semibold text-purple-700 dark:text-purple-400 mb-2 text-sm sm:text-base">
+                  Contribution Guidelines
+                </h3>
                 <ul className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 space-y-1 sm:space-y-2">
                   <li>• Read our contribution guidelines</li>
                   <li>• Follow the code of conduct</li>
