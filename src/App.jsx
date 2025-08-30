@@ -41,6 +41,7 @@ import FavoritesPage from "./Pages/Favorites/FavoritesPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from "./Pages/Dashboard/MySnippet";
+import ComponentsPage from "./Pages/Components/ComponentsPage";
 
 import Playground from "./Pages/Playground/Code_Playground";
 import FramerPlayground from "./Pages/Playground/FramerPlayground";
@@ -86,6 +87,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<HomePage />} />
+            <Route path="/components" element={<ComponentsPage />} />
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
             <Route
