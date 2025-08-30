@@ -78,4 +78,4 @@ function reloadWebsite() {
 setInterval(reloadWebsite, interval);
 
 
-export { app }
+export default  app 
