@@ -32,6 +32,7 @@ const Contact = () => {
       [e.target.id]: e.target.value,
     });
   };
+  
   const validateEmail = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -64,8 +65,17 @@ const Contact = () => {
 
     // Reset submit status after 5s
     setTimeout(() => setSubmitStatus(null), 5000);
+  };
 
-    
+  // Scroll to contact form function
+  const scrollToContactForm = () => {
+    const contactFormElement = document.getElementById('contact-form');
+    if (contactFormElement) {
+      contactFormElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   };
 
   return (
@@ -75,28 +85,27 @@ const Contact = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 py-16">
 
         {/* Header Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md px-6 py-3 rounded-full border border-gray-200 dark:border-gray-700 shadow-lg mb-8">
+        <div className="text-center mb-16 hover:text-blue-600 transition-colors duration-300 cursor-pointer">
+          <div 
+            onClick={scrollToContactForm}
+            className="inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md px-6 py-3 rounded-full border border-gray-200 dark:border-gray-700 shadow-lg mb-8 cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-300"
+          >
             <MessageCircle className="w-6 h-6 text-blue-600" />
             <span className="text-gray-900 dark:text-gray-300 font-medium">
               Let's Connect
             </span>
           </div>
 
-
           {/* Main Heading */}
           <h1 className="text-black dark:text-white text-4xl md:text-6xl font-bold mb-6">
             Get In Touch
           </h1>
-
 
           {/* Subheading */}
           <p className="text-base text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Ready to bring your ideas to life? We'd love to hear about your
             project and discuss how we can help you succeed.
           </p>
-
-          
         </div>
 
         {/* Contact Stats & Form Section */}
@@ -134,14 +143,11 @@ const Contact = () => {
 
             </div>
 
-
             {/* Secure */}
-
             <div className="text-center p-4 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-pink-400 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               
               <div className="w-16 h-16 bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Shield className="w-8 h-8 text-white" />
-              
               </div>
 
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -151,19 +157,14 @@ const Contact = () => {
               <p className="text-gray-600 dark:text-gray-300">Secure</p>
 
             </div>
-
-            
           </div>
 
           {/* Contact Form */}
-
-          <div className="flex-1">
+          <div className="flex-1" id="contact-form">
             
             <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-pink-400 dark:border-gray-700 rounded-3xl shadow-2xl p-8 md:p-12">
 
-              
               {/* Form Header */}
-
               <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                   Send us a message
@@ -193,15 +194,11 @@ const Contact = () => {
                 </div>
               )}
 
-
-
               {/* Form Fields */}
               <div className="space-y-10">
 
-
                 {/* Name & Email Fields */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
 
                   {/* Name */}
                   <div className="space-y-2">
@@ -232,8 +229,6 @@ const Contact = () => {
                   </div>
 
                   {/* Email */}
-
-
                   <div className="space-y-2">
                     <label
                       htmlFor="email"
@@ -259,12 +254,8 @@ const Contact = () => {
                       />
                     </div>
                   </div>
-
-                  
                 </div>
-
               </div>
-
 
               {/* Message Field */}
               <div className="space-y-2 mt-4">
@@ -288,10 +279,7 @@ const Contact = () => {
 
               </div>
 
-
               {/* Submit Button */}
-
-
               <div className="text-center mt-6">
                 <button
                   onClick={handleSubmit}
@@ -330,33 +318,18 @@ const Contact = () => {
                     </>
                   )}
                 </button>
-
-                
               </div>
-
-              
             </div>
           </div>
-
-          
         </div>
 
         {/* FAQ Section */}
-
-
-
-
-
         <div className="mt-16">
           <FAQ />
         </div>
-
-        
       </div>
     </div>
   );
 };
-
-
 
 export default Contact;
