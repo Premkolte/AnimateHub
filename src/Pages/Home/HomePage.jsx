@@ -9,6 +9,7 @@ import { GiTechnoHeart } from "react-icons/gi";
 import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
+import Subscribe from './Subscribe'
 import ReactJoyride from "react-joyride";
 import Particles from "../../components/Particles";
 import { useAuthStore } from "../../store/authStore";
@@ -362,6 +363,11 @@ const HomePage = () => {
         {/* Pricing */}
         <section className="text-center space-y-4 py-6 sm:py-8 md:py-16 pricing-section px-3 sm:px-4 md:px-6">
           <PricingSection />
+        </section>
+
+        {/* Subscription */}
+        <section className="text-center space-y-4 py-6 sm:py-8 md:py-16 pricing-section px-3 sm:px-4 md:px-6">
+          <Subscribe />
         </section>
 
         {/* Contributors */}
