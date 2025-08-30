@@ -33,7 +33,7 @@ const ComponentsSideBar = () => {
     const isCategoryExpanded = (category) => expandedCategories.has(category);
 
     return (
-        <div className="w-64 h-screen bg-white dark:bg-secondary-800 border-r border-gray-200 dark:border-secondary-700 flex flex-col">
+        <div className="w-64 min-h-screen bg-white dark:bg-secondary-800 border-r border-gray-200 dark:border-secondary-700 flex flex-col">
             <div className="p-4 border-b border-gray-200 dark:border-secondary-700">
                 <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center">
                     <span className="text-blue-600 dark:text-blue-400 mr-2">•</span>
