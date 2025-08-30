@@ -4,7 +4,7 @@ import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ComponentsSideBar = () => {
-    const [expandedCategories, setExpandedCategories] = useState(new Set(['Getting Started']));
+    const [expandedCategories, setExpandedCategories] = useState(new Set(['Getting Started', 'Layout', 'Navigation']));
 
     const categories = {
         'Getting Started': ['Introduction', 'Installation', 'Theming'],
