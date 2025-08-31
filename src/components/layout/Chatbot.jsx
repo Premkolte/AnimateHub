@@ -11,6 +11,7 @@ const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const messagesEndRef = useRef(null);
+  const chatbotRef = useRef(null); // Add ref for chatbot container
 
   const toggleChatbot = () => setIsOpen(!isOpen);
 
@@ -51,6 +52,30 @@ const Chatbot = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasScrolled]);
 
+  // Add click outside effect with smooth closing
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (chatbotRef.current && !chatbotRef.current.contains(event.target) && isOpen) {
+        // Add a small delay to ensure smooth animation
+        setTimeout(() => {
+          setIsOpen(false);
+        }, 50);
+      }
+    };
+
+    if (isOpen) {
+      // Use a slight delay before adding the event listener
+      const timeoutId = setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+      }, 100);
+
+      return () => {
+        clearTimeout(timeoutId);
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isOpen]);
+
   return (
     <>
       {/* Floating Button */}
@@ -58,7 +83,7 @@ const Chatbot = () => {
         className="fixed right-6 z-50"
         initial={{ bottom: 24 }}
         animate={{ bottom: hasScrolled ? 96 : 24 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        transition={{ type: 'spring', stiffness: 300, damping : 30 }}
       >
         <motion.button
           whileHover={{ scale: 1.05, y: -2 }}
@@ -83,10 +108,17 @@ const Chatbot = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={chatbotRef} // Add ref to the chatbot container
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            transition={{ 
+              type: 'spring', 
+              stiffness: 300, 
+              damping: 30,
+              // Ensure smooth exit animation
+              exit: { duration: 0.1, ease: "easeOut" }
+            }}
             className="fixed bottom-24 right-6 w-80 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-2xl z-50 overflow-hidden"
           >
             {/* Header */}
