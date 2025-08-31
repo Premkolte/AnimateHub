@@ -12,7 +12,7 @@ import {
 // FAQ component with accordion animation
 const FAQ = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [openItems, setOpenItems] = useState([]);
+  const [openItem, setOpenItem] = useState(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,11 +33,7 @@ const FAQ = () => {
   }, []);
 
   const toggleItem = (index) => {
-    setOpenItems(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
+    setOpenItem(prevOpenItem => prevOpenItem === index ? null : index);
   };
 
   const faqData = [
@@ -79,14 +75,14 @@ const FAQ = () => {
             <button
               onClick={() => toggleItem(index)}
               className={`w-full px-6 py-4 text-left flex justify-between items-center bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-300 ${
-                openItems.includes(index) ? 'bg-blue-50 dark:bg-blue-900/20' : ''
+                openItem === index ? 'bg-blue-50 dark:bg-blue-900/20' : ''
               }`}
             >
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
                 {item.question}
               </h3>
               <div className={`transform transition-transform duration-300 text-blue-600 dark:text-blue-400 ${
-                openItems.includes(index) ? 'rotate-180' : 'rotate-0'
+                openItem === index ? 'rotate-180' : 'rotate-0'
               }`}>
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -94,13 +90,13 @@ const FAQ = () => {
               </div>
             </button>
             <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
-              openItems.includes(index) 
+              openItem === index 
                 ? 'max-h-96 opacity-100' 
                 : 'max-h-0 opacity-0'
             }`}>
               <div className="px-6 py-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-600">
                 <p className={`text-gray-600 dark:text-gray-300 leading-relaxed transform transition-all duration-300 ${
-                  openItems.includes(index) 
+                  openItem === index 
                     ? 'translate-y-0 opacity-100' 
                     : 'translate-y-2 opacity-0'
                 }`}>
