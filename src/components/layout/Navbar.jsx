@@ -9,7 +9,7 @@ import {
   FiPlay,
   FiChevronDown,
 } from "react-icons/fi";
-import { FiCode, FiLayers } from "react-icons/fi";
+import { FiCode, FiLayers,FiType } from "react-icons/fi";
 import { SiFramer, SiTailwindcss } from "react-icons/si";
 import { MdBrush } from "react-icons/md"; // replacement for MdGradient
 import { FaHeart } from "react-icons/fa";
@@ -219,10 +219,6 @@ const Navbar = () => {
                     >
                       {/* Button to toggle dropdown open/close */}
                       <button
-
-
-
-
                         onClick={toggleDropdown}
                         className={`relative px-4 py-2 rounded-lg font-medium flex items-center
           ${scrolled ? "text-gray-700 dark:text-gray-300" : "text-white/90"}`}
@@ -259,8 +255,6 @@ const Navbar = () => {
                             <div className="flex items-center gap-2">
                               <FiPlay className="text-blue-500 dark:text-gray-300" />{" "}
                               {/* Icon */}
-
-
                               <span>Animation Ground</span>
                             </div>
                           </Link>
@@ -290,10 +284,6 @@ const Navbar = () => {
                               <FiCode className="text-blue-500 dark:text-gray-300" />{" "}
                               {/* Icon */}
                               Code Playground
-
-
-
-
                             </div>
                           </Link>
 
@@ -318,10 +308,6 @@ const Navbar = () => {
               before:opacity-30
             `}
                           >
-
-
-
-
                             <div className="flex items-center gap-2">
                               <SiFramer className="text-blue-500 dark:text-gray-300" />{" "}
                               {/* Icon */}
@@ -331,9 +317,6 @@ const Navbar = () => {
 
                           {/* Gradient Playground Link */}
                           <Link
-
-
-
                             to="/ColorGradientPlayground"
                             onClick={() => {
                               closeMenu();
@@ -354,11 +337,6 @@ const Navbar = () => {
             `}
                           >
                             <div className="flex items-center gap-2">
-
-
-
-
-
                               <MdBrush className="text-blue-500 dark:text-gray-300" />{" "}
                               {/* Icon */}
                               Gradient Ground
@@ -389,10 +367,6 @@ const Navbar = () => {
                             <div className="flex items-center gap-2">
                               <SiTailwindcss className="text-blue-500 dark:text-gray-300" />{" "}
                               {/* Icon */}
-
-
-
-
                               Tailwind Ground
                             </div>
                           </Link>
@@ -421,13 +395,36 @@ const Navbar = () => {
                             <div className="flex items-center gap-2">
                               <FiLayers className="text-blue-500 dark:text-gray-300" />{" "}
                               {/* Icon */}
-
-
-
                               SVG Playground
                             </div>
                           </Link>
-                          
+                          {/* Font Playground Link */}
+                          <Link
+                            to="/FontPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className={`
+    relative flex items-center px-5 py-2 rounded-lg
+    text-gray-900 dark:text-gray-200
+    hover:bg-gradient-to-r hover:from-blue-200 hover:to-white
+    dark:hover:from-gray-700 dark:hover:to-gray-900
+    transition-all duration-300 ease-in-out
+    group
+    before:absolute before:left-0 before:right-0 before:-bottom-1 before:h-[1px]
+    before:rounded-full
+    before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+    dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+    before:opacity-30
+  `}
+                          >
+                            <div className="flex items-center gap-2">
+                              <FiType className="text-purple-500 dark:text-gray-300" />{" "}
+                              {/* Icon */}
+                              Font Playground
+                            </div>
+                          </Link>
                         </div>
                       )}
                     </div> /* End of parent wrapper */
