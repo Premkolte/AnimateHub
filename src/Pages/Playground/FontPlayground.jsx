@@ -23,31 +23,54 @@ const FontPlayground = () => {
   const [fontWeight, setFontWeight] = useState(400);
   const [letterSpacing, setLetterSpacing] = useState(0);
   const [lineHeight, setLineHeight] = useState(1.5);
+  const [copied, setCopied] = useState(false);
 
-  const cssCode = `font-family: ${fontFamily};\nfont-size: ${fontSize}px;\nfont-weight: ${fontWeight};\nletter-spacing: ${letterSpacing}px;\nline-height: ${lineHeight};`;
+  const cssCode = `font-family: ${fontFamily};
+font-size: ${fontSize}px;
+font-weight: ${fontWeight};
+letter-spacing: ${letterSpacing}px;
+line-height: ${lineHeight};`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(cssCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white flex items-center justify-center p-6">
+    <div className="flex flex-col space-y-10 p-6">
+      {/* Main Heading */}
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center py-10 px-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl"
+      >
+        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 drop-shadow-md">
+          Font Playground
+        </h1>
+        <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
+          🎨 Experiment with different fonts, sizes, weights & spacing in real-time.
+        </p>
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="grid md:grid-cols-2 gap-6 w-full max-w-6xl"
+        transition={{ duration: 0.8 }}
+        className="grid md:grid-cols-2 gap-8 w-full max-w-7xl mx-auto"
       >
-        {/* Controls */}
-        <div className="bg-gray-800/60 backdrop-blur-xl p-6 rounded-2xl shadow-xl space-y-6">
-          <h2 className="text-2xl font-bold mb-4">Font Playground</h2>
-
+        {/* Controls Card */}
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 space-y-6 border border-gray-200 dark:border-gray-700">
           {/* Font Family */}
           <div>
-            <label className="block text-sm mb-2">Font Family</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+              Font Family
+            </label>
             <select
               value={fontFamily}
               onChange={(e) => setFontFamily(e.target.value)}
-              className="w-full p-2 rounded bg-gray-900 border border-gray-700"
+              className="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 shadow-inner focus:ring-2 focus:ring-pink-400 transition"
             >
               {fonts.map((font) => (
                 <option key={font} value={font} style={{ fontFamily: font }}>
@@ -59,20 +82,24 @@ const FontPlayground = () => {
 
           {/* Font Size */}
           <div>
-            <label className="block text-sm mb-2">Font Size ({fontSize}px)</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+              Font Size ({fontSize}px)
+            </label>
             <input
               type="range"
               min="12"
               max="72"
               value={fontSize}
               onChange={(e) => setFontSize(Number(e.target.value))}
-              className="w-full"
+              className="w-full accent-pink-500"
             />
           </div>
 
           {/* Font Weight */}
           <div>
-            <label className="block text-sm mb-2">Font Weight ({fontWeight})</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+              Font Weight ({fontWeight})
+            </label>
             <input
               type="range"
               min="100"
@@ -80,26 +107,30 @@ const FontPlayground = () => {
               step="100"
               value={fontWeight}
               onChange={(e) => setFontWeight(Number(e.target.value))}
-              className="w-full"
+              className="w-full accent-purple-500"
             />
           </div>
 
           {/* Letter Spacing */}
           <div>
-            <label className="block text-sm mb-2">Letter Spacing ({letterSpacing}px)</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+              Letter Spacing ({letterSpacing}px)
+            </label>
             <input
               type="range"
               min="-5"
               max="10"
               value={letterSpacing}
               onChange={(e) => setLetterSpacing(Number(e.target.value))}
-              className="w-full"
+              className="w-full accent-indigo-500"
             />
           </div>
 
           {/* Line Height */}
           <div>
-            <label className="block text-sm mb-2">Line Height ({lineHeight})</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+              Line Height ({lineHeight})
+            </label>
             <input
               type="range"
               min="1"
@@ -107,32 +138,42 @@ const FontPlayground = () => {
               step="0.1"
               value={lineHeight}
               onChange={(e) => setLineHeight(Number(e.target.value))}
-              className="w-full"
+              className="w-full accent-green-500"
             />
           </div>
 
-          {/* Buttons */}
-          <div className="flex gap-4">
-            <button
+          {/* Action Buttons */}
+          <div className="flex gap-4 pt-4">
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
               onClick={copyToClipboard}
-              className="flex items-center gap-2 bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
+              className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold transition-all shadow-md ${
+                copied
+                  ? "bg-green-500 text-white animate-pulse"
+                  : "bg-gradient-to-r from-pink-500 to-orange-400 text-white hover:shadow-lg"
+              }`}
             >
-              <Copy size={16} /> Copy CSS
-            </button>
-            <button
+              <Copy size={18} /> {copied ? "Copied!" : "Copy CSS"}
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setFontFamily(getRandomFont())}
-              className="flex items-center gap-2 bg-green-600 px-4 py-2 rounded-lg hover:bg-green-700 transition"
+              className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-white shadow-md bg-gradient-to-r from-indigo-500 to-purple-600 hover:shadow-lg"
             >
-              <Shuffle size={16} /> Random Font
-            </button>
+              <Shuffle size={18} /> Random Font
+            </motion.button>
           </div>
         </div>
 
-        {/* Preview */}
+        {/* Preview Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-gray-900/60 backdrop-blur-xl p-8 rounded-2xl shadow-xl flex items-center justify-center"
+          transition={{ type: "spring", stiffness: 180 }}
+          className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8 flex flex-col gap-6 items-center justify-center border border-gray-200 dark:border-gray-700"
         >
           <p
             style={{
@@ -142,10 +183,14 @@ const FontPlayground = () => {
               letterSpacing: `${letterSpacing}px`,
               lineHeight,
             }}
-            className="text-center"
+            className="text-center text-gray-900 dark:text-gray-100 transition-all duration-300"
           >
             The quick brown fox jumps over the lazy dog.
           </p>
+
+          <pre className="w-full p-4 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 font-mono text-sm shadow-inner overflow-x-auto border border-gray-200 dark:border-gray-700">
+            {cssCode}
+          </pre>
         </motion.div>
       </motion.div>
     </div>
