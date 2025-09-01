@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger)
 
 const PricingSection = () => {
   // Sample plans data - replace with your actual plans
@@ -87,6 +92,27 @@ const PricingSection = () => {
     },
   };
 
+  useGSAP(()=>{
+    gsap.utils.toArray('.pricing-cards').forEach((el)=>{
+      gsap.from(el,{
+        opacity:0,
+        y: 20,
+        ease:"power2",
+        scrollTrigger:{
+          trigger:el,
+          start:'top 80%',
+          end: 'top 50%',
+          scrub:1,
+        }
+      })
+    })
+
+    return()=>{
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
+
+  },[])
+
   return (
     <section className="relative text-center space-y-1 py-8 sm:py-10 md:py-12 pricing-section px-3 sm:px-4 md:px-6 overflow-visible">
       <div className="relative z-10">
@@ -120,17 +146,13 @@ const PricingSection = () => {
         </motion.div>
 
         {/* Enhanced Pricing Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+        <div
           className="flex flex-wrap xl:flex-nowrap xl:flex-row justify-center items-stretch gap-4 sm:gap-3 xl:gap-6 mt-12 max-w-7xl mx-auto"
         >
           {plans.map((plan, idx) => (
             <motion.div
               key={idx}
-              variants={cardVariants}
-              className={`relative flex flex-col items-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 p-6 sm:p-7 rounded-3xl w-full max-w-sm min-h-[360px] sm:min-h-[380px] transition-all duration-500 ease-out group overflow-hidden ${
+              className={`pricing-cards relative flex flex-col items-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 p-6 sm:p-7 rounded-3xl w-full max-w-sm min-h-[360px] sm:min-h-[380px] transition-all duration-500 ease-out group overflow-hidden ${
                 plan.isPopular
                   ? "border-primary-500 dark:border-accent-500 shadow-2xl shadow-primary-500/20 dark:shadow-accent-500/20 transform scale-105 xl:scale-105 z-20"
                   : "border-secondary-200 dark:border-secondary-700 shadow-xl hover:shadow-2xl hover:border-primary-300 dark:hover:border-accent-400"
@@ -264,7 +286,7 @@ const PricingSection = () => {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <style jsx>{`
