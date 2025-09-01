@@ -6,11 +6,13 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { User, Lock, Mail } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 import toast from "react-hot-toast";
+import { GoogleLogin } from "@react-oauth/google";
+
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const { handleLogin, isAuthLoading, authError, currentUser, forgotPassword } = useAuthStore();
+  const { handleLogin, handleGoogleSignin, isAuthLoading, authError, currentUser, forgotPassword } = useAuthStore();
 
   const [isForgotPasswordActive, setIsForgotPasswordActive] = useState(false)
   const [email, setEmail] = useState("")
@@ -279,21 +281,14 @@ const LoginPage = () => {
                 <div className="border-t border-secondary-200 dark:border-secondary-700 flex-1"></div>
               </div>
 
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.0 }}
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  handleGoogleSignin(credentialResponse.credential);
                 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => toast.error("Google signup is currently not available")}
-                className="w-full bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 font-semibold"
-              >
-                <FcGoogle className="mr-3 text-xl" />
-                Continue with Google (Coming Soon)
-              </motion.button>
+                onError={(error) => {
+                  console.error("Google Sign-In error:", error);
+                }}
+              />
             </motion.div>
           )}
 
