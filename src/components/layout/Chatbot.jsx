@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCommentDots, FaTimes, FaPaperPlane, FaRobot, FaUser } from 'react-icons/fa';
+import { FaCommentDots, FaTimes, FaPaperPlane, FaRobot, FaUser, FaTrash } from 'react-icons/fa';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +11,7 @@ const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const messagesEndRef = useRef(null);
+  const chatbotRef = useRef(null); // Add ref for chatbot container
 
   const toggleChatbot = () => setIsOpen(!isOpen);
 
@@ -51,6 +52,30 @@ const Chatbot = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasScrolled]);
 
+  // Add click outside effect with smooth closing
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (chatbotRef.current && !chatbotRef.current.contains(event.target) && isOpen) {
+        // Add a small delay to ensure smooth animation
+        setTimeout(() => {
+          setIsOpen(false);
+        }, 50);
+      }
+    };
+
+    if (isOpen) {
+      // Use a slight delay before adding the event listener
+      const timeoutId = setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+      }, 100);
+
+      return () => {
+        clearTimeout(timeoutId);
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isOpen]);
+
   return (
     <>
       {/* Floating Button */}
@@ -58,7 +83,7 @@ const Chatbot = () => {
         className="fixed right-6 z-50"
         initial={{ bottom: 24 }}
         animate={{ bottom: hasScrolled ? 96 : 24 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        transition={{ type: 'spring', stiffness: 300, damping : 30 }}
       >
         <motion.button
           whileHover={{ scale: 1.05, y: -2 }}
@@ -83,10 +108,17 @@ const Chatbot = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={chatbotRef} // Add ref to the chatbot container
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            transition={{ 
+              type: 'spring', 
+              stiffness: 300, 
+              damping: 30,
+              // Ensure smooth exit animation
+              exit: { duration: 0.1, ease: "easeOut" }
+            }}
             className="fixed bottom-24 right-6 w-80 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-2xl z-50 overflow-hidden"
           >
             {/* Header */}
@@ -101,14 +133,33 @@ const Chatbot = () => {
                     <p className="text-xs text-white/80">Always here to help</p>
                   </div>
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={toggleChatbot}
-                  className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-                >
-                  <FaTimes size={14} />
-                </motion.button>
+
+                {/* Clear + Close Buttons */}
+                <div className="flex space-x-2">
+                  {/* Clear Chat Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() =>
+                      setMessages([
+                        { sender: 'bot', text: '👋 Hi! I\'m your AI assistant. How can I help you today?', timestamp: new Date() }
+                      ])
+                    }
+                    className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                  >
+                    <FaTrash size={14} />
+                  </motion.button>
+
+                  {/* Close Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleChatbot}
+                    className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                  >
+                    <FaTimes size={14} />
+                  </motion.button>
+                </div>
               </div>
             </div>
 
@@ -125,21 +176,29 @@ const Chatbot = () => {
                   >
                     <div className={`flex items-end space-x-2 max-w-[75%] ${m.sender === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
                       {/* Avatar */}
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-xs ${
-                        m.sender === 'user' 
-                          ? 'bg-gradient-to-r from-blue-500 to-purple-500' 
-                          : 'bg-gradient-to-r from-gray-600 to-gray-700'
-                      }`}>
+                      <div
+                        className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-xs ${
+                          m.sender === 'user'
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-500'
+                            : 'bg-gradient-to-r from-gray-600 to-gray-700'
+                        }`}
+                      >
                         {m.sender === 'user' ? <FaUser size={12} /> : <FaRobot size={12} />}
                       </div>
                       {/* Bubble */}
-                      <div className={`px-4 py-3 rounded-2xl shadow-sm ${
-                        m.sender === 'user'
-                          ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-br-md'
-                          : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-md'
-                      }`}>
+                      <div
+                        className={`px-4 py-3 rounded-2xl shadow-sm ${
+                          m.sender === 'user'
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-br-md'
+                            : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-md'
+                        }`}
+                      >
                         <p className="text-sm leading-relaxed">{m.text}</p>
-                        <p className={`text-xs mt-1 ${m.sender === 'user' ? 'text-white/70' : 'text-gray-500 dark:text-gray-400'}`}>
+                        <p
+                          className={`text-xs mt-1 ${
+                            m.sender === 'user' ? 'text-white/70' : 'text-gray-500 dark:text-gray-400'
+                          }`}
+                        >
                           {m.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </p>
                       </div>

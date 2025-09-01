@@ -23,6 +23,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@google/generative-ai": "^0.21.0",
+    "@gsap/react": "^2.1.2",
     "@popperjs/core": "^2.11.8",
     "@react-oauth/google": "^0.12.2",
     "@vercel/analytics": "^1.5.0",
