@@ -22,6 +22,27 @@ export const useAuthStore = create((set, get) => ({
      * @param {string} userData.email - email
      * @param {string} userData.password - password
      */
+    handleGoogleSignin:async (googleCredential) => {
+        set({isAuthLoading:true});
+        try{
+            const apiResponse=await axiosInstance.post('/auth/google-login',{
+                credential:googleCredential
+            });
+            const response=apiResponse.data;
+            if(response.success){
+                set({currentUser:response.data.user});
+                toast.success("Google Sign-In successful!");
+            } else {
+                set({ authError: response.message });
+            }
+        } catch (error) {
+            set({ authError: error.response.data.message });
+        } finally {
+            set({ isAuthLoading: false })
+        }
+    },
+
+
     handleSignUp: async (userData) => {
         set({ isAuthLoading: true });
         try {
