@@ -159,6 +159,57 @@ const HomePage = () => {
   ];
 
   // GSAP ScrollTrigger animations for each section (alternate left/right)
+    useGSAP(() => {
+      // Animate each section
+      const sections = [
+        { ref: featuresRef, from: { x: -20, opacity: 0 }, to: { x: 0, opacity: 1 } },
+        { ref: templatesRef, from: { x: 20, opacity: 0 }, to: { x: 0, opacity: 1 } },
+        { ref: testimonialsRef, from: { x: -20, opacity: 0 }, to: { x: 0, opacity: 1 } },
+        { ref: pricingRef, from: { x: 20, opacity: 0 }, to: { x: 0, opacity: 1 } },
+        { ref: subscribeRef, from: { x: -20, opacity: 0 }, to: { x: 0, opacity: 1 } },
+        { ref: contributorsRef, from: { x: 20, opacity: 0 }, to: { x: 0, opacity: 1 } },
+      ];
+
+      sections.forEach(({ ref, from, to }) => {
+        if (ref.current) {
+          gsap.fromTo(
+            ref.current,
+            from,
+            {
+              ...to,
+              duration: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: ref.current,
+                start: "top 80%",
+                end: "top 40%",
+                scrub: 1,
+              },
+            }
+          );
+        }
+      });
+
+      // Animate all feature cards only once
+      gsap.utils.toArray('.feature-cards').forEach((el, i) => {
+        gsap.from(el, {
+          opacity: 0,
+          y: -20,
+          ease: "power2.in",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            end: "top 50%",
+            scrub: 1,
+          },
+        });
+      });
+
+      // Clean up triggers on unmount
+      return () => {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      };
+    }, []);
   useGSAP(() => {
     const sections = [
       {
@@ -272,6 +323,7 @@ const HomePage = () => {
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
+                  className="feature-cards bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-2 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform hover:scale-105 duration-300 ease-in-out max-w-xs w-full"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.15 }}
