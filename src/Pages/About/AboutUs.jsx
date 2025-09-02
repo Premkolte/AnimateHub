@@ -42,7 +42,7 @@ const About = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.6 }} // Disable animation
-      className="min-h-screen w-full bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white"
+      className="min-h-screen w-full overflow-x-hidden bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white"
     >
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-32">
         {/* Hero Section - Full width split */}
