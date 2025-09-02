@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FaReact, FaHtml5, FaCss3Alt, FaHeart } from "react-icons/fa";
-import { LuLayoutTemplate } from "react-icons/lu";
-import { BiLogoTailwindCss } from "react-icons/bi";
-import { BsGithub, BsStarFill } from "react-icons/bs";
+import { LuLayoutTemplate } from 'react-icons/lu';
+
+import { BsGithub } from "react-icons/bs";
 import { GiTechnoHeart } from "react-icons/gi";
 import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
@@ -16,12 +15,12 @@ import Particles from "../../components/Particles";
 import { useAuthStore } from "../../store/authStore";
 import PricingSection from "./Pricing";
 
-import { dark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import HeroSection from "./HeroSection";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LandPage from "./LandPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -159,57 +158,77 @@ const HomePage = () => {
   ];
 
   // GSAP ScrollTrigger animations for each section (alternate left/right)
-    useGSAP(() => {
-      // Animate each section
-      const sections = [
-        { ref: featuresRef, from: { x: -20, opacity: 0 }, to: { x: 0, opacity: 1 } },
-        { ref: templatesRef, from: { x: 20, opacity: 0 }, to: { x: 0, opacity: 1 } },
-        { ref: testimonialsRef, from: { x: -20, opacity: 0 }, to: { x: 0, opacity: 1 } },
-        { ref: pricingRef, from: { x: 20, opacity: 0 }, to: { x: 0, opacity: 1 } },
-        { ref: subscribeRef, from: { x: -20, opacity: 0 }, to: { x: 0, opacity: 1 } },
-        { ref: contributorsRef, from: { x: 20, opacity: 0 }, to: { x: 0, opacity: 1 } },
-      ];
+  useGSAP(() => {
+    // Animate each section
+    const sections = [
+      {
+        ref: featuresRef,
+        from: { x: -20, opacity: 0 },
+        to: { x: 0, opacity: 1 },
+      },
+      {
+        ref: templatesRef,
+        from: { x: 20, opacity: 0 },
+        to: { x: 0, opacity: 1 },
+      },
+      {
+        ref: testimonialsRef,
+        from: { x: -20, opacity: 0 },
+        to: { x: 0, opacity: 1 },
+      },
+      {
+        ref: pricingRef,
+        from: { x: 20, opacity: 0 },
+        to: { x: 0, opacity: 1 },
+      },
+      {
+        ref: subscribeRef,
+        from: { x: -20, opacity: 0 },
+        to: { x: 0, opacity: 1 },
+      },
+      {
+        ref: contributorsRef,
+        from: { x: 20, opacity: 0 },
+        to: { x: 0, opacity: 1 },
+      },
+    ];
 
-      sections.forEach(({ ref, from, to }) => {
-        if (ref.current) {
-          gsap.fromTo(
-            ref.current,
-            from,
-            {
-              ...to,
-              duration: 1,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: ref.current,
-                start: "top 80%",
-                end: "top 40%",
-                scrub: 1,
-              },
-            }
-          );
-        }
-      });
-
-      // Animate all feature cards only once
-      gsap.utils.toArray('.feature-cards').forEach((el, i) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: -20,
-          ease: "power2.in",
+    sections.forEach(({ ref, from, to }) => {
+      if (ref.current) {
+        gsap.fromTo(ref.current, from, {
+          ...to,
+          duration: 1,
+          ease: "power2.out",
           scrollTrigger: {
-            trigger: el,
+            trigger: ref.current,
             start: "top 80%",
-            end: "top 50%",
+            end: "top 40%",
             scrub: 1,
           },
         });
-      });
+      }
+    });
 
-      // Clean up triggers on unmount
-      return () => {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      };
-    }, []);
+    // Animate all feature cards only once
+    gsap.utils.toArray(".feature-cards").forEach((el, i) => {
+      gsap.from(el, {
+        opacity: 0,
+        y: -20,
+        ease: "power2.in",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: 1,
+        },
+      });
+    });
+
+    // Clean up triggers on unmount
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
   useGSAP(() => {
     const sections = [
       {
@@ -294,6 +313,8 @@ const HomePage = () => {
           ))}
         </div>
 
+        <LandPage />
+
         <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
           <Particles
             particleColors={["#ffffff", "#ffffff"]}
@@ -323,7 +344,6 @@ const HomePage = () => {
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
-                  className="feature-cards bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-2 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform hover:scale-105 duration-300 ease-in-out max-w-xs w-full"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.15 }}
@@ -386,13 +406,38 @@ const HomePage = () => {
             </motion.p>
 
             {/* Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="flex flex-wrap justify-center gap-6"
-            ></motion.div>
+            <div className="flex flex-wrap justify-center gap-4">
+              
+
+              <Link to="/templates">
+                <motion.button
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 250, damping: 15 }}
+                  className="px-8 py-3 rounded-full text-lg font-semibold text-white
+            bg-gradient-to-r from-blue-600 to-indigo-600 
+            shadow-lg hover:shadow-2xl transition-all duration-300"
+                >
+                  View Templates
+                </motion.button>
+              </Link>
+
+              <motion.a
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 250, damping: 15 }}
+                href="https://github.com/Premkolte/AnimateHub/issues/new/choose"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-8 py-3 rounded-full text-lg font-semibold
+          bg-white/10 backdrop-blur-md border border-white/20 
+          text-secondary-900 dark:text-white
+          shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <LuLayoutTemplate className="text-xl" />
+                Submit a Template
+              </motion.a>
+            </div>
           </div>
         </section>
 
@@ -493,8 +538,6 @@ const HomePage = () => {
             </motion.div>
           </motion.div>
         </section>
-
-        
       </div>
     </>
   );
