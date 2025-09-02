@@ -207,26 +207,35 @@ export default function LeaderBoard() {
     transition: { duration: 0.8, ease: "easeOut" }
   };
 
-  useGSAP(()=>{
-    gsap.utils.toArray('.card').forEach((e)=>{
-      gsap.fromTo(e, 
-        {
-          opacity:0,
-          y:20,
+  useGSAP(() => {
+  const triggers = [];
+
+  gsap.utils.toArray(".card").forEach((el) => {
+    const anim = gsap.fromTo(
+      el,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 90%",
+          end: "top 85%",
+          scrub: 1,         // smooth scrub effect
         },
-        {
-          opacity:1,
-          y:0,
-          scrollTrigger:{
-            trigger:e,
-            start:"top 90%",
-            end:'top 85%',
-            scrub:1
-          }
-        }
-      )
-    })
-  },[])
+      }
+    );
+
+    triggers.push(anim.scrollTrigger);
+  });
+
+  // ✅ Cleanup on unmount
+  return () => {
+    triggers.forEach((st) => st.kill());
+  };
+}, []);
+
 
   const bounceHover = {
     onMouseEnter: e => e.currentTarget.style.transform = "scale(1.07)",
