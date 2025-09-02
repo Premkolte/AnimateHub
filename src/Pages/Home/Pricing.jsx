@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 const PricingSection = () => {
   // Sample plans data - replace with your actual plans
@@ -92,26 +92,25 @@ const PricingSection = () => {
     },
   };
 
-  useGSAP(()=>{
-    gsap.utils.toArray('.pricing-cards').forEach((el)=>{
-      gsap.from(el,{
-        opacity:0,
-        y: 20,
-        ease:"power2",
-        scrollTrigger:{
-          trigger:el,
-          start:'top 80%',
-          end: 'top 50%',
-          scrub:1,
-        }
-      })
-    })
-
-    return()=>{
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+  useGSAP(() => {
+    gsap.utils.toArray('.pricing-cards').forEach((el) => {
+  gsap.from(el, {
+    opacity: 0,
+    y: 20,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: el,
+      start: 'top 90%',       // Adjust so animation triggers in viewport
+      toggleActions: 'play none none none', // Plays once
     }
+  });
+});
 
-  },[])
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   return (
     <section className="relative text-center space-y-1 py-8 sm:py-10 md:py-12 pricing-section px-3 sm:px-4 md:px-6 overflow-visible">
@@ -146,9 +145,7 @@ const PricingSection = () => {
         </motion.div>
 
         {/* Enhanced Pricing Cards */}
-        <div
-          className="flex flex-wrap xl:flex-nowrap xl:flex-row justify-center items-stretch gap-4 sm:gap-3 xl:gap-6 mt-12 max-w-7xl mx-auto"
-        >
+        <div className="flex flex-wrap xl:flex-nowrap xl:flex-row justify-center items-stretch gap-4 sm:gap-3 xl:gap-6 mt-12 max-w-7xl mx-auto">
           {plans.map((plan, idx) => (
             <motion.div
               key={idx}
