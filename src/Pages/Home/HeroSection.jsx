@@ -77,7 +77,7 @@ const HeroSection = () => {
   return (
     <div
       className="w-full flex flex-col md:flex-row items-center justify-between 
-  px-6 md:px-16 pt-0 pb-10 gap-10 bg-transparent"
+  px-6 md:px-16 pt-32 pb-10 gap-10 bg-transparent"
     >
       {/* Left Side: Title, Tagline, Buttons */}
       <div className="flex-1 flex flex-col items-start justify-center space-y-8">
@@ -95,7 +95,7 @@ const HeroSection = () => {
             boxShadow: "0 0 20px rgba(107, 91, 255, 0.7)",
           }}
         >
-          100% OPEN-SOURCE
+          Free for Developers
         </motion.div>
 
         <div className="text-center">
@@ -116,7 +116,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            UI Library for Developers
+            For Developers, By Developers
           </motion.p>
         </div>
 
