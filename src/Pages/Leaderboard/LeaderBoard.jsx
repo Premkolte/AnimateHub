@@ -212,7 +212,7 @@ export default function LeaderBoard() {
       gsap.fromTo(e, 
         {
           opacity:0,
-          y:30,
+          y:20,
         },
         {
           opacity:1,
@@ -220,8 +220,7 @@ export default function LeaderBoard() {
           scrollTrigger:{
             trigger:e,
             start:"top 90%",
-            end:'top 80%',
-            markers:true,
+            end:'top 85%',
             scrub:1
           }
         }
@@ -229,6 +228,11 @@ export default function LeaderBoard() {
     })
   },[])
 
+  const bounceHover = {
+    onMouseEnter: e => e.currentTarget.style.transform = "scale(1.07)",
+    onMouseLeave: e => e.currentTarget.style.transform = "scale(1)",
+    style: { transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)" }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-secondary-900 py-6 sm:py-12 px-2 sm:px-4">
@@ -240,10 +244,10 @@ export default function LeaderBoard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-2xl sm:text-4xl font-bold text-primary-600 dark:text-accent-500 mb-2 sm:mb-4">
+          <h1 {...bounceHover} className="text-2xl sm:text-4xl font-bold text-primary-600 dark:text-accent-500 mb-2 sm:mb-4">
             GSSoC'25 Leaderboard
           </h1>
-          <p className="text-sm sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p {...bounceHover} className="text-sm sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Celebrating the amazing contributions from GSSoC'25 participants.
             Join us in building something incredible together!
           </p>
