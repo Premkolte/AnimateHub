@@ -3,6 +3,12 @@ import { motion } from "framer-motion";
 import { FaTrophy, FaStar, FaCode, FaUsers, FaGithub } from "react-icons/fa";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
+import { gsap } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger)
+
 const GITHUB_REPO = "Premkolte/AnimateHub";
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
 
@@ -184,8 +190,6 @@ export default function LeaderBoard() {
 
   const PAGE_SIZE = 10; // how many contributors per page
 
-
-
   const [currentPage, setCurrentPage] = useState(1);
 
 
@@ -194,9 +198,37 @@ export default function LeaderBoard() {
   const indexOfFirst = indexOfLast - PAGE_SIZE;
   const currentContributors = contributors.slice(indexOfFirst, indexOfLast);
 
-
-
   const totalPages = Math.ceil(contributors.length / PAGE_SIZE);
+
+  // animations.js
+  const smoothY = {
+    initial: { y: 40, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
+
+  useGSAP(()=>{
+    gsap.utils.toArray('.card').forEach((e)=>{
+      gsap.fromTo(e, 
+        {
+          opacity:0,
+          y:30,
+        },
+        {
+          opacity:1,
+          y:0,
+          scrollTrigger:{
+            trigger:e,
+            start:"top 90%",
+            end:'top 80%',
+            markers:true,
+            scrub:1
+          }
+        }
+      )
+    })
+  },[])
+
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-secondary-900 py-6 sm:py-12 px-2 sm:px-4">
@@ -204,7 +236,7 @@ export default function LeaderBoard() {
         {/* Header */}
         <motion.div
           className="text-center mb-8 sm:mb-12 px-2"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
@@ -219,7 +251,7 @@ export default function LeaderBoard() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 mb-8 sm:mb-12 px-2">
-          <div className="bg-white dark:bg-secondary-800 p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+          <div {...smoothY} className="bg-white dark:bg-secondary-800 p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
             <div className="flex items-center">
               <div className="p-2 sm:p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mr-3 sm:mr-4 flex-shrink-0">
                 <FaUsers className="text-lg sm:text-2xl" />
@@ -236,7 +268,7 @@ export default function LeaderBoard() {
           </div>
 
           <div className="bg-white dark:bg-secondary-800 p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-            <div className="flex items-center">
+            <div {...smoothY} className="flex items-center">
               <div className="p-2 sm:p-3 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mr-3 sm:mr-4 flex-shrink-0">
                 <FaCode className="text-lg sm:text-2xl" />
               </div>
@@ -252,7 +284,7 @@ export default function LeaderBoard() {
           </div>
 
           <div className="bg-white dark:bg-secondary-800 p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 sm:col-span-2 md:col-span-1">
-            <div className="flex items-center">
+            <div {...smoothY} className="flex items-center">
               <div className="p-2 sm:p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 mr-3 sm:mr-4 flex-shrink-0">
                 <FaStar className="text-lg sm:text-2xl" />
               </div>
@@ -293,7 +325,7 @@ export default function LeaderBoard() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.03 }}
-                  className="group hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
+                  className="card group hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
                 >
                   {/* Mobile Layout */}
                   <div className="sm:hidden p-4">
