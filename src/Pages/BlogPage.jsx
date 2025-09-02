@@ -330,11 +330,17 @@ export default function BlogHub() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
   };
 
+  const bounceHover = {
+    onMouseEnter: e => e.currentTarget.style.transform = "scale(1.07)",
+    onMouseLeave: e => e.currentTarget.style.transform = "scale(1)",
+    style: { transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)" }
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.8 }}
       className="min-h-screen w-full py-10 px-4 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 text-slate-900 dark:text-slate-100"
     >
       <div className="max-w-7xl mx-auto space-y-10">
@@ -374,13 +380,13 @@ export default function BlogHub() {
           animate="visible"
           className="text-center space-y-4 relative"
         >
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-2 shadow-lg">
+          <div {...bounceHover} className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-2 shadow-lg">
             <span className="text-3xl">📝</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 {...bounceHover} className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             AnimateHub — Knowledge Hub
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+          <p {...bounceHover} className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
             Tutorials, showcases, and behind-the-scenes stories from the animation community.
           </p>
 
@@ -466,7 +472,7 @@ export default function BlogHub() {
             </div>
             
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-6" {...bounceHover}>
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <span className="text-2xl">📈</span>
                 </div>
@@ -499,7 +505,7 @@ export default function BlogHub() {
                         </button>
                       </div>
                       <div className="flex-shrink-0">
-                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs font-bold shadow-lg">
+                        <span className="cursor-pointer inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs font-bold shadow-lg">
                           ❤️ {likes[b.id] || 0}
                         </span>
                       </div>
@@ -519,7 +525,7 @@ export default function BlogHub() {
             </div>
             
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-6" {...bounceHover}>
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <span className="text-2xl">🔥</span>
                 </div>
@@ -563,7 +569,7 @@ export default function BlogHub() {
             </div>
             
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-6" {...bounceHover}>
                 <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <span className="text-2xl">🔖</span>
                 </div>
@@ -632,13 +638,13 @@ export default function BlogHub() {
           animate="visible"
           className="text-center mt-20 mb-8"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-4 shadow-lg">
+          <div {...bounceHover} className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-4 shadow-lg">
             <span className="text-2xl">📚</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
+          <h2 {...bounceHover} className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
             Discover Amazing Content
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          <p {...bounceHover} className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Explore our curated collection of tutorials, showcases, and insights from the animation community
           </p>
         </motion.section>
