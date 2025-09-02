@@ -1,5 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger)
 
 // LocalStorage keys
 const LS_BLOGS = "ah_blogs_v1";
@@ -336,6 +341,28 @@ export default function BlogHub() {
     style: { transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)" }
   };
 
+  useGSAP(()=>{
+    gsap.utils.toArray('.blogCard').forEach((el)=>{
+      gsap.fromTo(el,
+        {
+          y:30,
+          opacity:0,
+        },
+        {
+          y:0,
+          opacity:1,
+          ease:'bounce.inOut',
+          scrollTrigger:{
+            trigger:el,
+            scrub:1,
+            start:"top 80%",
+            end: 'top 60%',
+          }
+        }
+      )
+    })
+  },[])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -378,7 +405,7 @@ export default function BlogHub() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="text-center space-y-4 relative"
+          className="text-center space-y-4 relative py-10"
         >
           <div {...bounceHover} className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-2 shadow-lg">
             <span className="text-3xl">📝</span>
@@ -464,7 +491,7 @@ export default function BlogHub() {
         {/* Enhanced Sidebar Widgets Row */}
         <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch mt-8">
           {/* Top Liked */}
-          <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-blue-200 to-blue-300 dark:from-blue-700 to-blue-600 bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 dark:from-slate-900/90 dark:via-blue-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+          <div className="blogCard flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-blue-200 to-blue-300 dark:from-blue-700 to-blue-600 bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 dark:from-slate-900/90 dark:via-blue-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5 dark:opacity-10">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400 rounded-full -translate-y-16 translate-x-16"></div>
@@ -517,7 +544,7 @@ export default function BlogHub() {
           </div>
 
           {/* Trending Tags */}
-          <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-purple-200 to-purple-300 dark:from-purple-700 to-purple-600 bg-gradient-to-br from-white/90 via-purple-50/50 to-white/90 dark:from-slate-900/90 dark:via-purple-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+          <div className="blogCard flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-purple-200 to-purple-300 dark:from-purple-700 to-purple-600 bg-gradient-to-br from-white/90 via-purple-50/50 to-white/90 dark:from-slate-900/90 dark:via-purple-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5 dark:opacity-10">
               <div className="absolute top-0 left-0 w-28 h-28 bg-purple-400 rounded-full -translate-y-14 -translate-x-14"></div>
@@ -561,7 +588,7 @@ export default function BlogHub() {
           </div>
 
           {/* My Bookmarks */}
-          <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-yellow-200 to-yellow-300 dark:from-yellow-700 to-yellow-600 bg-gradient-to-br from-white/90 via-yellow-50/50 to-white/90 dark:from-slate-900/90 dark:via-yellow-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+          <div className="blogCard flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-yellow-200 to-yellow-300 dark:from-yellow-700 to-yellow-600 bg-gradient-to-br from-white/90 via-yellow-50/50 to-white/90 dark:from-slate-900/90 dark:via-yellow-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5 dark:opacity-10">
               <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-400 rounded-full -translate-y-12 translate-x-12"></div>
@@ -657,9 +684,9 @@ export default function BlogHub() {
               <motion.article
                 key={b.id}
                 id={`blog-${b.id}`}
-                className="group rounded-3xl overflow-hidden border border-transparent border-r-4 border-r-transparent hover:border-r-blue-500 dark:hover:border-r-blue-400 bg-gradient-to-br from-white/80 to-blue-50 dark:from-slate-900/80 dark:to-slate-800/80 shadow-lg hover:shadow-2xl transition-all duration-300 backdrop-blur-lg flex flex-col h-full relative"
+                className="blogCard group rounded-3xl overflow-hidden border border-transparent border-r-4 border-r-transparent hover:border-r-blue-500 dark:hover:border-r-blue-400 bg-gradient-to-br from-white/80 to-blue-50 dark:from-slate-900/80 dark:to-slate-800/80 shadow-lg hover:shadow-2xl transition-all duration-300 backdrop-blur-lg flex flex-col h-full relative"
               >
-                                 <div className="relative">
+                <div className="relative">
                    <img
                      src={b.cover}
                      alt={b.title}
