@@ -13,15 +13,8 @@ import Subscribe from "./Subscribe";
 import Particles from "../../components/Particles";
 import { useAuthStore } from "../../store/authStore";
 import PricingSection from "./Pricing";
-
-import HeroSection from "./HeroSection";
-
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LandPage from "./LandPage";
 
-gsap.registerPlugin(ScrollTrigger);
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -121,133 +114,7 @@ const HomePage = () => {
     },
   ];
 
-  // GSAP ScrollTrigger animations for each section (alternate left/right)
-  useGSAP(() => {
-    // Animate each section
-    const sections = [
-      {
-        ref: featuresRef,
-        from: { x: -20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: templatesRef,
-        from: { x: 20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: testimonialsRef,
-        from: { x: -20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: pricingRef,
-        from: { x: 20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: subscribeRef,
-        from: { x: -20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: contributorsRef,
-        from: { x: 20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-    ];
 
-    sections.forEach(({ ref, from, to }) => {
-      if (ref.current) {
-        gsap.fromTo(ref.current, from, {
-          ...to,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 80%",
-            end: "top 40%",
-            scrub: 1,
-          },
-        });
-      }
-    });
-
-    // Animate all feature cards only once
-    gsap.utils.toArray(".feature-cards").forEach((el, i) => {
-      gsap.from(el, {
-        opacity: 0,
-        y: -20,
-        ease: "power2.in",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          end: "top 50%",
-          scrub: 1,
-        },
-      });
-    });
-
-    // Clean up triggers on unmount
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-  useGSAP(() => {
-    const sections = [
-      {
-        ref: featuresRef,
-        from: { x: -20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: templatesRef,
-        from: { x: 20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: testimonialsRef,
-        from: { x: -20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: pricingRef,
-        from: { x: 20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: subscribeRef,
-        from: { x: -20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-      {
-        ref: contributorsRef,
-        from: { x: 20, opacity: 0 },
-        to: { x: 0, opacity: 1 },
-      },
-    ];
-
-    sections.forEach(({ ref, from, to }) => {
-      if (ref.current) {
-        gsap.fromTo(ref.current, from, {
-          ...to,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 80%",
-            end: "top 40%",
-            scrub: 1,
-          },
-        });
-      }
-    });
-
-    // Clean up triggers on unmount
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
 
   return (
     <>
@@ -285,14 +152,13 @@ const HomePage = () => {
           />
         </div>
 
-        <HeroSection></HeroSection>
 
         {/* Features */}
         <section
           ref={featuresRef}
           className="features-section w-full py-16 text-center"
         >
-          <div id="featuresGSAP" className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-blue-600 to-indigo-600 dark:bg-gradient-to-r dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
               Features
             </h2>
