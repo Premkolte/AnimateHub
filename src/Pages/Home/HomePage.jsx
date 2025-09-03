@@ -10,7 +10,6 @@ import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
 import Subscribe from "./Subscribe";
-import ReactJoyride from "react-joyride";
 import Particles from "../../components/Particles";
 import { useAuthStore } from "../../store/authStore";
 import PricingSection from "./Pricing";
@@ -85,41 +84,6 @@ const HomePage = () => {
     }
   }, []);
 
-  const steps = [
-    {
-      target: ".browse-components-button",
-      content: "Click here to browse our components.",
-    },
-    {
-      target: ".get-started-button",
-      content: "Click here to get started with our GitHub repository.",
-    },
-    {
-      target: ".star-github-button",
-      content: "Show your support by starring our GitHub repository.",
-    },
-    {
-      target: ".pricing-section",
-      content: "Check out our pricing plans here.",
-    },
-    {
-      target: ".features-section",
-      content: "Discover the amazing features we offer.",
-    },
-    {
-      target: ".testimonial-section",
-      content: "Read testimonials from our satisfied users.",
-    },
-    {
-      target: ".contributors-section",
-      content:
-        "Meet our talented contributors who have made this amazing website.",
-    },
-    {
-      target: ".templates-section",
-      content: "Explore our handcrafted templates.",
-    },
-  ];
 
   const features = [
     {
@@ -287,13 +251,6 @@ const HomePage = () => {
 
   return (
     <>
-      <ReactJoyride
-        steps={steps}
-        continuous={true}
-        showProgress={true}
-        showSkipButton={true}
-      />
-
       <div className="w-full flex flex-col items-center justify-center min-h-screen relative z-10 backdrop-blur-md bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 pt-2 pb-16">
         <div className="absolute inset-0 -z-10">
           {bulbs.map((b, i) => (
