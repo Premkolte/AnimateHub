@@ -14,6 +14,7 @@ import {
   Info,
   Phone,
   BookOpen,
+  X,
 } from "lucide-react";
 
 const currentYear = new Date().getFullYear();
@@ -32,9 +33,9 @@ const socialLinks = [
     color: "hover:text-blue-500",
   },
   {
-    name: "Twitter",
+    name: "X",
     href: "https://x.com/PremKolte26?mx=2",
-    icon: Twitter,
+    icon: X,
     color: "hover:text-blue-500",
   },
   {

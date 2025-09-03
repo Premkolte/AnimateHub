@@ -6,6 +6,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { User, Mail, Lock } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 import { GoogleLogin } from "@react-oauth/google";
+import toast from "react-hot-toast";
 const SignupPage = () => {
   const navigate = useNavigate();
   const { handleSignUp, handleGoogleSignin,isAuthLoading, currentUser, authError } = useAuthStore();
@@ -32,6 +33,30 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { username, fullName, email, password } = signUpData;
+
+    if (!username || !fullName || !email || !password) {
+      toast.error("All fields are required!");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long.");
+      return;
+    }
+
+    if (username.length < 3) {
+      toast.error("Username must be at least 3 characters long.");
+      return;
+    }
+
     handleSignUp(signUpData);
   };
 
