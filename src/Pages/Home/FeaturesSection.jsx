@@ -101,7 +101,7 @@ const features = [
 const FeaturesSection = () => {
 
   return (
-    <section className="features-section w-full py-20 overflow-hidden ">
+    <section className="bg-secondary-50 w-full py-20 overflow-hidden">
       <motion.div
         className="max-w-7xl mx-auto px-4"
         initial="hidden"
