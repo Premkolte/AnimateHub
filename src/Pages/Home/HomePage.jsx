@@ -10,73 +10,12 @@ import { IoMdRocket } from "react-icons/io";
 import { MdLibraryBooks } from "react-icons/md";
 import TestimonialSection from "./Testimonial";
 import Subscribe from "./Subscribe";
-import Particles from "../../components/Particles";
-import { useAuthStore } from "../../store/authStore";
 import PricingSection from "./Pricing";
 import LandPage from "./LandPage";
 
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { currentUser } = useAuthStore();
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Section refs for scroll animations
-  const featuresRef = useRef(null);
-  const templatesRef = useRef(null);
-  const testimonialsRef = useRef(null);
-  const pricingRef = useRef(null);
-  const subscribeRef = useRef(null);
-  const contributorsRef = useRef(null);
-
-  // Handler to update mouse position
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const [bulbs, setBulbs] = useState([]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    {
-      const colors = [
-        "#ff0084ff",
-        "#006effff",
-        "#ed3b3bff",
-        "#ff0022ff",
-        "#00ffa2ff",
-        "#11ff00ff",
-        "#00ccffff",
-        "#ff0000ff",
-        "#00e5ffff",
-        "#0037ffff",
-        "#abffa5ff",
-        "#ff00ddff",
-      ];
-      const newBulbs = [];
-      for (let i = 0; i < 15; i++) {
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const size = `${50 + Math.random() * 100}px`;
-        const top = `${Math.random() * 100}%`;
-        const left = `${Math.random() * 100}%`;
-        const blur = `${20 + Math.random() * 20}px`;
-        const opacity = 0.1 + Math.random() * 0.1;
-        newBulbs.push({ color, size, top, left, blur, opacity });
-      }
-      setBulbs(newBulbs);
-    }
-  }, []);
-
 
   const features = [
     {
@@ -119,43 +58,13 @@ const HomePage = () => {
   return (
     <>
       <div className="w-full flex flex-col items-center justify-center min-h-screen relative z-10 backdrop-blur-md bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white p-6 space-y-16 pt-2 pb-16">
-        <div className="absolute inset-0 -z-10">
-          {bulbs.map((b, i) => (
-            <span
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                width: b.size,
-                height: b.size,
-                top: b.top,
-                left: b.left,
-                backgroundColor: b.color,
-                filter: `blur(${b.blur})`,
-                opacity: b.opacity,
-              }}
-            ></span>
-          ))}
-        </div>
-
         <LandPage />
 
-        <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
-          <Particles
-            particleColors={["#ffffff", "#ffffff"]}
-            particleCount={300}
-            particleSpread={10}
-            speed={0.1}
-            particleBaseSize={100}
-            moveParticlesOnHover={true}
-            alphaParticles={false}
-            disableRotation={false}
-          />
-        </div>
+       
 
 
         {/* Features */}
         <section
-          ref={featuresRef}
           className="features-section w-full py-16 text-center"
         >
           <div className="max-w-7xl mx-auto">
@@ -230,7 +139,7 @@ const HomePage = () => {
 
             {/* Buttons */}
             <div className="flex flex-wrap justify-center gap-4">
-              
+
 
               <Link to="/templates">
                 <motion.button
