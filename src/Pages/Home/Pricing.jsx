@@ -132,7 +132,7 @@ const PricingCard = ({ plan, variants }) => (
       whileTap={{ scale: 0.98 }}
       className={`mt-auto w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg text-sm sm:text-base font-medium transition-colors
         ${plan.popular
-          ? 'bg-primary-600 hover:bg-primary-700 text-white'
+          ? 'bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 text-white'
           : 'bg-secondary-100 hover:bg-secondary-200 dark:bg-secondary-700 dark:hover:bg-secondary-600 text-gray-900 dark:text-white'}`}
     >
       {plan.cta}

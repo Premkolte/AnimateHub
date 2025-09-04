@@ -52,9 +52,6 @@ const templates = [
 ]
 
 
-
-
-
 const TemplatesSection = () => {
   return (
     <section className="w-full py-20 overflow-hidden">
@@ -84,14 +81,14 @@ const TemplatesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary-600 dark:text-accent-500">
             Ready-to-Use Templates
           </h2>
-          <p className="max-w-2xl mx-auto text-secondary-600 dark:text-secondary-300 text-lg">
+          <p className="max-w-2xl mx-auto text-lg text-secondary-600 dark:text-secondary-300">
             Jumpstart your projects with our collection of professionally designed templates.
           </p>
         </motion.div>
 
         {/* Template Cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto mb-16"
           variants={{
             hidden: { opacity: 0 },
             show: {
@@ -103,21 +100,19 @@ const TemplatesSection = () => {
             }
           }}
         >
-
-          {/* Templates Cards */}
-          {templates.map((template) => (
+          {templates.map((template, index) => (
             <motion.div
-              key={template.name}
+              key={index}
               variants={item}
               className="bg-white dark:bg-secondary-900 p-8 rounded-2xl shadow-lg border border-secondary-200 dark:border-secondary-600 hover:shadow-xl hover:border-primary-600 dark:hover:border-accent-600 transition-all duration-300 flex flex-col items-center text-center"
             >
               <div className="w-20 h-20 flex items-center justify-center rounded-2xl mb-6">
                 {template.icon}
               </div>
-              <h3 className="text-xl font-bold mb-3 text-secondary-900 dark:text-white">
+              <h3 className="text-xl font-bold mb-3 text-center text-secondary-900 dark:text-white">
                 {template.name}
               </h3>
-              <p className="text-secondary-600 dark:text-secondary-300 mb-6">
+              <p className="text-secondary-600 dark:text-secondary-300 mb-6 text-center">
                 {template.description}
               </p>
               <Link
