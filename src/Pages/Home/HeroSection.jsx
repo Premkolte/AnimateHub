@@ -19,26 +19,45 @@ import { BsGithub, BsStarFill } from "react-icons/bs";
 
 // Simple Icons (si)
 import { SiTailwindcss } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const featureButtons = [
   {
     name: "Components",
     icon: <FaPuzzlePiece />,
     color: "from-purple-600 to-indigo-600",
+    redirect: "/explore",
   },
-  { name: "Community", icon: <FaUsers />, color: "from-green-400 to-teal-500" },
-  { name: "GitHub", icon: <FaGithub />, color: "from-gray-700 to-black" },
+  {
+    name: "Community",
+    icon: <FaUsers />,
+    color: "from-green-400 to-teal-500",
+    redirect: "/",
+  },
+  {
+    name: "GitHub",
+    icon: <FaGithub />,
+    color: "from-gray-700 to-black",
+    redirect: "https://github.com/Premkolte/AnimateHub",
+  },
   {
     name: "Leaderboard",
     icon: <FaStar />,
     color: "from-yellow-400 to-orange-400",
+    redirect: "/leaderboard",
   },
   {
     name: "ResourceHub",
     icon: <FaPalette />,
     color: "from-pink-500 to-red-500",
+    redirect: "/resourcehub",
   },
-  { name: "Playgrounds", icon: <FaHeart />, color: "from-red-400 to-pink-500" },
+  {
+    name: "Playgrounds",
+    icon: <FaHeart />,
+    color: "from-red-400 to-pink-500",
+    redirect: "/animationplayground",
+  },
 ];
 
 const carouselTexts = [
@@ -239,11 +258,16 @@ const HeroSection = () => {
               {featureButtons.map((btn, idx) => (
                 <motion.button
                   key={idx}
-                  className={`flex items-center justify-center gap-2 px-3 py-4 rounded-xl text-white font-medium shadow-md bg-gradient-to-r ${btn.color}`}
+                  className={`flex items-center justify-center rounded-xl text-white font-medium shadow-md bg-gradient-to-r ${btn.color}`}
                   whileHover={{ scale: 1.05, y: -3 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {btn.icon} {btn.name}
+                  <Link
+                    to={btn.redirect}
+                    className="flex items-center justify-center gap-2 px-3 py-4"
+                  >
+                    {btn.icon} {btn.name}
+                  </Link>
                 </motion.button>
               ))}
             </div>
