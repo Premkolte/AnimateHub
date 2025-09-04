@@ -1,271 +1,237 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-
-// FontAwesome (fa)
-import {
-  FaGithub,
-  FaHeart,
-  FaUsers,
-  FaStar,
-  FaPuzzlePiece,
-  FaPalette,
-  FaHtml5,
-  FaCss3Alt,
-  FaReact,
-} from "react-icons/fa";
-
-// Bootstrap icons (bs)
+import { FaHeart } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaReact } from "react-icons/fa";
+import { BiLogoTailwindCss } from "react-icons/bi";
 import { BsGithub, BsStarFill } from "react-icons/bs";
+import Particles from "../../components/Particles";
 
-// Simple Icons (si)
-import { SiTailwindcss } from "react-icons/si";
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+};
 
-const featureButtons = [
-  {
-    name: "Components",
-    icon: <FaPuzzlePiece />,
-    color: "from-purple-600 to-indigo-600",
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 12
+    }
   },
-  { name: "Community", icon: <FaUsers />, color: "from-green-400 to-teal-500" },
-  { name: "GitHub", icon: <FaGithub />, color: "from-gray-700 to-black" },
-  {
-    name: "Leaderboard",
-    icon: <FaStar />,
-    color: "from-yellow-400 to-orange-400",
+  hover: {
+    scale: 1.1,
+    transition: { duration: 0.2 }
   },
-  {
-    name: "ResourceHub",
-    icon: <FaPalette />,
-    color: "from-pink-500 to-red-500",
-  },
-  { name: "Playgrounds", icon: <FaHeart />, color: "from-red-400 to-pink-500" },
+  tap: { 
+    scale: 0.98 
+  }
+};
+
+const techIcons = [
+  { icon: FaHtml5, color: "text-orange-600", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { icon: FaCss3Alt, color: "text-blue-600", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { icon: FaReact, color: "text-sky-500", href: "https://react.dev/learn" },
+  { icon: BiLogoTailwindCss, color: "text-teal-400", href: "https://tailwindcss.com/" }
 ];
 
-const carouselTexts = [
-  "Welcome!",
-  "Explore Components!",
-  "Join the Community!",
-  "Build with AnimateHub!",
-];
-const words = [
-  "Open-Source.",
-  "Beautiful.",
-  "Animated.",
-  "Developer-Friendly.",
-];
-
-const HeroSection = () => {
-  const [currentWord, setCurrentWord] = useState(0);
-
-  // cycle words every 2.5s
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % words.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Auto-slide carousel every 3 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % carouselTexts.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
+const HeroSection = ({ currentUser }) => {
   return (
-    <div
-      className="w-full flex flex-col md:flex-row items-center justify-between 
-  px-6 md:px-16 pt-32 pb-10 gap-10 bg-transparent"
-    >
-      {/* Left Side: Title, Tagline, Buttons */}
-      <div className="flex-1 flex flex-col items-start justify-center space-y-8">
-        <motion.div
-          className="px-5 py-2 rounded-full text-sm font-semibold text-white shadow-lg cursor-pointer"
-          style={{
-            background:
-              "linear-gradient(270deg, #6b5bff, #ff6ec7, #42d9ff, #6b5bff)",
-            backgroundSize: "600% 600%",
-          }}
-          animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          whileHover={{
-            scale: 1.1,
-            boxShadow: "0 0 20px rgba(107, 91, 255, 0.7)",
-          }}
+    <div className="w-full flex-1 relative overflow-hidden">
+      <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+        <Particles
+          particleColors={["#ffffff", "#ffffff"]}
+          particleCount={500}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
+
+      <motion.div 
+        className="text-center max-w-3xl mx-auto px-4 pt-28 pb-20"
+        initial="hidden"
+        animate="show"
+        variants={container}
+      >
+        <motion.div 
+          variants={item}
+          className="bg-primary-600 dark:bg-accent-600 text-white px-4 py-1 rounded-full inline-block text-sm mb-6"
         >
-          Free for Developers
+          100% OPEN-SOURCE
         </motion.div>
 
-        <div className="text-center">
-          <motion.h1
-            className="text-5xl md:text-6xl font-extrabold leading-tight 
-        text-transparent bg-clip-text  
-        bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600
-"
-            whileHover={{ scale: 1.05, rotate: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            AnimateHub
-          </motion.h1>
-
-          <motion.p
-            className="mt-4 text-2xl font-semibold text-left text-gray-700 dark:text-gray-300"
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            For Developers, By Developers
-          </motion.p>
-        </div>
-
-        <motion.p
-          className="mt-4 text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <motion.h1
+          className="text-4xl md:text-6xl mb-6 font-bold"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            show: { 
+              opacity: 1, 
+              y: 0,
+              transition: {
+                type: "spring",
+                stiffness: 100,
+                damping: 12
+              }
+            }
+          }}
         >
-          Build with{" "}
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={currentWord}
-              className="font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6 }}
-            >
-              {words[currentWord]}
-            </motion.span>
-          </AnimatePresence>
+          Animation UI Library <br /> for Developers
+        </motion.h1>
+
+        <motion.p 
+          className="text-md mb-10"
+          variants={item}
+        >
+          Open-sourced components made with
+          <br />
+          <span className="font-bold">HTML + CSS</span> &{" "}
+          <span className="font-bold">React + Tailwind</span>.
         </motion.p>
-        <section className="flex flex-col items-center space-y-10 mt-8 relative">
-  {/* Tech Icons Row */}
-  <div className="flex space-x-8">
-    <motion.a
-      whileHover={{ scale: 1.2, rotate: 5 }}
-      whileTap={{ scale: 0.9 }}
-      href="https://developer.mozilla.org/en-US/docs/Web/HTML"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="p-3 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 shadow-md hover:shadow-xl transition"
-    >
-      <FaHtml5 className="h-12 w-12 text-orange-500" />
-    </motion.a>
 
-    <motion.a
-      whileHover={{ scale: 1.2, rotate: -5 }}
-      whileTap={{ scale: 0.9 }}
-      href="https://developer.mozilla.org/en-US/docs/Web/CSS"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="p-3 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 shadow-md hover:shadow-xl transition"
-    >
-      <FaCss3Alt className="h-12 w-12 text-blue-500" />
-    </motion.a>
+        <motion.div 
+          className="flex flex-wrap gap-4 justify-center"
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+              }
+            }
+          }}
+        >
+          <motion.div variants={item} whileHover="hover" whileTap="tap">
+            <Link
+              className="block rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-md"
+              to="/explore"
+            >
+              Browse Components
+            </Link>
+          </motion.div>
 
-    <motion.a
-      whileHover={{ scale: 1.2, rotate: 5 }}
-      whileTap={{ scale: 0.9 }}
-      href="https://react.dev/learn"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="p-3 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 shadow-md hover:shadow-xl transition"
-    >
-      <FaReact className="h-12 w-12 text-cyan-400" />
-    </motion.a>
+          <motion.div variants={item} whileHover="hover" whileTap="tap">
+            <Link
+              className="block rounded-full border-2 border-blue-400 bg-transparent px-8 py-4 text-lg font-semibold text-blue-600 hover:bg-blue-400 hover:text-white shadow-sm hover:shadow-md"
+              to="https://github.com/Premkolte/AnimateHub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get Started
+            </Link>
+          </motion.div>
 
-    <motion.a
-      whileHover={{ scale: 1.2, rotate: -5 }}
-      whileTap={{ scale: 0.9 }}
-      href="https://tailwindcss.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="p-3 rounded-2xl bg-gradient-to-br from-sky-400/20 to-sky-600/20 shadow-md hover:shadow-xl transition"
-    >
-      <SiTailwindcss className="h-12 w-12 text-sky-400" />
-    </motion.a>
-  </div>
+          <AnimatePresence mode="wait">
+            {currentUser ? (
+              <motion.div 
+                key="favorites"
+                variants={item}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <Link
+                  to="/favorites"
+                  className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-red-500 to-pink-500 px-8 py-4 text-lg font-semibold text-white shadow-md"
+                >
+                  <FaHeart />
+                  My Favorites
+                </Link>
+              </motion.div>
+            ) : (
+              <motion.div 
+                key="signin"
+                variants={item}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <Link
+                  to="/sign-in"
+                  className="flex items-center justify-center gap-2 rounded-full border-2 border-red-400 bg-transparent px-8 py-4 text-lg font-semibold text-red-600 hover:bg-red-400 hover:text-white shadow-sm hover:shadow-md"
+                >
+                  <FaHeart />
+                  Sign In for Favorites
+                </Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
-  {/* GitHub Button */}
-  <motion.a
-    target="_blank"
-    rel="noopener noreferrer"
-    href="https://github.com/Premkolte/AnimateHub"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="flex items-center gap-4 px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 group"
-  >
-    <BsGithub className="text-white text-2xl group-hover:rotate-12 transition-transform duration-300" />
-    <span className="text-white">Star on GitHub</span>
-    <BsStarFill className="text-yellow-400 text-2xl group-hover:scale-125 transition-transform duration-300" />
-  </motion.a>
-</section>
-
-      </div>
-
-      {/* Right Side: Wider Tablet Mockup with black screen & animated carousel */}
-      <div className="flex-1 flex justify-center items-center">
-        <div className="relative w-[400px] h-[520px] md:w-[460px] md:h-[500px] bg-gradient-to-tr from-gray-100 to-gray-200 dark:from-secondary-800 dark:to-secondary-700 rounded-3xl shadow-2xl overflow-hidden border-2 border-blue-600 dark:border-gray-600">
-          {/* Screen Content */}
-          <div
-            className="absolute inset-4 rounded-2xl flex flex-col items-center justify-start p-4 shadow-inner overflow-hidden space-y-4"
-            style={{
-              background:
-                "linear-gradient(270deg, #6b5bff, #a66effff, #51c8ffff, #6b5bff)",
-              backgroundSize: "600% 600%",
-              animation: "gradientMove 15s ease infinite",
+        <motion.section 
+          className="flex flex-col items-center space-y-6 mt-16"
+          variants={container}
+        >
+          <motion.div 
+            className="flex space-x-6 justify-center"
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1,
+                  delayChildren: 0.4
+                }
+              }
             }}
           >
-            {/* Carousel */}
-            <div className="w-full h-28 flex items-center justify-center relative overflow-hidden mb-12">
-              <AnimatePresence mode="wait">
-                <motion.h2
-                  key={currentSlide}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-2xl md:text-3xl font-bold text-white text-center"
-                >
-                  {carouselTexts[currentSlide]}
-                </motion.h2>
-              </AnimatePresence>
-            </div>
+            {techIcons.map(({ icon: Icon, color, href }, index) => (
+              <motion.a 
+                key={index}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={item}
+                whileHover={{ 
+                  scale: 1.2,
+                  y: -5,
+                  transition: { duration: 0.2 }
+                }}
+                whileTap={{ scale: 0.9 }}
+                className={`${color} h-12 w-12`}
+              >
+                <Icon className="h-full w-full" />
+              </motion.a>
+            ))}
+          </motion.div>
 
-            {/* Feature Buttons */}
-            <div className="grid grid-cols-2 gap-3 mt-8 w-full">
-              {featureButtons.map((btn, idx) => (
-                <motion.button
-                  key={idx}
-                  className={`flex items-center justify-center gap-2 px-3 py-4 rounded-xl text-white font-medium shadow-md bg-gradient-to-r ${btn.color}`}
-                  whileHover={{ scale: 1.05, y: -3 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {btn.icon} {btn.name}
-                </motion.button>
-              ))}
-            </div>
-          </div>
-          <style>
-            {`
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-  `}
-          </style>
-
-          {/* Tablet Buttons/Decorations */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            <span className="w-4 h-4 bg-red-500 rounded-full"></span>
-            <span className="w-4 h-4 bg-yellow-400 rounded-full"></span>
-            <span className="w-4 h-4 bg-green-500 rounded-full"></span>
-          </div>
-        </div>
-      </div>
+          <motion.a
+            href="https://github.com/Premkolte/AnimateHub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 px-6 py-3 h-12 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-medium shadow-md"
+            variants={item}
+            whileHover={{
+              scale: 1.05,
+              backgroundColor: "#1F2937",
+              transition: { duration: 0.2 }
+            }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <BsGithub size={22} />
+            <span>Star on GitHub</span>
+            <BsStarFill size={22} className="text-yellow-400" />
+          </motion.a>
+        </motion.section>
+      </motion.div>
     </div>
   );
 };
