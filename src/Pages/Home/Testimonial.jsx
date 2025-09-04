@@ -44,13 +44,7 @@ const testimonials = [
 const TestimonialCard = ({ text, name, image }) => {
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      whileTap={{ scale: 0.98 }}
-      className="flex-none w-72 sm:w-80 md:w-96 p-8 h-auto min-h-[280px] rounded-2xl
-                 bg-white dark:bg-secondary-800/90 backdrop-blur-sm 
-                 shadow-lg dark:shadow-lg dark:shadow-accent-900/20
-                 flex flex-col justify-between relative transition-all duration-300 
-                 mx-3 hover:shadow-xl hover:shadow-primary-100 dark:hover:shadow-accent-900/30"
+      className="flex-none w-72 sm:w-80 md:w-96 p-8 h-auto min-h-[280px] rounded-2xl  bg-white dark:bg-secondary-800/90 backdrop-blur-sm   shadow-lg dark:shadow-lg dark:shadow-accent-900/20  flex flex-col justify-between relative transition-all duration-300   mx-3 hover:shadow-xl hover:shadow-primary-100 dark:hover:shadow-accent-900/30"
     >
       {/* Text */}
       <p className="mb-6 text-base md:text-lg flex-grow leading-relaxed text-gray-700 dark:text-gray-300 font-normal">
@@ -92,7 +86,7 @@ const TestimonialSection = () => {
 
       <div className="relative mx-auto px-4 sm:px-6">
         {/* Heading */}
-        <div className="text-center mb-14">
+        <div className="text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -105,7 +99,7 @@ const TestimonialSection = () => {
               {' '}across the globe
             </span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -123,7 +117,7 @@ const TestimonialSection = () => {
 
           <div className="overflow-hidden">
             <div
-              className="flex scroll-container"
+              className="flex scroll-container py-14"
               style={{
                 animation: "scrollLeft 22s linear infinite",
                 animationPlayState: isPaused ? "paused" : "running",
