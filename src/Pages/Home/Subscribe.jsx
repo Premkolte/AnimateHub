@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function NewsletterSubscription() {
   const [email, setEmail] = useState('');
@@ -7,13 +8,23 @@ export default function NewsletterSubscription() {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleSubscribe = () => {
-    if (email) {
-      setIsSubscribed(true);
-      setTimeout(() => {
-        setIsSubscribed(false);
-        setEmail('');
-      }, 3000);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      toast.error("Please enter an email address.");
+      return;
     }
+
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    setIsSubscribed(true);
+    setTimeout(() => {
+      setIsSubscribed(false);
+      setEmail("");
+    }, 3000);
   };
 
   return (

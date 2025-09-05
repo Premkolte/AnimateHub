@@ -44,35 +44,28 @@ const testimonials = [
 const TestimonialCard = ({ text, name, image }) => {
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.97 }}
-      className="flex-none w-72 sm:w-80 md:w-96 p-6 h-auto min-h-[250px] rounded-2xl
-                 bg-white/10 dark:bg-gray-900/40 backdrop-blur-xl border border-white/20 
-                 shadow-lg flex flex-col justify-between relative transition-all duration-500 
-                 mx-3"
+      className="flex-none w-72 sm:w-80 md:w-96 p-8 h-auto min-h-[280px] rounded-2xl  bg-white dark:bg-secondary-800/90 backdrop-blur-sm   shadow-lg dark:shadow-lg dark:shadow-accent-900/20  flex flex-col justify-between relative transition-all duration-300   mx-3 hover:shadow-xl hover:shadow-primary-100 dark:hover:shadow-accent-900/30"
     >
-      {/* Quote Icon */}
-      <div className="absolute top-4 right-4 text-indigo-400/60">
-        <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
-        </svg>
-      </div>
-
       {/* Text */}
-      <p className="mb-6 text-base md:text-lg flex-grow leading-relaxed text-gray-800 dark:text-gray-300 font-medium">
-        {text}
+      <p className="mb-6 text-base md:text-lg flex-grow leading-relaxed text-gray-700 dark:text-gray-300 font-normal">
+        "{text}"
       </p>
 
       {/* User */}
-      <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/20 dark:border-gray-700">
-        <img
-          src={image}
-          alt={name}
-          className="h-14 w-14 rounded-full border-4 border-white dark:border-gray-600 shadow-lg object-cover"
-        />
-        <h5 className="font-semibold text-lg text-gray-900 dark:text-white">
-          {name}
-        </h5>
+      <div className="flex items-center gap-4 mt-auto pt-5">
+        <div className="relative">
+          <div className="absolute -inset-1 bg-accent-500/30 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-200"></div>
+          <img
+            src={image}
+            alt={name}
+            className="relative h-14 w-14 rounded-full border-2 border-white dark:border-gray-700 shadow-md object-cover"
+          />
+        </div>
+        <div>
+          <h5 className="font-semibold text-lg text-gray-900 dark:text-white">
+            {name}
+          </h5>
+        </div>
       </div>
     </motion.div>
   );
@@ -89,24 +82,32 @@ const TestimonialSection = () => {
   const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-transparent backdrop-blur-xl border border-white/10 rounded-xl"></div>
+    <section className="w-full py-16 sm:py-20 md:py-24 relative overflow-hidden bg-secondary-50 dark:bg-secondary-900">
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative mx-auto px-4 sm:px-6">
         {/* Heading */}
-        <div className="text-center mb-14">
+        <div className="text-center">
           <motion.h2
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-500 to-blue-600 bg-clip-text text-transparent"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
           >
-            What Our Users Say
+            Loved by developers
+            <span className="text-primary-600 dark:text-accent-400">
+              {' '}across the globe
+            </span>
           </motion.h2>
-          <p className="mt-4 text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Trusted by developers and teams across India
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+          >
+            Join thousands of satisfied users who have transformed their projects with our components
+          </motion.p>
         </div>
 
         {/* Scrolling Carousel */}
@@ -116,7 +117,7 @@ const TestimonialSection = () => {
 
           <div className="overflow-hidden">
             <div
-              className="flex scroll-container"
+              className="flex scroll-container py-14"
               style={{
                 animation: "scrollLeft 22s linear infinite",
                 animationPlayState: isPaused ? "paused" : "running",
