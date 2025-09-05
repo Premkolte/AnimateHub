@@ -142,7 +142,7 @@ const PricingCard = ({ plan, variants }) => (
 
 const PricingSection = () => {
   return (
-    <section className="w-full py-12 sm:py-16 md:py-20 overflow-hidden">
+    <section className="w-full sm:py-10 md:py-2 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial="hidden"
