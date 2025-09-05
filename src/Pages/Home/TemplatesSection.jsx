@@ -54,7 +54,7 @@ const templates = [
 
 const TemplatesSection = () => {
   return (
-    <section className="w-full py-20 overflow-hidden">
+    <section className="w-full py-4 overflow-hidden">
       <motion.div
         className="max-w-7xl mx-auto px-4"
         initial="hidden"
