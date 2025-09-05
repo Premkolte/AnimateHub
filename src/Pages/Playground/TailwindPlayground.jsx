@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const TailwindPlayground = () => {
   const [classes, setClasses] = useState(
-    "bg-blue-500 text-white p-6 rounded-xl shadow-lg"
+    "bg-blue-500 text-white p-4 rounded-xl shadow-lg"
   );
   const [component, setComponent] = useState("card");
   const [copied, setCopied] = useState(false);
@@ -16,7 +16,7 @@ const TailwindPlayground = () => {
   };
 
   const resetClasses = () => {
-    setClasses("bg-blue-500 text-white p-6 rounded-xl shadow-lg");
+    setClasses("bg-blue-500 text-white p-4 rounded-xl shadow-lg");
   };
 
   // Generate JSX code preview
