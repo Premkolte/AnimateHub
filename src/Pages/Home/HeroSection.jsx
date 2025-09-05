@@ -18,6 +18,45 @@ const container = {
   }
 };
 
+const featureButtons = [
+  {
+    name: "Components",
+    icon: <FaPuzzlePiece />,
+    color: "from-purple-600 to-indigo-600",
+    redirect: "/explore",
+  },
+  {
+    name: "Community",
+    icon: <FaUsers />,
+    color: "from-green-400 to-teal-500",
+    redirect: "/",
+  },
+  {
+    name: "GitHub",
+    icon: <FaGithub />,
+    color: "from-gray-700 to-black",
+    redirect: "https://github.com/Premkolte/AnimateHub",
+  },
+  {
+    name: "Leaderboard",
+    icon: <FaStar />,
+    color: "from-yellow-400 to-orange-400",
+    redirect: "/leaderboard",
+  },
+  {
+    name: "ResourceHub",
+    icon: <FaPalette />,
+    color: "from-pink-500 to-red-500",
+    redirect: "/resourcehub",
+  },
+  {
+    name: "Playgrounds",
+    icon: <FaHeart />,
+    color: "from-red-400 to-pink-500",
+    redirect: "/animationplayground",
+  },
+];
+
 const item = {
   hidden: { opacity: 0, y: 20 },
   show: { 
@@ -37,6 +76,7 @@ const item = {
     scale: 0.98 
   }
 };
+
 
 const techIcons = [
   { icon: FaHtml5, color: "text-orange-600", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
@@ -137,44 +177,46 @@ const HeroSection = ({ currentUser }) => {
 
           <AnimatePresence mode="wait">
             {currentUser ? (
-              <motion.div 
-                key="favorites"
-                variants={item}
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                <Link
-                  to="/favorites"
-                  className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-red-500 to-pink-500 px-8 py-4 text-lg font-semibold text-white shadow-md"
+                <motion.div 
+                  key="favorites"
+                  variants={item}
+                  initial="hidden"
+                  animate="show"
+                  exit="hidden"
+                  whileHover="hover"
+                  whileTap="tap"
                 >
-                  <FaHeart />
-                  My Favorites
-                </Link>
-              </motion.div>
-            ) : (
-              <motion.div 
-                key="signin"
-                variants={item}
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                <Link
-                  to="/sign-in"
-                  className="flex items-center justify-center gap-2 rounded-full border-2 border-red-400 bg-transparent px-8 py-4 text-lg font-semibold text-red-600 hover:bg-red-400 hover:text-white shadow-sm hover:shadow-md"
+                  <Link
+                    to="/favorites"
+                    className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-red-500 to-pink-500 px-8 py-4 text-lg font-semibold text-white shadow-md"
+                  >
+
+                    <FaHeart />
+                    My Favorites
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="signin"
+                  variants={item}
+                  initial="hidden"
+                  animate="show"
+                  exit="hidden"
+                  whileHover="hover"
+                  whileTap="tap"
                 >
-                  <FaHeart />
-                  Sign In for Favorites
-                </Link>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
+                  <Link
+                    to="/sign-in"
+                    className="flex items-center justify-center gap-2 rounded-full border-2 border-red-400 bg-transparent px-8 py-4 text-lg font-semibold text-red-600 hover:bg-red-400 hover:text-white shadow-sm hover:shadow-md"
+                  >
+                    <FaHeart />
+                    Sign In for Favorites
+                  </Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+
 
         <motion.section 
           className="flex flex-col items-center space-y-6 mt-16"
