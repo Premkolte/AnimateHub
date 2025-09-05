@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaHeart } from "react-icons/fa";
+import { FaGithub, FaHeart, FaPalette, FaPuzzlePiece, FaStar, FaUsers } from "react-icons/fa";
 import { FaHtml5, FaCss3Alt, FaReact } from "react-icons/fa";
 import { BiLogoTailwindCss } from "react-icons/bi";
 import { BsGithub, BsStarFill } from "react-icons/bs";
@@ -102,7 +102,7 @@ const HeroSection = ({ currentUser }) => {
       </div>
 
       <motion.div 
-        className="text-center max-w-3xl mx-auto px-4 pt-28 pb-20"
+        className="text-center max-w-3xl mx-auto px-4 pt-10 pb-20"
         initial="hidden"
         animate="show"
         variants={container}
