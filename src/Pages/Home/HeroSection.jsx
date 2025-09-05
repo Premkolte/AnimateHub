@@ -6,6 +6,8 @@ import { FaHtml5, FaCss3Alt, FaReact } from "react-icons/fa";
 import { BiLogoTailwindCss } from "react-icons/bi";
 import { BsGithub, BsStarFill } from "react-icons/bs";
 import Particles from "../../components/Particles";
+import { FaPuzzlePiece,  FaUsers, FaGithub, FaStar, FaPalette  } from "react-icons/fa";
+
 
 const container = {
   hidden: { opacity: 0 },
