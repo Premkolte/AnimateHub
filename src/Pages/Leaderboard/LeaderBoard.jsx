@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { FaTrophy, FaStar, FaCode, FaUsers, FaGithub } from "react-icons/fa";
 import { ChevronRight, ChevronLeft } from "lucide-react";
@@ -101,13 +101,16 @@ export default function LeaderBoard() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [sortBy, setSortBy] = useState("points");
-  const filteredContributors = contributors
+const filteredContributors = useMemo(() => {
+  return contributors
     .filter((c) => c.username.toLowerCase().includes(searchTerm.toLowerCase()))
     .sort((a, b) => {
       if (sortBy === "points") return b.points - a.points;
       if (sortBy === "prs") return b.prs - a.prs;
       return 0;
     });
+}, [contributors, searchTerm, sortBy]);
+
 
 
   useEffect(() => {
