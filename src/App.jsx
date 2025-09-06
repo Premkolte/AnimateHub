@@ -41,8 +41,10 @@ import FavoritesPage from "./Pages/Favorites/FavoritesPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from "./Pages/Dashboard/MySnippet";
+
 import ComponentsPage from "./Pages/Components/ComponentsPage";
 import IntroductionPage from "./Pages/Components/staticPages/IntroductionPage";
+import InstallationPage from "./Pages/Components/staticPages/InstallationPage";
 
 import Playground from "./Pages/Playground/Code_Playground";
 import FramerPlayground from "./Pages/Playground/FramerPlayground";
@@ -91,6 +93,7 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/components" element={<ComponentsPage />}>
               <Route path="introduction" element={<IntroductionPage />} />
+              <Route path="installation" element={<InstallationPage />} />
             </Route>
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
@@ -106,7 +109,7 @@ function App() {
             <Route path="/ColorGradientPlayground" element={<ColorGradientPlayground />} />
             <Route path="/TailwindPlayground" element={<TailwindPlayground />} />
             <Route path="/SVGPlayground" element={<SVGPlayground />} />
-            <Route path="/FontPlayground" element={<FontPlayground/>}/>
+            <Route path="/FontPlayground" element={<FontPlayground />} />
 
 
 
