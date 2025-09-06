@@ -1,4 +1,5 @@
 import { FiCode, FiUpload, FiUsers, FiShare2 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const FeatureCard = ({ icon: Icon, title, children }) => (
     <div className="bg-white dark:bg-secondary-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
@@ -23,18 +24,18 @@ const IntroductionPage = () => {
                     Find the perfect component for your next project or share your own creations.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                    <a
-                        href="#explore"
+                    <Link
+                        to="/components/grid"
                         className="px-6 py-3 bg-primary-600 dark:bg-accent-600 text-white rounded-md hover:bg-primary-700 dark:hover:bg-accent-700 transition-colors font-medium"
                     >
                         Explore Components
-                    </a>
-                    <a
-                        href="/components/upload"
+                    </Link>
+                    <Link
+                        to="#"
                         className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
                     >
                         Share Your Component
-                    </a>
+                    </Link>
                 </div>
             </section>
 
