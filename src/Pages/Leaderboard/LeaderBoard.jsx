@@ -99,6 +99,7 @@ export default function LeaderBoard() {
     totalPoints: 0,
   });
   const [searchTerm, setSearchTerm] = useState("");
+
   const [sortBy, setSortBy] = useState("points");
   const filteredContributors = contributors
     .filter((c) => c.username.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -107,6 +108,7 @@ export default function LeaderBoard() {
       if (sortBy === "prs") return b.prs - a.prs;
       return 0;
     });
+
 
   useEffect(() => {
     const fetchContributorsWithPoints = async () => {
@@ -198,10 +200,9 @@ export default function LeaderBoard() {
   }, [contributors]);
 
   // Pagination variables and states
-
   const PAGE_SIZE = 10; // how many contributors per page
-
   const [currentPage, setCurrentPage] = useState(1);
+
 
   // Calculate which contributors to show on current page
   // Calculate which contributors to show on current page (after search & sort)
@@ -217,6 +218,19 @@ export default function LeaderBoard() {
     setCurrentPage(1);
   }, [searchTerm, sortBy]);
 
+  // Filter contributors by search term (case-insensitive)
+  const filteredContributors = contributors.filter((c) =>
+    c.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Calculate which contributors to show on current page (from filtered list)
+  const indexOfLast = currentPage * PAGE_SIZE;
+  const indexOfFirst = indexOfLast - PAGE_SIZE;
+  const currentContributors = filteredContributors.slice(indexOfFirst, indexOfLast);
+
+  const totalPages = Math.ceil(filteredContributors.length / PAGE_SIZE);
+
+
   // animations.js
   const smoothY = {
     initial: { y: 40, opacity: 0 },
@@ -225,6 +239,7 @@ export default function LeaderBoard() {
   };
 
   useGSAP(() => {
+
     const triggers = [];
 
     gsap.utils.toArray(".card").forEach((el) => {
@@ -243,6 +258,29 @@ export default function LeaderBoard() {
           },
         }
       );
+
+  const triggers = [];
+
+  gsap.utils.toArray(".card").forEach((el) => {
+    const anim = gsap.fromTo(
+      el,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 95%",
+          end: "top 90%",
+          scrub: 1,         // smooth scrub effect
+        },
+      }
+    );
+
+    triggers.push(anim.scrollTrigger);
+  });
+
 
       triggers.push(anim.scrollTrigger);
     });
@@ -283,6 +321,20 @@ export default function LeaderBoard() {
             Join us in building something incredible together!
           </p>
         </motion.div>
+
+        {/* Search Input */}
+        <div className="flex justify-center mb-6">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={e => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // Reset to first page on search
+            }}
+            placeholder="Search contributors by username..."
+            className="w-full max-w-xs px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-secondary-800 dark:text-white"
+          />
+        </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 mb-8 sm:mb-12 px-2">

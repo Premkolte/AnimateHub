@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaHeart } from "react-icons/fa";
+
+import { FaGithub, FaHeart, FaPalette, FaPuzzlePiece, FaStar, FaUsers } from "react-icons/fa";
 import { FaHtml5, FaCss3Alt, FaReact } from "react-icons/fa";
 import { BiLogoTailwindCss } from "react-icons/bi";
 import { BsGithub, BsStarFill } from "react-icons/bs";
@@ -19,45 +20,6 @@ const container = {
     }
   }
 };
-
-const featureButtons = [
-  {
-    name: "Components",
-    icon: <FaPuzzlePiece />,
-    color: "from-purple-600 to-indigo-600",
-    redirect: "/explore",
-  },
-  {
-    name: "Community",
-    icon: <FaUsers />,
-    color: "from-green-400 to-teal-500",
-    redirect: "/",
-  },
-  {
-    name: "GitHub",
-    icon: <FaGithub />,
-    color: "from-gray-700 to-black",
-    redirect: "https://github.com/Premkolte/AnimateHub",
-  },
-  {
-    name: "Leaderboard",
-    icon: <FaStar />,
-    color: "from-yellow-400 to-orange-400",
-    redirect: "/leaderboard",
-  },
-  {
-    name: "ResourceHub",
-    icon: <FaPalette />,
-    color: "from-pink-500 to-red-500",
-    redirect: "/resourcehub",
-  },
-  {
-    name: "Playgrounds",
-    icon: <FaHeart />,
-    color: "from-red-400 to-pink-500",
-    redirect: "/animationplayground",
-  },
-];
 
 const item = {
   hidden: { opacity: 0, y: 20 },
@@ -104,7 +66,7 @@ const HeroSection = ({ currentUser }) => {
       </div>
 
       <motion.div 
-        className="text-center max-w-3xl mx-auto px-4 pt-28 pb-20"
+        className="text-center max-w-3xl mx-auto px-4 pt-10 pb-20"
         initial="hidden"
         animate="show"
         variants={container}
