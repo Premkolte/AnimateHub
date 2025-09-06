@@ -2,8 +2,8 @@ import { FiCode, FiUpload, FiUsers, FiShare2 } from 'react-icons/fi';
 
 const FeatureCard = ({ icon: Icon, title, children }) => (
     <div className="bg-white dark:bg-secondary-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mb-4">
-            <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+        <div className="w-12 h-12 rounded-full bg-primary-50 dark:bg-accent-900/30 flex items-center justify-center mb-4">
+            <Icon className="w-6 h-6 text-primary-600 dark:text-accent-400" />
         </div>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
         <p className="text-gray-600 dark:text-gray-300">{children}</p>
@@ -25,7 +25,7 @@ const IntroductionPage = () => {
                 <div className="flex flex-wrap justify-center gap-4">
                     <a
                         href="#explore"
-                        className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+                        className="px-6 py-3 bg-primary-600 dark:bg-accent-600 text-white rounded-md hover:bg-primary-700 dark:hover:bg-accent-700 transition-colors font-medium"
                     >
                         Explore Components
                     </a>
@@ -103,7 +103,7 @@ const IntroductionPage = () => {
             </section>
 
             {/* Call to Action */}
-            <section className="text-center py-12 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg">
+            <section className="text-center py-12 bg-gradient-to-r from-primary-50 to-indigo-50 dark:from-accent-900/20 dark:to-indigo-900/20 rounded-lg">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                     Ready to get started?
                 </h2>
@@ -113,7 +113,7 @@ const IntroductionPage = () => {
                 <div className="flex flex-wrap justify-center gap-4">
                     <a
                         href="/components/browse"
-                        className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+                        className="px-6 py-3 bg-primary-600 dark:bg-accent-600 text-white rounded-md hover:bg-primary-700 dark:hover:bg-accent-700 transition-colors font-medium"
                     >
                         Browse Components
                     </a>
@@ -126,7 +126,7 @@ const IntroductionPage = () => {
                 </div>
             </section>
         </div>
-    )
-}
+    );
+};
 
-export default IntroductionPage
+export default IntroductionPage;
