@@ -66,18 +66,38 @@ app.use("/api/blogs/comments",commentRoute)
 
 
 
-// *--------------------- SELF PING -> recommended for free hosting plans which put the server on sleep if not used for some time, like Render
-const interval = 300000; // Interval in milliseconds (5 minutes)
-function reloadWebsite() {
-    axios.get(process.env.SERVER_URL)
-        .then(response => {
-            console.log(`Reloaded at ${new Date().toISOString()}: Status Code ${response.status}`);
-        })
-        .catch(error => {
-            console.error(`Error reloading at ${new Date().toISOString()}:`, error.message);
-        });
+// *--------------------- HEALTH CHECK & UPTIME MONITOR
+app.get("/api/health", (req, res) => {
+    res.status(200).json({
+        status: "OK",
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString(),
+    });
+});
+
+// Optional uptime ping for free hosting (Render/Heroku etc.)
+if (process.env.SERVER_URL) {
+    const interval = 300000; // 5 minutes
+    setInterval(async () => {
+        try {
+            const response = await axios.get(process.env.SERVER_URL + "/api/health");
+            console.log(`[Uptime Ping] ${new Date().toISOString()} | Status: ${response.status}`);
+        } catch (err) {
+            console.error(`[Uptime Ping Error] ${new Date().toISOString()} |`, err.message);
+        }
+    }, interval);
 }
-setInterval(reloadWebsite, interval);
 
 
-export default  app 
+
+// *--------------------- GLOBAL ERROR HANDLER
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(err.status || 500).json({
+        success: false,
+        message: err.message || "Something went wrong on the server.",
+    });
+});
+
+export default app;
+ 
