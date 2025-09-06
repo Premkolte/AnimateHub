@@ -58,6 +58,7 @@ import ColorGradientPlayground from "./Pages/Playground/ColorGradientPlayground"
 import TailwindPlayground from "./Pages/Playground/TailwindPlayground";
 import SVGPlayground from "./Pages/Playground/SVGPlayground";
 import FontPlayground from "./Pages/Playground/FontPlayground";
+import FlexboxPlayground from "./Pages/Playground/FlexboxPlayground";
 
 
 // Layout component that includes Navbar, Footer and an Outlet
@@ -104,6 +105,7 @@ function App() {
             <Route path="/TailwindPlayground" element={<TailwindPlayground />} />
             <Route path="/SVGPlayground" element={<SVGPlayground />} />
             <Route path="/FontPlayground" element={<FontPlayground/>}/>
+            <Route path="/flexboxPlayground" element={<FlexboxPlayground/>}/>
 
 
 

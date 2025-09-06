@@ -12,7 +12,7 @@ import {
 import { FiCode, FiLayers,FiType } from "react-icons/fi";
 import { SiFramer, SiTailwindcss } from "react-icons/si";
 import { MdBrush } from "react-icons/md"; // replacement for MdGradient
-import { FaHeart } from "react-icons/fa";
+import { FaHeart ,FaCss3Alt } from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
@@ -425,6 +425,31 @@ const Navbar = () => {
                               Font Playground
                             </div>
                           </Link>
+                          <Link
+  to="/flexboxPlayground"
+  onClick={() => {
+    closeMenu();
+    setOpenDropdown(false);
+  }}
+  className={`
+    relative flex items-center px-5 py-2 rounded-lg
+    text-gray-900 dark:text-gray-200
+    hover:bg-gradient-to-r hover:from-blue-200 hover:to-white
+    dark:hover:from-gray-700 dark:hover:to-gray-900
+    transition-all duration-300 ease-in-out
+    group
+    before:absolute before:left-0 before:right-0 before:-bottom-1 before:h-[1px]
+    before:rounded-full
+    before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+    dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+    before:opacity-30
+  `}
+>
+  <div className="flex items-center gap-2">
+    <FaCss3Alt className="text-blue-500 dark:text-gray-300" />{" "}
+    Flexbox Ground
+  </div>
+</Link>
                         </div>
                       )}
                     </div> /* End of parent wrapper */
