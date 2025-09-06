@@ -221,17 +221,7 @@ const filteredContributors = useMemo(() => {
     setCurrentPage(1);
   }, [searchTerm, sortBy]);
 
-  // Filter contributors by search term (case-insensitive)
-  const filteredContributors = contributors.filter((c) =>
-    c.username.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
-  // Calculate which contributors to show on current page (from filtered list)
-  const indexOfLast = currentPage * PAGE_SIZE;
-  const indexOfFirst = indexOfLast - PAGE_SIZE;
-  const currentContributors = filteredContributors.slice(indexOfFirst, indexOfLast);
-
-  const totalPages = Math.ceil(filteredContributors.length / PAGE_SIZE);
 
 
   // animations.js
