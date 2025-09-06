@@ -1,5 +1,6 @@
 import { FiCode, FiUpload, FiUsers, FiShare2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const FeatureCard = ({ icon: Icon, title, children }) => (
     <div className="bg-white dark:bg-secondary-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
@@ -13,7 +14,11 @@ const FeatureCard = ({ icon: Icon, title, children }) => (
 
 const IntroductionPage = () => {
     return (
-        <div className="space-y-12">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-12">
             {/* Hero Section */}
             <section className="text-center py-12 bg-white dark:bg-secondary-800 rounded-lg shadow-sm p-8">
                 <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
@@ -126,7 +131,7 @@ const IntroductionPage = () => {
                     </a>
                 </div>
             </section>
-        </div>
+        </motion.div>
     );
 };
 
