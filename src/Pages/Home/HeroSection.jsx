@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+
+
+import {  FaHeart } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaReact } from "react-icons/fa";
 import { BiLogoTailwindCss } from "react-icons/bi";
 import { BsGithub, BsStarFill } from "react-icons/bs";
 import {
@@ -15,6 +19,7 @@ import {
   FaPalette,
 } from "react-icons/fa";
 import Particles from "../../components/Particles";
+
 
 const container = {
   hidden: { opacity: 0 },
