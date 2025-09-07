@@ -14,3 +14,17 @@
     @apply font-heading; /* Sora */
   }
 }
+.accordion-button {
+    background-color: #007BFF; /* Blue background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;   /* Slightly curved corners */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.accordion-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
