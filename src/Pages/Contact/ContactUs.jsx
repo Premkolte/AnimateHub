@@ -238,7 +238,7 @@ const Contact = () => {
             <div className={`text-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 group transform ${
               visibleStats.includes(0) ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'
             }`}>
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-400 dark:from-purple-600 dark:to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-400 dark:from-purple-600 dark:to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 hover:rotate-12 transition-all duration-300">
                 <Clock className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -251,10 +251,10 @@ const Contact = () => {
             <div className={`text-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 group transform ${
               visibleStats.includes(1) ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'
             }`}>
-              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-400 dark:from-green-600 dark:to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-400 dark:from-green-600 dark:to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 hover:rotate-12 transition-all duration-300">
                 <Users className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 animate-pulse">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                 500+
               </h3>
               <p className="text-gray-600 dark:text-gray-300">Happy Clients</p>
@@ -264,7 +264,7 @@ const Contact = () => {
             <div className={`text-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 group transform ${
               visibleStats.includes(2) ? 'translate-x-0 opacity-100' : '-translate-x-16 opacity-0'
             }`}>
-              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-400 dark:from-orange-600 dark:to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-400 dark:from-orange-600 dark:to-red-600 rounded-2xl flex items-center hover:rotate-12 justify-center mx-auto mb-4 transition-all duration-300">
                 <Shield className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
