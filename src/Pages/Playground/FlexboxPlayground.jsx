@@ -1,21 +1,16 @@
 import React, { useState } from "react";
+import { Copy } from "lucide-react";
+import { motion } from "framer-motion";
 
 const defaultItems = [
-  { label: "Item 1", order: 0, grow: 1, shrink: 1, basis: "auto", align: "auto", color: "#3b82f6" },
-  { label: "Item 2", order: 0, grow: 1, shrink: 1, basis: "auto", align: "auto", color: "#22d3ee" },
-  { label: "Item 3", order: 0, grow: 1, shrink: 1, basis: "auto", align: "auto", color: "#f59e42" },
+  { label: "Item 1", order: 0, grow: 1, shrink: 1, basis: "80px", align: "auto", color: "#3b82f6" },
+  { label: "Item 2", order: 0, grow: 1, shrink: 1, basis: "80px", align: "auto", color: "#22d3ee" },
+  { label: "Item 3", order: 0, grow: 1, shrink: 1, basis: "80px", align: "auto", color: "#f59e42" },
 ];
 
-const alignSelfOptions = [
-  "auto",
-  "flex-start",
-  "flex-end",
-  "center",
-  "baseline",
-  "stretch",
-];
+const alignSelfOptions = ["auto", "flex-start", "flex-end", "center", "baseline", "stretch"];
 
-export  default  function FlexboxPlayground() {
+export default function FlexboxPlayground() {
   const [direction, setDirection] = useState("row");
   const [wrap, setWrap] = useState("nowrap");
   const [justify, setJustify] = useState("flex-start");
@@ -23,12 +18,11 @@ export  default  function FlexboxPlayground() {
   const [gap, setGap] = useState(16);
   const [items, setItems] = useState(defaultItems);
   const [selected, setSelected] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   const handleItemChange = (index, key, value) => {
-    setItems(items =>
-      items.map((item, i) =>
-        i === index ? { ...item, [key]: value } : item
-      )
+    setItems((items) =>
+      items.map((item, i) => (i === index ? { ...item, [key]: value } : item))
     );
   };
 
@@ -41,14 +35,14 @@ export  default  function FlexboxPlayground() {
         order: 0,
         grow: 1,
         shrink: 1,
-        basis: "auto",
+        basis: "80px",
         align: "auto",
         color: "#a78bfa",
       },
     ]);
   };
 
-  const removeItem = idx => {
+  const removeItem = (idx) => {
     if (items.length <= 1) return;
     setItems(items.filter((_, i) => i !== idx));
     setSelected(0);
@@ -61,19 +55,15 @@ export  default  function FlexboxPlayground() {
     justifyContent: justify,
     alignItems: align,
     gap: `${gap}px`,
-    background: "linear-gradient(135deg, #f0f4f8 0%, #c7d2fe 100%)",
     padding: "32px",
     borderRadius: "24px",
-    minHeight: "260px",
-    minWidth: "280px",
-    marginBottom: "32px",
-    boxShadow: "0 8px 32px rgba(59,130,246,0.06)",
-    transition: "all 0.3s",
+    minHeight: "360px",
+    minWidth: "400px",
   };
 
   const selectedItem = items[selected];
 
-  const itemStyle = item => ({
+  const itemStyle = (item) => ({
     order: item.order,
     flexGrow: item.grow,
     flexShrink: item.shrink,
@@ -82,21 +72,19 @@ export  default  function FlexboxPlayground() {
     background: item.color,
     color: "#fff",
     fontWeight: 600,
-    fontSize: 18,
-    borderRadius: 12,
-    minWidth: 80,
-    minHeight: 60,
+    fontSize: 16,
+    borderRadius: 10,
+    minWidth: 60,
+    minHeight: 40,
+    maxWidth: 120,
+    maxHeight: 80,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
-    transition: "all 0.2s",
     cursor: "pointer",
-    outline: "2px solid transparent",
-    outlineOffset: "-2px",
+    transition: "all 0.3s ease",
   });
 
-  // CSS code generation
   const containerCss = `display: flex;
 flex-direction: ${direction};
 flex-wrap: ${wrap};
@@ -110,177 +98,189 @@ flex-shrink: ${selectedItem.shrink};
 flex-basis: ${selectedItem.basis};
 align-self: ${selectedItem.align};`;
 
+  const copyCss = () => {
+    navigator.clipboard.writeText(containerCss + "\n\n" + itemCss);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="flex flex-col md:flex-row gap-10 p-6 w-full max-w-7xl mx-auto">
-      {/* Controls */}
-      <div className="flex-1 space-y-10">
-        <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-lg p-6 border border-gray-200/60 dark:border-gray-700/50">
-          <h2 className="text-xl font-bold mb-4 text-blue-700 dark:text-blue-300">Container Controls</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="font-semibold">Direction</label>
-              <select value={direction} onChange={e => setDirection(e.target.value)} className="block mt-1 w-full rounded border p-2">
-                <option value="row">row</option>
-                <option value="row-reverse">row-reverse</option>
-                <option value="column">column</option>
-                <option value="column-reverse">column-reverse</option>
-              </select>
-            </div>
-            <div>
-              <label className="font-semibold">Wrap</label>
-              <select value={wrap} onChange={e => setWrap(e.target.value)} className="block mt-1 w-full rounded border p-2">
-                <option value="nowrap">nowrap</option>
-                <option value="wrap">wrap</option>
-                <option value="wrap-reverse">wrap-reverse</option>
-              </select>
-            </div>
-            <div>
-              <label className="font-semibold">Justify</label>
-              <select value={justify} onChange={e => setJustify(e.target.value)} className="block mt-1 w-full rounded border p-2">
-                <option value="flex-start">flex-start</option>
-                <option value="center">center</option>
-                <option value="flex-end">flex-end</option>
-                <option value="space-between">space-between</option>
-                <option value="space-around">space-around</option>
-                <option value="space-evenly">space-evenly</option>
-              </select>
-            </div>
-            <div>
-              <label className="font-semibold">Align Items</label>
-              <select value={align} onChange={e => setAlign(e.target.value)} className="block mt-1 w-full rounded border p-2">
-                <option value="stretch">stretch</option>
-                <option value="flex-start">flex-start</option>
-                <option value="center">center</option>
-                <option value="flex-end">flex-end</option>
-                <option value="baseline">baseline</option>
-              </select>
-            </div>
-            <div>
-              <label className="font-semibold">Gap (px)</label>
-              <input type="number" min={0} max={64} value={gap} onChange={e => setGap(Number(e.target.value))} className="block mt-1 w-full rounded border p-2" />
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 p-6">
+      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-10 bg-white/40 dark:bg-gray-900/50 backdrop-blur-2xl rounded-3xl shadow-[0_0_30px_rgba(0,0,0,0.2)] border border-gray-300 dark:border-gray-700 p-8">
+        
+        {/* LEFT: Controls */}
+        <div className="flex flex-col space-y-6">
+          <h1 className="text-5xl font-extrabold mb-6 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-lg tracking-tight animate-pulse">
+            ✨ Flexbox Playground 
+          </h1>
 
-        <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-lg p-6 border border-gray-200/60 dark:border-gray-700/50">
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-xl font-bold text-blue-700 dark:text-blue-300">Item Controls</h2>
-            <div className="flex gap-2">
-              <button
-                onClick={addItem}
-                disabled={items.length >= 5}
-                className="bg-emerald-500 text-white px-3 py-1 rounded disabled:opacity-40"
-              >
-                + Item
-              </button>
-              <button
-                onClick={() => removeItem(selected)}
-                disabled={items.length <= 1}
-                className="bg-rose-500 text-white px-3 py-1 rounded disabled:opacity-40"
-              >
-                − Item
-              </button>
+          {/* Container Controls */}
+          <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-lg p-6 border border-gray-200/60 dark:border-gray-700/50 space-y-4">
+            <h2 className="text-lg font-bold text-blue-600 dark:text-blue-300 mb-2">Container Controls</h2>
+            <div className="grid grid-cols-2 gap-4">
+              <label>
+                Direction
+                <select value={direction} onChange={(e) => setDirection(e.target.value)} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full">
+                  <option value="row">row</option>
+                  <option value="row-reverse">row-reverse</option>
+                  <option value="column">column</option>
+                  <option value="column-reverse">column-reverse</option>
+                </select>
+              </label>
+              <label>
+                Wrap
+                <select value={wrap} onChange={(e) => setWrap(e.target.value)} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full">
+                  <option value="nowrap">nowrap</option>
+                  <option value="wrap">wrap</option>
+                  <option value="wrap-reverse">wrap-reverse</option>
+                </select>
+              </label>
+              <label>
+                Justify Content
+                <select value={justify} onChange={(e) => setJustify(e.target.value)} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full">
+                  <option value="flex-start">flex-start</option>
+                  <option value="center">center</option>
+                  <option value="flex-end">flex-end</option>
+                  <option value="space-between">space-between</option>
+                  <option value="space-around">space-around</option>
+                  <option value="space-evenly">space-evenly</option>
+                </select>
+              </label>
+              <label>
+                Align Items
+                <select value={align} onChange={(e) => setAlign(e.target.value)} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full">
+                  <option value="stretch">stretch</option>
+                  <option value="flex-start">flex-start</option>
+                  <option value="center">center</option>
+                  <option value="flex-end">flex-end</option>
+                  <option value="baseline">baseline</option>
+                </select>
+              </label>
+              <label>
+                Gap
+                <input type="number" min={0} max={64} value={gap} onChange={(e) => setGap(Number(e.target.value))} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full" />
+              </label>
             </div>
           </div>
-          <div className="flex gap-2 mb-2">
-            {items.map((item, i) => (
-              <button
-                key={i}
-                className={`px-3 py-1 rounded ${selected === i ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"}`}
-                onClick={() => setSelected(i)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="font-semibold">Order</label>
-              <input type="number" value={selectedItem.order} min={-10} max={10}
-                onChange={e => handleItemChange(selected, "order", Number(e.target.value))}
-                className="block mt-1 w-full rounded border p-2"
-              />
-            </div>
-            <div>
-              <label className="font-semibold">Flex Grow</label>
-              <input type="number" value={selectedItem.grow} min={0} max={10}
-                onChange={e => handleItemChange(selected, "grow", Number(e.target.value))}
-                className="block mt-1 w-full rounded border p-2"
-              />
-            </div>
-            <div>
-              <label className="font-semibold">Flex Shrink</label>
-              <input type="number" value={selectedItem.shrink} min={0} max={10}
-                onChange={e => handleItemChange(selected, "shrink", Number(e.target.value))}
-                className="block mt-1 w-full rounded border p-2"
-              />
-            </div>
-            <div>
-              <label className="font-semibold">Flex Basis</label>
-              <input type="text" value={selectedItem.basis}
-                onChange={e => handleItemChange(selected, "basis", e.target.value)}
-                className="block mt-1 w-full rounded border p-2"
-                placeholder="auto, 100px, 20%"
-              />
-            </div>
-            <div>
-              <label className="font-semibold">Align Self</label>
-              <select value={selectedItem.align}
-                onChange={e => handleItemChange(selected, "align", e.target.value)}
-                className="block mt-1 w-full rounded border p-2"
-              >
-                {alignSelfOptions.map(opt => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="font-semibold">Color</label>
-              <input type="color" value={selectedItem.color}
-                onChange={e => handleItemChange(selected, "color", e.target.value)}
-                className="w-12 h-12 border-2 border-gray-300 rounded"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Preview and CSS */}
-      <div className="flex-1 flex flex-col gap-6">
-        <div>
-          <h2 className="text-xl font-bold mb-2 text-blue-700 dark:text-blue-300">Live Preview</h2>
-          <div style={containerStyle}>
-            {items.map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  ...itemStyle(item),
-                  outlineColor: selected === i ? "#22d3ee" : "transparent",
-                }}
-                onClick={() => setSelected(i)}
-                tabIndex={0}
-                aria-label={item.label}
-              >
-                {item.label}
+          {/* Item Controls */}
+          <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-lg p-6 border border-gray-200/60 dark:border-gray-700/50 space-y-4">
+            <div className="flex justify-between items-center">
+              <h2 className="text-lg font-bold text-blue-600 dark:text-blue-300">Item Controls</h2>
+              <div className="flex gap-2">
+                <button onClick={addItem} disabled={items.length >= 5} className="px-3 py-1 bg-emerald-500 text-white rounded-lg">+ Item</button>
+                <button onClick={() => removeItem(selected)} disabled={items.length <= 1} className="px-3 py-1 bg-rose-500 text-white rounded-lg">− Item</button>
               </div>
-            ))}
+            </div>
+            <div className="flex gap-2 flex-wrap">
+              {items.map((item, i) => (
+                <button key={i} onClick={() => setSelected(i)} className={`px-3 py-1 rounded-lg ${selected === i ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700"}`}>
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <label>
+                Order
+                <input type="number" value={selectedItem.order} onChange={(e) => handleItemChange(selected, "order", Number(e.target.value))} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full" />
+              </label>
+              <label>
+                Grow
+                <input type="number" value={selectedItem.grow} onChange={(e) => handleItemChange(selected, "grow", Number(e.target.value))} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full" />
+              </label>
+              <label>
+                Shrink
+                <input type="number" value={selectedItem.shrink} onChange={(e) => handleItemChange(selected, "shrink", Number(e.target.value))} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full" />
+              </label>
+              <label>
+                Basis
+                <input type="text" value={selectedItem.basis} onChange={(e) => handleItemChange(selected, "basis", e.target.value)} placeholder="auto, 100px, 20%" className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full" />
+              </label>
+              <label>
+                Align Self
+                <select value={selectedItem.align} onChange={(e) => handleItemChange(selected, "align", e.target.value)} className="p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80 w-full">
+                  {alignSelfOptions.map((opt) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+              </label>
+              {/* Fixed Color Picker */}
+              <label className="flex flex-col">
+                Color
+                <div className="flex items-center gap-3">
+                  <input
+                    type="color"
+                    value={selectedItem.color}
+                    onChange={(e) => handleItemChange(selected, "color", e.target.value)}
+                    className="w-10 h-10 rounded-lg border cursor-pointer"
+                  />
+                  <input
+                    type="text"
+                    value={selectedItem.color}
+                    onChange={(e) => handleItemChange(selected, "color", e.target.value)}
+                    className="flex-1 p-2 rounded-xl border bg-white/80 dark:bg-gray-900/80"
+                  />
+                </div>
+              </label>
+            </div>
+          </div>
+
+          {/* CSS Output */}
+          <div className="rounded-xl shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] overflow-x-auto 
+            bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-green-400 font-mono text-sm p-5">
+            <div className="flex justify-between items-center mb-3">
+              <h2 className="font-bold text-blue-600 dark:text-blue-300">Generated CSS</h2>
+              <button
+                onClick={copyCss}
+                className="flex items-center gap-2 px-3 py-1 text-xs bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:scale-105 shadow-md transition"
+              >
+                <Copy size={14} />
+                {copied ? "Copied!" : "Copy"}
+              </button>
+            </div>
+            <pre className="leading-relaxed">
+              {containerCss.split("\n").map((line, idx) => (
+                <div key={idx}>
+                  <span className="text-gray-400 dark:text-gray-500 pr-4 select-none">{idx + 1}</span>
+                  {line}
+                </div>
+              ))}
+              <br />
+              {itemCss.split("\n").map((line, idx) => (
+                <div key={idx}>
+                  <span className="text-gray-400 dark:text-gray-500 pr-4 select-none">{idx + containerCss.split("\n").length + 1}</span>
+                  {line}
+                </div>
+              ))}
+            </pre>
           </div>
         </div>
-        <div>
-          <h2 className="text-xl font-bold mb-2 text-blue-700 dark:text-blue-300">CSS Output</h2>
-          <div className="bg-gray-900 text-green-200 rounded-xl p-4 text-sm font-mono mb-2">
-            <span className="text-yellow-300">{/* Container */}</span>
-            <br />
-            {containerCss.split("\n").map((line, i) => (
-              <span key={i}>{line}<br /></span>
-            ))}
-            <br />
-            <span className="text-yellow-300">{/* {selectedItem.label} */}</span>
-            <br />
-            {itemCss.split("\n").map((line, i) => (
-              <span key={i}>{line}<br /></span>
-            ))}
+
+        {/* RIGHT: Live Preview */}
+        <div className="flex flex-col bg-white/70 dark:bg-gray-800/60 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-6 relative shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">🔍 Live Preview</h2>
           </div>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
+            Adjust flex properties & preview results instantly.
+          </p>
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="flex-1 w-full flex items-center justify-center bg-gradient-to-br from-white/90 to-gray-100 dark:from-gray-800 dark:to-gray-900 border border-dashed border-gray-400 dark:border-gray-600 rounded-xl p-6 shadow-inner min-h-[360px]"
+          >
+            <div style={containerStyle} className="transition-all duration-500 w-full h-full">
+              {items.map((item, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.05 }}
+                  style={{ ...itemStyle(item), outline: selected === i ? "3px solid #22d3ee" : "none" }}
+                  onClick={() => setSelected(i)}
+                >
+                  {item.label}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>
