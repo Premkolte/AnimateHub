@@ -41,7 +41,10 @@ import FavoritesPage from "./Pages/Favorites/FavoritesPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from "./Pages/Dashboard/MySnippet";
+
 import ComponentsPage from "./Pages/Components/ComponentsPage";
+import IntroductionPage from "./Pages/Components/staticPages/IntroductionPage";
+import InstallationPage from "./Pages/Components/staticPages/InstallationPage";
 
 import Playground from "./Pages/Playground/Code_Playground";
 import FramerPlayground from "./Pages/Playground/FramerPlayground";
@@ -58,6 +61,7 @@ import ColorGradientPlayground from "./Pages/Playground/ColorGradientPlayground"
 import TailwindPlayground from "./Pages/Playground/TailwindPlayground";
 import SVGPlayground from "./Pages/Playground/SVGPlayground";
 import FontPlayground from "./Pages/Playground/FontPlayground";
+import FlexboxPlayground from "./Pages/Playground/FlexboxPlayground";
 
 
 // Layout component that includes Navbar, Footer and an Outlet
@@ -88,7 +92,10 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<HomePage />} />
-            <Route path="/components" element={<ComponentsPage />} />
+            <Route path="/components" element={<ComponentsPage />}>
+              <Route path="introduction" element={<IntroductionPage />} />
+              <Route path="installation" element={<InstallationPage />} />
+            </Route>
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/about" element={<AboutUs />} />
             <Route
@@ -103,7 +110,12 @@ function App() {
             <Route path="/ColorGradientPlayground" element={<ColorGradientPlayground />} />
             <Route path="/TailwindPlayground" element={<TailwindPlayground />} />
             <Route path="/SVGPlayground" element={<SVGPlayground />} />
+
             <Route path="/FontPlayground" element={<FontPlayground/>}/>
+            <Route path="/flexboxPlayground" element={<FlexboxPlayground/>}/>
+
+
+
 
 
 

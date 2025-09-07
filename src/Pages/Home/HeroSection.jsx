@@ -83,7 +83,7 @@ const HeroSection = ({ currentUser }) => {
       </div>
 
       <motion.div
-        className="text-center max-w-3xl mx-auto px-4 pt-28 pb-20" // resolved padding
+        className="text-center max-w-3xl mx-auto px-4 pt-28 pb-20"
         initial="hidden"
         animate="show"
         variants={container}
@@ -255,3 +255,4 @@ const HeroSection = ({ currentUser }) => {
 };
 
 export default HeroSection;
+
