@@ -383,18 +383,8 @@ const filteredContributors = useMemo(() => {
           </div>
         </div>
         {/* Search + Sort Controls */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-          {/* Search Bar */}
-          <input
-            type="text"
-            placeholder="Search contributor..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full sm:w-1/2 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-          />
-
+        <div className="flex flex-col sm:flex-row justify-end items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
           {/* Sort Dropdown */}
-
           <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
         </div>
 

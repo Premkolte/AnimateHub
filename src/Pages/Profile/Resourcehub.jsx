@@ -1,10 +1,13 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+gsap.registerPlugin(ScrollTrigger);
 import Fuse from "fuse.js"; // For fuzzy search
 import {
   Zap,
   Heart,
-  Palette,
   Sparkles,
   Hash,
   Star,
@@ -18,7 +21,6 @@ import {
   Play,
   Wand2,
   Shapes,
-  Code,
   Paintbrush,
   Camera,
   Download,
@@ -190,6 +192,7 @@ const cardColors = {
 
 const Resourcehub = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const cardsRef = useRef([]);
 
   // Configure Fuse.js for fuzzy search
   const fuse = useMemo(
@@ -198,7 +201,7 @@ const Resourcehub = () => {
         keys: ["name", "category", "description"],
         threshold: 0.3,
       }),
-    [resources]
+    []
   );
 
   // Filter resources with fuzzy search and highlight matches
@@ -207,6 +210,33 @@ const Resourcehub = () => {
     const results = fuse.search(searchTerm);
     return results.map((result) => result.item);
   }, [searchTerm, fuse]);
+
+  // GSAP scroll trigger animation for cards
+  useGSAP(() => {
+    if (!cardsRef.current) return;
+    cardsRef.current.forEach((el) => {
+      if (!el) return;
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            end: "top 80%",
+            scrub:2
+          },
+        }
+      );
+    });
+    return () => {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
+  }, [filteredResources]);
 
   // Function to highlight matched search terms
   const highlightText = (text, query) => {
@@ -225,16 +255,25 @@ const Resourcehub = () => {
 
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-screen">
-      {/* Main heading */}
-      <h1 className="text-5xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-800 mt-10 mb-6">
+      {/* Main heading with Framer Motion */}
+      <motion.h1
+        className="text-5xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-800 mt-10 mb-6"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
         ✨ Resources Hub ✨
-      </h1>
+      </motion.h1>
 
-      {/* Subheading */}
-      <p className="text-center mb-8 text-gray-600 dark:text-gray-400 text-lg">
-        A curated collection of animation, icon, UI libraries & tools for
-        developers.
-      </p>
+      {/* Subheading with Framer Motion */}
+      <motion.p
+        className="text-center mb-8 text-gray-600 dark:text-gray-400 text-lg"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+      >
+        A curated collection of animation, icon, UI libraries & tools for developers.
+      </motion.p>
 
       {/* Search Bar */}
       <div className="relative max-w-md mx-auto mb-12">
@@ -262,6 +301,7 @@ const Resourcehub = () => {
             <motion.div
               key={index}
               whileHover={{ y: -8, scale: 1.02 }}
+              ref={el => (cardsRef.current[index] = el)}
               className={`relative flex flex-col bg-gradient-to-br ${cardColors.gradient} backdrop-blur-xl border-2 ${cardColors.border} p-6 sm:p-8 rounded-3xl w-full min-h-[280px] transition-all duration-500 ease-out group overflow-hidden shadow-lg hover:shadow-2xl`}
             >
               {/* Decorative overlay */}
