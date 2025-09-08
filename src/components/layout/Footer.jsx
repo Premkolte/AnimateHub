@@ -46,6 +46,14 @@ const socialLinks = [
   },
 ];
 
+const COLORS = {
+  Instagram: "hover:text-pink-500",
+  LinkedIn: "hover:text-blue-500",
+  X: "hover:text-gray-500",
+  GitHub: "hover:text-gray-800",
+};
+
+
 const footerLinks = [
   {
     title: "Resources",
@@ -125,19 +133,20 @@ const Footer = () => {
               life!
             </p>
             <div className="flex space-x-4 mt-6">
-              {socialLinks.map(({ name, href, icon: Icon, color }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={name}
-                  className={`text-gray-500 transition-colors duration-200 ${color}`}
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
+  {socialLinks.map(({ name, href, icon: Icon, color }) => (
+    <a
+      key={name}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={name}
+      className={`text-gray-500 transition-colors duration-200 ${color}`}
+    >
+      <Icon className="w-6 h-6" /> {/* increased from w-5 h-5 */}
+    </a>
+  ))}
+</div>
+
           </div>
 
           {/* Footer Links */}
@@ -145,18 +154,19 @@ const Footer = () => {
             <div key={section.title}>
               <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
               <ul className="space-y-3 text-sm">
-                {section.links.map(({ name, href, icon: Icon, color }) => (
-                  <li key={name}>
-                    <Link
-                      to={href}
-                      className="flex items-center space-x-2 hover:text-primary-600 transition-all group"
-                    >
-                      <Icon className={`w-4 h-4 ${color}`} />
-                      <span>{name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+  {section.links.map(({ name, href, icon: Icon, color }) => (
+    <li key={name}>
+      <Link
+        to={href}
+        className="flex items-center space-x-2 hover:text-primary-600 transition-all group"
+      >
+        <Icon className={`w-5 h-5 ${color}`} /> {/* increased from w-4 h-4 */}
+        <span>{name}</span>
+      </Link>
+    </li>
+  ))}
+</ul>
+
             </div>
           ))}
         </div>

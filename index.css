@@ -44,7 +44,6 @@
     content: '';
     @apply absolute left-0 bottom-0 w-0 h-0.5 bg-green-600 transition-all duration-300;
   }
-
   .nav-link:hover::after {
     @apply w-full;
   }
@@ -60,4 +59,20 @@
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
+}
+
+.accordion-button {
+    background-color: #007BFF; /* Blue background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;   /* Slightly curved corners */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.accordion-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
 }

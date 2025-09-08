@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { FaTrophy, FaStar, FaCode, FaUsers, FaGithub } from "react-icons/fa";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
-import { gsap } from 'gsap'
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import SortDropdown from "./SortDropdown";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 const GITHUB_REPO = "Premkolte/AnimateHub";
 const TOKEN = import.meta.env.VITE_GITHUB_TOKEN || "YOUR_GITHUB_TOKEN";
@@ -96,6 +98,20 @@ export default function LeaderBoard() {
     totalContributors: 0,
     totalPoints: 0,
   });
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [sortBy, setSortBy] = useState("points");
+const filteredContributors = useMemo(() => {
+  return contributors
+    .filter((c) => c.username.toLowerCase().includes(searchTerm.toLowerCase()))
+    .sort((a, b) => {
+      if (sortBy === "points") return b.points - a.points;
+      if (sortBy === "prs") return b.prs - a.prs;
+      return 0;
+    });
+}, [contributors, searchTerm, sortBy]);
+
+
 
   useEffect(() => {
     const fetchContributorsWithPoints = async () => {
@@ -187,27 +203,55 @@ export default function LeaderBoard() {
   }, [contributors]);
 
   // Pagination variables and states
-
   const PAGE_SIZE = 10; // how many contributors per page
-
   const [currentPage, setCurrentPage] = useState(1);
 
 
   // Calculate which contributors to show on current page
+  // Calculate which contributors to show on current page (after search & sort)
   const indexOfLast = currentPage * PAGE_SIZE;
   const indexOfFirst = indexOfLast - PAGE_SIZE;
-  const currentContributors = contributors.slice(indexOfFirst, indexOfLast);
+  const currentContributors = filteredContributors.slice(
+    indexOfFirst,
+    indexOfLast
+  );
 
-  const totalPages = Math.ceil(contributors.length / PAGE_SIZE);
+  const totalPages = Math.ceil(filteredContributors.length / PAGE_SIZE);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, sortBy]);
+
+
+
 
   // animations.js
   const smoothY = {
     initial: { y: 40, opacity: 0 },
     animate: { y: 0, opacity: 1 },
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: 0.8, ease: "easeOut" },
   };
 
   useGSAP(() => {
+
+    const triggers = [];
+
+    gsap.utils.toArray(".card").forEach((el) => {
+      const anim = gsap.fromTo(
+        el,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            end: "top 85%",
+            scrub: 1, // smooth scrub effect
+          },
+        }
+      );
+
   const triggers = [];
 
   gsap.utils.toArray(".card").forEach((el) => {
@@ -220,8 +264,8 @@ export default function LeaderBoard() {
         ease: "power3.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 90%",
-          end: "top 85%",
+          start: "top 95%",
+          end: "top 90%",
           scrub: 1,         // smooth scrub effect
         },
       }
@@ -230,17 +274,20 @@ export default function LeaderBoard() {
     triggers.push(anim.scrollTrigger);
   });
 
-  // ✅ Cleanup on unmount
-  return () => {
-    triggers.forEach((st) => st.kill());
-  };
-}, []);
 
+      triggers.push(anim.scrollTrigger);
+    });
+
+    // ✅ Cleanup on unmount
+    return () => {
+      triggers.forEach((st) => st.kill());
+    };
+  }, []);
 
   const bounceHover = {
-    onMouseEnter: e => e.currentTarget.style.transform = "scale(1.07)",
-    onMouseLeave: e => e.currentTarget.style.transform = "scale(1)",
-    style: { transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)" }
+    onMouseEnter: (e) => (e.currentTarget.style.transform = "scale(1.07)"),
+    onMouseLeave: (e) => (e.currentTarget.style.transform = "scale(1)"),
+    style: { transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)" },
   };
 
   return (
@@ -253,18 +300,41 @@ export default function LeaderBoard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 {...bounceHover} className="text-2xl sm:text-4xl font-bold text-primary-600 dark:text-accent-500 mb-2 sm:mb-4">
+          <h1
+            {...bounceHover}
+            className="text-2xl sm:text-4xl font-bold text-primary-600 dark:text-accent-500 mb-2 sm:mb-4"
+          >
             GSSoC'25 Leaderboard
           </h1>
-          <p {...bounceHover} className="text-sm sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p
+            {...bounceHover}
+            className="text-sm sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+          >
             Celebrating the amazing contributions from GSSoC'25 participants.
             Join us in building something incredible together!
           </p>
         </motion.div>
 
+        {/* Search Input */}
+        <div className="flex justify-center mb-6">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={e => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); // Reset to first page on search
+            }}
+            placeholder="Search contributors by username..."
+            className="w-full max-w-xs px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-secondary-800 dark:text-white"
+          />
+        </div>
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 mb-8 sm:mb-12 px-2">
-          <div {...smoothY} className="bg-white dark:bg-secondary-800 p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+          <div
+            {...smoothY}
+            className="bg-white dark:bg-secondary-800 p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
+          >
             <div className="flex items-center">
               <div className="p-2 sm:p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mr-3 sm:mr-4 flex-shrink-0">
                 <FaUsers className="text-lg sm:text-2xl" />
@@ -312,6 +382,21 @@ export default function LeaderBoard() {
             </div>
           </div>
         </div>
+        {/* Search + Sort Controls */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+          {/* Search Bar */}
+          <input
+            type="text"
+            placeholder="Search contributor..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full sm:w-1/2 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+          />
+
+          {/* Sort Dropdown */}
+
+          <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+        </div>
 
         {loading ? (
           <SkeletonLoader />
@@ -349,10 +434,10 @@ export default function LeaderBoard() {
                           index === 0
                             ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30"
                             : index === 1
-                            ? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300"
-                            : index === 2
-                            ? "bg-amber-100 text-amber-600 dark:bg-amber-900/30"
-                            : "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400"
+                              ? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                              : index === 2
+                                ? "bg-amber-100 text-amber-600 dark:bg-amber-900/30"
+                                : "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400"
                         }`}
                       >
                         {indexOfFirst + index + 1}
@@ -413,10 +498,10 @@ export default function LeaderBoard() {
                           index === 0
                             ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30"
                             : index === 1
-                            ? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300"
-                            : index === 2
-                            ? "bg-amber-100 text-amber-600 dark:bg-amber-900/30"
-                            : "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400"
+                              ? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                              : index === 2
+                                ? "bg-amber-100 text-amber-600 dark:bg-amber-900/30"
+                                : "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400"
                         }`}
                       >
                         <span className="font-medium">
@@ -473,7 +558,6 @@ export default function LeaderBoard() {
                 </motion.div>
               ))}
             </div>
-            
 
             {/* Pagination Controls */}
 
@@ -487,8 +571,6 @@ export default function LeaderBoard() {
                 {/* ChevronLeft Icon for Previous */}
                 <ChevronLeft size={16} />
               </button>
-
-
 
               {/* Page Numbers Section */}
               <div className="flex justify-center gap-2 mt-4">
@@ -504,15 +586,9 @@ export default function LeaderBoard() {
                           : "bg-gray-200 text-black" // Inactive page style
                       }`}
                     >
-
-
-
                       {/* Display the page number */}
                       {i + 1}
                     </button>
-
-
-
                   )
                 )}
               </div>
@@ -523,16 +599,10 @@ export default function LeaderBoard() {
                 onClick={() => setCurrentPage((p) => p + 1)} // Move forward one page when clicked
                 className="px-3 py-1 rounded-md bg-gray-50 dark:bg-gray-700 text-sm disabled:opacity-50 flex items-center justify-center mt-5"
               >
-
-
-
                 {/* ChevronRight Icon for Next */}
                 <ChevronRight size={16} />
               </button>
             </div>
-
-
-
 
             {/* CTA Footer */}
             <div className="bg-gray-50 dark:bg-gray-800/50 px-4 sm:px-6 py-4 text-center border-t border-gray-100 dark:border-gray-700">
