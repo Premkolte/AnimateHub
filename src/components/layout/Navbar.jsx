@@ -12,7 +12,7 @@ import {
 import { FiCode, FiLayers, FiType } from "react-icons/fi";
 import { SiFramer, SiTailwindcss } from "react-icons/si";
 import { MdBrush } from "react-icons/md"; // replacement for MdGradient
-import { FaHeart, FaCss3Alt } from "react-icons/fa";
+import { FaHeart, FaCss3Alt ,FaThLarge} from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
@@ -509,6 +509,33 @@ const Navbar = () => {
                               Flexbox Ground
                             </div>
                           </Link>
+                          <Link
+  to="/gridPlayground"
+  onClick={() => {
+    closeMenu();
+    setOpenDropdown(false);
+  }}
+  className={`
+    relative flex items-center px-5 py-2 rounded-xl
+    transition-all duration-300 ease-in-out
+    group
+    before:absolute before:left-0 before:right-0 before:-bottom-1
+    before:rounded-full
+    before:bg-gradient-to-r before:from-green-300 before:via-green-200 before:to-green-300
+    dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+    before:opacity-30
+    ${location.pathname === "/gridPlayground"
+      ? "bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900/30 dark:to-teal-900/30 text-green-600 dark:text-teal-400"
+      : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-green-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+    }
+  `}
+>
+  <div className="flex items-center gap-2">
+    <FaThLarge className="text-green-500 dark:text-gray-300" />
+    Grid Ground
+  </div>
+</Link>
+
                         </div>
                       )}
 
