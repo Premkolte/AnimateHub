@@ -111,8 +111,8 @@ function App() {
             <Route path="/TailwindPlayground" element={<TailwindPlayground />} />
             <Route path="/SVGPlayground" element={<SVGPlayground />} />
 
-            <Route path="/FontPlayground" element={<FontPlayground/>}/>
-            <Route path="/flexboxPlayground" element={<FlexboxPlayground/>}/>
+            <Route path="/FontPlayground" element={<FontPlayground />} />
+            <Route path="/flexboxPlayground" element={<FlexboxPlayground />} />
 
 
 
