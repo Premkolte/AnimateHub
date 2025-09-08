@@ -68,7 +68,7 @@ const NewNavbar = () => {
                         </Link>
                     </div>
 
-                    <div className="hidden md:flex items-center space-x-1">
+                    <div className="hidden lg:flex items-center space-x-1">
                         {navLinks.map((item, index) => (
                             <div
                                 key={index}
@@ -126,36 +126,35 @@ const NewNavbar = () => {
                     <div className='flex justify-center items-center space-x-4'>
                         <DarkModeToggle />
                         <NavbarProfile />
-                    </div>
 
-
-
-                    {/* Mobile menu button */}
-                    <div className="md:hidden flex items-center">
-                        <button
-                            onClick={toggleMobileMenu}
-                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition-colors"
-                            aria-expanded={isMobileMenuOpen}
-                            aria-label="Toggle navigation"
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            <svg
-                                className="block h-6 w-6"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                aria-hidden="true"
+                        {/* Mobile menu button */}
+                        <div className="lg:hidden flex items-center">
+                            <button
+                                onClick={toggleMobileMenu}
+                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition-colors"
+                                aria-expanded={isMobileMenuOpen}
+                                aria-label="Toggle navigation"
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-                                />
-                            </svg>
-                        </button>
+                                <span className="sr-only">Open main menu</span>
+                                <svg
+                                    className="block h-6 w-6"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                                    />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
