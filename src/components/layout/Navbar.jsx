@@ -16,7 +16,7 @@ import { FaHeart, FaCss3Alt ,FaThLarge} from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
-import "../layout/Navbar.css";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
