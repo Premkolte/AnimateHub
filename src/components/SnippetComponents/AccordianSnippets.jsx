@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import Modal from "../UI/Modal";
 import { accordionSnippets } from "./Snippets/Accordion";
 import FavoriteButton from "../../Pages/Favorites/FavoriteButton";
@@ -245,16 +246,17 @@ const AccordianSnippets = () => {
           key={index}
           className="
             p-8 pt-14 
-          bg-[#dbeafe]
-          dark:bg-secondary-800 
-          text-secondary-900 dark:text-white 
+            min-h-[500px]   /* 🔥 Fix juggling by locking min height */
+            bg-[#dbeafe]
+            dark:bg-secondary-800 
+            text-secondary-900 dark:text-white 
             rounded-lg 
             border border-blue-300 dark:border-[#a855f7]
             shadow-lg shadow-[0_4px_20px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] 
             flex flex-col items-center justify-evenly gap-10 relative 
             text-sm
           "
-              >
+        >
           {/* Favorite Button */}
           <div className="absolute top-4 right-4">
             <FavoriteButton
@@ -276,28 +278,27 @@ const AccordianSnippets = () => {
           <div className="w-full">{renderAccordion(index)}</div>
 
           <div className="flex flex-col gap-4 w-full">
-            <button
-              className="w-full text-white text-md py-3 px-6 rounded-full shadow-md bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none"
-              onClick={() =>
-                handleShowModal(
-                  accordionObject.jsxCode,
-                  accordionObject.cssCode
-                )
-              }
-            >
-              Show CSS
-            </button>
-            <button
-              className="w-full text-secondary-900 dark:text-white border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-700 text-md py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-200"
-              onClick={() =>
-                handleShowModal(
-                  accordionObject.jsxCode,
-                  accordionObject.cssCode
-                )
-              }
-            >
-              React Snippet
-            </button>
+         <button
+    className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5 px-4 rounded transition-colors duration-200"
+    onClick={() =>
+      handleShowModal("", accordionObject.cssCode) // Show only CSS
+    }
+  >
+    Show CSS
+  </button>
+
+  {/* React Snippet Button */}
+  <button
+    className="w-full bg-white text-gray-800 font-semibold py-2.5 px-4 rounded shadow hover:shadow-md transition-all duration-200"
+    onClick={() =>
+      handleShowModal(
+        accordionObject.jsxCode || accordionObject.reactCode,
+        ""
+      ) // Show React/JSX as plain code
+    }
+  >
+    React Snippet
+  </button>
           </div>
         </div>
       ))}
