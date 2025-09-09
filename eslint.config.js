@@ -36,7 +36,7 @@ export default [
   'warn',
   {
     allowConstantExport: true,
-    allowLocalVars: false, // stricter enforcement for cleaner exports
+    allowLocalVars: false, // enforce cleaner exports
   },
 ],
     },
