@@ -25,6 +25,50 @@
            hover:bg-green-700 hover:shadow-lg active:scale-95 transition-all duration-300 ease-in-out;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  /* Fade-in animations: shorter and smaller movement */
+  .fade-in {
+    animation-duration: 0.2s !important;
+    transform: translateY(2px) !important;
+  }
+
+  /* Buttons and accordion: reduce hover effects */
+  button,
+  .accordion-button {
+    transition-duration: 0.1s !important;
+  }
+
+  button:hover,
+  .accordion-button:hover {
+    transform: scale(1) !important;
+    box-shadow: none !important;
+  }
+
+  /* Links */
+  a,
+  .nav-link {
+    transition-duration: 0.1s !important;
+  }
+
+  /* Cards */
+  .card {
+    transition-duration: 0.1s !important;
+  }
+
+  .card:hover {
+    transform: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; /* subtle shadow */
+  }
+
+  /* Nav link underline */
+  .nav-link::after {
+    transition: none !important;
+  }
+
+  .nav-link:hover::after {
+    width: 100% !important; /* still show underline but no animation */
+  }
+}
 
 /* Components */
 @layer components {
