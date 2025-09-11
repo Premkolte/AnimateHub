@@ -8,21 +8,14 @@ export const createBlog = asyncHandler(async (req, res) => {
   const { title, excerpt, content, category, tags } = req.body;
   const userId = req.user._id;
 
- 
   if (!title?.trim() || !excerpt?.trim() || !content?.trim() || !category?.trim()) {
     throw new ApiError(400, "Title, excerpt, content, and category are required");
   }
+  if (!req.file) throw new ApiError(400, "Blog image is required");
 
-  if (!req.file) {
-    throw new ApiError(400, "Blog image is required");
-  }
-
-  let imageUrl = "";
-
+  let imageUrl;
   try {
     const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
-
-    // Upload to Cloudinary
     const result = await cloudinary.uploader.upload(base64Image, {
       folder: "animatehub/blog-images",
       width: 1200,
@@ -32,7 +25,6 @@ export const createBlog = asyncHandler(async (req, res) => {
       quality: "auto",
       fetch_format: "auto",
     });
-
     imageUrl = result.secure_url;
   } catch (error) {
     console.error("Error uploading blog image:", error);
@@ -46,12 +38,10 @@ export const createBlog = asyncHandler(async (req, res) => {
     author: userId,
     imageUrl,
     category: category.trim(),
-    tags: tags?.map((tag) => tag.trim()) || [],
+    tags: tags?.map(tag => tag.trim()) || [],
   });
 
-  if (!newBlog) {
-    throw new ApiError(500, "Failed to create blog");
-  }
+  if (!newBlog) throw new ApiError(500, "Failed to create blog");
 
   return res
     .status(201)
@@ -60,12 +50,9 @@ export const createBlog = asyncHandler(async (req, res) => {
 
 export const getBlogById = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  const blog = await Blog.findById(id).populate("author", "name email avatarUrl");
 
-  const blog = await Blog.findById(id).populate("author", "name email avatarUrl ");
-
-  if (!blog) {
-    throw new ApiError(404, "Blog not found");
-  }
+  if (!blog) throw new ApiError(404, "Blog not found");
 
   return res
     .status(200)
@@ -74,14 +61,9 @@ export const getBlogById = asyncHandler(async (req, res) => {
 
 export const deleteBlog = asyncHandler(async (req, res) => {
   const { id } = req.params;
-
   const blog = await Blog.findById(id);
 
-  if (!blog) {
-    throw new ApiError(404, "Blog not found");
-  }
-
-  // Author check (sirf jisne create kiya, wahi delete kar sake)
+  if (!blog) throw new ApiError(404, "Blog not found");
   if (blog.author.toString() !== req.user._id.toString()) {
     throw new ApiError(403, "You are not authorized to delete this blog");
   }
@@ -94,13 +76,9 @@ export const deleteBlog = asyncHandler(async (req, res) => {
 });
 
 export const getUserBlogs = asyncHandler(async (req, res) => {
-  const userId = req.user._id;
+  const blogs = await Blog.find({ author: req.user._id }).sort({ createdAt: -1 });
 
-  const blogs = await Blog.find({ author: userId }).sort({ createdAt: -1 });
-
-  if (!blogs || blogs.length === 0) {
-    throw new ApiError(404, "No blogs found for this user");
-  }
+  if (!blogs?.length) throw new ApiError(404, "No blogs found for this user");
 
   return res
     .status(200)
@@ -113,8 +91,6 @@ export const updateBlogById = asyncHandler(async (req, res) => {
 
   const blog = await Blog.findById(id);
   if (!blog) throw new ApiError(404, "Blog not found");
-
-  // Author check
   if (blog.author.toString() !== req.user._id.toString()) {
     throw new ApiError(403, "You are not authorized to update this blog");
   }
@@ -126,22 +102,15 @@ export const updateBlogById = asyncHandler(async (req, res) => {
   if (category) updateData.category = category.trim();
   if (tags) updateData.tags = tags.map(tag => tag.trim());
 
-  // Optional image update
   if (req.file) {
     try {
-      // Delete old image from Cloudinary if exists
       if (blog.imageUrl) {
         const publicIdMatch = blog.imageUrl.match(/\/([^/]+)\.webp$/);
         if (publicIdMatch) {
-          const publicId = `animatehub/blog-images/${publicIdMatch[1]}`;
-          await cloudinary.uploader.destroy(publicId);
+          await cloudinary.uploader.destroy(`animatehub/blog-images/${publicIdMatch[1]}`);
         }
       }
-
-      // 2️ Upload new image
-      const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString(
-        "base64"
-      )}`;
+      const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
       const result = await cloudinary.uploader.upload(base64Image, {
         folder: "animatehub/blog-images",
         width: 1200,
@@ -151,7 +120,6 @@ export const updateBlogById = asyncHandler(async (req, res) => {
         quality: "auto",
         fetch_format: "auto",
       });
-
       updateData.imageUrl = result.secure_url;
     } catch (error) {
       console.error("Error uploading/deleting blog image:", error);
