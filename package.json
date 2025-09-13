@@ -16,7 +16,7 @@
   "dependencies": {
     "@babel/standalone": "^7.26.10",
     "@clerk/clerk-react": "^5.38.1",
-    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
