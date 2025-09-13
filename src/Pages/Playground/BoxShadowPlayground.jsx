@@ -72,7 +72,8 @@ export default function BoxShadowPlayground() {
         .replace(/inset/i, "")
         .trim()
         .split(/\s+/)
-        .map((n) => parseFloat(n));
+        .map((n) => parseFloat(n))
+        .filter((n) => !isNaN(n));
       const [x = 0, y = 0, blur = 0, spread = 0] = nums;
       return { id: Date.now() + i, inset, x, y, blur, spread, color };
     });
