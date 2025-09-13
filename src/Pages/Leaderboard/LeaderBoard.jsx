@@ -101,17 +101,17 @@ export default function LeaderBoard() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [sortBy, setSortBy] = useState("points");
-const filteredContributors = useMemo(() => {
-  return contributors
-    .filter((c) => c.username.toLowerCase().includes(searchTerm.toLowerCase()))
-    .sort((a, b) => {
-      if (sortBy === "points") return b.points - a.points;
-      if (sortBy === "prs") return b.prs - a.prs;
-      return 0;
-    });
-}, [contributors, searchTerm, sortBy]);
-
-
+  const filteredContributors = useMemo(() => {
+    return contributors
+      .filter((c) =>
+        c.username.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .sort((a, b) => {
+        if (sortBy === "points") return b.points - a.points;
+        if (sortBy === "prs") return b.prs - a.prs;
+        return 0;
+      });
+  }, [contributors, searchTerm, sortBy]);
 
   useEffect(() => {
     const fetchContributorsWithPoints = async () => {
@@ -206,7 +206,6 @@ const filteredContributors = useMemo(() => {
   const PAGE_SIZE = 10; // how many contributors per page
   const [currentPage, setCurrentPage] = useState(1);
 
-
   // Calculate which contributors to show on current page
   // Calculate which contributors to show on current page (after search & sort)
   const indexOfLast = currentPage * PAGE_SIZE;
@@ -221,9 +220,6 @@ const filteredContributors = useMemo(() => {
     setCurrentPage(1);
   }, [searchTerm, sortBy]);
 
-
-
-
   // animations.js
   const smoothY = {
     initial: { y: 40, opacity: 0 },
@@ -232,7 +228,6 @@ const filteredContributors = useMemo(() => {
   };
 
   useGSAP(() => {
-
     const triggers = [];
 
     gsap.utils.toArray(".card").forEach((el) => {
@@ -252,28 +247,27 @@ const filteredContributors = useMemo(() => {
         }
       );
 
-  const triggers = [];
+      const triggers = [];
 
-  gsap.utils.toArray(".card").forEach((el) => {
-    const anim = gsap.fromTo(
-      el,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 95%",
-          end: "top 90%",
-          scrub: 1,         // smooth scrub effect
-        },
-      }
-    );
+      gsap.utils.toArray(".card").forEach((el) => {
+        const anim = gsap.fromTo(
+          el,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 95%",
+              end: "top 90%",
+              scrub: 1, // smooth scrub effect
+            },
+          }
+        );
 
-    triggers.push(anim.scrollTrigger);
-  });
-
+        triggers.push(anim.scrollTrigger);
+      });
 
       triggers.push(anim.scrollTrigger);
     });
@@ -320,7 +314,7 @@ const filteredContributors = useMemo(() => {
           <input
             type="text"
             value={searchTerm}
-            onChange={e => {
+            onChange={(e) => {
               setSearchTerm(e.target.value);
               setCurrentPage(1); // Reset to first page on search
             }}
@@ -563,25 +557,31 @@ const filteredContributors = useMemo(() => {
               </button>
 
               {/* Page Numbers Section */}
-              <div className="flex justify-center gap-2 mt-4">
-                {Array.from(
-                  { length: Math.ceil(contributors.length / PAGE_SIZE) }, // Create an array with total number of pages
-                  (_, i) => (
-                    <button
-                      key={i + 1} // Unique key for each page button
-                      onClick={() => setCurrentPage(i + 1)} // Set page number on click
-                      className={`px-3 py-1 rounded ${
-                        currentPage === i + 1
-                          ? "bg-blue-500 text-white" // Highlight the active page
-                          : "bg-gray-200 text-black" // Inactive page style
-                      }`}
-                    >
-                      {/* Display the page number */}
-                      {i + 1}
-                    </button>
-                  )
-                )}
-              </div>
+              {filteredContributors.length > 0 && (
+                <div className="flex justify-center gap-2 mt-4">
+                  {Array.from(
+                    {
+                      length: Math.ceil(
+                        filteredContributors.length / PAGE_SIZE
+                      ),
+                    }, // Create an array with total number of pages
+                    (_, i) => (
+                      <button
+                        key={i + 1} // Unique key for each page button
+                        onClick={() => setCurrentPage(i + 1)} // Set page number on click
+                        className={`px-3 py-1 rounded ${
+                          currentPage === i + 1
+                            ? "bg-blue-500 text-white" // Highlight the active page
+                            : "bg-gray-200 text-black" // Inactive page style
+                        }`}
+                      >
+                        {/* Display the page number */}
+                        {i + 1}
+                      </button>
+                    )
+                  )}
+                </div>
+              )}
 
               {/* Right Arrow Button (Next Page) */}
               <button
