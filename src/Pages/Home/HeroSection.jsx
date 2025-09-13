@@ -97,7 +97,7 @@ const HeroSection = ({ currentUser }) => {
         </motion.div>
 
         <motion.h1
-          className="text-4xl md:text-6xl mb-6 font-bold"
+          className="text-4xl md:text-6xl mb-6 font-bold text-secondary-900 dark:text-white"
           variants={{
             hidden: { opacity: 0, y: 20 },
             show: {
@@ -114,7 +114,7 @@ const HeroSection = ({ currentUser }) => {
           Animation UI Library <br /> for Developers
         </motion.h1>
 
-        <motion.p className="text-md mb-10" variants={item}>
+        <motion.p className="text-md mb-10 text-secondary-900 dark:text-white" variants={item}>
           Open-sourced components made with
           <br />
           <span className="font-bold">HTML + CSS</span> &{" "}
