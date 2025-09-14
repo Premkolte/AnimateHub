@@ -927,7 +927,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Navigation Links */}
-          <div className="flex-1 px-6 py-4 space-y-2 overflow-y-auto">
+          <div className="flex-1 px-6 py-4 space-y-2 overflow-y-auto text-blue-600 dark:text-purple-400">
             {navLinks.map((item, index) => {
               // Skip the individual playground items
               if (item === "Playground" || item === "AnimationPlayground")
