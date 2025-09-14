@@ -1,21 +1,32 @@
+
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import Comment from "../models/comment.model.js";
 import Blog from "../models/blog.model.js";
 
+// Helper: check blog existence
+const ensureBlogExists = async (blogId) => {
+  const blog = await Blog.findById(blogId);
+  if (!blog) throw new ApiError(404, "Blog not found");
+  return blog;
+};
+
+// Helper: check comment existence (scoped to blog)
+const ensureCommentExists = async (commentId, blogId) => {
+  const comment = await Comment.findOne({ _id: commentId, blog: blogId });
+  if (!comment) throw new ApiError(404, "Comment not found");
+  return comment;
+};
+
 export const addComment = asyncHandler(async (req, res) => {
   const { blogId } = req.params;
   const { text } = req.body;
   const userId = req.user._id;
 
-  if (!text?.trim()) {
-    throw new ApiError(400, "Comment text is required");
-  }
+  if (!text?.trim()) throw new ApiError(400, "Comment text is required");
 
-  // check blog exists
-  const blog = await Blog.findById(blogId);
-  if (!blog) throw new ApiError(404, "Blog not found");
+  await ensureBlogExists(blogId);
 
   const comment = await Comment.create({
     blog: blogId,
@@ -32,25 +43,16 @@ export const deleteComment = asyncHandler(async (req, res) => {
   const { blogId, commentId } = req.params;
   const userId = req.user._id;
 
-  const comment = await Comment.findOne({ _id: commentId, blog: blogId });
-  if (!comment) {
-    throw new ApiError(404, "Comment not found");
-  }
+  const [comment, blog] = await Promise.all([
+    ensureCommentExists(commentId, blogId),
+    ensureBlogExists(blogId),
+  ]);
 
-  const blog = await Blog.findById(blogId);
-  if (!blog) {
-    throw new ApiError(404, "Blog not found");
-  }
-
-  // only owner of comment OR author of blog can delete
-  if (
-    comment.user.toString() !== userId.toString() &&
-    blog.author.toString() !== userId.toString()
-  ) {
-    throw new ApiError(
-      403,
-      "You are not authorized to delete this comment"
-    );
+  // Only owner of comment OR author of blog can delete
+  const isOwner = comment.user.toString() === userId.toString();
+  const isBlogAuthor = blog.author.toString() === userId.toString();
+  if (!isOwner && !isBlogAuthor) {
+    throw new ApiError(403, "You are not authorized to delete this comment");
   }
 
   await comment.deleteOne();
@@ -60,28 +62,17 @@ export const deleteComment = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "Comment deleted successfully"));
 });
 
-
 export const updateComment = asyncHandler(async (req, res) => {
   const { blogId, commentId } = req.params;
   const { text } = req.body;
   const userId = req.user._id;
 
-  if (!text?.trim()) {
-    throw new ApiError(400, "Updated text is required");
-  }
+  if (!text?.trim()) throw new ApiError(400, "Updated text is required");
 
-  // check blog exists
-  const blog = await Blog.findById(blogId);
-  if (!blog) {
-    throw new ApiError(404, "Blog not found");
-  }
+  await ensureBlogExists(blogId);
+  const comment = await ensureCommentExists(commentId, blogId);
 
-  const comment = await Comment.findOne({ _id: commentId, blog: blogId });
-  if (!comment) {
-    throw new ApiError(404, "Comment not found");
-  }
-
-  // only owner of comment can update
+  // Only owner of comment can update
   if (comment.user.toString() !== userId.toString()) {
     throw new ApiError(403, "You are not authorized to update this comment");
   }
@@ -94,16 +85,12 @@ export const updateComment = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "Comment updated successfully", comment));
 });
 
-//Get All Comments on a Blog Post
 export const getAllCommentsOnPost = asyncHandler(async (req, res) => {
   const { blogId } = req.params;
-  const { page = 1, limit = 10 } = req.query;
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.max(1, Number(req.query.limit) || 10);
 
-  // check blog exists
-  const blog = await Blog.findById(blogId);
-  if (!blog) {
-    throw new ApiError(404, "Blog not found");
-  }
+  await ensureBlogExists(blogId);
 
   const totalComments = await Comment.countDocuments({ blog: blogId });
 
@@ -111,14 +98,14 @@ export const getAllCommentsOnPost = asyncHandler(async (req, res) => {
     .populate("user", "username avatarUrl")
     .sort({ createdAt: -1 })
     .skip((page - 1) * limit)
-    .limit(Number(limit));
+    .limit(limit);
 
   return res.status(200).json(
     new ApiResponse(200, "Comments fetched successfully", {
       comments,
       totalComments,
       totalPages: Math.ceil(totalComments / limit),
-      currentPage: Number(page),
+      currentPage: page,
     })
   );
 });
