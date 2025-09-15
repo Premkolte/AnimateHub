@@ -9,7 +9,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
 const SignupPage = () => {
   const navigate = useNavigate();
-  const { handleSignUp, handleGoogleSignin,isAuthLoading, currentUser, authError } = useAuthStore();
+  const { handleSignUp, handleGoogleSignin, isAuthLoading, currentUser, authError } = useAuthStore();
 
   const [signUpData, setSignUpData] = useState({
     username: "",
@@ -299,7 +299,13 @@ const SignupPage = () => {
                   Creating Account...
                 </span>
               ) : (
-                <span className="relative z-10">Create Account</span>
+                <span
+                  className="relative z-10"
+                  onClick={() => navigate('/sign-in')}
+                >
+                  Create Account
+                </span>
+
               )}
               <div className="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             </motion.button>
