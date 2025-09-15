@@ -46,14 +46,6 @@ const socialLinks = [
   },
 ];
 
-const COLORS = {
-  Instagram: "hover:text-pink-500",
-  LinkedIn: "hover:text-blue-500",
-  X: "hover:text-gray-500",
-  GitHub: "hover:text-gray-800",
-};
-
-
 const footerLinks = [
   {
     title: "Resources",
@@ -125,48 +117,47 @@ const Footer = () => {
             <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent">
               Animate Hub
             </h2>
-            <p className="mt-4 text-sm leading-relaxed opacity-80 max-w-md">
-              Animate Hub is your go-to resource for all things animation in
-              web development. Discover a wide range of code snippets for
+            <p className="mt-4 text-sm leading-relaxed opacity-80 max-w-md dark:text-gray-300">
+              Animate Hub is your go-to resource for all things animation in web
+              development. Discover a wide range of code snippets for
               animations, hovers, and effects, designed to streamline your
-              workflow. Just copy, paste, and watch your projects come to
-              life!
+              workflow. Just copy, paste, and watch your projects come to life!
             </p>
             <div className="flex space-x-4 mt-6">
-  {socialLinks.map(({ name, href, icon: Icon, color }) => (
-    <a
-      key={name}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={name}
-      className={`text-gray-500 transition-colors duration-200 ${color}`}
-    >
-      <Icon className="w-6 h-6" /> {/* increased from w-5 h-5 */}
-    </a>
-  ))}
-</div>
-
+              {socialLinks.map(({ name, href, icon: Icon, color }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name}
+                  className={`text-gray-500 transition-colors duration-200 ${color} dark:text-gray-400`}
+                >
+                  <Icon className="w-6 h-6" />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Footer Links */}
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
+              <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">
+                {section.title}
+              </h3>
               <ul className="space-y-3 text-sm">
-  {section.links.map(({ name, href, icon: Icon, color }) => (
-    <li key={name}>
-      <Link
-        to={href}
-        className="flex items-center space-x-2 hover:text-primary-600 transition-all group"
-      >
-        <Icon className={`w-5 h-5 ${color}`} /> {/* increased from w-4 h-4 */}
-        <span>{name}</span>
-      </Link>
-    </li>
-  ))}
-</ul>
-
+                {section.links.map(({ name, href, icon: Icon, color }) => (
+                  <li key={name}>
+                    <Link
+                      to={href}
+                      className="flex items-center space-x-2 hover:text-primary-600 transition-all group dark:hover:text-primary-400 dark:text-gray-300"
+                    >
+                      <Icon className={`w-5 h-5 ${color}`} />
+                      <span>{name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -175,13 +166,12 @@ const Footer = () => {
         <div className="border-t border-gray-200 dark:border-secondary-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-400">
           <p>&copy; {currentYear} Animate Hub. All rights reserved.</p>
           <p className="flex items-center mt-2 md:mt-0">
-            Made with{" "}
-            <Heart className="w-4 h-4 text-red-500 mx-1" /> by{" "}
+            Made with <Heart className="w-4 h-4 text-red-500 mx-1" /> by{" "}
             <a
               href="https://github.com/Premkolte/AnimateHub"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-1 text-blue-600 hover:text-blue-800"
+              className="ml-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
             >
               Prem Kolte
             </a>

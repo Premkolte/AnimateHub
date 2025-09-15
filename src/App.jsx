@@ -28,6 +28,7 @@ import ContactUs from "./Pages/Contact/ContactUs";
 import Leaderboard from "./Pages/Leaderboard/LeaderBoard";
 import AnimationPlayground from "./Pages/AnimationPlayground";
 import Blog from "./Pages/BlogPage";
+import AddBlogPage from "./Pages/AddBlogPage";
 import ChallengeMode from "./Pages/challenge/ChallengeMode";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 
@@ -54,6 +55,7 @@ import SVGPlayground from "./Pages/Playground/SVGPlayground";
 import FontPlayground from "./Pages/Playground/FontPlayground";
 import FlexboxPlayground from "./Pages/Playground/FlexboxPlayground";
 import GridPlayground from "./Pages/Playground/GridPlayground";
+import BoxShadowPlayground from "./Pages/Playground/BoxShadowPlayground";
 
 import ContributorGuide from "./Pages/Contributors/ContributorGuide";
 import ProfilePage from "./Pages/Profile/ProfilePage";
@@ -103,7 +105,15 @@ function App() {
               <Route path="introduction" element={<IntroductionPage />} />
               <Route path="installation" element={<InstallationPage />} />
             </Route>
-
+            <Route path="/explore" element={<Dashboard />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route
+              path="/animationplayground"
+              element={<AnimationPlayground />}
+            />
+            <Route path="/challenge" element={<ChallengeMode />} />
+            <Route path="/blogs" element={<Blog />} />
+            <Route path="/blogs/add" element={<AddBlogPage />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/framerplayground" element={<FramerPlayground />} />
             <Route path="/ColorGradientPlayground" element={<ColorGradientPlayground />} />
@@ -117,6 +127,20 @@ function App() {
             {/* Dashboard & Challenge Mode */}
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/challenge" element={<ChallengeMode />} />
+
+            <Route path="/FontPlayground" element={<FontPlayground/>}/>
+            <Route path="/flexboxPlayground" element={<FlexboxPlayground/>}/>
+            <Route path="/gridPlayground" element={<GridPlayground/>}/>
+            <Route path="/boxShadowPlayground" element={<BoxShadowPlayground/>}/>
+
+
+
+
+
+
+
+
+
             <Route path="/leaderboard" element={<Leaderboard />} />
 
             {/* Contributor Pages */}

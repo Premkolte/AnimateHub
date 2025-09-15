@@ -51,18 +51,21 @@ const item = {
 const techIcons = [
   {
     icon: FaHtml5,
-    color: "text-orange-600",
+    color: "text-orange-600 hover:text-orange-700",
     href: "https://developer.mozilla.org/en-US/docs/Web/HTML",
   },
   {
     icon: FaCss3Alt,
-    color: "text-blue-600",
+    color: "text-blue-600 hover:text-blue-700",
     href: "https://developer.mozilla.org/en-US/docs/Web/CSS",
   },
-  { icon: FaReact, color: "text-sky-500", href: "https://react.dev/learn" },
+  { 
+    icon: FaReact, 
+    color: "text-sky-500 hover:text-sky-600", 
+    href: "https://react.dev/learn" },
   {
     icon: BiLogoTailwindCss,
-    color: "text-teal-400",
+    color: "text-teal-400 hover:text-teal-500",
     href: "https://tailwindcss.com/",
   },
 ];
@@ -97,7 +100,7 @@ const HeroSection = ({ currentUser }) => {
         </motion.div>
 
         <motion.h1
-          className="text-4xl md:text-6xl mb-6 font-bold"
+          className="text-4xl md:text-6xl mb-6 font-bold text-secondary-900 dark:text-white"
           variants={{
             hidden: { opacity: 0, y: 20 },
             show: {
@@ -114,7 +117,7 @@ const HeroSection = ({ currentUser }) => {
           Animation UI Library <br /> for Developers
         </motion.h1>
 
-        <motion.p className="text-md mb-10" variants={item}>
+        <motion.p className="text-md mb-10 text-secondary-900 dark:text-white" variants={item}>
           Open-sourced components made with
           <br />
           <span className="font-bold">HTML + CSS</span> &{" "}
@@ -136,7 +139,7 @@ const HeroSection = ({ currentUser }) => {
         >
           <motion.div variants={item} whileHover="hover" whileTap="tap">
             <Link
-              className="block rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 px-8 py-4 text-lg font-semibold text-white shadow-md"
+              className="block rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 px-8 py-4 text-lg font-semibold text-white hover:text-white  shadow-md"
               to="/explore"
             >
               Browse Components
@@ -236,7 +239,7 @@ const HeroSection = ({ currentUser }) => {
             href="https://github.com/Premkolte/AnimateHub"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 px-6 py-3 h-12 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-medium shadow-md"
+            className="inline-flex items-center justify-center gap-3 px-6 py-3 h-12 rounded-xl bg-gray-800 hover:bg-gray-700 hover:text-white font-medium shadow-md"
             variants={item}
             whileHover={{
               scale: 1.05,
