@@ -20,15 +20,37 @@ const SignupPage = () => {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const [passwordActive, setPasswordActive] = useState(false);
+
+  const [requirements, setRequirements] = useState({
+    length: false,
+    special: false,
+    number: false,
+    caps: false,
+  });
+
   const onChangeHandler = (e) => {
-    setSignUpData({
+    const updatedData = {
       ...signUpData,
       [e.target.name]: e.target.value,
-    });
+    };
+    setSignUpData(updatedData);
+    if (e.target.name === 'password') {
+      checkRequirements(updatedData.password);
+    }
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  };
+
+  const checkRequirements = (password) => {
+    setRequirements({
+      length: password.length >= 8,
+      special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+      number: /\d/.test(password),
+      caps: /[A-Z]/.test(password),
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -47,8 +69,8 @@ const SignupPage = () => {
       return;
     }
 
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long.");
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
       return;
     }
 
@@ -225,6 +247,8 @@ const SignupPage = () => {
                   className="w-full pl-12 pr-12 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
                   value={signUpData.password}
                   onChange={onChangeHandler}
+                  onFocus={() => setPasswordActive(true)}
+                  onBlur={() => setPasswordActive(false)}
                   placeholder="Create a strong password"
                   required
                 />
@@ -239,6 +263,17 @@ const SignupPage = () => {
                 </motion.button>
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
               </div>
+              {passwordActive && (
+                <div className="mt-2 space-y-1">
+                  <span className={`text-sm ${requirements.length ? 'text-green-500' : 'text-red-500'}`}>At least 8 characters</span>
+                  <br />
+                  <span className={`text-sm ${requirements.special ? 'text-green-500' : 'text-red-500'}`}>One special character</span>
+                  <br />
+                  <span className={`text-sm ${requirements.number ? 'text-green-500' : 'text-red-500'}`}>One number</span>
+                  <br />
+                  <span className={`text-sm ${requirements.caps ? 'text-green-500' : 'text-red-500'}`}>One uppercase letter</span>
+                </div>
+              )}
             </motion.div>
 
             {/* Submit Button */}
