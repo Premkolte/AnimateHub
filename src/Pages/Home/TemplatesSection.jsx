@@ -104,7 +104,10 @@ const TemplatesSection = () => {
             <motion.div
               key={index}
               variants={item}
-              className="bg-white dark:bg-secondary-900 p-8 rounded-2xl shadow-lg border border-secondary-200 dark:border-secondary-600 hover:shadow-xl hover:border-primary-600 dark:hover:border-accent-600 transition-all duration-300 flex flex-col items-center text-center"
+              className="bg-white dark:bg-secondary-900 p-8 rounded-2xl shadow-lg border border-secondary-200 
+                         dark:border-secondary-600 hover:border-primary-600 dark:hover:border-accent-600 
+                         flex flex-col items-center text-center hover:shadow-[0_0_12px_2px_rgba(59,130,246,0.7)]
+                         transform transition-all duration-700 ease-in-out hover:scale-105 dark:hover:shadow-[0_0_12px_2px_rgba(168,85,247,0.7)]"
             >
               <div className="w-20 h-20 flex items-center justify-center rounded-2xl mb-6">
                 {template.icon}
