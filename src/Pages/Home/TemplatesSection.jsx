@@ -33,23 +33,40 @@ const item = {
 const templates = [
   {
     name: "Landing Pages",
-    description: "Beautiful, conversion-focused landing page templates for your next project.",
-    link: "/",
-    icon: <LayoutTemplate size={40} className="text-primary-600 dark:text-accent-500" />
+    description:
+      "Beautiful, conversion-focused landing page templates for your next project.",
+    link: "/templates",
+    icon: (
+      <LayoutTemplate
+        size={40}
+        className="text-primary-600 dark:text-accent-500"
+      />
+    ),
   },
   {
     name: "Dashboards",
-    description: "Powerful dashboard templates with various layouts and components.",
-    link: "/",
-    icon: <LayoutTemplate size={40} className="text-primary-600 dark:text-accent-500" />
+    description:
+      "Powerful dashboard templates with various layouts and components.",
+    link: "/templates",
+    icon: (
+      <LayoutTemplate
+        size={40}
+        className="text-primary-600 dark:text-accent-500"
+      />
+    ),
   },
   {
     name: "Authentication",
     description: "Secure and modern authentication flows ready to implement.",
-    link: "/",
-    icon: <LayoutTemplate size={40} className="text-primary-600 dark:text-accent-500" />
-  }
-]
+    link: "/templates",
+    icon: (
+      <LayoutTemplate
+        size={40}
+        className="text-primary-600 dark:text-accent-500"
+      />
+    ),
+  },
+];
 
 
 const TemplatesSection = () => {
