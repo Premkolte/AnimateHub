@@ -117,7 +117,10 @@ const HeroSection = ({ currentUser }) => {
           Animation UI Library <br /> for Developers
         </motion.h1>
 
-        <motion.p className="text-md mb-10 text-secondary-900 dark:text-white" variants={item}>
+        <motion.p
+          className="text-md mb-10 text-secondary-900 dark:text-white"
+          variants={item}
+        >
           Open-sourced components made with
           <br />
           <span className="font-bold">HTML + CSS</span> &{" "}
@@ -239,7 +242,7 @@ const HeroSection = ({ currentUser }) => {
             href="https://github.com/Premkolte/AnimateHub"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 px-6 py-3 h-12 rounded-xl bg-gray-800 hover:bg-gray-700 hover:text-white font-medium shadow-md"
+            className="inline-flex items-center justify-center gap-3 px-6 py-3 h-12 rounded-xl bg-gray-800 hover:bg-gray-700 text-white hover:text-white font-medium shadow-md"
             variants={item}
             whileHover={{
               scale: 1.05,
