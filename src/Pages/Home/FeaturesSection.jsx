@@ -154,8 +154,9 @@ const FeaturesSection = () => {
                 hover:shadow-xl
                 transition-all duration-300 ease-in-out
                 max-w-md mx-auto w-full
-                flex flex-col items-center
-                h-full hover:border-primary-600 dark:hover:border-accent-600"
+                flex flex-col items-center hover:shadow-[0_0_12px_2px_rgba(59,130,246,0.7)]
+                h-full hover:border-primary-600 dark:hover:border-accent-600
+                transform transition-all duration-700 hover:scale-105 dark:hover:shadow-[0_0_12px_2px_rgba(168,85,247,0.7)]"
               whileTap="tap"
             >
               <div
