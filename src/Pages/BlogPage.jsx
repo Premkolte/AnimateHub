@@ -1,12 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState,useCallback } from "react";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import { useNavigate } from "react-router-dom";
 import BlogReadModal from "../components/BlogReadModal";
-
-gsap.registerPlugin(ScrollTrigger);
+import BlogCard from "../components/BlogCard";
 
 // LocalStorage keys
 const LS_BLOGS = "ah_blogs_v1";
@@ -197,7 +193,7 @@ export default function BlogHub() {
           b.title.toLowerCase().includes(q) ||
           b.excerpt.toLowerCase().includes(q) ||
           b.content.toLowerCase().includes(q) ||
-            b.tags.some((t) => t.toLowerCase().includes(q)) ||
+          b.tags.some((t) => t.toLowerCase().includes(q)) ||
           b.category.toLowerCase().includes(q)
       );
     }
@@ -231,85 +227,65 @@ export default function BlogHub() {
   );
 
   // Actions
-  const toggleLike = (id) => {
-    setLikes((prev) => ({ ...prev, [id]: (prev[id] || 0) + (likedByMe.has(id) ? -1 : 1) }));
-    setLikedByMe((prev) => {
-      const n = new Set(prev);
-      if (n.has(id)) n.delete(id);
-      else n.add(id);
-      return n;
-    });
-  };
+ const toggleLike = useCallback((id) => {
+  setLikes((prev) => ({ ...prev, [id]: (prev[id] || 0) + (likedByMe.has(id) ? -1 : 1) }));
+  setLikedByMe((prev) => {
+    const n = new Set(prev);
+    if (n.has(id)) n.delete(id);
+    else n.add(id);
+    return n;
+  });
+}, [likedByMe]);
 
-  const toggleBookmark = (id) => {
-    setBookmarks((prev) => {
-      const n = new Set(prev);
-      if (n.has(id)) n.delete(id);
-      else n.add(id);
-      return n;
-    });
-  };
+  const toggleBookmark = useCallback((id) => {
+  setBookmarks((prev) => {
+    const n = new Set(prev);
+    if (n.has(id)) n.delete(id);
+    else n.add(id);
+    return n;
+  });
+}, []);
 
-  const copyShareLink = (id) => {
-    const url = `${window.location.origin}${window.location.pathname}#blog-${id}`;
-    navigator.clipboard?.writeText(url);
-  };
+  const copyShareLink = useCallback((id) => {
+  const url = `${window.location.origin}${window.location.pathname}#blog-${id}`;
+  navigator.clipboard?.writeText(url);
+}, []);
 
-  const openModal = (blog) => setModalBlog(blog);
-  const closeModal = () => {
-    setModalBlog(null);
-    setNewComment(emptyComment);
-  };
+const openModal = useCallback((blog) => setModalBlog(blog), []);
+const closeModal = useCallback(() => {
+  setModalBlog(null);
+  setNewComment(emptyComment);
+}, []);
 
-  const submitComment = (e) => {
-    e.preventDefault();
-    if (!modalBlog || !newComment.name.trim() || !newComment.text.trim()) return;
-    setComments((prev) => {
-      const list = prev[modalBlog.id] ? prev[modalBlog.id].slice() : [];
-      list.push({ ...newComment, ts: Date.now() });
-      return { ...prev, [modalBlog.id]: list };
-    });
-    setNewComment(emptyComment);
-  };
+const submitComment = useCallback((e) => {
+  e.preventDefault();
+  if (!modalBlog || !newComment.name.trim() || !newComment.text.trim()) return;
+  setComments((prev) => {
+    const list = prev[modalBlog.id] ? prev[modalBlog.id].slice() : [];
+    list.push({ ...newComment, ts: Date.now() });
+    return { ...prev, [modalBlog.id]: list };
+  });
+  setNewComment(emptyComment);
+}, [modalBlog, newComment]);
 
-  const deleteComment = (blogId, ts) => {
-    setComments((prev) => {
-      const list = (prev[blogId] || []).filter((c) => c.ts !== ts);
-      return { ...prev, [blogId]: list };
-    });
-  };
+const deleteComment = useCallback((blogId, ts) => {
+  setComments((prev) => {
+    const list = (prev[blogId] || []).filter((c) => c.ts !== ts);
+    return { ...prev, [blogId]: list };
+  });
+}, []);
 
   // Anim
-  const fadeUp = {
-    hidden: { opacity: 0, y: 14 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  };
+ const fadeUp = useMemo(() => ({
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+}), []);
 
-  const bounceHover = {
-    onMouseEnter: (e) => (e.currentTarget.style.transform = "scale(1.07)"),
-    onMouseLeave: (e) => (e.currentTarget.style.transform = "scale(1)"),
-    style: { transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)" },
-  };
-
-  useGSAP(() => {
-    gsap.utils.toArray(".blogCard").forEach((el) => {
-      gsap.fromTo(
-        el,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          ease: "bounce.inOut",
-          scrollTrigger: {
-            trigger: el,
-            scrub: 1,
-            start: "top 80%",
-            end: "top 60%",
-          },
-        }
-      );
-    });
-  }, []);
+ const bounceHover = useMemo(() => ({
+  onMouseEnter: (e) => (e.currentTarget.style.transform = "scale(1.07)"),
+  onMouseLeave: (e) => (e.currentTarget.style.transform = "scale(1)"),
+  style: { transition: "transform 0.3s cubic-bezier(.34,1.56,.64,1)" },
+}), []);
 
   return (
     <motion.div
@@ -422,13 +398,13 @@ export default function BlogHub() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="blogCard py-10 text-2xl md:text-4xl font-bold text-center mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="py-10 text-2xl md:text-4xl font-bold text-center mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           >
             Explore Widgets
           </motion.h2>
           <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch mt-8">
             {/* Top Liked */}
-            <div className="blogCard flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-blue-200 to-blue-300 dark:from-blue-700 to-blue-600 bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 dark:from-slate-900/90 dark:via-blue-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+            <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-blue-200 to-blue-300 dark:from-blue-700 to-blue-600 bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 dark:from-slate-900/90 dark:via-blue-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
               <div className="absolute inset-0 opacity-5 dark:opacity-10">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400 rounded-full -translate-y-16 translate-x-16"></div>
                 <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-300 rounded-full translate-y-12 -translate-x-12"></div>
@@ -483,7 +459,7 @@ export default function BlogHub() {
             </div>
 
             {/* Trending Tags */}
-            <div className="blogCard flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-purple-200 to-purple-300 dark:from-purple-700 to-purple-600 bg-gradient-to-br from-white/90 via-purple-50/50 to-white/90 dark:from-slate-900/90 dark:via-purple-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+            <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-purple-200 to-purple-300 dark:from-purple-700 to-purple-600 bg-gradient-to-br from-white/90 via-purple-50/50 to-white/90 dark:from-slate-900/90 dark:via-purple-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
               <div className="absolute inset-0 opacity-5 dark:opacity-10">
                 <div className="absolute top-0 left-0 w-28 h-28 bg-purple-400 rounded-full -translate-y-14 -translate-x-14"></div>
                 <div className="absolute bottom-0 right-0 w-20 h-20 bg-purple-300 rounded-full translate-y-10 translate-x-10"></div>
@@ -524,7 +500,7 @@ export default function BlogHub() {
             </div>
 
             {/* Bookmarks */}
-            <div className="blogCard flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-yellow-200 to-yellow-300 dark:from-yellow-700 to-yellow-600 bg-gradient-to-br from-white/90 via-yellow-50/50 to-white/90 dark:from-slate-900/90 dark:via-yellow-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+            <div className="flex-1 min-w-[260px] rounded-3xl border-2 border-gradient-to-r from-yellow-200 to-yellow-300 dark:from-yellow-700 to-yellow-600 bg-gradient-to-br from-white/90 via-yellow-50/50 to-white/90 dark:from-slate-900/90 dark:via-yellow-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
               <div className="absolute inset-0 opacity-5 dark:opacity-10">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-400 rounded-full -translate-y-12 translate-x-12"></div>
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-yellow-300 rounded-full translate-y-16 -translate-x-16"></div>
@@ -591,155 +567,34 @@ export default function BlogHub() {
           </div>
         </div>
 
-        <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="blogCard text-center mt-20 mb-8"
-        >
-          <div
-            {...bounceHover}
-            className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-4 shadow-lg"
-          >
-            <span className="text-2xl">📚</span>
-          </div>
-          <h2
-            {...bounceHover}
-            className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3"
-          >
-            Discover Amazing Content
-          </h2>
-          <p
-            {...bounceHover}
-            className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
-          >
-            Explore our curated collection of tutorials, showcases, and insights from the animation community
-          </p>
-        </motion.section>
-
+        {/* Blog Cards Section - using BlogCard */}
         <section className="grid lg:grid-cols-12 gap-8 mt-8">
-          <div className="lg:col-span-12 grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
-            {visibleBlogs.map((b) => (
-              <motion.article
-                key={b.id}
-                id={`blog-${b.id}`}
-                className="blogCard group rounded-3xl overflow-hidden border border-transparent border-r-4 border-r-transparent hover:border-r-blue-500 dark:hover:border-r-blue-400 bg-gradient-to-br from-white/80 to-blue-50 dark:from-slate-900/80 dark:to-slate-800/80 shadow-lg hover:shadow-2xl transition-all duration-300 backdrop-blur-lg flex flex-col h-full relative"
-              >
-                <div className="relative">
-                  <img
-                    src={b.cover}
-                    alt={b.title}
-                    className="h-44 w-full object-cover"
-                    loading="lazy"
-                    style={{ borderTopLeftRadius: "1.5rem", borderTopRightRadius: "1.5rem" }}
-                  />
-                  <button
-                    onClick={() => toggleBookmark(b.id)}
-                    className={`absolute top-3 right-3 rounded-full px-3 py-1 text-sm font-semibold shadow backdrop-blur-lg transition ${
-                      bookmarks.has(b.id)
-                        ? "bg-gradient-to-r from-yellow-400 to-yellow-300 text-black"
-                        : "bg-white/80 dark:bg-slate-900/70"
-                    }`}
-                  >
-                    {bookmarks.has(b.id) ? "🔖 Saved" : "🔖 Save"}
-                  </button>
-                </div>
-                <div className="p-5 flex flex-col flex-1 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={b.author.avatar}
-                      alt={b.author.name}
-                      className="w-8 h-8 rounded-full"
-                    />
-                    <div className="flex flex-col text-xs text-slate-500 dark:text-slate-400">
-                      <span className="font-medium text-slate-700 dark:text-slate-200">
-                        {b.author.name}
-                      </span>
-                      <span>
-                        {new Date(b.date).toLocaleDateString()} • {b.readTime} min read
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg line-clamp-2 mb-1">{b.title}</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3">
-                      {b.excerpt}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {b.tags.map((t) => (
-                      <button
-                        key={t}
-                        onClick={() => setActiveTag(t === activeTag ? "" : t)}
-                        className={`text-xs px-3 py-1 rounded-full font-semibold shadow transition ${
-                          activeTag === t
-                            ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                            : "bg-slate-100 dark:bg-slate-700"
-                        }`}
-                      >
-                        #{t}
-                      </button>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-3 justify-start">
-                    <button
-                      onClick={() => toggleLike(b.id)}
-                      className={`group relative px-3 py-2 rounded-xl font-medium transition-all duration-300 hover:scale-105 overflow-hidden ${
-                        likedByMe.has(b.id)
-                          ? "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg hover:shadow-rose-500/25"
-                          : "bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 hover:from-rose-100 hover:to-pink-100 dark:hover:from-rose-900 dark:hover:to-pink-900"
-                      }`}
-                    >
-                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                      <span className="relative z-10 flex items-center gap-1">
-                        <span
-                          className={`transition-transform duration-300 ${
-                            likedByMe.has(b.id) ? "group-hover:scale-125" : "group-hover:scale-110"
-                          }`}
-                        >
-                          ❤️
-                        </span>
-                        <span className="font-semibold">{likes[b.id] || 0}</span>
-                      </span>
-                    </button>
-                    <button
-                      onClick={() => copyShareLink(b.id)}
-                      className="group relative px-3 py-2 rounded-xl bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 font-medium hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900 dark:hover:to-purple-900 transition-all duration-300 hover:scale-105 overflow-hidden"
-                      title="Copy share link"
-                    >
-                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                      <span className="relative z-10 flex items-center gap-1">
-                        <span className="group-hover:rotate-12 transition-transform duration-300">
-                          🔗
-                        </span>
-                        <span>Share</span>
-                      </span>
-                    </button>
-                  </div>
-                  <div className="mt-6 flex justify-center">
-                    <button
-                      onClick={() => openModal(b)}
-                      className="group relative px-8 py-3 rounded-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-110 overflow-hidden"
-                      style={{ boxShadow: "0 4px 24px rgba(60,60,120,0.15)" }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                      <span className="relative z-10 flex items-center gap-2">
-                        <span className="group-hover:rotate-12 transition-transform duration-300">
-                          📖
-                        </span>
-                        <span>Read More</span>
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">
-                          →
-                        </span>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
+          <div className="lg:col-span-12">
+            <motion.div
+              className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              {visibleBlogs.map((blog) => (
+                <BlogCard
+                  key={blog.id}
+                  blog={blog}
+                  activeTag={activeTag}
+                  bookmarks={bookmarks}
+                  likes={likes}
+                  likedByMe={likedByMe}
+                  onToggleBookmark={toggleBookmark}
+                  onToggleLike={toggleLike}
+                  onCopyShareLink={copyShareLink}
+                  onOpenModal={openModal}
+                  onSetActiveTag={setActiveTag}
+                />
+              ))}
+            </motion.div>
+
             {!visibleBlogs.length && (
-              <div className="col-span-full text-center text-slate-500 dark:text-slate-400">
+              <div className="col-span-full text-center text-slate-500 dark:text-slate-400 py-20">
                 No blogs match your filters.
               </div>
             )}
