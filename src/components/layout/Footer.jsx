@@ -15,6 +15,7 @@ import {
   Phone,
   BookOpen,
   X,
+  Shield,
 } from "lucide-react";
 
 const currentYear = new Date().getFullYear();
@@ -101,6 +102,12 @@ const footerLinks = [
         href: "/contact",
         icon: Phone,
         color: "text-red-400",
+      },
+      {
+        name: "Privacy Policy",
+        href: "/privacy-policy",
+        icon: Shield,
+        color: "text-green-400",
       },
     ],
   },
