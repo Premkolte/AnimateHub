@@ -61,6 +61,7 @@ import ContributorGuide from "./Pages/Contributors/ContributorGuide";
 import ProfilePage from "./Pages/Profile/ProfilePage";
 import PalettesPage from "./Pages/Profile/PalettesPage";
 import Resourcehub from "./Pages/Profile/Resourcehub";
+import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 
 // -----------------------------------
 // Layout component that wraps all pages
@@ -99,6 +100,7 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
             {/* Components & Playground Routes */}
             <Route path="/components" element={<ComponentsPage />}>
