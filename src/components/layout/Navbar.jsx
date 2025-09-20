@@ -12,7 +12,7 @@ import {
 import { FiCode, FiLayers, FiType } from "react-icons/fi";
 import { SiFramer, SiTailwindcss } from "react-icons/si";
 import { MdBrush } from "react-icons/md"; // replacement for MdGradient
-import { FaHeart, FaCss3Alt, FaThLarge ,FaRegSquare} from "react-icons/fa";
+import { FaHeart, FaCss3Alt, FaThLarge, FaRegSquare } from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
@@ -319,7 +319,6 @@ const Navbar = () => {
                               <span>Animation Ground</span>
                             </div>
                           </Link>
-
                           {/* Code Playground Link */}
                           <Link
                             to="/playground"
@@ -348,7 +347,6 @@ const Navbar = () => {
                               Code Playground
                             </div>
                           </Link>
-
                           {/* Framer Playground Link */}
                           <Link
                             to="/framerplayground"
@@ -377,7 +375,6 @@ const Navbar = () => {
                               Framer Playground
                             </div>
                           </Link>
-
                           {/* Gradient Playground Link */}
                           <Link
                             to="/ColorGradientPlayground"
@@ -406,7 +403,6 @@ const Navbar = () => {
                               Gradient Ground
                             </div>
                           </Link>
-
                           {/* Tailwind Playground Link */}
                           <Link
                             to="/TailwindPlayground"
@@ -435,7 +431,6 @@ const Navbar = () => {
                               Tailwind Ground
                             </div>
                           </Link>
-
                           {/* SVG Playground Link */}
                           <Link
                             to="/SVGPlayground"
@@ -464,7 +459,6 @@ const Navbar = () => {
                               SVG Playground
                             </div>
                           </Link>
-
                           {/* Font Playground Link */}
                           <Link
                             to="/FontPlayground"
@@ -493,7 +487,6 @@ const Navbar = () => {
                               Font Playground
                             </div>
                           </Link>
-
                           {/* Flexbox Playground Link */}
                           <Link
                             to="/flexboxPlayground"
@@ -576,6 +569,45 @@ const Navbar = () => {
                               Box Shadow Ground
                             </div>
                           </Link>
+                        
+                          <Link
+                            to="/transformPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className={`
+    relative flex items-center px-5 py-2 rounded-xl
+    transition-all duration-300 ease-in-out
+    group
+    before:absolute before:left-0 before:right-0 before:-bottom-1
+    before:rounded-full
+    before:bg-gradient-to-r before:from-orange-300 before:via-orange-200 before:to-orange-300
+    dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+    before:opacity-30
+    ${
+      location.pathname === "/transformPlayground"
+        ? "bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 text-orange-600 dark:text-red-400"
+        : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-orange-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+    }
+  `}
+                          >
+                            <div className="flex items-center gap-2">
+                              <svg
+                                className="w-4 h-4 text-orange-500 dark:text-gray-300"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                              Transform Ground
+                            </div>
+                          </Link>
+                          
                         </div>
                       )}
                     </div> /* End of parent wrapper */

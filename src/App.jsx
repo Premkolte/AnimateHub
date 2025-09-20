@@ -62,6 +62,7 @@ import ProfilePage from "./Pages/Profile/ProfilePage";
 import PalettesPage from "./Pages/Profile/PalettesPage";
 import Resourcehub from "./Pages/Profile/Resourcehub";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
+import TransformPlayground from "./Pages/Playground/TransformPlayground";
 
 // -----------------------------------
 // Layout component that wraps all pages
@@ -124,6 +125,7 @@ function App() {
             <Route path="/FontPlayground" element={<FontPlayground />} />
             <Route path="/flexboxPlayground" element={<FlexboxPlayground />} />
             <Route path="/gridPlayground" element={<GridPlayground />} />
+            <Route path="/TransformPlayground" element={<TransformPlayground />} />
             <Route path="/animationplayground" element={<AnimationPlayground />} />
 
             {/* Dashboard & Challenge Mode */}
