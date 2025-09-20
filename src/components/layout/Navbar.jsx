@@ -920,9 +920,9 @@ const Navbar = () => {
             </span>
             <button
               onClick={closeMenu}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:bg-white transition-colors duration-200"
+              className="p-2 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-white transition-colors duration-200"
             >
-              <FiX className="text-2xl" />
+              <FiX className="text-xl" />
             </button>
           </div>
 
