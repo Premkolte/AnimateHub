@@ -7,6 +7,9 @@ import {
   Clock,
   Shield,
   Users,
+  AlertCircle,
+  CheckCircle2,
+  X
 } from "lucide-react";
 
 // FAQ component with accordion animation
@@ -120,6 +123,11 @@ const Contact = () => {
     message: "",
   });
 
+  // Enhanced validation states
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
+
   // Submission state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -127,6 +135,42 @@ const Contact = () => {
   // Animation states
   const [isLoaded, setIsLoaded] = useState(false);
   const [visibleStats, setVisibleStats] = useState([]);
+
+  // Validation rules
+  const validationRules = {
+    name: {
+      required: true,
+      minLength: 2,
+      maxLength: 50,
+      pattern: /^[a-zA-Z\s'-]+$/,
+      messages: {
+        required: "Name is required",
+        minLength: "Name must be at least 2 characters",
+        maxLength: "Name cannot exceed 50 characters",
+        pattern: "Name can only contain letters, spaces, hyphens, and apostrophes"
+      }
+    },
+    email: {
+      required: true,
+      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      maxLength: 100,
+      messages: {
+        required: "Email address is required",
+        pattern: "Please enter a valid email address",
+        maxLength: "Email cannot exceed 100 characters"
+      }
+    },
+    message: {
+      required: true,
+      minLength: 10,
+      maxLength: 1000,
+      messages: {
+        required: "Message is required",
+        minLength: "Message must be at least 10 characters",
+        maxLength: "Message cannot exceed 1000 characters"
+      }
+    }
+  };
 
   // Initialize animations
   useEffect(() => {
@@ -142,44 +186,151 @@ const Contact = () => {
     return () => timeouts.forEach(clearTimeout);
   }, []);
 
-  // Handle input change
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-  
-  const validateEmail = (email) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // Validation functions
+  const validateField = (fieldName, value) => {
+    const rules = validationRules[fieldName];
+    if (!rules) return null;
 
-  // Handle form submission
+    if (rules.required && (!value || value.trim() === "")) {
+      return rules.messages.required;
+    }
+
+    if (!value || value.trim() === "") return null;
+
+    if (rules.minLength && value.length < rules.minLength) {
+      return rules.messages.minLength;
+    }
+
+    if (rules.maxLength && value.length > rules.maxLength) {
+      return rules.messages.maxLength;
+    }
+
+    if (rules.pattern && !rules.pattern.test(value)) {
+      return rules.messages.pattern;
+    }
+
+    return null;
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    Object.keys(validationRules).forEach(field => {
+      const error = validateField(field, formData[field]);
+      if (error) newErrors[field] = error;
+    });
+    
+    setErrors(newErrors);
+    const isValid = Object.keys(newErrors).length === 0;
+    setIsFormValid(isValid);
+    return isValid;
+  };
+
+  // Enhanced input change handler
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    
+    const newFormData = {
+      ...formData,
+      [id]: value,
+    };
+    setFormData(newFormData);
+
+    // Real-time validation for touched fields
+    if (touched[id]) {
+      const error = validateField(id, value);
+      setErrors(prev => ({
+        ...prev,
+        [id]: error
+      }));
+    }
+
+    // Update form validity immediately with correct data
+    setTimeout(() => {
+      const newErrors = {};
+      Object.keys(validationRules).forEach(field => {
+        const fieldValue = field === id ? value : newFormData[field];
+        const error = validateField(field, fieldValue);
+        if (error) newErrors[field] = error;
+      });
+      
+      setErrors(newErrors);
+      setIsFormValid(Object.keys(newErrors).length === 0);
+    }, 0);
+  };
+
+  // Handle field blur
+  const handleBlur = (e) => {
+    const { id } = e.target;
+    setTouched(prev => ({
+      ...prev,
+      [id]: true
+    }));
+
+    const error = validateField(id, formData[id]);
+    setErrors(prev => ({
+      ...prev,
+      [id]: error
+    }));
+  };
+
+  // Enhanced form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name.trim()) {
-      alert("Please enter your name");
-      return;
-    }
-    if (!formData.email.trim() || !validateEmail(formData.email)) {
-      alert("Please enter a valid email address");
-      return;
-    }
-    if (!formData.message.trim()) {
-      alert("Please enter your message");
+    // Mark all fields as touched
+    const allTouched = Object.keys(validationRules).reduce((acc, field) => {
+      acc[field] = true;
+      return acc;
+    }, {});
+    setTouched(allTouched);
+
+    // Validate entire form
+    if (!validateForm()) {
+      setSubmitStatus("validation_error");
+      setTimeout(() => setSubmitStatus(null), 5000);
       return;
     }
 
     setIsSubmitting(true);
+    setSubmitStatus(null);
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Simulate API call - replace with actual endpoint
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    setSubmitStatus("success");
-    setIsSubmitting(false);
-    setFormData({ name: "", email: "", message: "" });
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTouched({});
+      setErrors({});
+      setIsFormValid(false);
+    } catch (error) {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
 
-    setTimeout(() => setSubmitStatus(null), 5000);
+  // Field status helpers
+  const getFieldStatus = (fieldName) => {
+    if (!touched[fieldName]) return "default";
+    if (errors[fieldName]) return "error";
+    if (formData[fieldName] && !errors[fieldName]) return "success";
+    return "default";
+  };
+
+  const getFieldClasses = (fieldName) => {
+    const status = getFieldStatus(fieldName);
+    const baseClasses = "w-full pl-12 pr-4 py-4 border-2 rounded-xl focus:ring-4 outline-none transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400";
+    
+    switch (status) {
+      case "error":
+        return `${baseClasses} bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500/20`;
+      case "success":
+        return `${baseClasses} bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-600 focus:border-green-500 focus:ring-green-500/20`;
+      default:
+        return `${baseClasses} bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500/20 focus:scale-105`;
+    }
   };
 
   // Scroll to contact form function
@@ -341,12 +492,30 @@ const Contact = () => {
                               </p>
                           </div>
 
-                          {/* Success Message */}
+                          {/* Status Messages */}
                           {submitStatus === "success" && (
-                              <div className="mb-8 p-4 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-xl animate-bounce">
-                                  <p className="text-green-800 dark:text-green-200 text-center font-medium">
-                                      🎉 Thank you! Your message has been sent
-                                      successfully.
+                              <div className="mb-8 p-4 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-xl flex items-center gap-3">
+                                  <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+                                  <p className="text-green-800 dark:text-green-200 font-medium">
+                                      Thank you! Your message has been sent successfully.
+                                  </p>
+                              </div>
+                          )}
+
+                          {submitStatus === "error" && (
+                              <div className="mb-8 p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-xl flex items-center gap-3">
+                                  <X className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
+                                  <p className="text-red-800 dark:text-red-200 font-medium">
+                                      Failed to send message. Please try again later.
+                                  </p>
+                              </div>
+                          )}
+
+                          {submitStatus === "validation_error" && (
+                              <div className="mb-8 p-4 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 rounded-xl flex items-center gap-3">
+                                  <AlertCircle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0" />
+                                  <p className="text-yellow-800 dark:text-yellow-200 font-medium">
+                                      Please fix the errors below before submitting.
                                   </p>
                               </div>
                           )}
@@ -370,18 +539,40 @@ const Contact = () => {
                                           Your Name *
                                       </label>
                                       <div className="relative group">
-                                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10 group-focus-within:scale-110 transition-transform">
-                                              <User className="w-5 h-5 text-gray-400 group-focus-within:text-blue-600 transition-colors duration-200" />
+                                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
+                                              <User className={`w-5 h-5 transition-colors duration-200 ${
+                                                getFieldStatus("name") === "error" 
+                                                  ? "text-red-500" 
+                                                  : getFieldStatus("name") === "success"
+                                                  ? "text-green-500"
+                                                  : "text-gray-400 group-focus-within:text-blue-600"
+                                              }`} />
                                           </div>
                                           <input
                                               type="text"
                                               id="name"
-                                              required
                                               value={formData.name}
                                               onChange={handleInputChange}
+                                              onBlur={handleBlur}
                                               placeholder="Enter your full name"
-                                              className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 outline-none transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:scale-105"
+                                              className={getFieldClasses("name")}
+                                              aria-describedby={errors.name ? "name-error" : undefined}
+                                              aria-invalid={!!errors.name}
                                           />
+                                          {getFieldStatus("name") === "success" && (
+                                            <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
+                                              <CheckCircle2 className="w-5 h-5 text-green-500" />
+                                            </div>
+                                          )}
+                                      </div>
+                                      {errors.name && (
+                                        <p id="name-error" className="text-sm text-red-600 dark:text-red-400 flex items-center gap-2 mt-2">
+                                          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                                          {errors.name}
+                                        </p>
+                                      )}
+                                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                                        {formData.name.length}/50 characters
                                       </div>
                                   </div>
 
@@ -394,18 +585,40 @@ const Contact = () => {
                                           Your Email *
                                       </label>
                                       <div className="relative group">
-                                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10 group-focus-within:scale-110 transition-transform">
-                                              <Mail className="w-5 h-5 text-gray-400 group-focus-within:text-blue-600 transition-colors duration-200" />
+                                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
+                                              <Mail className={`w-5 h-5 transition-colors duration-200 ${
+                                                getFieldStatus("email") === "error" 
+                                                  ? "text-red-500" 
+                                                  : getFieldStatus("email") === "success"
+                                                  ? "text-green-500"
+                                                  : "text-gray-400 group-focus-within:text-blue-600"
+                                              }`} />
                                           </div>
                                           <input
                                               type="email"
                                               id="email"
                                               placeholder="Enter your email address"
-                                              required
                                               value={formData.email}
                                               onChange={handleInputChange}
-                                              className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 outline-none transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:scale-105"
+                                              onBlur={handleBlur}
+                                              className={getFieldClasses("email")}
+                                              aria-describedby={errors.email ? "email-error" : undefined}
+                                              aria-invalid={!!errors.email}
                                           />
+                                          {getFieldStatus("email") === "success" && (
+                                            <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
+                                              <CheckCircle2 className="w-5 h-5 text-green-500" />
+                                            </div>
+                                          )}
+                                      </div>
+                                      {errors.email && (
+                                        <p id="email-error" className="text-sm text-red-600 dark:text-red-400 flex items-center gap-2 mt-2">
+                                          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                                          {errors.email}
+                                        </p>
+                                      )}
+                                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                                        {formData.email.length}/100 characters
                                       </div>
                                   </div>
                               </div>
@@ -424,15 +637,42 @@ const Contact = () => {
                                   >
                                       Your Message *
                                   </label>
-                                  <textarea
-                                      required
-                                      id="message"
-                                      placeholder="Tell us about your project, questions, or how we can help you..."
-                                      rows="6"
-                                      value={formData.message}
-                                      onChange={handleInputChange}
-                                      className="w-full px-4 py-4 bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 outline-none transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none focus:scale-105"
-                                  ></textarea>
+                                  <div className="relative">
+                                      <textarea
+                                          id="message"
+                                          placeholder="Tell us about your project, questions, or how we can help you..."
+                                          rows="6"
+                                          value={formData.message}
+                                          onChange={handleInputChange}
+                                          onBlur={handleBlur}
+                                          className={`w-full px-4 py-4 border-2 rounded-xl focus:ring-4 outline-none transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none ${
+                                            getFieldStatus("message") === "error" 
+                                              ? "bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500/20"
+                                              : getFieldStatus("message") === "success"
+                                              ? "bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-600 focus:border-green-500 focus:ring-green-500/20"
+                                              : "bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500/20 focus:scale-105"
+                                          }`}
+                                          aria-describedby={errors.message ? "message-error" : undefined}
+                                          aria-invalid={!!errors.message}
+                                      />
+                                      {getFieldStatus("message") === "success" && (
+                                        <div className="absolute top-4 right-4">
+                                          <CheckCircle2 className="w-5 h-5 text-green-500" />
+                                        </div>
+                                      )}
+                                  </div>
+                                  {errors.message && (
+                                    <p id="message-error" className="text-sm text-red-600 dark:text-red-400 flex items-center gap-2 mt-2">
+                                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                                      {errors.message}
+                                    </p>
+                                  )}
+                                  <div className="text-xs text-gray-500 dark:text-gray-400 flex justify-between">
+                                    <span>{formData.message.length}/1000 characters</span>
+                                    <span className={formData.message.length >= 10 ? "text-green-600 dark:text-green-400" : ""}>
+                                      {formData.message.length >= 10 ? "✓" : ""} Minimum 10 characters
+                                    </span>
+                                  </div>
                               </div>
 
                               {/* Submit Button */}
@@ -446,8 +686,12 @@ const Contact = () => {
                                   <button
                                       type="button"
                                       onClick={handleSubmit}
-                                      disabled={isSubmitting}
-                                      className="flex justify-center items-center gap-3 w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
+                                      disabled={isSubmitting || !isFormValid}
+                                      className={`flex justify-center items-center gap-3 w-full px-8 py-4 font-semibold rounded-full shadow-lg transform transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/20 ${
+                                        isSubmitting || !isFormValid
+                                          ? "bg-gray-400 dark:bg-gray-600 text-gray-200 cursor-not-allowed"
+                                          : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white hover:shadow-xl hover:scale-105"
+                                      }`}
                                   >
                                       {isSubmitting ? (
                                           <>
@@ -480,6 +724,12 @@ const Contact = () => {
                                           </>
                                       )}
                                   </button>
+                                  
+                                  {!isFormValid && Object.keys(touched).length > 0 && (
+                                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                                      Please fill out all required fields correctly
+                                    </p>
+                                  )}
                               </div>
                           </div>
                       </div>
