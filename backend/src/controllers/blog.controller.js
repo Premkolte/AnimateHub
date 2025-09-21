@@ -3,6 +3,20 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import Blog from "../models/blog.model.js";
 import cloudinary from "../utils/cloudinary.js";
+const parseTags = (tags) => {
+  if (!tags) return [];
+  if (Array.isArray(tags)) return tags;
+  if (typeof tags === "string") {
+    try {
+      const parsed = JSON.parse(tags);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      // Fallback for comma-separated strings if JSON parsing fails
+      return tags.split(",").map(tag => tag.trim()).filter(Boolean);
+    }
+  }
+  return [];
+};
 
 export const createBlog = asyncHandler(async (req, res) => {
   const { title, excerpt, content, category, tags } = req.body;
@@ -38,7 +52,7 @@ export const createBlog = asyncHandler(async (req, res) => {
     author: userId,
     imageUrl,
     category: category.trim(),
-    tags: tags?.map(tag => tag.trim()) || [],
+    tags: parseTags(tags).map(tag => tag.trim()),
   });
 
   if (!newBlog) throw new ApiError(500, "Failed to create blog");
