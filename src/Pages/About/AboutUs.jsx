@@ -240,7 +240,7 @@ const About = () => {
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4">
               Why Choose <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">AnimateHub?</span>
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:white max-w-3xl mx-auto ">
               Discover what makes us the preferred choice for developers worldwide
             </p>
           </div>
@@ -345,7 +345,7 @@ const About = () => {
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4">
               Built With <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Modern Tech</span>
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-black max-w-3xl mx-auto">
               Powered by cutting-edge technologies for optimal performance and developer experience
             </p>
           </div>
