@@ -108,7 +108,7 @@ const FramerPlayground = () => {
 
       {/* Code Editor Heading */}
       <div className="text-left px-2 md:px-6 lg:px-12">
-        <h2 className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-100">
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-black">
           Code Editor (HTML / CSS)
         </h2>
       </div>
