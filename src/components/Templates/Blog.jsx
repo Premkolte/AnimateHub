@@ -230,7 +230,7 @@ const Blog = () => {
 
       {/* Category Filter */}
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="flex flex-wrap gap-3 justify-center mb-12">
+        <div className="flex flex-wrap gap-3 justify-center mb-12 hover:scale-75">
           {categories.map((category, index) => (
             <motion.button
               key={category}
@@ -251,7 +251,7 @@ const Blog = () => {
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 ">
           <AnimatePresence>
             {filteredPosts.map((post, index) => (
               <motion.article
@@ -263,7 +263,7 @@ const Blog = () => {
                 whileHover={{ y: -5 }}
                 layout
               >
-                <div className="h-48 overflow-hidden">
+                <div className="h-48 overflow-hidden ">
                   <img
                     src={post.imageUrl}
                     alt={post.title}

@@ -52,9 +52,9 @@ function CardSnippets() {
           <div className="flex flex-col gap-4 w-full">
             <button
               className="w-full text-white text-md py-3 px-6 rounded-full shadow-md bg-primary-600 dark:bg-accent-600 hover:bg-primary-700 dark:hover:bg-accent-700 hover:shadow-xl focus:outline-none transition-all duration-200"
-              onClick={() =>
-                handleShowModal(cardObject.jsxCode, cardObject.cssCode)
-              }
+               onClick={() =>
+               handleShowModal(cardObject.jsxCode, cardObject.cssCode)
+             }
             >
               Show CSS
             </button>
