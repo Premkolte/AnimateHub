@@ -377,7 +377,7 @@ export default function LeaderBoard() {
             </div>
 
             {/* Contributors List */}
-            <div className="divide-y divide-gray-100 dark:divide-gray-600">
+            <div className="divide-y divide-gray-100 dark:divide-white">
               {currentContributors.map((contributor, index) => (
                 <motion.div
                   key={contributor.username}
