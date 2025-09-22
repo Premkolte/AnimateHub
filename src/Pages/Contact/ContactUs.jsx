@@ -372,13 +372,14 @@ const Contact = () => {
                   </div>
 
                   <h1
-                      className={`text-black dark:text-white text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent transform transition-all duration-700 delay-200 ${
+                      className={`text-black dark:text-white text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent transform transition-all duration-700 delay-200 hover:scale-75 ${
                           isLoaded
                               ? "translate-y-0 opacity-100"
                               : "translate-y-8 opacity-0"
                       }`}
                   >
                       Get In Touch
+                      
                   </h1>
 
                   <p
