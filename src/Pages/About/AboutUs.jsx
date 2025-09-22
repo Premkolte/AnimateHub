@@ -2,7 +2,7 @@ import { useState } from "react"
 import { motion, useReducedMotion } from "framer-motion" // Import the useReducedMotion hook
 import GitHubStats from "./GitHubStats"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTwitter, faFacebook, faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import { faFacebook, faLinkedin, faXTwitter } from "@fortawesome/free-brands-svg-icons"
 import Journey from "./Journey"
 import CoreTeam from "./CoreTeam"
 import Insights from "./Insights"
@@ -555,7 +555,7 @@ const About = () => {
             
             <div className="flex justify-center space-x-6">
               {[
-                { icon: faTwitter, url: "https://twitter.com/animatehub", label: "Twitter", color: "hover:text-blue-500" },
+                { icon: faXTwitter, url: "https://twitter.com/animatehub", label: "Twitter", color: "hover:text-blue-500" },
                 { icon: faFacebook, url: "https://facebook.com/animatehub", label: "Facebook", color: "hover:text-blue-700" },
                 { icon: faLinkedin, url: "https://linkedin.com/company/animatehub", label: "LinkedIn", color: "hover:text-blue-800" },
               ].map((social, index) => (
