@@ -267,7 +267,7 @@ export default function BlogHub() {
     >
       <div className="max-w-7xl mx-auto space-y-10">
         <div className="flex justify-between items-center">
-           {currentUser && (
+          {currentUser && (
             <div className="text-sm text-slate-600 dark:text-slate-400">
               Welcome back,{" "}
               <span className="font-semibold text-blue-600 dark:text-blue-400">
@@ -348,7 +348,7 @@ export default function BlogHub() {
               </motion.h2>
               <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch mt-8">
                 {/* Top Liked */}
-                <div className="flex-1 min-w-[260px] rounded-3xl bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 dark:from-slate-900/90 dark:via-blue-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+                {/* <div className="flex-1 min-w-[260px] rounded-3xl bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 dark:from-slate-900/90 dark:via-blue-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
                   <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-6" {...bounceHover}>
                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg"><span className="text-2xl">📈</span></div>
@@ -369,7 +369,64 @@ export default function BlogHub() {
                       ))}
                     </ul>
                   </div>
+                </div> */}
+
+                {/*Top Liked */}
+                <div className="flex-1 min-w-[280px] rounded-3xl bg-gradient-to-br from-white/90 via-blue-50/50 to-white/90 dark:from-slate-900/90 dark:via-blue-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+                  <div className="relative z-10">
+                    {/* Header */}
+                    <div className="flex items-center gap-3 mb-6" {...bounceHover}>
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <span className="text-2xl">📈</span>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-xl text-slate-800 dark:text-slate-100">Top Liked</h4>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">Most popular posts</p>
+                      </div>
+                    </div>
+
+                    {/* Posts */}
+                    <ul className="space-y-4 flex-1">
+                      {topLiked.map((b, index) => (
+                        <li key={b.id} className="group relative">
+                          <div className={`flex items-center gap-3 p-4 rounded-2xl bg-white/70 dark:bg-slate-800/70 hover:bg-white/90 dark:hover:bg-slate-700/70 transition-all duration-300 shadow-md hover:shadow-xl cursor-pointer`} onClick={() => openModal(b)}>
+                            {/* Rank Badge */}
+                            <div className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-bold text-lg flex-shrink-0 ${index === 0 ? "bg-gradient-to-r from-yellow-400 to-yellow-500 shadow-lg" :
+                              index === 1 ? "bg-gradient-to-r from-gray-300 to-gray-400 shadow-md" :
+                                index === 2 ? "bg-gradient-to-r from-amber-600 to-amber-700 shadow-md" :
+                                  "bg-gradient-to-r from-blue-500 to-blue-600 shadow-sm"
+                              }`}>{index + 1}</div>
+
+                            {/* Post Info */}
+                            <div className="flex-1 min-w-0">
+                              <h5 className="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-100 line-clamp-2 group-hover:underline group-hover:transition-all duration-200 cursor-pointer">
+                                {b.title}
+                              </h5>
+                              <div className="flex items-center gap-2 mt-1 text-xs text-slate-500 dark:text-slate-400">
+                                <img src={b.author.avatar} alt={b.author.name} className="w-4 h-4 rounded-full object-cover" />
+                                <span>{b.author.name}</span>
+                                <span>· {b.readTime} min read</span>
+                              </div>
+                            </div>
+
+
+                            {/* Likes */}
+                            <div className="flex-shrink-0 flex items-center gap-1">
+                              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-pink-600/80 text-white text-xs font-bold shadow-lg transition-transform duration-300 group-hover:scale-110">
+                                <span className="bg-white text-pink-600 rounded-full w-4 h-4 flex items-center justify-center text-[10px]">❤️</span>
+                                {likes[b.id] || 0}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Hover overlay */}
+                          <div className="absolute inset-0 rounded-2xl pointer-events-none bg-gradient-to-r from-transparent via-blue-200/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
+
 
                 {/* Trending Tags */}
                 <div className="flex-1 min-w-[260px] rounded-3xl bg-gradient-to-br from-white/90 via-purple-50/50 to-white/90 dark:from-slate-900/90 dark:via-purple-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
@@ -392,7 +449,7 @@ export default function BlogHub() {
                   </div>
                 </div>
 
-                {/* Bookmarks */}
+                {/* Bookmarks
                 <div className="flex-1 min-w-[260px] rounded-3xl bg-gradient-to-br from-white/90 via-yellow-50/50 to-white/90 dark:from-slate-900/90 dark:via-yellow-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
                   <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-6" {...bounceHover}>
@@ -421,7 +478,85 @@ export default function BlogHub() {
                       </div>
                     )}
                   </div>
+                </div> */}
+
+                {/* My Bookmarks */}
+                <div className="flex-1 min-w-[280px] rounded-3xl bg-gradient-to-br from-white/90 via-yellow-50/50 to-white/90 
+                dark:from-slate-900/90 dark:via-yellow-900/20 dark:to-slate-900/90 shadow-2xl backdrop-blur-xl p-6 flex flex-col relative overflow-hidden">
+                  <div className="relative z-10">
+                    {/* Header */}
+                    <div className="flex items-center gap-3 mb-6" {...bounceHover}>
+                      <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <span className="text-2xl">🔖</span>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-xl text-slate-800 dark:text-slate-100">My Bookmarks</h4>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">Saved for later</p>
+                      </div>
+                    </div>
+
+                    {/* Bookmarked Posts */}
+                    {blogs.filter((b) => bookmarks.has(b.id)).length ? (
+                      <ul className="space-y-4 flex-1">
+                        {blogs.filter((b) => bookmarks.has(b.id)).map((b, index) => (
+                          <li key={b.id} className="group relative">
+                            <div
+                              className={`flex items-center gap-3 p-4 rounded-2xl bg-white/70 dark:bg-slate-800/70
+                          hover:bg-white/90 dark:hover:bg-slate-700/70 transition-all duration-300
+                          shadow-md hover:shadow-xl cursor-pointer`}
+                              onClick={() => openModal(b)}
+                            >
+                              {/* Rank Badge */}
+                              <div className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-bold text-lg flex-shrink-0
+                              ${index === 0 ? "bg-gradient-to-r from-yellow-400 to-yellow-500 shadow-lg" :
+                                  index === 1 ? "bg-gradient-to-r from-gray-300 to-gray-400 shadow-md" :
+                                    index === 2 ? "bg-gradient-to-r from-amber-600 to-amber-700 shadow-md" :
+                                      "bg-gradient-to-r from-yellow-500 to-yellow-600 shadow-sm"}`}>
+                                {index + 1}
+                              </div>
+
+                              {/* Post Info */}
+                              <div className="flex-1 min-w-0">
+                                <h5 className="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-100 
+                               line-clamp-2 transition-all duration-300 group-hover:underline">
+                                  {b.title}
+                                </h5>
+                                <div className="flex items-center gap-2 mt-1 text-xs text-slate-500 dark:text-slate-400">
+                                  <img src={b.author.avatar} alt={b.author.name} className="w-4 h-4 rounded-full object-cover" />
+                                  <span>{b.author.name}</span>
+                                  <span>· {b.readTime} min read</span>
+                                </div>
+                              </div>
+
+                              {/* Remove Bookmark Button */}
+                              <button
+                                onClick={(e) => { e.stopPropagation(); toggleBookmark(b.id); }}
+                                className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600
+                           text-black rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 group-hover:shadow-yellow-500/25"
+                                title="Remove bookmark"
+                              >
+                                <span className="text-sm">×</span>
+                              </button>
+                            </div>
+
+                            {/* Hover overlay */}
+                            <div className="absolute inset-0 rounded-2xl pointer-events-none bg-gradient-to-r from-transparent via-yellow-200/10 to-transparent 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="flex-1 flex flex-col items-center justify-center text-center p-6">
+                        <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                          <span className="text-3xl">📚</span>
+                        </div>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mb-2">No bookmarks yet</p>
+                        <p className="text-xs text-slate-400 dark:text-slate-500">Save your favorite posts to read later!</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
+
               </div>
             </div>
 
