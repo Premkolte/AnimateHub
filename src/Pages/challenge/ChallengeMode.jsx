@@ -584,7 +584,7 @@ const ChallengeMode = () => {
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 relative z-10">
         {/* Header */}
         <section ref={headerRef} className="relative">
-          <div className="text-center space-y-6">
+          <div className="text-center space-y-6 hover:scale-75 transition-all duration-100">
             <div className="flex justify-center">
               <div className="relative">
                 <div 
@@ -612,7 +612,7 @@ const ChallengeMode = () => {
                 <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-lg opacity-30 -z-10"></div>
               </div>
             </div>
-            <h1 className="header-text text-5xl md:text-7xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
+            <h1 className=" header-text text-5xl md:text-7xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
               Challenge Mode
             </h1>
             <p className="header-text text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
