@@ -6,6 +6,7 @@ import { faTwitter, faFacebook, faLinkedin } from "@fortawesome/free-brands-svg-
 import Journey from "./Journey"
 import CoreTeam from "./CoreTeam"
 import Insights from "./Insights"
+import { Link } from "react-router-dom"
 
 const About = () => {
   const shouldReduceMotion = useReducedMotion() // This hook returns true if the user prefers reduced motion
@@ -410,10 +411,10 @@ const About = () => {
               
               <div className="flex flex-wrap gap-3 justify-center">
                 {[
-                  { label: "🔧 Contribute", bg: "from-blue-500 to-cyan-500" },
-                  { label: "💡 Suggest", bg: "from-purple-500 to-pink-500" },
-                  { label: "📚 Document", bg: "from-green-500 to-emerald-500" },
-                  { label: "🐛 Report Issues", bg: "from-orange-500 to-red-500" },
+                  { label: "🔧 Contribute", href:"https://github.com/Premkolte/AnimateHub", bg: "from-blue-500 to-cyan-500" },
+                  { label: "💡 Suggest", href:"/contact", bg: "from-purple-500 to-pink-500" },
+                  { label: "📚 Document", href:"https://github.com/Premkolte/AnimateHub", bg: "from-green-500 to-emerald-500" },
+                  { label: "🐛 Report Issues", href:"https://github.com/Premkolte/AnimateHub/issues/new", bg: "from-orange-500 to-red-500" },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -421,7 +422,9 @@ const About = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    {item.label}
+                    <Link to={item.href}>
+                      {item.label}
+                    </Link>
                   </motion.div>
                 ))}
               </div>
