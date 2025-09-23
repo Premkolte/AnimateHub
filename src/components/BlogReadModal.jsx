@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 function normalizeTags(raw) {
@@ -10,7 +10,7 @@ function normalizeTags(raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) return normalizeTags(parsed);
       }
-    } catch {}
+    } catch { }
     return raw.split(",").map(t => t.trim()).filter(Boolean);
   }
   if (raw && typeof raw === "object") {
@@ -37,6 +37,10 @@ export default function BlogReadModal({
   submitComment,
   deleteComment,
 }) {
+
+  const [isMaximized, setIsMaximized] = useState(false);
+  const toggleMaximize = () => setIsMaximized(prev => !prev);
+
   if (!blog) return null;
   const safeTags = normalizeTags(blog.tags);
 
@@ -150,11 +154,10 @@ export default function BlogReadModal({
       return (
         <motion.p
           key={index}
-          className={`text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-200 mb-4 ${
-            index === 0
-              ? "first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 dark:first-letter:text-blue-400 first-letter:mr-3 first-letter:float-left first-letter:leading-none first-letter:mt-1"
-              : ""
-          }`}
+          className={`text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-200 mb-4 ${index === 0
+            ? "first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 dark:first-letter:text-blue-400 first-letter:mr-3 first-letter:float-left first-letter:leading-none first-letter:mt-1"
+            : ""
+            }`}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.9 + index * 0.1 }}
@@ -184,7 +187,8 @@ export default function BlogReadModal({
 
           <motion.div
             initial={{ y: 100, opacity: 0, scale: 0.8 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
+            //animate={{ y: 0, opacity: 1, scale: 1 }}
+            animate={{ y: 0, opacity: 1, scale: isMaximized ? 1.22 : 1 }}
             exit={{ y: 100, opacity: 0, scale: 0.8 }}
             transition={{ type: "spring", stiffness: 300, damping: 25, mass: 0.8 }}
             className="relative z-10 w-full max-w-6xl max-h-[95vh] sm:max-h-[90vh] bg-gradient-to-br from-white/98 via-blue-50/80 to-purple-50/80 dark:from-slate-900/98 dark:via-slate-800/90 dark:to-purple-900/30 rounded-3xl overflow-hidden border-2 border-white/30 dark:border-slate-700/50 shadow-2xl backdrop-blur-2xl"
@@ -211,12 +215,8 @@ export default function BlogReadModal({
               </div>
 
               <div className="relative z-10 flex items-center justify-between">
-                <motion.div
-                  className="flex items-center gap-4"
-                  initial={{ x: -30, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
+                {/* Left side: Icon + Title */}
+                <motion.div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20">
                     <motion.span
                       className="text-2xl"
@@ -228,27 +228,36 @@ export default function BlogReadModal({
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">Blog Reader</h3>
-                    <p className="text-blue-100 text-sm">
-                      Immersive reading experience
-                    </p>
+                    <p className="text-blue-100 text-sm">Immersive reading experience</p>
                   </div>
                 </motion.div>
 
-                <motion.button
-                  onClick={onClose}
-                  className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 border border-white/20 group"
-                  title="Close"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  initial={{ x: 30, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <span className="text-white text-lg font-bold group-hover:rotate-90 transition-transform duration-300">
+                {/* Right side: Buttons */}
+                <div className="flex items-center gap-2">
+                  {/* Maximize/Minimize button */}
+                  <motion.button
+                    onClick={toggleMaximize}
+                    className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 border border-white/20"
+                    title={isMaximized ? "Minimize" : "Maximize"}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {isMaximized ? "🗕" : "🗖"}
+                  </motion.button>
+
+                  {/* Close button */}
+                  <motion.button
+                    onClick={onClose} F
+                    className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 border border-white/20"
+                    title="Close"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
                     ×
-                  </span>
-                </motion.button>
+                  </motion.button>
+                </div>
               </div>
+
             </motion.div>
 
             <div className="overflow-y-auto max-h-[calc(95vh-100px)] sm:max-h-[calc(90vh-120px)] custom-scrollbar">
@@ -331,11 +340,10 @@ export default function BlogReadModal({
                   >
                     <motion.button
                       onClick={() => toggleLike(blog.id)}
-                      className={`group relative px-5 py-3 rounded-2xl font-semibold transition-all duration-300 overflow-hidden min-w-[120px] ${
-                        likedByMe.has(blog.id)
-                          ? "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg shadow-rose-500/25"
-                          : "bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 hover:from-rose-100 hover:to-pink-100 dark:hover:from-rose-900/50 dark:hover:to-pink-900/50"
-                      }`}
+                      className={`group relative px-5 py-3 rounded-2xl font-semibold transition-all duration-300 overflow-hidden min-w-[120px] ${likedByMe.has(blog.id)
+                        ? "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg shadow-rose-500/25"
+                        : "bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 hover:from-rose-100 hover:to-pink-100 dark:hover:from-rose-900/50 dark:hover:to-pink-900/50"
+                        }`}
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -357,11 +365,10 @@ export default function BlogReadModal({
 
                     <motion.button
                       onClick={() => toggleBookmark(blog.id)}
-                      className={`group relative px-5 py-3 rounded-2xl font-semibold transition-all duration-300 overflow-hidden min-w-[120px] ${
-                        bookmarks.has(blog.id)
-                          ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-black shadow-lg shadow-yellow-500/25"
-                          : "bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 hover:from-yellow-100 hover:to-yellow-200 dark:hover:from-yellow-900/50 dark:hover:to-yellow-800/50"
-                      }`}
+                      className={`group relative px-5 py-3 rounded-2xl font-semibold transition-all duration-300 overflow-hidden min-w-[120px] ${bookmarks.has(blog.id)
+                        ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-black shadow-lg shadow-yellow-500/25"
+                        : "bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 text-slate-700 dark:text-slate-200 hover:from-yellow-100 hover:to-yellow-200 dark:hover:from-yellow-900/50 dark:hover:to-yellow-800/50"
+                        }`}
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
