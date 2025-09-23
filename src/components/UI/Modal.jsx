@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { IoMdClose } from 'react-icons/io';
-import { AiOutlineHeart, AiFillHeart, AiOutlineCode } from 'react-icons/ai';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Link } from 'react-router-dom';
-import { useAuthStore } from '../../store/authStore';
+import React, { useState } from "react";
+import { IoMdClose } from "react-icons/io";
+import { AiOutlineHeart, AiFillHeart, AiOutlineCode } from "react-icons/ai";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Link } from "react-router-dom";
+import { useAuthStore } from "../../store/authStore";
 
 function Modal({ showModal, onClose, jsxCode, cssCode }) {
-  const [copyStatus, setCopyStatus] = useState('');
+  const [copyStatus, setCopyStatus] = useState("");
   const [isFavorited, setIsFavorited] = useState(false);
   const { currentUser } = useAuthStore();
 
@@ -14,7 +14,7 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
 
   const handleCopy = (text) => {
     setCopyStatus(text);
-    setTimeout(() => setCopyStatus(''), 2000);
+    setTimeout(() => setCopyStatus(""), 2000);
   };
 
   const handleFavorite = () => {
@@ -23,9 +23,14 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
-      <div className="bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white rounded-lg shadow-lg p-6 max-w-3xl w-full max-h-screen overflow-auto relative">
-        
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white rounded-lg shadow-lg p-6 max-w-3xl w-full max-h-screen overflow-auto relative"
+      >
         {/* Close Button */}
         <button
           className="absolute top-4 right-4 text-2xl text-secondary-700 dark:text-white hover:text-red-500"
@@ -41,23 +46,31 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
             onClick={handleFavorite}
             title="Add to favorites"
           >
-            {isFavorited ? <AiFillHeart className="text-red-500" /> : <AiOutlineHeart />}
+            {isFavorited ? (
+              <AiFillHeart className="text-red-500" />
+            ) : (
+              <AiOutlineHeart />
+            )}
           </button>
         )}
 
         <div className="flex flex-col items-center gap-5">
-          
           {/* JSX / React Code */}
           {jsxCode && (
             <div className="bg-secondary-800 text-white rounded-lg w-full p-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <AiOutlineCode className="text-green-400" />
-                  <span className="bg-green-500 p-2 rounded text-sm font-medium">JSX</span>
+                  <span className="bg-green-500 p-2 rounded text-sm font-medium">
+                    JSX
+                  </span>
                 </div>
-                <CopyToClipboard text={jsxCode} onCopy={() => handleCopy(jsxCode)}>
+                <CopyToClipboard
+                  text={jsxCode}
+                  onCopy={() => handleCopy(jsxCode)}
+                >
                   <button className="bg-white text-black dark:bg-white dark:text-black p-2 px-4 rounded-lg">
-                    {copyStatus === jsxCode ? 'Copied!' : 'Copy to clipboard'}
+                    {copyStatus === jsxCode ? "Copied!" : "Copy to clipboard"}
                   </button>
                 </CopyToClipboard>
               </div>
@@ -71,10 +84,15 @@ function Modal({ showModal, onClose, jsxCode, cssCode }) {
           {cssCode && (
             <div className="bg-secondary-800 text-white rounded-lg w-full p-2">
               <div className="flex items-center justify-between">
-                <div className="bg-green-500 p-2 rounded text-sm font-medium">CSS</div>
-                <CopyToClipboard text={cssCode} onCopy={() => handleCopy(cssCode)}>
+                <div className="bg-green-500 p-2 rounded text-sm font-medium">
+                  CSS
+                </div>
+                <CopyToClipboard
+                  text={cssCode}
+                  onCopy={() => handleCopy(cssCode)}
+                >
                   <button className="bg-white text-black dark:bg-white dark:text-black p-2 px-4 rounded-lg">
-                    {copyStatus === cssCode ? 'Copied!' : 'Copy to clipboard'}
+                    {copyStatus === cssCode ? "Copied!" : "Copy to clipboard"}
                   </button>
                 </CopyToClipboard>
               </div>
