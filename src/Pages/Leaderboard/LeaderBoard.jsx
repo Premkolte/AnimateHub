@@ -328,7 +328,7 @@ export default function LeaderBoard() {
                               href={contributor.profile}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors text-sm truncate block"
+                              className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors text-lg truncate block"
                             >
                               {contributor.username}
                             </a>
@@ -392,7 +392,7 @@ export default function LeaderBoard() {
                             href={contributor.profile}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors"
+                            className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors text-lg"
                           >
                             {contributor.username}
                           </a>
