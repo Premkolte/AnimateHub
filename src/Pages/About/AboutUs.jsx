@@ -49,10 +49,10 @@ const About = () => {
         {/* Enhanced Hero Section */}
         <section className="relative">
           {/* Background decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
+          {/* <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-tr from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl"></div>
-          </div>
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-tr from-blue-400/20 to-cyan-400/-400 rounded-full blur-3xl"></div>
+          </div> */}
           
           <div className="relative flex flex-col lg:flex-row items-center gap-16">
             <motion.div className="flex-1 space-y-8" variants={fadeInLeft} initial="initial" animate="animate">
