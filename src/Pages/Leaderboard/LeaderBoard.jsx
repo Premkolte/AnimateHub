@@ -408,6 +408,29 @@ export default function LeaderBoard() {
                         className="w-10 h-10 rounded-full border-2 border-white dark:border-gray-600 shadow-sm flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                          <div className="min-w-0">
+                            <a
+                              href={contributor.profile}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors text-lg truncate block"
+                            >
+                              {contributor.username}
+                            </a>
+                            <a
+                              href={`https://github.com/${GITHUB_REPO}/pulls?q=is:pr+author:${contributor.username}+is:merged`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-accent-400 transition-colors block"
+                            >
+                              View Contributions →
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Badges */}
+
                         <a
                           href={contributor.profile}
                           target="_blank"
@@ -469,7 +492,11 @@ export default function LeaderBoard() {
                             href={contributor.profile}
                             target="_blank"
                             rel="noopener noreferrer"
+
+                            className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors text-lg"
+
                             className="font-medium text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-accent-400 transition-colors"
+
                           >
                             {contributor.username}
                           </a>
