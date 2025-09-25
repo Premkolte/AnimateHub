@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google Fonts -->
+    <!-- Added Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
 
     <meta charset="UTF-8" />
@@ -14,8 +14,23 @@
     <meta name="keywords" content="animation library, react components, tailwind css, css animations, open source, ui components, web animations, frontend development, react animations" />
     <meta name="author" content="AnimateHub" />
     <meta name="robots" content="index, follow" />
+    
+    <!-- REMOVE this line to allow translation -->
+    <!-- <meta name="google" content="notranslate" /> -->
 
-    <!-- Open Graph Meta Tags -->
+    <!-- Google Translate -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'hi,en',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
     <meta property="og:title" content="AnimateHub - Open Source Animation UI Library" />
     <meta property="og:description" content="100+ open-source animation components for React & CSS. Zero setup required, production-ready animations." />
     <meta property="og:type" content="website" />
@@ -23,19 +38,19 @@
     <meta property="og:image" content="https://animate-hub.vercel.app/og-image.png" />
     <meta property="og:site_name" content="AnimateHub" />
     <meta property="og:locale" content="en_US" />
-
+    
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="AnimateHub - Open Source Animation UI Library" />
     <meta name="twitter:description" content="100+ open-source animation components for React & CSS. Zero setup required, production-ready animations." />
     <meta name="twitter:image" content="https://animate-hub.vercel.app/og-image.png" />
     <meta name="twitter:creator" content="@AnimateHub" />
-
+    
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#3B82F6" />
     <link rel="canonical" href="https://animate-hub.vercel.app/" />
-
-    <!-- Structured Data -->
+    
+    <!-- Structured Data for Search Engines -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -58,85 +73,15 @@
       "softwareVersion": "1.0.0"
     }
     </script>
-
-    <!-- Futuristic Styling -->
-    <style>
-      body {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(-45deg, #1d1f20, #2e2f31, #3b82f6, #9333ea);
-        background-size: 400% 400%;
-        animation: gradientBG 12s ease infinite;
-        color: white;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      /* Smooth gradient animation */
-      @keyframes gradientBG {
-        0% {background-position: 0% 50%;}
-        50% {background-position: 100% 50%;}
-        100% {background-position: 0% 50%;}
-      }
-
-      /* Glassmorphism container */
-      #root {
-        width: 90%;
-        max-width: 1200px;
-        min-height: 80vh;
-        padding: 2rem;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(12px);
-        border-radius: 20px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        animation: fadeIn 1.2s ease;
-      }
-
-      @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(20px);}
-        to {opacity: 1; transform: translateY(0);}
-      }
-
-      /* Dark/Light adaptive text */
-      @media (prefers-color-scheme: light) {
-        body { background: linear-gradient(-45deg, #f5f5f5, #e5e7eb, #93c5fd, #c084fc); }
-        #root { background: rgba(255, 255, 255, 0.6); color: #111; }
-      }
-
-      /* Translate button (fixed) */
-      #google_translate_element {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 9999;
-        background: rgba(0,0,0,0.4);
-        border-radius: 8px;
-        padding: 5px;
-      }
-    </style>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <!-- Google Translate Widget -->
-    <div id="google_translate_element"></div>
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element" style="position:fixed;top:10px;right:10px;z-index:9999;"></div>
+   <div id="root"></div>
 
-    <!-- React Mount Point -->
-    <div id="root"></div>
+  <div id="root"></div>
 
-    <!-- JS Bundle -->
-    <script type="module" src="/src/main.jsx"></script>
-
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'hi,en',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-      }
-    </script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  </body>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
 </html>
