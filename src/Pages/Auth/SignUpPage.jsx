@@ -5,11 +5,11 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { User, Mail, Lock } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
+import { GoogleLogin } from "@react-oauth/google";
 import toast from "react-hot-toast";
-
 const SignupPage = () => {
   const navigate = useNavigate();
-  const { handleSignUp, isAuthLoading, currentUser, authError } = useAuthStore();
+  const { handleSignUp, handleGoogleSignin, isAuthLoading, currentUser, authError } = useAuthStore();
 
   const [signUpData, setSignUpData] = useState({
     username: "",
@@ -20,19 +20,65 @@ const SignupPage = () => {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const [passwordActive, setPasswordActive] = useState(false);
+
+  const [requirements, setRequirements] = useState({
+    length: false,
+    special: false,
+    number: false,
+    caps: false,
+  });
+
   const onChangeHandler = (e) => {
-    setSignUpData({
+    const updatedData = {
       ...signUpData,
       [e.target.name]: e.target.value,
-    });
+    };
+    setSignUpData(updatedData);
+    if (e.target.name === 'password') {
+      checkRequirements(updatedData.password);
+    }
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  const checkRequirements = (password) => {
+    setRequirements({
+      length: password.length >= 8,
+      special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+      number: /\d/.test(password),
+      caps: /[A-Z]/.test(password),
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const { username, fullName, email, password } = signUpData;
+
+    if (!username || !fullName || !email || !password) {
+      toast.error("All fields are required!");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
+
+    if (username.length < 3) {
+      toast.error("Username must be at least 3 characters long.");
+      return;
+    }
+
     handleSignUp(signUpData);
   };
 
@@ -201,6 +247,8 @@ const SignupPage = () => {
                   className="w-full pl-12 pr-12 py-4 border-2 border-primary-100 dark:border-accent-600/30 dark:bg-secondary-700/50 text-secondary-900 dark:text-white rounded-xl focus:border-primary-500 dark:focus:border-accent-500 focus:outline-none focus:ring-4 focus:ring-primary-200/30 dark:focus:ring-accent-500/20 transition-all duration-300 placeholder-secondary-400 dark:placeholder-secondary-500"
                   value={signUpData.password}
                   onChange={onChangeHandler}
+                  onFocus={() => setPasswordActive(true)}
+                  onBlur={() => setPasswordActive(false)}
                   placeholder="Create a strong password"
                   required
                 />
@@ -215,6 +263,17 @@ const SignupPage = () => {
                 </motion.button>
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
               </div>
+              {passwordActive && (
+                <div className="mt-2 space-y-1">
+                  <span className={`text-sm ${requirements.length ? 'text-green-500' : 'text-red-500'}`}>At least 8 characters</span>
+                  <br />
+                  <span className={`text-sm ${requirements.special ? 'text-green-500' : 'text-red-500'}`}>One special character</span>
+                  <br />
+                  <span className={`text-sm ${requirements.number ? 'text-green-500' : 'text-red-500'}`}>One number</span>
+                  <br />
+                  <span className={`text-sm ${requirements.caps ? 'text-green-500' : 'text-red-500'}`}>One uppercase letter</span>
+                </div>
+              )}
             </motion.div>
 
             {/* Submit Button */}
@@ -240,7 +299,13 @@ const SignupPage = () => {
                   Creating Account...
                 </span>
               ) : (
-                <span className="relative z-10">Create Account</span>
+                <span
+                  className="relative z-10"
+                  onClick={() => navigate('/sign-in')}
+                >
+                  Create Account
+                </span>
+
               )}
               <div className="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             </motion.button>
@@ -272,21 +337,14 @@ const SignupPage = () => {
                   <div className="border-t border-secondary-200 dark:border-secondary-700 flex-1"></div>
                 </div>
 
-                <motion.button
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.0 }}
-                  whileHover={{
-                    scale: 1.02,
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    handleGoogleSignin(credentialResponse.credential);
                   }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => toast.error("Google signup is currently not available")}
-                  className="w-full bg-white hover:bg-gray-50 text-gray-800 border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center p-4 rounded-xl shadow-md transition-all duration-300 font-semibold"
-                >
-                  <FcGoogle className="mr-3 text-xl" />
-                  Continue with Google (Coming Soon)
-                </motion.button>
+                  onError={(error) => {
+                    console.error("Google Sign-In error:", error);
+                  }}
+                />
               </motion.div>
 
               <motion.div

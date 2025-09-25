@@ -1,45 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Root page -->
   <url>
     <loc>https://animate-hub.vercel.app/</loc>
-    <lastmod>2025-01-08</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Main sections -->
   <url>
     <loc>https://animate-hub.vercel.app/explore</loc>
-    <lastmod>2025-01-08</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
-  <url>
-    <loc>https://animate-hub.vercel.app/about</loc>
-    <lastmod>2025-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://animate-hub.vercel.app/contact</loc>
-    <lastmod>2025-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://animate-hub.vercel.app/contributors</loc>
-    <lastmod>2025-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+
   <url>
     <loc>https://animate-hub.vercel.app/templates</loc>
-    <lastmod>2025-01-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
   </url>
+
   <url>
     <loc>https://animate-hub.vercel.app/favorites</loc>
-    <lastmod>2025-01-08</lastmod>
+    <lastmod>2025-09-10</lastmod>
     <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Informational pages -->
+  <url>
+    <loc>https://animate-hub.vercel.app/about</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://animate-hub.vercel.app/contact</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+
+  <url>
+    <loc>https://animate-hub.vercel.app/contributors</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.55</priority>
+  </url>
+
+  <!-- User-related pages (if available) -->
+  <url>
+    <loc>https://animate-hub.vercel.app/login</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://animate-hub.vercel.app/signup</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://animate-hub.vercel.app/profile</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Legal pages -->
+  <url>
+    <loc>https://animate-hub.vercel.app/privacy-policy</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://animate-hub.vercel.app/terms</loc>
+    <lastmod>2025-09-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
