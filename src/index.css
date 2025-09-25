@@ -1,140 +1,425 @@
-@import url('https://fonts.googleapis.com/css2?family=Gagalin&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ==============================
+   styles.css — Level 3 Futuristic UI
+   Pure CSS (no plugins). Drop-in replacement.
+   ============================== */
 
-/* Custom utilities if needed */
-@layer utilities {
-  .font-gagalin {
-    font-family: 'Gagalin', sans-serif;
+/* ---------- Root / Variables ---------- */
+:root{
+  --bg-1: #0f1724;      /* deep navy */
+  --bg-2: #0b1020;      /* darker */
+  --accent-1: #7c3aed;  /* vivid violet */
+  --accent-2: #06b6d4;  /* cyan */
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.08);
+  --card-bg: rgba(255,255,255,0.03);
+  --muted: rgba(255,255,255,0.65);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-subtle: 0 6px 18px rgba(2,6,23,0.6);
+  --glass-blur: 10px;
+  --focus-ring: 0 0 0 6px rgba(124,58,237,0.12);
+  --duration: 320ms;
+  --ease: cubic-bezier(.2,.9,.3,1);
+}
+
+/* ---------- Base / Layout ---------- */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial;
+  color:var(--muted);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background:linear-gradient(120deg,var(--bg-1) 0%, #081028 40%, #071226 60%);
+  overflow-y:auto;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Fade-in animations: shorter and smaller movement */
+  .fade-in {
+    animation-duration: 0.2s !important;
+    transform: translateY(2px) !important;
+  }
+
+  /* Buttons and accordion: reduce hover effects */
+  button,
+  .accordion-button {
+    transition-duration: 0.1s !important;
+  }
+
+  button:hover,
+  .accordion-button:hover {
+    transform: scale(1) !important;
+    box-shadow: none !important;
+  }
+
+  /* Links */
+  a,
+  .nav-link {
+    transition-duration: 0.1s !important;
+  }
+
+  /* Cards */
+  .card {
+    transition-duration: 0.1s !important;
+  }
+
+  .card:hover {
+    transform: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; /* subtle shadow */
+  }
+
+  /* Nav link underline */
+  .nav-link::after {
+    transition: none !important;
+  }
+
+  .nav-link:hover::after {
+    width: 100% !important; /* still show underline but no animation */
   }
 }
 
-@layer base {
-  html, body {
-    @apply overscroll-none; /* disables rubber-band bounce */
+/* Animated subtle moving gradient overlay (futuristic energy) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background: radial-gradient(400px 200px at 10% 20%, rgba(124,58,237,0.12),
+               transparent 20%),
+              radial-gradient(500px 300px at 90% 80%, rgba(6,182,212,0.10),
+               transparent 20%);
+  pointer-events:none;
+  animation: floatBG 14s linear infinite;
+  mix-blend-mode: screen;
+}
+@keyframes floatBG{
+  0%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-12px) rotate(2deg)}
+  100%{transform:translateY(0) rotate(0deg)}
+}
+
+/* ---------- Container / Root App Card ---------- */
+.app-root{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:1200px;
+  border-radius:var(--radius-lg);
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  box-shadow: var(--shadow-subtle);
+  border:1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  padding:28px;
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:20px;
+  transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+}
+.app-root:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.7) }
+
+/* ---------- Header / Title ---------- */
+.header{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  justify-content:space-between;
+  z-index:3;
+}
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.logo{
+  width:56px;
+  height:56px;
+  border-radius:12px;
+  background: linear-gradient(135deg,var(--accent-1),var(--accent-2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-weight:700;
+  box-shadow: 0 6px 18px rgba(124,58,237,0.18), inset 0 -6px 14px rgba(255,255,255,0.06);
+}
+
+/* Title text */
+.title{
+  font-size:20px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:0.2px;
+}
+.subtitle{
+  font-size:13px;
+  color:rgba(255,255,255,0.72);
+  margin-top:-4px;
+}
+
+/* ---------- Grid Layout ---------- */
+.layout{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:22px;
+  align-items:start;
+}
+
+/* Responsive fallback */
+@media (max-width:980px){
+  .layout{ grid-template-columns: 1fr; }
+}
+
+/* ---------- Main Card / Game area ---------- */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+/* board wrapper (example for tic tac toe) */
+.board-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+  justify-content:center;
+}
+
+/* futuristic status text with animated underline */
+.status{
+  font-weight:700;
+  color:linear-gradient(90deg,#fff,#eee);
+  font-size:18px;
+  position:relative;
+  padding-bottom:6px;
+}
+.status::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:0;
+  height:3px;
+  width:36px;
+  border-radius:6px;
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  box-shadow:0 6px 18px rgba(124,58,237,0.15);
+}
+
+/* ---------- Game Board (3x3) ---------- */
+.board{
+  width: min(520px, 92%);
+  aspect-ratio: 1/1;
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:10px;
+  padding:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  border-radius:12px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* each cell */
+.cell{
+  border-radius:10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+  height:100%;
+  transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease), background-color var(--duration) var(--ease);
+  border: 1px solid rgba(255,255,255,0.03);
+  position:relative;
+  overflow:hidden;
+}
+
+/* subtle hover micro-interaction */
+.cell:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(3,6,23,0.45);
+}
+
+/* symbol styles */
+.symbol{
+  font-size:56px;
+  font-weight:800;
+  color: rgba(255,255,255,0.9);
+  transition: transform 220ms var(--ease), color 220ms var(--ease), text-shadow 220ms var(--ease);
+  text-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+/* X / O color accents */
+.symbol.x{ color: var(--accent-1); }
+.symbol.o{ color: var(--accent-2); }
+
+/* Tap animation — scale in */
+.cell:active .symbol{
+  transform:scale(0.92);
+}
+
+/* winning highlight (animated glow and border) */
+.cell.winning{
+  box-shadow: 0 12px 40px rgba(124,58,237,0.24), inset 0 0 30px rgba(124,58,237,0.06);
+  border-color: rgba(124,58,237,0.5);
+  animation: winningPulse 900ms ease-in-out infinite;
+}
+@keyframes winningPulse{
+  0%{ filter: drop-shadow(0 0 0 rgba(124,58,237,0.0)); }
+  50%{ filter: drop-shadow(0 10px 24px rgba(124,58,237,0.18)); transform: translateY(-3px) }
+  100%{ filter: drop-shadow(0 0 0 rgba(124,58,237,0.0)); transform: translateY(0) }
+}
+
+/* alternate win for O */
+.cell.winning.o{
+  box-shadow: 0 12px 40px rgba(6,182,212,0.24), inset 0 0 30px rgba(6,182,212,0.06);
+  border-color: rgba(6,182,212,0.5);
+}
+.cell.winning.o .symbol{ color: var(--accent-2) }
+
+/* ---------- Controls / Buttons ---------- */
+.controls{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:center;
+  margin-top:6px;
+}
+.btn{
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding:10px 16px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+  box-shadow: 0 8px 20px rgba(2,6,23,0.5);
+  transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease), background var(--duration) var(--ease);
+}
+.btn:active{ transform: scale(0.98) }
+.btn.primary{
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  box-shadow: 0 12px 30px rgba(124,58,237,0.16);
+  border: none;
+}
+.btn.ghost{
+  background:transparent;
+  border: 1px dashed rgba(255,255,255,0.06);
+}
+
+/* focus styles for accessibility */
+.btn:focus, .cell:focus{
+  outline:none;
+  box-shadow: var(--focus-ring);
+  border-radius:12px;
+}
+
+/* ---------- Sidebar / Info Card ---------- */
+.sidebar{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.info-card{
+  padding:14px;
+  border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+}
+
+/* score rows */
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  padding:8px 0;
+}
+.score{
+  font-weight:800;
+  color:#fff;
+  font-size:18px;
+}
+
+/* ---------- Accordion Button (improved) ---------- */
+.accordion-button{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
+  border-radius:10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.04);
+  cursor:pointer;
+  font-weight:700;
+  transition: all 260ms var(--ease);
+}
+.accordion-button:hover{ transform: translateY(-4px); box-shadow: 0 12px 28px rgba(3,6,23,0.45) }
+.accordion-button:active{ transform: translateY(-1px) }
+
+/* ---------- Utility / Animations ---------- */
+.fade-in { animation: fadeIn 480ms var(--ease) both; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px) }
+  to   { opacity: 1; transform: translateY(0) }
+}
+
+/* ---------- Google Translate container visibility control ----------
+   Default hidden (you already had display:none). We keep it hidden but provide
+   a utility to show it when needed: add class "show-translate" to reveal. */
+#google_translate_element { display:none; pointer-events:none }
+#google_translate_element.show-translate {
+  display:block;
+  pointer-events:auto;
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:9999;
+  padding:8px;
+  border-radius:10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 8px 20px rgba(2,6,23,0.6);
+}
+
+/* ---------- Dark/Light adaptive mode support ---------- */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg-1: #e6eef8;
+    --bg-2: #f8fafc;
+    --accent-1: #6d28d9;
+    --accent-2: #0891b2;
+    --muted: rgba(10,14,22,0.88);
+    --glass-bg: rgba(255,255,255,0.6);
+    --glass-border: rgba(12,17,26,0.06);
+    --card-bg: rgba(255,255,255,0.85);
+    --shadow-subtle: 0 8px 40px rgba(12,17,26,0.06);
   }
-}
-:root {
-  --scrollbar-thumb: #1b67e2; /* for light mode */
-}
-
-.dark {
-  background-color: #0f1629;
-  --scrollbar-thumb: #7429c6; /* for dark mode */
+  body{ color:var(--muted) }
+  .symbol{ text-shadow: 0 4px 10px rgba(0,0,0,0.04); }
 }
 
-::-webkit-scrollbar {
-  width: 10px;
+/* ---------- Small screens adjustments ---------- */
+@media (max-width:520px){
+  .board{ gap:6px }
+  .symbol{ font-size:44px }
+  .app-root{ padding:18px }
+  .logo{ width:48px; height:48px; border-radius:10px }
 }
 
-::-webkit-scrollbar-track {
-  background: inherit;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb);
-}
-.back-to-top {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 3.5rem;
-  height: 3.5rem;
-  padding-top: 8px;
-  background-color: #3B82F6;
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px);
-}
-
-.back-to-top.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-.back-to-top:hover {
-  transition: scale 0.3s ease-in-out;
-  transform: scale(1.1);
-}
-
-.back-to-top svg {
-  width: 44px;
-  height: 44px;
-  fill: white;
-}
-
-/* Floating animation for active items */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-/* Shimmer effect */
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-/* Glow pulse animation */
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-/* Keep scrollbar space reserved */
-pre {
-  scrollbar-gutter: stable;
-}
-/* Common button base */
-.custom-btn {
-  display: inline-block;
-  width: 100%;
-  padding: 12px 0;
-  border-radius: 9999px; /* pill shape */
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  transition: all 0.2s ease-in-out;
-  margin-top: 12px;
-}
-
-/* Purple Show CSS Button */
-.btn-purple {
-  background: linear-gradient(135deg, #340f57, #350d58);
-  color: white;
-  box-shadow: 0px 4px 12px rgba(147, 51, 234, 0.5);
-}
-.btn-purple:hover {
-  background: linear-gradient(135deg, #a855f7, #9333ea);
-  box-shadow: 0px 6px 15px rgba(147, 51, 234, 0.6);
-}
-
-/* Dark React Snippet Button */
-.btn-dark {
-  background: #080606;
-  color: white;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
-}
-.btn-dark:hover {
-  background: #3a3a3a;
-  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
-}
+/* ---------- Helper classes (optional) ---------- */
+.center{ display:flex; align-items:center; justify-content:center }
+.small{ font-size:13px; color: rgba(255,255,255,0.66) }

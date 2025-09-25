@@ -65,34 +65,35 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 import TransformPlayground from "./Pages/Playground/TransformPlayground";
 
 // -----------------------------------
-// Layout component that wraps all pages
+// Layout component with futuristic hover + fade transitions
 // -----------------------------------
 function Layout() {
   return (
-    <>
+    <div className="app-root transition-all duration-500 ease-in-out hover:scale-[1.01] hover:shadow-[0_20px_60px_rgba(2,6,23,0.6)]">
       <Navbar />
-      <main className="min-h-screen transition-all duration-300 ease-in-out">
+      <main className="min-h-screen px-4 sm:px-8 md:px-12 transition-colors duration-500 ease-in-out">
         <Outlet />
       </main>
       <Chatbot />
       <Footer />
       <BackToTop />
       <Toaster position="top-right" reverseOrder={false} />
-    </>
+    </div>
   );
 }
 
-
+// -----------------------------------
+// App Component - Level 3 Futuristic
+// -----------------------------------
 function App() {
   return (
     <AppProvider>
       <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        {/* UX Enhancements */}
+        {/* Futuristic cursor + smooth scroll */}
         <SplashCursor />
         <ScrollToTop />
 
         <Routes>
-          {/* Primary layout wrapper */}
           <Route element={<Layout />}>
             {/* Home & Info Pages */}
             <Route path="/" element={<HomePage />} />
@@ -175,6 +176,7 @@ function App() {
         <Analytics />
       </Router>
 
+      {/* Speed Insights overlay for futuristic performance hints */}
       <SpeedInsights />
     </AppProvider>
   );
