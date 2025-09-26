@@ -495,8 +495,6 @@ export default function LeaderBoard() {
 
                             className="font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-accent-400 transition-colors text-lg"
 
-                            className="font-medium text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-accent-400 transition-colors"
-
                           >
                             {contributor.username}
                           </a>
