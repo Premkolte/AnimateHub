@@ -14,34 +14,39 @@ const testimonials = [
     text: "An amazing tool for developers in India. The open-source nature makes it even more valuable!",
     name: "Varnikumar Patel",
     image: img1,
+    rating: 5,
   },
   {
     id: 2,
     text: "After integrating AnimateHub, our website engagement in India went through the roof!",
     name: "Priya Nair",
     image: img4,
+    rating: 4,
   },
   {
     id: 3,
     text: "The UI components are sleek and easy to tweak. Perfect for our startup's needs.",
     name: "Vikranth Jonna",
     image: img2,
+    rating: 5,
   },
   {
     id: 4,
     text: "AnimateHub has streamlined our workflow completely. A must-have for Indian tech teams!",
     name: "Ananya Singh",
     image: img5,
+    rating: 4,
   },
   {
     id: 5,
     text: "By far the smoothest animation library I've tried. The documentation is crystal clear.",
     name: "Vikram Iyer",
     image: img3,
+    rating: 5,
   },
 ];
 
-const TestimonialCard = ({ text, name, image }) => {
+const TestimonialCard = ({ text, name, image, rating  }) => {
   return (
     <motion.div
       className="flex-none w-72 sm:w-80 md:w-96 p-8 h-auto min-h-[280px] rounded-2xl  bg-white dark:bg-secondary-800/90 backdrop-blur-sm   shadow-lg dark:shadow-lg dark:shadow-accent-900/20  flex flex-col justify-between relative transition-all duration-300   mx-3 hover:shadow-xl hover:shadow-primary-100 dark:hover:shadow-accent-900/30"
@@ -50,6 +55,22 @@ const TestimonialCard = ({ text, name, image }) => {
       <p className="mb-6 text-base md:text-lg flex-grow leading-relaxed text-gray-700 dark:text-gray-300 font-normal">
         "{text}"
       </p>
+
+      {/* Star Rating */}
+      {rating && (
+        <div className="flex items-center mb-4">
+          {Array.from({ length: 5 }, (_, index) => (
+            <span
+              key={index}
+              className={`text-lg ${
+                index < rating ? "text-yellow-400" : "text-gray-300 dark:text-gray-600"
+              }`}
+            >
+              ★
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* User */}
       <div className="flex items-center gap-4 mt-auto pt-5">
@@ -75,6 +96,7 @@ TestimonialCard.propTypes = {
   text: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  rating: PropTypes.number,
 };
 
 const TestimonialSection = () => {
