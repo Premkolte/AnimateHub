@@ -142,8 +142,8 @@ const PricingSection = () => {
             >
               {/* Popular Badge */}
               {plan.isPopular && (
-                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 z-[60]">
-                  <div className="bg-gradient-to-r from-primary-500 to-accent-500 dark:from-primary-600 dark:to-accent-600 text-white px-6 py-2 rounded-full text-xs font-bold shadow-xl border-2 border-white dark:border-secondary-800">
+                <div className="absolute top-4 right-4 z-[60]">
+                  <div className="bg-gradient-to-r from-primary-500 to-accent-500 dark:from-primary-600 dark:to-accent-600 text-white px-3 py-2 rounded-full text-xs font-bold shadow-xl border-2 border-white dark:border-secondary-800">
                     ⭐ MOST POPULAR
                   </div>
                 </div>
