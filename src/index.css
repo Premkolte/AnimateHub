@@ -97,3 +97,44 @@
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
 }
+/* Keep scrollbar space reserved */
+pre {
+  scrollbar-gutter: stable;
+}
+/* Common button base */
+.custom-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 9999px; /* pill shape */
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  margin-top: 12px;
+}
+
+/* Purple Show CSS Button */
+.btn-purple {
+  background: linear-gradient(135deg, #340f57, #350d58);
+  color: white;
+  box-shadow: 0px 4px 12px rgba(147, 51, 234, 0.5);
+}
+.btn-purple:hover {
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+  box-shadow: 0px 6px 15px rgba(147, 51, 234, 0.6);
+}
+
+/* Dark React Snippet Button */
+.btn-dark {
+  background: #080606;
+  color: white;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
+}
+.btn-dark:hover {
+  background: #3a3a3a;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+}

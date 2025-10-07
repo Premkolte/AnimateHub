@@ -1,6 +1,6 @@
 import { VerifyAccountEmail } from './EmailTemplates/VerifyAccount.email.js';
 import { ForgotPasswordEmail } from './EmailTemplates/ForgotPassword.email.js';
-import transporter from './emailTransporter.js';
+import transporter from './EmailTransporter.js';
 
 /**
  * Sends a verification email to the user

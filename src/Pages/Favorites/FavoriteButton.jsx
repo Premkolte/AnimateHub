@@ -4,6 +4,7 @@ import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
 import { useFavorites } from '../../contexts/FavoritesContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 const FavoriteButton = ({ snippet, className = "", size = "md" }) => {
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -117,6 +118,11 @@ const FavoriteButton = ({ snippet, className = "", size = "md" }) => {
       </SignedOut>
     </div>
   );
+};
+FavoriteButton.propTypes = {
+  snippet: PropTypes.object.isRequired,
+  className: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'md', 'lg'])
 };
 
 export default FavoriteButton;

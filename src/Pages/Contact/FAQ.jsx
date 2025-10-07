@@ -3,20 +3,16 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 // FAQ Component
 const FAQ = () => {
-  // State to track which FAQ items are open
-  const [openItems, setOpenItems] = useState(new Set());
+  // State to track which FAQ item is open (only one at a time)
+  const [openItem, setOpenItem] = useState(null);
 
   // Refs for each FAQ answer container
   const answerRefs = useRef([]);
+  
   // Function to toggle an FAQ item open/closed
   const toggleItem = (index) => {
-    const newOpenItems = new Set(openItems);
-    if (newOpenItems.has(index)) {
-      newOpenItems.delete(index);
-    } else {
-      newOpenItems.add(index);
-    }
-    setOpenItems(newOpenItems);
+    // If clicking on a different item, open that one
+    setOpenItem(prevOpenItem => prevOpenItem === index ? null : index);
   };
 
   // FAQ data array
@@ -71,11 +67,8 @@ const FAQ = () => {
               </span>
 
               {/* Icon */}
-
-
               <div className="flex-shrink-0 p-2 rounded-full bg-gradient-to-r from-[#3b82f6] to-[#accefbff] dark:from-purple-600 dark:to-blue-6000 text-white transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 motion-reduce:group-hover:transform-none">
-
-                {openItems.has(index) ? (
+                {openItem === index ? (
                   <ChevronUp className="w-5 h-5" />
                 ) : (
                   <ChevronDown className="w-5 h-5" />
@@ -87,12 +80,12 @@ const FAQ = () => {
             <div
               ref={(el) => (answerRefs.current[index] = el)}
               style={{
-                maxHeight: openItems.has(index)
+                maxHeight: openItem === index
                   ? answerRefs.current[index]?.scrollHeight + "px"
                   : "0px",
               }}
               className={`overflow-hidden transition-all ease-in-out motion-reduce:transition-none ${
-                openItems.has(index)
+                openItem === index
                   ? "duration-700 opacity-100"
                   : "duration-500 opacity-0"
               }`}

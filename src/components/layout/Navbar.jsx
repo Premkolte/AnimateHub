@@ -6,13 +6,16 @@ import {
   FiUser,
   FiSettings,
   FiLogOut,
+  FiPlay,
   FiChevronDown,
 } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
+import { FiCode, FiLayers, FiType } from "react-icons/fi";
+import { SiFramer, SiTailwindcss } from "react-icons/si";
+import { MdBrush } from "react-icons/md"; // replacement for MdGradient
+import { FaHeart, FaCss3Alt, FaThLarge, FaRegSquare } from "react-icons/fa";
 import Logo from "/assets/Animate_logo.png";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useAuthStore } from "../../store/authStore";
-import "../layout/Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +32,6 @@ const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
 
-
   const navLinks = [
     "Home",
     "Explore",
@@ -40,7 +42,18 @@ const Navbar = () => {
     "Blogs",
     "Contact",
   ];
-
+  // inside Navbar component
+  const playgroundPaths = [
+    "/playground",
+    "/animationplayground",
+    "/framerplayground",
+    "/ColorGradientPlayground",
+    "/SVGPlayground",
+    "/TailwindPlayground",
+    "/FontPlayground",
+    "/flexboxPlayground",
+  ];
+  const isPlaygroundActive = playgroundPaths.includes(location.pathname);
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -151,20 +164,21 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-
   return (
     <>
       <nav
         className={`
           w-full backdrop-blur-md transition-all duration-500 ease-out
-          ${scrolled
-            ? "bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200"
-            : "bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200"
+          ${
+            scrolled
+              ? "bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200"
+              : "bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200"
           }
           py-3 sticky top-0 left-0 z-50
-          ${scrolled
-            ? "shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
-            : "shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
+          ${
+            scrolled
+              ? "shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
+              : "shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
           }
         `}
       >
@@ -186,10 +200,11 @@ const Navbar = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 rounded-full blur-lg group-hover:opacity-30 transition-opacity duration-300"></div>
                 </div>
                 <span
-                  className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${scrolled
-                    ? "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                    : "bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent"
-                    }`}
+                  className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${
+                    scrolled
+                      ? "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                      : "bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent"
+                  }`}
                 >
                   AnimateHub
                 </span>
@@ -205,71 +220,397 @@ const Navbar = () => {
                 }
 
                 if (item === "Playgrounds") {
+                  // Parent wrapper for the Playgrounds dropdown
                   return (
-                    <div key="playgrounds" className="relative" ref={dropdownRef}>
+                    <div
+                      key="playgrounds"
+                      className="relative"
+                      ref={dropdownRef} // Ref to detect clicks outside for closing dropdown
+                    >
+                      {/* Button to toggle dropdown open/close */}
                       <button
                         onClick={toggleDropdown}
-                        className={`relative px-4 py-2 rounded-lg font-medium flex items-center
-                  ${scrolled ? "text-gray-700 dark:text-gray-300" : "text-white/90"}`}
+                        className={`
+    relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
+    font-medium text-sm xl:text-base flex items-center
+    ${scrolled ? "text-gray-700 dark:text-gray-300" : "text-white/90"}
+    hover:shadow-lg transform hover:scale-105
+    ${
+      isPlaygroundActive
+        ? scrolled
+          ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+          : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
+        : ""
+    }
+    group overflow-hidden
+  `}
                       >
-                        Playgrounds <FiChevronDown className="ml-1" />
-                      </button>
+                        <span className="relative z-10">Playgrounds</span>
 
+                        {/* Dropdown arrow */}
+                        <FiChevronDown
+                          className={`ml-1 transition-transform duration-300 ${
+                            openDropdown ? "rotate-180" : ""
+                          }`}
+                        />
+
+                        {/* Active indicator dot (like About/Explore tabs) */}
+                        {isPlaygroundActive && (
+                          <div
+                            className="absolute -top-1.5 right-1 w-3 h-3 rounded-full
+        bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500
+        animate-pulse
+        before:content-[''] before:absolute before:inset-0
+        before:rounded-full before:bg-gradient-to-br
+        before:from-cyan-400 before:via-purple-500 before:to-pink-500
+        before:animate-[spin_3s_linear_infinite]
+        after:content-[''] after:absolute after:inset-[-2px]
+        after:rounded-full after:bg-gradient-to-r
+        after:from-blue-500/30 after:to-purple-500/30
+        after:blur-sm after:animate-pulse
+        shadow-[0_0_15px_rgba(147,51,234,0.5)]"
+                          ></div>
+                        )}
+
+                        {/* Side accent for active state */}
+                        {isPlaygroundActive && (
+                          <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-lg" />
+                        )}
+
+                        {/* Bottom accent underline */}
+                        <div
+                          className={`
+      absolute bottom-0 left-0 h-[2px] w-full transform origin-left
+      transition-transform duration-300 ease-out
+      bg-gradient-to-r from-blue-500 to-purple-500
+      scale-x-0 group-hover:scale-x-100
+      ${isPlaygroundActive ? "scale-x-100" : ""}
+    `}
+                        />
+                      </button>
+                      {/* Dropdown menu */}
                       {openDropdown && (
                         <div className="absolute left-0 w-56 text-black dark:text-white bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-2 z-50">
+                          {/* Animation Playground Link */}
                           <Link
                             to="/animationplayground"
                             onClick={() => {
                               closeMenu();
                               setOpenDropdown(false);
                             }}
-                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                            className={`
+        relative flex items-center px-5 py-2 rounded-xl
+        transition-all duration-300 ease-in-out
+        group
+        before:absolute before:left-0 before:right-0 before:bottom-0 before:h-[1px]
+        before:rounded-full
+        before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+        dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+        before:opacity-30
+        ${
+          location.pathname === "/animationplayground"
+            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+        }
+      `}
                           >
-                            Animation Playground
+                            <div className="flex items-center gap-2">
+                              <FiPlay className="text-blue-500 dark:text-gray-300" />
+                              <span>Animation Ground</span>
+                            </div>
                           </Link>
+                          {/* Code Playground Link */}
                           <Link
                             to="/playground"
                             onClick={() => {
                               closeMenu();
                               setOpenDropdown(false);
                             }}
-                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                            className={`
+        relative flex items-center px-5 py-2 rounded-xl
+        transition-all duration-300 ease-in-out
+        group
+        before:absolute before:left-0 before:right-0 before:bottom-0 before:h-[1px]
+        before:rounded-full
+        before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+        dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+        before:opacity-30
+        ${
+          location.pathname === "/playground"
+            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+        }
+      `}
                           >
-                            Code Playground
+                            <div className="flex items-center gap-2">
+                              <FiCode className="text-blue-500 dark:text-gray-300" />
+                              Code Playground
+                            </div>
                           </Link>
+                          {/* Framer Playground Link */}
                           <Link
                             to="/framerplayground"
                             onClick={() => {
                               closeMenu();
                               setOpenDropdown(false);
                             }}
-                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                            className={`
+        relative flex items-center px-5 py-2 rounded-xl
+        transition-all duration-300 ease-in-out
+        group
+        before:absolute before:left-0 before:right-0 before:bottom-0 before:h-[1px]
+        before:rounded-full
+        before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+        dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+        before:opacity-30
+        ${
+          location.pathname === "/framerplayground"
+            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+        }
+      `}
                           >
-                            Framer Playground
+                            <div className="flex items-center gap-2">
+                              <SiFramer className="text-blue-500 dark:text-gray-300" />
+                              Framer Playground
+                            </div>
                           </Link>
+                          {/* Gradient Playground Link */}
                           <Link
                             to="/ColorGradientPlayground"
                             onClick={() => {
                               closeMenu();
                               setOpenDropdown(false);
                             }}
-                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                            className={`
+        relative flex items-center px-5 py-2 rounded-xl
+        transition-all duration-300 ease-in-out
+        group
+        before:absolute before:left-0 before:right-0 before:bottom-0 before:h-[1px]
+        before:rounded-full
+        before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+        dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+        before:opacity-30
+        ${
+          location.pathname === "/ColorGradientPlayground"
+            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+        }
+      `}
                           >
-                            Gradient Playground
+                            <div className="flex items-center gap-2">
+                              <MdBrush className="text-blue-500 dark:text-gray-300" />
+                              Gradient Ground
+                            </div>
                           </Link>
+                          {/* Tailwind Playground Link */}
                           <Link
                             to="/TailwindPlayground"
                             onClick={() => {
                               closeMenu();
                               setOpenDropdown(false);
                             }}
-                            className="block px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-700"
+                            className={`
+        relative flex items-center px-5 py-2 rounded-xl
+        transition-all duration-300 ease-in-out
+        group
+        before:absolute before:left-0 before:right-0 before:bottom-0 before:h-[1px]
+        before:rounded-full
+        before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+        dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+        before:opacity-30
+        ${
+          location.pathname === "/TailwindPlayground"
+            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+        }
+      `}
                           >
-                            Tailwind Playground
+                            <div className="flex items-center gap-2">
+                              <SiTailwindcss className="text-blue-500 dark:text-gray-300" />
+                              Tailwind Ground
+                            </div>
                           </Link>
+                          {/* SVG Playground Link */}
+                          <Link
+                            to="/SVGPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className={`
+        relative flex items-center px-5 py-2 rounded-xl
+        transition-all duration-300 ease-in-out
+        group
+        before:absolute before:left-0 before:right-0 before:bottom-0 before:h-[1px]
+        before:rounded-full
+        before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+        dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+        before:opacity-30
+        ${
+          location.pathname === "/SVGPlayground"
+            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+        }
+      `}
+                          >
+                            <div className="flex items-center gap-2">
+                              <FiLayers className="text-blue-500 dark:text-gray-300" />
+                              SVG Playground
+                            </div>
+                          </Link>
+                          {/* Font Playground Link */}
+                          <Link
+                            to="/FontPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className={`
+        relative flex items-center px-5 py-2 rounded-xl
+        transition-all duration-300 ease-in-out
+        group
+        before:absolute before:left-0 before:right-0 before:bottom-0 before:h-[1px]
+        before:rounded-full
+        before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+        dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+        before:opacity-30
+        ${
+          location.pathname === "/FontPlayground"
+            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+        }
+      `}
+                          >
+                            <div className="flex items-center gap-2">
+                              <FiType className="text-blue-500 dark:text-gray-300" />
+                              Font Playground
+                            </div>
+                          </Link>
+                          {/* Flexbox Playground Link */}
+                          <Link
+                            to="/flexboxPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className={`
+        relative flex items-center px-5 py-2 rounded-xl
+        transition-all duration-300 ease-in-out
+        group
+        before:absolute before:left-0 before:right-0 before:-bottom-1
+        before:rounded-full
+        before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
+        dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+        before:opacity-30
+        ${
+          location.pathname === "/flexboxPlayground"
+            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+        }
+      `}
+                          >
+                            <div className="flex items-center gap-2">
+                              <FaCss3Alt className="text-blue-500 dark:text-gray-300" />
+                              Flexbox Ground
+                            </div>
+                          </Link>
+                          <Link
+                            to="/gridPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className={`
+    relative flex items-center px-5 py-2 rounded-xl
+    transition-all duration-300 ease-in-out
+    group
+    before:absolute before:left-0 before:right-0 before:-bottom-1
+    before:rounded-full
+    before:bg-gradient-to-r before:from-green-300 before:via-green-200 before:to-green-300
+    dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+    before:opacity-30
+    ${
+      location.pathname === "/gridPlayground"
+        ? "bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900/30 dark:to-teal-900/30 text-green-600 dark:text-teal-400"
+        : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-green-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+    }
+  `}
+                          >
+                            <div className="flex items-center gap-2">
+                              <FaThLarge className="text-green-500 dark:text-gray-300" />
+                              Grid Ground
+                            </div>
+                          </Link>
+                          <Link
+                            to="/boxShadowPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className={`
+    relative flex items-center px-5 py-2 rounded-xl
+    transition-all duration-300 ease-in-out
+    group
+    before:absolute before:left-0 before:right-0 before:-bottom-1
+    before:rounded-full
+    before:bg-gradient-to-r before:from-pink-300 before:via-pink-200 before:to-pink-300
+    dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+    before:opacity-30
+    ${
+      location.pathname === "/boxShadowPlayground"
+        ? "bg-gradient-to-r from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 text-pink-600 dark:text-purple-400"
+        : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-pink-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+    }
+  `}
+                          >
+                            <div className="flex items-center gap-2">
+                              <FaRegSquare className="text-pink-500 dark:text-gray-300" />
+                              Box Shadow Ground
+                            </div>
+                          </Link>
+                        
+                          <Link
+                            to="/transformPlayground"
+                            onClick={() => {
+                              closeMenu();
+                              setOpenDropdown(false);
+                            }}
+                            className={`
+    relative flex items-center px-5 py-2 rounded-xl
+    transition-all duration-300 ease-in-out
+    group
+    before:absolute before:left-0 before:right-0 before:-bottom-1
+    before:rounded-full
+    before:bg-gradient-to-r before:from-orange-300 before:via-orange-200 before:to-orange-300
+    dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
+    before:opacity-30
+    ${
+      location.pathname === "/transformPlayground"
+        ? "bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 text-orange-600 dark:text-red-400"
+        : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-orange-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+    }
+  `}
+                          >
+                            <div className="flex items-center gap-2">
+                              <svg
+                                className="w-4 h-4 text-orange-500 dark:text-gray-300"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                              Transform Ground
+                            </div>
+                          </Link>
+                          
                         </div>
                       )}
-                    </div>
+                    </div> /* End of parent wrapper */
                   );
                 }
 
@@ -284,17 +625,19 @@ const Navbar = () => {
                     className={`
                       relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
                       font-medium text-sm xl:text-base
-                      ${scrolled
-                        ? "text-gray-700 dark:text-gray-300"
-                        : "text-white/90 dark:text-gray-200"
+                      ${
+                        scrolled
+                          ? "text-gray-700 dark:text-gray-300"
+                          : "text-white/90 dark:text-gray-200"
                       }
                       hover:shadow-lg 
                       transform hover:scale-105
-                      ${isActive
-                        ? scrolled
-                          ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-                          : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
-                        : ""
+                      ${
+                        isActive
+                          ? scrolled
+                            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                            : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
+                          : ""
                       }
                       group overflow-hidden
                     `}
@@ -348,23 +691,34 @@ const Navbar = () => {
               <div className="relative" ref={profileRef}>
                 <button
                   onClick={toggleProfile}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group ${!currentUser?.avatarUrl && 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white'
-                    }`}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group ${
+                    !currentUser?.avatarUrl &&
+                    "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                  }`}
                   title="Profile Menu"
                 >
                   {currentUser ? (
                     currentUser.avatarUrl ? (
-                      <img src={currentUser.avatarUrl} alt={currentUser.username} className="w-full h-full rounded-full object-cover" />
+                      <img
+                        src={currentUser.avatarUrl}
+                        alt={currentUser.username}
+                        className="w-full h-full rounded-full object-cover"
+                      />
                     ) : (
-                      <span>{currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}</span>
+                      <span>
+                        {currentUser.username
+                          ? currentUser.username.charAt(0).toUpperCase()
+                          : "U"}
+                      </span>
                     )
                   ) : (
                     <FiUser className="text-lg" />
                   )}
                   <div className="absolute -bottom-1 -right-1">
                     <FiChevronDown
-                      className={`text-xs bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full p-0.5 transition-transform duration-300 ${isProfileOpen ? "rotate-180" : ""
-                        }`}
+                      className={`text-xs bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full p-0.5 transition-transform duration-300 ${
+                        isProfileOpen ? "rotate-180" : ""
+                      }`}
                     />
                   </div>
                 </button>
@@ -375,10 +729,11 @@ const Navbar = () => {
                   absolute right-0 top-full mt-2 w-64 rounded-xl shadow-2xl z-50
                   bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/50
                   transform origin-top-right transition-all duration-300 ease-out
-                  ${isProfileOpen
+                  ${
+                    isProfileOpen
                       ? "opacity-100 scale-100 translate-y-0"
                       : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                    }
+                  }
                 `}
                 >
                   {currentUser ? (
@@ -417,7 +772,11 @@ const Navbar = () => {
                       {/* User Menu Items */}
                       <div className="p-2 space-y-1">
                         <Link
-                          to={currentUser?.username ? `/profile/${currentUser.username}` : '/profile'}
+                          to={
+                            currentUser?.username
+                              ? `/profile/${currentUser.username}`
+                              : "/profile"
+                          }
                           onClick={() => setIsProfileOpen(false)}
                           className="flex items-center space-x-3 px-3 py-2.5 rounded-lg
                             hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-all duration-200
@@ -530,10 +889,11 @@ const Navbar = () => {
               {/* Mobile Menu Button */}
               <button
                 onClick={toggleMenu}
-                className={` xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${scrolled
-                  ? "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
-                  : "bg-white/10 hover:bg-white/20"
-                  }`}
+                className={` xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${
+                  scrolled
+                    ? "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    : "bg-white/10 hover:bg-white/20"
+                }`}
                 aria-label="Toggle menu"
               >
                 <div className="relative w-6 h-6">
@@ -561,7 +921,6 @@ const Navbar = () => {
                 </div>
               </button>
             </div>
-
           </div>
         </div>
         <div id="google_translate_element" style={{ display: "none" }}></div>
@@ -593,14 +952,14 @@ const Navbar = () => {
             </span>
             <button
               onClick={closeMenu}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+              className="p-2 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-white transition-colors duration-200"
             >
               <FiX className="text-xl" />
             </button>
           </div>
 
           {/* Mobile Navigation Links */}
-          <div className="flex-1 px-6 py-4 space-y-2 overflow-y-auto">
+          <div className="flex-1 px-6 py-4 space-y-2 overflow-y-auto text-blue-600 dark:text-purple-400">
             {navLinks.map((item, index) => {
               // Skip the individual playground items
               if (item === "Playground" || item === "AnimationPlayground")
@@ -640,9 +999,10 @@ const Navbar = () => {
                   className={`
                     flex items-center px-4 py-3 rounded-xl transition-all duration-300
                     text-lg font-medium transform hover:scale-105
-                    ${isActive
-                      ? "bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-500 dark:border-purple-500"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-800/50"
+                    ${
+                      isActive
+                        ? "bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-500 dark:border-purple-500"
+                        : "hover:bg-gray-100 dark:hover:bg-gray-800/50"
                     }
                   `}
                   style={{
@@ -665,7 +1025,6 @@ const Navbar = () => {
                 </Link>
               );
             })}
-
           </div>
         </div>
       </div>

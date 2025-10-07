@@ -1,9 +1,41 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Copy, Check } from "lucide-react";
+import React, { useState, useCallback, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Copy,
+  Check,
+  Palette,
+  Eye,
+  Menu,
+  Search,
+  Heart,
+  Share2,
+  MessageCircle,
+  Play,
+  Star,
+  ArrowRight,
+  ChevronDown,
+  Settings,
+  RefreshCw,
+  Sliders,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Filter,
+  Grid,
+  List,
+} from "lucide-react";
 
-// 🎨 List of all color palettes with names & colors
+// All color palettes with semantic color assignments
 const palettes = [
+  { name: "Galaxy Dust", colors: ["#0f2027", "#203a43", "#2c5364", "#6a11cb"] },
+  {
+    name: "Mystic Teal",
+    colors: ["#136a8a", "#267871", "#00bf8f", "#001510"],
+  },
+  {
+    name: "Coffee Mocha",
+    colors: ["#4e342e", "#6f4e37", "#a47148", "#d7ccc8"],
+  },
   { name: "Sunset Glow", colors: ["#ff9a9e", "#fad0c4", "#fad390", "#f6e58d"] },
   {
     name: "Ocean Breeze",
@@ -26,7 +58,7 @@ const palettes = [
   },
   { name: "Coral Reef", colors: ["#ff9966", "#ff5e62", "#00f2fe", "#4facfe"] },
   { name: "Golden Hour", colors: ["#ff9a00", "#ff6a00", "#ff3c00", "#ffce00"] },
-  { name: "Galaxy Dust", colors: ["#0f2027", "#203a43", "#2c5364", "#6a11cb"] },
+
   { name: "Minty Fresh", colors: ["#76b852", "#8DC26F", "#00c9a7", "#92fe9d"] },
   { name: "Rose Petals", colors: ["#ffdde1", "#ee9ca7", "#ff758c", "#ff7eb3"] },
   {
@@ -90,10 +122,6 @@ const palettes = [
     colors: ["#f6d365", "#fda085", "#ffd700", "#ffb347"],
   },
 
-  {
-    name: "Coffee Mocha",
-    colors: ["#4e342e", "#6f4e37", "#a47148", "#d7ccc8"],
-  },
   {
     name: "Neon Jungle",
     colors: ["#00ff87", "#60efff", "#ff6ec4", "#7873f5"],
@@ -260,10 +288,7 @@ const palettes = [
     name: "Tangerine",
     colors: ["#f12711", "#f5af19", "#ff6a00", "#ff9a00"],
   },
-  {
-    name: "Mystic Teal",
-    colors: ["#136a8a", "#267871", "#00bf8f", "#001510"],
-  },
+
   {
     name: "Amber Rose",
     colors: ["#f7971e", "#ffd200", "#ff758c", "#ff7eb3"],
@@ -300,107 +325,605 @@ const palettes = [
   },
   { name: "Dreamscape", colors: ["#00c6ff", "#0072ff", "#7f00ff", "#e100ff"] },
 ];
+// Helper functions
+const isColorDark = (color) => {
+  const hex = color.replace("#", "");
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  return brightness < 128;
+};
 
-// 🔘 Reusable Button Component
-const Button = ({ children, onClick, className = "" }) => (
-  <motion.button
-    whileHover={{ scale: 1.05 }} // slightly grow on hover
-    whileTap={{ scale: 0.95 }} // slightly shrink on click
-    onClick={onClick}
-    className={`px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 
-                bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 
-                text-sm font-medium transition-all shadow-md ${className}`}
-  >
-    {children}
-  </motion.button>
-);
+const lightenColor = (color, amount = 0.1) => {
+  const hex = color.replace("#", "");
+  const r = Math.min(255, parseInt(hex.substr(0, 2), 16) + 255 * amount);
+  const g = Math.min(255, parseInt(hex.substr(2, 2), 16) + 255 * amount);
+  const b = Math.min(255, parseInt(hex.substr(4, 2), 16) + 255 * amount);
+  return `#${Math.round(r).toString(16).padStart(2, "0")}${Math.round(g)
+    .toString(16)
+    .padStart(2, "0")}${Math.round(b).toString(16).padStart(2, "0")}`;
+};
 
-// 🎨 Main Page Component
-export default function PalettesPage() {
-  const [copied, setCopied] = useState(null);
+const hsvToHex = (h, s, v) => {
+  const S = s > 1 ? s / 100 : s;
+  const V = v > 1 ? v / 100 : v;
+  const C = V * S;
+  const X = C * (1 - Math.abs(((h / 60) % 2) - 1));
+  const M = V - C;
+  let r = 0,
+    g = 0,
+    b = 0;
 
-  // 📌 Function to copy single color
-  const copyColor = (color, idx) => {
-    navigator.clipboard.writeText(color);
-    setCopied(`${idx}-${color}`);
-    setTimeout(() => setCopied(null), 1500);
-  };
+  if (h >= 0 && h < 60) {
+    r = C;
+    g = X;
+    b = 0;
+  } else if (h >= 60 && h < 120) {
+    r = X;
+    g = C;
+    b = 0;
+  } else if (h >= 120 && h < 180) {
+    r = 0;
+    g = C;
+    b = X;
+  } else if (h >= 180 && h < 240) {
+    r = 0;
+    g = X;
+    b = C;
+  } else if (h >= 240 && h < 300) {
+    r = X;
+    g = 0;
+    b = C;
+  } else {
+    r = C;
+    g = 0;
+    b = X;
+  }
 
-  // 📌 Function to copy full palette
-  const copyFullPalette = (palette, idx) => {
-    navigator.clipboard.writeText(palette.colors.join(", "));
-    setCopied(`full-${idx}`);
-    setTimeout(() => setCopied(null), 1500);
-  };
+  r = Math.round((r + M) * 255);
+  g = Math.round((g + M) * 255);
+  b = Math.round((b + M) * 255);
+
+  return `#${r.toString(16).padStart(2, "0")}${g
+    .toString(16)
+    .padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+};
+
+const hexToHsv = (hex) => {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const diff = max - min;
+
+  let h = 0;
+  if (diff !== 0) {
+    if (max === r) h = ((g - b) / diff) % 6;
+    else if (max === g) h = (b - r) / diff + 2;
+    else h = (r - g) / diff + 4;
+  }
+  h = Math.round(h * 60);
+  if (h < 0) h += 360;
+
+  const s = max === 0 ? 0 : diff / max;
+  const v = max;
+
+  return { h, s: Math.round(s * 100), v: Math.round(v * 100) };
+};
+
+// Color wheel component
+const ColorWheel = ({
+  hue,
+  saturation,
+  brightness,
+  onHueChange,
+  onSaturationChange,
+  onBrightnessChange,
+  size = 140,
+}) => {
+  const handleWheelClick = useCallback(
+    (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const x = e.clientX - rect.left - centerX;
+      const y = e.clientY - rect.top - centerY;
+
+      const angle = Math.atan2(y, x) * (180 / Math.PI);
+      const normalizedAngle = angle < 0 ? angle + 360 : angle;
+      const distance = Math.sqrt(x * x + y * y);
+      const maxDistance = size / 2 - 10;
+      const normalizedDistance = Math.min(distance / maxDistance, 1);
+
+      onHueChange(normalizedAngle);
+      onSaturationChange(normalizedDistance * 100);
+    },
+    [onHueChange, onSaturationChange, size]
+  );
+
+  const indicatorX =
+    Math.cos((hue * Math.PI) / 180) * (saturation / 100) * (size / 2 - 10);
+  const indicatorY =
+    Math.sin((hue * Math.PI) / 180) * (saturation / 100) * (size / 2 - 10);
 
   return (
-    <div className="p-8 flex flex-col items-center">
-      {/* 🎨 Fancy Heading */}
-      <h1 className="text-4xl font-extrabold mb-10 text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">
-        🎨 Color Palettes
-      </h1>
-
-      {/* 🔲 Grid of Palettes */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-6xl">
-        {palettes.map((palette, idx) => (
-          <motion.div
-            key={idx}
-            whileHover={{ scale: 1.05 }}
-            className="shadow-lg border border-pink-500 
-           bg-white dark:bg-gray-900 p-6 flex flex-col items-center
-           transition-all duration-300 
-           hover:shadow-[0_0_25px_5px_rgba(236,72,153,0.6)]      
-           rounded-2xl"
-          >
-            {/* 🏷️ Palette Name */}
-            <h2 className="font-semibold text-lg mb-4 text-center">
-              {palette.name}
-            </h2>
-
-            {/* 🎨 Individual Colors */}
-            <div className="flex gap-3 mb-4 w-full">
-              {palette.colors.map((color, cIdx) => (
-                <div
-                  key={cIdx}
-                  className="relative flex-1 h-16 rounded-lg cursor-pointer overflow-hidden group"
-                  onClick={() => copyColor(color, idx)}
-                >
-                  {/* Color Block */}
-                  <div
-                    className="h-full w-full transition-transform duration-200 group-hover:scale-105"
-                    style={{ backgroundColor: color }}
-                  />
-                  {/* Copy Feedback */}
-                  <div className="absolute bottom-1 left-1 text-xs text-white drop-shadow-sm">
-                    {copied === `${idx}-${color}` ? (
-                      <span className="flex items-center gap-1">
-                        <Check className="w-3 h-3" /> Copied!
-                      </span>
-                    ) : (
-                      color
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* 📌 Copy Full Palette Button */}
-            <Button
-              className="mt-auto flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-all shadow-md"
-              onClick={() => copyFullPalette(palette, idx)}
-            >
-              {copied === `full-${idx}` ? (
-                <Check className="w-4 h-4" />
-              ) : (
-                <Copy className="w-4 h-4" />
-              )}
-              {copied === `full-${idx}`
-                ? "Copied Full Palette!"
-                : "Copy Full Palette"}
-            </Button>
-          </motion.div>
-        ))}
+    <div className="flex flex-col items-center gap-3">
+      <div className="relative">
+        <svg
+          width={size}
+          height={size}
+          onClick={handleWheelClick}
+          className="cursor-pointer"
+        >
+          <defs>
+            <radialGradient id="saturation-gradient">
+              <stop offset="0%" stopColor="white" />
+              <stop offset="100%" stopColor="transparent" />
+            </radialGradient>
+          </defs>
+          <g transform={`translate(${size / 2}, ${size / 2})`}>
+            {Array.from({ length: 360 }, (_, i) => (
+              <path
+                key={i}
+                d={`M 0 0 L ${
+                  Math.cos((i * Math.PI) / 180) * (size / 2 - 10)
+                } ${Math.sin((i * Math.PI) / 180) * (size / 2 - 10)} A ${
+                  size / 2 - 10
+                } ${size / 2 - 10} 0 0 1 ${
+                  Math.cos(((i + 1) * Math.PI) / 180) * (size / 2 - 10)
+                } ${Math.sin(((i + 1) * Math.PI) / 180) * (size / 2 - 10)} Z`}
+                fill={hsvToHex(i, 100, 100)}
+              />
+            ))}
+            <circle
+              cx="0"
+              cy="0"
+              r={size / 2 - 10}
+              fill="url(#saturation-gradient)"
+            />
+            <circle
+              cx={indicatorX}
+              cy={indicatorY}
+              r="6"
+              fill="white"
+              stroke="#333"
+              strokeWidth="2"
+            />
+          </g>
+        </svg>
+      </div>
+      <div className="w-full">
+        <label className="text-xs text-gray-600 mb-1 block">Brightness</label>
+        <div className="relative">
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={brightness}
+            onChange={(e) => onBrightnessChange(parseInt(e.target.value))}
+            className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+            style={{
+              background: `linear-gradient(90deg, black, ${hsvToHex(
+                hue,
+                saturation,
+                100
+              )})`,
+            }}
+          />
+          <div
+            className="absolute top-0 w-3 h-3 bg-white border-2 border-gray-400 rounded-full transform -translate-y-1 pointer-events-none"
+            style={{ left: `calc(${brightness}% - 6px)` }}
+          />
+        </div>
       </div>
     </div>
   );
-}
+};
+
+// Custom color editor
+const CustomColorEditor = ({
+  customColors,
+  onCustomColorChange,
+  onApplyCustomColors,
+}) => {
+  const [activeElement, setActiveElement] = useState("primary");
+  const [hue, setHue] = useState(0);
+  const [saturation, setSaturation] = useState(100);
+  const [brightness, setBrightness] = useState(100);
+
+  const elementTypes = {
+    primary: { label: "Primary", description: "Main brand color" },
+    secondary: { label: "Secondary", description: "Supporting color" },
+    accent: { label: "Accent", description: "Emphasis color" },
+    background: { label: "Background", description: "Background surfaces" },
+  };
+
+  const updateColorFromWheel = useCallback(() => {
+    const newColor = hsvToHex(hue, saturation, brightness);
+    onCustomColorChange(activeElement, newColor);
+  }, [hue, saturation, brightness, activeElement, onCustomColorChange]);
+
+  const handleElementChange = (element) => {
+    setActiveElement(element);
+    const color = customColors[element];
+    if (color) {
+      const hsv = hexToHsv(color);
+      setHue(hsv.h);
+      setSaturation(hsv.s);
+      setBrightness(hsv.v);
+    }
+  };
+
+  useEffect(() => {
+    updateColorFromWheel();
+  }, [updateColorFromWheel]);
+
+  const generateRandomPalette = () => {
+    const baseHue = Math.random() * 360;
+    const colors = {
+      primary: hsvToHex(
+        baseHue,
+        70 + Math.random() * 30,
+        60 + Math.random() * 40
+      ),
+      secondary: hsvToHex(
+        (baseHue + 30 + Math.random() * 60) % 360,
+        50 + Math.random() * 40,
+        70 + Math.random() * 30
+      ),
+      accent: hsvToHex(
+        (baseHue + 120 + Math.random() * 120) % 360,
+        80 + Math.random() * 20,
+        80 + Math.random() * 20
+      ),
+      background: hsvToHex(
+        baseHue,
+        10 + Math.random() * 20,
+        95 + Math.random() * 5
+      ),
+    };
+
+    Object.entries(colors).forEach(([key, color]) => {
+      onCustomColorChange(key, color);
+    });
+
+    const hsv = hexToHsv(colors[activeElement]);
+    setHue(hsv.h);
+    setSaturation(hsv.s);
+    setBrightness(hsv.v);
+  };
+  
+
+  return (
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <h3 className="font-semibold flex items-center gap-2 text-gray-800 dark:text-gray-100">
+          <Sliders className="w-4 h-4" />
+          Custom Colors
+        </h3>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={generateRandomPalette}
+          className="p-2 bg-gray-100 dark:bg-secondary-700 hover:bg-gray-200 dark:hover:bg-secondary-600 rounded-lg transition-colors"
+          title="Generate random palette"
+        >
+          <RefreshCw className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+        </motion.button>
+      </div>
+
+      {/* Color Wheel */}
+      <div className="bg-gray-50 dark:bg-secondary-800 p-3 rounded-lg">
+        <ColorWheel
+          hue={hue}
+          saturation={saturation}
+          brightness={brightness}
+          onHueChange={setHue}
+          onSaturationChange={setSaturation}
+          onBrightnessChange={setBrightness}
+          size={140}
+        />
+      </div>
+
+      {/* Color Input */}
+      <div className="flex items-center gap-2">
+        <div
+          className="w-8 h-8 rounded-lg border-2 border-gray-300 dark:border-secondary-600 shadow-sm"
+          style={{ backgroundColor: customColors[activeElement] || "#000000" }}
+        />
+        <input
+          type="text"
+          value={customColors[activeElement] || "#000000"}
+          onChange={(e) => {
+            const color = e.target.value;
+            if (/^#[0-9A-Fa-f]{6}$/.test(color)) {
+              onCustomColorChange(activeElement, color);
+              const hsv = hexToHsv(color);
+              setHue(hsv.h);
+              setSaturation(hsv.s);
+              setBrightness(hsv.v);
+            }
+          }}
+          className="flex-1 p-2 border border-gray-300 dark:border-secondary-600 rounded-lg font-mono text-xs bg-white dark:bg-secondary-900 text-gray-800 dark:text-gray-100"
+          placeholder="#000000"
+        />
+      </div>
+
+      {/* Apply Button */}
+      <motion.button
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        onClick={onApplyCustomColors}
+        className="w-full p-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all text-sm"
+      >
+        Apply Custom Colors
+      </motion.button>
+    </div>
+  );
+};
+
+// Main component
+const PalettesPage = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPalette, setSelectedPalette] = useState(palettes[0]);
+  const [copiedColors, setCopiedColors] = useState({});
+  const [showCustomEditor, setShowCustomEditor] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [customColors, setCustomColors] = useState({
+    primary: "#3b82f6",
+    secondary: "#10b981",
+    accent: "#8b5cf6",
+    background: "#ffffff",
+  });
+
+  const filteredPalettes = palettes.filter((palette) =>
+    palette.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredPalettes.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedPalettes = filteredPalettes.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  const paletteToSemanticColors = useCallback((palette) => {
+    const colors = palette.colors;
+    const backgroundBase = colors[3] || "#ffffff";
+    const isDarkTheme = isColorDark(backgroundBase);
+    return {
+      primary: colors[0] || "#3b82f6",
+      secondary: colors[1] || "#10b981",
+      accent: colors[2] || "#8b5cf6",
+      background: isDarkTheme
+        ? backgroundBase
+        : lightenColor(backgroundBase, 0.3),
+      text: isDarkTheme ? "#ffffff" : "#1f2937",
+      textSecondary: isDarkTheme ? "#e5e7eb" : "#6b7280",
+      border: isDarkTheme ? "#4b5563" : lightenColor(backgroundBase, 0.2),
+      surface: isDarkTheme
+        ? lightenColor(backgroundBase, 0.1)
+        : lightenColor(backgroundBase, 0.4),
+    };
+  }, []);
+
+  const copyToClipboard = async (color, paletteIndex, colorIndex) => {
+    try {
+      await navigator.clipboard.writeText(color);
+      const key = `${paletteIndex}-${colorIndex}`;
+      setCopiedColors((prev) => ({ ...prev, [key]: true }));
+      setTimeout(() => {
+        setCopiedColors((prev) => ({ ...prev, [key]: false }));
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy color:", err);
+    }
+  };
+
+  const handleCustomColorChange = (element, color) => {
+    setCustomColors((prev) => ({ ...prev, [element]: color }));
+  };
+
+  const handleApplyCustomColors = () => {
+    setSelectedPalette({
+      name: "Custom Palette",
+      colors: Object.values(customColors),
+    });
+  };
+
+  const copyFullPalette = (palette, paletteIdx) => {
+    navigator.clipboard.writeText(palette.colors.join(", "));
+    setCopiedColors((prev) => ({ ...prev, [`full-${paletteIdx}`]: true }));
+    setTimeout(
+      () =>
+        setCopiedColors((prev) => ({ ...prev, [`full-${paletteIdx}`]: false })),
+      1500
+    );
+  };
+
+  const Button = ({ children, onClick, className = "" }) => (
+    <motion.button
+      whileHover={{ scale: 1.05 }} // slightly grow on hover
+      whileTap={{ scale: 0.95 }} // slightly shrink on click
+      onClick={onClick}
+      className={`px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 
+                  bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 
+                  text-sm font-medium transition-all shadow-md ${className}`}
+    >
+      {children}
+    </motion.button>
+  );
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-secondary-900 dark:via-secondary-800 dark:to-secondary-700 transition-colors">
+      {/* Header */}
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center h-16">
+          <motion.div
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            className="flex items-center gap-3"
+          >
+            <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mt-10">
+              <Palette className="w-6 h-6 text-white" />
+            </div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent mt-10">
+              Color Palette
+            </h1>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="h-full overflow-y-auto p-6 space-y-6">
+        {/* Search */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="flex justify-center"
+        >
+          <div className="relative w-full max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300 w-4 h-4" />
+            <input
+              type="text"
+              placeholder="Search palettes..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-blue-800 dark:border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-800 dark:text-gray-100"
+            />
+          </div>
+        </motion.div>
+
+        {/* Controls */}
+
+        {/* Palette List */}
+        <div className="space-y-6  max-w-5xl mx-auto px-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+            {paginatedPalettes.map((palette, idx) => (
+              <div
+                key={`${palette.name}-${idx}`}
+                className={`p-5 rounded-2xl cursor-pointer border-2 transition-all
+                          ${
+                            selectedPalette?.name === palette.name
+                              ? "border-primary-500 bg-primary-50/50 dark:bg-primary-900/50"
+                              : "border-blue-200 dark:border-secondary-700 bg-white/60 dark:bg-secondary-800/60 hover:bg-white/80 dark:hover:bg-secondary-700/70"
+                          }`}
+                onClick={() => setSelectedPalette(palette)}
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-medium text-gray-800 dark:text-gray-100 text-base">
+                    {palette.name}
+                  </h4>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPalette(palette);
+                    }}
+                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-secondary-700 transition-colors"
+                    title="Preview palette"
+                  >
+                    <Eye className="w-5 h-5 text-gray-500 dark:text-gray-300" />
+                  </button>
+                </div>
+
+                {/* Colors */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                  {palette.colors.map((color, colorIndex) => (
+                    <div
+                      key={colorIndex}
+                      className="aspect-square rounded-lg cursor-pointer relative overflow-hidden"
+                      style={{ backgroundColor: color }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyToClipboard(color, idx, colorIndex);
+                      }}
+                      title={color}
+                    >
+                      {copiedColors[`${idx}-${colorIndex}`] && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Color codes */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                  {palette.colors.map((color, colorIndex) => (
+                    <button
+                      key={colorIndex}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyToClipboard(color, idx, colorIndex);
+                      }}
+                      className="w-full px-1 py-1 text-xs font-mono rounded text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-secondary-700 transition-colors text-center"
+                      title={color}
+                    >
+                      {color}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Full palette copy */}
+                <Button
+                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white rounded-lg hover:opacity-90 transition-all shadow-md"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    copyFullPalette(palette, idx);
+                  }}
+                >
+                  {copiedColors[`full-${idx}`] ? (
+                    <Check className="w-4 h-4" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
+                  {copiedColors[`full-${idx}`]
+                    ? "Copied Full Palette!"
+                    : "Copy Full Palette"}
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 pt-4">
+              <button
+                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className="p-2 border rounded-lg bg-white/60 dark:bg-secondary-800 border-gray-200 dark:border-secondary-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              <span className="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+                {currentPage} / {totalPages}
+              </span>
+
+              <button
+                onClick={() =>
+                  setCurrentPage(Math.min(totalPages, currentPage + 1))
+                }
+                className="p-2 border rounded-lg bg-white/60 dark:bg-secondary-800 border-gray-200 dark:border-secondary-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PalettesPage;

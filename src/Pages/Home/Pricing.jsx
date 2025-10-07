@@ -1,111 +1,176 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
+import { Check, Zap } from "lucide-react";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  },
+  hover: {
+    y: -5,
+    transition: { duration: 0.2 }
+  }
+};
+
+const plans = [
+  {
+    name: "Starter",
+    description: "Perfect for individuals getting started",
+    price: "$9",
+    period: "per month",
+    features: [
+      "5 Projects",
+      "10GB Storage",
+      "Basic Support",
+      "Standard Analytics",
+      "Email Integration"
+    ],
+    cta: "Get Started",
+    popular: false
+  },
+  {
+    name: "Professional",
+    description: "Most popular for growing teams",
+    price: "$29",
+    period: "per month",
+    features: [
+      "Unlimited Projects",
+      "100GB Storage",
+      "Priority Support",
+      "Advanced Analytics",
+      "API Access",
+      "Team Collaboration",
+      "Custom Integrations"
+    ],
+    cta: "Start Free Trial",
+    popular: true
+  },
+  {
+    name: "Enterprise",
+    description: "For large organizations with advanced needs",
+    price: "Custom",
+    period: "Let's talk",
+    features: [
+      "Everything in Pro",
+      "Unlimited Storage",
+      "24/7 Dedicated Support",
+      "Custom Solutions",
+      "SSO Integration",
+      "Advanced Security"
+    ],
+    cta: "Contact Sales",
+    popular: false
+  }
+];
+
+const PricingCard = ({ plan, variants }) => (
+  <motion.div
+    variants={variants}
+    whileHover="hover"
+    className={`relative flex flex-col p-6 sm:p-8 rounded-2xl bg-white dark:bg-secondary-900 
+      border border-secondary-200 dark:border-secondary-600
+      shadow-lg hover:shadow-xl hover:border-primary-600 dark:hover:border-accent-600 transition-all duration-300
+      ${plan.popular ? 'ring-2 ring-primary-500 dark:ring-accent-500' : ''}
+      h-full w-full max-w-md mx-auto sm:max-w-none`}
+  >
+    {plan.popular && (
+      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+        <div className="bg-primary-500 dark:bg-accent-500 text-white text-xs font-medium px-4 py-1 rounded-full whitespace-nowrap">
+          Most Popular
+        </div>
+      </div>
+    )}
+
+    <h3 className="text-xl sm:text-2xl font-bold text-secondary-900 dark:text-white mb-2">
+      {plan.name}
+    </h3>
+
+    <p className="text-sm sm:text-base text-secondary-600 dark:text-secondary-300 mb-4 sm:mb-6">
+      {plan.description}
+    </p>
+
+    <div className="mb-6 sm:mb-8">
+      <div className="flex items-baseline flex-wrap gap-2">
+        <span className="text-3xl sm:text-4xl font-bold text-secondary-900 dark:text-white">
+          {plan.price}
+        </span>
+        <span className="text-sm sm:text-base text-secondary-500 dark:text-secondary-400">
+          {plan.period}
+        </span>
+      </div>
+    </div>
+
+    <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 text-left">
+      {plan.features.map((feature, index) => (
+        <li key={index} className="flex items-start sm:items-center">
+          <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-0.5 sm:mt-0 mr-2 flex-shrink-0" />
+          <span className="text-sm sm:text-base text-secondary-700 dark:text-secondary-300">{feature}</span>
+        </li>
+      ))}
+    </ul>
+
+    <motion.button
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.98 }}
+      className={`mt-auto w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg text-sm sm:text-base font-medium transition-colors
+        ${plan.popular
+          ? 'bg-primary-600 hover:bg-primary-700 dark:bg-accent-600 dark:hover:bg-accent-700 text-white'
+          : 'bg-secondary-100 hover:bg-secondary-200 dark:bg-secondary-700 dark:hover:bg-secondary-600 text-gray-900 dark:text-white'}`}
+    >
+      {plan.cta}
+    </motion.button>
+  </motion.div>
+);
 
 const PricingSection = () => {
-  // Sample plans data - replace with your actual plans
-  const plans = [
-    {
-      planName: "Starter",
-      planSubText: "Perfect for individuals getting started",
-      price: "$9",
-      priceSubText: "per month",
-      features: [
-        "5 Projects",
-        "10GB Storage",
-        "Basic Support",
-        "Standard Analytics",
-        "Email Integration"
-      ],
-      btnText: "Get Started",
-      redirectTo: "/starter",
-      isPopular: false
-    },
-    {
-      planName: "Professional",
-      planSubText: "Most popular for growing teams",
-      price: "$29",
-      priceSubText: "per month",
-      features: [
-        "Unlimited Projects",
-        "100GB Storage",
-        "Priority Support",
-        "Advanced Analytics",
-        "API Access",
-        "Team Collaboration",
-        "Custom Integrations"
-      ],
-      btnText: "Start Free Trial",
-      redirectTo: "/professional",
-      isPopular: true
-    },
-    {
-      planName: "Enterprise",
-      planSubText: "For large organizations with advanced needs",
-      price: "$99",
-      priceSubText: "per month",
-      features: [
-        "Everything in Pro",
-        "Unlimited Storage",
-        "24/7 Dedicated Support",
-        "Custom Solutions",
-        "SSO Integration",
-        "Advanced Security"
-      ],
-      btnText: "Contact Sales",
-      redirectTo: "/enterprise",
-      isPopular: false
-    }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 40,
-      scale: 0.95
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        duration: 0.7
-      }
-    }
-  };
-
   return (
-    <section className="relative text-center space-y-1 py-8 sm:py-10 md:py-12 pricing-section px-3 sm:px-4 md:px-6 overflow-visible">
-       
-      <div className="relative z-10">
-        {/* Enhanced Header */}
+    <section className="w-full sm:py-10 md:py-2 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-8 sm:mb-10"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={container}
         >
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-secondary-800 rounded-full mb-8 shadow-lg border border-primary-200 dark:border-accent-700"
+            className="text-center mb-16"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 12
+                }
+              }
+            }}
           >
-            <div className="w-2 h-2 bg-primary-500 dark:bg-accent-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-semibold text-primary-600 dark:text-accent-400">Choose Your Perfect Plan</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-primary-600 dark:text-accent-500">
+              Simple, transparent pricing
+            </h2>
+            <p className="max-w-2xl mx-auto text-secondary-600 dark:text-secondary-300 text-base sm:text-lg px-4">
+              Choose the perfect plan for your needs. No hidden fees, no surprises.
+            </p>
           </motion.div>
           
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
@@ -173,93 +238,25 @@ const PricingSection = () => {
                   </div>
                 </div>
 
-                <h2 className={`font-black text-xl sm:text-2xl md:text-3xl text-center mb-2 ${
-                  plan.isPopular 
-                    ? 'bg-gradient-to-r from-primary-600 to-accent-600 dark:from-primary-400 dark:to-accent-400 bg-clip-text text-transparent' 
-                    : 'text-secondary-900 dark:text-white'
-                }`}>
-                  {plan.planName}
-                </h2>
-                <p className="text-secondary-600 dark:text-secondary-300 text-center text-xs sm:text-sm mb-6 font-medium leading-relaxed">
-                  {plan.planSubText}
-                </p>
-                
-                {/* Enhanced Price Display */}
-                <div className="flex flex-col items-center my-6 sm:my-8">
-                  <div className="flex items-baseline gap-2">
-                    <span className={`font-black text-3xl sm:text-4xl md:text-5xl ${
-                      plan.isPopular 
-                        ? 'bg-gradient-to-r from-primary-600 to-accent-600 dark:from-primary-400 dark:to-accent-400 bg-clip-text text-transparent' 
-                        : 'text-secondary-900 dark:text-white'
-                    }`}>
-                      {plan.price}
-                    </span>
-                  </div>
-                  <p className="text-sm sm:text-base text-secondary-500 dark:text-secondary-400 mt-2 font-medium">
-                    {plan.priceSubText}
-                  </p>
-                </div>
-              </div>
-
-              {/* Enhanced Features */}
-              <div className="flex flex-col gap-2 w-full flex-1 justify-between">
-                <div className="space-y-2">
-                  {plan.features.map((feature, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 * index + 0.4 }}
-                      className="flex items-center gap-3 text-xs sm:text-sm group-hover:translate-x-1 transition-transform duration-200"
-                    >
-                      <div className={`p-1.5 rounded-lg shadow-sm ${
-                        plan.isPopular 
-                          ? 'bg-primary-500 dark:bg-accent-500' 
-                          : 'bg-primary-100 dark:bg-accent-900'
-                      }`}>
-                        <div className={`w-3 h-3 ${
-                          plan.isPopular ? 'text-white' : 'text-primary-600 dark:text-accent-400'
-                        }`}>
-                          ✓
-                        </div>
-                      </div>
-                      <span className="text-secondary-700 dark:text-secondary-300 font-semibold">
-                        {feature}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Enhanced CTA Button */}
-                <div className="flex justify-center mt-6 sm:mt-8">
-                  <motion.button
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-6 py-3 rounded-2xl transition-all duration-300 text-sm font-bold min-w-[180px] shadow-xl transform hover:shadow-2xl ${
-                      plan.isPopular
-                        ? 'bg-gradient-to-r from-primary-500 to-accent-500 dark:from-primary-600 dark:to-accent-600 text-white shadow-primary-500/25 dark:shadow-accent-500/25 hover:shadow-primary-500/40 dark:hover:shadow-accent-500/40'
-                        : 'border-3 border-primary-500 dark:border-accent-500 text-primary-600 dark:text-accent-600 hover:bg-primary-500 hover:text-white dark:hover:bg-accent-500 dark:hover:text-white bg-white dark:bg-secondary-800'
-                    }`}
-                  >
-                    {plan.btnText}
-                  </motion.button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 max-w-7xl mx-auto mb-12 sm:mb-16"
+          >
+            {plans.map((plan, index) => (
+              <motion.div
+                key={plan.name}
+                variants={item}
+                className="h-full"
+              >
+                <PricingCard plan={plan} variants={item} />
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
     </section>
   );
 };

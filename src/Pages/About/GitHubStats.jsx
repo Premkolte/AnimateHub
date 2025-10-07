@@ -20,17 +20,42 @@ export default function GitHubStats() {
         const token = import.meta.env.VITE_GITHUB_TOKEN;
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-        const repoRes = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}`, { headers });
+        const repoRes = await fetch(
+          `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}`,
+          { headers }
+        );
         const repoData = await repoRes.json();
-        const contributorsRes = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contributors?per_page=1&anon=true`, { headers });
-        const contributorsCount = contributorsRes.headers.get("Link")?.match(/&page=(\d+)>; rel="last"/)?.[1] || 0;
+
+        const contributorsRes = await fetch(
+          `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contributors?per_page=1&anon=true`,
+          { headers }
+        );
+        const contributorsCount =
+          contributorsRes.headers
+            .get("Link")
+            ?.match(/&page=(\d+)>; rel="last"/)?.[1] || 0;
+
+        // format last commit
+        const commitDate = new Date(repoData.pushed_at);
+        const now = new Date();
+        const diffTime = now - commitDate;
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        let lastCommitLabel;
+        if (diffDays === 0) {
+          lastCommitLabel = "Today";
+        } else if (diffDays === 1) {
+          lastCommitLabel = "Yesterday";
+        } else {
+          lastCommitLabel = commitDate.toLocaleDateString();
+        }
 
         setStats({
           stars: repoData.stargazers_count || 0,
           forks: repoData.forks_count || 0,
           issues: repoData.open_issues_count || 0,
           contributors: contributorsCount || 0,
-          lastCommit: new Date(repoData.pushed_at).toLocaleDateString(),
+          lastCommit: lastCommitLabel,
           size: repoData.size || 0,
         });
       } catch (err) {
@@ -53,7 +78,7 @@ export default function GitHubStats() {
   return (
     <section className="py-12 rounded-xl bg-blue-100 dark:bg-secondary-900 text-secondary-900 dark:text-white">
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h3 className="text-3xl sm:text-4xl font-extrabold mb-10">
+        <h3 className="text-3xl sm:text-4xl font-extrabold mb-10 dark:text-white">
           Project Stats
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
