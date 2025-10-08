@@ -284,6 +284,25 @@ export default function BlogHub() {
 
   const submitBlog = (e) => {
     e.preventDefault();
+
+    const minChars = 4; 
+    const content = newBlog.content.trim(); 
+
+    const requiredFields = [
+      { name: "Title", value: newBlog.title.trim() },
+      { name: "Excerpt", value: newBlog.excerpt.trim() },
+      { name: "Content", value: content },
+      { name: "Author Name", value: newBlog.author.trim() },
+      
+    ];
+
+    for (const field of requiredFields) {
+      if (field.value.length < minChars) {
+        alert(`${field.name} must be at least ${minChars} characters long to publish.`);
+        return; 
+      }
+    }
+
     const id = (blogs.reduce((m, b) => Math.max(m, b.id), 0) || 0) + 1;
     const now = new Date().toISOString().slice(0, 10);
     const tags = newBlog.tags
@@ -296,7 +315,7 @@ export default function BlogHub() {
       id,
       title: newBlog.title.trim(),
       excerpt: newBlog.excerpt.trim(),
-      content: newBlog.content.trim(),
+      content: content, 
       tags: tags.length ? tags : ["Community"],
       category: newBlog.category.trim() || "Community",
       author: {
@@ -306,11 +325,9 @@ export default function BlogHub() {
         )}`,
       },
       date: now,
-      readTime: Math.max(2, Math.round(newBlog.content.split(/\s+/).length / 180)),
-      cover:
-        newBlog.cover.trim() ||
-        "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1400&auto=format&fit=crop",
+      readTime: Math.max(2, Math.round(content.split(/\s+/).length / 180)), 
     };
+    
     setBlogs((prev) => [item, ...prev]);
     setShowAdd(false);
     setNewBlog({
@@ -933,6 +950,10 @@ export default function BlogHub() {
                     value={newBlog.content}
                     onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
                   />
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  Word count: {newBlog.content.trim().split(/\s+/).filter(word => word.length > 0).length} / 50
+                  </p>
+
                 </div>
 
                 {/* Enhanced Action Buttons */}
@@ -948,6 +969,7 @@ export default function BlogHub() {
                     className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform"
                     type="submit"
                   >
+                  
                     <span className="flex items-center gap-2">
                       <span>🚀</span>
                       <span>Publish Blog</span>
