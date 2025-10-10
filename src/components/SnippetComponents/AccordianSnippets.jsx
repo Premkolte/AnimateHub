@@ -13,17 +13,16 @@ const BasicAccordion = () => {
   };
 
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
-      <div className="border-b border-gray-200 last:border-b-0">
+
+    <div className="space-y-4"> {/* <-- added spacing between sections */}
+      <div className="border border-gray-200 rounded-lg overflow-hidden">
         <button
           className="flex justify-between items-center w-full p-4 text-left bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
           onClick={() => toggleSection(0)}
         >
           <h3 className="font-medium text-gray-900">Section 1</h3>
           <svg
-            className={`w-5 h-5 transition-transform duration-300 ${
-              openSection === 0 ? "rotate-180" : ""
-            }`}
+            className={`w-5 h-5 transition-transform duration-300 ${openSection === 0 ? "rotate-180" : ""}`}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -42,16 +41,15 @@ const BasicAccordion = () => {
           </div>
         )}
       </div>
-      <div>
+
+      <div className="border border-gray-200 rounded-lg overflow-hidden">
         <button
           className="flex justify-between items-center w-full p-4 text-left bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
           onClick={() => toggleSection(1)}
         >
           <h3 className="font-medium text-gray-900">Section 2</h3>
           <svg
-            className={`w-5 h-5 transition-transform duration-300 ${
-              openSection === 1 ? "rotate-180" : ""
-            }`}
+            className={`w-5 h-5 transition-transform duration-300 ${openSection === 1 ? "rotate-180" : ""}`}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -90,9 +88,8 @@ const StyledAccordion = () => {
         >
           <h3 className="font-semibold text-purple-800">Getting Started</h3>
           <svg
-            className={`w-5 h-5 text-purple-600 transition-transform duration-300 ${
-              openItem === 0 ? "rotate-180" : ""
-            }`}
+            className={`w-5 h-5 text-purple-600 transition-transform duration-300 ${openItem === 0 ? "rotate-180" : ""
+              }`}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -118,9 +115,8 @@ const StyledAccordion = () => {
         >
           <h3 className="font-semibold text-purple-800">Advanced Features</h3>
           <svg
-            className={`w-5 h-5 text-purple-600 transition-transform duration-300 ${
-              openItem === 1 ? "rotate-180" : ""
-            }`}
+            className={`w-5 h-5 text-purple-600 transition-transform duration-300 ${openItem === 1 ? "rotate-180" : ""
+              }`}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -166,9 +162,8 @@ const FAQAccordion = () => {
             </h3>
           </div>
           <span
-            className={`text-2xl text-slate-400 transition-transform duration-300 ${
-              openFAQ === 0 ? "rotate-45" : ""
-            }`}
+            className={`text-2xl text-slate-400 transition-transform duration-300 ${openFAQ === 0 ? "rotate-45" : ""
+              }`}
           >
             +
           </span>
@@ -196,9 +191,8 @@ const FAQAccordion = () => {
             </h3>
           </div>
           <span
-            className={`text-2xl text-slate-400 transition-transform duration-300 ${
-              openFAQ === 1 ? "rotate-45" : ""
-            }`}
+            className={`text-2xl text-slate-400 transition-transform duration-300 ${openFAQ === 1 ? "rotate-45" : ""
+              }`}
           >
             +
           </span>
@@ -240,7 +234,7 @@ const AccordianSnippets = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gradient-to-br from-white via-gray-50/30 to-blue-50/30 dark:from-gray-900 dark:via-gray-800/80 dark:to-gray-900/50 rounded-lg ">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start bg-gradient-to-br from-white via-gray-50/30 to-blue-50/30 dark:from-gray-900 dark:via-gray-800/80 dark:to-gray-900/50 rounded-lg ">
       {accordionSnippets.map((accordionObject, index) => (
         <div
           key={index}
