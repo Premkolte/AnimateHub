@@ -6,11 +6,116 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base styles */
 @layer base {
   body {
-    @apply font-sans; /* Poppins */
+    @apply font-sans bg-gradient-to-br from-white via-green-50 to-green-100 text-gray-900 transition-colors duration-300 ease-in-out;
   }
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading; /* Sora */
+    @apply font-heading text-gray-800 tracking-tight;
   }
+
+  a {
+    @apply text-green-600 hover:text-green-800 transition-colors duration-300;
+  }
+
+  button {
+    @apply px-4 py-2 rounded-2xl font-semibold shadow-md bg-green-600 text-white 
+           hover:bg-green-700 hover:shadow-lg active:scale-95 transition-all duration-300 ease-in-out;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Fade-in animations: shorter and smaller movement */
+  .fade-in {
+    animation-duration: 0.2s !important;
+    transform: translateY(2px) !important;
+  }
+
+  /* Buttons and accordion: reduce hover effects */
+  button,
+  .accordion-button {
+    transition-duration: 0.1s !important;
+  }
+
+  button:hover,
+  .accordion-button:hover {
+    transform: scale(1) !important;
+    box-shadow: none !important;
+  }
+
+  /* Links */
+  a,
+  .nav-link {
+    transition-duration: 0.1s !important;
+  }
+
+  /* Cards */
+  .card {
+    transition-duration: 0.1s !important;
+  }
+
+  .card:hover {
+    transform: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; /* subtle shadow */
+  }
+
+  /* Nav link underline */
+  .nav-link::after {
+    transition: none !important;
+  }
+
+  .nav-link:hover::after {
+    width: 100% !important; /* still show underline but no animation */
+  }
+}
+
+/* Components */
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition-shadow duration-300;
+  }
+
+  .section {
+    @apply py-12 px-4 md:px-8 lg:px-16;
+  }
+
+  .nav-link {
+    @apply relative text-gray-700 hover:text-green-700 font-medium transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-green-600 transition-all duration-300;
+  }
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+.accordion-button {
+    background-color: #007BFF; /* Blue background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;   /* Slightly curved corners */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.accordion-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }

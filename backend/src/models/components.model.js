@@ -25,7 +25,7 @@ const componentSchema = new Schema({
     category: {
         type: String,
         required: true,
-        enum: ["button", "navbar", "card", "form", "layout", "navigation", "typography", "misc", "modal", "dropdown", "accordion", "carousel", "tab", "alert", "toast", "tooltip", "avatar", "badge", "breadcrumb", "pagination", "progress", "spinner", "table", "tag", "timeline", "sidebar", "footer", "header", "hero", "other"]
+        enum: ["button", "input", "checkbox", "radio", "select", "switch", "form", "date picker", "navbar", "sidebar", "tabs", "breadcrumb", "pagination", "grid", "container", "spacing", "divider", "table", "card", "accordion", "tooltip", "modal", "alert", "badge", "avatar", "toast", "progress", "spinner", "skeleton", "drawer", "popover", "icons", "transitions", "animations", "layout", "navigation", "typography", "dropdown", "carousel", "tab", "tag", "timeline", "footer", "header", "hero"]
     },
 
 
