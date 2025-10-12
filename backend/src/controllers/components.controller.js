@@ -11,9 +11,12 @@ import User from "../models/user.model.js";
  * Read uploaded file content as UTF-8 text
  */
 const readCodeFile = (file) => {
+    if (!file?.buffer) {
+        throw new ApiError(400, "Invalid or missing file buffer");
+    }
     try {
         return file.buffer.toString("utf-8");
-    } catch (error) {
+    } catch {
         throw new ApiError(400, "Error reading the uploaded file");
     }
 };
@@ -22,9 +25,27 @@ const readCodeFile = (file) => {
  * Ensure user is owner of the component or an admin
  */
 const checkOwnershipOrAdmin = (component, userId, isAdmin, action) => {
-    if (component.submittedBy.toString() !== userId.toString() && !isAdmin) {
+    const isOwner = component.submittedBy.toString() === userId.toString();
+    if (!isOwner && !isAdmin) {
         throw new ApiError(403, `Not authorized to ${action} this component`);
     }
+};
+
+/**
+ * Build query for component retrieval
+ */
+const buildComponentQuery = ({ category, status, search }) => {
+    const query = {};
+    if (category) query.category = category;
+    if (status) query.status = status;
+    if (search) {
+        query.$or = [
+            { name: { $regex: search, $options: "i" } },
+            { description: { $regex: search, $options: "i" } },
+            { tags: { $in: [new RegExp(search, "i")] } },
+        ];
+    }
+    return query;
 };
 
 // ---------- Controller Functions ----------
@@ -32,19 +53,22 @@ const checkOwnershipOrAdmin = (component, userId, isAdmin, action) => {
 // Create a new component - only logged-in users
 export const createComponent = asyncHandler(async (req, res) => {
     const { name, description, tags, category } = req.body;
-    const submittedBy = req.user?._id;
     const codeFile = req.file;
+    const submittedBy = req.user?._id;
 
     if (!name || !description || !category) {
         throw new ApiError(400, "Name, description, and category are required");
     }
-    if (!codeFile) throw new ApiError(400, "Code file is required");
+    if (!codeFile) {
+        throw new ApiError(400, "Code file is required");
+    }
+
+    const existingComponent = await Component.findOne({ name });
+    if (existingComponent) {
+        throw new ApiError(400, "Component with this name already exists");
+    }
 
     const code = readCodeFile(codeFile);
-
-    // Check for duplicate component name
-    const existingComponent = await Component.findOne({ name });
-    if (existingComponent) throw new ApiError(400, "Component with this name already exists");
 
     await Component.create({
         name,
@@ -63,19 +87,9 @@ export const createComponent = asyncHandler(async (req, res) => {
 
 // Get all components - public
 export const getAllComponents = asyncHandler(async (req, res) => {
-    const { category, status, search, page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 10 } = req.query;
 
-    const query = {};
-    if (category) query.category = category;
-    if (status) query.status = status;
-    if (search) {
-        query.$or = [
-            { name: { $regex: search, $options: "i" } },
-            { description: { $regex: search, $options: "i" } },
-            { tags: { $in: [new RegExp(search, "i")] } },
-        ];
-    }
-
+    const query = buildComponentQuery(req.query);
     const options = {
         page: parseInt(page),
         limit: parseInt(limit),
@@ -94,12 +108,13 @@ export const getAllComponents = asyncHandler(async (req, res) => {
 
 // Get single component by ID - public
 export const getComponentById = asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const component = await Component.findById(id)
+    const component = await Component.findById(req.params.id)
         .populate("submittedBy", "username avatarUrl")
         .populate("approvedBy", "username");
 
-    if (!component) throw new ApiError(404, "Component not found");
+    if (!component) {
+        throw new ApiError(404, "Component not found");
+    }
 
     return res
         .status(200)
@@ -115,22 +130,26 @@ export const updateComponent = asyncHandler(async (req, res) => {
     const isAdmin = req.user?.role === "admin";
 
     const component = await Component.findById(id);
-    if (!component) throw new ApiError(404, "Component not found");
+    if (!component) {
+        throw new ApiError(404, "Component not found");
+    }
 
     checkOwnershipOrAdmin(component, userId, isAdmin, "update");
 
-    // Validate new name uniqueness
     if (name && name !== component.name) {
         const existingComponent = await Component.findOne({ name });
-        if (existingComponent) throw new ApiError(400, "Component with this name already exists");
+        if (existingComponent) {
+            throw new ApiError(400, "Component with this name already exists");
+        }
     }
 
-    const updateData = {};
-    if (name) updateData.name = name;
-    if (description) updateData.description = description;
-    if (tags) updateData.tags = tags;
-    if (category) updateData.category = category;
-    if (codeFile) updateData.code = readCodeFile(codeFile);
+    const updateData = {
+        ...(name && { name }),
+        ...(description && { description }),
+        ...(tags && { tags }),
+        ...(category && { category }),
+        ...(codeFile && { code: readCodeFile(codeFile) }),
+    };
 
     const updatedComponent = await Component.findByIdAndUpdate(
         id,
@@ -150,7 +169,9 @@ export const deleteComponent = asyncHandler(async (req, res) => {
     const isAdmin = req.user?.role === "admin";
 
     const component = await Component.findById(id);
-    if (!component) throw new ApiError(404, "Component not found");
+    if (!component) {
+        throw new ApiError(404, "Component not found");
+    }
 
     checkOwnershipOrAdmin(component, userId, isAdmin, "delete");
 
@@ -174,6 +195,7 @@ export const getApprovedComponentsOfLoggedInUser = asyncHandler(async (req, res)
     }
 
     const components = await Component.find({ submittedBy: user._id, status: "approved" });
+
     return res
         .status(200)
         .json(new ApiResponse(200, "Components retrieved successfully", components));
@@ -181,8 +203,10 @@ export const getApprovedComponentsOfLoggedInUser = asyncHandler(async (req, res)
 
 // Get pending components of logged-in user (private)
 export const getPendingComponentsOfLoggedInUser = asyncHandler(async (req, res) => {
-    const userId = req.user._id;
-    const components = await Component.find({ submittedBy: userId, status: "pending" });
+    const components = await Component.find({
+        submittedBy: req.user._id,
+        status: "pending",
+    });
 
     return res
         .status(200)
@@ -191,8 +215,10 @@ export const getPendingComponentsOfLoggedInUser = asyncHandler(async (req, res) 
 
 // Get rejected components of logged-in user (private)
 export const getRejectedComponentsOfLoggedInUser = asyncHandler(async (req, res) => {
-    const userId = req.user._id;
-    const components = await Component.find({ submittedBy: userId, status: "rejected" });
+    const components = await Component.find({
+        submittedBy: req.user._id,
+        status: "rejected",
+    });
 
     return res
         .status(200)
