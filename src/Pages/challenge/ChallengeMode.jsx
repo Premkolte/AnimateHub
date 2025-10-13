@@ -880,7 +880,7 @@ const ChallengeMode = () => {
 
         {/* Footer Callouts */}
         <section ref={footerCardsRef} className="grid md:grid-cols-3 gap-6">
-          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
+          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
                onMouseEnter={(e) => {
                  gsap.to(e.currentTarget, {
                    y: -8,
@@ -922,7 +922,7 @@ const ChallengeMode = () => {
             </p>
           </div>
 
-          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
+          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
                onMouseEnter={(e) => {
                  gsap.to(e.currentTarget, {
                    y: -8,
@@ -962,7 +962,7 @@ const ChallengeMode = () => {
             </p>
           </div>
 
-          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
+          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
                onMouseEnter={(e) => {
                  gsap.to(e.currentTarget, {
                    y: -8,
