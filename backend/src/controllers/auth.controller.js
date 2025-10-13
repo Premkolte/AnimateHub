@@ -1,13 +1,16 @@
-
+import crypto from "crypto";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import crypto from "crypto";
 import User from "../models/user.model.js";
 import { sendVerificationEmail } from "../services/emailService.js";
 import sanatizeUserModelResponse from "../functions/sanatizeUserModelResponse.js";
 
-// Helper: set cookie with consistent options
+/**
+ * @desc Helper - Sets the authentication cookie with consistent options
+ * @param {Object} res - Express response object
+ * @param {String} token - JWT access token
+ */
 const setAuthCookie = (res, token) => {
   return res.cookie("accessToken", token, {
     httpOnly: true,
@@ -17,6 +20,11 @@ const setAuthCookie = (res, token) => {
   });
 };
 
+/**
+ * @desc Register a new user
+ * @route POST /api/auth/register
+ * @access Public
+ */
 export const registerController = asyncHandler(async (req, res) => {
   const { username, email, fullName, password } = req.body;
 
@@ -33,7 +41,7 @@ export const registerController = asyncHandler(async (req, res) => {
 
   const verificationToken = crypto.randomBytes(32).toString("hex");
   user.emailVerificationToken = verificationToken;
-  user.emailVerificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24h
+  user.emailVerificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
   await user.save();
   await sendVerificationEmail(user.email, verificationToken, user.fullName);
@@ -52,17 +60,27 @@ export const registerController = asyncHandler(async (req, res) => {
     );
 });
 
+/**
+ * @desc Login user
+ * @route POST /api/auth/login
+ * @access Public
+ */
 export const loginController = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
+
   if (!username || !password) {
     throw new ApiError(400, "Both fields are required");
   }
 
   let user = await User.findOne({ username });
-  if (!user) throw new ApiError(404, "User not found");
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
 
   const isPasswordValid = await user.verifyPassword(password);
-  if (!isPasswordValid) throw new ApiError(401, "Invalid password");
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Invalid password");
+  }
 
   const accessToken = user.generateAccessToken();
   user = sanatizeUserModelResponse(user.toObject(), true);
@@ -76,6 +94,11 @@ export const loginController = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, message, { user, accessToken }));
 });
 
+/**
+ * @desc Logout user
+ * @route POST /api/auth/logout
+ * @access Private
+ */
 export const logoutController = asyncHandler(async (_req, res) => {
   res.clearCookie("accessToken");
   return res
@@ -83,29 +106,46 @@ export const logoutController = asyncHandler(async (_req, res) => {
     .json(new ApiResponse(200, "User logged out successfully"));
 });
 
+/**
+ * @desc Get currently authenticated user
+ * @route GET /api/auth/me
+ * @access Private
+ */
 export const getCurrentUserController = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id).select(
     "-password -__v -_id -emailVerificationToken -emailVerificationExpires -createdAt -updatedAt -resetPasswordToken -resetPasswordExpires"
   );
 
-  if (!user) throw new ApiError(404, "User not found");
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
 
   return res
     .status(200)
     .json(new ApiResponse(200, "User fetched successfully", { user }));
 });
 
+/**
+ * @desc Update user password
+ * @route PATCH /api/auth/update-password
+ * @access Private
+ */
 export const updatePasswordController = asyncHandler(async (req, res) => {
   const { currentPassword, newPassword } = req.body;
+
   if (!currentPassword || !newPassword) {
     throw new ApiError(400, "Both fields are required");
   }
 
   let user = await User.findById(req.user.id);
-  if (!user) throw new ApiError(404, "User not found");
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
 
   const isPasswordValid = await user.verifyPassword(currentPassword);
-  if (!isPasswordValid) throw new ApiError(401, "Invalid current password");
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Invalid current password");
+  }
 
   user.password = newPassword;
   await user.save();
