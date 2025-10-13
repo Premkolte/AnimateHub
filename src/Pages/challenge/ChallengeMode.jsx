@@ -584,28 +584,12 @@ const ChallengeMode = () => {
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 relative z-10">
         {/* Header */}
         <section ref={headerRef} className="relative">
-          <div className="text-center space-y-6 hover:scale-75 transition-all duration-100">
+          <div className="text-center space-y-6 transition-transform duration-500 hover:scale-105">
             <div className="flex justify-center">
               <div className="relative">
                 <div 
                   ref={logoRef}
                   className="w-20 h-20 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 rounded-3xl mb-4 shadow-2xl flex items-center justify-center transform rotate-12 hover:rotate-0 transition-transform duration-500 cursor-pointer"
-                  onMouseEnter={(e) => {
-                    gsap.to(e.currentTarget, {
-                      rotation: 0,
-                      scale: 1.1,
-                      duration: 0.3,
-                      ease: "back.out(2)"
-                    });
-                  }}
-                  onMouseLeave={(e) => {
-                    gsap.to(e.currentTarget, {
-                      rotation: 12,
-                      scale: 1,
-                      duration: 0.3,
-                      ease: "power2.out"
-                    });
-                  }}
                 >
                   <span className="text-3xl transform -rotate-12">🔥</span>
                 </div>
@@ -896,7 +880,7 @@ const ChallengeMode = () => {
 
         {/* Footer Callouts */}
         <section ref={footerCardsRef} className="grid md:grid-cols-3 gap-6">
-          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
+          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
                onMouseEnter={(e) => {
                  gsap.to(e.currentTarget, {
                    y: -8,
@@ -938,7 +922,7 @@ const ChallengeMode = () => {
             </p>
           </div>
 
-          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
+          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
                onMouseEnter={(e) => {
                  gsap.to(e.currentTarget, {
                    y: -8,
@@ -978,7 +962,7 @@ const ChallengeMode = () => {
             </p>
           </div>
 
-          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
+          <div className="footer-card group p-6 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 border-primary-500 dark:border-accent-500 shadow-2xl ring-2 ring-primary-500/20 dark:ring-accent-500/20 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden cursor-pointer"
                onMouseEnter={(e) => {
                  gsap.to(e.currentTarget, {
                    y: -8,
