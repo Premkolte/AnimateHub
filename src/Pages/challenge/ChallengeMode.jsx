@@ -584,28 +584,12 @@ const ChallengeMode = () => {
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 relative z-10">
         {/* Header */}
         <section ref={headerRef} className="relative">
-          <div className="text-center space-y-6 hover:scale-75 transition-all duration-100">
+          <div className="text-center space-y-6 transition-transform duration-500 hover:scale-105">
             <div className="flex justify-center">
               <div className="relative">
                 <div 
                   ref={logoRef}
                   className="w-20 h-20 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 rounded-3xl mb-4 shadow-2xl flex items-center justify-center transform rotate-12 hover:rotate-0 transition-transform duration-500 cursor-pointer"
-                  onMouseEnter={(e) => {
-                    gsap.to(e.currentTarget, {
-                      rotation: 0,
-                      scale: 1.1,
-                      duration: 0.3,
-                      ease: "back.out(2)"
-                    });
-                  }}
-                  onMouseLeave={(e) => {
-                    gsap.to(e.currentTarget, {
-                      rotation: 12,
-                      scale: 1,
-                      duration: 0.3,
-                      ease: "power2.out"
-                    });
-                  }}
                 >
                   <span className="text-3xl transform -rotate-12">🔥</span>
                 </div>
