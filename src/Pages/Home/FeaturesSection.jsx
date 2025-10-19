@@ -147,6 +147,7 @@ const FeaturesSection = () => {
             <motion.div
               key={index}
               variants={item}
+              whileTap="tap"
               className="bg-white dark:bg-secondary-900 
                 text-secondary-800 dark:text-white 
                 border border-secondary-200 dark:border-secondary-600 
@@ -154,24 +155,26 @@ const FeaturesSection = () => {
                 hover:shadow-xl
                 transition-all duration-300 ease-in-out
                 max-w-md mx-auto w-full
-                flex flex-col items-center hover:shadow-[0_0_12px_2px_rgba(59,130,246,0.7)]
+                flex flex-col items-center justify-center
+                hover:shadow-[0_0_12px_2px_rgba(59,130,246,0.7)]
                 h-full hover:border-primary-600 dark:hover:border-accent-600
-                transform transition-all duration-700 hover:scale-105 dark:hover:shadow-[0_0_12px_2px_rgba(168,85,247,0.7)]"
-              whileTap="tap"
+                transform transition-all duration-700 hover:scale-105 
+                dark:hover:shadow-[0_0_12px_2px_rgba(168,85,247,0.7)]"
             >
-              <div
-                className="w-20 h-20 flex items-center justify-center rounded-2xl mb-6"
-              >
-                {feature.icon}
+              {/* Wrapper keeps icon + text block vertically centered */}
+              <div className="flex flex-col items-center justify-center flex-1">
+                <div className="w-20 h-20 flex items-center justify-center rounded-2xl mb-6">
+                  {feature.icon}
+                </div>
+
+                <h3 className="text-xl font-bold mb-3 text-secondary-900 dark:text-white text-center leading-tight">
+                  {feature.title}
+                </h3>
+
+                <p className="text-secondary-600 dark:text-secondary-300 leading-relaxed text-center">
+                  {feature.description}
+                </p>
               </div>
-
-              <h3 className="text-xl font-bold mb-3 text-secondary-900 dark:text-white">
-                {feature.title}
-              </h3>
-
-              <p className="text-secondary-600 dark:text-secondary-300 leading-relaxed text-center">
-                {feature.description}
-              </p>
             </motion.div>
           ))}
         </motion.div>
