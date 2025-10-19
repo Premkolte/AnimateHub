@@ -256,44 +256,35 @@ const About = () => {
               whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl">
+              <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl transform transition duration-300 group-hover:shadow-lg">
                 <div className="flex items-center mb-8">
                   <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
                     <span className="text-3xl">✨</span>
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Why Choose Us?</h3>
                 </div>
-                
+
                 <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
-                      <span className="text-xl">✂️</span>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Copy-Paste Simple</h4>
-                      <p className="text-gray-600 dark:text-gray-300">Instant integration with zero complex setup required</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
-                      <span className="text-xl">⚡</span>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Performance Optimized</h4>
-                      <p className="text-gray-600 dark:text-gray-300">Smooth 60fps animations with minimal overhead</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
-                      <span className="text-xl">🔄</span>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Always Updated</h4>
-                      <p className="text-gray-600 dark:text-gray-300">Regular updates with latest design trends</p>
-                    </div>
-                  </div>
+                  {[
+                    { label: "Copy-Paste Simple", icon: "✂️", color: "from-green-400 to-blue-500", desc: "Instant integration with zero complex setup required" },
+                    { label: "Performance Optimized", icon: "⚡", color: "from-yellow-400 to-orange-500", desc: "Smooth 60fps animations with minimal overhead" },
+                    { label: "Always Updated", icon: "🔄", color: "from-purple-400 to-indigo-500", desc: "Regular updates with latest design trends" },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex items-start space-x-4 p-3 rounded-xl transition-colors"
+                      whileHover={{ x: 8, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    >
+                      <div className={`w-10 h-10 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-md`}>
+                        <span className="text-xl">{item.icon}</span>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{item.label}</h4>
+                        <p className="text-gray-600 dark:text-gray-300">{item.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </motion.div>
@@ -307,7 +298,7 @@ const About = () => {
               whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl">
+              <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl transform transition duration-300 group-hover:shadow-lg">
                 <div className="flex items-center mb-8">
                   <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
                     <span className="text-3xl">🚀</span>
@@ -324,8 +315,8 @@ const About = () => {
                   ].map((item, i) => (
                     <motion.div
                       key={i}
-                      className="flex items-center space-x-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-                      whileHover={{ x: 8 }}
+                      className="flex items-center space-x-4 p-3 rounded-xl transition-colors"
+                      whileHover={{ x: 8, scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     >
                       <div className={`w-10 h-10 bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center shadow-md`}>
@@ -338,6 +329,8 @@ const About = () => {
               </div>
             </motion.div>
           </div>
+
+
         </section>
 
         {/* Tech Stack - Modern Grid */}
@@ -455,7 +448,7 @@ const About = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
                 <motion.a
                   href="/explore"
-                  className="flex-1 py-4 px-8 bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 text-white rounded-2xl font-semibold shadow-xl hover:shadow-2xl transition-all text-center text-lg"
+                  className="flex-1 py-4 px-8 bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 text-white dark:text-white rounded-2xl font-semibold shadow-xl hover:shadow-2xl dark:hover:text-gray-200 transition-all text-center text-lg"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -466,13 +459,14 @@ const About = () => {
                   href="https://github.com/Premkolte/AnimateHub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-4 px-8 bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-600 text-white rounded-2xl font-semibold shadow-xl hover:shadow-2xl transition-all text-center text-lg"
+                  className="flex-1 py-4 px-8 bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-600 text-white dark:text-white rounded-2xl font-semibold shadow-xl hover:shadow-2xl dark:hover:text-gray-200 transition-all text-center text-lg"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   ⭐ Star on GitHub
                 </motion.a>
               </div>
+
             </div>
           </motion.div>
         </section>
@@ -498,7 +492,9 @@ const About = () => {
               </div>
               
               <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-                Ready to Begin Your
+                <span className="text-black dark:text-white">
+                  Ready to Begin Your
+                </span>
                 <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300">
                   AnimateHub Adventure?
