@@ -305,7 +305,7 @@ const About = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 dark:text-white">What We Offer</h3>
                 </div>
-                
+
                 <div className="space-y-4">
                   {[
                     { label: "50+ Animation Components", color: "from-blue-500 to-cyan-500", icon: "🎨" },
@@ -404,18 +404,23 @@ const About = () => {
               
               <div className="flex flex-wrap gap-3 justify-center">
                 {[
-                  { label: "🔧 Contribute", href:"https://github.com/Premkolte/AnimateHub", bg: "from-blue-500 to-cyan-500" },
-                  { label: "💡 Suggest", href:"/contact", bg: "from-purple-500 to-pink-500" },
-                  { label: "📚 Document", href:"https://github.com/Premkolte/AnimateHub", bg: "from-green-500 to-emerald-500" },
-                  { label: "🐛 Report Issues", href:"https://github.com/Premkolte/AnimateHub/issues/new", bg: "from-orange-500 to-red-500" },
+                  { label: "🔧 Contribute", href:"https://github.com/Premkolte/AnimateHub", gradient: "linear-gradient(to right, #3b82f6, #06b6d4)", hoverGradient: "linear-gradient(to right, #2563eb, #0ea5e9)" },
+                  { label: "💡 Suggest", href:"/contact", gradient: "linear-gradient(to right, #a855f7, #ec4899)", hoverGradient: "linear-gradient(to right, #9333ea, #db2777)" },
+                  { label: "📚 Document", href:"https://github.com/Premkolte/AnimateHub", gradient: "linear-gradient(to right, #10b981, #22c55e)", hoverGradient: "linear-gradient(to right, #059669, #16a34a)" },
+                  { label: "🐛 Report Issues", href:"https://github.com/Premkolte/AnimateHub/issues/new", gradient: "linear-gradient(to right, #f97316, #ef4444)", hoverGradient: "linear-gradient(to right, #ea580c, #dc2626)" },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
-                    className={`px-6 py-3 bg-gradient-to-r ${item.bg} text-white rounded-full text-sm font-medium shadow-lg hover:shadow-xl transition-shadow cursor-pointer`}
-                    whileHover={{ scale: 1.05 }}
+                    className="group px-6 py-3 rounded-full text-sm font-medium shadow-lg cursor-pointer"
+                    style={{ background: item.gradient }}
+                    whileHover={{ scale: 1.05, background: item.hoverGradient }}
                     whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <Link to={item.href}>
+                    <Link
+                      to={item.href}
+                      className="text-white group-hover:text-black dark:group-hover:text-white transition-colors duration-300"
+                    >
                       {item.label}
                     </Link>
                   </motion.div>
