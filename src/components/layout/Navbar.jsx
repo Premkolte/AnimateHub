@@ -185,7 +185,7 @@ const Navbar = () => {
         <div className="w-full px-4 lg:px-8">
           <div className="w-full flex justify-between items-center">
             {/* Logo Section */}
-            <div className="flex items-center space-x-3 group">
+            <div className="flex items-center space-x-3 group pr-6">
               <Link
                 to="/"
                 className="flex items-center space-x-3 transform transition-transform duration-300 hover:scale-105"
@@ -210,7 +210,7 @@ const Navbar = () => {
                 </span>
               </Link>
             </div>
-
+            
             {/* Desktop Navigation */}
             <div className="hidden xl:flex items-center space-x-1 xl:space-x-2">
               {navLinks.map((item, index) => {
