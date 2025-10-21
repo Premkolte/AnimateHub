@@ -4,58 +4,73 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import Component from "../models/components.model.js";
 import { uploadFileToGitHub } from "../functions/uploadFileToGithub.js";
 
-
-// Admin will use this to get all pending components - later he will approve or reject them
+/**
+ * @desc Admin - Get all components with "pending" status
+ * @route GET /api/admin/components/pending
+ * @access Admin
+ */
 export const getAllPendingComponents = asyncHandler(async (req, res) => {
-    const components = await Component.find({ status: "pending" }).select("name description category");
-    return res
-        .status(200)
-        .json(new ApiResponse(200, "Components retrieved successfully", components));
-})
+  const components = await Component.find({ status: "pending" })
+    .select("name description category");
 
+  return res.status(200).json(
+    new ApiResponse(200, "Components retrieved successfully", components)
+  );
+});
 
-// Admin will use this to approve a component
+/**
+ * @desc Admin - Approve a pending component
+ * @route PATCH /api/admin/components/:id/approve
+ * @access Admin
+ */
 export const approveComponentController = asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const component = await Component.findById(id);
+  const { id } = req.params;
+  const component = await Component.findById(id);
 
-    if (!component) {
-        throw new ApiError(404, "Component not found");
-    }
+  if (!component) {
+    throw new ApiError(404, "Component not found");
+  }
 
-    component.status = "approved";
+  component.status = "approved";
 
-    const { success, message, data } = await uploadFileToGitHub(component.category, component.name, component.code);
+  const { success, message, data } = await uploadFileToGitHub(
+    component.category,
+    component.name,
+    component.code
+  );
 
-    if (!success) {
-        throw new ApiError(500, message, data);
-    }
+  if (!success) {
+    throw new ApiError(500, message, data);
+  }
 
-    component.repoLink = data.content.html_url;
-    component.code = undefined;
-    component.approvedBy = req.user._id;
+  component.repoLink = data.content.html_url;
+  component.code = undefined;
+  component.approvedBy = req.user._id;
 
-    await component.save();
+  await component.save();
 
-    return res
-        .status(200)
-        .json(new ApiResponse(200, "Component approved successfully"));
-})
+  return res.status(200).json(
+    new ApiResponse(200, "Component approved successfully")
+  );
+});
 
-
-// Admin will use this to reject a component
+/**
+ * @desc Admin - Reject a pending component
+ * @route PATCH /api/admin/components/:id/reject
+ * @access Admin
+ */
 export const rejectComponentController = asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const component = await Component.findById(id);
+  const { id } = req.params;
+  const component = await Component.findById(id);
 
-    if (!component) {
-        throw new ApiError(404, "Component not found");
-    }
+  if (!component) {
+    throw new ApiError(404, "Component not found");
+  }
 
-    component.status = "rejected";
-    await component.save();
+  component.status = "rejected";
+  await component.save();
 
-    return res
-        .status(200)
-        .json(new ApiResponse(200, "Component rejected successfully"));
-})
+  return res.status(200).json(
+    new ApiResponse(200, "Component rejected successfully")
+  );
+});

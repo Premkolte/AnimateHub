@@ -47,7 +47,7 @@ const TemplatesPage = () => {
 
   // Parallax background elements
   const ParallaxBackground = () => (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none ">
       <motion.div
         style={{ y: backgroundY }}
         className="absolute -top-1/2 -left-1/4 w-96 h-96 bg-primary-200/10 dark:bg-accent-500/5 rounded-full blur-3xl"
@@ -222,13 +222,13 @@ const TemplatesPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 dark:text-white">
               Why Choose Our Templates?
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-accent-500 mx-auto rounded-full" />
           </motion.div>
 
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 text-left">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 text-left ">
             {features.map((feature, idx) => (
               <motion.div
                 key={idx}
@@ -247,18 +247,18 @@ const TemplatesPage = () => {
                   rotateX: 5,
                   transition: { duration: 0.3 }
                 }}
-                className="group p-6 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl shadow-sm hover:shadow-2xl duration-300 hover:border-primary-500 dark:hover:border-accent-500 transition-all relative overflow-hidden"
+                className="group p-6 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000  backdrop-blur-xl shadow-sm hover:shadow-2xl duration-300 hover:border-primary-500 dark:hover:border-accent-500 transition-all relative overflow-hidden"
               >
                 {/* Animated background gradient on hover */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-primary-100/20 to-accent-100/20 dark:from-secondary-700/20 dark:to-accent-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute  inset-0 bg-gradient-to-br from-primary-100/20 to-accent-100/20 dark:from-secondary-700/20 dark:to-accent-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   initial={{ scale: 0.8 }}
                   whileHover={{ scale: 1 }}
                 />
                 
                 <div className="relative z-10">
                   <motion.h3 
-                    className="text-xl font-semibold mb-3"
+                    className="text-xl font-semibold mb-3 dark:text-white"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
@@ -361,7 +361,7 @@ const TemplatesPage = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl font-extrabold md:text-5xl mb-4">
+          <h1 className="text-4xl font-extrabold md:text-5xl mb-4 dark:text-white">
             Available Templates
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-accent-500 mx-auto rounded-full" />

@@ -6,7 +6,9 @@ import {
     registerController,
     updatePasswordController
 } from "../controllers/auth.controller.js";
-
+import {
+    googleLoginController
+} from "../controllers/googleAuth.controller.js";   
 import { 
     verifyUserMailController, 
     resendVerificationEmail,
@@ -24,7 +26,7 @@ router.post("/login", loginController)
 router.post("/logout", logoutController)
 router.get("/check", authMiddleware, getCurrentUserController)
 router.post("/update-password", authMiddleware, updatePasswordController)
-
+router.post("/google-login", googleLoginController);
 
 // Email verification routes
 router.get("/verify-email/:token", verifyUserMailController)

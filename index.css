@@ -1,16 +1,133 @@
+/* Hide Google Translate button */
 #google_translate_element {
   display: none;
 }
 
+/* Tailwind Imports */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Base Styles */
 @layer base {
   body {
-    @apply font-sans; /* Poppins */
+    @apply font-sans bg-gradient-to-br from-green-50 via-green-100 to-green-200 text-gray-900 transition-colors duration-500 ease-in-out;
   }
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading; /* Sora */
+    @apply font-heading text-gray-800 tracking-tight;
+  }
+
+  a {
+    @apply text-green-600 hover:text-green-800 transition-colors duration-300;
+  }
+
+  button {
+    @apply px-5 py-3 rounded-2xl font-semibold shadow-md bg-green-600 text-white 
+           hover:bg-green-700 hover:shadow-xl active:scale-95 transition-all duration-300 ease-in-out;
+  }
+
+  /* Dark mode adaptive support */
+  @media (prefers-color-scheme: dark) {
+    body {
+      @apply bg-gray-900 text-gray-100;
+    }
+    a {
+      @apply text-green-400 hover:text-green-200;
+    }
+    button {
+      @apply bg-green-500 hover:bg-green-400 text-gray-900;
+    }
+    .card {
+      @apply bg-gray-800 text-gray-100 shadow-lg;
+    }
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation-duration: 0.2s !important;
+    transform: translateY(2px) !important;
+  }
+
+  button,
+  .accordion-button {
+    transition-duration: 0.1s !important;
+  }
+
+  button:hover,
+  .accordion-button:hover {
+    transform: scale(1) !important;
+    box-shadow: none !important;
+  }
+
+  a,
+  .nav-link {
+    transition-duration: 0.1s !important;
+  }
+
+  .card {
+    transition-duration: 0.1s !important;
+  }
+
+  .card:hover {
+    transform: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  }
+
+  .nav-link::after {
+    transition: none !important;
+  }
+
+  .nav-link:hover::after {
+    width: 100% !important;
+  }
+}
+
+/* Components */
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6 hover:shadow-2xl transition-shadow duration-500;
+  }
+
+  .section {
+    @apply py-12 px-4 md:px-8 lg:px-16;
+  }
+
+  .nav-link {
+    @apply relative text-gray-700 hover:text-green-700 font-medium transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-green-600 transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .accordion-button {
+    @apply bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold shadow-md 
+           hover:bg-blue-700 hover:shadow-lg transition-all duration-300;
+  }
+
+  /* Optional: scroll-to-top button */
+  #scrollToTop {
+    @apply fixed bottom-6 right-6 bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg transition-all duration-300;
+    display: none;
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }

@@ -1,36 +1,35 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Added Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="Favicon.png">
+    <link rel="icon" type="image/x-icon" href="Favicon.png" loading="lazy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Enhanced SEO Meta Tags -->
+    <meta name="color-scheme" content="dark light" />
+
     <title>AnimateHub - Open Source Animation UI Library for Developers</title>
-    <meta name="description" content="Discover 100+ open-source animation components built with React, Tailwind CSS, and pure CSS. Copy, paste, and animate your web projects instantly." />
-    <meta name="keywords" content="animation library, react components, tailwind css, css animations, open source, ui components, web animations, frontend development, react animations" />
+    <meta
+      name="description"
+      content="Discover 100+ open-source animation components built with React, Tailwind CSS, and pure CSS. Copy, paste, and animate your web projects instantly."
+    />
+    <meta
+      name="keywords"
+      content="animation library, react components, tailwind css, css animations, open source, ui components, web animations, frontend development, react animations"
+    />
     <meta name="author" content="AnimateHub" />
     <meta name="robots" content="index, follow" />
-    
-    <!-- REMOVE this line to allow translation -->
-    <!-- <meta name="google" content="notranslate" /> -->
 
-    <!-- Google Translate -->
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'hi,en',
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-      }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- Open Graph Meta Tags for Social Sharing -->
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="AnimateHub - Open Source Animation UI Library" />
     <meta property="og:description" content="100+ open-source animation components for React & CSS. Zero setup required, production-ready animations." />
     <meta property="og:type" content="website" />
@@ -38,19 +37,18 @@
     <meta property="og:image" content="https://animate-hub.vercel.app/og-image.png" />
     <meta property="og:site_name" content="AnimateHub" />
     <meta property="og:locale" content="en_US" />
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="AnimateHub - Open Source Animation UI Library" />
     <meta name="twitter:description" content="100+ open-source animation components for React & CSS. Zero setup required, production-ready animations." />
     <meta name="twitter:image" content="https://animate-hub.vercel.app/og-image.png" />
     <meta name="twitter:creator" content="@AnimateHub" />
-    
-    <!-- Additional SEO Meta Tags -->
+
     <meta name="theme-color" content="#3B82F6" />
     <link rel="canonical" href="https://animate-hub.vercel.app/" />
-    
-    <!-- Structured Data for Search Engines -->
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -60,26 +58,152 @@
       "url": "https://animate-hub.vercel.app/",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "AnimateHub"
-      },
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "author": {"@type": "Organization", "name": "AnimateHub"},
       "screenshot": "https://animate-hub.vercel.app/og-image.png",
       "softwareVersion": "1.0.0"
     }
     </script>
-    <link rel="stylesheet" href="index.css">
+
+    <!-- Styling -->
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(-45deg, #1d1f20, #2e2f31, #3b82f6, #9333ea);
+        background-size: 400% 400%;
+        animation: gradientBG 12s ease infinite;
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.8s ease, color 0.5s ease;
+      }
+
+      @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+      }
+
+      #root {
+        width: 90%;
+        max-width: 1200px;
+        min-height: 80vh;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        animation: fadeIn 1.2s ease;
+      }
+
+      @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+      }
+
+      [data-theme="light"] body {
+        background: linear-gradient(-45deg, #f5f5f5, #e5e7eb, #93c5fd, #c084fc);
+        color: #111;
+      }
+
+      #themeToggle, #scrollTopBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(255,255,255,0.15);
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      #themeToggle:hover, #scrollTopBtn:hover {
+        transform: scale(1.1);
+        background: rgba(255,255,255,0.25);
+      }
+
+      #scrollTopBtn {
+        bottom: 80px;
+        display: none;
+      }
+
+      #google_translate_element {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 9999;
+        background: rgba(0,0,0,0.4);
+        border-radius: 8px;
+        padding: 5px;
+      }
+
+      *:focus {
+        outline: 2px solid #3b82f6;
+        outline-offset: 3px;
+      }
+    </style>
   </head>
   <body>
-    <!-- Google Translate Widget -->
-    <div id="google_translate_element" style="position:fixed;top:10px;right:10px;z-index:9999;"></div>
+    <div id="google_translate_element" aria-label="Language translator"></div>
+    <div id="root" role="main"></div>
 
-    <div id="root"></div>
+    <!-- Light/Dark Mode Toggle -->
+    <button id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark mode">🌓</button>
+
+    <!-- Scroll to top -->
+    <button id="scrollTopBtn" title="Scroll to top" aria-label="Scroll to top">⬆️</button>
+
     <script type="module" src="/src/main.jsx"></script>
-  </body> 
+
+    <!-- Google Translate Script -->
+    <script defer type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'hi,en',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+    </script>
+    <script defer src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Theme + Scroll Logic -->
+    <script>
+      const toggle = document.getElementById('themeToggle');
+      const scrollBtn = document.getElementById('scrollTopBtn');
+
+      // Persisted theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+
+      toggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        if (current === 'light') {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
+      // Scroll to top visibility
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) scrollBtn.style.display = 'block';
+        else scrollBtn.style.display = 'none';
+      });
+
+      scrollBtn.addEventListener('click', () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      });
+    </script>
+  </body>
 </html>

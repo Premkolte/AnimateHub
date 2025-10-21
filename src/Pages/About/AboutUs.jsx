@@ -1,28 +1,23 @@
-import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion"; // Import the useReducedMotion hook
-import GitHubStats from "./GitHubStats";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Journey from "./Journey";
-import {
-  faTwitter,
-  faFacebook,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
-import CoreTeam from "./CoreTeam";
-import Insights from "./Insights";
+import { useState } from "react"
+import { motion, useReducedMotion } from "framer-motion" // Import the useReducedMotion hook
+import GitHubStats from "./GitHubStats"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFacebook, faLinkedin, faXTwitter } from "@fortawesome/free-brands-svg-icons"
+import Journey from "./Journey"
+import CoreTeam from "./CoreTeam"
+import Insights from "./Insights"
+import { Link } from "react-router-dom"
 
 const About = () => {
-  const shouldReduceMotion = useReducedMotion(); // This hook returns true if the user prefers reduced motion
+  const shouldReduceMotion = useReducedMotion() // This hook returns true if the user prefers reduced motion
 
   const techUsed = [
     { icon: "⚛️", name: "React 18", desc: "Reusable UI & hooks" },
     { icon: "⚡", name: "Vite 5", desc: "Blazing fast dev server" },
     { icon: "🎨", name: "Tailwind CSS 3", desc: "Utility-first styling" },
     { icon: "🎭", name: "Framer Motion", desc: "Declarative animations" },
-  ];
-  const [code, setCode] = useState(
-    `Type something excited!`
-  );
+  ]
+  const [code, setCode] = useState(`Type something excited!`)
 
   // Animation variants for Framer Motion
   const fadeInLeft = {
@@ -32,7 +27,7 @@ const About = () => {
       opacity: 1,
       transition: { duration: shouldReduceMotion ? 0 : 0.8 }, // Disable animation if reduced motion is preferred
     },
-  };
+  }
 
   const fadeInRight = {
     initial: { x: 50, opacity: 0 },
@@ -41,125 +36,198 @@ const About = () => {
       opacity: 1,
       transition: { duration: shouldReduceMotion ? 0 : 0.8 }, // Disable animation
     },
-  };
+  }
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.6 }} // Disable animation
-      className="min-h-screen w-full bg-white dark:bg-secondary-900 text-secondary-900 dark:text-white"
+      className="min-h-screen w-full overflow-x-hidden bg-gradient-to-br from-slate-50 via-purple-50 to-indigo-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-indigo-900/20 text-secondary-900 dark:text-white"
     >
-      <div className="max-w-7xl mx-auto px-6 py-20 space-y-32">
-        {/* Hero Section - Full width split */}
-        <section className="flex flex-col md:flex-row items-center gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
+        {/* Enhanced Hero Section */}
+        <section className="relative">
+          {/* Background decorative elements */}
+          {/* <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-tr from-blue-400/20 to-cyan-400/-400 rounded-full blur-3xl"></div>
+          </div> */}
+          
+          <div className="relative flex flex-col lg:flex-row items-center gap-16">
+            <motion.div className="flex-1 space-y-8" variants={fadeInLeft} initial="initial" animate="animate">
+              <div className="space-y-6">
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-indigo-500/10 border border-purple-500/20 backdrop-blur-sm">
+                  <span className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></span>
+                  <span className="text-sm font-medium text-purple-700 dark:text-purple-300">100% Open Source</span>
+                </div>
+                
+                <h1 className="text-6xl lg:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 dark:from-purple-400 dark:via-blue-400 dark:to-indigo-400 leading-tight">
+                  About
+                  <br />
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400">
+                    AnimateHub
+                  </span>
+                </h1>
+                
+                <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+                  A powerful <span className="font-semibold text-purple-600 dark:text-purple-400">open-source animation UI library</span> that simplifies creating beautiful, reusable animations for modern web applications.
+                </p>
+              </div>
+              
+              <div className="flex flex-wrap gap-4">
+                <div className="flex items-center space-x-2 px-4 py-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-full border border-gray-200/50 dark:border-gray-700/50">
+                  <span className="text-2xl">⚛️</span>
+                  <span className="font-medium">React</span>
+                </div>
+                <div className="flex items-center space-x-2 px-4 py-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-full border border-gray-200/50 dark:border-gray-700/50">
+                  <span className="text-2xl">🎨</span>
+                  <span className="font-medium">Tailwind</span>
+                </div>
+                <div className="flex items-center space-x-2 px-4 py-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-full border border-gray-200/50 dark:border-gray-700/50">
+                  <span className="text-2xl">🎭</span>
+                  <span className="font-medium">Framer Motion</span>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="flex-1 relative w-full max-w-lg"
+              variants={fadeInRight}
+              initial="initial"
+              animate="animate"
+            >
+              <div className="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/30 p-6">
+                {/* Floating decorative elements */}
+                <div className="absolute -top-4 -left-4 w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg rotate-12 shadow-lg"></div>
+                <div className="absolute -top-2 -right-6 w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full shadow-lg"></div>
+                <div className="absolute -bottom-3 -right-3 w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl -rotate-12 shadow-lg"></div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Live Code Editor</h3>
+                    <div className="flex space-x-2">
+                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                  </div>
+                  
+                  <textarea
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    className="w-full h-32 p-4 bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-xl text-sm font-mono text-gray-800 dark:text-gray-200 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition-all"
+                    placeholder="// Try typing some code..."
+                  />
+                  
+                  <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">Preview:</div>
+                    <pre className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap break-words">
+                      {code || "Start typing to see your code here..."}
+                    </pre>
+                  </div>
+                  
+                  <div className="flex justify-between">
+                    <button
+                      onClick={() => setCode("")}
+                      className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                    >
+                      Clear
+                    </button>
+                    <button className="px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm font-medium rounded-lg hover:from-purple-600 hover:to-indigo-600 transform hover:scale-105 transition-all shadow-lg">
+                      Run Code
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Mission & Vision - Modern Cards */}
+        <section className="grid lg:grid-cols-2 gap-8">
+          {/* Mission Card */}
           <motion.div
-            className="flex-1 space-y-6"
-            variants={fadeInLeft}
-            initial="initial"
-            animate="animate"
+            className="group relative overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl hover:shadow-purple-500/20 transition-all duration-500"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            whileHover={shouldReduceMotion ? {} : { y: -10 }}
           >
-            <h1 className="text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-500">
-              About AnimateHub
-            </h1>
-            <p className="text-lg md:text-xl opacity-80 leading-relaxed">
-              A powerful open-source animation UI library that simplifies
-              creating beautiful, reusable animations for modern web
-              applications.
-            </p>
-            <div className="inline-block px-6 py-2 text-sm font-semibold rounded-full bg-gradient-to-r from-primary-600 to-purple-600 text-white dark:from-accent-600 dark:to-purple-400 animate-pulse motion-reduce:animate-none shadow-lg">
-              100% OPEN-SOURCE
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div className="relative p-8 lg:p-10">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                  <span className="text-2xl">🎯</span>
+                </div>
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Mission</h2>
+              </div>
+              
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                Our mission is to empower developers and creators by providing
+                <span className="font-semibold text-purple-600 dark:text-purple-400 mx-1">
+                  ready-to-use HTML, CSS, JS, and React components
+                </span>
+                for stunning animations, making modern web design accessible, fun, and effortless.
+              </p>
+              
+              <div className="mt-6 flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
+                  Accessibility
+                </span>
+                <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-medium">
+                  Simplicity
+                </span>
+                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
+                  Innovation
+                </span>
+              </div>
             </div>
           </motion.div>
+
+          {/* Vision Card */}
           <motion.div
-            className="flex-1 relative w-full h-64 md:h-96 bg-gradient-to-r from-purple-200 to-indigo-200 dark:from-purple-700 dark:to-indigo-700 rounded-3xl shadow-xl overflow-auto flex flex-col p-4"
-            variants={fadeInRight}
-            initial="initial"
-            animate="animate"
+            className="group relative overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl hover:shadow-indigo-500/20 transition-all duration-500"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            whileHover={shouldReduceMotion ? {} : { y: -10 }}
           >
-            {/* Background shapes */}
-            <div className="absolute top-4 left-4 w-24 h-24 bg-purple-300 dark:bg-purple-600 rounded-full blur-3xl opacity-40"></div>
-            <div className="absolute bottom-6 right-6 w-32 h-32 bg-indigo-300 dark:bg-indigo-600 rounded-full blur-3xl opacity-30"></div>
-
-            {/* Editable code area */}
-            <textarea
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              className="relative text-sm p-4 rounded-xl bg-white dark:bg-secondary-800 text-black dark:text-white w-full h-full resize-none overflow-auto focus:outline-none"
-              placeholder="Type anything here..."
-            />
-
-            {/* Display typed code safely */}
-            <pre className="mt-2 p-2 bg-gray-100 dark:bg-gray-900 text-sm rounded overflow-auto">
-              {code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-            </pre>
-
-            {/* Clear button */}
-            <button
-              onClick={() => setCode("")}
-              className="mt-2 self-end px-4 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 transition motion-reduce:transition-none"
-            >
-              Clear
-            </button>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div className="relative p-8 lg:p-10">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                  <span className="text-2xl">🚀</span>
+                </div>
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Vision</h2>
+              </div>
+              
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                Our vision is to create a community where developers and designers can
+                <span className="font-semibold text-indigo-600 dark:text-indigo-400 mx-1">
+                  innovate with ready-made animation components
+                </span>
+                , learn from each other, and bring their creative ideas to life with modern, effortless web design.
+              </p>
+              
+              <div className="mt-6 flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-medium">
+                  Community
+                </span>
+                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
+                  Collaboration
+                </span>
+                <span className="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-sm font-medium">
+                  Creativity
+                </span>
+              </div>
+            </div>
           </motion.div>
         </section>
-        <section className="flex w-full min-h-[300px] rounded-2xl shadow-xl overflow-hidden">
-  {/* Left div */}
-  <motion.div
-    className="flex-1 bg-gradient-to-br from-purple-700 to-pink-600 dark:from-purple-900 dark:to-pink-800 text-white flex items-center justify-center p-8"
-    whileHover={{ scale: 1.05 }}
-    transition={{ type: "spring", stiffness: 200 }}
-  >
-    <h2 className="text-3xl font-extrabold tracking-wide">Mission</h2>
-  </motion.div>
-
-  {/* Right div */}
-  <motion.div
-    className="flex-[3] bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 flex items-center p-8"
-    initial={{ opacity: 0, x: 50 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-  >
-    <p className="text-lg leading-relaxed">
-      Our mission is to empower developers and creators by providing
-      <span className="font-semibold text-purple-600 dark:text-purple-400">
-        {" "}
-        ready-to-use HTML, CSS, JS, and React components
-      </span>
-      for stunning animations, making modern web design accessible, fun,
-      and effortless.
-    </p>
-  </motion.div>
-</section>
-
-        <section className="flex w-full min-h-[300px] rounded-2xl shadow-xl overflow-hidden">
-  {/* Left div */}
-  <motion.div
-    className="flex-[3] bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 flex items-center p-8"
-    initial={{ opacity: 0, x: 50 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-  >
-    <p className="text-lg leading-relaxed">
-      Our vision is to create a community where developers and designers can
-      <span className="font-semibold text-purple-600 dark:text-purple-400">
-        {" "}
-        innovate with ready-made animation components
-      </span>
-      , learn from each other, and bring their creative ideas to life with
-      modern, effortless web design.
-    </p>
-  </motion.div>
-
-  {/* Right div */}
-  <motion.div
-    className="flex-1 bg-gradient-to-br from-purple-700 to-pink-600 dark:from-purple-900 dark:to-pink-800 text-white flex items-center justify-center p-8"
-    whileHover={{ scale: 1.05 }}
-    transition={{ type: "spring", stiffness: 200 }}
-  >
-    <h2 className="text-3xl font-extrabold tracking-wide">Vision</h2>
-  </motion.div>
-</section>
 
         <Journey></Journey>
 
@@ -167,133 +235,243 @@ const About = () => {
 
         <Insights></Insights>
 
-        {/* Why Choose Us & What We Offer - Staggered overlapping cards */}
-        <section className="relative flex flex-col md:flex-row gap-12">
-          <motion.div
-            className="md:w-1/2 bg-gradient-to-br from-purple-50 to-white dark:from-secondary-800 dark:to-secondary-700 p-8 rounded-3xl shadow-xl border border-purple-200 dark:border-secondary-700 -mt-12 md:mt-0 z-10"
-            whileHover={shouldReduceMotion ? {} : { scale: 1.05 }} // Disable hover animation
-          >
-            <h2 className="text-2xl font-bold flex items-center gap-2 mb-4 text-purple-700 dark:text-purple-400">
-              ✨ Why Choose Us?
+        {/* Why Choose Us & What We Offer - Modern Overlapping Cards */}
+        <section className="relative">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4">
+              Why Choose <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">AnimateHub?</span>
             </h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <span className="text-2xl">✂️</span>
-                <div>
-                  <h3 className="font-semibold text-lg">Copy-Paste Simple</h3>
-                  <p className="opacity-80 text-sm">
-                    Instant integration, no complex setup
-                  </p>
+            <p className="text-xl text-gray-600 dark:white max-w-3xl mx-auto ">
+              Discover what makes us the preferred choice for developers worldwide
+            </p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Why Choose Us Card */}
+            <motion.div
+              className="relative group"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl transform transition duration-300 group-hover:shadow-lg">
+                <div className="flex items-center mb-8">
+                  <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                    <span className="text-3xl">✨</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Why Choose Us?</h3>
                 </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-2xl">⚡</span>
-                <div>
-                  <h3 className="font-semibold text-lg">
-                    Performance Optimized
-                  </h3>
-                  <p className="opacity-80 text-sm">Smooth 60fps animations</p>
-                </div>
-              </li>
-            </ul>
-          </motion.div>
 
-          <motion.div
-            className="md:w-1/2 bg-gradient-to-br from-indigo-50 to-white dark:from-secondary-800 dark:to-secondary-700 p-8 rounded-3xl shadow-xl border border-indigo-200 dark:border-secondary-700 translate-y-12 md:-translate-y-6 z-0"
-            whileHover={shouldReduceMotion ? {} : { scale: 1.05 }} // Disable hover animation
-          >
-            <h2 className="text-2xl font-bold flex items-center gap-2 mb-4 text-indigo-700 dark:text-indigo-400">
-              🚀 What We Offer
-            </h2>
-            <ul className="space-y-3">
-              {[
-                { label: "50+ Animation Components", color: "bg-blue-500" },
-                { label: "Live Preview & Code Copy", color: "bg-green-500" },
-                { label: "Ready-to-use Templates", color: "bg-purple-500" },
-                { label: "Dark/Light Mode Support", color: "bg-orange-500" },
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <span
-                    className={`w-3 h-3 rounded-full ${item.color} flex-shrink-0`}
-                  ></span>
-                  <span className="text-lg">{item.label}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+                <div className="space-y-6">
+                  {[
+                    { label: "Copy-Paste Simple", icon: "✂️", color: "from-green-400 to-blue-500", desc: "Instant integration with zero complex setup required" },
+                    { label: "Performance Optimized", icon: "⚡", color: "from-yellow-400 to-orange-500", desc: "Smooth 60fps animations with minimal overhead" },
+                    { label: "Always Updated", icon: "🔄", color: "from-purple-400 to-indigo-500", desc: "Regular updates with latest design trends" },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex items-start space-x-4 p-3 rounded-xl transition-colors"
+                      whileHover={{ x: 8, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    >
+                      <div className={`w-10 h-10 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-md`}>
+                        <span className="text-xl">{item.icon}</span>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{item.label}</h4>
+                        <p className="text-gray-600 dark:text-gray-300">{item.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* What We Offer Card */}
+            <motion.div
+              className="relative group lg:mt-12"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl transform transition duration-300 group-hover:shadow-lg">
+                <div className="flex items-center mb-8">
+                  <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                    <span className="text-3xl">🚀</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white">What We Offer</h3>
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    { label: "50+ Animation Components", color: "from-blue-500 to-cyan-500", icon: "🎨" },
+                    { label: "Live Preview & Code Copy", color: "from-green-500 to-emerald-500", icon: "👁️" },
+                    { label: "Ready-to-use Templates", color: "from-purple-500 to-violet-500", icon: "📦" },
+                    { label: "Dark/Light Mode Support", color: "from-orange-500 to-red-500", icon: "🌓" },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex items-center space-x-4 p-3 rounded-xl transition-colors"
+                      whileHover={{ x: 8, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    >
+                      <div className={`w-10 h-10 bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center shadow-md`}>
+                        <span className="text-lg">{item.icon}</span>
+                      </div>
+                      <span className="text-lg font-medium text-gray-800 dark:text-white">{item.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+
         </section>
 
-        {/* Tech Stack */}
-        <section className="w-full bg-blue-100 rounded-full dark:bg-secondary-700 rounded-xl p-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3">
-            🛠️ Built With Modern Tech
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {techUsed.map((tech) => (
-              <div
+        {/* Tech Stack - Modern Grid */}
+        <section className="relative">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4">
+              Built With <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Modern Tech</span>
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-black max-w-3xl mx-auto">
+              Powered by cutting-edge technologies for optimal performance and developer experience
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {techUsed.map((tech, index) => (
+              <motion.div
                 key={tech.name}
-                className="bg-primary-50 dark:bg-secondary-800 text-secondary-900 dark:text-white border border-primary-200 dark:border-secondary-700 p-8 rounded-lg shadow-sm hover:shadow-sm dark:shadow-none hover:ring-1 hover:ring-primary-300 dark:hover:ring-accent-500 transform transition-transform duration-300 ease-in-out w-full text-center motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group relative overflow-hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/30 p-6 shadow-lg hover:shadow-2xl transition-all duration-500"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+                whileHover={shouldReduceMotion ? {} : { y: -8, scale: 1.02 }}
               >
-                <span className="text-4xl">{tech.icon}</span>
-                <h3 className="mt-3 text-lg font-semibold text-blue-600 dark:text-blue-400">
-                  {tech.name}
-                </h3>
-                <p className="text-sm opacity-80 mt-1">{tech.desc}</p>
-              </div>
+                {/* Gradient background on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="relative text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 rounded-2xl flex items-center justify-center text-4xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    {tech.icon}
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    {tech.name}
+                  </h3>
+                  
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {tech.desc}
+                  </p>
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute top-2 right-2 w-2 h-2 bg-gradient-to-br from-purple-400 to-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-2 left-2 w-1 h-1 bg-gradient-to-br from-indigo-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100"></div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
-        {/* Community & CTA - Alternating layout */}
-        <section className="flex flex-col gap-8">
+        {/* Community & CTA - Enhanced Layout */}
+        <section className="space-y-8">
           {/* Join Community Card */}
-          <motion.div className="p-8 rounded-3xl text-center bg-gradient-to-tr from-purple-50 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-purple-200 dark:border-secondary-700 w-full">
-            <h2 className="text-2xl text-center font-bold mb-4 text-purple-700 dark:text-purple-400 gap-2">
-              👥 Join Community
-            </h2>
-            <p className="text-sm opacity-80 mb-4">
-              Collaborate with developers worldwide and contribute to making web
-              animations accessible to everyone.
-            </p>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {["🔧 Contribute", "💡 Suggest", "📚 Document"].map((item, i) => (
-                <span
-                  key={i}
-                  className="px-3 py-1 bg-purple-100 dark:bg-secondary-700 text-purple-800 dark:text-white rounded-full text-sm"
-                >
-                  {item}
-                </span>
-              ))}
+          <motion.div
+            className="relative group overflow-hidden"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-indigo-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 lg:p-12 rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl text-center">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-4xl">👥</span>
+              </div>
+              
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+                Join Our Growing Community
+              </h2>
+              
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                Collaborate with developers worldwide and contribute to making web animations accessible to everyone. Be part of something bigger.
+              </p>
+              
+              <div className="flex flex-wrap gap-3 justify-center">
+                {[
+                  { label: "🔧 Contribute", href:"https://github.com/Premkolte/AnimateHub", gradient: "linear-gradient(to right, #3b82f6, #06b6d4)", hoverGradient: "linear-gradient(to right, #2563eb, #0ea5e9)" },
+                  { label: "💡 Suggest", href:"/contact", gradient: "linear-gradient(to right, #a855f7, #ec4899)", hoverGradient: "linear-gradient(to right, #9333ea, #db2777)" },
+                  { label: "📚 Document", href:"https://github.com/Premkolte/AnimateHub", gradient: "linear-gradient(to right, #10b981, #22c55e)", hoverGradient: "linear-gradient(to right, #059669, #16a34a)" },
+                  { label: "🐛 Report Issues", href:"https://github.com/Premkolte/AnimateHub/issues/new", gradient: "linear-gradient(to right, #f97316, #ef4444)", hoverGradient: "linear-gradient(to right, #ea580c, #dc2626)" },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    className="group px-6 py-3 rounded-full text-sm font-medium shadow-lg cursor-pointer"
+                    style={{ background: item.gradient }}
+                    whileHover={{ scale: 1.05, background: item.hoverGradient }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Link
+                      to={item.href}
+                      className="text-white group-hover:text-black dark:group-hover:text-white transition-colors duration-300"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
           {/* Ready to Start Card */}
-          <motion.div className="p-8 rounded-3xl text-center bg-gradient-to-tr from-indigo-50 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-indigo-200 dark:border-secondary-700 w-full">
-            <h2 className="text-2xl font-bold mb-4 text-indigo-700 dark:text-indigo-400">
-              Ready to Start?
-            </h2>
-            <p className="text-sm opacity-80 mb-4">
-              Explore our components and start building today.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              {/* Explore Components Button with moving gradient */}
-              <a
-                href="/explore"
-                className="flex-1 text-center py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 bg-[length:200%_200%] animate-gradient-x motion-reduce:animate-none hover:scale-105 transform transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
-              >
-                🚀 Explore Components
-              </a>
+          <motion.div
+            className="relative group overflow-hidden"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl p-8 lg:p-12 rounded-3xl border border-white/20 dark:border-gray-700/30 shadow-2xl text-center">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-4xl">🚀</span>
+              </div>
+              
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+                Ready to Start Building?
+              </h2>
+              
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                Explore our comprehensive collection of components and start creating amazing animations today.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+                <motion.a
+                  href="/explore"
+                  className="flex-1 py-4 px-8 bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 text-white dark:text-white rounded-2xl font-semibold shadow-xl hover:shadow-2xl dark:hover:text-gray-200 transition-all text-center text-lg"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  🎨 Explore Components
+                </motion.a>
 
-              {/* Star on GitHub Button */}
-              <a
-                href="https://github.com/Premkolte/AnimateHub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 text-center py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 via-blue-300 to-indigo-600 bg-[length:200%_200%] animate-gradient-x motion-reduce:animate-none hover:scale-105 transform transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
-              >
-                ⭐ Star on GitHub
-              </a>
+                <motion.a
+                  href="https://github.com/Premkolte/AnimateHub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-4 px-8 bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-600 text-white dark:text-white rounded-2xl font-semibold shadow-xl hover:shadow-2xl dark:hover:text-gray-200 transition-all text-center text-lg"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  ⭐ Star on GitHub
+                </motion.a>
+              </div>
+
             </div>
           </motion.div>
         </section>
@@ -301,75 +479,110 @@ const About = () => {
         {/* {Github Info section} */}
         <GitHubStats />
 
-        <section className="w-full py-20 bg-gradient-to-r from-blue-300 to-pink-300 dark:from-gray-800 dark:to-purple-900 text-black dark:text-white rounded-3xl text-center px-6 transition-colors duration-500">
-  {/* Tagline */}
-  <h2 className="text-3xl md:text-3xl font-extrabold mb-4">
-    Ready to Begin Your AnimateHub Adventure?
-  </h2>
-
-  {/* Subheading / Description */}
-  <p className="text-base text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-    Explore creative animation components, enhance your projects, and
-    join a vibrant developer community. Your journey starts here!
-  </p>
-
-  {/* Buttons */}
-  <div className="flex flex-col sm:flex-row justify-center gap-4">
-    <a
-      href="https://animate-hub.vercel.app/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="px-6 py-3 bg-white dark:bg-gray-100 text-purple-700 dark:text-purple-700 font-semibold rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-200 transition"
-    >
-      Visit AnimateHub
-    </a>
-
-    <a
-      href="https://github.com/Premkolte/AnimateHub"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="px-6 py-3 bg-transparent border-2 border-white dark:border-gray-300 text-white dark:text-gray-300 font-semibold rounded-full shadow-lg hover:bg-white hover:text-purple-700 dark:hover:bg-gray-200 dark:hover:text-purple-700 transition"
-    >
-      Explore on GitHub
-    </a>
-  </div>
-</section>
-
-        {/* Social Media */}
-        <section className="text-center p-8 rounded-3xl bg-gradient-to-tr from-purple-200 to-white dark:from-secondary-800 dark:to-secondary-700 shadow-xl border border-purple-500 dark:border-secondary-700">
-          <h2 className="text-2xl font-bold mb-2 text-black dark:text-white">
-            Connect With Us
-          </h2>
-          <p className="text-sm opacity-80 mb-4">
-            Follow us for updates, tips, and community highlights.
-          </p>
-          <div className="flex justify-center space-x-6">
-            <a
-              href="https://twitter.com/animatehub"
-              aria-label="Twitter"
-              className="hover:text-blue-500 transform hover:scale-110 transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
-            >
-              <FontAwesomeIcon icon={faTwitter} size="2x" />
-            </a>
-            <a
-              href="https://facebook.com/animatehub"
-              aria-label="Facebook"
-              className="hover:text-blue-700 transform hover:scale-110 transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
-            >
-              <FontAwesomeIcon icon={faFacebook} size="2x" />
-            </a>
-            <a
-              href="https://linkedin.com/company/animatehub"
-              aria-label="LinkedIn"
-              className="hover:text-blue-800 transform hover:scale-110 transition-all motion-reduce:transition-none motion-reduce:hover:transform-none"
-            >
-              <FontAwesomeIcon icon={faLinkedin} size="2x" />
-            </a>
+        <section className="relative overflow-hidden">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-0 left-1/4 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-gradient-to-br from-pink-400/20 to-indigo-400/20 rounded-full blur-3xl"></div>
           </div>
+          
+          <div className="relative bg-gradient-to-br from-blue-500/90 via-purple-600/90 to-pink-500/90 dark:from-gray-800/95 dark:via-purple-900/95 dark:to-indigo-900/95 backdrop-blur-xl text-white rounded-3xl p-12 lg:p-16 text-center shadow-2xl border border-white/10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <div className="w-24 h-24 mx-auto mb-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                <span className="text-5xl">🎨</span>
+              </div>
+              
+              <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+                <span className="text-black dark:text-white">
+                  Ready to Begin Your
+                </span>
+                <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300">
+                  AnimateHub Adventure?
+                </span>
+              </h2>
+
+              <p className="text-xl lg:text-2xl text-blue-100 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+                Explore creative animation components, enhance your projects, and join a vibrant developer community. Your journey starts here!
+              </p>
+
+              <div className="flex flex-col sm:flex-row justify-center gap-6 max-w-2xl mx-auto">
+                <motion.a
+                  href="https://animate-hub.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-white/90 hover:bg-white text-purple-700 font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all backdrop-blur-sm"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  🌟 Visit AnimateHub
+                </motion.a>
+
+                <motion.a
+                  href="https://github.com/Premkolte/AnimateHub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-transparent border-2 border-white/70 hover:border-white hover:bg-white/10 text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all backdrop-blur-sm"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  🚀 Explore on GitHub
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Enhanced Social Media Section */}
+        <section className="relative">
+          <motion.div
+            className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl p-8 lg:p-12 text-center shadow-2xl border border-white/20 dark:border-gray-700/30"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <span className="text-3xl">📱</span>
+            </div>
+            
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+              Connect With Our Community
+            </h2>
+            
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+              Follow us for the latest updates, animation tips, and community highlights. Join thousands of developers!
+            </p>
+            
+            <div className="flex justify-center space-x-6">
+              {[
+                { icon: faXTwitter, url: "https://twitter.com/animatehub", label: "Twitter", color: "hover:text-blue-500" },
+                { icon: faFacebook, url: "https://facebook.com/animatehub", label: "Facebook", color: "hover:text-blue-700" },
+                { icon: faLinkedin, url: "https://linkedin.com/company/animatehub", label: "LinkedIn", color: "hover:text-blue-800" },
+              ].map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.url}
+                  aria-label={social.label}
+                  className={`w-14 h-14 bg-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center text-gray-600 dark:text-gray-300 ${social.color} transform transition-all shadow-lg hover:shadow-xl`}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <FontAwesomeIcon icon={social.icon} size="xl" />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
         </section>
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default About;
+export default About
