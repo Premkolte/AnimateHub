@@ -1,26 +1,30 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
-  // Ignore build output
-  { ignores: ['dist'] },
+  // 🔒 Ignore folders that should never be linted
+  { ignores: ['dist', 'node_modules', 'build', '.vercel', '.github'] },
 
-  // CLIENT (browser/React) rules
+  // 🌐 FRONTEND (React / Browser)
   {
-    files: ['client/**/*.{js,jsx}', 'src/**/*.{js,jsx}'], // adjust to your client paths
+    files: ['src/**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 'latest',
-      globals: globals.browser,
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        JSX: true,
+      },
       parserOptions: {
-        ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
-        sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: { version: 'detect' },
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
@@ -31,42 +35,37 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
+
+      // 🧹 Custom safe overrides
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
-  'warn',
-  {
-    allowConstantExport: true,
-    allowLocalVars: false, // enforce cleaner exports
-  },
-],
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'react/prop-types': 'off', // Avoids unnecessary blocking on TS/JS projects
+      'no-console': 'off', // Avoid breaking production builds by accident
     },
   },
 
-  // SERVER (Node) rules
+  // ⚙️ BACKEND (Node / Server)
   {
     files: [
-      'index.js',
       'server/**/*.{js,mjs,cjs}',
       'backend/**/*.{js,mjs,cjs}',
-      'src/**/*.server.{js,mjs,cjs}',
-      'src/**/server/**/*.{js,mjs,cjs}',
-      'src/app.js',
+      'index.js',
       'src/utils/**/*.js',
-      // add/adjust paths so all backend files are included
+      'src/**/server/**/*.{js,mjs,cjs}',
     ],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: {
-        ...globals.node, // enables process, __dirname (CJS only), etc.
-      },
-    },
-    plugins: {
-      // keep it minimal; no react on the server
+      globals: globals.node,
     },
     rules: {
       ...js.configs.recommended.rules,
-      // Optionally disable browser-specific rules here if any leak in
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      'no-undef': 'error',
     },
   },
-]
+];
