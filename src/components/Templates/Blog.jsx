@@ -151,13 +151,38 @@ const Blog = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const minWords = 10;
+    const minChars = 4;
+    const content = newPost.content.trim();
+    const wordCount = content.split(/\s+/).filter(word => word.length > 0).length;
+
+    const requiredFields = [
+      { name: "Title", value: newPost.title },
+      { name: "Excerpt", value: newPost.excerpt },
+      { name: "Content", value: content },
+      { name: "Author", value: newPost.author },
+    ];
+
+    for (const field of requiredFields) {
+      if (field.value.length < minChars) {
+        alert(`${field.name} must be at least ${minChars} characters long.`);
+        return; 
+      }
+    }
+
+    if (wordCount < minWords) {
+      alert(`Your post must have at least ${minWords} words. Currently: ${wordCount}`);
+      return; // Stops submission
+    }
+
     const newBlogPost = {
       ...newPost,
       id: Date.now(),
-      date: new Date().toISOString().split('T')[0],
-      readTime: newPost.content ? `${Math.ceil(newPost.content.split(' ').length / 200)} min read` : "2 min read",
-      tags: newPost.tags.length ? newPost.tags : ['general'],
-      description: newPost.excerpt || newPost.content.substring(0, 150) + '...'
+      date: new Date().toISOString().split("T")[0],
+      readTime: `${Math.ceil(wordCount / 200)} min read`,
+      tags: newPost.tags.length ? newPost.tags : ["general"],
+      description: newPost.excerpt || newPost.content.substring(0, 150) + "...",
     };
 
     setPosts([newBlogPost, ...posts]);
@@ -168,7 +193,7 @@ const Blog = () => {
       author: "",
       imageUrl: "",
       category: "",
-      tags: []
+      tags: [],
     });
     setImageFile(null);
     setIsFormOpen(false);
