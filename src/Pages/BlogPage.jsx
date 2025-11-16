@@ -244,7 +244,69 @@ export default function BlogHub() {
       const list = (prev[blogId] || []).filter((c) => c.ts !== ts);
       return { ...prev, [blogId]: list };
     });
+  // useEffect for initialization (from main)
+  useEffect(() => {
+    // Any setup or fetch logic can go here
   }, []);
+
+  // submitBlog function (from feature/blogPost)
+  const submitBlog = (e) => {
+    e.preventDefault();
+
+    const minChars = 4; 
+    const content = newBlog.content.trim(); 
+
+    const requiredFields = [
+      { name: "Title", value: newBlog.title.trim() },
+      { name: "Excerpt", value: newBlog.excerpt.trim() },
+      { name: "Content", value: content },
+      { name: "Author Name", value: newBlog.author.trim() },
+    ];
+
+    for (const field of requiredFields) {
+      if (field.value.length < minChars) {
+        alert(`${field.name} must be at least ${minChars} characters long to publish.`);
+        return; 
+      }
+    }
+
+    const id = (blogs.reduce((m, b) => Math.max(m, b.id), 0) || 0) + 1;
+    const now = new Date().toISOString().slice(0, 10);
+    const tags = newBlog.tags
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+
+    const authorName = newBlog.author.trim() || "Guest Author";
+    const item = {
+      id,
+      title: newBlog.title.trim(),
+      excerpt: newBlog.excerpt.trim(),
+      content: content, 
+      tags: tags.length ? tags : ["Community"],
+      category: newBlog.category.trim() || "Community",
+      author: {
+        name: authorName,
+        avatar: `https://api.dicebear.com/8.x/initials/svg?seed=${encodeURIComponent(
+          authorName
+        )}`,
+      },
+      date: now,
+      readTime: Math.max(2, Math.round(content.split(/\s+/).length / 180)), 
+    };
+    
+    setBlogs((prev) => [item, ...prev]);
+    setShowAdd(false);
+    setNewBlog({
+      title: "",
+      excerpt: "",
+      content: "",
+      tags: "",
+      category: "",
+      author: "",
+      cover: "",
+    });
+  };
 
   // Anim
   const fadeUp = useMemo(() => ({
@@ -426,6 +488,80 @@ export default function BlogHub() {
                     </ul>
                   </div>
                 </div>
+
+                {/* Cover Image */}
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                    Cover Image URL
+                  </label>
+                  <input
+                    placeholder="https://example.com/image.jpg (optional)"
+                    className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-pink-500 focus:ring-4 focus:ring-pink-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                    value={newBlog.cover}
+                    onChange={(e) => setNewBlog({ ...newBlog, cover: e.target.value })}
+                  />
+                </div>
+
+                {/* Excerpt */}
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                    Short Excerpt *
+                  </label>
+                  <textarea
+                    required
+                    placeholder="Write a brief description of your blog..."
+                    rows={2}
+                    className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none"
+                    value={newBlog.excerpt}
+                    onChange={(e) => setNewBlog({ ...newBlog, excerpt: e.target.value })}
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-rose-500 rounded-full"></span>
+                    Blog Content *
+                  </label>
+                  <textarea
+                    required
+                    placeholder="Write your full blog content here... (Markdown supported)"
+                    rows={5}
+                    className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all duration-300 placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none"
+                    value={newBlog.content}
+                    onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
+                  />
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    Word count: {newBlog.content.trim().split(/\s+/).filter(word => word.length > 0).length} / 50
+                  </p>
+                </div>
+
+                {/* Enhanced Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 justify-end pt-3 border-t border-slate-200 dark:border-slate-700">
+                  <button
+                    type="button"
+                    onClick={() => setShowAdd(false)}
+                    className="px-5 py-2.5 rounded-xl border-2 border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300 hover:scale-105"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform"
+                    type="submit"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span>🚀</span>
+                      <span>Publish Blog</span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </motion.form>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
 
                 {/* Trending Tags */}
