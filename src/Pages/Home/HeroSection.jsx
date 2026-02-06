@@ -40,12 +40,28 @@ const item = {
     },
   },
   hover: {
-    scale: 1.1,
-    transition: { duration: 0.2 },
+    scale: 1.05,
+    y: -3,
+    transition: { 
+      type: "spring",
+      stiffness: 400,
+      damping: 10 
+    },
   },
   tap: {
-    scale: 0.98,
+    scale: 0.97,
   },
+};
+
+// Button glow animation
+const buttonGlow = {
+  rest: {
+    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+  },
+  hover: {
+    boxShadow: "0 8px 30px rgba(139, 92, 246, 0.4)",
+    transition: { duration: 0.3 }
+  }
 };
 
 const techIcons = [
@@ -100,7 +116,7 @@ const HeroSection = ({ currentUser }) => {
         </motion.div>
 
         <motion.h1
-          className="text-4xl md:text-6xl mb-6 font-bold text-secondary-900 dark:text-white"
+          className="text-4xl md:text-6xl mb-6 font-bold"
           variants={{
             hidden: { opacity: 0, y: 20 },
             show: {
@@ -114,7 +130,11 @@ const HeroSection = ({ currentUser }) => {
             },
           }}
         >
-          Animation UI Library <br /> for Developers
+          <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-pink-500 dark:from-primary-400 dark:via-accent-400 dark:to-pink-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+            Animation UI Library
+          </span>
+          <br />
+          <span className="text-secondary-800 dark:text-white">for Developers</span>
         </motion.h1>
 
         <motion.p
@@ -140,18 +160,29 @@ const HeroSection = ({ currentUser }) => {
             },
           }}
         >
-          <motion.div variants={item} whileHover="hover" whileTap="tap">
+          <motion.div 
+            variants={item} 
+            whileHover="hover" 
+            whileTap="tap"
+            className="relative group"
+          >
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-300 animate-gradient" style={{ backgroundSize: '200% 200%' }} />
             <Link
-              className="block rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 px-8 py-4 text-lg font-semibold text-white hover:text-white  shadow-md"
+              className="relative block rounded-full bg-gradient-to-br from-purple-600 via-violet-600 to-indigo-600 px-8 py-4 text-lg font-semibold text-white hover:text-white shadow-lg hover-shine overflow-hidden"
               to="/explore"
             >
-              Browse Components
+              <span className="relative z-10">Browse Components</span>
             </Link>
           </motion.div>
 
-          <motion.div variants={item} whileHover="hover" whileTap="tap">
+          <motion.div 
+            variants={item} 
+            whileHover="hover" 
+            whileTap="tap"
+            className="relative group"
+          >
             <Link
-              className="block rounded-full border-2 border-blue-400 bg-transparent px-8 py-4 text-lg font-semibold text-blue-600 hover:bg-blue-400 hover:text-white shadow-sm hover:shadow-md"
+              className="block rounded-full border-2 border-primary-400 dark:border-accent-400 bg-white/80 dark:bg-secondary-800/80 backdrop-blur-sm px-8 py-4 text-lg font-semibold text-primary-600 dark:text-accent-400 hover:bg-primary-500 dark:hover:bg-accent-500 hover:text-white dark:hover:text-white hover:border-primary-500 dark:hover:border-accent-500 shadow-lg transition-all duration-300"
               to="https://github.com/Premkolte/AnimateHub"
               target="_blank"
               rel="noopener noreferrer"
@@ -170,13 +201,15 @@ const HeroSection = ({ currentUser }) => {
                 exit="hidden"
                 whileHover="hover"
                 whileTap="tap"
+                className="relative group"
               >
+                <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-pink-500 to-rose-500 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
                 <Link
                   to="/favorites"
-                  className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-red-500 to-pink-500 px-8 py-4 text-lg font-semibold text-white shadow-md"
+                  className="relative flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-red-500 via-pink-500 to-rose-500 px-8 py-4 text-lg font-semibold text-white shadow-lg hover-shine overflow-hidden"
                 >
-                  <FaHeart />
-                  My Favorites
+                  <FaHeart className="animate-heartbeat" />
+                  <span>My Favorites</span>
                 </Link>
               </motion.div>
             ) : (
@@ -188,13 +221,14 @@ const HeroSection = ({ currentUser }) => {
                 exit="hidden"
                 whileHover="hover"
                 whileTap="tap"
+                className="relative group"
               >
                 <Link
                   to="/sign-in"
-                  className="flex items-center justify-center gap-2 rounded-full border-2 border-red-400 bg-transparent px-8 py-4 text-lg font-semibold text-red-600 hover:bg-red-400 hover:text-white shadow-sm hover:shadow-md"
+                  className="flex items-center justify-center gap-2 rounded-full border-2 border-rose-400 bg-white/80 dark:bg-secondary-800/80 backdrop-blur-sm px-8 py-4 text-lg font-semibold text-rose-500 hover:bg-rose-500 hover:text-white hover:border-rose-500 shadow-lg transition-all duration-300"
                 >
                   <FaHeart />
-                  Sign In for Favorites
+                  <span>Sign In for Favorites</span>
                 </Link>
               </motion.div>
             )}
@@ -226,12 +260,16 @@ const HeroSection = ({ currentUser }) => {
                 rel="noopener noreferrer"
                 variants={item}
                 whileHover={{
-                  scale: 1.2,
-                  y: -5,
-                  transition: { duration: 0.2 },
+                  scale: 1.3,
+                  y: -8,
+                  rotate: [0, -10, 10, 0],
+                  transition: { 
+                    scale: { duration: 0.2 },
+                    rotate: { duration: 0.4 }
+                  },
                 }}
                 whileTap={{ scale: 0.9 }}
-                className={`${color} h-12 w-12`}
+                className={`${color} h-12 w-12 transition-all duration-300 hover:drop-shadow-lg`}
               >
                 <Icon className="h-full w-full" />
               </motion.a>
@@ -242,18 +280,31 @@ const HeroSection = ({ currentUser }) => {
             href="https://github.com/Premkolte/AnimateHub"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 px-6 py-3 h-12 rounded-xl bg-gray-800 hover:bg-gray-700 text-white hover:text-white font-medium shadow-md"
+            className="group relative inline-flex items-center justify-center gap-3 px-6 py-3 h-12 rounded-xl bg-gray-800 dark:bg-gray-900 text-white font-medium shadow-lg overflow-hidden"
             variants={item}
             whileHover={{
               scale: 1.05,
-              backgroundColor: "#1F2937",
               transition: { duration: 0.2 },
             }}
             whileTap={{ scale: 0.98 }}
           >
-            <BsGithub size={22} />
-            <span>Star on GitHub</span>
-            <BsStarFill size={22} className="text-yellow-400" />
+            <span className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <BsGithub size={22} className="relative z-10" />
+            <span className="relative z-10">Star on GitHub</span>
+            <motion.span 
+              className="relative z-10"
+              animate={{ 
+                scale: [1, 1.2, 1],
+                rotate: [0, 10, -10, 0]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 3
+              }}
+            >
+              <BsStarFill size={22} className="text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
+            </motion.span>
           </motion.a>
         </motion.section>
       </motion.div>

@@ -49,45 +49,70 @@ const testimonials = [
 const TestimonialCard = ({ text, name, image, rating  }) => {
   return (
     <motion.div
-      className="flex-none w-72 sm:w-80 md:w-96 p-8 h-auto min-h-[280px] rounded-2xl  bg-white dark:bg-secondary-800/90 backdrop-blur-sm   shadow-lg dark:shadow-lg dark:shadow-accent-900/20  flex flex-col justify-between relative transition-all duration-300   mx-3 hover:shadow-xl hover:shadow-primary-100 dark:hover:shadow-accent-900/30"
+      className="group flex-none w-72 sm:w-80 md:w-96 p-8 h-auto min-h-[280px] rounded-2xl bg-white dark:bg-secondary-800/90 backdrop-blur-sm shadow-lg dark:shadow-lg dark:shadow-accent-900/20 flex flex-col justify-between relative mx-3 overflow-hidden cursor-pointer"
+      whileHover={{ 
+        y: -8,
+        transition: { duration: 0.3, ease: "easeOut" }
+      }}
+      style={{
+        transition: "box-shadow 0.3s ease"
+      }}
     >
+      {/* Gradient accent on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-accent-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      {/* Top gradient line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+
+      {/* Quote icon */}
+      <div className="absolute top-4 right-4 text-6xl text-primary-100 dark:text-accent-900/30 font-serif leading-none group-hover:text-primary-200 dark:group-hover:text-accent-800/40 transition-colors duration-300">
+        "
+      </div>
+
       {/* Text */}
-      <p className="mb-6 text-base md:text-lg flex-grow leading-relaxed text-gray-700 dark:text-gray-300 font-normal">
+      <p className="relative mb-6 text-base md:text-lg flex-grow leading-relaxed text-gray-700 dark:text-gray-300 font-normal z-10">
         "{text}"
       </p>
 
       {/* Star Rating */}
       {rating && (
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-4 gap-1">
           {Array.from({ length: 5 }, (_, index) => (
-            <span
+            <motion.span
               key={index}
               className={`text-lg ${
                 index < rating ? "text-yellow-400" : "text-gray-300 dark:text-gray-600"
               }`}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ scale: 1.2 }}
             >
               ★
-            </span>
+            </motion.span>
           ))}
         </div>
       )}
 
       {/* User */}
-      <div className="flex items-center gap-4 mt-auto pt-5">
+      <div className="flex items-center gap-4 mt-auto pt-5 relative z-10">
         <div className="relative">
-          <div className="absolute -inset-1 bg-accent-500/30 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-200"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-300"></div>
           <img
             src={image}
             alt={name}
-            className="relative h-14 w-14 rounded-full border-2 border-white dark:border-gray-700 shadow-md object-cover"
+            className="relative h-14 w-14 rounded-full border-2 border-white dark:border-gray-700 shadow-md object-cover group-hover:scale-105 transition-transform duration-300"
           />
         </div>
         <div>
-          <h5 className="font-semibold text-lg text-gray-900 dark:text-white">
+          <h5 className="font-semibold text-lg text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-accent-400 transition-colors duration-300">
             {name}
           </h5>
         </div>
       </div>
+
+      {/* Glow effect on hover */}
+      <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-primary-500 via-accent-500 to-pink-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 -z-10" />
     </motion.div>
   );
 };

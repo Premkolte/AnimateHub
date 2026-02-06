@@ -9,6 +9,11 @@ import transporter from './EmailTransporter.js';
  * @param {string} fullName - User's full name 
  */
 export const sendVerificationEmail = async (email, token, fullName = 'User') => {
+    if (!transporter) {
+        console.warn('Email is disabled. Skipping verification email to:', email);
+        return;
+    }
+    
     try {
         const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
         const emailTemplate = VerifyAccountEmail(fullName, verificationLink);
@@ -34,6 +39,11 @@ export const sendVerificationEmail = async (email, token, fullName = 'User') => 
  * @param {string} fullName - User's full name (optional)
  */
 export const sendPasswordResetEmail = async (email, token, fullName = 'User') => {
+    if (!transporter) {
+        console.warn('Email is disabled. Skipping password reset email to:', email);
+        return;
+    }
+    
     try {
         const resetLink = `${process.env.FRONTEND_URL}/reset-password/${token}`;
         const emailTemplate = ForgotPasswordEmail(fullName, resetLink);

@@ -69,34 +69,15 @@
     <style>
       body {
         margin: 0;
+        padding: 0;
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(-45deg, #1d1f20, #2e2f31, #3b82f6, #9333ea);
-        background-size: 400% 400%;
-        animation: gradientBG 12s ease infinite;
-        color: white;
         min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.8s ease, color 0.5s ease;
-      }
-
-      @keyframes gradientBG {
-        0% {background-position: 0% 50%;}
-        50% {background-position: 100% 50%;}
-        100% {background-position: 0% 50%;}
+        width: 100%;
       }
 
       #root {
-        width: 90%;
-        max-width: 1200px;
-        min-height: 80vh;
-        padding: 2rem;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(12px);
-        border-radius: 20px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        animation: fadeIn 1.2s ease;
+        width: 100%;
+        min-height: 100vh;
       }
 
       @keyframes fadeIn {
@@ -105,44 +86,13 @@
       }
 
       [data-theme="light"] body {
-        background: linear-gradient(-45deg, #f5f5f5, #e5e7eb, #93c5fd, #c084fc);
+        background: #f5f5f5;
         color: #111;
       }
 
-      #themeToggle, #scrollTopBtn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(255,255,255,0.15);
-        border: none;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        color: #fff;
-        cursor: pointer;
-        font-size: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        transition: transform 0.3s ease, background 0.3s ease;
-      }
-
-      #themeToggle:hover, #scrollTopBtn:hover {
-        transform: scale(1.1);
-        background: rgba(255,255,255,0.25);
-      }
-
-      #scrollTopBtn {
-        bottom: 80px;
-        display: none;
-      }
-
-      #google_translate_element {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 9999;
-        background: rgba(0,0,0,0.4);
-        border-radius: 8px;
-        padding: 5px;
+      /* Hide default theme and scroll buttons - app has its own */
+      #themeToggle, #scrollTopBtn, #google_translate_element {
+        display: none !important;
       }
 
       *:focus {
