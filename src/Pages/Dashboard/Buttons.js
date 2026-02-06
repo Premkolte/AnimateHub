@@ -16,6 +16,7 @@ export const Buttons = [
     "ExpandingSearchBar",
     "FooterSnippets",
     "FormSnippets",
+    "HeroParticles",
     "InputFieldSnippets",
     "LoginSnippets",
     'ModalSnippets',
