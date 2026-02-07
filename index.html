@@ -149,12 +149,35 @@
         outline: 2px solid #3b82f6;
         outline-offset: 3px;
       }
+      .hero {
+        text-align: center;
+        padding: 4rem 2rem;
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        letter-spacing: -1px;
+      }
+      .hero p {
+        max-width: 600px;
+        margin: 1rem auto 2.5rem;
+        opacity: 0.85;
+        line-height: 1.6;
+      }
     </style>
   </head>
   <body>
     <div id="google_translate_element" aria-label="Language translator"></div>
-    <div id="root" role="main"></div>
-
+    <div id="root" role="main">
+      <header class="hero">
+        <h1>AnimateHub</h1>
+        <p>Open-source animation components for modern web apps</p>
+        <div class="cta">
+          <a href="#components" class="btn primary">Explore Components</a>
+          <a href="https://github.com/" class="btn ghost">GitHub</a>
+        </div>
+      </header>
+    </div>
     <!-- Light/Dark Mode Toggle -->
     <button id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark mode">🌓</button>
 
