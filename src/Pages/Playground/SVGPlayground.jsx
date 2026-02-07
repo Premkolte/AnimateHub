@@ -25,7 +25,7 @@ const SVGPlayground = () => {
   };
 
   const restartAnimation = () => setKey((prev) => prev + 1);
-  
+
   const resetAll = () => {
     setSettings(initialSettings);
     setKey((prev) => prev + 1); // Force restart animation
@@ -33,15 +33,15 @@ const SVGPlayground = () => {
 
   const generateSvgElement = useCallback(() => {
     const { shape, fillColor, strokeColor, strokeWidth, dashArray, rotateAngle, scale, opacity } = settings;
-    
+
     // Handle transparent fill
     const actualFillColor = fillColor === "transparent" ? "none" : fillColor;
     const commonProps = `fill="${actualFillColor}" stroke="${strokeColor}" stroke-width="${strokeWidth}" opacity="${opacity}"`;
-    
+
     // Center coordinates for proper rotation
     const centerX = 150;
     const centerY = 100;
-    
+
     switch (shape) {
       case "circle":
         return `<circle cx="${centerX}" cy="${centerY}" r="60" ${commonProps} style="transform-origin: ${centerX}px ${centerY}px; transform: rotate(${rotateAngle}deg) scale(${scale});" />`;
@@ -84,7 +84,7 @@ const SVGPlayground = () => {
     const svgElement = generateSvgElement();
     const keyframes = generateKeyframes();
     const animatedElement = svgElement.replace('style="', 'class="animated-shape" style="');
-    
+
     const code = `<svg width="300" height="200" viewBox="0 0 300 200" style="overflow: hidden;">
   ${animatedElement}
   <style>
@@ -152,11 +152,10 @@ const SVGPlayground = () => {
         {name === "fillColor" && (
           <button
             onClick={() => updateSetting(name, "transparent")}
-            className={`absolute top-1 right-1 px-2 py-1 text-xs rounded ${
-              settings[name] === "transparent" 
-                ? "bg-purple-600 text-white" 
+            className={`absolute top-1 right-1 px-2 py-1 text-xs rounded ${settings[name] === "transparent"
+                ? "bg-purple-600 text-white"
                 : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-            }`}
+              }`}
           >
             None
           </button>
@@ -168,9 +167,9 @@ const SVGPlayground = () => {
   const SelectControl = ({ name, label, options }) => (
     <div className="space-y-2">
       <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
-      <select 
-        value={settings[name]} 
-        onChange={e => updateSetting(name, e.target.value)} 
+      <select
+        value={settings[name]}
+        onChange={e => updateSetting(name, e.target.value)}
         className="w-full p-3 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
       >
         {options.map(option => (
@@ -198,17 +197,17 @@ const SVGPlayground = () => {
             <div className="sticky top-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 space-y-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">🎛️ Controls</h2>
-                <button 
-                  onClick={resetAll} 
+                <button
+                  onClick={resetAll}
                   className="px-4 py-2 text-sm font-semibold text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-lg transition-colors"
                 >
                   Reset All
                 </button>
               </div>
-              
+
               <ControlGroup title="Shape & Style">
-                <SelectControl 
-                  name="shape" 
+                <SelectControl
+                  name="shape"
                   label="Shape Type"
                   options={[
                     { value: "path", label: "Curved Path" },
@@ -230,8 +229,8 @@ const SVGPlayground = () => {
               </ControlGroup>
 
               <ControlGroup title="Animation">
-                <SelectControl 
-                  name="animationType" 
+                <SelectControl
+                  name="animationType"
                   label="Animation Type"
                   options={[
                     { value: "draw", label: "Draw Animation" },
@@ -239,8 +238,8 @@ const SVGPlayground = () => {
                     { value: "pulse", label: "Pulse Effect" }
                   ]}
                 />
-                <SelectControl 
-                  name="easing" 
+                <SelectControl
+                  name="easing"
                   label="Easing Function"
                   options={[
                     { value: "linear", label: "Linear" },
@@ -257,8 +256,8 @@ const SVGPlayground = () => {
                 )}
               </ControlGroup>
 
-              <button 
-                onClick={restartAnimation} 
+              <button
+                onClick={restartAnimation}
                 className="w-full p-4 text-white font-bold rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:from-pink-600 hover:via-purple-600 hover:to-indigo-600 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
               >
                 🔄 Restart Animation
@@ -275,10 +274,10 @@ const SVGPlayground = () => {
               </div>
               <div className="p-8 flex justify-center items-center min-h-[400px] bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
                 <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg" style={{ overflow: 'hidden' }}>
-                  <svg 
-                    key={key} 
-                    width="300" 
-                    height="200" 
+                  <svg
+                    key={key}
+                    width="300"
+                    height="200"
                     viewBox="0 0 300 200"
                     style={{ overflow: 'hidden' }}
                     className="border border-gray-200 dark:border-gray-700 rounded-lg"
@@ -289,8 +288,8 @@ const SVGPlayground = () => {
                       }
                       ${generateKeyframes()}
                     `}</style>
-                    <g dangerouslySetInnerHTML={{ 
-                      __html: generateSvgElement().replace('style="', 'class="animated-shape" style="') 
+                    <g dangerouslySetInnerHTML={{
+                      __html: generateSvgElement().replace('style="', 'class="animated-shape" style="')
                     }} />
                   </svg>
                 </div>
@@ -301,8 +300,8 @@ const SVGPlayground = () => {
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
               <div className="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 border-b border-gray-200 dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Generated SVG Code</h3>
-                <button 
-                  onClick={handleCopy} 
+                <button
+                  onClick={handleCopy}
                   className="px-4 py-2 text-sm font-semibold rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors shadow-md hover:shadow-lg"
                 >
                   {copyButtonText}

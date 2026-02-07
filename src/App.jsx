@@ -132,10 +132,10 @@ function App() {
             <Route path="/explore" element={<Dashboard />} />
             <Route path="/challenge" element={<ChallengeMode />} />
 
-            <Route path="/FontPlayground" element={<FontPlayground/>}/>
-            <Route path="/flexboxPlayground" element={<FlexboxPlayground/>}/>
-            <Route path="/gridPlayground" element={<GridPlayground/>}/>
-            <Route path="/boxShadowPlayground" element={<BoxShadowPlayground/>}/>
+            <Route path="/FontPlayground" element={<FontPlayground />} />
+            <Route path="/flexboxPlayground" element={<FlexboxPlayground />} />
+            <Route path="/gridPlayground" element={<GridPlayground />} />
+            <Route path="/boxShadowPlayground" element={<BoxShadowPlayground />} />
 
 
 

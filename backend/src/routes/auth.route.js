@@ -8,12 +8,12 @@ import {
 } from "../controllers/auth.controller.js";
 import {
     googleLoginController
-} from "../controllers/googleAuth.controller.js";   
-import { 
-    verifyUserMailController, 
+} from "../controllers/googleAuth.controller.js";
+import {
+    verifyUserMailController,
     resendVerificationEmail,
     forgotPassword,
-    resetPassword 
+    resetPassword
 } from "../controllers/user.controller.js";
 
 import authMiddleware from "../middlewares/auth.middleware.js";
