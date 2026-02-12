@@ -53,6 +53,15 @@ export const createBlog = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Title, excerpt, content, and category are required");
   }
 
+  // Validate minimum lengths
+  if (title.trim().length < 5) {
+    throw new ApiError(400, "Title must be at least 5 characters long");
+  }
+
+  if (content.trim().length < 20) {
+    throw new ApiError(400, "Content must be at least 20 characters long");
+  }
+
   if (!req.file) {
     throw new ApiError(400, "Blog image is required");
   }
@@ -158,9 +167,27 @@ export const updateBlogById = asyncHandler(async (req, res) => {
   }
 
   const updateData = {};
-  if (title) updateData.title = title.trim();
+  if (title !== undefined && title !== null) {
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) {
+      throw new ApiError(400, "Title cannot be empty");
+    }
+    if (trimmedTitle.length < 5) {
+      throw new ApiError(400, "Title must be at least 5 characters long");
+    }
+    updateData.title = trimmedTitle;
+  }
   if (excerpt) updateData.excerpt = excerpt.trim();
-  if (content) updateData.content = content.trim();
+  if (content !== undefined && content !== null) {
+    const trimmedContent = content.trim();
+    if (!trimmedContent) {
+      throw new ApiError(400, "Content cannot be empty");
+    }
+    if (trimmedContent.length < 20) {
+      throw new ApiError(400, "Content must be at least 20 characters long");
+    }
+    updateData.content = trimmedContent;
+  }
   if (category) updateData.category = category.trim();
   if (tags) updateData.tags = parseTags(tags).map((tag) => tag.trim());
 

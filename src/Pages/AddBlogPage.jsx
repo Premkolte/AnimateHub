@@ -43,6 +43,32 @@ export default function AddBlogPage() {
     category: "",
   });
 
+  const [errors, setErrors] = useState({
+    title: "",
+    content: "",
+  });
+
+  const validateForm = () => {
+    const newErrors = {
+      title: "",
+      content: "",
+    };
+
+    const trimmedTitle = newBlog.title.trim();
+    const trimmedContent = newBlog.content.trim();
+
+    if (trimmedTitle.length < 5) {
+      newErrors.title = "Title must be at least 5 characters long";
+    }
+
+    if (trimmedContent.length < 20) {
+      newErrors.content = "Content must be at least 20 characters long";
+    }
+
+    setErrors(newErrors);
+    return !newErrors.title && !newErrors.content;
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -69,6 +95,11 @@ export default function AddBlogPage() {
     }
     if (!imageFile) {
       alert("Please select a blog image");
+      return;
+    }
+
+    // Validate form before submission
+    if (!validateForm()) {
       return;
     }
 
@@ -156,10 +187,14 @@ export default function AddBlogPage() {
               placeholder="Enter your blog title..."
               className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all"
               value={newBlog.title}
-              onChange={(e) =>
-                setNewBlog({ ...newBlog, title: e.target.value })
-              }
+              onChange={(e) => {
+                setNewBlog({ ...newBlog, title: e.target.value });
+                if (errors.title) setErrors((prev) => ({ ...prev, title: "" }));
+              }}
             />
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+            )}
           </div>
 
           <div className="space-y-1">
@@ -190,10 +225,14 @@ export default function AddBlogPage() {
               placeholder="Write your full blog content (Markdown supported)..."
               className="w-full px-3 py-2 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20 transition-all resize-none"
               value={newBlog.content}
-              onChange={(e) =>
-                setNewBlog({ ...newBlog, content: e.target.value })
-              }
+              onChange={(e) => {
+                setNewBlog({ ...newBlog, content: e.target.value });
+                if (errors.content) setErrors((prev) => ({ ...prev, content: "" }));
+              }}
             />
+            {errors.content && (
+              <p className="text-red-500 text-sm mt-1">{errors.content}</p>
+            )}
           </div>
 
           <div className="grid md:grid-cols-2 gap-3">
