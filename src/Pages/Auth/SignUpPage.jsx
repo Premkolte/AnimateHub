@@ -79,7 +79,11 @@ const SignupPage = () => {
       return;
     }
 
-    handleSignUp(signUpData);
+    const success = await handleSignUp(signUpData);
+    if (success) {
+      toast.success("Account created! Please check your email for OTP verification code.");
+      navigate('/verify-otp', { state: { email } });
+    }
   };
 
   useEffect(() => {

@@ -40,6 +40,7 @@ import LoginPage from "./Pages/Auth/LoginPage";
 import SignupPage from "./Pages/Auth/SignUpPage";
 import FavoritesPage from "./Pages/Favorites/FavoritesPage";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
+import OTPVerificationPage from "./Pages/Auth/OTPVerificationPage";
 import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 import MySnippet from "./Pages/Dashboard/MySnippet";
 
@@ -160,6 +161,7 @@ function App() {
             {/* Auth */}
             <Route path="/sign-in" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/verify-otp" element={<OTPVerificationPage />} />
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
             <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 

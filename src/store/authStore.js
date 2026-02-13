@@ -50,12 +50,14 @@ export const useAuthStore = create((set, get) => ({
             const response = apiResponse.data;
             if (response.success) {
                 set({ currentUser: response.data.user });
-                toast.success("Please check your inbox to verify your account.")
+                return true;
             } else {
                 set({ authError: response.message });
+                return false;
             }
         } catch (error) {
             set({ authError: error.response.data.message });
+            return false;
         } finally {
             set({ isAuthLoading: false })
         }
@@ -241,9 +243,83 @@ export const useAuthStore = create((set, get) => ({
         } finally {
             set({ isAuthLoading: false })
         }
+    },
+
+    /**
+     * Generate OTP for email verification
+     * @param {string} email - User's email address
+     */
+    generateOTP: async (email) => {
+        set({ isAuthLoading: true });
+        try {
+            const apiResponse = await axiosInstance.post('/auth/generate-otp', { email });
+            const response = apiResponse.data;
+            if (response.success) {
+                set({ authError: null })
+                return true;
+            } else {
+                set({ authError: response.message });
+                return false;
+            }
+        } catch (error) {
+            const errorMsg = error.response?.data?.message || 'Failed to generate OTP';
+            set({ authError: errorMsg });
+            return false;
+        } finally {
+            set({ isAuthLoading: false })
+        }
+    },
+
+    /**
+     * Verify OTP code
+     * @param {string} email - User's email address
+     * @param {string} otp - 6-digit OTP code
+     */
+    verifyOTP: async (email, otp) => {
+        set({ isAuthLoading: true });
+        try {
+            const apiResponse = await axiosInstance.post('/auth/verify-otp', { email, otp });
+            const response = apiResponse.data;
+            if (response.success) {
+                set({ authError: null });
+                return true;
+            } else {
+                set({ authError: response.message });
+                return false;
+            }
+        } catch (error) {
+            const errorMsg = error.response?.data?.message || 'Invalid or expired OTP';
+            set({ authError: errorMsg });
+            return false;
+        } finally {
+            set({ isAuthLoading: false })
+        }
+    },
+
+    /**
+     * Resend OTP to user's email
+     * @param {string} email - User's email address
+     */
+    resendOTP: async (email) => {
+        set({ isAuthLoading: true });
+        try {
+            const apiResponse = await axiosInstance.post('/auth/generate-otp', { email });
+            const response = apiResponse.data;
+            if (response.success) {
+                set({ authError: null });
+                return true;
+            } else {
+                set({ authError: response.message });
+                return false;
+            }
+        } catch (error) {
+            const errorMsg = error.response?.data?.message || 'Failed to resend OTP';
+            set({ authError: errorMsg });
+            return false;
+        } finally {
+            set({ isAuthLoading: false })
+        }
     }
-
-
 
 
 }))

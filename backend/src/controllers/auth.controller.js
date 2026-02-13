@@ -3,7 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import User from "../models/user.model.js";
-import { sendVerificationEmail } from "../services/emailService.js";
+import { sendVerificationEmail, sendLoginConfirmationEmail, sendOTPEmail } from "../services/emailService.js";
 import sanatizeUserModelResponse from "../functions/sanatizeUserModelResponse.js";
 
 /**
@@ -39,23 +39,25 @@ export const registerController = asyncHandler(async (req, res) => {
 
   let user = new User({ username, email, fullName, password });
 
-  const verificationToken = crypto.randomBytes(32).toString("hex");
-  user.emailVerificationToken = verificationToken;
-  user.emailVerificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+  const otp = crypto.randomInt(100000, 999999).toString().padStart(6, '0');
+  const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
+
+  user.emailVerificationOTP = otp;
+  user.emailVerificationOTPExpires = expiresAt;
+  user.isEmailVerified = false;
 
   await user.save();
-  await sendVerificationEmail(user.email, verificationToken, user.fullName);
+  await sendOTPEmail(user.email, otp, user.fullName);
 
-  const accessToken = user.generateAccessToken();
   user = sanatizeUserModelResponse(user.toObject(), true);
 
-  return setAuthCookie(res, accessToken)
+  return res
     .status(201)
     .json(
       new ApiResponse(
         201,
-        "User created successfully. Please check your email to verify your account.",
-        { user, accessToken }
+        "User created successfully. Please check your email for OTP to verify your account.",
+        { user }
       )
     );
 });
@@ -88,6 +90,12 @@ export const loginController = asyncHandler(async (req, res) => {
   const message = user.isVerified
     ? "User logged in successfully"
     : "User logged in successfully. Please verify your email to fully access the website.";
+
+  // Send login confirmation email asynchronously
+  const loginTime = new Date().toLocaleString();
+  sendLoginConfirmationEmail(user.email, user.fullName, loginTime).catch((err) => {
+    console.error("Failed to send login confirmation email:", err);
+  });
 
   return setAuthCookie(res, accessToken)
     .status(200)
