@@ -1,0 +1,240 @@
+/* ===== Social Share – fixed floating button, always visible, right side ===== */
+.social-share {
+  --share-size: 40px;
+  --share-gap: 8px;
+  --share-bg: rgba(255, 255, 255, 0.96);
+  --share-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --share-icon-size: 20px;
+  --share-label-color: #374151;
+  --share-hover-scale: 1.08;
+  --share-transition: 0.25s ease;
+  --trigger-size: 48px;
+  --trigger-bg: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
+  --trigger-bg-hover: linear-gradient(135deg, #8b5cf6 0%, #818cf8 100%);
+
+  /* Fixed: stays on screen at all times while scrolling */
+  position: fixed;
+  z-index: 1000;
+  /* Smooth behavior: use will-change and transition for scroll/repaint */
+  will-change: transform;
+  transition: transform var(--share-transition);
+}
+
+/* Trigger: floating share icon – always visible */
+.social-share__trigger {
+  width: var(--trigger-size);
+  height: var(--trigger-size);
+  border: none;
+  border-radius: 50%;
+  background: var(--trigger-bg);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.45);
+  transition: transform var(--share-transition), box-shadow var(--share-transition),
+    background var(--share-transition);
+}
+
+.social-share__trigger:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+  background: var(--trigger-bg-hover);
+}
+
+.social-share__trigger:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+.social-share__trigger-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* Panel: opens to the left of the button, smooth animation */
+.social-share__panel {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.92);
+  transition: opacity var(--share-transition), transform var(--share-transition),
+    visibility var(--share-transition);
+  border-radius: 16px;
+  background: var(--share-bg);
+  box-shadow: var(--share-shadow);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 12px 10px;
+}
+
+.social-share--open .social-share__panel {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.social-share__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--share-gap);
+}
+
+.social-share__label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--share-label-color);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.social-share__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--share-size);
+  height: var(--share-size);
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: opacity var(--share-transition), transform var(--share-transition),
+    color var(--share-transition), background-color var(--share-transition);
+  text-decoration: none;
+  color: inherit;
+}
+
+.social-share__btn:hover {
+  opacity: 0.95;
+  transform: scale(var(--share-hover-scale));
+}
+
+.social-share__btn:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.social-share__icon {
+  width: var(--share-icon-size);
+  height: var(--share-icon-size);
+  flex-shrink: 0;
+}
+
+.social-share__btn--facebook {
+  color: #1877f2;
+}
+.social-share__btn--facebook:hover {
+  color: #0d65d9;
+  background-color: #e8f0fe;
+}
+
+.social-share__btn--x {
+  color: #0f1419;
+}
+.social-share__btn--x:hover {
+  color: #0f1419;
+  background-color: #f0f0f0;
+}
+
+.social-share__btn--linkedin {
+  color: #0a66c2;
+}
+.social-share__btn--linkedin:hover {
+  color: #004182;
+  background-color: #e8f2fa;
+}
+
+.social-share__btn--copy {
+  color: #6b7280;
+}
+.social-share__btn--copy:hover {
+  color: #059669;
+  background-color: #ecfdf5;
+}
+.social-share__btn--copy.copied {
+  color: #059669;
+}
+
+.social-share__copy-text {
+  display: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+/* ----- Desktop: fixed on right, vertically centered ----- */
+@media (min-width: 769px) {
+  .social-share {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+
+  .social-share__panel {
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%) scale(0.92);
+  }
+
+  .social-share--open .social-share__panel {
+    transform: translateY(-50%) scale(1);
+  }
+
+  .social-share__list {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ----- Mobile / small screens: fixed bottom-right, responsive ----- */
+@media (max-width: 768px) {
+  .social-share {
+    top: auto;
+    right: 16px;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    transform: none;
+  }
+
+  .social-share__panel {
+    right: 0;
+    bottom: calc(100% + 10px);
+    top: auto;
+    transform: translateY(4px) scale(0.92);
+  }
+
+  .social-share--open .social-share__panel {
+    transform: translateY(0) scale(1);
+  }
+
+  .social-share__list {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .social-share__btn {
+    flex: 1;
+    max-width: 48px;
+  }
+
+  .social-share__btn--copy {
+    max-width: none;
+    min-width: 72px;
+    padding: 0 10px;
+    border-radius: 24px;
+  }
+
+  .social-share__copy-text {
+    display: inline;
+  }
+
+  .social-share__btn--copy .social-share__icon {
+    margin-right: 2px;
+  }
+}

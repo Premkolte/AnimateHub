@@ -14,6 +14,7 @@ import Chatbot from "./components/layout/Chatbot";
 import Footer from "./components/layout/Footer";
 import SplashCursor from "./components/SplashCursor";
 import BackToTop from "./components/UI/BackToTop";
+import SocialShare from "./components/UI/SocialShare";
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -77,6 +78,7 @@ function Layout() {
       <Chatbot />
       <Footer />
       <BackToTop />
+      <SocialShare />
       <Toaster position="top-right" reverseOrder={false} />
     </>
   );
