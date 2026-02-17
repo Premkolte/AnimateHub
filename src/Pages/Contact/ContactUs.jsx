@@ -345,473 +345,209 @@ const Contact = () => {
   };
 
   return (
-      <div className="relative flex flex-col items-center justify-center overflow-hidden w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-          {/* Background Pattern */}
-          <div
-              className={`absolute inset-0 transition-opacity duration-1000 ${isLoaded ? "opacity-10" : "opacity-0"}`}
-          >
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')]"></div>
-          </div>
+  <div className="relative min-h-screen w-full overflow-hidden 
+  bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 
+  dark:from-gray-950 dark:via-gray-900 dark:to-black">
 
-          {/* Wrapper Container */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 py-16">
-              {/* Header Section */}
-              <div className="text-center mb-16">
-                  <div
-                      onClick={scrollToContactForm}
-                      className={`inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md px-6 py-3 rounded-full border border-gray-200 dark:border-gray-700 shadow-lg mb-8 cursor-pointer hover:shadow-xl hover:scale-105 transition-all duration-500 transform ${
-                          isLoaded
-                              ? "translate-y-0 opacity-100 scale-100"
-                              : "translate-y-8 opacity-0 scale-95"
-                      }`}
-                  >
-                      <MessageCircle className="w-6 h-6 text-blue-600 animate-pulse" />
-                      <span className="text-gray-900 dark:text-gray-300 font-medium">
-                          Let's Connect
-                      </span>
-                  </div>
+    {/* Background Glow Effects */}
+    <div className="absolute -top-40 -left-40 w-[600px] h-[600px] 
+    bg-purple-500/30 rounded-full blur-[160px] animate-pulse"></div>
 
-                  <h1
-                      className={`text-black dark:text-white text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent transform transition-all duration-700 delay-200 hover:scale-75 ${
-                          isLoaded
-                              ? "translate-y-0 opacity-100"
-                              : "translate-y-8 opacity-0"
-                      }`}
-                  >
-                      Get In Touch
-                      
-                  </h1>
+    <div className="absolute bottom-[-200px] right-[-200px] w-[600px] h-[600px] 
+    bg-pink-500/30 rounded-full blur-[160px] animate-pulse"></div>
 
-                  <p
-                      className={`text-base text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed transform transition-all duration-700 delay-400 ${
-                          isLoaded
-                              ? "translate-y-0 opacity-100"
-                              : "translate-y-8 opacity-0"
-                      }`}
-                  >
-                      Ready to bring your ideas to life? We'd love to hear about
-                      your project and discuss how we can help you succeed.
-                  </p>
-              </div>
+    <div className="relative z-10 max-w-7xl mx-auto px-6 py-28">
 
-              {/* Contact Stats & Form Section */}
-              <div className="flex flex-col lg:flex-row gap-12">
-                  {/* Contact Stats */}
-                  <div className="w-full lg:w-1/3 grid grid-cols-1 gap-8 mb-8 lg:mb-0">
-                      {/* Response Time */}
-                      <div
-                          className={`text-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 group transform ${
-                              visibleStats.includes(0)
-                                  ? "translate-x-0 opacity-100"
-                                  : "-translate-x-16 opacity-0"
-                          }`}
-                      >
-                          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-400 dark:from-purple-600 dark:to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 hover:rotate-12 transition-all duration-300">
-                              <Clock className="w-8 h-8 text-white" />
-                          </div>
-                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                              24h
-                          </h3>
-                          <p className="text-gray-600 dark:text-gray-300">
-                              Response Time
-                          </p>
-                      </div>
+      {/* Header */}
+      <div className="text-center mb-24">
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight 
+        bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 
+        bg-clip-text text-transparent drop-shadow-md">
+          Let’s Connect & Create Magic ✨
+        </h1>
 
-                      {/* Happy Clients */}
-                      <div
-                          className={`text-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 group transform ${
-                              visibleStats.includes(1)
-                                  ? "translate-x-0 opacity-100"
-                                  : "-translate-x-16 opacity-0"
-                          }`}
-                      >
-                          <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-400 dark:from-green-600 dark:to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 hover:rotate-12 transition-all duration-300">
-                              <Users className="w-8 h-8 text-white" />
-                          </div>
-                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                              500+
-                          </h3>
-                          <p className="text-gray-600 dark:text-gray-300">
-                              Happy Clients
-                          </p>
-                      </div>
-
-                      {/* Secure */}
-                      <div
-                          className={`text-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 group transform ${
-                              visibleStats.includes(2)
-                                  ? "translate-x-0 opacity-100"
-                                  : "-translate-x-16 opacity-0"
-                          }`}
-                      >
-                          <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-400 dark:from-orange-600 dark:to-red-600 rounded-2xl flex items-center hover:rotate-12 justify-center mx-auto mb-4 transition-all duration-300">
-                              <Shield className="w-8 h-8 text-white" />
-                          </div>
-                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                              100%
-                          </h3>
-                          <p className="text-gray-600 dark:text-gray-300">
-                              Secure
-                          </p>
-                      </div>
-                  </div>
-
-                  {/* Contact Form */}
-                  <div
-                      className={`flex-1 transform transition-all duration-700 delay-300 ${
-                          isLoaded
-                              ? "translate-x-0 opacity-100"
-                              : "translate-x-16 opacity-0"
-                      }`}
-                      id="contact-form"
-                  >
-                      <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-3xl shadow-2xl p-8 md:p-12 hover:-translate-y-2 transition-all duration-300">
-                          {/* Form Header */}
-                          <div
-                              className={`text-center mb-10 transform transition-all duration-500 delay-500 ${
-                                  isLoaded
-                                      ? "translate-y-0 opacity-100"
-                                      : "translate-y-4 opacity-0"
-                              }`}
-                          >
-                              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                                  Send us a message
-                              </h2>
-                              <p className="text-base text-gray-600 dark:text-gray-300 mb-6">
-                                  Got any questions, suggestions, or feedback?
-                                  We'd love to hear from you!
-                              </p>
-                              <p className="text-base text-gray-600 dark:text-gray-300">
-                                  Reach out to us via email at{" "}
-                                  <a
-                                      href="mailto:contact@animatehub.com"
-                                      className="text-blue-600 dark:text-blue-400 hover:underline font-semibold transition-all duration-300 hover:scale-105 inline-block"
-                                  >
-                                      contact@animatehub.com
-                                  </a>{" "}
-                                  or fill out the form below:
-                              </p>
-                          </div>
-
-                          {/* Status Messages */}
-                          {submitStatus === "success" && (
-                              <div className="mb-8 p-4 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-xl flex items-center gap-3">
-                                  <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
-                                  <p className="text-green-800 dark:text-green-200 font-medium">
-                                      Thank you! Your message has been sent successfully.
-                                  </p>
-                              </div>
-                          )}
-
-                          {submitStatus === "error" && (
-                              <div className="mb-8 p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-xl flex items-center gap-3">
-                                  <X className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
-                                  <p className="text-red-800 dark:text-red-200 font-medium">
-                                      Failed to send message. Please try again later.
-                                  </p>
-                              </div>
-                          )}
-
-                          {submitStatus === "validation_error" && (
-                              <div className="mb-8 p-4 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 rounded-xl flex items-center gap-3">
-                                  <AlertCircle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0" />
-                                  <p className="text-yellow-800 dark:text-yellow-200 font-medium">
-                                      Please fix the errors below before submitting.
-                                  </p>
-                              </div>
-                          )}
-
-                          {/* Form Fields */}
-                          <div className="space-y-8">
-                              {/* Name & Email Fields */}
-                              <div
-                                  className={`grid grid-cols-1 md:grid-cols-2 gap-6 transform transition-all duration-500 delay-700 ${
-                                      isLoaded
-                                          ? "translate-y-0 opacity-100"
-                                          : "translate-y-4 opacity-0"
-                                  }`}
-                              >
-                                  {/* Name */}
-                                  <div className="space-y-2">
-                                      <label
-                                          htmlFor="name"
-                                          className="text-sm font-semibold text-gray-700 dark:text-gray-300 block"
-                                      >
-                                          Your Name *
-                                      </label>
-                                      <div className="relative group">
-                                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                              <User className={`w-5 h-5 transition-colors duration-200 ${
-                                                getFieldStatus("name") === "error" 
-                                                  ? "text-red-500" 
-                                                  : getFieldStatus("name") === "success"
-                                                  ? "text-green-500"
-                                                  : "text-gray-400 group-focus-within:text-blue-600"
-                                              }`} />
-                                          </div>
-                                          <input
-                                              type="text"
-                                              id="name"
-                                              value={formData.name}
-                                              onChange={handleInputChange}
-                                              onBlur={handleBlur}
-                                              placeholder="Enter your full name"
-                                              className={getFieldClasses("name")}
-                                              aria-describedby={errors.name ? "name-error" : undefined}
-                                              aria-invalid={!!errors.name}
-                                          />
-                                          {getFieldStatus("name") === "success" && (
-                                            <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                                              <CheckCircle2 className="w-5 h-5 text-green-500" />
-                                            </div>
-                                          )}
-                                      </div>
-                                      {errors.name && (
-                                        <p id="name-error" className="text-sm text-red-600 dark:text-red-400 flex items-center gap-2 mt-2">
-                                          <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                                          {errors.name}
-                                        </p>
-                                      )}
-                                      <div className="text-xs text-gray-500 dark:text-gray-400">
-                                        {formData.name.length}/50 characters
-                                      </div>
-                                  </div>
-
-                                  {/* Email */}
-                                  <div className="space-y-2">
-                                      <label
-                                          htmlFor="email"
-                                          className="text-sm font-semibold text-gray-700 dark:text-gray-300 block"
-                                      >
-                                          Your Email *
-                                      </label>
-                                      <div className="relative group">
-                                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
-                                              <Mail className={`w-5 h-5 transition-colors duration-200 ${
-                                                getFieldStatus("email") === "error" 
-                                                  ? "text-red-500" 
-                                                  : getFieldStatus("email") === "success"
-                                                  ? "text-green-500"
-                                                  : "text-gray-400 group-focus-within:text-blue-600"
-                                              }`} />
-                                          </div>
-                                          <input
-                                              type="email"
-                                              id="email"
-                                              placeholder="Enter your email address"
-                                              value={formData.email}
-                                              onChange={handleInputChange}
-                                              onBlur={handleBlur}
-                                              className={getFieldClasses("email")}
-                                              aria-describedby={errors.email ? "email-error" : undefined}
-                                              aria-invalid={!!errors.email}
-                                          />
-                                          {getFieldStatus("email") === "success" && (
-                                            <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
-                                              <CheckCircle2 className="w-5 h-5 text-green-500" />
-                                            </div>
-                                          )}
-                                      </div>
-                                      {errors.email && (
-                                        <p id="email-error" className="text-sm text-red-600 dark:text-red-400 flex items-center gap-2 mt-2">
-                                          <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                                          {errors.email}
-                                        </p>
-                                      )}
-                                      <div className="text-xs text-gray-500 dark:text-gray-400">
-                                        {formData.email.length}/100 characters
-                                      </div>
-                                  </div>
-                              </div>
-
-                              {/* Message Field */}
-                              <div
-                                  className={`space-y-2 transform transition-all duration-500 delay-800 ${
-                                      isLoaded
-                                          ? "translate-y-0 opacity-100"
-                                          : "translate-y-4 opacity-0"
-                                  }`}
-                              >
-                                  <label
-                                      htmlFor="message"
-                                      className="text-sm font-semibold text-gray-700 dark:text-gray-300 block"
-                                  >
-                                      Your Message *
-                                  </label>
-                                  <div className="relative">
-                                      <textarea
-                                          id="message"
-                                          placeholder="Tell us about your project, questions, or how we can help you..."
-                                          rows="6"
-                                          value={formData.message}
-                                          onChange={handleInputChange}
-                                          onBlur={handleBlur}
-                                          className={`w-full px-4 py-4 border-2 rounded-xl focus:ring-4 outline-none transition-all duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none ${
-                                            getFieldStatus("message") === "error" 
-                                              ? "bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500/20"
-                                              : getFieldStatus("message") === "success"
-                                              ? "bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-600 focus:border-green-500 focus:ring-green-500/20"
-                                              : "bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500/20 focus:scale-105"
-                                          }`}
-                                          aria-describedby={errors.message ? "message-error" : undefined}
-                                          aria-invalid={!!errors.message}
-                                      />
-                                      {getFieldStatus("message") === "success" && (
-                                        <div className="absolute top-4 right-4">
-                                          <CheckCircle2 className="w-5 h-5 text-green-500" />
-                                        </div>
-                                      )}
-                                  </div>
-                                  {errors.message && (
-                                    <p id="message-error" className="text-sm text-red-600 dark:text-red-400 flex items-center gap-2 mt-2">
-                                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                                      {errors.message}
-                                    </p>
-                                  )}
-                                  <div className="text-xs text-gray-500 dark:text-gray-400 flex justify-between">
-                                    <span>{formData.message.length}/1000 characters</span>
-                                    <span className={formData.message.length >= 10 ? "text-green-600 dark:text-green-400" : ""}>
-                                      {formData.message.length >= 10 ? "✓" : ""} Minimum 10 characters
-                                    </span>
-                                  </div>
-                              </div>
-
-                              {/* Submit Button */}
-                              <div
-                                  className={`text-center pt-4 transform transition-all duration-500 delay-900 ${
-                                      isLoaded
-                                          ? "translate-y-0 opacity-100"
-                                          : "translate-y-4 opacity-0"
-                                  }`}
-                              >
-                                  <button
-                                      type="button"
-                                      onClick={handleSubmit}
-                                      disabled={isSubmitting || !isFormValid}
-                                      className={`flex justify-center items-center gap-3 w-full px-8 py-4 font-semibold rounded-full shadow-lg transform transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/20 ${
-                                        isSubmitting || !isFormValid
-                                          ? "bg-gray-400 dark:bg-gray-600 text-gray-200 cursor-not-allowed"
-                                          : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white hover:shadow-xl hover:scale-105"
-                                      }`}
-                                  >
-                                      {isSubmitting ? (
-                                          <>
-                                              <svg
-                                                  className="animate-spin h-5 w-5 text-white"
-                                                  xmlns="http://www.w3.org/2000/svg"
-                                                  fill="none"
-                                                  viewBox="0 0 24 24"
-                                              >
-                                                  <circle
-                                                      className="opacity-25"
-                                                      cx="12"
-                                                      cy="12"
-                                                      r="10"
-                                                      stroke="currentColor"
-                                                      strokeWidth="4"
-                                                  />
-                                                  <path
-                                                      className="opacity-75"
-                                                      fill="currentColor"
-                                                      d="M4 12a8 8 0 018-8v8z"
-                                                  />
-                                              </svg>
-                                              <span>Sending...</span>
-                                          </>
-                                      ) : (
-                                          <>
-                                              <Send className="h-5 w-5" />
-                                              <span>Send Message</span>
-                                          </>
-                                      )}
-                                  </button>
-                                  
-                                  {!isFormValid && Object.keys(touched).length > 0 && (
-                                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                                      Please fill out all required fields correctly
-                                    </p>
-                                  )}
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              {/* FAQ Section */}
-              <div className="mt-20">
-                  <FAQ />
-              </div>
-          </div>
-
-          {/* Custom CSS for animations */}
-          <style jsx>{`
-              @keyframes fade-in {
-                  from {
-                      opacity: 0;
-                      transform: translateY(10px);
-                  }
-                  to {
-                      opacity: 1;
-                      transform: translateY(0);
-                  }
-              }
-
-              @keyframes float {
-                  0%,
-                  100% {
-                      transform: translateY(0px);
-                  }
-                  50% {
-                      transform: translateY(-10px);
-                  }
-              }
-
-              @keyframes glow {
-                  0%,
-                  100% {
-                      box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
-                  }
-                  50% {
-                      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
-                  }
-              }
-
-              .animate-fade-in {
-                  animation: fade-in 0.5s ease-out;
-              }
-
-              .animate-float {
-                  animation: float 3s ease-in-out infinite;
-              }
-
-              .animate-glow {
-                  animation: glow 2s ease-in-out infinite;
-              }
-
-              /* Smooth scrolling for the whole page */
-              html {
-                  scroll-behavior: smooth;
-              }
-
-              /* Custom focus styles */
-              input:focus,
-              textarea:focus {
-                  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-              }
-
-              /* Custom gradient text */
-              .bg-clip-text {
-                  -webkit-background-clip: text;
-                  background-clip: text;
-              }
-
-              /* Custom hover animations */
-              .group:hover .animate-pulse {
-                  animation-duration: 0.5s;
-              }
-          `}</style>
+        <p className="text-xl text-gray-600 dark:text-gray-300 mt-6 max-w-2xl mx-auto leading-relaxed">
+          We’re excited to hear your ideas. Let’s collaborate and bring them to life beautifully.
+        </p>
       </div>
-  );
+
+      <div className="grid lg:grid-cols-2 gap-24 items-start">
+
+        {/* LEFT SIDE - FEATURE BOXES */}
+        <div className="space-y-10">
+
+          {[{
+            icon: Clock,
+            title: "24h",
+            desc: "Fast & Friendly Response",
+            gradient: "from-indigo-500 to-purple-600"
+          },{
+            icon: Users,
+            title: "500+",
+            desc: "Happy Clients Worldwide",
+            gradient: "from-green-500 to-emerald-600"
+          },{
+            icon: Shield,
+            title: "100%",
+            desc: "Secure & Confidential",
+            gradient: "from-pink-500 to-orange-500"
+          }].map((item, i) => (
+            <div key={i}
+              className="float-animation group relative p-[2px] rounded-3xl 
+              bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400
+              hover:scale-[1.05] transition-all duration-500">
+
+              <div className="rounded-3xl bg-white/80 dark:bg-gray-900/80 
+              backdrop-blur-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)]
+              border border-white/50 dark:border-gray-700/50">
+
+                <div className="flex items-center gap-6">
+
+                  <div className={`w-18 h-18 rounded-2xl bg-gradient-to-r ${item.gradient}
+                  flex items-center justify-center shadow-xl 
+                  group-hover:rotate-6 group-hover:scale-110 transition-all duration-500`}>
+                    <item.icon className="text-white w-8 h-8" />
+                  </div>
+
+                  <div>
+                    <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mt-1 text-lg">
+                      {item.desc}
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          ))}
+
+        </div>
+
+        {/* RIGHT SIDE - FORM */}
+        <div className="relative">
+
+          {/* Glow Border */}
+          <div className="absolute inset-0 rounded-3xl 
+          bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+          blur-xl opacity-30 glow-animation"></div>
+
+          <div className="relative bg-white/90 dark:bg-gray-900/90 
+          backdrop-blur-2xl rounded-3xl p-14 shadow-[0_30px_80px_rgba(0,0,0,0.15)]
+          border border-white/50 dark:border-gray-700/50">
+
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white 
+            mb-12 text-center tracking-wide">
+              Send Us a Message
+            </h2>
+
+            <div className="space-y-8">
+
+              <input
+                id="name"
+                type="text"
+                value={formData.name}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                placeholder="Your Name"
+                className="w-full px-6 py-4 rounded-2xl 
+                border border-gray-300 dark:border-gray-600
+                bg-white dark:bg-gray-950
+                focus:ring-2 focus:ring-purple-500 focus:scale-[1.02]
+                transition-all duration-300 shadow-sm"
+              />
+
+              <input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                placeholder="Your Email"
+                className="w-full px-6 py-4 rounded-2xl 
+                border border-gray-300 dark:border-gray-600
+                bg-white dark:bg-gray-950
+                focus:ring-2 focus:ring-blue-500 focus:scale-[1.02]
+                transition-all duration-300 shadow-sm"
+              />
+
+              <textarea
+                id="message"
+                rows="5"
+                value={formData.message}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                placeholder="Tell us about your project..."
+                className="w-full px-6 py-4 rounded-2xl 
+                border border-gray-300 dark:border-gray-600
+                bg-white dark:bg-gray-950 resize-none
+                focus:ring-2 focus:ring-pink-500 focus:scale-[1.02]
+                transition-all duration-300 shadow-sm"
+              />
+
+              <button
+                onClick={handleSubmit}
+                disabled={isSubmitting || !isFormValid}
+                className={`w-full py-4 rounded-2xl font-semibold text-white 
+                animated-gradient transition-all duration-500 shadow-lg
+                ${isSubmitting || !isFormValid
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 hover:scale-105 hover:shadow-2xl"
+                }`}
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </button>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div className="mt-32">
+        <FAQ />
+      </div>
+
+    </div>
+
+    {/* Proper React Style Block */}
+    <style>
+      {`
+        @keyframes floatSlow {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-12px); }
+        }
+
+        @keyframes glowPulse {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.6; }
+        }
+
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        .float-animation {
+          animation: floatSlow 4s ease-in-out infinite;
+        }
+
+        .glow-animation {
+          animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .animated-gradient {
+          background-size: 200% 200%;
+          animation: gradientShift 6s ease infinite;
+        }
+      `}
+    </style>
+
+  </div>
+);
 };
 
 export default Contact;
