@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import img1 from "/assets/testimonials/img5.jpg";
@@ -45,6 +45,19 @@ const testimonials = [
     rating: 5,
   },
 ];
+
+/**
+ * Deduplicate testimonials by id to prevent duplicate entries.
+ * Returns a new array with only unique testimonials.
+ */
+const getUniqueTestimonials = (items) => {
+  const seen = new Set();
+  return items.filter((item) => {
+    if (seen.has(item.id)) return false;
+    seen.add(item.id);
+    return true;
+  });
+};
 
 const TestimonialCard = ({ text, name, image, rating  }) => {
   return (
@@ -101,7 +114,29 @@ TestimonialCard.propTypes = {
 
 const TestimonialSection = () => {
   const [isPaused, setIsPaused] = useState(false);
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  const scrollRef = useRef(null);
+  const [scrollWidth, setScrollWidth] = useState(0);
+
+  // Deduplicate testimonials to ensure no duplicate entries exist
+  const uniqueTestimonials = useMemo(() => getUniqueTestimonials(testimonials), []);
+
+  // Duplicate once for seamless infinite scroll looping
+  const scrollTestimonials = useMemo(
+    () => [...uniqueTestimonials, ...uniqueTestimonials],
+    [uniqueTestimonials]
+  );
+
+  // Measure the exact pixel width of one set of testimonials
+  // so the scroll resets seamlessly without visible duplication
+  useEffect(() => {
+    if (scrollRef.current) {
+      const totalWidth = scrollRef.current.scrollWidth;
+      setScrollWidth(totalWidth / 2);
+    }
+  }, [scrollTestimonials]);
+
+  // Calculate animation duration based on content width for consistent speed
+  const animationDuration = Math.max(scrollWidth / 50, 20);
 
   return (
     <section className="w-full py-10 md:py-16 relative overflow-hidden bg-secondary-50 dark:bg-secondary-900">
@@ -139,18 +174,22 @@ const TestimonialSection = () => {
 
           <div className="overflow-hidden">
             <div
+              ref={scrollRef}
               className="flex scroll-container py-14"
               style={{
-                animation: "scrollLeft 22s linear infinite",
+                animation: scrollWidth
+                  ? `scrollLeft ${animationDuration}s linear infinite`
+                  : "none",
                 animationPlayState: isPaused ? "paused" : "running",
                 width: "max-content",
+                willChange: "transform",
               }}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
-              {duplicatedTestimonials.map((testimonial, index) => (
+              {scrollTestimonials.map((testimonial, index) => (
                 <TestimonialCard
-                  key={`${testimonial.id}-${index}`}
+                  key={`testimonial-${testimonial.id}-${index}`}
                   {...testimonial}
                 />
               ))}
@@ -159,11 +198,11 @@ const TestimonialSection = () => {
         </div>
       </div>
 
-      {/* Keyframes */}
+      {/* Keyframes - scroll by exact pixel width of one set for seamless loop */}
       <style>{`
         @keyframes scrollLeft {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-${scrollWidth}px); }
         }
       `}</style>
     </section>
