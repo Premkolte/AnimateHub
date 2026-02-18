@@ -1,4 +1,12 @@
 export const buttonSnippets = [
+   {
+    label: "Shadow Pulse Button",
+    tags: ['pulse', 'animation', 'tailwind'],
+    cssCode:
+      '<button style="background-color: #9333ea; color: white; padding: 12px 24px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">Pulse Effect</button>',
+    jsxCode:
+      "<button className={`px-6 py-3 font-semibold text-white bg-purple-600 rounded-lg shadow-lg animate-pulse`}>Pulse Effect</button>",
+  },
   {
     label: "Move Right",
     tags: ['hover', 'slide', 'transform'],
