@@ -168,24 +168,22 @@ const Navbar = () => {
     <>
       <nav
         className={`
-          w-full backdrop-blur-md transition-all duration-500 ease-out
-          ${
-            scrolled
-              ? "bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200"
-              : "bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200"
+          w-full backdrop-blur-md transition-all duration-500 ease-out overflow-x-hidden
+          ${scrolled
+            ? "bg-white/95 dark:bg-gray-900/95 shadow-2xl border-b-0 text-gray-800 dark:text-gray-200"
+            : "bg-gradient-to-r from-[#3b82f6] to-[#6a99d6] dark:from-purple-900 dark:to-purple-900 border-b border-white/20 text-white dark:text-gray-200"
           }
           py-3 sticky top-0 left-0 z-50
-          ${
-            scrolled
-              ? "shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
-              : "shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
+          ${scrolled
+            ? "shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
+            : "shadow-[0px_3px_20px_0px_rgba(255,255,255,0.3)]"
           }
         `}
       >
-        <div className="w-full px-4 lg:px-8">
-          <div className="w-full flex justify-between items-center">
+        <div className="w-full px-4 lg:px-6">
+          <div className="w-full flex justify-between items-center gap-2">
             {/* Logo Section */}
-            <div className="flex items-center space-x-3 group pr-6">
+            <div className="flex items-center space-x-2 group pr-4 flex-shrink-0">
               <Link
                 to="/"
                 className="flex items-center space-x-3 transform transition-transform duration-300 hover:scale-105"
@@ -200,19 +198,18 @@ const Navbar = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 rounded-full blur-lg group-hover:opacity-30 transition-opacity duration-300"></div>
                 </div>
                 <span
-                  className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${
-                    scrolled
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                      : "bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent"
-                  }`}
+                  className={`font-heading text-xl md:text-2xl lg:text-3xl font-bold transition-all duration-300 ${scrolled
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                    : "bg-gradient-to-r from-white to-gray-100 dark:from-gray-100 dark:to-purple-200 bg-clip-text text-transparent"
+                    }`}
                 >
                   AnimateHub
                 </span>
               </Link>
             </div>
-            
+
             {/* Desktop Navigation */}
-            <div className="hidden xl:flex items-center space-x-1 xl:space-x-2">
+            <div className="hidden xl:flex items-center space-x-0.5 xl:space-x-1 min-w-0 flex-shrink">
               {navLinks.map((item, index) => {
                 // skip old Playground & AnimationPlayground
                 if (item === "Playground" || item === "AnimationPlayground") {
@@ -231,17 +228,16 @@ const Navbar = () => {
                       <button
                         onClick={toggleDropdown}
                         className={`
-    relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
-    font-medium text-sm xl:text-base flex items-center
+    relative px-2 xl:px-3 py-2 rounded-lg transition-all duration-300 ease-out
+    font-medium text-sm flex items-center whitespace-nowrap
     ${scrolled ? "text-gray-700 dark:text-gray-300" : "text-white/90"}
     hover:shadow-lg transform hover:scale-105
-    ${
-      isPlaygroundActive
-        ? scrolled
-          ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-          : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
-        : ""
-    }
+    ${isPlaygroundActive
+                            ? scrolled
+                              ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                              : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
+                            : ""
+                          }
     group overflow-hidden
   `}
                       >
@@ -249,9 +245,8 @@ const Navbar = () => {
 
                         {/* Dropdown arrow */}
                         <FiChevronDown
-                          className={`ml-1 transition-transform duration-300 ${
-                            openDropdown ? "rotate-180" : ""
-                          }`}
+                          className={`ml-1 transition-transform duration-300 ${openDropdown ? "rotate-180" : ""
+                            }`}
                         />
 
                         {/* Active indicator dot (like About/Explore tabs) */}
@@ -307,11 +302,10 @@ const Navbar = () => {
         before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
         dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
         before:opacity-30
-        ${
-          location.pathname === "/animationplayground"
-            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-        }
+        ${location.pathname === "/animationplayground"
+                                ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
       `}
                           >
                             <div className="flex items-center gap-2">
@@ -335,11 +329,10 @@ const Navbar = () => {
         before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
         dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
         before:opacity-30
-        ${
-          location.pathname === "/playground"
-            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-        }
+        ${location.pathname === "/playground"
+                                ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
       `}
                           >
                             <div className="flex items-center gap-2">
@@ -363,11 +356,10 @@ const Navbar = () => {
         before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
         dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
         before:opacity-30
-        ${
-          location.pathname === "/framerplayground"
-            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-        }
+        ${location.pathname === "/framerplayground"
+                                ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
       `}
                           >
                             <div className="flex items-center gap-2">
@@ -391,11 +383,10 @@ const Navbar = () => {
         before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
         dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
         before:opacity-30
-        ${
-          location.pathname === "/ColorGradientPlayground"
-            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-        }
+        ${location.pathname === "/ColorGradientPlayground"
+                                ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
       `}
                           >
                             <div className="flex items-center gap-2">
@@ -419,11 +410,10 @@ const Navbar = () => {
         before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
         dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
         before:opacity-30
-        ${
-          location.pathname === "/TailwindPlayground"
-            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-        }
+        ${location.pathname === "/TailwindPlayground"
+                                ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
       `}
                           >
                             <div className="flex items-center gap-2">
@@ -447,11 +437,10 @@ const Navbar = () => {
         before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
         dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
         before:opacity-30
-        ${
-          location.pathname === "/SVGPlayground"
-            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-        }
+        ${location.pathname === "/SVGPlayground"
+                                ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
       `}
                           >
                             <div className="flex items-center gap-2">
@@ -475,11 +464,10 @@ const Navbar = () => {
         before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
         dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
         before:opacity-30
-        ${
-          location.pathname === "/FontPlayground"
-            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-        }
+        ${location.pathname === "/FontPlayground"
+                                ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
       `}
                           >
                             <div className="flex items-center gap-2">
@@ -503,11 +491,10 @@ const Navbar = () => {
         before:bg-gradient-to-r before:from-blue-300 before:via-blue-200 before:to-blue-300
         dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
         before:opacity-30
-        ${
-          location.pathname === "/flexboxPlayground"
-            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-            : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-        }
+        ${location.pathname === "/flexboxPlayground"
+                                ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-blue-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
       `}
                           >
                             <div className="flex items-center gap-2">
@@ -530,11 +517,10 @@ const Navbar = () => {
     before:bg-gradient-to-r before:from-green-300 before:via-green-200 before:to-green-300
     dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
     before:opacity-30
-    ${
-      location.pathname === "/gridPlayground"
-        ? "bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900/30 dark:to-teal-900/30 text-green-600 dark:text-teal-400"
-        : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-green-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-    }
+    ${location.pathname === "/gridPlayground"
+                                ? "bg-gradient-to-r from-green-100 to-teal-100 dark:from-green-900/30 dark:to-teal-900/30 text-green-600 dark:text-teal-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-green-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
   `}
                           >
                             <div className="flex items-center gap-2">
@@ -557,11 +543,10 @@ const Navbar = () => {
     before:bg-gradient-to-r before:from-pink-300 before:via-pink-200 before:to-pink-300
     dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
     before:opacity-30
-    ${
-      location.pathname === "/boxShadowPlayground"
-        ? "bg-gradient-to-r from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 text-pink-600 dark:text-purple-400"
-        : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-pink-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-    }
+    ${location.pathname === "/boxShadowPlayground"
+                                ? "bg-gradient-to-r from-pink-100 to-purple-100 dark:from-pink-900/30 dark:to-purple-900/30 text-pink-600 dark:text-purple-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-pink-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
   `}
                           >
                             <div className="flex items-center gap-2">
@@ -569,7 +554,7 @@ const Navbar = () => {
                               Box Shadow Ground
                             </div>
                           </Link>
-                        
+
                           <Link
                             to="/transformPlayground"
                             onClick={() => {
@@ -585,11 +570,10 @@ const Navbar = () => {
     before:bg-gradient-to-r before:from-orange-300 before:via-orange-200 before:to-orange-300
     dark:before:from-gray-500 dark:before:via-gray-500 dark:before:to-gray-500
     before:opacity-30
-    ${
-      location.pathname === "/transformPlayground"
-        ? "bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 text-orange-600 dark:text-red-400"
-        : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-orange-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
-    }
+    ${location.pathname === "/transformPlayground"
+                                ? "bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 text-orange-600 dark:text-red-400"
+                                : "text-gray-900 dark:text-gray-200 hover:bg-gradient-to-r hover:from-orange-200 hover:to-white dark:hover:from-gray-700 dark:hover:to-gray-900"
+                              }
   `}
                           >
                             <div className="flex items-center gap-2">
@@ -607,7 +591,7 @@ const Navbar = () => {
                               Transform Ground
                             </div>
                           </Link>
-                          
+
                         </div>
                       )}
                     </div> /* End of parent wrapper */
@@ -623,21 +607,19 @@ const Navbar = () => {
                     to={path}
                     onClick={closeMenu}
                     className={`
-                      relative px-4 py-2 rounded-lg transition-all duration-300 ease-out
-                      font-medium text-sm xl:text-base
-                      ${
-                        scrolled
-                          ? "text-gray-700 dark:text-gray-300"
-                          : "text-white/90 dark:text-gray-200"
+                      relative px-2 xl:px-3 py-2 rounded-lg transition-all duration-300 ease-out
+                      font-medium text-sm whitespace-nowrap
+                      ${scrolled
+                        ? "text-gray-700 dark:text-gray-300"
+                        : "text-white/90 dark:text-gray-200"
                       }
                       hover:shadow-lg 
                       transform hover:scale-105
-                      ${
-                        isActive
-                          ? scrolled
-                            ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
-                            : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
-                          : ""
+                      ${isActive
+                        ? scrolled
+                          ? "bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-purple-400"
+                          : "bg-white/10 dark:bg-purple-500/20 text-white dark:text-purple-200"
+                        : ""
                       }
                       group overflow-hidden
                     `}
@@ -684,17 +666,16 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Actions - Profile with Dark Mode Toggle */}
-            <div className="flex items-center space-x-4">
+            <div className="hidden xl:flex items-center space-x-3 flex-shrink-0">
               <DarkModeToggle />
 
               {/* Profile Avatar Dropdown */}
               <div className="relative" ref={profileRef}>
                 <button
                   onClick={toggleProfile}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group ${
-                    !currentUser?.avatarUrl &&
+                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25 ring-2 ring-white/20 hover:ring-white/40 group ${!currentUser?.avatarUrl &&
                     "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
-                  }`}
+                    }`}
                   title="Profile Menu"
                 >
                   {currentUser ? (
@@ -716,9 +697,8 @@ const Navbar = () => {
                   )}
                   <div className="absolute -bottom-1 -right-1">
                     <FiChevronDown
-                      className={`text-xs bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full p-0.5 transition-transform duration-300 ${
-                        isProfileOpen ? "rotate-180" : ""
-                      }`}
+                      className={`text-xs bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full p-0.5 transition-transform duration-300 ${isProfileOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </div>
                 </button>
@@ -729,11 +709,10 @@ const Navbar = () => {
                   absolute right-0 top-full mt-2 w-64 rounded-xl shadow-2xl z-50
                   bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl border border-white/20 dark:border-gray-700/50
                   transform origin-top-right transition-all duration-300 ease-out
-                  ${
-                    isProfileOpen
+                  ${isProfileOpen
                       ? "opacity-100 scale-100 translate-y-0"
                       : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                  }
+                    }
                 `}
                 >
                   {currentUser ? (
@@ -885,42 +864,41 @@ const Navbar = () => {
                   )}
                 </div>
               </div>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={toggleMenu}
-                className={` xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${
-                  scrolled
-                    ? "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
-                    : "bg-white/10 hover:bg-white/20"
-                }`}
-                aria-label="Toggle menu"
-              >
-                <div className="relative w-6 h-6">
-                  <span
-                    className={`
-                  absolute top-1.5 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
-                  ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
-                  ${isOpen ? "rotate-45 translate-y-2" : ""}
-                `}
-                  />
-                  <span
-                    className={`
-                  absolute top-3 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
-                  ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
-                  ${isOpen ? "opacity-0" : ""}
-                `}
-                  />
-                  <span
-                    className={`
-                  absolute top-[18px] left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
-                  ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
-                  ${isOpen ? "-rotate-45 -translate-y-2" : ""}
-                `}
-                  />
-                </div>
-              </button>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className={`xl:hidden menu-button relative p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none group ${scrolled
+                ? "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
+                : "bg-white/10 hover:bg-white/20"
+                }`}
+              aria-label="Toggle menu"
+            >
+              <div className="relative w-6 h-6">
+                <span
+                  className={`
+                absolute top-1.5 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
+                ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
+                ${isOpen ? "rotate-45 translate-y-2" : ""}
+              `}
+                />
+                <span
+                  className={`
+                absolute top-3 left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
+                ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
+                ${isOpen ? "opacity-0" : ""}
+              `}
+                />
+                <span
+                  className={`
+                absolute top-[18px] left-0 w-6 h-0.5 transform transition-all duration-300 ease-out
+                ${scrolled ? "bg-gray-700 dark:bg-gray-300" : "bg-white"}
+                ${isOpen ? "-rotate-45 -translate-y-2" : ""}
+              `}
+                />
+              </div>
+            </button>
           </div>
         </div>
         <div id="google_translate_element" style={{ display: "none" }}></div>
@@ -999,10 +977,9 @@ const Navbar = () => {
                   className={`
                     flex items-center px-4 py-3 rounded-xl transition-all duration-300
                     text-lg font-medium transform hover:scale-105
-                    ${
-                      isActive
-                        ? "bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-500 dark:border-purple-500"
-                        : "hover:bg-gray-100 dark:hover:bg-gray-800/50"
+                    ${isActive
+                      ? "bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-500 dark:border-purple-500"
+                      : "hover:bg-gray-100 dark:hover:bg-gray-800/50"
                     }
                   `}
                   style={{

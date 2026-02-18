@@ -105,7 +105,7 @@ export default function GridPlayground() {
 
   const generateCompleteCSS = () => {
     let css = generateBasicCSS();
-    
+
     css += `\n\n.grid-item {
   display: flex;
   align-items: center;
@@ -127,7 +127,7 @@ export default function GridPlayground() {
 
   const generateHTMLTemplate = () => {
     const basicCSS = generateBasicCSS();
-    
+
     let html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -194,7 +194,7 @@ export default function GridPlayground() {
   // Event handlers
   const addItem = () => setItems(prev => prev + 1);
   const removeItem = () => setItems(prev => prev > 1 ? prev - 1 : 1);
-  
+
   const randomizeColors = () => {
     const newColors = {};
     for (let i = 0; i < items; i++) {
@@ -233,22 +233,22 @@ export default function GridPlayground() {
       setRows(config.rows || rows);
       setGap(config.gap || gap);
       setItems(config.items);
-      
+
       if (config.customColumns) {
         setCustomColumns(config.customColumns);
         setGridTemplate("custom");
       } else {
         setGridTemplate("equal");
       }
-      
+
       if (config.customRows) {
         setCustomRows(config.customRows);
       }
-      
+
       if (config.autoFlow) {
         setAutoFlow(config.autoFlow);
       }
-      
+
       setPresetTemplate(preset);
       setSelectedItem(null);
     }
@@ -257,7 +257,7 @@ export default function GridPlayground() {
   const updateItemSpan = (index, type, value) => {
     const maxValue = type === 'colSpan' ? columns : rows;
     const clampedValue = Math.max(1, Math.min(value, maxValue));
-    
+
     setItemSpans(prev => ({
       ...prev,
       [index]: {
@@ -292,24 +292,23 @@ export default function GridPlayground() {
 
   // Theme classes - using Tailwind dark mode
   const bgClass = "bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-800 dark:to-gray-900";
-  
+
   const cardClass = "bg-white/70 backdrop-blur-xl border-white/20 dark:bg-gray-800/70 dark:border-gray-700/20";
-  
+
   const textClass = "text-slate-800 dark:text-white";
   const textSecondaryClass = "text-slate-600 dark:text-gray-300";
   const textLabelClass = "text-slate-700 dark:text-gray-200";
-  
+
   const inputClass = "bg-white border-slate-200 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:border-blue-400";
 
   return (
     <div className={`min-h-screen ${bgClass} p-4 md:p-6 transition-all duration-300`}>
       {/* Copy Success Notification */}
       {copySuccess && (
-        <div className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${
-          copySuccess.includes('Failed') 
-            ? 'bg-red-500 text-white' 
+        <div className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${copySuccess.includes('Failed')
+            ? 'bg-red-500 text-white'
             : 'bg-green-500 text-white'
-        }`}>
+          }`}>
           {copySuccess}
         </div>
       )}
@@ -326,7 +325,7 @@ export default function GridPlayground() {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          
+
           {/* LEFT: Basic Controls */}
           <div className="space-y-6">
             <div className={`${cardClass} p-6 rounded-2xl shadow-xl`}>
@@ -361,21 +360,19 @@ export default function GridPlayground() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setGridTemplate("equal")}
-                    className={`flex-1 px-3 py-2 rounded-lg font-medium transition-all ${
-                      gridTemplate === "equal" 
-                        ? "bg-blue-500 text-white" 
+                    className={`flex-1 px-3 py-2 rounded-lg font-medium transition-all ${gridTemplate === "equal"
+                        ? "bg-blue-500 text-white"
                         : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                    }`}
+                      }`}
                   >
                     Equal
                   </button>
                   <button
                     onClick={() => setGridTemplate("custom")}
-                    className={`flex-1 px-3 py-2 rounded-lg font-medium transition-all ${
-                      gridTemplate === "custom" 
-                        ? "bg-blue-500 text-white" 
+                    className={`flex-1 px-3 py-2 rounded-lg font-medium transition-all ${gridTemplate === "custom"
+                        ? "bg-blue-500 text-white"
                         : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                    }`}
+                      }`}
                   >
                     Custom
                   </button>
@@ -530,13 +527,11 @@ export default function GridPlayground() {
                   <label className={`text-sm font-semibold ${textLabelClass}`}>Show Grid Lines</label>
                   <button
                     onClick={() => setShowGridLines(!showGridLines)}
-                    className={`relative w-12 h-6 rounded-full transition-all duration-300 ${
-                      showGridLines ? "bg-blue-500" : "bg-slate-300 dark:bg-gray-600"
-                    }`}
+                    className={`relative w-12 h-6 rounded-full transition-all duration-300 ${showGridLines ? "bg-blue-500" : "bg-slate-300 dark:bg-gray-600"
+                      }`}
                   >
-                    <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transition-all duration-300 ${
-                      showGridLines ? "translate-x-6" : "translate-x-0.5"
-                    }`} />
+                    <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transition-all duration-300 ${showGridLines ? "translate-x-6" : "translate-x-0.5"
+                      }`} />
                   </button>
                 </div>
 
@@ -569,11 +564,11 @@ export default function GridPlayground() {
                   {items} items
                 </div>
               </div>
-              
+
               <div className="relative">
                 {showGridLines && (
-                  <div 
-                    className="absolute inset-0 opacity-20 pointer-events-none bg-gradient-to-r from-transparent via-slate-600 to-transparent dark:via-slate-500" 
+                  <div
+                    className="absolute inset-0 opacity-20 pointer-events-none bg-gradient-to-r from-transparent via-slate-600 to-transparent dark:via-slate-500"
                     style={{
                       backgroundImage: `
                         linear-gradient(to right, #64748b 1px, transparent 1px),
@@ -583,7 +578,7 @@ export default function GridPlayground() {
                     }}
                   />
                 )}
-                
+
                 <div ref={gridRef} style={containerStyle} className={containerClasses}>
                   {Array.from({ length: items }).map((_, i) => {
                     const span = getItemSpan(i);
@@ -591,9 +586,8 @@ export default function GridPlayground() {
                       <div
                         key={i}
                         onClick={() => setSelectedItem(selectedItem === i ? null : i)}
-                        className={`relative flex items-center justify-center text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-xl cursor-pointer overflow-hidden group ${
-                          selectedItem === i ? "ring-4 ring-yellow-400 ring-opacity-75" : ""
-                        }`}
+                        className={`relative flex items-center justify-center text-white font-bold rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-xl cursor-pointer overflow-hidden group ${selectedItem === i ? "ring-4 ring-yellow-400 ring-opacity-75" : ""
+                          }`}
                         style={{
                           background: getItemColor(i),
                           gridColumn: span.colSpan > 1 ? `span ${span.colSpan}` : undefined,
@@ -601,27 +595,27 @@ export default function GridPlayground() {
                         }}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                        
+
                         <span className="relative z-10 text-lg font-black">
                           {i + 1}
                         </span>
-                        
+
                         {(span.colSpan > 1 || span.rowSpan > 1) && (
                           <div className="absolute top-1 left-1 text-xs bg-black/20 px-1 rounded">
                             {span.colSpan}×{span.rowSpan}
                           </div>
                         )}
-                        
+
                         <div className="absolute top-1 right-1 w-2 h-2 bg-white/30 rounded-full" />
                       </div>
                     );
                   })}
                 </div>
               </div>
-              
+
               <div className="mt-4 p-3 bg-slate-50 dark:bg-gray-700 rounded-xl border border-slate-200 dark:border-gray-600">
                 <div className={`text-xs ${textSecondaryClass} font-medium`}>
-                  Template: {gridTemplate === "equal" ? `${columns}×${rows}` : "Custom"} • 
+                  Template: {gridTemplate === "equal" ? `${columns}×${rows}` : "Custom"} •
                   Gap: {gap}px • Items: {items} • Flow: {autoFlow}
                 </div>
               </div>
@@ -636,7 +630,7 @@ export default function GridPlayground() {
                 <h2 className={`text-xl font-bold ${textClass} mb-4 flex items-center gap-2`}>
                   🎯 Item #{selectedItem + 1} Controls
                 </h2>
-                
+
                 <div className="space-y-4">
                   <div>
                     <label className={`block text-sm font-semibold ${textLabelClass} mb-2`}>Color</label>
@@ -700,7 +694,7 @@ export default function GridPlayground() {
               <h2 className={`text-xl font-bold ${textClass} mb-4 flex items-center gap-2`}>
                 📤 Export Options
               </h2>
-              
+
               <div className="space-y-3">
                 <button
                   onClick={copyBasicCSS}
@@ -708,14 +702,14 @@ export default function GridPlayground() {
                 >
                   📋 Copy Basic CSS
                 </button>
-                
+
                 <button
                   onClick={copyCompleteCSS}
                   className="w-full px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all"
                 >
                   📋 Copy Complete CSS
                 </button>
-                
+
                 <button
                   onClick={copyHTMLTemplate}
                   className="w-full px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold rounded-xl transition-all"
@@ -726,35 +720,35 @@ export default function GridPlayground() {
             </div>
 
             {/* CSS Output */}
-            <div className="bg-slate-900/95 dark:bg-gray-900/95 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-slate-700/20 dark:border-gray-700/20">
+            <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-slate-200 dark:border-gray-700/20">
               <div className="flex items-center gap-2 mb-4">
-                <h3 className="text-lg font-bold text-white">📝 Generated CSS</h3>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">📝 Generated CSS</h3>
                 <div className="flex gap-1">
                   <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                   <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 </div>
               </div>
-              <div className="bg-slate-800 dark:bg-gray-800 p-4 rounded-xl border border-slate-700 dark:border-gray-700 max-h-80 overflow-y-auto">
-                <pre className="text-sm text-slate-300 font-mono leading-relaxed">
-                  <code className="text-blue-400">.grid-container</code> {`{`}
-                  {'\n  '}<code className="text-emerald-400">display</code>: <code className="text-yellow-400">grid</code>;
-                  {'\n  '}<code className="text-emerald-400">grid-template-columns</code>: <code className="text-yellow-400">{gridTemplate === "equal" ? `repeat(${columns}, 1fr)` : customColumns}</code>;
-                  {'\n  '}<code className="text-emerald-400">grid-template-rows</code>: <code className="text-yellow-400">{gridTemplate === "equal" ? `repeat(${rows}, ${itemHeight}px)` : customRows}</code>;
-                  {'\n  '}<code className="text-emerald-400">gap</code>: <code className="text-yellow-400">{gap}px</code>;
-                  {alignment !== "center" && `\n  `}<code className="text-emerald-400">{alignment !== "center" ? "align-items" : ""}</code>{alignment !== "center" ? ": " : ""}<code className="text-yellow-400">{alignment !== "center" ? alignment : ""}</code>{alignment !== "center" ? ";" : ""}
-                  {justifyContent !== "center" && `\n  `}<code className="text-emerald-400">{justifyContent !== "center" ? "justify-content" : ""}</code>{justifyContent !== "center" ? ": " : ""}<code className="text-yellow-400">{justifyContent !== "center" ? justifyContent : ""}</code>{justifyContent !== "center" ? ";" : ""}
-                  {autoFlow !== "row" && `\n  `}<code className="text-emerald-400">{autoFlow !== "row" ? "grid-auto-flow" : ""}</code>{autoFlow !== "row" ? ": " : ""}<code className="text-yellow-400">{autoFlow !== "row" ? autoFlow : ""}</code>{autoFlow !== "row" ? ";" : ""}
+              <div className="bg-slate-100 dark:bg-gray-800 p-4 rounded-xl border border-slate-200 dark:border-gray-700 max-h-80 overflow-y-auto">
+                <pre className="text-sm text-slate-700 dark:text-slate-300 font-mono leading-relaxed">
+                  <code className="text-blue-600 dark:text-blue-400">.grid-container</code> {`{`}
+                  {'\n  '}<code className="text-emerald-600 dark:text-emerald-400">display</code>: <code className="text-yellow-600 dark:text-yellow-400">grid</code>;
+                  {'\n  '}<code className="text-emerald-600 dark:text-emerald-400">grid-template-columns</code>: <code className="text-yellow-600 dark:text-yellow-400">{gridTemplate === "equal" ? `repeat(${columns}, 1fr)` : customColumns}</code>;
+                  {'\n  '}<code className="text-emerald-600 dark:text-emerald-400">grid-template-rows</code>: <code className="text-yellow-600 dark:text-yellow-400">{gridTemplate === "equal" ? `repeat(${rows}, ${itemHeight}px)` : customRows}</code>;
+                  {'\n  '}<code className="text-emerald-600 dark:text-emerald-400">gap</code>: <code className="text-yellow-600 dark:text-yellow-400">{gap}px</code>;
+                  {alignment !== "center" && `\n  `}<code className="text-emerald-600 dark:text-emerald-400">{alignment !== "center" ? "align-items" : ""}</code>{alignment !== "center" ? ": " : ""}<code className="text-yellow-600 dark:text-yellow-400">{alignment !== "center" ? alignment : ""}</code>{alignment !== "center" ? ";" : ""}
+                  {justifyContent !== "center" && `\n  `}<code className="text-emerald-600 dark:text-emerald-400">{justifyContent !== "center" ? "justify-content" : ""}</code>{justifyContent !== "center" ? ": " : ""}<code className="text-yellow-600 dark:text-yellow-400">{justifyContent !== "center" ? justifyContent : ""}</code>{justifyContent !== "center" ? ";" : ""}
+                  {autoFlow !== "row" && `\n  `}<code className="text-emerald-600 dark:text-emerald-400">{autoFlow !== "row" ? "grid-auto-flow" : ""}</code>{autoFlow !== "row" ? ": " : ""}<code className="text-yellow-600 dark:text-yellow-400">{autoFlow !== "row" ? autoFlow : ""}</code>{autoFlow !== "row" ? ";" : ""}
                   {'\n'}{`}`}
-                  
+
                   {Object.entries(itemSpans).length > 0 && (
                     <>
                       {'\n\n'}
                       {Object.entries(itemSpans).map(([index, span]) => (
                         <React.Fragment key={index}>
-                          <code className="text-blue-400">.grid-item-{Number(index) + 1}</code> {`{`}
-                          {span.colSpan > 1 && `\n  `}<code className="text-emerald-400">{span.colSpan > 1 ? "grid-column" : ""}</code>{span.colSpan > 1 ? ": " : ""}<code className="text-yellow-400">{span.colSpan > 1 ? `span ${span.colSpan}` : ""}</code>{span.colSpan > 1 ? ";" : ""}
-                          {span.rowSpan > 1 && `\n  `}<code className="text-emerald-400">{span.rowSpan > 1 ? "grid-row" : ""}</code>{span.rowSpan > 1 ? ": " : ""}<code className="text-yellow-400">{span.rowSpan > 1 ? `span ${span.rowSpan}` : ""}</code>{span.rowSpan > 1 ? ";" : ""}
+                          <code className="text-blue-600 dark:text-blue-400">.grid-item-{Number(index) + 1}</code> {`{`}
+                          {span.colSpan > 1 && `\n  `}<code className="text-emerald-600 dark:text-emerald-400">{span.colSpan > 1 ? "grid-column" : ""}</code>{span.colSpan > 1 ? ": " : ""}<code className="text-yellow-600 dark:text-yellow-400">{span.colSpan > 1 ? `span ${span.colSpan}` : ""}</code>{span.colSpan > 1 ? ";" : ""}
+                          {span.rowSpan > 1 && `\n  `}<code className="text-emerald-600 dark:text-emerald-400">{span.rowSpan > 1 ? "grid-row" : ""}</code>{span.rowSpan > 1 ? ": " : ""}<code className="text-yellow-600 dark:text-yellow-400">{span.rowSpan > 1 ? `span ${span.rowSpan}` : ""}</code>{span.rowSpan > 1 ? ";" : ""}
                           {'\n'}{`}`}{'\n\n'}
                         </React.Fragment>
                       ))}

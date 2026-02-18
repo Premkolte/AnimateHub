@@ -572,19 +572,19 @@ export default function AnimationPlayground() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-slate-900 text-white rounded-2xl shadow-2xl overflow-hidden border border-slate-700"
+          className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
         >
-          <div className="px-8 py-6 bg-gradient-to-r from-slate-800 to-slate-700 border-b border-slate-600 flex items-center justify-between">
+          <div className="px-8 py-6 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 border-b border-slate-300 dark:border-slate-600 flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
                 <span className="text-white text-sm">📄</span>
               </div>
-              <h2 className="text-xl font-bold">Generated CSS Code</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Generated CSS Code</h2>
             </div>
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setShowCode(!showCode)}
-                className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-slate-600 dark:hover:bg-slate-500 text-slate-700 dark:text-white rounded-lg transition-colors"
               >
                 {showCode ? '👁️ Hide' : '👁️ Show'}
               </button>
@@ -598,8 +598,8 @@ export default function AnimationPlayground() {
           
           <div className="p-8">
             {showCode && (
-              <pre className="bg-black/40 p-6 rounded-xl text-sm font-mono leading-relaxed overflow-x-auto border border-slate-600">
-                <code className="text-green-400">{codeSnippet}</code>
+              <pre className="bg-slate-100 dark:bg-black/40 p-6 rounded-xl text-sm font-mono leading-relaxed overflow-x-auto border border-slate-300 dark:border-slate-600">
+                <code className="text-emerald-700 dark:text-green-400">{codeSnippet}</code>
               </pre>
             )}
             
