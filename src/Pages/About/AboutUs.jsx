@@ -559,15 +559,15 @@ const About = () => {
             
             <div className="flex justify-center space-x-6">
               {[
-                { icon: faXTwitter, url: "https://twitter.com/animatehub", label: "Twitter", color: "hover:text-blue-500" },
-                { icon: faFacebook, url: "https://facebook.com/animatehub", label: "Facebook", color: "hover:text-blue-700" },
-                { icon: faLinkedin, url: "https://linkedin.com/company/animatehub", label: "LinkedIn", color: "hover:text-blue-800" },
+                { icon: faXTwitter, url: "https://twitter.com/animatehub", label: "Twitter", hoverBg: "hover:bg-black dark:hover:bg-gray-100", hoverText: "hover:text-white dark:hover:text-black" },
+                { icon: faFacebook, url: "https://facebook.com/animatehub", label: "Facebook", hoverBg: "hover:bg-blue-600", hoverText: "hover:text-white" },
+                { icon: faLinkedin, url: "https://linkedin.com/company/animatehub", label: "LinkedIn", hoverBg: "hover:bg-blue-700", hoverText: "hover:text-white" },
               ].map((social, index) => (
                 <motion.a
                   key={social.label}
                   href={social.url}
                   aria-label={social.label}
-                  className={`w-14 h-14 bg-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center text-gray-600 dark:text-gray-300 ${social.color} transform transition-all shadow-lg hover:shadow-xl`}
+                  className={`w-14 h-14 bg-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center text-gray-600 dark:text-gray-300 ${social.hoverBg} ${social.hoverText} transform transition-all duration-300 shadow-lg hover:shadow-xl`}
                   whileHover={{ scale: 1.1, y: -5 }}
                   whileTap={{ scale: 0.9 }}
                   initial={{ opacity: 0, y: 20 }}
