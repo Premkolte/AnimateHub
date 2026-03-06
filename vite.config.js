@@ -59,5 +59,12 @@ export default defineConfig(({ mode }) => {
     // 🚀 Silent mode for CI/CD logs and smoother deployment
     logLevel: 'info',
     clearScreen: false,
+
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: './src/setupTests.js',
+      css: true,
+    },
   };
 });
