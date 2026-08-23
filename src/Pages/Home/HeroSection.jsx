@@ -76,7 +76,7 @@ const HeroSection = ({ currentUser }) => {
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <Particles
           particleColors={["#ffffff", "#ffffff"]}
-          particleCount={500}
+          particleCount={150}
           particleSpread={10}
           speed={0.1}
           particleBaseSize={100}

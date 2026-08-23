@@ -376,7 +376,7 @@ function Window({ activeTab, activeFilter, searchQuery }) {
 
   return (
     <div
-      className={`flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950/30 overflow-y-auto transition-all duration-700 ${
+      className={`flex-1 h-full bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950/30 overflow-y-auto transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       }`}
     >

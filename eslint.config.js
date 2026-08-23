@@ -1,30 +1,26 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
+import js from '@eslint/js'
+import globals from 'globals'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
-  // 🔒 Ignore folders that should never be linted
-  { ignores: ['dist', 'node_modules', 'build', '.vercel', '.github'] },
+  // Ignore build output
+  { ignores: ['dist'] },
 
-  // 🌐 FRONTEND (React / Browser)
+  // CLIENT (browser/React) rules
   {
-    files: ['src/**/*.{js,jsx,ts,tsx}'],
+    files: ['client/**/*.{js,jsx}', 'src/**/*.{js,jsx}'], // adjust to your client paths
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        JSX: true,
-      },
+      globals: globals.browser,
       parserOptions: {
+        ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
+        sourceType: 'module',
       },
     },
-    settings: {
-      react: { version: 'detect' },
-    },
+    settings: { react: { version: '18.3' } },
     plugins: {
       react,
       'react-hooks': reactHooks,
@@ -35,37 +31,42 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
-
-      // 🧹 Custom safe overrides
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-      'react/prop-types': 'off', // Avoids unnecessary blocking on TS/JS projects
-      'no-console': 'off', // Avoid breaking production builds by accident
+  'warn',
+  {
+    allowConstantExport: true,
+    allowLocalVars: false, // enforce cleaner exports
+  },
+],
     },
   },
 
-  // ⚙️ BACKEND (Node / Server)
+  // SERVER (Node) rules
   {
     files: [
+      'index.js',
       'server/**/*.{js,mjs,cjs}',
       'backend/**/*.{js,mjs,cjs}',
-      'index.js',
-      'src/utils/**/*.js',
+      'src/**/*.server.{js,mjs,cjs}',
       'src/**/server/**/*.{js,mjs,cjs}',
+      'src/app.js',
+      'src/utils/**/*.js',
+      // add/adjust paths so all backend files are included
     ],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: globals.node,
+      globals: {
+        ...globals.node, // enables process, __dirname (CJS only), etc.
+      },
+    },
+    plugins: {
+      // keep it minimal; no react on the server
     },
     rules: {
       ...js.configs.recommended.rules,
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-      'no-undef': 'error',
+      // Optionally disable browser-specific rules here if any leak in
     },
   },
-];
+]

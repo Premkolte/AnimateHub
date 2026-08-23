@@ -77,7 +77,7 @@ const Loader = ({
         </div>
       </div>
 
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{__html: `
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
           33% { transform: translateY(-10px) rotate(5deg); opacity: 1; }
@@ -127,7 +127,7 @@ const Loader = ({
         .animation-delay-800 { animation-delay: 0.8s; }
         .animation-delay-900 { animation-delay: 0.9s; }
         .animation-delay-1000 { animation-delay: 1s; }
-      `}</style>
+      `}} />
     </div>
   );
 }
