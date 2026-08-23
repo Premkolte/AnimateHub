@@ -204,19 +204,17 @@ function SideBar({ activeTab, setActiveTab }) {
         />
       )}
 
-      {/* ========== Enhanced Main Sidebar Container ========== */}
       <div
-        className={`fixed top-16 bottom-0 left-0 z-40
+        className={`fixed top-[4.5rem] bottom-0 left-0 z-40 h-full
         bg-gradient-to-b from-white/30 via-white/20 to-white/10 
         dark:from-secondary-900/80 dark:via-secondary-900/70 dark:to-secondary-900/60
         backdrop-blur-2xl border-r border-white/30
-        dark:border-purple-800/40 shadow-2xl rounded-r-3xl
+        dark:border-purple-800/40 shadow-2xl rounded-r-3xl flex flex-col
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         transition-all duration-500 ease-out
-        lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-y-auto
-        hover:shadow-purple-500/10 dark:hover:shadow-purple-400/10`}
+        lg:translate-x-0 lg:relative lg:inset-0 lg:z-auto overflow-hidden
+        hover:shadow-purple-500/10 dark:hover:shadow-purple-400/10 flex-shrink-0`}
         style={{
-          maxHeight: "100vh",
           width: "320px", // Slightly wider for better content spacing
         }}
       >
@@ -390,7 +388,7 @@ function SideBar({ activeTab, setActiveTab }) {
           </div>
 
           {/* ========== Enhanced Buttons Section ========== */}
-          <div className="flex-1 space-y-2">
+          <div className="flex-1 space-y-2 overflow-y-auto pr-2 pb-4 scrollbar-thin scrollbar-thumb-purple-500/30 scrollbar-track-transparent">
             {buttonsToShow.length > 0 ? (
               buttonsToShow.map(({ button, originalIndex }) => (
                 <button

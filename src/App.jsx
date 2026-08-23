@@ -3,6 +3,7 @@ import {
   Route,
   Routes,
   Outlet,
+  useLocation,
 } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -68,6 +69,9 @@ import TransformPlayground from "./Pages/Playground/TransformPlayground";
 // Layout component that wraps all pages
 // -----------------------------------
 function Layout() {
+  const location = useLocation();
+  const hideFooter = location.pathname === "/explore";
+
   return (
     <>
       <Navbar />
@@ -75,7 +79,7 @@ function Layout() {
         <Outlet />
       </main>
       <Chatbot />
-      <Footer />
+      {!hideFooter && <Footer />}
       <BackToTop />
       <Toaster position="top-right" reverseOrder={false} />
     </>
@@ -90,7 +94,6 @@ function App() {
     <AppProvider>
       <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         {/* UX Enhancements */}
-        <SplashCursor />
         <ScrollToTop />
 
         <Routes>

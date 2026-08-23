@@ -84,7 +84,6 @@ const plans = [
 const PricingCard = ({ plan, variants, idx }) => (
   <motion.div
     variants={variants}
-    whileHover="hover"
     className={`relative flex flex-col items-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-secondary-1000 backdrop-blur-xl border-2 p-6 sm:p-8 pt-14 sm:pt-16 rounded-3xl w-full max-w-sm min-h-[450px] sm:min-h-[480px] transition-all duration-500 ease-out group overflow-hidden ${
       plan.popular
         ? 'border-primary-500 dark:border-accent-500 shadow-2xl shadow-primary-500/20 dark:shadow-accent-500/20 transform scale-105 xl:scale-110 z-20'

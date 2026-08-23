@@ -1,18 +1,10 @@
-import tailwindcss from "tailwindcss";
-import autoprefixer from "autoprefixer";
-
+// postcss.config.js
 export default {
-  plugins: [
-    // TailwindCSS core for utility-based styling
-    tailwindcss(),
-
-    // Autoprefixer ensures proper vendor prefixing across browsers
-    autoprefixer({
-      overrideBrowserslist: ["last 2 versions", "not dead"],
-      grid: "autoplace",
-      flexbox: "no-2009",
-    }),
-  ],
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
 };
+
 
 
