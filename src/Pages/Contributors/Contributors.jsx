@@ -26,13 +26,13 @@ const TopContributorsCard = ({ contributor, index }) => {
       }
     },
     hover: {
-      scale: 1.05,
-      y: -10,
-      rotateY: 5,
+      scale: 1.02,
+      y: -4,
+      rotateY: 2,
       transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 20
+        type: "tween",
+        duration: 0.35,
+        ease: [0.22, 1, 0.36, 1]
       }
     }
   };
@@ -91,7 +91,7 @@ const TopContributorsCard = ({ contributor, index }) => {
       </motion.div>
 
       {/* Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-accent-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-400/20 to-accent-500/20 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-120 opacity-0 group-hover:opacity-100" />
       
       <div className="relative bg-primary-50 dark:bg-secondary-900 rounded-xl p-6 shadow-xl border-2 border-primary-200 dark:border-secondary-700 backdrop-blur-sm max-w-sm mx-auto overflow-hidden">
         {/* Background Pattern */}
@@ -151,7 +151,7 @@ const TopContributorsCard = ({ contributor, index }) => {
             href={contributor.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-secondary-900 to-secondary-700 hover:from-primary-600 hover:to-accent-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg overflow-hidden transition-all duration-300"
+            className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-secondary-900 to-secondary-700 hover:from-primary-600 hover:to-accent-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg overflow-hidden transition-all duration-200"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ const TopContributorsCard = ({ contributor, index }) => {
             transition={{ delay: index * 0.2 + 0.6 }}
           >
             {/* Button Background Animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-600 opacity-0 group-hover:opacity-100 transition-opacity duration-120" />
             <FaGithub className="relative z-10 text-lg" />
             <span className="relative z-10">Visit Profile</span>
           </motion.a>
@@ -216,24 +216,24 @@ const ContributorCard = ({ contributor, index }) => {
       initial="hidden"
       animate="visible"
       whileHover={{ 
-        scale: 1.08, 
-        y: -8,
-        rotateY: 5,
-        transition: { type: "spring", stiffness: 400, damping: 25 }
+        scale: 1.035, 
+        y: -4,
+        rotateY: 2,
+        transition: { type: "tween", duration: 0.32, ease: [0.22, 1, 0.36, 1] }
       }}
       className="group relative cursor-pointer"
     >
       {/* Animated Border */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${borderGradient} rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm`} />
-      <div className={`absolute inset-0 bg-gradient-to-r ${borderGradient} rounded-xl opacity-60 group-hover:opacity-100 transition-all duration-300`} style={{ padding: '2px' }}>
+      <div className={`absolute inset-0 bg-gradient-to-r ${borderGradient} rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-120 blur-sm`} />
+      <div className={`absolute inset-0 bg-gradient-to-r ${borderGradient} rounded-xl opacity-60 group-hover:opacity-100 transition-all duration-120`} style={{ padding: '2px' }}>
         <div className="w-full h-full bg-primary-50 dark:bg-secondary-800 rounded-xl" />
       </div>
 
       {/* Hover Glow Effects */}
-      <div className={`absolute inset-0 bg-gradient-to-br from-primary-400/20 to-accent-500/20 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500`} />
-      <div className="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-transparent via-primary-500/60 to-accent-500/60 rounded-r-xl opacity-0 group-hover:opacity-100 transition-all duration-300" />
+      <div className={`absolute inset-0 bg-gradient-to-br from-primary-400/20 to-accent-500/20 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-120`} />
+      <div className="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-transparent via-primary-500/60 to-accent-500/60 rounded-r-xl opacity-0 group-hover:opacity-100 transition-all duration-120" />
       
-      <div className="relative bg-primary-50 dark:bg-secondary-900 rounded-xl p-5 shadow-lg hover:shadow-2xl transition-all duration-500 backdrop-blur-sm border border-primary-200/50 dark:border-secondary-700/50 overflow-hidden">
+      <div className="relative bg-primary-50 dark:bg-secondary-900 rounded-xl p-5 shadow-lg hover:shadow-2xl transition-all duration-200 backdrop-blur-sm border border-primary-200/50 dark:border-secondary-700/50 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className={`absolute top-0 right-0 w-full h-full bg-gradient-to-bl ${borderGradient} rounded-xl transform rotate-12 scale-110`} />
@@ -262,7 +262,7 @@ const ContributorCard = ({ contributor, index }) => {
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
               />
               {/* Avatar overlay effect */}
-              <div className={`absolute inset-0 bg-gradient-to-tr ${borderGradient} opacity-0 group-hover/avatar:opacity-20 rounded-full transition-opacity duration-300`} />
+              <div className={`absolute inset-0 bg-gradient-to-tr ${borderGradient} opacity-0 group-hover/avatar:opacity-20 rounded-full transition-opacity duration-120`} />
             </div>
           </div>
 
@@ -272,7 +272,7 @@ const ContributorCard = ({ contributor, index }) => {
             whileHover={{ scale: 1.05 }}
           >
             <span className="relative z-10">{contributor.login}</span>
-            <div className={`absolute inset-0 bg-gradient-to-r ${borderGradient} bg-clip-text text-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold`}>
+            <div className={`absolute inset-0 bg-gradient-to-r ${borderGradient} bg-clip-text text-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-120 font-bold`}>
               {contributor.login}
             </div>
           </motion.h3>
@@ -293,7 +293,7 @@ const ContributorCard = ({ contributor, index }) => {
             href={contributor.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn relative inline-flex items-center gap-2 bg-gradient-to-r from-secondary-900 to-secondary-700 text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg overflow-hidden transition-all duration-300"
+            className="group/btn relative inline-flex items-center gap-2 bg-gradient-to-r from-secondary-900 to-secondary-700 text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg overflow-hidden transition-all duration-200"
             whileHover={{ 
               scale: 1.08,
               boxShadow: "0 10px 25px rgba(0,0,0,0.2)"
@@ -301,22 +301,22 @@ const ContributorCard = ({ contributor, index }) => {
             whileTap={{ scale: 0.95 }}
           >
             {/* Button background animation */}
-            <div className={`absolute inset-0 bg-gradient-to-r ${borderGradient} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300`} />
+            <div className={`absolute inset-0 bg-gradient-to-r ${borderGradient} opacity-0 group-hover/btn:opacity-100 transition-opacity duration-120`} />
             
             {/* Button content */}
             <FaGithub className="relative z-10 text-sm" />
             <span className="relative z-10">View Profile</span>
             
             {/* Button shine effect */}
-            <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover/btn:opacity-100 group-hover/btn:translate-x-full transition-all duration-700" />
+            <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover/btn:opacity-100 group-hover/btn:translate-x-full transition-all duration-250" />
           </motion.a>
         </div>
 
         {/* Bottom accent line */}
-        <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${borderGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-xl`} />
+        <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${borderGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-120 rounded-b-xl`} />
         
         {/* Side accent line */}
-        <div className={`absolute top-0 right-0 w-1 h-full bg-gradient-to-b ${borderGradient} opacity-60 group-hover:opacity-100 transition-opacity duration-300 rounded-r-xl`} />
+        <div className={`absolute top-0 right-0 w-1 h-full bg-gradient-to-b ${borderGradient} opacity-60 group-hover:opacity-100 transition-opacity duration-120 rounded-r-xl`} />
       </div>
     </motion.div>
   );
