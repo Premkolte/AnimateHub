@@ -102,7 +102,7 @@ const PrivacyPolicy = () => {
           variants={fadeInUp}
           initial="initial"
           animate="animate"
-          className="text-center space-y-6"
+          className="text-center space-y-4"
         >
           <div className="flex justify-center">
             <div className="w-16 h-16 rounded-full bg-primary-50 dark:bg-accent-900/30 flex items-center justify-center">
@@ -112,7 +112,7 @@ const PrivacyPolicy = () => {
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-600 to-purple-500 bg-clip-text text-transparent">
             Privacy Policy
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
             Your privacy is important to us. This policy explains how AnimateHub collects, 
             uses, and protects your personal information.
           </p>
@@ -129,8 +129,8 @@ const PrivacyPolicy = () => {
           animate="animate"
           className="bg-white dark:bg-secondary-800 p-8 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
         >
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Introduction</h2>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 ml-1">Introduction</h2>
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed ml-1">
             Welcome to AnimateHub! We are committed to protecting your privacy and ensuring 
             the security of your personal information. This privacy policy describes how we 
             collect, use, store, and protect your information when you use our platform for 
@@ -151,15 +151,15 @@ const PrivacyPolicy = () => {
               variants={fadeInUp}
               className="bg-white dark:bg-secondary-800 p-8 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-primary-50 dark:bg-accent-900/30 flex items-center justify-center">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 rounded-full bg-primary-50 dark:bg-accent-900/30 flex items-center justify-center">
                   <section.icon className="w-6 h-6 text-primary-600 dark:text-accent-400" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   {section.title}
                 </h2>
               </div>
-              <ul className="space-y-3">
+              <ul className="space-y-2 ml-1">
                 {section.content.map((item, itemIndex) => (
                   <li key={itemIndex} className="flex items-start gap-3">
                     <div className="w-2 h-2 rounded-full bg-primary-600 dark:bg-accent-400 mt-2 flex-shrink-0" />
@@ -180,20 +180,20 @@ const PrivacyPolicy = () => {
           animate="animate"
           className="bg-gradient-to-r from-primary-50 to-purple-50 dark:from-accent-900/20 dark:to-purple-900/20 p-8 rounded-lg border border-primary-200 dark:border-accent-700"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-full bg-primary-100 dark:bg-accent-900/50 flex items-center justify-center">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-accent-900/50 flex items-center justify-center ml-1">
               <Mail className="w-6 h-6 text-primary-600 dark:text-accent-400" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
               Questions or Concerns?
-            </h2>
+            </h2>``
           </div>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4 ml-1">
             If you have any questions about this privacy policy or how we handle your data, 
             please don't hesitate to contact us. We're here to help and ensure your privacy 
             is protected.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 ml-1">
             <a
               href="/contact"
               className="px-6 py-3 bg-primary-600 dark:bg-accent-600 text-white rounded-md hover:bg-primary-700 dark:hover:bg-accent-700 transition-colors font-medium"
@@ -216,10 +216,10 @@ const PrivacyPolicy = () => {
           animate="animate"
           className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 p-6 rounded-lg"
         >
-          <div className="flex items-start gap-3">
-            <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+          <div className="flex items-start gap-2">
+            <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
             <div>
-              <h3 className="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-2">
+              <h3 className="text-md font-semibold text-amber-800 dark:text-amber-200 mb-2">
                 Important Notice
               </h3>
               <p className="text-amber-700 dark:text-amber-300 text-sm leading-relaxed">
