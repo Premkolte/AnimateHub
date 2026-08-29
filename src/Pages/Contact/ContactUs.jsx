@@ -9,7 +9,11 @@ import {
   Users,
   AlertCircle,
   CheckCircle2,
-  X
+  X,
+  MapPin,
+  Github,
+  Twitter,
+  Linkedin
 } from "lucide-react";
 
 // FAQ component with accordion animation
@@ -453,6 +457,36 @@ const Contact = () => {
                           <p className="text-gray-600 dark:text-gray-300">
                               Secure
                           </p>
+                      </div>
+
+                      {/* Socials & Address */}
+                      <div
+                          className={`text-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 group transform ${
+                              visibleStats.includes(2)
+                                  ? "translate-x-0 opacity-100"
+                                  : "-translate-x-16 opacity-0"
+                          }`}
+                      >
+                          <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-400 dark:from-pink-600 dark:to-rose-600 rounded-2xl flex items-center justify-center hover:rotate-12 mx-auto mb-4 transition-all duration-300">
+                              <MapPin className="w-8 h-8 text-white" />
+                          </div>
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                              Visit Us
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+                              123 Animation Street,<br/>Creative City, CA 90210
+                          </p>
+                          <div className="flex justify-center gap-4 mt-2">
+                              <a href="https://github.com/Premkolte/AnimateHub" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                                  <Github className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                              </a>
+                              <a href="#" className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                                  <Twitter className="w-5 h-5 text-blue-400" />
+                              </a>
+                              <a href="#" className="p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                                  <Linkedin className="w-5 h-5 text-blue-600" />
+                              </a>
+                          </div>
                       </div>
                   </div>
 
