@@ -1,0 +1,471 @@
+
+> animatehub@0.0.0 lint
+> eslint .
+
+
+C:\Open Source Project\AnimateHub\backend\src\models\user.model.js
+  104:5  error  Unnecessary try/catch wrapper  no-useless-catch
+
+C:\Open Source Project\AnimateHub\backend\src\services\EmailTransporter.js
+  20:28  warning  'success' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\AddBlogPage.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\AnimationPlayground.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Auth\LoginPage.jsx
+    4:10  warning  'FcGoogle' is defined but never used. Allowed unused vars must match /^_/u                                   no-unused-vars
+   51:9   warning  'handleGoogleSignIn' is assigned a value but never used. Allowed unused vars must match /^_/u                no-unused-vars
+   63:6   warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  302:18  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                              react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Auth\OptionalAuth.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Auth\ProtectedRoute.jsx
+  2:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Auth\ResetPasswordPage.jsx
+  39:8  warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Open Source Project\AnimateHub\src\Pages\Auth\SignUpPage.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u                                      no-unused-vars
+   4:10  warning  'FcGoogle' is defined but never used. Allowed unused vars must match /^_/u                                   no-unused-vars
+  50:33  error    Unnecessary escape character: \[                                                                             no-useless-escape
+  50:50  error    Unnecessary escape character: \/                                                                             no-useless-escape
+  92:6   warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Open Source Project\AnimateHub\src\Pages\BlogPage.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Components\components\ComponentsBase.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  131:23  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Components\components\ComponentsSideBar.jsx
+  1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u          no-unused-vars
+  3:10  warning  'FiChevronDown' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Contact\ContactUs.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  306:14  warning  'error' is defined but never used                                        no-unused-vars
+  370:30  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  392:60  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  482:37  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  747:18  error    Unknown property 'jsx' found                                             react/no-unknown-property
+
+C:\Open Source Project\AnimateHub\src\Pages\Contact\FAQ.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Contributors\ContributorGuide.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  226:15  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  226:55  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  231:67  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  296:23  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  296:50  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  338:32  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  352:43  warning  'index' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  419:16  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  434:28  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  434:86  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Contributors\Contributors.jsx
+  457:6  warning  React Hook useEffect has a missing dependency: 'forceFreshFetch'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Open Source Project\AnimateHub\src\Pages\Dashboard\MySnippet.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  87:14  error    Unknown property 'jsx' found                                             react/no-unknown-property
+
+C:\Open Source Project\AnimateHub\src\Pages\Dashboard\SideBar.jsx
+   14:8   warning  'ColorPalettePicker' is defined but never used. Allowed unused vars must match /^_/u                                                 no-unused-vars
+  176:6   warning  React Hook useEffect has missing dependencies: 'activeFilter' and 'searchQuery'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  379:31  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                      react/no-unescaped-entities
+  379:45  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                      react/no-unescaped-entities
+  495:14  error    Unknown property 'jsx' found                                                                                                         react/no-unknown-property
+
+C:\Open Source Project\AnimateHub\src\Pages\Dashboard\Window.jsx
+   11:8   warning  'ColorPalettePicker' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  266:72  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                       react/no-unescaped-entities
+  267:48  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                       react/no-unescaped-entities
+  296:14  error    'process' is not defined                                                              no-undef
+
+C:\Open Source Project\AnimateHub\src\Pages\Favorites\FavoriteButton.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Favorites\FavoritesPage.jsx
+  1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  3:36  warning  'FaEye' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Favorites\withFavoriteButton.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Home\Contributors.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Home\FeaturesSection.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Home\HeroSection.jsx
+   1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u          no-unused-vars
+   7:3  warning  'FaPuzzlePiece' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  12:3  warning  'FaUsers' is defined but never used. Allowed unused vars must match /^_/u        no-unused-vars
+  13:3  warning  'FaGithub' is defined but never used. Allowed unused vars must match /^_/u       no-unused-vars
+  14:3  warning  'FaStar' is defined but never used. Allowed unused vars must match /^_/u         no-unused-vars
+  15:3  warning  'FaPalette' is defined but never used. Allowed unused vars must match /^_/u      no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Home\HomePage.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u      no-unused-vars
+  5:8  warning  'Subscribe' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Home\Pricing.jsx
+   1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  94:5  error    No duplicate props allowed                                               react/jsx-no-duplicate-props
+
+C:\Open Source Project\AnimateHub\src\Pages\Home\Subscribe.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  150:14  error    Unknown property 'jsx' found                                             react/no-unknown-property
+
+C:\Open Source Project\AnimateHub\src\Pages\Home\TemplatesSection.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Home\Testimonial.jsx
+   2:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  56:9   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`          react/no-unescaped-entities
+  56:16  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`          react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Leaderboard\LeaderBoard.jsx
+    3:10  warning  'FaTrophy' is defined but never used. Allowed unused vars must match /^_/u     no-unused-vars
+    5:10  warning  'ChevronDown' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  272:18  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                react/no-unescaped-entities
+  278:61  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                react/no-unescaped-entities
+  572:55  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                react/no-unescaped-entities
+  580:57  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                react/no-unescaped-entities
+  589:24  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                react/no-unescaped-entities
+  600:28  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                react/no-unescaped-entities
+  608:46  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\NotFoundPage\NotFoundPage.jsx
+  16:37  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  16:58  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  16:89  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  46:33  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  46:49  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Payment\Payment.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\BoxShadowPlayground.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\ColorGradientPlayground.jsx
+   1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u                                           no-unused-vars
+  47:6  warning  React Hook useEffect has a missing dependency: 'colors.length'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\FlexboxPlayground.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\FontPlayground.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\FramerPlayground.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  104:14  warning  'err' is defined but never used                                          no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\JavascriptCode.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  146:27  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`          react/no-unescaped-entities
+  146:36  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`          react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\SVGPlayground.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+   49:9   error    Unexpected lexical declaration in case block                             no-case-declarations
+   50:9   error    Unexpected lexical declaration in case block                             no-case-declarations
+   51:9   error    Unexpected lexical declaration in case block                             no-case-declarations
+   52:9   error    Unexpected lexical declaration in case block                             no-case-declarations
+   56:9   error    Unexpected lexical declaration in case block                             no-case-declarations
+  326:14  error    Unknown property 'jsx' found                                             react/no-unknown-property
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\TailwindPlayground.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Playground\TransformPlayground.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\PrivacyPolicy\PrivacyPolicy.jsx
+  148:35  warning  'index' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  193:23  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  193:52  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Profile\PalettesPage.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u                             no-unused-vars
+    2:18  warning  'AnimatePresence' is defined but never used. Allowed unused vars must match /^_/u                   no-unused-vars
+    8:3   warning  'Menu' is defined but never used. Allowed unused vars must match /^_/u                              no-unused-vars
+   10:3   warning  'Heart' is defined but never used. Allowed unused vars must match /^_/u                             no-unused-vars
+   11:3   warning  'Share2' is defined but never used. Allowed unused vars must match /^_/u                            no-unused-vars
+   12:3   warning  'MessageCircle' is defined but never used. Allowed unused vars must match /^_/u                     no-unused-vars
+   13:3   warning  'Play' is defined but never used. Allowed unused vars must match /^_/u                              no-unused-vars
+   14:3   warning  'Star' is defined but never used. Allowed unused vars must match /^_/u                              no-unused-vars
+   15:3   warning  'ArrowRight' is defined but never used. Allowed unused vars must match /^_/u                        no-unused-vars
+   16:3   warning  'ChevronDown' is defined but never used. Allowed unused vars must match /^_/u                       no-unused-vars
+   17:3   warning  'Settings' is defined but never used. Allowed unused vars must match /^_/u                          no-unused-vars
+   20:3   warning  'X' is defined but never used. Allowed unused vars must match /^_/u                                 no-unused-vars
+   23:3   warning  'Filter' is defined but never used. Allowed unused vars must match /^_/u                            no-unused-vars
+   24:3   warning  'Grid' is defined but never used. Allowed unused vars must match /^_/u                              no-unused-vars
+   25:3   warning  'List' is defined but never used. Allowed unused vars must match /^_/u                              no-unused-vars
+  527:7   warning  'CustomColorEditor' is assigned a value but never used. Allowed unused vars must match /^_/u        no-unused-vars
+  537:9   warning  'elementTypes' is assigned a value but never used. Allowed unused vars must match /^_/u             no-unused-vars
+  549:9   warning  'handleElementChange' is assigned a value but never used. Allowed unused vars must match /^_/u      no-unused-vars
+  674:10  warning  'showCustomEditor' is assigned a value but never used. Allowed unused vars must match /^_/u         no-unused-vars
+  674:28  warning  'setShowCustomEditor' is assigned a value but never used. Allowed unused vars must match /^_/u      no-unused-vars
+  677:10  warning  'isSidebarCollapsed' is assigned a value but never used. Allowed unused vars must match /^_/u       no-unused-vars
+  677:30  warning  'setIsSidebarCollapsed' is assigned a value but never used. Allowed unused vars must match /^_/u    no-unused-vars
+  696:9   warning  'paletteToSemanticColors' is assigned a value but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  729:9   warning  'handleCustomColorChange' is assigned a value but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  733:9   warning  'handleApplyCustomColors' is assigned a value but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Profile\ProfilePage.jsx
+  73:6   warning  React Hook useEffect has a missing dependency: 'fetchUserData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  92:14  warning  'error' is defined but never used                                                                                 no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Profile\Resourcehub.jsx
+  1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u      no-unused-vars
+  1:44  warning  'useEffect' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Profile\components\AllComponents.jsx
+   82:6   warning  React Hook useEffect has a missing dependency: 'fetchAllComponents'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  140:22  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                        react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Profile\components\PendingComponents.jsx
+   3:47  warning  'FiBox' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  23:35  warning  'index' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\Profile\components\RejectedComponents.jsx
+    3:49  warning  'FiBox' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+   25:36  warning  'index' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  173:20  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\Pages\Profile\components\VerifyEmailReminder.jsx
+  1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  3:10  warning  'toast' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  6:32  warning  'email' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\Pages\challenge\ChallengeMode.jsx
+    1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u                                                    no-unused-vars
+  253:32  warning  'i' is defined but never used. Allowed unused args must match /^_/u                                                        no-unused-vars
+  551:13  error    Unexpected lexical declaration in case block                                                                               no-case-declarations
+  572:6   warning  React Hook useEffect has missing dependencies: 'runCode' and 'submit'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  726:85  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                            react/no-unescaped-entities
+  997:21  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                            react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\components\BlogCard.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  13:13  error    Empty block statement                                                    no-empty
+
+C:\Open Source Project\AnimateHub\src\components\BlogReadModal.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  13:13  error    Empty block statement                                                    no-empty
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\AccordianSnippets.jsx
+  174:50  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  174:58  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\AnimationIcon.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\AnimationSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\AvatarImageSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\BadgeSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\BoxShadowSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ButtonSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\CardSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\CheckboxSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ColorPickerSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\CountDownSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\CouponSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\DarkModeSnippets.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  11:28  warning  'jsx' is defined but never used. Allowed unused args must match /^_/u    no-unused-vars
+  11:33  warning  'css' is defined but never used. Allowed unused args must match /^_/u    no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\DropdownSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ExpandingSearchBar.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\FooterSnippets.jsx
+  2:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\InputfieldSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\LoginSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ModalSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\NavbarIconSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\NeonButton.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\NewsLetterSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\PageLoaderSnippets.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u                no-unused-vars
+  19:9   warning  'runLoader' is assigned a value but never used. Allowed unused vars must match /^_/u   no-unused-vars
+  19:22  warning  'index' is defined but never used. Allowed unused args must match /^_/u                no-unused-vars
+  25:9   warning  'stopLoader' is assigned a value but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\PaginationSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\PaymentFormSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\PillNavigationSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\PricingSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ProfileCardSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ProgressBarSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\QuoteSlideSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\RadioSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ResponsivenessSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ShadeSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\SignupSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\SlideShowSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\SocialSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\SortSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\TabGroup.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\TableSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\TextAreaSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\TextSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\ToggleSwitchSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\SnippetComponents\TooltipSnippets.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\Templates\Blog.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\Templates\Portfolio.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\Templates\Product.jsx
+   1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u                                    no-unused-vars
+  84:6  warning  React Hook useMemo has a missing dependency: 'products'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Open Source Project\AnimateHub\src\components\Templates\TemplatesPage.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\Templates\TemplatesRoutes.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\UI\BackToTop.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\UI\DarkModeToggle.jsx
+  31:6  warning  React Hook useEffect has a missing dependency: 'toggleTheme'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Open Source Project\AnimateHub\src\components\UI\Modal.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\layout\Chatbot.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\layout\Footer.jsx
+   6:3  warning  'Twitter' is defined but never used. Allowed unused vars must match /^_/u   no-unused-vars
+  14:3  warning  'Info' is defined but never used. Allowed unused vars must match /^_/u      no-unused-vars
+  16:3  warning  'BookOpen' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\layout\Loader.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u                no-unused-vars
+   5:3   warning  'size' is assigned a value but never used. Allowed unused args must match /^_/u        no-unused-vars
+   6:3   warning  'centered' is assigned a value but never used. Allowed unused args must match /^_/u    no-unused-vars
+   8:3   warning  'fullscreen' is assigned a value but never used. Allowed unused args must match /^_/u  no-unused-vars
+  80:14  error    Unknown property 'jsx' found                                                           react/no-unknown-property
+
+C:\Open Source Project\AnimateHub\src\components\layout\Navbar.jsx
+  1:8  warning  'React' is defined but never used. Allowed unused vars must match /^_/u       no-unused-vars
+  7:3  warning  'FiSettings' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\layout\NavbarComponents\MobileNav.jsx
+  1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u        no-unused-vars
+  3:25  warning  'FaChevronUp' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+C:\Open Source Project\AnimateHub\src\components\layout\WelcomeMessage.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+  33:24  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+
+C:\Open Source Project\AnimateHub\src\contexts\FavoritesContext.jsx
+   1:8   warning  'React' is defined but never used. Allowed unused vars must match /^_/u                                                         no-unused-vars
+   6:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  48:6   warning  React Hook useEffect has a missing dependency: 'getStorageKey'. Either include it or remove the dependency array                react-hooks/exhaustive-deps
+  63:6   warning  React Hook useEffect has a missing dependency: 'getStorageKey'. Either include it or remove the dependency array                react-hooks/exhaustive-deps
+
+C:\Open Source Project\AnimateHub\src\providers\AuthProvider.jsx
+  10:8  warning  React Hook useEffect has a missing dependency: 'fetchCurrentUser'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Open Source Project\AnimateHub\src\store\authStore.js
+  5:42  warning  'get' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+Ô£û 238 problems (62 errors, 176 warnings)
+
